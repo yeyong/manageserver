@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAS.Common", "SAS.Common\SA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAS.Cache", "SAS.Cache\SAS.Cache.csproj", "{7A65B383-BFA6-4B0D-AA97-2C24F5B2F613}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAS.Config", "SAS.Config\SAS.Config.csproj", "{5325F618-33FA-4B03-9A3E-96ED8C554F6C}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -29,6 +31,10 @@ Global
 		{7A65B383-BFA6-4B0D-AA97-2C24F5B2F613}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A65B383-BFA6-4B0D-AA97-2C24F5B2F613}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A65B383-BFA6-4B0D-AA97-2C24F5B2F613}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5325F618-33FA-4B03-9A3E-96ED8C554F6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5325F618-33FA-4B03-9A3E-96ED8C554F6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5325F618-33FA-4B03-9A3E-96ED8C554F6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5325F618-33FA-4B03-9A3E-96ED8C554F6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
