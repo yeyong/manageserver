@@ -40,6 +40,13 @@
     <Compile Include="DefaultCacheStrategy.cs" />
     <Compile Include="ICacheStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SASCache.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SAS.Common\SAS.Common.csproj">
+      <Project>{203EB763-E07B-4047-9473-D16F84B2E554}</Project>
+      <Name>SAS.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
