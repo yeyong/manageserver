@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过下列属性集
 // 控制。更改这些属性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("配置文件层")]
-[assembly: AssemblyDescription("配置文件读取")]
+[assembly: AssemblyTitle("数据接口层")]
+[assembly: AssemblyDescription("数据接口声明")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("www.zhaoshang-zj.org")]
-[assembly: AssemblyProduct("配置文件层")]
-[assembly: AssemblyCopyright("Copyright © www.zhaoshang-zj.org 2009")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("www.zhaoshang-zj.com")]
+[assembly: AssemblyProduct("数据接口声明")]
+[assembly: AssemblyCopyright("Copyright © www.zhaoshang-zj.com 2009")]
+[assembly: AssemblyTrademark("Studio After 80s")]
 [assembly: AssemblyCulture("")]
 
 // 将 ComVisible 设置为 false 使此程序集中的类型
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("89dab1f4-c4c0-41fd-8f1e-78dec8b42de5")]
+[assembly: Guid("fc44f30e-52f5-4b9b-8daf-f76c5507e551")]
 
 // 程序集的版本信息由下面四个值组成:
 //

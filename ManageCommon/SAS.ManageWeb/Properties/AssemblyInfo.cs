@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("通用后台管理Web页")]
 [assembly: AssemblyDescription("后台web层面的管理")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("www.zhaoshang-zj.com")]
+[assembly: AssemblyCompany("www.zhaoshang-zj.org")]
 [assembly: AssemblyProduct("通用后台管理")]
-[assembly: AssemblyCopyright("Copyright © www.zhaoshang-zj.com 2009")]
+[assembly: AssemblyCopyright("Copyright © www.zhaoshang-zj.org 2009")]
 [assembly: AssemblyTrademark("Studio After 80s")]
 [assembly: AssemblyCulture("")]
 
