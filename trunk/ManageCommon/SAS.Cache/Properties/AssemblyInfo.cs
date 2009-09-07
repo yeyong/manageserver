@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("缓存处理类库")]
 [assembly: AssemblyDescription("存放缓存处理的方法和基类")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("www.zhaoshang-zj.com")]
+[assembly: AssemblyCompany("www.zhaoshang-zj.org")]
 [assembly: AssemblyProduct("SAS.Cache")]
-[assembly: AssemblyCopyright("Copyright © www.zhaoshang-zj.com 2009")]
+[assembly: AssemblyCopyright("Copyright © www.zhaoshang-zj.org 2009")]
 [assembly: AssemblyTrademark("Studio After 80s")]
 [assembly: AssemblyCulture("")]
 

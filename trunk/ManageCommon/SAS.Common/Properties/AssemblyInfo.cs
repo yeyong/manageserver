@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("通用操作类库")]
 [assembly: AssemblyDescription("放置通用操作类型的公用类和方法")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("www.zhaoshang-zj.com")]
+[assembly: AssemblyCompany("www.zhaoshang-zj.org")]
 [assembly: AssemblyProduct("SAS.Common")]
-[assembly: AssemblyCopyright("Copyright © www.zhaoshang-zj.com 2009")]
+[assembly: AssemblyCopyright("Copyright © www.zhaoshang-zj.org 2009")]
 [assembly: AssemblyTrademark("Studio After 80s")]
 [assembly: AssemblyCulture("")]
 
