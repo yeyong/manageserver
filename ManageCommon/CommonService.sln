@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAS.Config", "SAS.Config\SA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAS.Data", "SAS.Data\SAS.Data.csproj", "{E15BF13F-EC22-47A3-ACF4-AA79738FB7E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAS.Entity", "SAS.Entity\SAS.Entity.csproj", "{F6CFD248-E9E3-480A-B518-526298AAF81E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAS.Logic", "SAS.Logic\SAS.Logic.csproj", "{9145299A-21C2-4558-A956-2DBDCBF477DE}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -41,6 +45,14 @@ Global
 		{E15BF13F-EC22-47A3-ACF4-AA79738FB7E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E15BF13F-EC22-47A3-ACF4-AA79738FB7E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E15BF13F-EC22-47A3-ACF4-AA79738FB7E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6CFD248-E9E3-480A-B518-526298AAF81E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6CFD248-E9E3-480A-B518-526298AAF81E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6CFD248-E9E3-480A-B518-526298AAF81E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6CFD248-E9E3-480A-B518-526298AAF81E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9145299A-21C2-4558-A956-2DBDCBF477DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9145299A-21C2-4558-A956-2DBDCBF477DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9145299A-21C2-4558-A956-2DBDCBF477DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9145299A-21C2-4558-A956-2DBDCBF477DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
