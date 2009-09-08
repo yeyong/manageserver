@@ -11,7 +11,7 @@ namespace SAS.Config
         #region 私有字段
 
         private string m_dbconnectstring = "Data Source=127.0.0.1;User ID=mall_admin;Password=yeyong2008521;Initial Catalog=;Pooling=true";		// 数据库连接串-格式(中文为用户修改的内容)：Data Source=数据库服务器地址;User ID=您的数据库用户名;Password=您的数据库用户密码;Initial Catalog=数据库名称;Pooling=true
-        private string m_tableprefix = "sas_";		// 数据库中表的前缀
+        private string m_tableprefix = "ntw_";		// 数据库中表的前缀
         private string m_sitepath = "/";			// 站点内的根路径
         private string m_dbtype = "";
         private string m_founderuid = "00000000-0000-0000-0000-000000000000";				// 创始人
