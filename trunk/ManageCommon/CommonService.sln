@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAS.Entity", "SAS.Entity\SA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAS.Logic", "SAS.Logic\SAS.Logic.csproj", "{9145299A-21C2-4558-A956-2DBDCBF477DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAS.Data.SqlServer", "SAS.Data.SqlServer\SAS.Data.SqlServer.csproj", "{7A7B0B03-0109-408C-BC7A-7FA36911C924}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -53,6 +55,10 @@ Global
 		{9145299A-21C2-4558-A956-2DBDCBF477DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9145299A-21C2-4558-A956-2DBDCBF477DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9145299A-21C2-4558-A956-2DBDCBF477DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A7B0B03-0109-408C-BC7A-7FA36911C924}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A7B0B03-0109-408C-BC7A-7FA36911C924}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A7B0B03-0109-408C-BC7A-7FA36911C924}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A7B0B03-0109-408C-BC7A-7FA36911C924}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

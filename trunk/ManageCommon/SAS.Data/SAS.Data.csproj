@@ -37,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseProvider.cs" />
+    <Compile Include="DataProvider\OnlineUsers.cs" />
     <Compile Include="DbException.cs" />
     <Compile Include="DbHelper.cs" />
     <Compile Include="IDataProvider.cs" />
@@ -51,6 +52,10 @@
     <ProjectReference Include="..\SAS.Config\SAS.Config.csproj">
       <Project>{5325F618-33FA-4B03-9A3E-96ED8C554F6C}</Project>
       <Name>SAS.Config</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SAS.Entity\SAS.Entity.csproj">
+      <Project>{F6CFD248-E9E3-480A-B518-526298AAF81E}</Project>
+      <Name>SAS.Entity</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
