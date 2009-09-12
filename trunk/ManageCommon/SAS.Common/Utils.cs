@@ -2108,5 +2108,18 @@ namespace SAS.Common
             }
         }
 
+        /// <summary>
+        /// 字段串是否为Null或为""(空)
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static bool StrIsNullOrEmpty(string str)
+        {
+            if (str == null || str.Trim() == string.Empty)
+                return true;
+
+            return false;
+        }
+
     } 
 }

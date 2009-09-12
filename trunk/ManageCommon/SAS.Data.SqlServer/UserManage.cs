@@ -52,6 +52,26 @@ namespace SAS.Data.SqlServer
                                                          string.Format("SELECT COUNT(ol_id) FROM [{0}online] WHERE [ol_ps_id]<>'00000000-0000-0000-0000-000000000000'", BaseConfigs.GetTablePrefix)).Tables[0].Rows[0][0]);
         }
 
+        /// <summary>
+        /// 获得全部在线用户列表
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetOnlineUserListTable()
+        {
+            return DbHelper.ExecuteDataset(CommandType.StoredProcedure, string.Format("{0}getonlineuserlist", BaseConfigs.GetTablePrefix)).Tables[0];
+        }
+
+        /// <summary>
+        /// 返回在线用户图例
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetOnlineGroupIconTable()
+        {
+            string commandText = string.Format("SELECT [ui_id], [ui_displayOrder], [ui_ug_name], [ui_img] FROM [{0}userGroupIcon] WHERE [ui_img] <> '' ORDER BY [ui_displayOrder]",
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
         #endregion
     }
 }
