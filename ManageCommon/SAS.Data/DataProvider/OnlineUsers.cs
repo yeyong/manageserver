@@ -1,6 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data;
 using System.Text;
+
+using SAS.Entity;
 
 namespace SAS.Data.DataProvider
 {
@@ -34,5 +36,35 @@ namespace SAS.Data.DataProvider
             return DatabaseProvider.GetInstance().GetOnlineUserCount();
         }
 
+        /// <summary>
+        /// 获取在线用户列表
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetOnlineUserListTable()
+        {
+            return DatabaseProvider.GetInstance().GetOnlineUserListTable();
+        }
+
+        /// <summary>
+        /// 获取在线用户组图标
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetOnlineGroupIconTable()
+        {
+            return DatabaseProvider.GetInstance().GetOnlineGroupIconTable();
+        }
+
+        public static OnlineUserInfo GetOnlineUser(int olid)
+        {
+            IDataReader reader = DatabaseProvider.GetInstance().GetOnlineUser(olid);
+            OnlineUserInfo onlineuserinfo = null;
+
+            if (reader.Read())
+            {
+                onlineuserinfo = LoadSingleOnlineUser(reader);
+            }
+            reader.Close();
+            return onlineuserinfo;
+        }
     }
 }
