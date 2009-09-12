@@ -9,7 +9,7 @@ namespace SAS.Config
     public class GeneralConfigInfo : IConfigInfo
     {
         #region 私有字段
-        private string m_sitetitle = "农途网"; //网站名称
+        private string m_sitetitle = "天狼星网"; //网站名称
         private string m_siteurl = "index.aspx"; //网站url地址
         private string m_webtitle = "SAS!NT"; //网站名称
         private string m_weburl = ""; //网站url地址
@@ -171,6 +171,8 @@ namespace SAS.Config
 
         private bool m_specifytemplate = false;  //版块是否指定模板
         private string m_verifyimageassemly = "";//验证码生成所使用的程序集
+
+        private int m_onlineusercountcacheminute = 0;//在线用户数统计缓存时间，0为实时统计
         #endregion
 
         #region 属性
@@ -1448,6 +1450,15 @@ namespace SAS.Config
         {
             get { return m_verifyimageassemly; }
             set { m_verifyimageassemly = value; }
+        }
+
+        /// <summary>
+        /// 在线用户数统计缓存时间，0为实时统计
+        /// </summary>
+        public int OnlineUserCountCacheMinute
+        {
+            get { return m_onlineusercountcacheminute; }
+            set { m_onlineusercountcacheminute = value; }
         }
         #endregion
     }

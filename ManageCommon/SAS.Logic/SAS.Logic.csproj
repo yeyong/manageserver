@@ -35,6 +35,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -45,7 +46,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OnlineUsers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SASCacheStrategy.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SAS.Cache\SAS.Cache.csproj">
+      <Project>{7A65B383-BFA6-4B0D-AA97-2C24F5B2F613}</Project>
+      <Name>SAS.Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SAS.Common\SAS.Common.csproj">
+      <Project>{203EB763-E07B-4047-9473-D16F84B2E554}</Project>
+      <Name>SAS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SAS.Config\SAS.Config.csproj">
+      <Project>{5325F618-33FA-4B03-9A3E-96ED8C554F6C}</Project>
+      <Name>SAS.Config</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SAS.Data\SAS.Data.csproj">
+      <Project>{E15BF13F-EC22-47A3-ACF4-AA79738FB7E8}</Project>
+      <Name>SAS.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SAS.Entity\SAS.Entity.csproj">
+      <Project>{F6CFD248-E9E3-480A-B518-526298AAF81E}</Project>
+      <Name>SAS.Entity</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
