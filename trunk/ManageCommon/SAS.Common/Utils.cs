@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -10,7 +11,7 @@ using System.Web;
 using System.Web.UI;
 using Microsoft.VisualBasic;
 using System.Collections;
-using System.Drawing;
+using System.Net;
 
 namespace SAS.Common
 {
@@ -19,31 +20,29 @@ namespace SAS.Common
     /// </summary>
     public class Utils
     {
+        public const string ASSEMBLY_VERSION = "3.0.0";
+
         private static Regex RegexBr = new Regex(@"(\r\n)", RegexOptions.IgnoreCase);
+
         public static Regex RegexFont = new Regex(@"<font color=" + "\".*?\"" + @">([\s\S]+?)</font>", Utils.GetRegexCompiledOptions());
 
         private static FileVersionInfo AssemblyFileVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location);
 
         private static string TemplateCookieName = string.Format("sastemplateid_{0}_{1}_{2}", AssemblyFileVersion.FileMajorPart, AssemblyFileVersion.FileMinorPart, AssemblyFileVersion.FileBuildPart);
 
-
         /// <summary>
         /// 得到正则编译参数设置
         /// </summary>
-        /// <returns></returns>
+        /// <returns>参数设置</returns>
         public static RegexOptions GetRegexCompiledOptions()
         {
-#if NET1
-            return RegexOptions.Compiled;
-#else
             return RegexOptions.None;
-#endif
         }
 
         /// <summary>
         /// 返回字符串真实长度, 1个汉字长度为2
         /// </summary>
-        /// <returns></returns>
+        /// <returns>字符长度</returns>
         public static int GetStringLength(string str)
         {
             return Encoding.Default.GetBytes(str).Length;
@@ -51,17 +50,13 @@ namespace SAS.Common
 
         public static bool IsCompriseStr(string str, string stringarray, string strsplit)
         {
-            if (stringarray == "" || stringarray == null)
-            {
+            if (Utils.StrIsNullOrEmpty(stringarray))
                 return false;
-            }
 
             str = str.ToLower();
             string[] stringArray = Utils.SplitString(stringarray.ToLower(), strsplit);
             for (int i = 0; i < stringArray.Length; i++)
             {
-                //string t1 = str;
-                //string t2 = stringArray[i];
                 if (str.IndexOf(stringArray[i]) > -1)
                 {
                     return true;
@@ -84,18 +79,10 @@ namespace SAS.Common
                 if (caseInsensetive)
                 {
                     if (strSearch.ToLower() == stringArray[i].ToLower())
-                    {
                         return i;
-                    }
                 }
-                else
-                {
-                    if (strSearch == stringArray[i])
-                    {
-                        return i;
-                    }
-                }
-
+                else if (strSearch == stringArray[i])
+                    return i;
             }
             return -1;
         }
@@ -197,16 +184,12 @@ namespace SAS.Common
         /// <returns>清除后返回的字符串</returns>
         public static string ClearBR(string str)
         {
-            //Regex r = null;
             Match m = null;
 
-            //r = new Regex(@"(\r\n)",RegexOptions.IgnoreCase);
             for (m = RegexBr.Match(str); m.Success; m = m.NextMatch())
             {
                 str = str.Replace(m.Groups[0].ToString(), "");
             }
-
-
             return str;
         }
 
@@ -230,25 +213,16 @@ namespace SAS.Common
                         startIndex = 0;
                     }
                     else
-                    {
                         startIndex = startIndex - length;
-                    }
                 }
-
 
                 if (startIndex > str.Length)
-                {
                     return "";
-                }
-
-
             }
             else
             {
                 if (length < 0)
-                {
                     return "";
-                }
                 else
                 {
                     if (length + startIndex > 0)
@@ -257,16 +231,12 @@ namespace SAS.Common
                         startIndex = 0;
                     }
                     else
-                    {
                         return "";
-                    }
                 }
             }
 
             if (str.Length - startIndex < length)
-            {
                 length = str.Length - startIndex;
-            }
 
             return str.Substring(startIndex, length);
         }
@@ -297,6 +267,11 @@ namespace SAS.Common
             }
             else //非web程序引用
             {
+                strPath = strPath.Replace("/", "\\");
+                if (strPath.StartsWith("\\"))
+                {
+                    strPath = strPath.Substring(strPath.IndexOf('\\', 1)).TrimStart('\\');
+                }
                 return System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, strPath);
             }
         }
@@ -327,10 +302,8 @@ namespace SAS.Common
 
             // 缓冲区为10k
             byte[] buffer = new Byte[10000];
-
             // 文件长度
             int length;
-
             // 需要读的数据长度
             long dataToRead;
 
@@ -338,7 +311,6 @@ namespace SAS.Common
             {
                 // 打开文件
                 iStream = new FileStream(filepath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-
 
                 // 需要读的数据长度
                 dataToRead = iStream.Length;
@@ -388,9 +360,8 @@ namespace SAS.Common
         {
             filename = filename.Trim();
             if (filename.EndsWith(".") || filename.IndexOf(".") == -1)
-            {
                 return false;
-            }
+
             string extname = filename.Substring(filename.LastIndexOf(".") + 1).ToLower();
             return (extname == "jpg" || extname == "jpeg" || extname == "png" || extname == "bmp" || extname == "gif");
         }
@@ -402,7 +373,6 @@ namespace SAS.Common
         /// <returns>转换后的string类型结果</returns>
         public static string IntToStr(int intValue)
         {
-            //
             return Convert.ToString(intValue);
         }
         /// <summary>
@@ -417,6 +387,7 @@ namespace SAS.Common
             string ret = "";
             for (int i = 0; i < b.Length; i++)
                 ret += b[i].ToString("x").PadLeft(2, '0');
+
             return ret;
         }
 
@@ -433,7 +404,6 @@ namespace SAS.Common
             return Convert.ToBase64String(Result);  //返回长度为44字节的字符串
         }
 
-
         /// <summary>
         /// 字符串如果操过指定长度则将超出的部分用指定字符串代替
         /// </summary>
@@ -446,6 +416,41 @@ namespace SAS.Common
             return GetSubString(p_SrcString, 0, p_Length, p_TailString);
         }
 
+        public static string GetUnicodeSubString(string str, int len, string p_TailString)
+        {
+            string result = string.Empty;// 最终返回的结果
+            int byteLen = System.Text.Encoding.Default.GetByteCount(str);// 单字节字符长度
+            int charLen = str.Length;// 把字符平等对待时的字符串长度
+            int byteCount = 0;// 记录读取进度
+            int pos = 0;// 记录截取位置
+            if (byteLen > len)
+            {
+                for (int i = 0; i < charLen; i++)
+                {
+                    if (Convert.ToInt32(str.ToCharArray()[i]) > 255)// 按中文字符计算加2
+                        byteCount += 2;
+                    else// 按英文字符计算加1
+                        byteCount += 1;
+                    if (byteCount > len)// 超出时只记下上一个有效位置
+                    {
+                        pos = i;
+                        break;
+                    }
+                    else if (byteCount == len)// 记下当前位置
+                    {
+                        pos = i + 1;
+                        break;
+                    }
+                }
+
+                if (pos >= 0)
+                    result = str.Substring(0, pos) + p_TailString;
+            }
+            else
+                result = str;
+
+            return result;
+        }
 
         /// <summary>
         /// 取指定长度的字符串
@@ -457,26 +462,22 @@ namespace SAS.Common
         /// <returns>截取后的字符串</returns>
         public static string GetSubString(string p_SrcString, int p_StartIndex, int p_Length, string p_TailString)
         {
-
-
             string myResult = p_SrcString;
 
-            //当是日文或韩文时(注:中文的范围:\u4e00 - \u9fa5, 日文在\u0800 - \u4e00, 韩文为\xAC00-\xD7A3)
-            if (System.Text.RegularExpressions.Regex.IsMatch(p_SrcString, "[\u0800-\u4e00]+") ||
-                System.Text.RegularExpressions.Regex.IsMatch(p_SrcString, "[\xAC00-\xD7A3]+"))
-            {
-                //当截取的起始位置超出字段串长度时
-                if (p_StartIndex >= p_SrcString.Length)
+            Byte[] bComments = Encoding.UTF8.GetBytes(p_SrcString);
+            foreach (char c in Encoding.UTF8.GetChars(bComments))
+            {    //当是日文或韩文时(注:中文的范围:\u4e00 - \u9fa5, 日文在\u0800 - \u4e00, 韩文为\xAC00-\xD7A3)
+                if ((c > '\u0800' && c < '\u4e00') || (c > '\xAC00' && c < '\xD7A3'))
                 {
-                    return "";
-                }
-                else
-                {
-                    return p_SrcString.Substring(p_StartIndex,
-                                                   ((p_Length + p_StartIndex) > p_SrcString.Length) ? (p_SrcString.Length - p_StartIndex) : p_Length);
+                    //if (System.Text.RegularExpressions.Regex.IsMatch(p_SrcString, "[\u0800-\u4e00]+") || System.Text.RegularExpressions.Regex.IsMatch(p_SrcString, "[\xAC00-\xD7A3]+"))
+                    //当截取的起始位置超出字段串长度时
+                    if (p_StartIndex >= p_SrcString.Length)
+                        return "";
+                    else
+                        return p_SrcString.Substring(p_StartIndex,
+                                                       ((p_Length + p_StartIndex) > p_SrcString.Length) ? (p_SrcString.Length - p_StartIndex) : p_Length);
                 }
             }
-
 
             if (p_Length >= 0)
             {
@@ -499,8 +500,6 @@ namespace SAS.Common
                         p_TailString = "";
                     }
 
-
-
                     int nRealLength = p_Length;
                     int[] anResultFlag = new int[p_Length];
                     byte[] bsResult = null;
@@ -508,34 +507,26 @@ namespace SAS.Common
                     int nFlag = 0;
                     for (int i = p_StartIndex; i < p_EndIndex; i++)
                     {
-
                         if (bsSrcString[i] > 127)
                         {
                             nFlag++;
                             if (nFlag == 3)
-                            {
                                 nFlag = 1;
-                            }
                         }
                         else
-                        {
                             nFlag = 0;
-                        }
 
                         anResultFlag[i] = nFlag;
                     }
 
                     if ((bsSrcString[p_EndIndex - 1] > 127) && (anResultFlag[p_Length - 1] == 1))
-                    {
                         nRealLength = p_Length + 1;
-                    }
 
                     bsResult = new byte[nRealLength];
 
                     Array.Copy(bsSrcString, p_StartIndex, bsResult, 0, nRealLength);
 
                     myResult = Encoding.Default.GetString(bsResult);
-
                     myResult = myResult + p_TailString;
                 }
             }
@@ -554,10 +545,10 @@ namespace SAS.Common
         /// <summary>
         /// 生成指定数量的html空格符号
         /// </summary>
-        public static string Spaces(int nSpaces)
+        public static string GetSpacesString(int spacesCount)
         {
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < nSpaces; i++)
+            for (int i = 0; i < spacesCount; i++)
             {
                 sb.Append(" &nbsp;&nbsp;");
             }
@@ -571,7 +562,7 @@ namespace SAS.Common
         /// <returns>判断结果</returns>
         public static bool IsValidEmail(string strEmail)
         {
-            return Regex.IsMatch(strEmail, @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
+            return Regex.IsMatch(strEmail, @"^[\w\.]+([-]\w+)*@[A-Za-z0-9-_]+[\.][A-Za-z0-9-_]");
         }
 
         public static bool IsValidDoEmail(string strEmail)
@@ -615,7 +606,6 @@ namespace SAS.Common
         /// <returns>判断结果</returns>
         public static bool IsSafeSqlString(string str)
         {
-
             return !Regex.IsMatch(str, @"[-|;|,|\/|\(|\)|\[|\]|\}|\{|%|@|\*|!|\']");
         }
 
@@ -695,14 +685,10 @@ namespace SAS.Common
         public static string GetDate(string datetimestr, string replacestr)
         {
             if (datetimestr == null)
-            {
                 return replacestr;
-            }
 
             if (datetimestr.Equals(""))
-            {
                 return replacestr;
-            }
 
             try
             {
@@ -713,7 +699,6 @@ namespace SAS.Common
                 return replacestr;
             }
             return datetimestr;
-
         }
 
 
@@ -755,12 +740,9 @@ namespace SAS.Common
         public static string GetStandardDateTime(string fDateTime, string formatStr)
         {
             if (fDateTime == "0000-0-0 0:00:00")
-            {
-
                 return fDateTime;
-            }
-            DateTime s = Convert.ToDateTime(fDateTime);
-            return s.ToString(formatStr);
+
+            return Convert.ToDateTime(fDateTime).ToString(formatStr);
         }
 
         /// <summary>
@@ -769,6 +751,14 @@ namespace SAS.Common
         public static string GetStandardDateTime(string fDateTime)
         {
             return GetStandardDateTime(fDateTime, "yyyy-MM-dd HH:mm:ss");
+        }
+
+        /// <summary>
+        /// 返回标准时间 yyyy-MM-dd
+        /// </sumary>
+        public static string GetStandardDate(string fDate)
+        {
+            return GetStandardDateTime(fDate, "yyyy-MM-dd");
         }
 
         /// <summary>
@@ -783,9 +773,7 @@ namespace SAS.Common
 
         public static string GetRealIP()
         {
-            string ip = SASRequest.GetIP();
-
-            return ip;
+            return SASRequest.GetIP();
         }
 
         /// <summary>
@@ -793,18 +781,7 @@ namespace SAS.Common
         /// </summary>
         public static string mashSQL(string str)
         {
-            string str2;
-
-            if (str == null)
-            {
-                str2 = "";
-            }
-            else
-            {
-                str = str.Replace("\'", "'");
-                str2 = str;
-            }
-            return str2;
+            return (str == null) ? "" : str.Replace("\'", "'");
         }
 
         /// <summary>
@@ -812,18 +789,7 @@ namespace SAS.Common
         /// </summary>
         public static string ChkSQL(string str)
         {
-            string str2;
-
-            if (str == null)
-            {
-                str2 = "";
-            }
-            else
-            {
-                str = str.Replace("'", "''");
-                str2 = str;
-            }
-            return str2;
+            return (str == null) ? "" : str.Replace("'", "''");
         }
 
 
@@ -872,25 +838,27 @@ namespace SAS.Common
         /// </summary>
         public static string[] SplitString(string strContent, string strSplit)
         {
-            if (strContent.IndexOf(strSplit) < 0)
+            if (!Utils.StrIsNullOrEmpty(strContent))
             {
-                string[] tmp = { strContent };
-                return tmp;
+                if (strContent.IndexOf(strSplit) < 0)
+                    return new string[] { strContent };
+
+                return Regex.Split(strContent, Regex.Escape(strSplit), RegexOptions.IgnoreCase);
             }
-            return Regex.Split(strContent, Regex.Escape(strSplit), RegexOptions.IgnoreCase);
+            else
+                return new string[0] { };
         }
 
         /// <summary>
         /// 分割字符串
         /// </summary>
         /// <returns></returns>
-        public static string[] SplitString(string strContent, string strSplit, int p_3)
+        public static string[] SplitString(string strContent, string strSplit, int count)
         {
-            string[] result = new string[p_3];
-
+            string[] result = new string[count];
             string[] splited = SplitString(strContent, strSplit);
 
-            for (int i = 0; i < p_3; i++)
+            for (int i = 0; i < count; i++)
             {
                 if (i < splited.Length)
                     result[i] = splited[i];
@@ -900,6 +868,126 @@ namespace SAS.Common
 
             return result;
         }
+
+        /// <summary>
+        /// 过滤字符串数组中每个元素为合适的大小
+        /// 当长度小于minLength时，忽略掉,-1为不限制最小长度
+        /// 当长度大于maxLength时，取其前maxLength位
+        /// 如果数组中有null元素，会被忽略掉
+        /// </summary>
+        /// <param name="minLength">单个元素最小长度</param>
+        /// <param name="maxLength">单个元素最大长度</param>
+        /// <returns></returns>
+        public static string[] PadStringArray(string[] strArray, int minLength, int maxLength)
+        {
+            if (minLength > maxLength)
+            {
+                int t = maxLength;
+                maxLength = minLength;
+                minLength = t;
+            }
+
+            int iMiniStringCount = 0;
+            for (int i = 0; i < strArray.Length; i++)
+            {
+                if (minLength > -1 && strArray[i].Length < minLength)
+                {
+                    strArray[i] = null;
+                    continue;
+                }
+                if (strArray[i].Length > maxLength)
+                    strArray[i] = strArray[i].Substring(0, maxLength);
+
+                iMiniStringCount++;
+            }
+
+            string[] result = new string[iMiniStringCount];
+            for (int i = 0, j = 0; i < strArray.Length && j < result.Length; i++)
+            {
+                if (strArray[i] != null && strArray[i] != string.Empty)
+                {
+                    result[j] = strArray[i];
+                    j++;
+                }
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// 分割字符串
+        /// </summary>
+        /// <param name="strContent">被分割的字符串</param>
+        /// <param name="strSplit">分割符</param>
+        /// <param name="ignoreRepeatItem">忽略重复项</param>
+        /// <param name="maxElementLength">单个元素最大长度</param>
+        /// <returns></returns>
+        public static string[] SplitString(string strContent, string strSplit, bool ignoreRepeatItem, int maxElementLength)
+        {
+            string[] result = SplitString(strContent, strSplit);
+
+            return ignoreRepeatItem ? DistinctStringArray(result, maxElementLength) : result;
+        }
+
+        public static string[] SplitString(string strContent, string strSplit, bool ignoreRepeatItem, int minElementLength, int maxElementLength)
+        {
+            string[] result = SplitString(strContent, strSplit);
+
+            if (ignoreRepeatItem)
+            {
+                result = DistinctStringArray(result);
+            }
+            return PadStringArray(result, minElementLength, maxElementLength);
+        }
+
+        /// <summary>
+        /// 分割字符串
+        /// </summary>
+        /// <param name="strContent">被分割的字符串</param>
+        /// <param name="strSplit">分割符</param>
+        /// <param name="ignoreRepeatItem">忽略重复项</param>
+        /// <returns></returns>
+        public static string[] SplitString(string strContent, string strSplit, bool ignoreRepeatItem)
+        {
+            return SplitString(strContent, strSplit, ignoreRepeatItem, 0);
+        }
+
+        /// <summary>
+        /// 清除字符串数组中的重复项
+        /// </summary>
+        /// <param name="strArray">字符串数组</param>
+        /// <param name="maxElementLength">字符串数组中单个元素的最大长度</param>
+        /// <returns></returns>
+        public static string[] DistinctStringArray(string[] strArray, int maxElementLength)
+        {
+            Hashtable h = new Hashtable();
+
+            foreach (string s in strArray)
+            {
+                string k = s;
+                if (maxElementLength > 0 && k.Length > maxElementLength)
+                {
+                    k = k.Substring(0, maxElementLength);
+                }
+                h[k.Trim()] = s;
+            }
+
+            string[] result = new string[h.Count];
+
+            h.Keys.CopyTo(result, 0);
+
+            return result;
+        }
+
+        /// <summary>
+        /// 清除字符串数组中的重复项
+        /// </summary>
+        /// <param name="strArray">字符串数组</param>
+        /// <returns></returns>
+        public static string[] DistinctStringArray(string[] strArray)
+        {
+            return DistinctStringArray(strArray, 0);
+        }
+
         /// <summary>
         /// 替换html字符
         /// </summary>
@@ -915,30 +1003,12 @@ namespace SAS.Common
             return "";
         }
 
-
-
-        //public static string ClearHtml(string strHtml)
-        //{
-        //    if (strHtml != "")
-        //    {
-
-        //        r = Regex.Replace(@"<\/?[^>]*>",RegexOptions.IgnoreCase);
-        //        for (m = r.Match(strHtml); m.Success; m = m.NextMatch()) 
-        //        {
-        //            strHtml = strHtml.Replace(m.Groups[0].ToString(),"");
-        //        }
-        //    }
-        //    return strHtml;
-        //}
-
-
         /// <summary>
         /// 进行指定的替换(脏字过滤)
         /// </summary>
         public static string StrFilter(string str, string bantext)
         {
-            string text1 = "";
-            string text2 = "";
+            string text1 = "", text2 = "";
             string[] textArray1 = SplitString(bantext, "\r\n");
             for (int num1 = 0; num1 < textArray1.Length; num1++)
             {
@@ -948,8 +1018,6 @@ namespace SAS.Common
             }
             return str;
         }
-
-
 
         /// <summary>
         /// 获得伪静态页码显示链接
@@ -961,11 +1029,38 @@ namespace SAS.Common
         /// <returns>页码html</returns>
         public static string GetStaticPageNumbers(int curPage, int countPage, string url, string expname, int extendPage)
         {
+            return GetStaticPageNumbers(curPage, countPage, url, expname, extendPage, 0);
+        }
+
+
+        /// <summary>
+        /// 获得伪静态页码显示链接
+        /// </summary>
+        /// <param name="curPage">当前页数</param>
+        /// <param name="countPage">总页数</param>
+        /// <param name="url">超级链接地址</param>
+        /// <param name="extendPage">周边页码显示个数上限</param>
+        /// <param name="forumrewrite">当前版块是否使用URL重写</param>
+        /// <returns>页码html</returns>
+        public static string GetStaticPageNumbers(int curPage, int countPage, string url, string expname, int extendPage, int forumrewrite)
+        {
             int startPage = 1;
             int endPage = 1;
 
             string t1 = "<a href=\"" + url + "-1" + expname + "\">&laquo;</a>";
             string t2 = "<a href=\"" + url + "-" + countPage + expname + "\">&raquo;</a>";
+
+            if (forumrewrite == 1)
+            {
+                t1 = "<a href=\"" + url + "/1/list" + expname + "\">&laquo;</a>";
+                t2 = "<a href=\"" + url + "/" + countPage + "/list" + expname + "\">&raquo;</a>";
+            }
+
+            if (forumrewrite == 2)
+            {
+                t1 = "<a href=\"" + url + "/\">&laquo;</a>";
+                t2 = "<a href=\"" + url + "/" + countPage + "/\">&raquo;</a>";
+            }
 
             if (countPage < 1) countPage = 1;
             if (extendPage < 3) extendPage = 2;
@@ -1014,10 +1109,37 @@ namespace SAS.Common
                 else
                 {
                     s.Append("<a href=\"");
-                    s.Append(url);
-                    s.Append("-");
-                    s.Append(i);
-                    s.Append(expname);
+                    if (forumrewrite == 1)
+                    {
+                        s.Append(url);
+                        if (i != 1)
+                        {
+                            s.Append("/");
+                            s.Append(i);
+                        }
+                        s.Append("/list");
+                        s.Append(expname);
+                    }
+                    else if (forumrewrite == 2)
+                    {
+                        s.Append(url);
+                        s.Append("/");
+                        if (i != 1)
+                        {
+                            s.Append(i);
+                            s.Append("/");
+                        }
+                    }
+                    else
+                    {
+                        s.Append(url);
+                        if (i != 1)
+                        {
+                            s.Append("-");
+                            s.Append(i);
+                        }
+                        s.Append(expname);
+                    }
                     s.Append("\">");
                     s.Append(i);
                     s.Append("</a>");
@@ -1125,85 +1247,6 @@ namespace SAS.Common
         public static string GetPageNumbers(int curPage, int countPage, string url, int extendPage, string pagetag)
         {
             return GetPageNumbers(curPage, countPage, url, extendPage, pagetag, null);
-            //if (pagetag == "")
-            //    pagetag = "page";
-            //int startPage = 1;
-            //int endPage = 1;
-
-            //if(url.IndexOf("?") > 0)
-            //{
-            //    url = url + "&";
-            //}
-            //else
-            //{
-            //    url = url + "?";
-            //}
-
-
-            //string t1 = "<a href=\"" + url + "&" + pagetag + "=1" + "\">&laquo;</a>";
-            //string t2 = "<a href=\"" + url + "&" + pagetag + "=" + countPage + "\">&raquo;</a>";
-
-            //if (countPage < 1) 
-            //    countPage = 1;
-            //if (extendPage < 3) 
-            //    extendPage = 2;
-
-            //if (countPage > extendPage)
-            //{
-            //    if (curPage - (extendPage / 2) > 0)
-            //    {
-            //        if (curPage + (extendPage / 2) < countPage)
-            //        {
-            //            startPage = curPage - (extendPage / 2);
-            //            endPage = startPage + extendPage - 1;
-            //        }
-            //        else
-            //        {
-            //            endPage = countPage;
-            //            startPage = endPage - extendPage + 1;
-            //            t2 = "";
-            //        }
-            //    }
-            //    else
-            //    {
-            //        endPage = extendPage;
-            //        t1 = "";
-            //    }
-            //}
-            //else
-            //{
-            //    startPage = 1;
-            //    endPage = countPage;
-            //    t1 = "";
-            //    t2 = "";
-            //}
-
-            //StringBuilder s = new StringBuilder("");
-
-            //s.Append(t1);
-            //for (int i = startPage; i <= endPage; i++)
-            //{
-            //    if (i == curPage)
-            //    {
-            //        s.Append("<span>");
-            //        s.Append(i);
-            //        s.Append("</span>");
-            //    }
-            //    else
-            //    {
-            //        s.Append("<a href=\"");
-            //        s.Append(url);
-            //        s.Append(pagetag);
-            //        s.Append("=");
-            //        s.Append(i);
-            //        s.Append("\">");
-            //        s.Append(i);
-            //        s.Append("</a>");
-            //    }
-            //}
-            //s.Append(t2);
-
-            //return s.ToString();
         }
 
         /// <summary>
@@ -1224,13 +1267,9 @@ namespace SAS.Common
             int endPage = 1;
 
             if (url.IndexOf("?") > 0)
-            {
                 url = url + "&";
-            }
             else
-            {
                 url = url + "?";
-            }
 
             string t1 = "<a href=\"" + url + "&" + pagetag + "=1";
             string t2 = "<a href=\"" + url + "&" + pagetag + "=" + countPage;
@@ -1357,17 +1396,10 @@ namespace SAS.Common
         /// <returns>文件名的字符串数组</returns>
         public static string[] FindNoUTF8File(string Path)
         {
-            //System.IO.StreamReader reader = null;
             StringBuilder filelist = new StringBuilder();
             DirectoryInfo Folder = new DirectoryInfo(Path);
-            //System.IO.DirectoryInfo[] subFolders = Folder.GetDirectories(); 
-            /*
-            for (int i=0;i<subFolders.Length;i++) 
-            { 
-                FindNoUTF8File(subFolders[i].FullName); 
-            }
-            */
             FileInfo[] subFiles = Folder.GetFiles();
+
             for (int j = 0; j < subFiles.Length; j++)
             {
                 if (subFiles[j].Extension.ToLower().Equals(".htm"))
@@ -1422,31 +1454,26 @@ namespace SAS.Common
                         while ((chr & 0x80) != 0);
 
                         cOctets--;
-                        if (cOctets == 0) return false;
+                        if (cOctets == 0)
+                            return false;
                     }
                 }
                 else
                 {
                     if ((chr & 0xC0) != 0x80)
-                    {
                         return false;
-                    }
+
                     cOctets--;
                 }
             }
 
             if (cOctets > 0)
-            {
                 return false;
-            }
 
             if (bAllAscii)
-            {
                 return false;
-            }
 
             return true;
-
         }
 
         /// <summary>
@@ -1457,17 +1484,14 @@ namespace SAS.Common
         public static string FormatBytesStr(int bytes)
         {
             if (bytes > 1073741824)
-            {
                 return ((double)(bytes / 1073741824)).ToString("0") + "G";
-            }
+
             if (bytes > 1048576)
-            {
                 return ((double)(bytes / 1048576)).ToString("0") + "M";
-            }
+
             if (bytes > 1024)
-            {
                 return ((double)(bytes / 1024)).ToString("0") + "K";
-            }
+
             return bytes.ToString() + "Bytes";
         }
 
@@ -1479,9 +1503,8 @@ namespace SAS.Common
         public static int SafeInt32(object objNum)
         {
             if (objNum == null)
-            {
                 return 0;
-            }
+
             string strNum = objNum.ToString();
             if (IsNumeric(strNum))
             {
@@ -1489,20 +1512,14 @@ namespace SAS.Common
                 if (strNum.ToString().Length > 9)
                 {
                     if (strNum.StartsWith("-"))
-                    {
                         return int.MinValue;
-                    }
                     else
-                    {
                         return int.MaxValue;
-                    }
                 }
                 return Int32.Parse(strNum);
             }
             else
-            {
                 return 0;
-            }
         }
 
         /// <summary>
@@ -1515,13 +1532,11 @@ namespace SAS.Common
         {
             TimeSpan ts = DateTime.Now - DateTime.Parse(Time).AddSeconds(Sec);
             if (ts.TotalSeconds > int.MaxValue)
-            {
                 return int.MaxValue;
-            }
+
             else if (ts.TotalSeconds < int.MinValue)
-            {
                 return int.MinValue;
-            }
+
             return (int)ts.TotalSeconds;
         }
 
@@ -1533,17 +1548,15 @@ namespace SAS.Common
         /// <returns></returns>
         public static int StrDateDiffMinutes(string time, int minutes)
         {
-            if (time == "" || time == null)
+            if (Utils.StrIsNullOrEmpty(time))
                 return 1;
+
             TimeSpan ts = DateTime.Now - DateTime.Parse(time).AddMinutes(minutes);
             if (ts.TotalMinutes > int.MaxValue)
-            {
                 return int.MaxValue;
-            }
             else if (ts.TotalMinutes < int.MinValue)
-            {
                 return int.MinValue;
-            }
+
             return (int)ts.TotalMinutes;
         }
 
@@ -1555,17 +1568,15 @@ namespace SAS.Common
         /// <returns></returns>
         public static int StrDateDiffHours(string time, int hours)
         {
-            if (time == "" || time == null)
+            if (Utils.StrIsNullOrEmpty(time))
                 return 1;
+
             TimeSpan ts = DateTime.Now - DateTime.Parse(time).AddHours(hours);
             if (ts.TotalHours > int.MaxValue)
-            {
                 return int.MaxValue;
-            }
             else if (ts.TotalHours < int.MinValue)
-            {
                 return int.MinValue;
-            }
+
             return (int)ts.TotalHours;
         }
 
@@ -1586,10 +1597,7 @@ namespace SAS.Common
         /// <returns></returns>
         public static string ReplaceStrToScript(string str)
         {
-            str = str.Replace("\\", "\\\\");
-            str = str.Replace("'", "\\'");
-            str = str.Replace("\"", "\\\"");
-            return str;
+            return str.Replace("\\", "\\\\").Replace("'", "\\'").Replace("\"", "\\\"");
         }
 
         /// <summary>
@@ -1600,16 +1608,12 @@ namespace SAS.Common
         public static bool IsIP(string ip)
         {
             return Regex.IsMatch(ip, @"^((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)$");
-
         }
-
 
         public static bool IsIPSect(string ip)
         {
             return Regex.IsMatch(ip, @"^((2[0-4]\d|25[0-5]|[01]?\d\d?)\.){2}((2[0-4]\d|25[0-5]|[01]?\d\d?|\*)\.)(2[0-4]\d|25[0-5]|[01]?\d\d?|\*)$");
-
         }
-
 
 
         /// <summary>
@@ -1620,8 +1624,8 @@ namespace SAS.Common
         /// <returns></returns>
         public static bool InIPArray(string ip, string[] iparray)
         {
-
             string[] userip = Utils.SplitString(ip, @".");
+
             for (int ipIndex = 0; ipIndex < iparray.Length; ipIndex++)
             {
                 string[] tmpip = Utils.SplitString(iparray[ipIndex], @".");
@@ -1629,36 +1633,23 @@ namespace SAS.Common
                 for (int i = 0; i < tmpip.Length; i++)
                 {
                     if (tmpip[i] == "*")
-                    {
                         return true;
-                    }
 
                     if (userip.Length > i)
                     {
                         if (tmpip[i] == userip[i])
-                        {
                             r++;
-                        }
                         else
-                        {
                             break;
-                        }
                     }
                     else
-                    {
                         break;
-                    }
-
                 }
+
                 if (r == 4)
-                {
                     return true;
-                }
-
-
             }
             return false;
-
         }
 
         /// <summary>
@@ -1710,8 +1701,24 @@ namespace SAS.Common
             }
             cookie.Value = strValue;
             HttpContext.Current.Response.AppendCookie(cookie);
-
         }
+
+        /// <summary>
+        /// 写cookie值
+        /// </summary>
+        /// <param name="strName">名称</param>
+        /// <param name="strValue">值</param>
+        public static void WriteCookie(string strName, string key, string strValue)
+        {
+            HttpCookie cookie = HttpContext.Current.Request.Cookies[strName];
+            if (cookie == null)
+            {
+                cookie = new HttpCookie(strName);
+            }
+            cookie[key] = strValue;
+            HttpContext.Current.Response.AppendCookie(cookie);
+        }
+
         /// <summary>
         /// 写cookie值
         /// </summary>
@@ -1728,7 +1735,6 @@ namespace SAS.Common
             cookie.Value = strValue;
             cookie.Expires = DateTime.Now.AddMinutes(expires);
             HttpContext.Current.Response.AppendCookie(cookie);
-
         }
 
         /// <summary>
@@ -1739,9 +1745,20 @@ namespace SAS.Common
         public static string GetCookie(string strName)
         {
             if (HttpContext.Current.Request.Cookies != null && HttpContext.Current.Request.Cookies[strName] != null)
-            {
                 return HttpContext.Current.Request.Cookies[strName].Value.ToString();
-            }
+
+            return "";
+        }
+
+        /// <summary>
+        /// 读cookie值
+        /// </summary>
+        /// <param name="strName">名称</param>
+        /// <returns>cookie值</returns>
+        public static string GetCookie(string strName, string key)
+        {
+            if (HttpContext.Current.Request.Cookies != null && HttpContext.Current.Request.Cookies[strName] != null && HttpContext.Current.Request.Cookies[strName][key] != null)
+                return HttpContext.Current.Request.Cookies[strName][key].ToString();
 
             return "";
         }
@@ -1754,15 +1771,11 @@ namespace SAS.Common
         {
             string forumPath = HttpContext.Current.Request.Path;
             if (forumPath.LastIndexOf("/") != forumPath.IndexOf("/"))
-            {
                 forumPath = forumPath.Substring(forumPath.IndexOf("/"), forumPath.LastIndexOf("/") + 1);
-            }
             else
-            {
                 forumPath = "/";
-            }
-            return forumPath;
 
+            return forumPath;
         }
 
         /// <summary>
@@ -1782,8 +1795,7 @@ namespace SAS.Common
         /// <returns></returns>
         public static string RemoveHtml(string content)
         {
-            string regexstr = @"<[^>]*>";
-            return Regex.Replace(content, regexstr, string.Empty, RegexOptions.IgnoreCase);
+            return Regex.Replace(content, @"<[^>]*>", string.Empty, RegexOptions.IgnoreCase);
         }
 
         /// <summary>
@@ -1807,9 +1819,8 @@ namespace SAS.Common
         {
             Match m = RegexFont.Match(title);
             if (m.Success)
-            {
                 return m.Groups[1].Value;
-            }
+
             return title;
         }
 
@@ -1820,8 +1831,9 @@ namespace SAS.Common
         /// <returns></returns>
         public static bool IsNumeric(object Expression)
         {
-            return TypeParse.IsNumeric(Expression);
+            return Validator.IsNumeric(Expression);
         }
+
         /// <summary>
         /// 从HTML中获取文本,保留br,p,img
         /// </summary>
@@ -1836,7 +1848,18 @@ namespace SAS.Common
 
         public static bool IsDouble(object Expression)
         {
-            return TypeParse.IsDouble(Expression);
+            return Validator.IsDouble(Expression);
+        }
+
+        /// <summary>
+        /// object型转换为bool型
+        /// </summary>
+        /// <param name="strValue">要转换的字符串</param>
+        /// <param name="defValue">缺省值</param>
+        /// <returns>转换后的bool类型结果</returns>
+        public static bool StrToBool(object expression, bool defValue)
+        {
+            return TypeConverter.StrToBool(expression, defValue);
         }
 
         /// <summary>
@@ -1845,20 +1868,42 @@ namespace SAS.Common
         /// <param name="strValue">要转换的字符串</param>
         /// <param name="defValue">缺省值</param>
         /// <returns>转换后的bool类型结果</returns>
-        public static bool StrToBool(object Expression, bool defValue)
+        public static bool StrToBool(string expression, bool defValue)
         {
-            return TypeParse.StrToBool(Expression, defValue);
+            return TypeConverter.StrToBool(expression, defValue);
         }
 
         /// <summary>
         /// 将对象转换为Int32类型
         /// </summary>
+        /// <param name="expression">要转换的字符串</param>
+        /// <param name="defValue">缺省值</param>
+        /// <returns>转换后的int类型结果</returns>
+        public static int StrToInt(object expression, int defValue)
+        {
+            return TypeConverter.ObjectToInt(expression, defValue);
+        }
+
+        /// <summary>
+        /// 将字符串转换为Int32类型
+        /// </summary>
+        /// <param name="expression">要转换的字符串</param>
+        /// <param name="defValue">缺省值</param>
+        /// <returns>转换后的int类型结果</returns>
+        public static int StrToInt(string expression, int defValue)
+        {
+            return TypeConverter.StrToInt(expression, defValue);
+        }
+
+        /// <summary>
+        /// Object型转换为float型
+        /// </summary>
         /// <param name="strValue">要转换的字符串</param>
         /// <param name="defValue">缺省值</param>
         /// <returns>转换后的int类型结果</returns>
-        public static int StrToInt(object Expression, int defValue)
+        public static float StrToFloat(object strValue, float defValue)
         {
-            return TypeParse.StrToInt(Expression, defValue);
+            return TypeConverter.StrToFloat(strValue, defValue);
         }
 
         /// <summary>
@@ -1867,9 +1912,9 @@ namespace SAS.Common
         /// <param name="strValue">要转换的字符串</param>
         /// <param name="defValue">缺省值</param>
         /// <returns>转换后的int类型结果</returns>
-        public static float StrToFloat(object strValue, float defValue)
+        public static float StrToFloat(string strValue, float defValue)
         {
-            return TypeParse.StrToFloat(strValue, defValue);
+            return TypeConverter.StrToFloat(strValue, defValue);
         }
 
         /// <summary>
@@ -1879,16 +1924,15 @@ namespace SAS.Common
         /// <returns>是则返加true 不是则返回 false</returns>
         public static bool IsNumericArray(string[] strNumber)
         {
-            return TypeParse.IsNumericArray(strNumber);
+            return Validator.IsNumericArray(strNumber);
         }
 
 
         public static string AdDeTime(int times)
         {
-            string newtime = (DateTime.Now).AddMinutes(times).ToString();
-            return newtime;
-
+            return (DateTime.Now).AddMinutes(times).ToString();
         }
+
         /// <summary>
         /// 验证是否为正整数
         /// </summary>
@@ -1896,7 +1940,6 @@ namespace SAS.Common
         /// <returns></returns>
         public static bool IsInt(string str)
         {
-
             return Regex.IsMatch(str, @"^[0-9]*$");
         }
 
@@ -1932,12 +1975,8 @@ namespace SAS.Common
                                     if (Utils.IsTime(splitetime[1].ToString()) == false || Utils.IsTime(splitetime[0].ToString()) == false)
                                         throw new Exception();
                                     break;
-
                             }
-
                     }
-
-
                 }
                 catch
                 {
@@ -1946,7 +1985,6 @@ namespace SAS.Common
                 }
             }
             return true;
-
         }
 
         /// <summary>
@@ -1956,10 +1994,7 @@ namespace SAS.Common
         /// <returns></returns>
         public static string ClearLastChar(string str)
         {
-            if (str == "")
-                return "";
-            else
-                return str.Substring(0, str.Length - 1);
+            return (str == "") ? "" : str.Substring(0, str.Length - 1);
         }
 
         /// <summary>
@@ -1972,13 +2007,11 @@ namespace SAS.Common
         public static bool BackupFile(string sourceFileName, string destFileName, bool overwrite)
         {
             if (!System.IO.File.Exists(sourceFileName))
-            {
                 throw new FileNotFoundException(sourceFileName + "文件不存在！");
-            }
+
             if (!overwrite && System.IO.File.Exists(destFileName))
-            {
                 return false;
-            }
+
             try
             {
                 System.IO.File.Copy(sourceFileName, destFileName, true);
@@ -2015,19 +2048,14 @@ namespace SAS.Common
             try
             {
                 if (!System.IO.File.Exists(backupFileName))
-                {
                     throw new FileNotFoundException(backupFileName + "文件不存在！");
-                }
+
                 if (backupTargetFileName != null)
                 {
                     if (!System.IO.File.Exists(targetFileName))
-                    {
                         throw new FileNotFoundException(targetFileName + "文件不存在！无法备份此文件！");
-                    }
                     else
-                    {
                         System.IO.File.Copy(targetFileName, backupTargetFileName, true);
-                    }
                 }
                 System.IO.File.Delete(targetFileName);
                 System.IO.File.Copy(backupFileName, targetFileName);
@@ -2109,6 +2137,135 @@ namespace SAS.Common
         }
 
         /// <summary>
+        /// 转换长文件名为短文件名
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <param name="repstring"></param>
+        /// <param name="leftnum"></param>
+        /// <param name="rightnum"></param>
+        /// <param name="charnum"></param>
+        /// <returns></returns>
+        public static string ConvertSimpleFileName(string fullname, string repstring, int leftnum, int rightnum, int charnum)
+        {
+            string simplefilename = "", leftstring = "", rightstring = "", filename = "";
+            string extname = GetFileExtName(fullname);
+
+            if (Utils.StrIsNullOrEmpty(extname))
+                throw new Exception("字符串不含有扩展名信息");
+
+            int filelength = 0, dotindex = 0;
+
+            dotindex = fullname.LastIndexOf('.');
+            filename = fullname.Substring(0, dotindex);
+            filelength = filename.Length;
+            if (dotindex > charnum)
+            {
+                leftstring = filename.Substring(0, leftnum);
+                rightstring = filename.Substring(filelength - rightnum, rightnum);
+                if (repstring == "" || repstring == null)
+                    simplefilename = leftstring + rightstring + "." + extname;
+                else
+                    simplefilename = leftstring + repstring + rightstring + "." + extname;
+            }
+            else
+                simplefilename = fullname;
+
+            return simplefilename;
+        }
+
+        //public static string GetFileExtName(string filename)
+        //{
+        //    string[] array = filename.Trim().Split('.');
+        //    Array.Reverse(array);
+        //    return array[0].ToString();
+        //}
+
+
+        /// <summary>
+        /// 将数据表转换成JSON类型串
+        /// </summary>
+        /// <param name="dt">要转换的数据表</param>
+        /// <returns></returns>
+        public static StringBuilder DataTableToJSON(System.Data.DataTable dt)
+        {
+            return DataTableToJson(dt, true);
+        }
+
+        /// <summary>
+        /// 将数据表转换成JSON类型串
+        /// </summary>
+        /// <param name="dt">要转换的数据表</param>
+        /// <param name="dispose">数据表转换结束后是否dispose掉</param>
+        /// <returns></returns>
+        public static StringBuilder DataTableToJson(System.Data.DataTable dt, bool dt_dispose)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append("[\r\n");
+
+            //数据表字段名和类型数组
+            string[] dt_field = new string[dt.Columns.Count];
+            int i = 0;
+            string formatStr = "{{";
+            string fieldtype = "";
+            foreach (System.Data.DataColumn dc in dt.Columns)
+            {
+                dt_field[i] = dc.Caption.ToLower().Trim();
+                formatStr += "'" + dc.Caption.ToLower().Trim() + "':";
+                fieldtype = dc.DataType.ToString().Trim().ToLower();
+                if (fieldtype.IndexOf("int") > 0 || fieldtype.IndexOf("deci") > 0 ||
+                    fieldtype.IndexOf("floa") > 0 || fieldtype.IndexOf("doub") > 0 ||
+                    fieldtype.IndexOf("bool") > 0)
+                {
+                    formatStr += "{" + i + "}";
+                }
+                else
+                {
+                    formatStr += "'{" + i + "}'";
+                }
+                formatStr += ",";
+                i++;
+            }
+
+            if (formatStr.EndsWith(","))
+                formatStr = formatStr.Substring(0, formatStr.Length - 1);//去掉尾部","号
+
+            formatStr += "}},";
+
+            i = 0;
+            object[] objectArray = new object[dt_field.Length];
+            foreach (System.Data.DataRow dr in dt.Rows)
+            {
+
+                foreach (string fieldname in dt_field)
+                {   //对 \ , ' 符号进行转换 
+                    objectArray[i] = dr[dt_field[i]].ToString().Trim().Replace("\\", "\\\\").Replace("'", "\\'");
+                    switch (objectArray[i].ToString())
+                    {
+                        case "True":
+                            {
+                                objectArray[i] = "true"; break;
+                            }
+                        case "False":
+                            {
+                                objectArray[i] = "false"; break;
+                            }
+                        default: break;
+                    }
+                    i++;
+                }
+                i = 0;
+                stringBuilder.Append(string.Format(formatStr, objectArray));
+            }
+            if (stringBuilder.ToString().EndsWith(","))
+                stringBuilder.Remove(stringBuilder.Length - 1, 1);//去掉尾部","号
+
+            if (dt_dispose)
+                dt.Dispose();
+
+            return stringBuilder.Append("\r\n];");
+        }
+
+        /// <summary>
         /// 字段串是否为Null或为""(空)
         /// </summary>
         /// <param name="str"></param>
@@ -2119,6 +2276,238 @@ namespace SAS.Common
                 return true;
 
             return false;
+        }
+
+        /// <summary>
+        /// 是否为数值串列表，各数值间用","间隔
+        /// </summary>
+        /// <param name="numList"></param>
+        /// <returns></returns>
+        public static bool IsNumericList(string numList)
+        {
+            if (StrIsNullOrEmpty(numList))
+                return false;
+
+            return IsNumericArray(numList.Split(','));
+        }
+
+        /// <summary>
+        /// 检查颜色值是否为3/6位的合法颜色
+        /// </summary>
+        /// <param name="color">待检查的颜色</param>
+        /// <returns></returns>
+        public static bool CheckColorValue(string color)
+        {
+            if (StrIsNullOrEmpty(color))
+                return false;
+
+            color = color.Trim().Trim('#');
+
+            if (color.Length != 3 && color.Length != 6)
+                return false;
+
+            //不包含0-9  a-f以外的字符
+            if (!Regex.IsMatch(color, "[^0-9a-f]", RegexOptions.IgnoreCase))
+                return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// 获取ajax形式的分页链接
+        /// </summary>
+        /// <param name="curPage">当前页数</param>
+        /// <param name="countPage">总页数</param>
+        /// <param name="callback">回调函数</param>
+        /// <param name="extendPage">周边页码显示个数上限</param>
+        /// <returns></returns>
+        public static string GetAjaxPageNumbers(int curPage, int countPage, string callback, int extendPage)
+        {
+            string pagetag = "page";
+            int startPage = 1;
+            int endPage = 1;
+
+            string t1 = "<a href=\"###\" onclick=\"" + string.Format(callback, "&" + pagetag + "=1");
+            string t2 = "<a href=\"###\" onclick=\"" + string.Format(callback, "&" + pagetag + "=" + countPage);
+
+            t1 += "\">&laquo;</a>";
+            t2 += "\">&raquo;</a>";
+
+            if (countPage < 1)
+                countPage = 1;
+            if (extendPage < 3)
+                extendPage = 2;
+
+            if (countPage > extendPage)
+            {
+                if (curPage - (extendPage / 2) > 0)
+                {
+                    if (curPage + (extendPage / 2) < countPage)
+                    {
+                        startPage = curPage - (extendPage / 2);
+                        endPage = startPage + extendPage - 1;
+                    }
+                    else
+                    {
+                        endPage = countPage;
+                        startPage = endPage - extendPage + 1;
+                        t2 = "";
+                    }
+                }
+                else
+                {
+                    endPage = extendPage;
+                    t1 = "";
+                }
+            }
+            else
+            {
+                startPage = 1;
+                endPage = countPage;
+                t1 = "";
+                t2 = "";
+            }
+
+            StringBuilder s = new StringBuilder("");
+
+            s.Append(t1);
+            for (int i = startPage; i <= endPage; i++)
+            {
+                if (i == curPage)
+                {
+                    s.Append("<span>");
+                    s.Append(i);
+                    s.Append("</span>");
+                }
+                else
+                {
+                    s.Append("<a href=\"###\" onclick=\"");
+                    s.Append(string.Format(callback, pagetag + "=" + i));
+                    s.Append("\">");
+                    s.Append(i);
+                    s.Append("</a>");
+                }
+            }
+            s.Append(t2);
+
+            return s.ToString();
+        }
+
+        /// <summary>
+        /// 根据Url获得源文件内容
+        /// </summary>
+        /// <param name="url">合法的Url地址</param>
+        /// <returns></returns>
+        public static string GetSourceTextByUrl(string url)
+        {
+            WebRequest request = WebRequest.Create(url);
+            request.Timeout = 20000;//20秒超时
+            WebResponse response = request.GetResponse();
+
+            Stream resStream = response.GetResponseStream();
+            StreamReader sr = new StreamReader(resStream);
+            return sr.ReadToEnd();
+        }
+
+        /// <summary>
+        /// 转换时间为unix时间戳
+        /// </summary>
+        /// <param name="date">需要传递UTC时间,避免时区误差,例:DataTime.UTCNow</param>
+        /// <returns></returns>
+        public static double ConvertToUnixTimestamp(DateTime date)
+        {
+            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            TimeSpan diff = date - origin;
+            return Math.Floor(diff.TotalSeconds);
+        }
+
+
+        /// <summary>
+        /// Json特符字符过滤，参见http://www.json.org/
+        /// </summary>
+        /// <param name="sourceStr">要过滤的源字符串</param>
+        /// <returns>返回过滤的字符串</returns>
+        public static string JsonCharFilter(string sourceStr)
+        {
+            sourceStr = sourceStr.Replace("\\", "\\\\");
+            sourceStr = sourceStr.Replace("\b", "\\\b");
+            sourceStr = sourceStr.Replace("\t", "\\\t");
+            sourceStr = sourceStr.Replace("\n", "\\\n");
+            sourceStr = sourceStr.Replace("\n", "\\\n");
+            sourceStr = sourceStr.Replace("\f", "\\\f");
+            sourceStr = sourceStr.Replace("\r", "\\\r");
+            return sourceStr.Replace("\"", "\\\"");
+        }
+
+
+        /// <summary>
+        /// 合并字符
+        /// </summary>
+        /// <param name="source">要合并的源字符串</param>
+        /// <param name="target">要被合并到的目的字符串</param>
+        /// <param name="mergechar">合并符</param>
+        /// <returns>合并到的目的字符串</returns>
+        public static string MergeString(string source, string target)
+        {
+            return MergeString(source, target, ",");
+        }
+
+        /// <summary>
+        /// 合并字符
+        /// </summary>
+        /// <param name="source">要合并的源字符串</param>
+        /// <param name="target">要被合并到的目的字符串</param>
+        /// <param name="mergechar">合并符</param>
+        /// <returns>并到字符串</returns>
+        public static string MergeString(string source, string target, string mergechar)
+        {
+            if (Utils.StrIsNullOrEmpty(target))
+                target = source;
+            else
+                target += mergechar + source;
+
+            return target;
+        }
+
+
+        /// <summary>
+        /// 清除UBB标签
+        /// </summary>
+        /// <param name="sDetail">帖子内容</param>
+        /// <returns>帖子内容</returns>
+        public static string ClearUBB(string sDetail)
+        {
+            return Regex.Replace(sDetail, @"\[[^\]]*?\]", string.Empty, RegexOptions.IgnoreCase);
+        }
+
+        /// <summary>
+        /// 获取站点根目录URL
+        /// </summary>
+        /// <returns></returns>
+        public static string GetRootUrl(string forumPath)
+        {
+            int port = HttpContext.Current.Request.Url.Port;
+            return string.Format("{0}://{1}{2}{3}",
+                                 HttpContext.Current.Request.Url.Scheme,
+                                 HttpContext.Current.Request.Url.Host.ToString(),
+                                 (port == 80 || port == 0) ? "" : ":" + port,
+                                 forumPath);
+        }
+
+
+        /// <summary>
+        /// 获取指定文件的扩展名
+        /// </summary>
+        /// <param name="fileName">指定文件名</param>
+        /// <returns>扩展名</returns>
+        public static string GetFileExtName(string fileName)
+        {
+            if (Utils.StrIsNullOrEmpty(fileName) || fileName.IndexOf('.') <= 0)
+                return "";
+
+            fileName = fileName.ToLower().Trim();
+
+            return fileName.Substring(fileName.LastIndexOf('.'), fileName.Length - fileName.LastIndexOf('.'));
         }
 
     } 

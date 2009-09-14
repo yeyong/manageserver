@@ -172,8 +172,14 @@ namespace SAS.Config
         private bool m_specifytemplate = false;  //版块是否指定模板
         private string m_verifyimageassemly = "";//验证码生成所使用的程序集
 
+
+        private int m_statstatus = 0;//是否开启浏览统计
+
+
+        private int m_notificationreserveddays = 7;//通知在系统中保留天数
         private int m_whosonlinecontract = 0;  //在线列表是否隐藏游客: 1 是 0 否
         private int m_deletingexpireduserfrequency = 5;//删除过期用户频率(单位:时间)
+        private int m_onlineoptimization = 0;//用户在线表性能优化开关
         private int m_onlineusercountcacheminute = 0;//在线用户数统计缓存时间，0为实时统计
         #endregion
 
@@ -1454,6 +1460,26 @@ namespace SAS.Config
             set { m_verifyimageassemly = value; }
         }
 
+
+        /// <summary>
+        /// 统计是否开启
+        /// </summary>
+        public int Statstatus
+        {
+            get { return m_statstatus; }
+            set { m_statstatus = value; }
+        }
+
+
+        /// <summary>
+        /// 通知保留天数
+        /// </summary>
+        public int Notificationreserveddays
+        {
+            get { return m_notificationreserveddays; }
+            set { m_notificationreserveddays = value; }
+        }
+
         /// <summary>
         /// 在线列表是否隐藏游客
         /// </summary>
@@ -1475,6 +1501,15 @@ namespace SAS.Config
                 return m_deletingexpireduserfrequency;
             }
             set { m_deletingexpireduserfrequency = value; }
+        }
+
+        /// <summary>
+        /// 用户在线表性能优化开关,默认为不开启
+        /// </summary>
+        public int Onlineoptimization
+        {
+            get { return m_onlineoptimization; }
+            set { m_onlineoptimization = value; }
         }
 
         /// <summary>

@@ -61,6 +61,7 @@
     <Compile Include="TypeConverter.cs" />
     <Compile Include="TypeParse.cs" />
     <Compile Include="Utils.cs" />
+    <Compile Include="Validator.cs" />
     <Compile Include="XmlWriter.cs" />
     <Compile Include="XML\InvalidXmlException.cs" />
     <Compile Include="XML\XmlDocumentExtender.cs" />

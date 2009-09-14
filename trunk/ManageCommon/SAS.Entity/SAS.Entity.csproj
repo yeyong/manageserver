@@ -45,7 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IpInfo.cs" />
+    <Compile Include="NoticeInfo.cs" />
+    <Compile Include="NoticeinfoCollection.cs" />
     <Compile Include="OnlineUserInfo.cs" />
+    <Compile Include="PrivateMessageInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReceivePMSettingType.cs" />
     <Compile Include="TemplateAboutInfo.cs" />

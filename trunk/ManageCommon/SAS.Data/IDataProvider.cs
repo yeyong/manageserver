@@ -751,6 +751,211 @@ namespace SAS.Data
 
         #endregion
 
+        #region 短消息pms处理操作
+
+        /// <summary>
+        /// 获得指定ID的短消息的内容
+        /// </summary>
+        /// <param name="pmid">短消息pmid</param>
+        /// <returns>短消息内容</returns>
+        IDataReader GetPrivateMessageInfo(int pmId);
+
+        /// <summary>
+        /// 得到当用户的短消息数量
+        /// </summary>
+        /// <param name="userId">用户ID</param>
+        /// <param name="folder">所属文件夹(0:收件箱,1:发件箱,2:草稿箱)</param>
+        /// <param name="state">短消息状态(0:已读短消息、1:未读短消息、2:最近消息（7天内）、-1:全部短消息)</param>
+        /// <returns>短消息数量</returns>
+        int GetPrivateMessageCount(Guid userId, int folder, int state);
+
+        /// <summary>
+        /// 得到公共消息数量
+        /// </summary>
+        /// <returns>公共消息数量</returns>
+        int GetAnnouncePrivateMessageCount();
+
+        /// <summary>
+        /// 创建短消息
+        /// </summary>
+        /// <param name="privateMessageInfo">短消息内容</param>
+        /// <param name="saveToSentBox">设置短消息是否在发件箱保留(0为不保留, 1为保留)</param>
+        /// <returns>短消息在数据库中的pmid</returns>
+        int CreatePrivateMessage(PrivateMessageInfo privateMessageInfo, int saveToSentBox);
+
+        /// <summary>
+        /// 删除短消息
+        /// </summary>
+        /// <param name="userId">用户ID</param>
+        /// <param name="pmitemidList">要删除的短信息列表</param>
+        /// <returns>删除记录数</returns>
+        int DeletePrivateMessages(Guid userId, string pmIdList);
+
+        /// <summary>
+        /// 获取新短消息数
+        /// </summary>
+        /// <param name="userId">用户ID</param>
+        /// <returns></returns>
+        int GetNewPMCount(Guid userId);
+
+        /// <summary>
+        /// 设置短信息状态
+        /// </summary>
+        /// <param name="pmId">短信息ID</param>
+        /// <param name="state">状态值</param>
+        /// <returns>更新记录数</returns>
+        int SetPrivateMessageState(int pmId, byte state);
+
+        /// <summary>
+        /// 获得指定用户的短信息列表
+        /// </summary>
+        /// <param name="userId">用户ID</param>
+        /// <param name="folder">短信息类型(0:收件箱,1:发件箱,2:草稿箱)</param>
+        /// <param name="pageSize">每页显示短信息数</param>
+        /// <param name="pageIndex">当前要显示的页数</param>
+        /// <param name="intType">筛选条件1为未读</param>
+        /// <returns>短信息列表</returns>
+        IDataReader GetPrivateMessageList(Guid userId, int folder, int pageSize, int pageIndex, int intType);
+
+        /// <summary>
+        /// 获得公共消息列表
+        /// </summary>
+        /// <param name="pageSize">每页显示短信息数</param>
+        /// <param name="pageIndex">当前要显示的页数</param>
+        /// <returns>公共消息列表</returns>
+        IDataReader GetAnnouncePrivateMessageList(int pageSize, int pageIndex);
+
+        /// <summary>
+        /// 更新短信发送和接收者的用户名
+        /// </summary>
+        /// <param name="uid">Uid</param>
+        /// <param name="newUserName">新用户名</param>
+        void UpdatePMSenderAndReceiver(Guid uid, string newUserName);
+
+        /// <summary>
+        /// 删除短消息
+        /// </summary>
+        /// <param name="isNew">是否删除新短消息</param>
+        /// <param name="postDateTime">发送日期</param>
+        /// <param name="msgFromList">发送者列表</param>
+        /// <param name="lowerUpper">是否区分大小写</param>
+        /// <param name="subject">主题</param>
+        /// <param name="message">内容</param>
+        /// <param name="isUpdateUserNewPm">是否更新用户短消息数</param>
+        /// <returns></returns>
+        string DeletePrivateMessages(bool isnew, string postDateTime, string msgFromList, bool lowerUpper, string subject, string message, bool isUpdateUserNewPm);
+
+        #endregion
+
+        #region 通知notices处理操作
+
+        /// <summary>
+        /// 添加指定的通知信息
+        /// </summary>
+        /// <param name="noticeInfo">要添加的通知信息</param>
+        /// <returns></returns>
+        int CreateNoticeInfo(NoticeInfo noticeInfo);
+
+        /// <summary>
+        /// 更新指定的通知信息
+        /// </summary>
+        /// <param name="noticeInfo">要更新的通知信息</param>
+        /// <returns></returns>
+        bool UpdateNoticeInfo(NoticeInfo noticeInfo);
+
+        /// <summary>
+        /// 删除指定通知id的信息
+        /// </summary>
+        /// <param name="nid">指定的通知id</param>
+        /// <returns></returns>
+        bool DeleteNoticeByNid(int nid);
+
+        /// <summary>
+        /// 删除指定用户id的通知信息
+        /// </summary>
+        /// <param name="uid">指定的通知id</param>
+        /// <returns></returns>
+        bool DeleteNoticeByUid(Guid uid);
+
+        /// <summary>
+        /// 删除指定通知类型和天数内的通知
+        /// </summary>
+        /// <param name="noticeType">删除的通知类型</param>
+        /// <param name="days">指定天数</param>
+        void DeleteNotice(Noticetype noticeType, int days);
+
+        /// <summary>
+        /// 获取指定通知id的信息
+        /// </summary>
+        /// <param name="nid">通知id</param>
+        /// <returns>通知信息</returns>
+        IDataReader GetNoticeByNid(int nid);
+
+        /// <summary>
+        /// 获取指定通知id和类型的通知
+        /// </summary>
+        /// <param name="uid">指定通知id</param>
+        /// <param name="noticeType"><see cref="Noticetype"/>通知类型</param>
+        /// <param name="pageId">分页id</param>
+        /// <param name="pageSize">页面尽寸</param>
+        /// <returns></returns>
+        IDataReader GetNoticeByUid(Guid uid, Noticetype noticeType, int pageId, int pageSize);
+
+        /// <summary>
+        /// 将某一类通知更改为未读状态
+        /// </summary>
+        /// <param name="type">通知类型</param>
+        /// <param name="uid">用户ID</param>
+        /// <returns></returns>
+        int ReNewNotice(int type, Guid uid);
+
+        /// <summary>
+        /// 获得指定用户的新通知
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        IDataReader GetNewNotices(Guid userId);
+
+        /// <summary>
+        /// 获取指定用户和通知类型的通知信息
+        /// </summary>
+        /// <param name="uid">指定的用户id</param>
+        /// <param name="noticeType">通知类型</param>
+        /// <returns></returns>
+        IDataReader GetNoticeByUid(Guid uid, Noticetype noticeType);
+
+        /// <summary>
+        /// 获取指定用户id及通知类型的通知数
+        /// </summary>
+        /// <param name="uid">指定用户id</param>
+        /// <param name="noticeType">通知类型</param>
+        /// <returns></returns>
+        int GetNoticeCountByUid(Guid uid, Noticetype noticeType);
+
+        /// <summary>
+        /// 获取指定用户和分页下的通知
+        /// </summary>
+        /// <param name="uid">用户id</param>
+        /// <returns>通知集合</returns>
+        int GetNewNoticeCountByUid(Guid uid);
+
+        /// <summary>
+        /// 更新指定用户的通知新旧状态
+        /// </summary>
+        /// <param name="uid">用户id</param>
+        /// <param name="newType">通知新旧状态(1:新通知 0:旧通知)</param>
+        void UpdateNoticeNewByUid(Guid uid, int newType);
+
+        /// <summary>
+        /// 得到通知数
+        /// </summary>
+        /// <param name="userId">用户ID</param>
+        /// <param name="state">通知状态(0为已读，1为未读)</param>
+        /// <returns></returns>
+        int GetNoticeCount(Guid userId, int state);
+
+        #endregion
+
         #region 统计信息Statistics表操作
 
         /// <summary>
