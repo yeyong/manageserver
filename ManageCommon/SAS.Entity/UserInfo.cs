@@ -13,7 +13,7 @@ namespace SAS.Entity
         private string _ps_name;
 
         private string _ps_nickname;
-
+        private int _ps_gender;
         private string _ps_password;
         private string _ps_pay_pass;
         private string _ps_init;
@@ -37,8 +37,8 @@ namespace SAS.Entity
         private int? _ps_ug_id;
 
         private int _ps_tempid;
-        private bool _ps_isemail;
-        private string _ps_bdsound;
+        private int _ps_isemail;
+        private int _ps_bdsound;
         private int _ps_status;
 
         private int? _ps_onlinetime;
@@ -49,6 +49,12 @@ namespace SAS.Entity
         private int? _ps_newmess;
         private string _ps_lastactivity;
         private string _ps_secques;
+        private int _ps_pageviews;
+        private int _ps_issign;
+        private ReceivePMSettingType _ps_newsletter;
+        private int _ps_invisible;
+        private int _ps_newpm;
+        private string _ps_salt;//用来二次MD5的字段
 
         /// <summary>
         /// 用户ID
@@ -75,6 +81,15 @@ namespace SAS.Entity
         {
             set { _ps_name = value; }
             get { return _ps_name; }
+        }
+
+        /// <summary>
+        /// 用户性别
+        /// </summary>
+        public int Ps_gender
+        {
+            set { _ps_gender = value; }
+            get { return _ps_gender; }
         }
 
         /// <summary>
@@ -278,7 +293,7 @@ namespace SAS.Entity
         /// <summary>
         /// 是否显示邮箱（默认1，显示；0，不显示）
         /// </summary>
-        public bool Ps_isEmail
+        public int Ps_isEmail
         {
             set { _ps_isemail = value; }
             get { return _ps_isemail; }
@@ -287,7 +302,7 @@ namespace SAS.Entity
         /// <summary>
         /// 弹出消息声音
         /// </summary>
-        public string Ps_bdSound
+        public int Ps_bdSound
         {
             set { _ps_bdsound = value; }
             get { return _ps_bdsound; }
@@ -364,6 +379,61 @@ namespace SAS.Entity
             set { _ps_secques = value.Trim(); }
             get { return _ps_secques; }
         }
+
+        /// <summary>
+        /// 页面浏览量
+        /// </summary>
+        public int ps_pageviews
+        {
+            set { _ps_pageviews = value; }
+            get { return _ps_pageviews; }
+        }
+
+        /// <summary>
+        /// 是否启用个性签名
+        /// </summary>
+        public int ps_issign
+        {
+            set { _ps_issign = value; }
+            get { return _ps_issign; }
+        }
+
+        /// <summary>
+        /// 短消息接收类型
+        /// </summary>
+        public ReceivePMSettingType ps_newsletter
+        {
+            set { _ps_newsletter = value; }
+            get { return _ps_newsletter; }
+        }
+
+        /// <summary>
+        /// 是否隐身
+        /// </summary>
+        public int ps_invisible
+        {
+            set { _ps_invisible = value; }
+            get { return ps_invisible; }
+        }
+
+        /// <summary>
+        /// 是否有新消息
+        /// </summary>
+        public int ps_newpm
+        {
+            set { _ps_newpm = value; }
+            get { return _ps_newpm; }
+        }
+
+        /// <summary>
+        /// 二次MD5加密时用到的随机值
+        /// </summary>
+        public string ps_salt
+        {
+            set { _ps_salt = value; }
+            get { return _ps_salt; }
+        }
+
         #endregion Model
     }
 
@@ -375,24 +445,23 @@ namespace SAS.Entity
         #region Model
         private Guid _pd_id;
         private string _pd_name;
-        private bool _pd_gender;
         private string _pd_birthday;
         private string _pd_msn;
         private string _pd_qq;
         private string _pd_skype;
         private string _pd_yahoo;
         private string _pd_sign;
-        private int? _pd_logo;
+        private int _pd_logo;
         private string _pd_phone;
         private string _pd_mobile;
         private string _pd_website;
-        private int? _pd_ai_id_1;
+        private int _pd_ai_id_1;
         private string _pd_address_1;
-        private int? _pd_ai_id_2;
+        private int _pd_ai_id_2;
         private string _pd_address_2;
-        private int? _pd_ai_id_3;
+        private int _pd_ai_id_3;
         private string _pd_address_3;
-        private int? _pd_ai_id_temp;
+        private int _pd_ai_id_temp;
         private string _pd_address_temp;
 
         private string _pd_authstr;
@@ -417,15 +486,6 @@ namespace SAS.Entity
         {
             set { _pd_name = value; }
             get { return _pd_name; }
-        }
-
-        /// <summary>
-        /// 性别（0，女；1，男）
-        /// </summary>
-        public bool Pd_gender
-        {
-            set { _pd_gender = value; }
-            get { return _pd_gender; }
         }
 
         /// <summary>
@@ -485,7 +545,7 @@ namespace SAS.Entity
         /// <summary>
         /// 头像ID
         /// </summary>
-        public int? Pd_logo
+        public int Pd_logo
         {
             set { _pd_logo = value; }
             get { return _pd_logo; }
@@ -520,7 +580,7 @@ namespace SAS.Entity
         /// <summary>
         /// 所在城市（配送城市）1
         /// </summary>
-        public int? Pd_ai_id_1
+        public int Pd_ai_id_1
         {
             set { _pd_ai_id_1 = value; }
             get { return _pd_ai_id_1; }
@@ -538,7 +598,7 @@ namespace SAS.Entity
         /// <summary>
         /// 所在城市（配送城市）2
         /// </summary>
-        public int? Pd_ai_id_2
+        public int Pd_ai_id_2
         {
             set { _pd_ai_id_2 = value; }
             get { return _pd_ai_id_2; }
@@ -556,7 +616,7 @@ namespace SAS.Entity
         /// <summary>
         /// 所在城市（配送城市）3
         /// </summary>
-        public int? Pd_ai_id_3
+        public int Pd_ai_id_3
         {
             set { _pd_ai_id_3 = value; }
             get { return _pd_ai_id_3; }
@@ -574,7 +634,7 @@ namespace SAS.Entity
         /// <summary>
         /// 临时配送城市
         /// </summary>
-        public int? Pd_ai_id_temp
+        public int Pd_ai_id_temp
         {
             set { _pd_ai_id_temp = value; }
             get { return _pd_ai_id_temp; }

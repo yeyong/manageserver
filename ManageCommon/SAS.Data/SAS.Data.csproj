@@ -39,6 +39,9 @@
     <Compile Include="DatabaseProvider.cs" />
     <Compile Include="DataProvider\OnlineUsers.cs" />
     <Compile Include="DataProvider\Statistics.cs" />
+    <Compile Include="DataProvider\Templates.cs" />
+    <Compile Include="DataProvider\UserGroups.cs" />
+    <Compile Include="DataProvider\Users.cs" />
     <Compile Include="DbException.cs" />
     <Compile Include="DbFields.cs" />
     <Compile Include="DbHelper.cs" />

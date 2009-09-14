@@ -172,6 +172,8 @@ namespace SAS.Config
         private bool m_specifytemplate = false;  //版块是否指定模板
         private string m_verifyimageassemly = "";//验证码生成所使用的程序集
 
+        private int m_whosonlinecontract = 0;  //在线列表是否隐藏游客: 1 是 0 否
+        private int m_deletingexpireduserfrequency = 5;//删除过期用户频率(单位:时间)
         private int m_onlineusercountcacheminute = 0;//在线用户数统计缓存时间，0为实时统计
         #endregion
 
@@ -1450,6 +1452,29 @@ namespace SAS.Config
         {
             get { return m_verifyimageassemly; }
             set { m_verifyimageassemly = value; }
+        }
+
+        /// <summary>
+        /// 在线列表是否隐藏游客
+        /// </summary>
+        public int Whosonlinecontract
+        {
+            get { return m_whosonlinecontract; }
+            set { m_whosonlinecontract = value; }
+        }
+
+        /// <summary>
+        /// 删除过期用户频率
+        /// </summary>
+        public int Deletingexpireduserfrequency
+        {
+            get
+            {
+                if (m_deletingexpireduserfrequency < 1)
+                    m_deletingexpireduserfrequency = 5;
+                return m_deletingexpireduserfrequency;
+            }
+            set { m_deletingexpireduserfrequency = value; }
         }
 
         /// <summary>
