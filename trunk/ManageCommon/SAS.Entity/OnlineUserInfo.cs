@@ -17,8 +17,9 @@ namespace SAS.Entity
         private int _ol_pg_id;
         private int _ol_ug_id;
         private string _ol_img;
-        private bool _ol_invisible;
+        private short _ol_invisible;
         private int _ol_action;
+        private string _ol_actionname;
         private int _ol_lastactivity;
         private string _ol_lastpostpmtime;
         private string _ol_lastsearchtime;
@@ -115,7 +116,7 @@ namespace SAS.Entity
         /// <summary>
         /// 在线状态（是否隐身）
         /// </summary>
-        public bool ol_invisible
+        public short ol_invisible
         {
             set { _ol_invisible = value; }
             get { return _ol_invisible; }
@@ -128,6 +129,15 @@ namespace SAS.Entity
         {
             set { _ol_action = value; }
             get { return _ol_action; }
+        }
+
+        ///<summary>
+        ///当前所在位置或所做的动作
+        ///</summary>
+        public string ol_actionname
+        {
+            set { _ol_actionname = value; }
+            get { return _ol_actionname; }
         }
 
         /// <summary>
@@ -219,4 +229,5 @@ namespace SAS.Entity
         //    get { return _ol_onlinestate; }
         //}
         #endregion Model
+    }
 }

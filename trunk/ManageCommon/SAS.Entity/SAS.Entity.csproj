@@ -47,6 +47,11 @@
   <ItemGroup>
     <Compile Include="OnlineUserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReceivePMSettingType.cs" />
+    <Compile Include="TemplateAboutInfo.cs" />
+    <Compile Include="TemplateInfo.cs" />
+    <Compile Include="UserAction.cs" />
+    <Compile Include="UserGroupInfo.cs" />
     <Compile Include="UserInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
