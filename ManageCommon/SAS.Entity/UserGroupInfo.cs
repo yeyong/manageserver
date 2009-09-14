@@ -229,4 +229,5 @@ namespace SAS.Entity
             get { return _ug_isSystem; }
         }
         #endregion Model
+    }
 }

@@ -293,9 +293,9 @@ namespace SAS.Logic
 
 
                     //给管理人员发送关注通知
-                    if (ui.Adminid > 0 && ui.Adminid < 4)
+                    if (ui.Ps_pg_id > 0 && ui.Ps_pg_id < 4)
                     {
-                        if (Discuz.Data.Notices.ReNewNotice((int)Noticetype.AttentionNotice, ui.Uid) == 0)
+                        if (SAS.Data.DataProvider.Notices.ReNewNotice((int)Noticetype.AttentionNotice, ui.Ps_id) == 0)
                         {
                             NoticeInfo ni = new NoticeInfo();
                             ni.New = 1;
@@ -303,30 +303,30 @@ namespace SAS.Logic
                             ni.Postdatetime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                             ni.Type = Noticetype.AttentionNotice;
                             ni.Poster = "";
-                            ni.Posterid = 0;
-                            ni.Uid = ui.Uid;
+                            ni.Posterid = new Guid("00000000-0000-0000-0000-000000000000");
+                            ni.Uid = ui.Ps_id;
                             Notices.CreateNoticeInfo(ni);
                         }
                     }
-                    Discuz.Data.OnlineUsers.SetUserOnlineState(uid, 1);
+                    SAS.Data.DataProvider.OnlineUsers.SetUserOnlineState(uid, 1);
 
-                    HttpCookie cookie = HttpContext.Current.Request.Cookies["dnt"];
+                    HttpCookie cookie = HttpContext.Current.Request.Cookies["sas"];
                     if (cookie != null)
                     {
-                        cookie.Values["tpp"] = ui.Tpp.ToString();
-                        cookie.Values["ppp"] = ui.Ppp.ToString();
-                        if (HttpContext.Current.Request.Cookies["dnt"]["expires"] != null)
+                        //cookie.Values["tpp"] = ui.Tpp.ToString();
+                        //cookie.Values["ppp"] = ui.Ppp.ToString();
+                        if (HttpContext.Current.Request.Cookies["sas"]["expires"] != null)
                         {
-                            int expires = TypeConverter.StrToInt(HttpContext.Current.Request.Cookies["dnt"]["expires"].ToString(), 0);
+                            int expires = TypeConverter.StrToInt(HttpContext.Current.Request.Cookies["sas"]["expires"].ToString(), 0);
                             if (expires > 0)
                             {
-                                cookie.Expires = DateTime.Now.AddMinutes(TypeConverter.StrToInt(HttpContext.Current.Request.Cookies["dnt"]["expires"].ToString(), 0));
+                                cookie.Expires = DateTime.Now.AddMinutes(TypeConverter.StrToInt(HttpContext.Current.Request.Cookies["sas"]["expires"].ToString(), 0));
                             }
                         }
                     }
 
                     string cookieDomain = GeneralConfigs.GetConfig().CookieDomain.Trim();
-                    if (!Utils.StrIsNullOrEmpty(cookieDomain) && HttpContext.Current.Request.Url.Host.IndexOf(cookieDomain) > -1 && ForumUtils.IsValidDomain(HttpContext.Current.Request.Url.Host))
+                    if (!Utils.StrIsNullOrEmpty(cookieDomain) && HttpContext.Current.Request.Url.Host.IndexOf(cookieDomain) > -1 && LogicUtils.IsValidDomain(HttpContext.Current.Request.Url.Host))
                         cookie.Domain = cookieDomain;
                     HttpContext.Current.Response.AppendCookie(cookie);
                 }
@@ -350,14 +350,15 @@ namespace SAS.Logic
         /// <param name="passwordkey">论坛passwordkey</param>
         /// <param name="timeout">在线超时时间</param>
         /// <param name="passwd">用户密码</param>
-        public static OnlineUserInfo UpdateInfo(string passwordkey, int timeout, int uid, string passwd)
+        public static OnlineUserInfo UpdateInfo(string passwordkey, int timeout, Guid uid, string passwd)
         {
             lock (SynObject)
             {
                 OnlineUserInfo onlineuser = new OnlineUserInfo();
-                string ip = DNTRequest.GetIP();
-                int userid = TypeConverter.StrToInt(ForumUtils.GetCookie("userid"), uid);
-                string password = (Utils.StrIsNullOrEmpty(passwd) ? ForumUtils.GetCookiePassword(passwordkey) : ForumUtils.GetCookiePassword(passwd, passwordkey));
+                string ip = SASRequest.GetIP();
+                Guid userid = uid;
+                userid = new Guid(LogicUtils.GetCookie("userid"));
+                string password = (Utils.StrIsNullOrEmpty(passwd) ? LogicUtils.GetCookiePassword(passwordkey) : LogicUtils.GetCookiePassword(passwd, passwordkey));
 
                 // 如果密码非Base64编码字符串则怀疑被非法篡改, 直接置身份为游客
                 if (password.Length == 0 || !Utils.IsBase64String(password))
@@ -368,7 +369,7 @@ namespace SAS.Logic
                     onlineuser = GetOnlineUser(userid, password);
 
                     //更新流量统计
-                    if (!DNTRequest.GetPageName().EndsWith("ajax.aspx") && GeneralConfigs.GetConfig().Statstatus == 1)
+                    if (!SASRequest.GetPageName().EndsWith("ajax.aspx") && GeneralConfigs.GetConfig().Statstatus == 1)
                         Stats.UpdateStatCount(false, onlineuser != null);
 
                     if (onlineuser != null)
@@ -386,7 +387,7 @@ namespace SAS.Logic
                         userid = Users.CheckPassword(userid, password, false);
                         if (userid != -1)
                         {
-                            Discuz.Data.OnlineUsers.DeleteRowsByIP(ip);
+                            SAS.Data.DataProvider.OnlineUsers.DeleteRowsByIP(ip);
                             CheckIp(ip);
                             return CreateUser(userid, timeout);
                         }
@@ -404,14 +405,14 @@ namespace SAS.Logic
                 {
                     onlineuser = GetOnlineUserByIP(-1, ip);
                     //更新流量统计
-                    if (!DNTRequest.GetPageName().EndsWith("ajax.aspx") && GeneralConfigs.GetConfig().Statstatus == 1)
+                    if (!SASRequest.GetPageName().EndsWith("ajax.aspx") && GeneralConfigs.GetConfig().Statstatus == 1)
                         Stats.UpdateStatCount(true, onlineuser != null);
 
                     if (onlineuser == null)
                         return CreateGuestUser(timeout);
                 }
 
-                onlineuser.Lastupdatetime = Utils.GetDateTime();
+                onlineuser.ol_lastupdatetime = Utils.GetDateTime();
                 return onlineuser;
             }
         }
@@ -424,7 +425,7 @@ namespace SAS.Logic
         {
             string errmsg = "";
             //判断IP地址是否合法,需要重构
-            Discuz.Common.Generic.List<IpInfo> list = Caches.GetBannedIpList();
+            SAS.Common.Generic.List<IpInfo> list = Caches.GetBannedIpList();
 
             foreach (IpInfo ipinfo in list)
             {
@@ -445,7 +446,7 @@ namespace SAS.Logic
             }
 
             if (errmsg != string.Empty)
-                HttpContext.Current.Response.Redirect(BaseConfigs.GetForumPath + "tools/error.htm?templatepath=default&msg=" + Utils.UrlEncode(errmsg));
+                HttpContext.Current.Response.Redirect(BaseConfigs.GetSitePath + "tools/error.htm?templatepath=default&msg=" + Utils.UrlEncode(errmsg));
         }
 
         /// <summary>
@@ -459,5 +460,329 @@ namespace SAS.Logic
         }
 
         #endregion
+
+        #region 在组用户信息更新
+
+        /// <summary>
+        /// 更新用户的当前动作及相关信息
+        /// </summary>
+        /// <param name="olid">在线列表id</param>
+        /// <param name="action">动作</param>
+        /// <param name="inid">所在位置代码</param>
+        /// <param name="timeout">过期时间</param>
+        public static void UpdateAction(int olid, int action, int inid, int timeout)
+        {
+            // 如果上次刷新cookie间隔小于5分钟, 则不刷新数据库最后活动时间
+            if ((timeout < 0) && (Environment.TickCount - TypeConverter.StrToInt(Utils.GetCookie("lastolupdate"), Environment.TickCount) < 300000))
+                Utils.WriteCookie("lastolupdate", Environment.TickCount.ToString());
+            else
+                UpdateAction(olid, action, inid);
+        }
+
+        /// <summary>
+        /// 更新用户的当前动作及相关信息
+        /// </summary>
+        /// <param name="olid">在线列表id</param>
+        /// <param name="action">动作</param>
+        /// <param name="inid">所在位置代码</param>
+        public static void UpdateAction(int olid, int action, int inid)
+        {
+            if (GeneralConfigs.GetConfig().Onlineoptimization == 1)
+            {
+                SAS.Data.DataProvider.OnlineUsers.UpdateAction(olid, action, inid);
+            }
+        }
+
+
+        /// <summary>
+        /// 更新用户的当前动作及相关信息
+        /// </summary>
+        /// <param name="olid">在线列表id</param>
+        /// <param name="action">动作id</param>
+        /// <param name="fid">版块id</param>
+        /// <param name="forumname">版块名</param>
+        /// <param name="tid">主题id</param>
+        /// <param name="topictitle">主题名</param>
+        /// <param name="timeout">超时时间</param>
+        public static void UpdateAction(int olid, int action, int fid, string forumname, int tid, string topictitle, int timeout)
+        {
+            // 如果上次刷新cookie间隔小于5分钟, 则不刷新数据库最后活动时间
+            if ((timeout < 0) && (System.Environment.TickCount - TypeConverter.StrToInt(Utils.GetCookie("lastolupdate"), System.Environment.TickCount) < 300000))
+                Utils.WriteCookie("lastolupdate", System.Environment.TickCount.ToString());
+            else
+            {
+                if (GeneralConfigs.GetConfig().Onlineoptimization == 1)
+                {
+                    if ((action == UserAction.ShowForum.ActionID) || (action == UserAction.PostTopic.ActionID) || (action == UserAction.ShowTopic.ActionID) || (action == UserAction.PostReply.ActionID))
+                        forumname = forumname.Length > 40 ? forumname.Substring(0, 37) + "..." : forumname;
+
+                    if ((action == UserAction.ShowTopic.ActionID) || (action == UserAction.PostReply.ActionID))
+                        topictitle = topictitle.Length > 40 ? topictitle.Substring(0, 37) + "..." : topictitle;
+
+                    SAS.Data.DataProvider.OnlineUsers.UpdateAction(olid, action, fid, forumname, tid, topictitle);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 更新用户最后活动时间
+        /// </summary>
+        /// <param name="olid">在线id</param>
+        /// <param name="timeout">超时时间</param>
+        private static void UpdateLastTime(int olid, int timeout)
+        {
+            // 如果上次刷新cookie间隔小于5分钟, 则不刷新数据库最后活动时间
+            if ((timeout < 0) && (System.Environment.TickCount - TypeConverter.StrToInt(Utils.GetCookie("lastolupdate"), System.Environment.TickCount) < 300000))
+                Utils.WriteCookie("lastolupdate", System.Environment.TickCount.ToString());
+            else
+                SAS.Data.DataProvider.OnlineUsers.UpdateLastTime(olid);
+        }
+
+        /// <summary>
+        /// 更新用户最后发帖时间
+        /// </summary>
+        /// <param name="olid">在线id</param>
+        public static void UpdatePostTime(int olid)
+        {
+            SAS.Data.DataProvider.OnlineUsers.UpdatePostTime(olid);
+        }
+
+        /// <summary>
+        /// 更新用户最后发短消息时间
+        /// </summary>
+        /// <param name="olid">在线id</param>
+        public static void UpdatePostPMTime(int olid)
+        {
+            if (GeneralConfigs.GetConfig().Onlineoptimization == 1)
+            {
+                SAS.Data.DataProvider.OnlineUsers.UpdatePostPMTime(olid);
+            }
+        }
+
+        /// <summary>
+        /// 更新在线表中指定用户是否隐身
+        /// </summary>
+        /// <param name="olid">在线id</param>
+        /// <param name="invisible">是否隐身</param>
+        public static void UpdateInvisible(int olid, int invisible)
+        {
+            if (GeneralConfigs.GetConfig().Onlineoptimization == 1)
+            {
+                SAS.Data.DataProvider.OnlineUsers.UpdateInvisible(olid, invisible);
+            }
+        }
+
+        /// <summary>
+        /// 更新在线表中指定用户的用户密码
+        /// </summary>
+        /// <param name="olid">在线id</param>
+        /// <param name="password">用户密码</param>
+        public static void UpdatePassword(int olid, string password)
+        {
+            if (GeneralConfigs.GetConfig().Onlineoptimization == 1)
+            {
+                SAS.Data.DataProvider.OnlineUsers.UpdatePassword(olid, password);
+            }
+        }
+
+
+        /// <summary>
+        /// 更新用户IP地址
+        /// </summary>
+        /// <param name="olid">在线id</param>
+        /// <param name="ip">ip地址</param>
+        public static void UpdateIP(int olid, string ip)
+        {
+            SAS.Data.DataProvider.OnlineUsers.UpdateIP(olid, ip);
+        }
+
+        /// <summary>
+        /// 更新用户最后搜索时间
+        /// </summary>
+        /// <param name="olid">在线id</param>
+        public static void UpdateSearchTime(int olid)
+        {
+            if (GeneralConfigs.GetConfig().Onlineoptimization == 1)
+            {
+                SAS.Data.DataProvider.OnlineUsers.UpdateSearchTime(olid);
+            }
+        }
+
+        /// <summary>
+        /// 更新用户的用户组
+        /// </summary>
+        /// <param name="userid">用户ID</param>
+        /// <param name="groupid">组名</param>
+        public static void UpdateGroupid(Guid userid, int groupid)
+        {
+            SAS.Data.DataProvider.OnlineUsers.UpdateGroupid(userid, groupid);
+        }
+
+        #endregion
+
+        /// <summary>
+        /// 删除在线表中指定在线id的行
+        /// </summary>
+        /// <param name="olid">在线id</param>
+        /// <returns></returns>
+        public static int DeleteRows(int olid)
+        {
+            return SAS.Data.DataProvider.OnlineUsers.DeleteRows(olid);
+        }
+
+        #region 条件编译的方法
+
+        /// <summary>
+        /// 返回在线用户列表
+        /// </summary>
+        /// <param name="totaluser">全部用户数</param>
+        /// <param name="guest">游客数</param>
+        /// <param name="user">登录用户数</param>
+        /// <param name="invisibleuser">隐身会员数</param>
+        /// <returns></returns>
+        public static SAS.Common.Generic.List<OnlineUserInfo> GetForumOnlineUserCollection(int forumid, out int totaluser, out int guest, out int user, out int invisibleuser)
+        {
+            SAS.Common.Generic.List<OnlineUserInfo> coll = SAS.Data.DataProvider.OnlineUsers.GetForumOnlineUserCollection(forumid);
+
+            //在线游客
+            guest = 0;
+            //在线隐身用户
+            invisibleuser = 0;
+            //当前版块在线总用户数
+            totaluser = coll.Count;
+
+            foreach (OnlineUserInfo onlineUserInfo in coll)
+            {
+                if (onlineUserInfo.ol_ps_id == new Guid("00000000-0000-0000-0000-000000000000"))
+                    guest++;
+
+                if (onlineUserInfo.ol_invisible == 1)
+                    invisibleuser++;
+            }
+
+            //统计用户
+            user = totaluser - guest;
+            //返回当前版块的在线用户表
+            return coll;
+        }
+
+
+        /// <summary>
+        /// 返回在线用户列表
+        /// </summary>
+        /// <param name="totaluser">全部用户数</param>
+        /// <param name="guest">游客数</param>
+        /// <param name="user">登录用户数</param>
+        /// <param name="invisibleuser">隐身会员数</param>
+        /// <returns></returns>
+        public static SAS.Common.Generic.List<OnlineUserInfo> GetOnlineUserCollection(out int totaluser, out int guest, out int user, out int invisibleuser)
+        {
+            SAS.Common.Generic.List<OnlineUserInfo> coll = SAS.Data.DataProvider.OnlineUsers.GetOnlineUserCollection();
+
+            //在线注册用户数
+            user = 0;
+            //在线隐身用户数
+            invisibleuser = 0;
+            //在线总用户数
+            totaluser = coll.Count;
+
+            foreach (OnlineUserInfo onlineUserInfo in coll)
+            {
+                if (onlineUserInfo.ol_ps_id != new Guid("00000000-0000-0000-0000-000000000000"))
+                    user++;
+
+                if (onlineUserInfo.ol_invisible == 1)
+                    invisibleuser++;
+            }
+
+            if (totaluser > TypeConverter.StrToInt(Statistics.GetStatisticsRowItem("highestonlineusercount"), 1))
+            {
+                if (Statistics.UpdateStatistics("highestonlineusercount", totaluser.ToString()) > 0)
+                {
+                    Statistics.UpdateStatistics("highestonlineusertime", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                    Statistics.ReSetStatisticsCache();
+                }
+            }
+
+            //统计游客
+            guest = totaluser > user ? totaluser - user : 0;
+
+            //返回当前版块的在线用户集合
+            return coll;
+        }
+
+        /// <summary>
+        /// 更新在线时间
+        /// </summary>
+        /// <param name="oltimespan">在线时间间隔</param>
+        /// <param name="uid">当前用户id</param>
+        public static void UpdateOnlineTime(int oltimespan, Guid uid)
+        {
+            //为0代表关闭统计功能
+            if (oltimespan != 0)
+            {
+                if (Utils.StrIsNullOrEmpty(Utils.GetCookie("lastactivity", "onlinetime")))
+                    Utils.WriteCookie("lastactivity", "onlinetime", System.Environment.TickCount.ToString());
+
+                if ((System.Environment.TickCount - TypeConverter.StrToInt(Utils.GetCookie("lastactivity", "onlinetime"), System.Environment.TickCount) >= oltimespan * 60 * 1000))
+                {
+                    SAS.Data.DataProvider.OnlineUsers.UpdateOnlineTime(oltimespan, uid);
+                    Utils.WriteCookie("lastactivity", "onlinetime", System.Environment.TickCount.ToString());
+
+                    //判断是否同步oltime (登录后的第一次onlinetime更新的时候或者在线超过1小时)
+                    if (Utils.StrIsNullOrEmpty(Utils.GetCookie("lastactivity", "oltime")) || (System.Environment.TickCount - TypeConverter.StrToInt(Utils.GetCookie("lastactivity", "onlinetime"), System.Environment.TickCount) >= 60 * 60 * 1000))
+                    {
+                        SAS.Data.DataProvider.OnlineUsers.SynchronizeOnlineTime(uid);
+                        Utils.WriteCookie("lastactivity", "oltime", System.Environment.TickCount.ToString());
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+
+
+        /// <summary>
+        /// 根据Uid获得Olid
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+        public static int GetOlidByUid(Guid uid)
+        {
+            return SAS.Data.DataProvider.OnlineUsers.GetOlidByUid(uid);
+        }
+
+        /// <summary>
+        /// 删除在线表中Uid的用户
+        /// </summary>
+        /// <param name="uid">要删除用户的Uid</param>
+        /// <returns></returns>
+        public static int DeleteUserByUid(Guid uid)
+        {
+            return DeleteRows(GetOlidByUid(uid));
+        }
+
+        /// <summary>
+        /// 更新用户新短消息数
+        /// </summary>
+        /// <param name="olid">在线id</param>
+        /// <param name="count">更新数</param>
+        /// <returns></returns>
+        public static int UpdateNewPms(int olid, int count)
+        {
+            return SAS.Data.DataProvider.OnlineUsers.UpdateNewPms(olid, count);
+        }
+
+        /// <summary>
+        /// 更新用户新通知数
+        /// </summary>
+        /// <param name="olid">在线id</param>
+        /// <param name="pluscount">增加量</param>
+        /// <returns></returns>
+        public static int UpdateNewNotices(int olid, int pluscount)
+        {
+            return SAS.Data.DataProvider.OnlineUsers.UpdateNewNotices(olid, pluscount);
+        }       
     }
 }
