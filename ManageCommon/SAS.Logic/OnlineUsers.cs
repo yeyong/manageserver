@@ -362,9 +362,9 @@ namespace SAS.Logic
 
                 // 如果密码非Base64编码字符串则怀疑被非法篡改, 直接置身份为游客
                 if (password.Length == 0 || !Utils.IsBase64String(password))
-                    userid = -1;
+                    userid = new Guid("00000000-0000-0000-0000-000000000000");
 
-                if (userid != -1)
+                if (userid != new Guid("00000000-0000-0000-0000-000000000000"))
                 {
                     onlineuser = GetOnlineUser(userid, password);
 
@@ -374,10 +374,10 @@ namespace SAS.Logic
 
                     if (onlineuser != null)
                     {
-                        if (onlineuser.Ip != ip)
+                        if (onlineuser.ol_ip != ip)
                         {
-                            UpdateIP(onlineuser.Olid, ip);
-                            onlineuser.Ip = ip;
+                            UpdateIP(onlineuser.ol_id, ip);
+                            onlineuser.ol_ip = ip;
                             return onlineuser;
                         }
                     }
@@ -385,7 +385,7 @@ namespace SAS.Logic
                     {
                         // 判断密码是否正确
                         userid = Users.CheckPassword(userid, password, false);
-                        if (userid != -1)
+                        if (userid != new Guid("00000000-0000-0000-0000-000000000000"))
                         {
                             SAS.Data.DataProvider.OnlineUsers.DeleteRowsByIP(ip);
                             CheckIp(ip);
@@ -395,7 +395,7 @@ namespace SAS.Logic
                         {
                             CheckIp(ip);
                             // 如密码错误则在在线表中创建游客
-                            onlineuser = GetOnlineUserByIP(-1, ip);
+                            onlineuser = GetOnlineUserByIP(new Guid("00000000-0000-0000-0000-000000000000"), ip);
                             if (onlineuser == null)
                                 return CreateGuestUser(timeout);
                         }
@@ -403,7 +403,7 @@ namespace SAS.Logic
                 }
                 else
                 {
-                    onlineuser = GetOnlineUserByIP(-1, ip);
+                    onlineuser = GetOnlineUserByIP(new Guid("00000000-0000-0000-0000-000000000000"), ip);
                     //更新流量统计
                     if (!SASRequest.GetPageName().EndsWith("ajax.aspx") && GeneralConfigs.GetConfig().Statstatus == 1)
                         Stats.UpdateStatCount(true, onlineuser != null);
@@ -456,7 +456,7 @@ namespace SAS.Logic
         /// <param name="timeout">在线超时时间</param>>
         public static OnlineUserInfo UpdateInfo(string passwordkey, int timeout)
         {
-            return UpdateInfo(passwordkey, timeout, -1, "");
+            return UpdateInfo(passwordkey, timeout, new Guid("00000000-0000-0000-0000-000000000000"), "");
         }
 
         #endregion
