@@ -36,7 +36,7 @@ namespace SAS.Logic
                 info.Username = username;
                 info.Dateline = DateTime.Now.ToShortDateString();
                 info.Expiration = DateTime.Now.AddDays(deteline).ToString("yyyy-MM-dd"); ;
-                Discuz.Data.Ips.AddBannedIp(info);
+                SAS.Data.DataProvider.Ips.AddBannedIp(info);
             }
         }
 
@@ -46,7 +46,7 @@ namespace SAS.Logic
         /// <returns></returns>
         public static List<IpInfo> GetBannedIpList()
         {
-            List<IpInfo> ipInfoList = Discuz.Data.Ips.GetBannedIpList();
+            List<IpInfo> ipInfoList = SAS.Data.DataProvider.Ips.GetBannedIpList();
 
             foreach (IpInfo info in ipInfoList)
             {
@@ -58,7 +58,7 @@ namespace SAS.Logic
         private static string GetLocation(IpInfo info)
         {
             string ip = string.Format("{0}.{1}.{2}.{3}", info.Ip1, info.Ip2, info.Ip3, info.Ip4);
-            Discuz.Forum.IpSearch.PHCZIP phczip = new IpSearch.PHCZIP();
+            SAS.Logic.IpSearch.PHCZIP phczip = new IpSearch.PHCZIP();
             return phczip.GetAddressWithIP(ip) == "" ? "未知地址" : phczip.GetAddressWithIP(ip);
         }
 
@@ -70,13 +70,13 @@ namespace SAS.Logic
         /// <returns></returns>
         public static List<IpInfo> GetBannedIpList(int num, int pageid, out int counts)
         {
-            List<IpInfo> ipInfoList = Discuz.Data.Ips.GetBannedIpList(num, pageid);
+            List<IpInfo> ipInfoList = SAS.Data.DataProvider.Ips.GetBannedIpList(num, pageid);
 
             foreach (IpInfo info in ipInfoList)
             {
                 info.Location = GetLocation(info);
             }
-            counts = Discuz.Data.Ips.GetBannedIpCount();
+            counts = SAS.Data.DataProvider.Ips.GetBannedIpCount();
             return ipInfoList;
         }
 
@@ -86,19 +86,19 @@ namespace SAS.Logic
             if (!Utils.IsNumericList(iplist))
                 return;
 
-            Discuz.Data.Ips.DelBanIp(iplist);
+            SAS.Data.DataProvider.Ips.DelBanIp(iplist);
         }
 
-        public static void EditBanIp(string[] expiration, string[] hiddenexpiration, string[] hiddenid, int useradminid, int userid)
+        public static void EditBanIp(string[] expiration, string[] hiddenexpiration, string[] hiddenid, int useradminid, Guid userid)
         {
             for (int i = 0; i < expiration.Length; i++)
             {
                 //1-管理员 2-超版
-                if (useradminid != 1 && userid != Users.GetShortUserInfo(TypeConverter.StrToInt(hiddenid[i])).Uid)
+                if (useradminid != 1 && userid != Users.GetShortUserInfo(new Guid(hiddenid[i])).Ps_id)
                     continue;
 
                 if (expiration[i] != hiddenexpiration[i])
-                    Discuz.Data.Ips.EditBanIp(Utils.StrToInt(hiddenid[i].ToString(), -1), expiration[i]);
+                    SAS.Data.DataProvider.Ips.EditBanIp(Utils.StrToInt(hiddenid[i].ToString(), -1), expiration[i]);
             }
         }
 

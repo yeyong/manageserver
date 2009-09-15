@@ -175,6 +175,7 @@ namespace SAS.Config
 
         private int m_statstatus = 0;//是否开启浏览统计
 
+        private int m_iisurlrewrite = 0; //是否启用IIS的URL重写
 
         private int m_notificationreserveddays = 7;//通知在系统中保留天数
         private int m_whosonlinecontract = 0;  //在线列表是否隐藏游客: 1 是 0 否
@@ -1470,6 +1471,15 @@ namespace SAS.Config
             set { m_statstatus = value; }
         }
 
+
+        /// <summary>
+        /// 是否启用IIS的URL重写
+        /// </summary>
+        public int Iisurlrewrite
+        {
+            get { return m_iisurlrewrite; }
+            set { m_iisurlrewrite = value; }
+        }
 
         /// <summary>
         /// 通知保留天数

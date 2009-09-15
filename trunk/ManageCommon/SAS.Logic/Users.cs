@@ -96,5 +96,32 @@ namespace SAS.Logic
             }
             return dt;
         }
+
+        /// <summary>
+        /// 检查密码
+        /// </summary>
+        /// <param name="username">用户名</param>
+        /// <param name="password">密码</param>
+        /// <param name="originalpassword">是否非MD5密码</param>
+        /// <returns>如果正确则返回用户id, 否则返回-1</returns>
+        public static Guid CheckPassword(string username, string password, bool originalpassword)
+        {
+            ShortUserInfo userInfo = SAS.Data.DataProvider.Users.CheckPassword(username, password, originalpassword);
+
+            return userInfo == null ? new Guid("00000000-0000-0000-0000-000000000000") : userInfo.Ps_id;
+        }
+
+        /// <summary>
+        /// 判断指定用户密码是否正确.
+        /// </summary>
+        /// <param name="uid">用户ID</param>
+        /// <param name="password">用户密码</param>
+        /// <returns>如果用户密码正确则返回true, 否则返回false</returns>
+        public static Guid CheckPassword(Guid uid, string password, bool originalpassword)
+        {
+            ShortUserInfo userInfo = SAS.Data.DataProvider.Users.CheckPassword(uid, password, originalpassword);
+
+            return userInfo == null ? new Guid("00000000-0000-0000-0000-000000000000") : userInfo.Ps_id;
+        }
     }
 }

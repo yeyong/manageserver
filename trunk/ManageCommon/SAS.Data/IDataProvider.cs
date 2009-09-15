@@ -956,6 +956,115 @@ namespace SAS.Data
 
         #endregion
 
+        #region IP禁止操作
+
+        /// <summary>
+        /// 添加被禁止的ip
+        /// </summary>
+        /// <param name="info"></param>
+        void AddBannedIp(IpInfo info);
+
+        /// <summary>
+        /// 获得被禁止ip列表
+        /// </summary>
+        /// <returns></returns>
+        IDataReader GetBannedIpList();
+
+        /// <summary>
+        /// 获取指定分页的禁止IP列表
+        /// </summary>
+        /// <param name="num"></param>
+        /// <param name="pageId"></param>
+        /// <returns></returns>
+        IDataReader GetBannedIpList(int num, int pageId);
+
+        /// <summary>
+        /// 显示被禁止的ip数量
+        /// </summary>
+        /// <returns></returns>
+        int GetBannedIpCount();
+
+        /// <summary>
+        /// 删除选中的ip地址段
+        /// </summary>
+        /// <param name="bannedIdList"></param>
+        int DeleteBanIp(string bannedIdList);
+
+        /// <summary>
+        /// 编辑banip结束时间
+        /// </summary>
+        /// <param name="iplist"></param>
+        /// <param name="endTime"></param>
+        int UpdateBanIpExpiration(int id, string endTime);
+
+        #endregion
+
+        #region 统计,统计信息stats,statvars表操作
+
+        /// <summary>
+        /// 更新统计变量
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="variable"></param>
+        /// <param name="value"></param>
+        void UpdateStatVars(string type, string variable, string value);
+
+        /// <summary>
+        /// 获得所有统计信息
+        /// </summary>
+        /// <returns></returns>
+        IDataReader GetAllStats();
+
+        /// <summary>
+        /// 获得所有统计
+        /// </summary>
+        /// <returns></returns>
+        IDataReader GetAllStatVars();
+
+        /// <summary>
+        /// 统计板块数量
+        /// </summary>
+        /// <returns></returns>
+        int GetForumCount();
+
+        /// <summary>
+        /// 获得今日新用户数
+        /// </summary>
+        /// <returns></returns>
+        int GetTodayNewMemberCount();
+
+        /// <summary>
+        /// 获得管理员数量
+        /// </summary>
+        /// <returns></returns>
+        int GetAdminCount();
+
+        /// <summary>
+        /// 获得用户排行
+        /// </summary>
+        /// <param name="count"></param>
+        /// <param name="postTableId"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        IDataReader GetUsersRank(int count, string postTableId, string type);
+
+        /// <summary>
+        /// 获得用户排行
+        /// </summary>
+        /// <param name="filed">当月还是总在线时间</param>
+        /// <returns></returns>
+        IDataReader GetUserByOnlineTime(string filed);
+
+        /// <summary>
+        /// 更新统计数据
+        /// </summary>
+        /// <param name="browser"></param>
+        /// <param name="os"></param>
+        /// <param name="visitorsAdd"></param>
+        void UpdateStatCount(string browser, string os, string visitorsAdd);   
+
+        #endregion
+
         #region 统计信息Statistics表操作
 
         /// <summary>

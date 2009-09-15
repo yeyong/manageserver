@@ -192,7 +192,7 @@ namespace SAS.Logic
         /// <param name="fordntver">适用论坛版本</param>
         public static void CreateTemplate(string name, string directory, string copyright, string author, string createdate, string ver, string fordntver)
         {
-            Data.Templates.CreateTemplate(name, directory, copyright, author, createdate, ver, fordntver);
+            Data.DataProvider.Templates.CreateTemplate(name, directory, copyright, author, createdate, ver, fordntver);
         }
     }
 }
