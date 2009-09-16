@@ -14,6 +14,13 @@ namespace SAS.Data.SqlServer
     public partial class DataProvider : IDataProvider
     {
         private static int _lastRemoveTimeout;
+
+        #region 用户personinfo操作
+
+
+
+        #endregion
+
         #region 在线用户OnlineUser表基本操作
 
         /// <summary>
@@ -483,6 +490,129 @@ namespace SAS.Data.SqlServer
             }
         }
 
+        /// <summary>
+        /// 同步在线时间
+        /// </summary>
+        /// <param name="uid">用户id</param>
+        public void SynchronizeOnlineTime(Guid uid)
+        {
+            DbParameter[] parms = {
+                                    DbHelper.MakeInParam("@uid", (DbType)SqlDbType.UniqueIdentifier, 16, uid),
+                                  };
+            string commandText = string.Format("SELECT [total] FROM [{0}onlinetime] WHERE [uid]=@uid", BaseConfigs.GetTablePrefix);
+            int total = TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText, parms));
+
+            commandText = string.Format("UPDATE [{0}users] SET [oltime]={1} WHERE [oltime]<{1} AND [uid]=@uid", BaseConfigs.GetTablePrefix, total);
+            if (DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) < 1)
+            {
+                try
+                {
+                    commandText = string.Format("UPDATE [{0}onlinetime] SET [total]=(SELECT [oltime] FROM [{0}users] WHERE [uid]=@uid) WHERE [uid]=@uid",
+                                                 BaseConfigs.GetTablePrefix);
+                    DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+                }
+                catch { }
+            }
+        }
+
+        /// <summary>
+        /// 根据uid获得olid
+        /// </summary>
+        /// <param name="uid">uid</param>
+        /// <returns>olid</returns>
+        public int GetOlidByUid(Guid uid)
+        {
+            string commandText = string.Format("SELECT [ol_id] FROM [{0}online] WHERE [ol_ps_id]='{1}'", BaseConfigs.GetTablePrefix, uid);
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteScalarToStr(CommandType.Text, commandText), -1);
+        }
+
+        /// <summary>
+        /// 更新用户新短消息数
+        /// </summary>
+        /// <param name="olid">在线id</param>
+        /// <param name="pluscount">增加量</param>
+        /// <returns></returns>
+        public int UpdateNewPms(int olid, int count)
+        {
+            DbParameter[] parms = { 
+                                     DbHelper.MakeInParam("@count",(DbType)SqlDbType.Int, 4, short.Parse(count.ToString())),
+                                     DbHelper.MakeInParam("@olid",(DbType)SqlDbType.Int, 4, olid)
+                                  };
+            string commandText = string.Format("UPDATE [{0}online] SET [ol_newpms]=@count WHERE [ol_id]=@olid", BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
+        /// 更新用户新通知数
+        /// </summary>
+        /// <param name="olid">在线id</param>
+        /// <param name="plusCount">增加量</param>
+        /// <returns></returns>
+        public int UpdateNewNotices(int olId, int plusCount)
+        {
+            DbParameter[] parms = { 
+                                     DbHelper.MakeInParam("@pluscount",(DbType)SqlDbType.SmallInt, 2, short.Parse(plusCount.ToString())),
+                                     DbHelper.MakeInParam("@olid",(DbType)SqlDbType.Int, 4, olId)
+                                  };
+            string commandText = string.Format("UPDATE [{0}online] SET [ol_newnotices]=[ol_newnotices]+@pluscount WHERE [ol_id]=@olid",
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+
+        /// <summary>
+        /// 删除在线图例
+        /// </summary>
+        /// <param name="groupId">用户组Id</param>
+        public void DeleteOnlineList(int groupId)
+        {
+            string commandText = string.Format("DELETE FROM [{0}userGroupIcon] WHERE [ui_id]={1}",
+                                                BaseConfigs.GetTablePrefix,
+                                                groupId);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
+        }
+
+        /// <summary>
+        /// 添加在线用户组图例
+        /// </summary>
+        /// <param name="grouptitle"></param>
+        public void AddOnlineList(string groupTitle)
+        {
+            DbParameter[] parms = { 
+                                        DbHelper.MakeInParam("@groupid", (DbType)SqlDbType.Int, 4, GetMaxUserGroupId()),
+                                        DbHelper.MakeInParam("@title", (DbType)SqlDbType.VarChar, 200, groupTitle)
+                                    };
+            string commandText = string.Format("INSERT INTO [{0}userGroupIcon] ([ui_id], [ui_ug_name], [ui_img]) VALUES(@groupid,@title, '')",
+                                                BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
         #endregion
+
+        #region 用户组usergroup usergroup基本操作
+
+        /// <summary>
+        /// 获取用户组列表
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetUserGroups()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}userGroup] ORDER BY [ug_id]", DbFields.USER_GROUPS, BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 用户组最大ID值
+        /// </summary>
+        /// <returns></returns>
+        public int GetMaxUserGroupId()
+        {
+            string commandText = string.Format("SELECT ISNULL(MAX(ug_id), 0) FROM [{0}userGroup]", BaseConfigs.GetTablePrefix);
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText));
+        }
+
+        #endregion
+
+
     }
 }
