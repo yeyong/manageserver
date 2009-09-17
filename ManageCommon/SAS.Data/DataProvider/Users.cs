@@ -359,25 +359,25 @@ namespace SAS.Data.DataProvider
         }
 
 
-        /// <summary>
-        /// 更新指定用户的个人资料
-        /// </summary>
-        /// <param name="__userinfo">用户信息</param>
-        /// <returns>如果用户不存在则为false, 否则为true</returns>
-        public static void UpdateUserProfile(UserInfo userinfo)
-        {
-            DatabaseProvider.GetInstance().UpdateUserProfile(userinfo);
-        }
+        /////// <summary>
+        /////// 更新指定用户的个人资料
+        /////// </summary>
+        /////// <param name="__userinfo">用户信息</param>
+        /////// <returns>如果用户不存在则为false, 否则为true</returns>
+        ////public static void UpdateUserProfile(UserInfo userinfo)
+        ////{
+        ////    DatabaseProvider.GetInstance().UpdateUserProfile(userinfo);
+        ////}
 
-        /// <summary>
-        /// 更新用户论坛设置
-        /// </summary>
-        /// <param name="__userinfo">用户信息</param>
-        /// <returns>如果用户不存在则返回false, 否则返回true</returns>
-        public static void UpdateUserForumSetting(UserInfo userinfo)
-        {
-            DatabaseProvider.GetInstance().UpdateUserForumSetting(userinfo);
-        }
+        /////// <summary>
+        /////// 更新用户论坛设置
+        /////// </summary>
+        /////// <param name="__userinfo">用户信息</param>
+        /////// <returns>如果用户不存在则返回false, 否则返回true</returns>
+        ////public static void UpdateUserForumSetting(UserInfo userinfo)
+        ////{
+        ////    DatabaseProvider.GetInstance().UpdateUserForumSetting(userinfo);
+        ////}
 
         ///// <summary>
         ///// 修改用户自定义积分字段的值
@@ -402,109 +402,109 @@ namespace SAS.Data.DataProvider
         //    return DatabaseProvider.GetInstance().GetUserExtCredits(uid, extid);
         //}
 
-        /// <summary>
-        /// 更新用户头像
-        /// </summary>
-        /// <param name="uid">用户id</param>
-        /// <param name="avatar">头像</param>
-        /// <param name="avatarwidth">头像宽度</param>
-        /// <param name="avatarheight">头像高度</param>
-        /// <param name="templateid">模板Id</param>
-        /// <returns>如果用户不存在则返回false, 否则返回true</returns>
-        public static void UpdateUserPreference(Guid uid, string avatar, int avatarwidth, int avatarheight, int templateid)
-        {
-            DatabaseProvider.GetInstance().UpdateUserPreference(uid, avatar, avatarwidth, avatarheight, templateid);
-        }
+        /////// <summary>
+        /////// 更新用户头像
+        /////// </summary>
+        /////// <param name="uid">用户id</param>
+        /////// <param name="avatar">头像</param>
+        /////// <param name="avatarwidth">头像宽度</param>
+        /////// <param name="avatarheight">头像高度</param>
+        /////// <param name="templateid">模板Id</param>
+        /////// <returns>如果用户不存在则返回false, 否则返回true</returns>
+        ////public static void UpdateUserPreference(Guid uid, string avatar, int avatarwidth, int avatarheight, int templateid)
+        ////{
+        ////    DatabaseProvider.GetInstance().UpdateUserPreference(uid, avatar, avatarwidth, avatarheight, templateid);
+        ////}
 
-        /// <summary>
-        /// 更新用户密码
-        /// </summary>
-        /// <param name="uid">用户id</param>
-        /// <param name="password">密码</param>
-        /// <param name="originalpassword">是否非MD5密码</param>
-        /// <returns>成功返回true否则false</returns>
-        public static void UpdateUserPassword(Guid uid, string password, bool originalpassword)
-        {
-            DatabaseProvider.GetInstance().UpdateUserPassword(uid, password, originalpassword);
-        }
+        /////// <summary>
+        /////// 更新用户密码
+        /////// </summary>
+        /////// <param name="uid">用户id</param>
+        /////// <param name="password">密码</param>
+        /////// <param name="originalpassword">是否非MD5密码</param>
+        /////// <returns>成功返回true否则false</returns>
+        ////public static void UpdateUserPassword(Guid uid, string password, bool originalpassword)
+        ////{
+        ////    DatabaseProvider.GetInstance().UpdateUserPassword(uid, password, originalpassword);
+        ////}
 
-        /// <summary>
-        /// 更新用户安全问题
-        /// </summary>
-        /// <param name="uid">用户id</param>
-        /// <param name="userSecques">用户安全问题答案的存储数据</param>
-        /// <returns>成功返回true否则false</returns>
-        public static void UpdateUserSecques(Guid uid, string userSecques)
-        {
-            DatabaseProvider.GetInstance().UpdateUserSecques(uid, userSecques);
-        }
+        /////// <summary>
+        /////// 更新用户安全问题
+        /////// </summary>
+        /////// <param name="uid">用户id</param>
+        /////// <param name="userSecques">用户安全问题答案的存储数据</param>
+        /////// <returns>成功返回true否则false</returns>
+        ////public static void UpdateUserSecques(Guid uid, string userSecques)
+        ////{
+        ////    DatabaseProvider.GetInstance().UpdateUserSecques(uid, userSecques);
+        ////}
 
 
-        /// <summary>
-        /// 更新用户最后登录时间
-        /// </summary>
-        /// <param name="uid">用户id</param>
-        public static void UpdateUserLastvisit(Guid uid, string ip)
-        {
-            DatabaseProvider.GetInstance().UpdateUserLastvisit(uid, ip);
-        }
+        /////// <summary>
+        /////// 更新用户最后登录时间
+        /////// </summary>
+        /////// <param name="uid">用户id</param>
+        ////public static void UpdateUserLastvisit(Guid uid, string ip)
+        ////{
+        ////    DatabaseProvider.GetInstance().UpdateUserLastvisit(uid, ip);
+        ////}
 
-        /// <summary>
-        /// 更新用户当前的在线状态
-        /// </summary>
-        /// <param name="uidlist">用户uid列表</param>
-        /// <param name="state">当前在线状态(0:离线,1:在线)</param>
-        public static void UpdateUserOnlineState(string uidlist, int state, string activitytime)
-        {
-            switch (state)
-            {
-                case 0:		//正常退出
-                    DatabaseProvider.GetInstance().UpdateUserOnlineStateAndLastActivity(uidlist, 0, activitytime);
-                    break;
-                case 1:		//正常登录
-                    DatabaseProvider.GetInstance().UpdateUserOnlineStateAndLastVisit(uidlist, 1, activitytime);
-                    break;
-                case 2:		//超时退出
-                    DatabaseProvider.GetInstance().UpdateUserOnlineStateAndLastActivity(uidlist, 0, activitytime);
-                    break;
-                case 3:		//隐身登录
-                    DatabaseProvider.GetInstance().UpdateUserOnlineStateAndLastVisit(uidlist, 0, activitytime);
-                    break;
-            }
-        }
+        /////// <summary>
+        /////// 更新用户当前的在线状态
+        /////// </summary>
+        /////// <param name="uidlist">用户uid列表</param>
+        /////// <param name="state">当前在线状态(0:离线,1:在线)</param>
+        ////public static void UpdateUserOnlineState(string uidlist, int state, string activitytime)
+        ////{
+        ////    switch (state)
+        ////    {
+        ////        case 0:		//正常退出
+        ////            DatabaseProvider.GetInstance().UpdateUserOnlineStateAndLastActivity(uidlist, 0, activitytime);
+        ////            break;
+        ////        case 1:		//正常登录
+        ////            DatabaseProvider.GetInstance().UpdateUserOnlineStateAndLastVisit(uidlist, 1, activitytime);
+        ////            break;
+        ////        case 2:		//超时退出
+        ////            DatabaseProvider.GetInstance().UpdateUserOnlineStateAndLastActivity(uidlist, 0, activitytime);
+        ////            break;
+        ////        case 3:		//隐身登录
+        ////            DatabaseProvider.GetInstance().UpdateUserOnlineStateAndLastVisit(uidlist, 0, activitytime);
+        ////            break;
+        ////    }
+        ////}
 
-        /// <summary>
-        /// 更新用户当前的在线状态
-        /// </summary>
-        /// <param name="uid">用户uid列表</param>
-        /// <param name="state">当前在线状态(0:离线,1:在线)</param>
-        public static void UpdateUserOnlineState(Guid uid, int state, string activitytime)
-        {
-            switch (state)
-            {
-                case 0:		//正常退出
-                    DatabaseProvider.GetInstance().UpdateUserOnlineStateAndLastActivity(uid, 0, activitytime);
-                    break;
-                case 1:		//正常登录
-                    DatabaseProvider.GetInstance().UpdateUserOnlineStateAndLastVisit(uid, 1, activitytime);
-                    break;
-                case 2:		//超时退出
-                    DatabaseProvider.GetInstance().UpdateUserOnlineStateAndLastActivity(uid, 0, activitytime);
-                    break;
-                case 3:		//隐身登录
-                    DatabaseProvider.GetInstance().UpdateUserOnlineStateAndLastVisit(uid, 0, activitytime);
-                    break;
-            }
-        }
+        /////// <summary>
+        /////// 更新用户当前的在线状态
+        /////// </summary>
+        /////// <param name="uid">用户uid列表</param>
+        /////// <param name="state">当前在线状态(0:离线,1:在线)</param>
+        ////public static void UpdateUserOnlineState(Guid uid, int state, string activitytime)
+        ////{
+        ////    switch (state)
+        ////    {
+        ////        case 0:		//正常退出
+        ////            DatabaseProvider.GetInstance().UpdateUserOnlineStateAndLastActivity(uid, 0, activitytime);
+        ////            break;
+        ////        case 1:		//正常登录
+        ////            DatabaseProvider.GetInstance().UpdateUserOnlineStateAndLastVisit(uid, 1, activitytime);
+        ////            break;
+        ////        case 2:		//超时退出
+        ////            DatabaseProvider.GetInstance().UpdateUserOnlineStateAndLastActivity(uid, 0, activitytime);
+        ////            break;
+        ////        case 3:		//隐身登录
+        ////            DatabaseProvider.GetInstance().UpdateUserOnlineStateAndLastVisit(uid, 0, activitytime);
+        ////            break;
+        ////    }
+        ////}
 
-        /// <summary>
-        /// 更新用户当前的在线时间和最后活动时间
-        /// </summary>
-        /// <param name="uid">用户uid</param>
-        public static void UpdateUserOnlineTime(Guid uid, string activitytime)
-        {
-            DatabaseProvider.GetInstance().UpdateUserLastActivity(uid, activitytime);
-        }
+        /////// <summary>
+        /////// 更新用户当前的在线时间和最后活动时间
+        /////// </summary>
+        /////// <param name="uid">用户uid</param>
+        ////public static void UpdateUserOnlineTime(Guid uid, string activitytime)
+        ////{
+        ////    DatabaseProvider.GetInstance().UpdateUserLastActivity(uid, activitytime);
+        ////}
 
         /// <summary>
         /// 设置用户信息表中未读短消息的数量
@@ -517,16 +517,16 @@ namespace SAS.Data.DataProvider
             return DatabaseProvider.GetInstance().SetUserNewPMCount(uid, pmnum);
         }
 
-        /// <summary>
-        /// 将用户的未读短信息数量减小一个指定的值
-        /// </summary>
-        /// <param name="uid">用户ID</param>
-        /// <param name="subval">短消息将要减小的值,负数为加</param>
-        /// <returns>更新记录个数</returns>
-        public static int DecreaseNewPMCount(Guid uid, int subval)
-        {
-            return DatabaseProvider.GetInstance().DecreaseNewPMCount(uid, subval);
-        }
+        /////// <summary>
+        /////// 将用户的未读短信息数量减小一个指定的值
+        /////// </summary>
+        /////// <param name="uid">用户ID</param>
+        /////// <param name="subval">短消息将要减小的值,负数为加</param>
+        /////// <returns>更新记录个数</returns>
+        ////public static int DecreaseNewPMCount(Guid uid, int subval)
+        ////{
+        ////    return DatabaseProvider.GetInstance().DecreaseNewPMCount(uid, subval);
+        ////}
 
         ///// <summary>
         ///// 更新用户精华数
@@ -549,25 +549,25 @@ namespace SAS.Data.DataProvider
         //    DatabaseProvider.GetInstance().UpdateUserSpaceId(spaceid, userid);
         //}
 
-        /// <summary>
-        /// 根据验证字串获取用户Id
-        /// </summary>
-        /// <param name="authStr"></param>
-        /// <returns></returns>
-        public static DataTable GetUserIdByAuthStr(string authstr)
-        {
-            return DatabaseProvider.GetInstance().GetUserIdByAuthStr(authstr);
-        }
+        /////// <summary>
+        /////// 根据验证字串获取用户Id
+        /////// </summary>
+        /////// <param name="authStr"></param>
+        /////// <returns></returns>
+        ////public static DataTable GetUserIdByAuthStr(string authstr)
+        ////{
+        ////    return DatabaseProvider.GetInstance().GetUserIdByAuthStr(authstr);
+        ////}
 
-        /// <summary>
-        /// 获取指定组的用户列表
-        /// </summary>
-        /// <param name="groupIdList"></param>
-        /// <returns></returns>
-        public static DataTable GetUsers(string groupIdList)
-        {
-            return DatabaseProvider.GetInstance().GetUsers(groupIdList);
-        }
+        /////// <summary>
+        /////// 获取指定组的用户列表
+        /////// </summary>
+        /////// <param name="groupIdList"></param>
+        /////// <returns></returns>
+        ////public static DataTable GetUsers(string groupIdList)
+        ////{
+        ////    return DatabaseProvider.GetInstance().GetUsers(groupIdList);
+        ////}
 
         ///// <summary>
         ///// 通过RewriteName获取用户ID
@@ -579,45 +579,45 @@ namespace SAS.Data.DataProvider
         //    return DatabaseProvider.GetInstance().GetUserIdByRewriteName(rewritename);
         //}
 
-        /// <summary>
-        /// 更新用户短消息设置
-        /// </summary>
-        /// <param name="user">用户信息</param>
-        public static void UpdateUserPMSetting(UserInfo user)
-        {
-            DatabaseProvider.GetInstance().UpdateUserPMSetting(user);
-        }
+        /////// <summary>
+        /////// 更新用户短消息设置
+        /////// </summary>
+        /////// <param name="user">用户信息</param>
+        ////public static void UpdateUserPMSetting(UserInfo user)
+        ////{
+        ////    DatabaseProvider.GetInstance().UpdateUserPMSetting(user);
+        ////}
 
-        /// <summary>
-        /// 更新被禁止的用户
-        /// </summary>
-        /// <param name="groupid">用户组id</param>
-        /// <param name="groupexpiry">过期时间</param>
-        /// <param name="uid">用户id</param>
-        public static void UpdateBanUser(int groupid, string groupexpiry, Guid uid)
-        {
-            DatabaseProvider.GetInstance().UpdateBanUser(groupid, groupexpiry, uid);
-        }
+        /////// <summary>
+        /////// 更新被禁止的用户
+        /////// </summary>
+        /////// <param name="groupid">用户组id</param>
+        /////// <param name="groupexpiry">过期时间</param>
+        /////// <param name="uid">用户id</param>
+        ////public static void UpdateBanUser(int groupid, string groupexpiry, Guid uid)
+        ////{
+        ////    DatabaseProvider.GetInstance().UpdateBanUser(groupid, groupexpiry, uid);
+        ////}
 
-        /// <summary>
-        /// 搜索特定板块特殊用户
-        /// </summary>
-        /// <param name="fid">板块id</param>
-        /// <returns></returns>
-        public static DataTable SearchSpecialUser(int fid)
-        {
-            return DatabaseProvider.GetInstance().SearchSpecialUser(fid);
-        }
+        /////// <summary>
+        /////// 搜索特定板块特殊用户
+        /////// </summary>
+        /////// <param name="fid">板块id</param>
+        /////// <returns></returns>
+        ////public static DataTable SearchSpecialUser(int fid)
+        ////{
+        ////    return DatabaseProvider.GetInstance().SearchSpecialUser(fid);
+        ////}
 
-        /// <summary>
-        /// 更新特定板块特殊用户
-        /// </summary>
-        /// <param name="permuserlist">特殊用户列表</param>
-        /// <param name="fid">板块id</param>
-        public static void UpdateSpecialUser(string permuserlist, int fid)
-        {
-            DatabaseProvider.GetInstance().UpdateSpecialUser(permuserlist, fid);
-        }
+        /////// <summary>
+        /////// 更新特定板块特殊用户
+        /////// </summary>
+        /////// <param name="permuserlist">特殊用户列表</param>
+        /////// <param name="fid">板块id</param>
+        ////public static void UpdateSpecialUser(string permuserlist, int fid)
+        ////{
+        ////    DatabaseProvider.GetInstance().UpdateSpecialUser(permuserlist, fid);
+        ////}
 
         ///// <summary>
         ///// 得到指定用户的指定积分扩展字段的积分值
@@ -640,24 +640,24 @@ namespace SAS.Data.DataProvider
         //    DatabaseProvider.GetInstance().UpdateMedals(uid, medals);
         //}
 
-        /// <summary>
-        /// 更改用户组用户的管理权限
-        /// </summary>
-        /// <param name="adminId">管理组Id</param>
-        /// <param name="groupId">用户组Id</param>
-        public static void UpdateUserAdminIdByGroupId(int adminId, int groupId)
-        {
-            DatabaseProvider.GetInstance().UpdateUserAdminIdByGroupId(adminId, groupId);
-        }
+        /////// <summary>
+        /////// 更改用户组用户的管理权限
+        /////// </summary>
+        /////// <param name="adminId">管理组Id</param>
+        /////// <param name="groupId">用户组Id</param>
+        ////public static void UpdateUserAdminIdByGroupId(int adminId, int groupId)
+        ////{
+        ////    DatabaseProvider.GetInstance().UpdateUserAdminIdByGroupId(adminId, groupId);
+        ////}
 
-        /// <summary>
-        /// 更新用户到禁言组
-        /// </summary>
-        /// <param name="uidList">用户Id列表</param>
-        public static void UpdateUserToStopTalkGroup(string uidList)
-        {
-            DatabaseProvider.GetInstance().SetStopTalkUser(uidList);
-        }
+        /////// <summary>
+        /////// 更新用户到禁言组
+        /////// </summary>
+        /////// <param name="uidList">用户Id列表</param>
+        ////public static void UpdateUserToStopTalkGroup(string uidList)
+        ////{
+        ////    DatabaseProvider.GetInstance().SetStopTalkUser(uidList);
+        ////}
 
         ///// <summary>
         ///// 清除用户所发帖数以及精华数
@@ -668,129 +668,129 @@ namespace SAS.Data.DataProvider
         //    DatabaseProvider.GetInstance().ClearPosts(uid);
         //}
 
-        /// <summary>
-        /// 更新Email验证信息
-        /// </summary>
-        /// <param name="authstr">验证字符串</param>
-        /// <param name="authtime">验证时间</param>
-        /// <param name="uid">用户Id</param>
-        public static void UpdateEmailValidateInfo(string authstr, DateTime authTime, Guid uid)
-        {
-            DatabaseProvider.GetInstance().UpdateEmailValidateInfo(authstr, authTime, uid);
-        }
+        /////// <summary>
+        /////// 更新Email验证信息
+        /////// </summary>
+        /////// <param name="authstr">验证字符串</param>
+        /////// <param name="authtime">验证时间</param>
+        /////// <param name="uid">用户Id</param>
+        ////public static void UpdateEmailValidateInfo(string authstr, DateTime authTime, Guid uid)
+        ////{
+        ////    DatabaseProvider.GetInstance().UpdateEmailValidateInfo(authstr, authTime, uid);
+        ////}
 
-        /// <summary>
-        /// 更新用户积分
-        /// </summary>
-        /// <param name="credits">积分</param>
-        public static void UpdateUserCredits(string credits)
-        {
-            DatabaseProvider.GetInstance().UpdateUserCredits(credits);
-        }
+        /////// <summary>
+        /////// 更新用户积分
+        /////// </summary>
+        /////// <param name="credits">积分</param>
+        ////public static void UpdateUserCredits(string credits)
+        ////{
+        ////    DatabaseProvider.GetInstance().UpdateUserCredits(credits);
+        ////}
 
-        /// <summary>
-        /// 获取用户组列表中的所有用户
-        /// </summary>
-        /// <param name="groupIdList">用户组列表</param>
-        /// <returns></returns>
-        public static DataTable GetUserListByGroupid(string groupIdList)
-        {
-            return DatabaseProvider.GetInstance().GetUserListByGroupid(groupIdList);
-        }
+        /////// <summary>
+        /////// 获取用户组列表中的所有用户
+        /////// </summary>
+        /////// <param name="groupIdList">用户组列表</param>
+        /////// <returns></returns>
+        ////public static DataTable GetUserListByGroupid(string groupIdList)
+        ////{
+        ////    return DatabaseProvider.GetInstance().GetUserListByGroupid(groupIdList);
+        ////}
 
-        /// <summary>
-        /// 获取当前页用户列表
-        /// </summary>
-        /// <param name="pageSize">每页记录数</param>
-        /// <param name="currentPage">当前页数</param>
-        /// <returns></returns>
-        public static DataTable GetUserListByCurrentPage(int pageSize, int currentPage)
-        {
-            return DatabaseProvider.GetInstance().GetUserList(pageSize, currentPage);
-        }
+        /////// <summary>
+        /////// 获取当前页用户列表
+        /////// </summary>
+        /////// <param name="pageSize">每页记录数</param>
+        /////// <param name="currentPage">当前页数</param>
+        /////// <returns></returns>
+        ////public static DataTable GetUserListByCurrentPage(int pageSize, int currentPage)
+        ////{
+        ////    return DatabaseProvider.GetInstance().GetUserList(pageSize, currentPage);
+        ////}
 
-        /// <summary>
-        /// 获取用户名列表指定的Email列表
-        /// </summary>
-        /// <param name="userNameList">用户名列表</param>
-        /// <returns></returns>
-        public static DataTable GetEmailListByUserNameList(string userNameList)
-        {
-            return DatabaseProvider.GetInstance().MailListTable(userNameList);
-        }
+        /////// <summary>
+        /////// 获取用户名列表指定的Email列表
+        /////// </summary>
+        /////// <param name="userNameList">用户名列表</param>
+        /////// <returns></returns>
+        ////public static DataTable GetEmailListByUserNameList(string userNameList)
+        ////{
+        ////    return DatabaseProvider.GetInstance().MailListTable(userNameList);
+        ////}
 
-        /// <summary>
-        /// 获取用户组Id列表指定的Email列表
-        /// </summary>
-        /// <param name="userNameList">用户名列表</param>
-        /// <returns></returns>
-        public static DataTable GetEmailListByGroupidList(string groupidList)
-        {
-            return DatabaseProvider.GetInstance().GetUserEmailByGroupid(groupidList);
-        }
+        /////// <summary>
+        /////// 获取用户组Id列表指定的Email列表
+        /////// </summary>
+        /////// <param name="userNameList">用户名列表</param>
+        /////// <returns></returns>
+        ////public static DataTable GetEmailListByGroupidList(string groupidList)
+        ////{
+        ////    return DatabaseProvider.GetInstance().GetUserEmailByGroupid(groupidList);
+        ////}
 
-        /// <summary>
-        /// 将Uid列表中的用户更新到目标组中
-        /// </summary>
-        /// <param name="groupid">目标组</param>
-        /// <param name="uidList">用户列表</param>
-        public static void UpdateUserGroupByUidList(int groupid, string uidList)
-        {
-            DatabaseProvider.GetInstance().ChangeUserGroupByUid(groupid, uidList);
-        }
+        /////// <summary>
+        /////// 将Uid列表中的用户更新到目标组中
+        /////// </summary>
+        /////// <param name="groupid">目标组</param>
+        /////// <param name="uidList">用户列表</param>
+        ////public static void UpdateUserGroupByUidList(int groupid, string uidList)
+        ////{
+        ////    DatabaseProvider.GetInstance().ChangeUserGroupByUid(groupid, uidList);
+        ////}
 
-        /// <summary>
-        /// 按用户Id列表删除用户
-        /// </summary>
-        /// <param name="uidList">用户Id列表</param>
-        public static void DeleteUsers(string uidList)
-        {
-            //TODO:是否应该调用DeleteUser方法？
-            DatabaseProvider.GetInstance().DeleteUserByUidlist(uidList);
-        }
+        /////// <summary>
+        /////// 按用户Id列表删除用户
+        /////// </summary>
+        /////// <param name="uidList">用户Id列表</param>
+        ////public static void DeleteUsers(string uidList)
+        ////{
+        ////    //TODO:是否应该调用DeleteUser方法？
+        ////    DatabaseProvider.GetInstance().DeleteUserByUidlist(uidList);
+        ////}
 
-        /// <summary>
-        /// 删除用户信息
-        /// </summary>
-        /// <param name="uid">用户Id</param>
-        /// <param name="delPosts">是否删除帖子</param>
-        /// <param name="delPms">是否删除短信</param>
-        /// <returns></returns>
-        public static bool DeleteUser(Guid uid, bool delPosts, bool delPms)
-        {
-            return DatabaseProvider.GetInstance().DelUserAllInf(uid, delPosts, delPms);
-        }
+        /////// <summary>
+        /////// 删除用户信息
+        /////// </summary>
+        /////// <param name="uid">用户Id</param>
+        /////// <param name="delPosts">是否删除帖子</param>
+        /////// <param name="delPms">是否删除短信</param>
+        /////// <returns></returns>
+        ////public static bool DeleteUser(Guid uid, bool delPosts, bool delPms)
+        ////{
+        ////    return DatabaseProvider.GetInstance().DelUserAllInf(uid, delPosts, delPms);
+        ////}
 
-        /// <summary>
-        /// 清空用户Id列表中的验证码
-        /// </summary>
-        /// <param name="uidList">用户Id列表</param>
-        public static void ClearUsersAuthstr(string uidList)
-        {
-            DatabaseProvider.GetInstance().ClearAuthstrByUidlist(uidList);
-        }
+        /////// <summary>
+        /////// 清空用户Id列表中的验证码
+        /////// </summary>
+        /////// <param name="uidList">用户Id列表</param>
+        ////public static void ClearUsersAuthstr(string uidList)
+        ////{
+        ////    DatabaseProvider.GetInstance().ClearAuthstrByUidlist(uidList);
+        ////}
 
-        /// <summary>
-        /// 搜索未审核用户              
-        /// </summary>
-        /// <param name="searchUserName">用户名</param>
-        /// <param name="regBefore">注册时间</param>
-        /// <param name="regIp">注册IP</param>
-        /// <returns></returns>
-        public static DataTable AuditNewUserClear(string searchUserName, string regBefore, string regIp)
-        {
-            return DatabaseProvider.GetInstance().AuditNewUserClear(searchUserName, regBefore, regIp);
-        }
+        /////// <summary>
+        /////// 搜索未审核用户              
+        /////// </summary>
+        /////// <param name="searchUserName">用户名</param>
+        /////// <param name="regBefore">注册时间</param>
+        /////// <param name="regIp">注册IP</param>
+        /////// <returns></returns>
+        ////public static DataTable AuditNewUserClear(string searchUserName, string regBefore, string regIp)
+        ////{
+        ////    return DatabaseProvider.GetInstance().AuditNewUserClear(searchUserName, regBefore, regIp);
+        ////}
 
-        /// <summary>
-        /// 获取用户Id列表中的用户
-        /// </summary>
-        /// <param name="uidList">用户Id列表</param>
-        /// <returns></returns>
-        public static DataTable GetUsersByUidlLst(string uidList)
-        {
-            return DatabaseProvider.GetInstance().GetUsersByUidlLst(uidList);
-        }
+        /////// <summary>
+        /////// 获取用户Id列表中的用户
+        /////// </summary>
+        /////// <param name="uidList">用户Id列表</param>
+        /////// <returns></returns>
+        ////public static DataTable GetUsersByUidlLst(string uidList)
+        ////{
+        ////    return DatabaseProvider.GetInstance().GetUsersByUidlLst(uidList);
+        ////}
 
         ///// <summary>
         ///// 获取版块版主
@@ -878,47 +878,47 @@ namespace SAS.Data.DataProvider
         //    DatabaseProvider.GetInstance().ResetUserDigestPosts(userid);
         //}
 
-        /// <summary>
-        /// 获取指定数量的用户
-        /// </summary>
-        /// <param name="statcount">获取数量</param>
-        /// <param name="lastuid">最小用户ID</param>
-        /// <returns></returns>
-        public static IDataReader GetTopUsers(int statcount, Guid lastuid)
-        {
-            return DatabaseProvider.GetInstance().GetTopUsers(statcount, lastuid);
-        }
+        /////// <summary>
+        /////// 获取指定数量的用户
+        /////// </summary>
+        /////// <param name="statcount">获取数量</param>
+        /////// <param name="lastuid">最小用户ID</param>
+        /////// <returns></returns>
+        ////public static IDataReader GetTopUsers(int statcount, Guid lastuid)
+        ////{
+        ////    return DatabaseProvider.GetInstance().GetTopUsers(statcount, lastuid);
+        ////}
 
-        /// <summary>
-        /// 得到最后注册的用户ID和用户名
-        /// </summary>
-        /// <param name="lastuserid">输出参数：最后注册的用户ID</param>
-        /// <param name="lastusername">输出参数：最后注册的用户名</param>
-        /// <returns>存在返回true,不存在返回false</returns>
-        public static bool GetLastUserInfo(out string lastuserid, out string lastusername)
-        {
-            return DatabaseProvider.GetInstance().GetLastUserInfo(out lastuserid, out lastusername);
-        }
+        /////// <summary>
+        /////// 得到最后注册的用户ID和用户名
+        /////// </summary>
+        /////// <param name="lastuserid">输出参数：最后注册的用户ID</param>
+        /////// <param name="lastusername">输出参数：最后注册的用户名</param>
+        /////// <returns>存在返回true,不存在返回false</returns>
+        ////public static bool GetLastUserInfo(out string lastuserid, out string lastusername)
+        ////{
+        ////    return DatabaseProvider.GetInstance().GetLastUserInfo(out lastuserid, out lastusername);
+        ////}
 
-        /// <summary>
-        /// 更新普通用户用户组
-        /// </summary>
-        /// <param name="groupid">用户组id</param>
-        /// <param name="userid">用户ID</param>
-        public static void UpdateUserOtherInfo(int groupid, Guid userid)
-        {
-            DatabaseProvider.GetInstance().UpdateUserOtherInfo(groupid, userid);
-        }
+        /////// <summary>
+        /////// 更新普通用户用户组
+        /////// </summary>
+        /////// <param name="groupid">用户组id</param>
+        /////// <param name="userid">用户ID</param>
+        ////public static void UpdateUserOtherInfo(int groupid, Guid userid)
+        ////{
+        ////    DatabaseProvider.GetInstance().UpdateUserOtherInfo(groupid, userid);
+        ////}
 
-        /// <summary>
-        /// 更新在线表用户信息
-        /// </summary>
-        /// <param name="groupid">用户组id</param>
-        /// <param name="userid">用户ID</param>
-        public static void UpdateUserOnlineInfo(int groupid, Guid userid)
-        {
-            DatabaseProvider.GetInstance().UpdateUserOnlineInfo(groupid, userid);
-        }
+        /////// <summary>
+        /////// 更新在线表用户信息
+        /////// </summary>
+        /////// <param name="groupid">用户组id</param>
+        /////// <param name="userid">用户ID</param>
+        ////public static void UpdateUserOnlineInfo(int groupid, Guid userid)
+        ////{
+        ////    DatabaseProvider.GetInstance().UpdateUserOnlineInfo(groupid, userid);
+        ////}
 
         ///// <summary>
         ///// 获取用户查询条件
@@ -946,46 +946,46 @@ namespace SAS.Data.DataProvider
         //        userGroup, email, credits_Start, credits_End, lastIp, posts, digestPosts, uid, joindateStart, joindateEnd);
         //}
 
-        /// <summary>
-        /// 获取按条件搜索得到的用户列表
-        /// </summary>
-        /// <param name="searchCondition">搜索条件</param>
-        /// <returns></returns>
-        public static DataTable GetUsersByCondition(string searchCondition)
-        {
-            return DatabaseProvider.GetInstance().Global_UserGrid(searchCondition);
-        }
+        /////// <summary>
+        /////// 获取按条件搜索得到的用户列表
+        /////// </summary>
+        /////// <param name="searchCondition">搜索条件</param>
+        /////// <returns></returns>
+        ////public static DataTable GetUsersByCondition(string searchCondition)
+        ////{
+        ////    return DatabaseProvider.GetInstance().Global_UserGrid(searchCondition);
+        ////}
 
-        /// <summary>
-        /// 获取用户列表
-        /// </summary>
-        /// <param name="pagesize">页面大小</param>
-        /// <param name="currentpage">当前页</param>
-        /// <param name="condition">条件</param>
-        /// <returns></returns>
-        public static DataTable GetUserList(int pagesize, int currentpage, string condition)
-        {
-            return DatabaseProvider.GetInstance().UserList(pagesize, currentpage, condition);
-        }
+        /////// <summary>
+        /////// 获取用户列表
+        /////// </summary>
+        /////// <param name="pagesize">页面大小</param>
+        /////// <param name="currentpage">当前页</param>
+        /////// <param name="condition">条件</param>
+        /////// <returns></returns>
+        ////public static DataTable GetUserList(int pagesize, int currentpage, string condition)
+        ////{
+        ////    return DatabaseProvider.GetInstance().UserList(pagesize, currentpage, condition);
+        ////}
 
-        /// <summary>
-        /// 获取符合条件的用户数
-        /// </summary>
-        /// <param name="condition"></param>
-        /// <returns></returns>
-        public static int GetUserCount(string condition)
-        {
-            return DatabaseProvider.GetInstance().Global_UserGrid_RecordCount(condition);
-        }
+        /////// <summary>
+        /////// 获取符合条件的用户数
+        /////// </summary>
+        /////// <param name="condition"></param>
+        /////// <returns></returns>
+        ////public static int GetUserCount(string condition)
+        ////{
+        ////    return DatabaseProvider.GetInstance().Global_UserGrid_RecordCount(condition);
+        ////}
 
-        /// <summary>
-        /// 获取用户查询条件
-        /// </summary>
-        /// <param name="getstring"></param>
-        /// <returns></returns>
-        public static string GetUserListCondition(string getstring)
-        {
-            return DatabaseProvider.GetInstance().Global_UserGrid_GetCondition(getstring);
-        }
+        /////// <summary>
+        /////// 获取用户查询条件
+        /////// </summary>
+        /////// <param name="getstring"></param>
+        /////// <returns></returns>
+        ////public static string GetUserListCondition(string getstring)
+        ////{
+        ////    return DatabaseProvider.GetInstance().Global_UserGrid_GetCondition(getstring);
+        ////}
     }
 }

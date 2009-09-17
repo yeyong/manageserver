@@ -135,93 +135,93 @@ namespace SAS.Data
         /// <param name="authFlag">验证标志</param>
         void UpdateAuthStr(Guid uid, string authStr, int authFlag);
 
-        /// <summary>
-        /// 更新指定用户的个人资料
-        /// </summary>
-        /// <param name="userInfo">用户信息</param>
-        /// <returns>如果用户不存在则为false, 否则为true</returns>
-        void UpdateUserProfile(UserInfo userInfo);
+        ///// <summary>
+        ///// 更新指定用户的个人资料
+        ///// </summary>
+        ///// <param name="userInfo">用户信息</param>
+        ///// <returns>如果用户不存在则为false, 否则为true</returns>
+        //void UpdateUserProfile(UserInfo userInfo);
 
-        /// <summary>
-        /// 更新用户论坛设置
-        /// </summary>
-        /// <param name="userInfo">用户信息</param>
-        /// <returns>如果用户不存在则返回false, 否则返回true</returns>
-        void UpdateUserForumSetting(UserInfo userInfo);
+        ///// <summary>
+        ///// 更新用户论坛设置
+        ///// </summary>
+        ///// <param name="userInfo">用户信息</param>
+        ///// <returns>如果用户不存在则返回false, 否则返回true</returns>
+        //void UpdateUserForumSetting(UserInfo userInfo);
 
-        /// <summary>
-        /// 更新用户头像
-        /// </summary>
-        /// <param name="uid">用户id</param>
-        /// <param name="avatar">头像</param>
-        /// <param name="avatarWidth">头像宽度</param>
-        /// <param name="avatarHeight">头像高度</param>
-        /// <param name="templateId">模板Id</param>
-        /// <returns>如果用户不存在则返回false, 否则返回true</returns>
-        void UpdateUserPreference(Guid uid, string avatar, int avatarWidth, int avatarHeight, int templateId);
+        ///// <summary>
+        ///// 更新用户头像
+        ///// </summary>
+        ///// <param name="uid">用户id</param>
+        ///// <param name="avatar">头像</param>
+        ///// <param name="avatarWidth">头像宽度</param>
+        ///// <param name="avatarHeight">头像高度</param>
+        ///// <param name="templateId">模板Id</param>
+        ///// <returns>如果用户不存在则返回false, 否则返回true</returns>
+        //void UpdateUserPreference(Guid uid, string avatar, int avatarWidth, int avatarHeight, int templateId);
 
-        /// <summary>
-        /// 更新用户密码
-        /// </summary>
-        /// <param name="uid">用户id</param>
-        /// <param name="passWord">密码</param>
-        /// <param name="originalPassWord">是否非MD5密码</param>
-        /// <returns>成功返回true否则false</returns>
-        void UpdateUserPassword(Guid uid, string passWord, bool originalPassWord);
+        ///// <summary>
+        ///// 更新用户密码
+        ///// </summary>
+        ///// <param name="uid">用户id</param>
+        ///// <param name="passWord">密码</param>
+        ///// <param name="originalPassWord">是否非MD5密码</param>
+        ///// <returns>成功返回true否则false</returns>
+        //void UpdateUserPassword(Guid uid, string passWord, bool originalPassWord);
 
-        /// <summary>
-        /// 更新用户安全问题
-        /// </summary>
-        /// <param name="uid">用户id</param>
-        /// <param name="secques">用户安全问题答案的存储数据</param>
-        /// <returns>成功返回true否则false</returns>
-        void UpdateUserSecques(Guid uid, string secques);
+        ///// <summary>
+        ///// 更新用户安全问题
+        ///// </summary>
+        ///// <param name="uid">用户id</param>
+        ///// <param name="secques">用户安全问题答案的存储数据</param>
+        ///// <returns>成功返回true否则false</returns>
+        //void UpdateUserSecques(Guid uid, string secques);
 
-        /// <summary>
-        /// 更新用户最后访问时间
-        /// </summary>
-        /// <param name="uid">用户id</param>
-        /// <param name="ip"></param>
-        void UpdateUserLastvisit(Guid uid, string ip);
+        ///// <summary>
+        ///// 更新用户最后访问时间
+        ///// </summary>
+        ///// <param name="uid">用户id</param>
+        ///// <param name="ip"></param>
+        //void UpdateUserLastvisit(Guid uid, string ip);
 
-        /// <summary>
-        /// 更新用户在线信息
-        /// </summary>
-        /// <param name="uidList">用户uid列表</param>
-        /// <param name="onlineState">当前在线状态(0:离线,1:在线)</param>
-        /// <param name="activityTime"></param>
-        void UpdateUserOnlineStateAndLastActivity(string uidList, int onlineState, string activityTime);
+        ///// <summary>
+        ///// 更新用户在线信息
+        ///// </summary>
+        ///// <param name="uidList">用户uid列表</param>
+        ///// <param name="onlineState">当前在线状态(0:离线,1:在线)</param>
+        ///// <param name="activityTime"></param>
+        //void UpdateUserOnlineStateAndLastActivity(string uidList, int onlineState, string activityTime);
 
-        /// <summary>
-        /// 更新用户在线信息
-        /// </summary>
-        /// <param name="uidList">用户uid列表</param>
-        /// <param name="onlineState">当前在线状态(0:离线,1:在线)</param>
-        /// <param name="activityTime"></param>
-        void UpdateUserOnlineStateAndLastVisit(string uidList, int onlineState, string activityTime);
+        ///// <summary>
+        ///// 更新用户在线信息
+        ///// </summary>
+        ///// <param name="uidList">用户uid列表</param>
+        ///// <param name="onlineState">当前在线状态(0:离线,1:在线)</param>
+        ///// <param name="activityTime"></param>
+        //void UpdateUserOnlineStateAndLastVisit(string uidList, int onlineState, string activityTime);
 
-        /// <summary>
-        /// 更新用户在线信息
-        /// </summary>
-        /// <param name="uid">用户uid列表</param>
-        /// <param name="onlineState">当前在线状态(0:离线,1:在线)</param>
-        /// <param name="activityTime"></param>
-        void UpdateUserOnlineStateAndLastActivity(Guid uid, int onlineState, string activityTime);
+        ///// <summary>
+        ///// 更新用户在线信息
+        ///// </summary>
+        ///// <param name="uid">用户uid列表</param>
+        ///// <param name="onlineState">当前在线状态(0:离线,1:在线)</param>
+        ///// <param name="activityTime"></param>
+        //void UpdateUserOnlineStateAndLastActivity(Guid uid, int onlineState, string activityTime);
 
-        /// <summary>
-        /// 更新用户在线信息
-        /// </summary>
-        /// <param name="uid">用户uid列表</param>
-        /// <param name="onlineState">当前在线状态(0:离线,1:在线)</param>
-        /// <param name="activityTime"></param>
-        void UpdateUserOnlineStateAndLastVisit(Guid uid, int onlineState, string activityTime);
+        ///// <summary>
+        ///// 更新用户在线信息
+        ///// </summary>
+        ///// <param name="uid">用户uid列表</param>
+        ///// <param name="onlineState">当前在线状态(0:离线,1:在线)</param>
+        ///// <param name="activityTime"></param>
+        //void UpdateUserOnlineStateAndLastVisit(Guid uid, int onlineState, string activityTime);
 
-        /// <summary>
-        /// 更新用户在线时间
-        /// </summary>
-        /// <param name="uid">用户uid</param>
-        /// <param name="activityTime"></param>
-        void UpdateUserLastActivity(Guid uid, string activityTime);
+        ///// <summary>
+        ///// 更新用户在线时间
+        ///// </summary>
+        ///// <param name="uid">用户uid</param>
+        ///// <param name="activityTime"></param>
+        //void UpdateUserLastActivity(Guid uid, string activityTime);
 
         /// <summary>
         /// 设置用户信息表中未读短消息的数量
@@ -231,148 +231,148 @@ namespace SAS.Data
         /// <returns>更新记录个数</returns>
         int SetUserNewPMCount(Guid uid, int pmNum);
 
-        /// <summary>
-        /// 将用户的未读短信息数量减小一个指定的值
-        /// </summary>
-        /// <param name="uid">用户ID</param>
-        /// <param name="subval">短消息将要减小的值,负数为加</param>
-        /// <returns>更新记录个数</returns>
-        int DecreaseNewPMCount(Guid uid, int subVal);
+        ///// <summary>
+        ///// 将用户的未读短信息数量减小一个指定的值
+        ///// </summary>
+        ///// <param name="uid">用户ID</param>
+        ///// <param name="subval">短消息将要减小的值,负数为加</param>
+        ///// <returns>更新记录个数</returns>
+        //int DecreaseNewPMCount(Guid uid, int subVal);
 
-        /// <summary>
-        /// 根据验证字串获取用户Id
-        /// </summary>
-        /// <param name="authStr"></param>
-        /// <returns></returns>
-        DataTable GetUserIdByAuthStr(string authStr);
+        ///// <summary>
+        ///// 根据验证字串获取用户Id
+        ///// </summary>
+        ///// <param name="authStr"></param>
+        ///// <returns></returns>
+        //DataTable GetUserIdByAuthStr(string authStr);
 
-        /// <summary>
-        /// 获取指定组的用户列表
-        /// </summary>
-        /// <param name="groupIdList"></param>
-        /// <returns></returns>
-        DataTable GetUsers(string groupIdList);
+        ///// <summary>
+        ///// 获取指定组的用户列表
+        ///// </summary>
+        ///// <param name="groupIdList"></param>
+        ///// <returns></returns>
+        //DataTable GetUsers(string groupIdList);
 
-        /// <summary>
-        /// 更新用户短消息设置
-        /// </summary>
-        /// <param name="user">用户信息</param>
-        void UpdateUserPMSetting(UserInfo user);
+        ///// <summary>
+        ///// 更新用户短消息设置
+        ///// </summary>
+        ///// <param name="user">用户信息</param>
+        //void UpdateUserPMSetting(UserInfo user);
 
-        /// <summary>
-        /// 更新被禁止的用户
-        /// </summary>
-        /// <param name="groupId">用户组id</param>
-        /// <param name="groupExpiry">过期时间</param>
-        /// <param name="uid">用户id</param>
-        void UpdateBanUser(int groupId, string groupExpiry, Guid uid);
+        ///// <summary>
+        ///// 更新被禁止的用户
+        ///// </summary>
+        ///// <param name="groupId">用户组id</param>
+        ///// <param name="groupExpiry">过期时间</param>
+        ///// <param name="uid">用户id</param>
+        //void UpdateBanUser(int groupId, string groupExpiry, Guid uid);
 
-        /// <summary>
-        /// 获取指定论坛的特殊用户
-        /// </summary>
-        /// <param name="fid">板块id</param>
-        /// <returns></returns>
-        DataTable SearchSpecialUser(int fid);
+        ///// <summary>
+        ///// 获取指定论坛的特殊用户
+        ///// </summary>
+        ///// <param name="fid">板块id</param>
+        ///// <returns></returns>
+        //DataTable SearchSpecialUser(int fid);
 
-        /// <summary>
-        /// 更新特定板块特殊用户
-        /// </summary>
-        /// <param name="permUserList">特殊用户列表</param>
-        /// <param name="fid">板块id</param>
-        void UpdateSpecialUser(string permUserList, int fid);
+        ///// <summary>
+        ///// 更新特定板块特殊用户
+        ///// </summary>
+        ///// <param name="permUserList">特殊用户列表</param>
+        ///// <param name="fid">板块id</param>
+        //void UpdateSpecialUser(string permUserList, int fid);
 
-        /// <summary>
-        /// 更改用户管理权限Id
-        /// </summary>
-        /// <param name="adminId">管理组Id</param>
-        /// <param name="groupId">用户组Id</param>
-        void UpdateUserAdminIdByGroupId(int adminId, int groupId);
+        ///// <summary>
+        ///// 更改用户管理权限Id
+        ///// </summary>
+        ///// <param name="adminId">管理组Id</param>
+        ///// <param name="groupId">用户组Id</param>
+        //void UpdateUserAdminIdByGroupId(int adminId, int groupId);
 
-        /// <summary>
-        /// 禁言用户
-        /// </summary>
-        /// <param name="uidList">用户Id列表</param>
-        void SetStopTalkUser(string uidList);
+        ///// <summary>
+        ///// 禁言用户
+        ///// </summary>
+        ///// <param name="uidList">用户Id列表</param>
+        //void SetStopTalkUser(string uidList);
 
-        /// <summary>
-        /// 更新Email验证信息
-        /// </summary>
-        /// <param name="authStr"></param>
-        /// <param name="authTime"></param>
-        /// <param name="uid"></param>
-        void UpdateEmailValidateInfo(string authStr, DateTime authTime, Guid uid);
+        ///// <summary>
+        ///// 更新Email验证信息
+        ///// </summary>
+        ///// <param name="authStr"></param>
+        ///// <param name="authTime"></param>
+        ///// <param name="uid"></param>
+        //void UpdateEmailValidateInfo(string authStr, DateTime authTime, Guid uid);
 
-        /// <summary>
-        /// 更新用户积分
-        /// </summary>
-        /// <param name="credits">积分</param>
-        void UpdateUserCredits(string credits);
+        ///// <summary>
+        ///// 更新用户积分
+        ///// </summary>
+        ///// <param name="credits">积分</param>
+        //void UpdateUserCredits(string credits);
 
-        /// <summary>
-        /// 获取用户名
-        /// </summary>
-        /// <param name="groupIdList"></param>
-        /// <returns></returns>
-        DataTable GetUserListByGroupid(string groupIdList);
+        ///// <summary>
+        ///// 获取用户名
+        ///// </summary>
+        ///// <param name="groupIdList"></param>
+        ///// <returns></returns>
+        //DataTable GetUserListByGroupid(string groupIdList);
 
-        /// <summary>
-        /// 获取用户列表
-        /// </summary>
-        /// <param name="pageSize"></param>
-        /// <param name="currentPage"></param>
-        /// <returns></returns>
-        DataTable GetUserList(int pageSize, int currentPage);
+        ///// <summary>
+        ///// 获取用户列表
+        ///// </summary>
+        ///// <param name="pageSize"></param>
+        ///// <param name="currentPage"></param>
+        ///// <returns></returns>
+        //DataTable GetUserList(int pageSize, int currentPage);
 
-        /// <summary>
-        /// 获取用户名列表指定的Email列表
-        /// </summary>
-        /// <param name="userNameList">用户名列表</param>
-        /// <returns></returns>
-        DataTable MailListTable(string userNameList);
+        ///// <summary>
+        ///// 获取用户名列表指定的Email列表
+        ///// </summary>
+        ///// <param name="userNameList">用户名列表</param>
+        ///// <returns></returns>
+        //DataTable MailListTable(string userNameList);
 
-        /// <summary>
-        /// 获取指定组的用户Email地址
-        /// </summary>
-        /// <param name="groupIdList"></param>
-        /// <returns></returns>
-        DataTable GetUserEmailByGroupid(string groupIdList);
+        ///// <summary>
+        ///// 获取指定组的用户Email地址
+        ///// </summary>
+        ///// <param name="groupIdList"></param>
+        ///// <returns></returns>
+        //DataTable GetUserEmailByGroupid(string groupIdList);
 
-        /// <summary>
-        /// 删除用户
-        /// </summary>
-        /// <param name="uidList">用户Id列表</param>
-        void DeleteUserByUidlist(string uidList);
+        ///// <summary>
+        ///// 删除用户
+        ///// </summary>
+        ///// <param name="uidList">用户Id列表</param>
+        //void DeleteUserByUidlist(string uidList);
 
-        /// <summary>
-        /// 删除用户信息
-        /// </summary>
-        /// <param name="uid"></param>
-        /// <param name="delPosts"></param>
-        /// <param name="delPms"></param>
-        /// <returns></returns>
-        bool DelUserAllInf(Guid uid, bool delPosts, bool delPms);
+        ///// <summary>
+        ///// 删除用户信息
+        ///// </summary>
+        ///// <param name="uid"></param>
+        ///// <param name="delPosts"></param>
+        ///// <param name="delPms"></param>
+        ///// <returns></returns>
+        //bool DelUserAllInf(Guid uid, bool delPosts, bool delPms);
 
-        /// <summary>
-        /// 清空指定用户的认证串
-        /// </summary>
-        /// <param name="uidList">用户Id列表</param>
-        void ClearAuthstrByUidlist(string uidList);
+        ///// <summary>
+        ///// 清空指定用户的认证串
+        ///// </summary>
+        ///// <param name="uidList">用户Id列表</param>
+        //void ClearAuthstrByUidlist(string uidList);
 
-        /// <summary>
-        /// 搜索未审核用户              
-        /// </summary>
-        /// <param name="searchUser">用户名</param>
-        /// <param name="regBefore">注册时间</param>
-        /// <param name="regIp">注册IP</param>
-        /// <returns></returns>
-        DataTable AuditNewUserClear(string searchUser, string regBefore, string regIp);
+        ///// <summary>
+        ///// 搜索未审核用户              
+        ///// </summary>
+        ///// <param name="searchUser">用户名</param>
+        ///// <param name="regBefore">注册时间</param>
+        ///// <param name="regIp">注册IP</param>
+        ///// <returns></returns>
+        //DataTable AuditNewUserClear(string searchUser, string regBefore, string regIp);
 
-        /// <summary>
-        /// 获取用户
-        /// </summary>
-        /// <param name="uidList"></param>
-        /// <returns></returns>
-        DataTable GetUsersByUidlLst(string uidList);
+        ///// <summary>
+        ///// 获取用户
+        ///// </summary>
+        ///// <param name="uidList"></param>
+        ///// <returns></returns>
+        //DataTable GetUsersByUidlLst(string uidList);
 
         /// <summary>
         /// 获取指定用户名的用户信息
@@ -396,65 +396,65 @@ namespace SAS.Data
         /// <returns></returns>
         IDataReader GetUsers(Guid startUid, Guid endUid);
 
-        /// <summary>
-        /// 获取指定数量的用户
-        /// </summary>
-        /// <param name="statCount"></param>
-        /// <param name="lastUid"></param>
-        /// <returns></returns>
-        IDataReader GetTopUsers(int statCount, Guid lastUid);
+        ///// <summary>
+        ///// 获取指定数量的用户
+        ///// </summary>
+        ///// <param name="statCount"></param>
+        ///// <param name="lastUid"></param>
+        ///// <returns></returns>
+        //IDataReader GetTopUsers(int statCount, Guid lastUid);
 
-        /// <summary>
-        /// 得到论坛中最后注册的用户ID和用户名
-        /// </summary>
-        /// <param name="lastuserid">输出参数：最后注册的用户ID</param>
-        /// <param name="lastusername">输出参数：最后注册的用户名</param>
-        /// <returns>存在返回true,不存在返回false</returns>
-        bool GetLastUserInfo(out string lastUserId, out string lastUserName);
+        ///// <summary>
+        ///// 得到论坛中最后注册的用户ID和用户名
+        ///// </summary>
+        ///// <param name="lastuserid">输出参数：最后注册的用户ID</param>
+        ///// <param name="lastusername">输出参数：最后注册的用户名</param>
+        ///// <returns>存在返回true,不存在返回false</returns>
+        //bool GetLastUserInfo(out string lastUserId, out string lastUserName);
 
-        /// <summary>
-        /// 更新用户其他信息
-        /// </summary>
-        /// <param name="groupId">用户组id</param>
-        /// <param name="userId">用户ID</param>
-        void UpdateUserOtherInfo(int groupId, Guid userId);
+        ///// <summary>
+        ///// 更新用户其他信息
+        ///// </summary>
+        ///// <param name="groupId">用户组id</param>
+        ///// <param name="userId">用户ID</param>
+        //void UpdateUserOtherInfo(int groupId, Guid userId);
 
-        /// <summary>
-        /// 更新在线表用户信息
-        /// </summary>
-        /// <param name="groupId">用户组id</param>
-        /// <param name="userId">用户ID</param>
-        void UpdateUserOnlineInfo(int groupId, Guid userId);
+        ///// <summary>
+        ///// 更新在线表用户信息
+        ///// </summary>
+        ///// <param name="groupId">用户组id</param>
+        ///// <param name="userId">用户ID</param>
+        //void UpdateUserOnlineInfo(int groupId, Guid userId);
 
-        /// <summary>
-        /// 获取指定条件和分页下的用户列表信息
-        /// </summary>
-        /// <param name="pageSize">页面大小</param>
-        /// <param name="currentPage">当前页</param>
-        /// <param name="condition">条件</param>
-        /// <returns></returns>
-        DataTable UserList(int pageSize, int currentPage, string condition);
+        ///// <summary>
+        ///// 获取指定条件和分页下的用户列表信息
+        ///// </summary>
+        ///// <param name="pageSize">页面大小</param>
+        ///// <param name="currentPage">当前页</param>
+        ///// <param name="condition">条件</param>
+        ///// <returns></returns>
+        //DataTable UserList(int pageSize, int currentPage, string condition);
 
-        /// <summary>
-        /// 获取按条件搜索得到的用户列表
-        /// </summary>
-        /// <param name="searchCondition">搜索条件</param>
-        /// <returns></returns>
-        DataTable Global_UserGrid(string searchCondition);
+        ///// <summary>
+        ///// 获取按条件搜索得到的用户列表
+        ///// </summary>
+        ///// <param name="searchCondition">搜索条件</param>
+        ///// <returns></returns>
+        //DataTable Global_UserGrid(string searchCondition);
 
-        /// <summary>
-        /// 获取符合条件的用户数
-        /// </summary>
-        /// <param name="condition"></param>
-        /// <returns></returns>
-        int Global_UserGrid_RecordCount(string condition);
+        ///// <summary>
+        ///// 获取符合条件的用户数
+        ///// </summary>
+        ///// <param name="condition"></param>
+        ///// <returns></returns>
+        //int Global_UserGrid_RecordCount(string condition);
 
-        /// <summary>
-        /// 获取用户查询条件
-        /// </summary>
-        /// <param name="getstring"></param>
-        /// <returns></returns>
-        string Global_UserGrid_GetCondition(string getString);
+        ///// <summary>
+        ///// 获取用户查询条件
+        ///// </summary>
+        ///// <param name="getstring"></param>
+        ///// <returns></returns>
+        //string Global_UserGrid_GetCondition(string getString);
 
         #endregion
 
