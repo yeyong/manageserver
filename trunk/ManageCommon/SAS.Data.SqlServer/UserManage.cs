@@ -17,7 +17,416 @@ namespace SAS.Data.SqlServer
 
         #region 用户personinfo操作
 
+        /// <summary>
+        /// 返回指定用户的信息
+        /// </summary>
+        /// <param name="uid">用户id</param>
+        /// <returns>用户信息</returns>
+        public IDataReader GetUserInfoToReader(Guid uid)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@uid", (DbType)SqlDbType.UniqueIdentifier,16, uid)
+			                      };
+            return DbHelper.ExecuteReader(CommandType.StoredProcedure, string.Format("{0}getuserinfo", BaseConfigs.GetTablePrefix), parms);
+        }
 
+        /// <summary>
+        /// 获取简短用户信息
+        /// </summary>
+        /// <param name="uid">用id</param>
+        /// <returns>用户简短信息</returns>
+        public IDataReader GetShortUserInfoToReader(Guid uid)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@uid", (DbType)SqlDbType.UniqueIdentifier,16, uid),
+			                      };
+            return DbHelper.ExecuteReader(CommandType.StoredProcedure, string.Format("{0}getshortuserinfo", BaseConfigs.GetTablePrefix), parms);
+        }
+
+        /// <summary>
+        /// 更改用户组
+        /// </summary>
+        /// <param name="groupId">目标组</param>
+        /// <param name="uidList">用户列表</param>
+        public void ChangeUserGroupByUid(int groupId, string uidList)
+        {
+            string commandText = string.Format("UPDATE [{0}personInfo] SET [ps_ug_id]={1}  WHERE [ps_id] IN ({2})",
+                                                BaseConfigs.GetTablePrefix,
+                                                groupId,
+                                                uidList);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
+        }
+
+        ///<summary>
+        /// 根据IP查找用户
+        /// </summary>
+        /// <param name="ip">ip地址</param>
+        /// <returns>用户信息</returns>
+        public IDataReader GetUserInfoByIP(string ip)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@regip", (DbType)SqlDbType.VarChar,50, ip),
+			                      };
+            return DbHelper.ExecuteReader(CommandType.StoredProcedure, string.Format("{0}getuserinfobyip", BaseConfigs.GetTablePrefix), parms);
+        }
+
+        /// <summary>
+        /// 获取用户Id
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public IDataReader GetShortUserInfoByName(string userName)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@username",(DbType)SqlDbType.VarChar,20,userName),
+			                      };
+            string commandText = string.Format("SELECT TOP 1 {0} FROM [{1}personInfo] WHERE [{1}personInfo].[ps_name]=@username",
+                                                DbFields.USERS,
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
+        /// 获得用户列表DataTable
+        /// </summary>
+        /// <param name="pagesize">每页记录数</param>
+        /// <param name="pageindex">当前页数</param>
+        /// <returns>用户列表DataTable</returns>
+        public DataTable GetUserList(int pageSize, int pageIndex, string column, string orderType)
+        {
+            string[] arrayorderby = new string[] { "ps_name", "ps_credits", "posts", "admin", "ps_lastactivity", "ps_createDate", "ps_onlinetime" };
+            int i = Array.IndexOf(arrayorderby, column);
+            column = (i > 6 || i < 0) ? "ps_id" : arrayorderby[i];
+
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@pagesize", (DbType)SqlDbType.Int,4,pageSize),
+									   DbHelper.MakeInParam("@pageindex",(DbType)SqlDbType.Int,4,pageIndex),
+									   DbHelper.MakeInParam("@column",(DbType)SqlDbType.VarChar,1000,column),
+                                       DbHelper.MakeInParam("@ordertype",(DbType)SqlDbType.VarChar,5,orderType)
+								   };
+            return DbHelper.ExecuteDataset(CommandType.StoredProcedure, string.Format("{0}getuserlist", BaseConfigs.GetTablePrefix), parms).Tables[0];
+        }
+
+        /// <summary>
+        /// 检测Email和安全项
+        /// </summary>
+        /// <param name="username">用户名</param>
+        /// <param name="email">email</param>
+        /// <param name="questionid">问题id</param>
+        /// <param name="answer">答案</param>
+        /// <returns>如果正确则返回用户id, 否则返回-1</returns>
+        public IDataReader CheckEmailAndSecques(string userName, string email, string secques)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@username",(DbType)SqlDbType.VarChar,50,userName),
+									   DbHelper.MakeInParam("@email",(DbType)SqlDbType.VarChar,100, email),
+									   DbHelper.MakeInParam("@secques",(DbType)SqlDbType.Char,8, secques)
+								   };
+            return DbHelper.ExecuteReader(CommandType.StoredProcedure, string.Format("{0}checkemailandsecques", BaseConfigs.GetTablePrefix), parms);
+        }
+
+        /// <summary>
+        /// 检测密码和安全项
+        /// </summary>
+        /// <param name="username">用户名</param>
+        /// <param name="password">密码</param>
+        /// <param name="originalpassword">是否非MD5密码</param>
+        /// <param name="questionid">问题id</param>
+        /// <param name="answer">答案</param>
+        /// <returns>如果正确则返回用户id, 否则返回-1</returns>
+        public IDataReader CheckPasswordAndSecques(string userName, string passWord, bool originalPassWord, string secques)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@username",(DbType)SqlDbType.VarChar,50,userName),
+									   DbHelper.MakeInParam("@password",(DbType)SqlDbType.VarChar,200, originalPassWord ? Utils.MD5(passWord) : passWord),
+									   DbHelper.MakeInParam("@secques",(DbType)SqlDbType.Char,8, secques)
+								   };
+            return DbHelper.ExecuteReader(CommandType.StoredProcedure, string.Format("{0}checkpasswordandsecques", BaseConfigs.GetTablePrefix), parms);
+        }
+
+        /// <summary>
+        /// 检查密码
+        /// </summary>
+        /// <param name="username">用户名</param>
+        /// <param name="password">密码</param>
+        /// <param name="originalpassword">是否非MD5密码</param>
+        /// <returns>如果正确则返回用户id, 否则返回-1</returns>
+        public IDataReader CheckPassword(string userName, string passWord, bool originalPassWord)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@username",(DbType)SqlDbType.VarChar,50, userName),
+									   DbHelper.MakeInParam("@password",(DbType)SqlDbType.VarChar,200, originalPassWord ? Utils.MD5(passWord) : passWord)
+								   };
+            return DbHelper.ExecuteReader(CommandType.StoredProcedure, string.Format("{0}checkpasswordbyusername", BaseConfigs.GetTablePrefix), parms);
+        }
+
+        /// <summary>
+        /// 检测密码
+        /// </summary>
+        /// <param name="uid">用户id</param>
+        /// <param name="password">密码</param>
+        /// <param name="originalpassword">是否非MD5密码</param>
+        /// <param name="groupid">用户组id</param>
+        /// <param name="adminid">管理id</param>
+        /// <returns>如果用户密码正确则返回uid, 否则返回-1</returns>
+        public IDataReader CheckPassword(Guid uid, string passWord, bool originalPassWord)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@uid",(DbType)SqlDbType.UniqueIdentifier,16,uid),
+									   DbHelper.MakeInParam("@password",(DbType)SqlDbType.Char,32, originalPassWord ? Utils.MD5(passWord) : passWord)
+								   };
+            return DbHelper.ExecuteReader(CommandType.StoredProcedure, string.Format("{0}checkpasswordbyuid", BaseConfigs.GetTablePrefix), parms);
+        }
+
+        /// <summary>
+        /// 根据指定的email查找用户并返回用户uid
+        /// </summary>
+        /// <param name="email">email地址</param>
+        /// <returns>用户uid</returns>
+        public IDataReader FindUserEmail(string email)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@email",(DbType)SqlDbType.VarChar,100, email),
+								   };
+            return DbHelper.ExecuteReader(CommandType.StoredProcedure, string.Format("{0}getuseridbyemail", BaseConfigs.GetTablePrefix), parms);
+        }
+
+        /// <summary>
+        /// 得到论坛中用户总数
+        /// </summary>
+        /// <returns>用户总数</returns>
+        public int GetUserCount()
+        {
+            string commandText = string.Format("SELECT COUNT(ps_id) FROM [{0}personInfo]", BaseConfigs.GetTablePrefix);
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText));
+        }
+
+        /// <summary>
+        /// 得到论坛中用户总数
+        /// </summary>
+        /// <returns>用户总数</returns>
+        public int GetUserCountByAdmin()
+        {
+            string commandText = string.Format("SELECT COUNT(ps_id) FROM [{0}personInfo] WHERE [{0}personInfo].[ps_pg_id] > 0", BaseConfigs.GetTablePrefix);
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText));
+        }
+
+        /// <summary>
+        /// 创建新用户.
+        /// </summary>
+        /// <param name="__userinfo">用户信息</param>
+        /// <returns>返回用户ID, 如果已存在该用户名则返回-1</returns>
+        public Guid CreateUser(UserInfo userInfo)
+        {
+            DbParameter[] parms = {
+					DbHelper.MakeInParam("@ps_en_id", (DbType)SqlDbType.UniqueIdentifier,16,userInfo.Ps_en_id),
+					DbHelper.MakeInParam("@ps_name", (DbType)SqlDbType.VarChar,50,userInfo.Ps_name),
+					DbHelper.MakeInParam("@ps_nickName", (DbType)SqlDbType.VarChar,50,userInfo.Ps_nickName),
+					DbHelper.MakeInParam("@ps_gender", (DbType)SqlDbType.SmallInt,2,userInfo.Ps_gender),
+					DbHelper.MakeInParam("@ps_password", (DbType)SqlDbType.VarChar,200,userInfo.Ps_password),
+					DbHelper.MakeInParam("@ps_pay_pass", (DbType)SqlDbType.VarChar,200,userInfo.Ps_pay_pass),
+					DbHelper.MakeInParam("@ps_init", (DbType)SqlDbType.VarChar,200,userInfo.Ps_init),
+					DbHelper.MakeInParam("@ps_company", (DbType)SqlDbType.VarChar,200,userInfo.Ps_company),
+					DbHelper.MakeInParam("@ps_question", (DbType)SqlDbType.VarChar,1000,userInfo.Ps_question),
+					DbHelper.MakeInParam("@ps_answer", (DbType)SqlDbType.VarChar,1000,userInfo.Ps_answer),
+					DbHelper.MakeInParam("@ps_isLock", (DbType)SqlDbType.Bit,1,userInfo.Ps_isLock),
+					DbHelper.MakeInParam("@ps_lastLogin", (DbType)SqlDbType.Char,19,userInfo.Ps_lastLogin),
+					DbHelper.MakeInParam("@ps_lastChangePass", (DbType)SqlDbType.Char,19,userInfo.Ps_lastChangePass),
+					DbHelper.MakeInParam("@ps_lockDate", (DbType)SqlDbType.Char,19,userInfo.Ps_lockDate),
+					DbHelper.MakeInParam("@ps_email", (DbType)SqlDbType.VarChar,100,userInfo.Ps_email),
+					DbHelper.MakeInParam("@ps_prev_email", (DbType)SqlDbType.VarChar,100,userInfo.Ps_prev_email),
+					DbHelper.MakeInParam("@ps_regIP", (DbType)SqlDbType.VarChar,50,userInfo.Ps_regIP),
+					DbHelper.MakeInParam("@ps_loginIP", (DbType)SqlDbType.VarChar,50,userInfo.Ps_loginIP),
+					DbHelper.MakeInParam("@ps_star", (DbType)SqlDbType.Int,4,userInfo.Ps_star),
+					DbHelper.MakeInParam("@ps_credits", (DbType)SqlDbType.Int,4,userInfo.Ps_credits),
+					DbHelper.MakeInParam("@ps_scores", (DbType)SqlDbType.Int,4,userInfo.Ps_scores),
+					DbHelper.MakeInParam("@ps_pg_id", (DbType)SqlDbType.Int,4,userInfo.Ps_pg_id),
+					DbHelper.MakeInParam("@ps_ug_id", (DbType)SqlDbType.Int,4,userInfo.Ps_ug_id),
+					DbHelper.MakeInParam("@ps_tempID", (DbType)SqlDbType.Int,4,userInfo.Ps_tempID),
+					DbHelper.MakeInParam("@ps_isEmail", (DbType)SqlDbType.Int,4,userInfo.Ps_isEmail),
+					DbHelper.MakeInParam("@ps_bdSound", (DbType)SqlDbType.Int,4,userInfo.Ps_bdSound),
+					DbHelper.MakeInParam("@ps_onlinetime", (DbType)SqlDbType.Int,4,userInfo.Ps_onlinetime),
+					DbHelper.MakeInParam("@ps_isDetail", (DbType)SqlDbType.Bit,1,userInfo.Ps_isDetail),
+					DbHelper.MakeInParam("@ps_isCreater", (DbType)SqlDbType.Bit,1,userInfo.Ps_isCreater),
+					DbHelper.MakeInParam("@ps_creater", (DbType)SqlDbType.UniqueIdentifier,16,userInfo.Ps_creater),
+					DbHelper.MakeInParam("@ps_lastactivity", (DbType)SqlDbType.Char,19,userInfo.Ps_lastactivity),
+					DbHelper.MakeInParam("@ps_secques", (DbType)SqlDbType.Char,8,userInfo.ps_secques),
+					DbHelper.MakeInParam("@ps_pageviews", (DbType)SqlDbType.Int,4,userInfo.ps_pageviews),
+					DbHelper.MakeInParam("@ps_issign", (DbType)SqlDbType.SmallInt,2,userInfo.ps_issign),
+					DbHelper.MakeInParam("@ps_newsletter", (DbType)SqlDbType.Int,4,userInfo.ps_newsletter),
+					DbHelper.MakeInParam("@ps_invisible", (DbType)SqlDbType.Int,4,userInfo.ps_invisible),
+					DbHelper.MakeInParam("@ps_newMess", (DbType)SqlDbType.Int,4,userInfo.Ps_newMess),
+					DbHelper.MakeInParam("@ps_newpm", (DbType)SqlDbType.Int,4,userInfo.ps_newpm),
+					DbHelper.MakeInParam("@ps_salt", (DbType)SqlDbType.NChar,6,userInfo.ps_salt),
+
+					DbHelper.MakeInParam("@pd_name", (DbType)SqlDbType.VarChar,50,userInfo.Pd_name),
+					DbHelper.MakeInParam("@pd_birthday", (DbType)SqlDbType.VarChar,200,userInfo.Pd_birthday),
+					DbHelper.MakeInParam("@pd_MSN", (DbType)SqlDbType.VarChar,100,userInfo.Pd_MSN),
+					DbHelper.MakeInParam("@pd_QQ", (DbType)SqlDbType.VarChar,100,userInfo.Pd_QQ),
+					DbHelper.MakeInParam("@pd_Skype", (DbType)SqlDbType.VarChar,100,userInfo.Pd_Skype),
+					DbHelper.MakeInParam("@pd_Yahoo", (DbType)SqlDbType.VarChar,100,userInfo.Pd_Yahoo),
+					DbHelper.MakeInParam("@pd_sign", (DbType)SqlDbType.VarChar,2000,userInfo.Pd_sign),
+					DbHelper.MakeInParam("@pd_logo", (DbType)SqlDbType.Int,4,userInfo.Pd_logo),
+					DbHelper.MakeInParam("@pd_phone", (DbType)SqlDbType.VarChar,50,userInfo.Pd_phone),
+					DbHelper.MakeInParam("@pd_mobile", (DbType)SqlDbType.VarChar,50,userInfo.Pd_mobile),
+					DbHelper.MakeInParam("@pd_website", (DbType)SqlDbType.VarChar,200,userInfo.Pd_website),
+					DbHelper.MakeInParam("@pd_ai_id_1", (DbType)SqlDbType.Int,4,userInfo.Pd_ai_id_1),
+					DbHelper.MakeInParam("@pd_address_1", (DbType)SqlDbType.VarChar,2000,userInfo.Pd_address_1),
+					DbHelper.MakeInParam("@pd_ai_id_2", (DbType)SqlDbType.Int,4,userInfo.Pd_ai_id_2),
+					DbHelper.MakeInParam("@pd_address_2", (DbType)SqlDbType.VarChar,2000,userInfo.Pd_address_2),
+					DbHelper.MakeInParam("@pd_ai_id_3", (DbType)SqlDbType.Int,4,userInfo.Pd_ai_id_3),
+					DbHelper.MakeInParam("@pd_address_3", (DbType)SqlDbType.VarChar,2000,userInfo.Pd_address_3),
+					DbHelper.MakeInParam("@pd_ai_id_temp", (DbType)SqlDbType.Int,4,userInfo.Pd_ai_id_temp),
+					DbHelper.MakeInParam("@pd_address_temp", (DbType)SqlDbType.VarChar,2000,userInfo.Pd_address_temp),
+					DbHelper.MakeInParam("@pd_authstr", (DbType)SqlDbType.VarChar,20,userInfo.pd_authstr),
+					DbHelper.MakeInParam("@pd_idcard", (DbType)SqlDbType.VarChar,50,userInfo.pd_idcard),
+					DbHelper.MakeInParam("@pd_bio", (DbType)SqlDbType.Text,16,userInfo.pd_bio)
+		    };
+
+            return new Guid(DbHelper.ExecuteScalar(CommandType.StoredProcedure, string.Format("{0}createuser", BaseConfigs.GetTablePrefix), parms).ToString());
+        }
+
+        /// <summary>
+        /// 更新用户信息.
+        /// </summary>
+        /// <param name="userinfo">用户信息</param>
+        /// <returns>返回是否成功</returns>
+        public bool UpdateUser(UserInfo userInfo)
+        {
+            DbParameter[] parms = {
+					DbHelper.MakeInParam("@ps_en_id", (DbType)SqlDbType.UniqueIdentifier,16,userInfo.Ps_en_id),
+					DbHelper.MakeInParam("@ps_name", (DbType)SqlDbType.VarChar,50,userInfo.Ps_name),
+					DbHelper.MakeInParam("@ps_nickName", (DbType)SqlDbType.VarChar,50,userInfo.Ps_nickName),
+					DbHelper.MakeInParam("@ps_gender", (DbType)SqlDbType.SmallInt,2,userInfo.Ps_gender),
+					DbHelper.MakeInParam("@ps_password", (DbType)SqlDbType.VarChar,200,userInfo.Ps_password),
+					DbHelper.MakeInParam("@ps_pay_pass", (DbType)SqlDbType.VarChar,200,userInfo.Ps_pay_pass),
+					DbHelper.MakeInParam("@ps_init", (DbType)SqlDbType.VarChar,200,userInfo.Ps_init),
+					DbHelper.MakeInParam("@ps_company", (DbType)SqlDbType.VarChar,200,userInfo.Ps_company),
+					DbHelper.MakeInParam("@ps_question", (DbType)SqlDbType.VarChar,1000,userInfo.Ps_question),
+					DbHelper.MakeInParam("@ps_answer", (DbType)SqlDbType.VarChar,1000,userInfo.Ps_answer),
+					DbHelper.MakeInParam("@ps_isLock", (DbType)SqlDbType.Bit,1,userInfo.Ps_isLock),
+					DbHelper.MakeInParam("@ps_lastLogin", (DbType)SqlDbType.Char,19,userInfo.Ps_lastLogin),
+					DbHelper.MakeInParam("@ps_lastChangePass", (DbType)SqlDbType.Char,19,userInfo.Ps_lastChangePass),
+					DbHelper.MakeInParam("@ps_lockDate", (DbType)SqlDbType.Char,19,userInfo.Ps_lockDate),
+					DbHelper.MakeInParam("@ps_email", (DbType)SqlDbType.VarChar,100,userInfo.Ps_email),
+					DbHelper.MakeInParam("@ps_prev_email", (DbType)SqlDbType.VarChar,100,userInfo.Ps_prev_email),
+					DbHelper.MakeInParam("@ps_regIP", (DbType)SqlDbType.VarChar,50,userInfo.Ps_regIP),
+					DbHelper.MakeInParam("@ps_loginIP", (DbType)SqlDbType.VarChar,50,userInfo.Ps_loginIP),
+					DbHelper.MakeInParam("@ps_star", (DbType)SqlDbType.Int,4,userInfo.Ps_star),
+					DbHelper.MakeInParam("@ps_credits", (DbType)SqlDbType.Int,4,userInfo.Ps_credits),
+					DbHelper.MakeInParam("@ps_scores", (DbType)SqlDbType.Int,4,userInfo.Ps_scores),
+					DbHelper.MakeInParam("@ps_pg_id", (DbType)SqlDbType.Int,4,userInfo.Ps_pg_id),
+					DbHelper.MakeInParam("@ps_ug_id", (DbType)SqlDbType.Int,4,userInfo.Ps_ug_id),
+					DbHelper.MakeInParam("@ps_tempID", (DbType)SqlDbType.Int,4,userInfo.Ps_tempID),
+					DbHelper.MakeInParam("@ps_isEmail", (DbType)SqlDbType.Int,4,userInfo.Ps_isEmail),
+					DbHelper.MakeInParam("@ps_bdSound", (DbType)SqlDbType.Int,4,userInfo.Ps_bdSound),
+					DbHelper.MakeInParam("@ps_onlinetime", (DbType)SqlDbType.Int,4,userInfo.Ps_onlinetime),
+					DbHelper.MakeInParam("@ps_isDetail", (DbType)SqlDbType.Bit,1,userInfo.Ps_isDetail),
+					DbHelper.MakeInParam("@ps_isCreater", (DbType)SqlDbType.Bit,1,userInfo.Ps_isCreater),
+					DbHelper.MakeInParam("@ps_creater", (DbType)SqlDbType.UniqueIdentifier,16,userInfo.Ps_creater),
+					DbHelper.MakeInParam("@ps_lastactivity", (DbType)SqlDbType.Char,19,userInfo.Ps_lastactivity),
+					DbHelper.MakeInParam("@ps_secques", (DbType)SqlDbType.Char,8,userInfo.ps_secques),
+					DbHelper.MakeInParam("@ps_pageviews", (DbType)SqlDbType.Int,4,userInfo.ps_pageviews),
+					DbHelper.MakeInParam("@ps_issign", (DbType)SqlDbType.SmallInt,2,userInfo.ps_issign),
+					DbHelper.MakeInParam("@ps_newsletter", (DbType)SqlDbType.Int,4,userInfo.ps_newsletter),
+					DbHelper.MakeInParam("@ps_invisible", (DbType)SqlDbType.Int,4,userInfo.ps_invisible),
+					DbHelper.MakeInParam("@ps_newMess", (DbType)SqlDbType.Int,4,userInfo.Ps_newMess),
+					DbHelper.MakeInParam("@ps_newpm", (DbType)SqlDbType.Int,4,userInfo.ps_newpm),
+					DbHelper.MakeInParam("@ps_salt", (DbType)SqlDbType.NChar,6,userInfo.ps_salt),
+                    DbHelper.MakeInParam("@ps_status", (DbType)SqlDbType.Int,4,userInfo.Ps_status),
+
+					DbHelper.MakeInParam("@pd_name", (DbType)SqlDbType.VarChar,50,userInfo.Pd_name),
+					DbHelper.MakeInParam("@pd_birthday", (DbType)SqlDbType.VarChar,200,userInfo.Pd_birthday),
+					DbHelper.MakeInParam("@pd_MSN", (DbType)SqlDbType.VarChar,100,userInfo.Pd_MSN),
+					DbHelper.MakeInParam("@pd_QQ", (DbType)SqlDbType.VarChar,100,userInfo.Pd_QQ),
+					DbHelper.MakeInParam("@pd_Skype", (DbType)SqlDbType.VarChar,100,userInfo.Pd_Skype),
+					DbHelper.MakeInParam("@pd_Yahoo", (DbType)SqlDbType.VarChar,100,userInfo.Pd_Yahoo),
+					DbHelper.MakeInParam("@pd_sign", (DbType)SqlDbType.VarChar,2000,userInfo.Pd_sign),
+					DbHelper.MakeInParam("@pd_logo", (DbType)SqlDbType.Int,4,userInfo.Pd_logo),
+					DbHelper.MakeInParam("@pd_phone", (DbType)SqlDbType.VarChar,50,userInfo.Pd_phone),
+					DbHelper.MakeInParam("@pd_mobile", (DbType)SqlDbType.VarChar,50,userInfo.Pd_mobile),
+					DbHelper.MakeInParam("@pd_website", (DbType)SqlDbType.VarChar,200,userInfo.Pd_website),
+					DbHelper.MakeInParam("@pd_ai_id_1", (DbType)SqlDbType.Int,4,userInfo.Pd_ai_id_1),
+					DbHelper.MakeInParam("@pd_address_1", (DbType)SqlDbType.VarChar,2000,userInfo.Pd_address_1),
+					DbHelper.MakeInParam("@pd_ai_id_2", (DbType)SqlDbType.Int,4,userInfo.Pd_ai_id_2),
+					DbHelper.MakeInParam("@pd_address_2", (DbType)SqlDbType.VarChar,2000,userInfo.Pd_address_2),
+					DbHelper.MakeInParam("@pd_ai_id_3", (DbType)SqlDbType.Int,4,userInfo.Pd_ai_id_3),
+					DbHelper.MakeInParam("@pd_address_3", (DbType)SqlDbType.VarChar,2000,userInfo.Pd_address_3),
+					DbHelper.MakeInParam("@pd_ai_id_temp", (DbType)SqlDbType.Int,4,userInfo.Pd_ai_id_temp),
+					DbHelper.MakeInParam("@pd_address_temp", (DbType)SqlDbType.VarChar,2000,userInfo.Pd_address_temp),
+					DbHelper.MakeInParam("@pd_authstr", (DbType)SqlDbType.VarChar,20,userInfo.pd_authstr),
+                    DbHelper.MakeInParam("@pd_authtime", (DbType)SqlDbType.SmallDateTime,4,userInfo.pd_authtime),
+					DbHelper.MakeInParam("@pd_authflag", (DbType)SqlDbType.TinyInt,1,userInfo.pd_authflag),
+					DbHelper.MakeInParam("@pd_idcard", (DbType)SqlDbType.VarChar,50,userInfo.pd_idcard),
+					DbHelper.MakeInParam("@pd_bio", (DbType)SqlDbType.Text,16,userInfo.pd_bio)
+                };
+
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteNonQuery(CommandType.StoredProcedure,
+                                                                      string.Format("{0}updateuser", BaseConfigs.GetTablePrefix),
+                                                                      parms), -1) == 2;
+        }
+
+        /// <summary>
+        /// 更新权限验证字符串
+        /// </summary>
+        /// <param name="uid">用户id</param>
+        /// <param name="authstr">验证串</param>
+        /// <param name="authflag">验证标志</param>
+        public void UpdateAuthStr(Guid uid, string authStr, int authFlag)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@uid", (DbType)SqlDbType.UniqueIdentifier, 16, uid), 
+									   DbHelper.MakeInParam("@authstr", (DbType)SqlDbType.VarChar, 20, authStr),
+									   DbHelper.MakeInParam("@authflag", (DbType)SqlDbType.TinyInt, 2, authFlag) 
+								   };
+            DbHelper.ExecuteNonQuery(CommandType.StoredProcedure, string.Format("{0}updateuserauthstr", BaseConfigs.GetTablePrefix), parms);
+        }
+
+        /// <summary>
+        /// 设置用户信息表中未读短消息的数量
+        /// </summary>
+        /// <param name="uid">用户ID</param>
+        /// <param name="pmnum">短消息数量</param>
+        /// <returns>更新记录个数</returns>
+        public int SetUserNewPMCount(Guid uid, int pmNum)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@uid", (DbType)SqlDbType.UniqueIdentifier, 16, uid), 
+									   DbHelper.MakeInParam("@value", (DbType)SqlDbType.Int, 4, pmNum)
+			                      };
+            string commandText = string.Format("UPDATE [{0}personInfo] SET [ps_newMess]=@value WHERE [ps_id]=@uid", BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
+        /// 获取指定用户名的用户信息
+        /// </summary>
+        /// <param name="userName">用户名</param>
+        /// <returns></returns>
+        public IDataReader GetUserInfoByName(string userName)
+        {
+            string commandText = string.Format("SELECT [ps_id], [ps_name] FROM [{0}personInfo] WHERE [ps_name] LIKE '%{1}%'",
+                                                BaseConfigs.GetTablePrefix,
+                                                RegEsc(userName));
+            return DbHelper.ExecuteReader(CommandType.Text, commandText);
+        }
+
+        /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <param name="startUid"></param>
+        /// <param name="endUid"></param>
+        /// <returns></returns>
+        public IDataReader GetUsers(Guid startUid, Guid endUid)
+        {
+            DbParameter[] parms = {
+				DbHelper.MakeInParam("@start_uid", (DbType)SqlDbType.UniqueIdentifier, 16, startUid),
+				DbHelper.MakeInParam("@end_uid", (DbType)SqlDbType.UniqueIdentifier, 16, endUid)
+			};
+            string commandText = string.Format("SELECT [ps_id] FROM [{0}personInfo] WHERE [ps_id] >= @start_uid AND [ps_id]<=@end_uid",
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
+        }
 
         #endregion
 
@@ -612,7 +1021,6 @@ namespace SAS.Data.SqlServer
         }
 
         #endregion
-
 
     }
 }
