@@ -412,6 +412,22 @@ namespace SAS.Data.SqlServer
         }
 
         /// <summary>
+        /// 获取用户信息
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+        public IDataReader GetUserInfoToReader(string userName)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@username", (DbType)SqlDbType.VarChar,50, userName)
+			                      };
+            string commandText = string.Format("SELECT TOP 1 {1} FROM [{0}personInfo] AS [u] LEFT JOIN [{0}personDetail] AS [uf] ON [u].[ps_id]=[uf].[pd_id] WHERE [u].[ps_name]=@username",
+                                                BaseConfigs.GetTablePrefix,
+                                                DbFields.USERS_JOIN_FIELDS);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
         /// 获取用户列表
         /// </summary>
         /// <param name="startUid"></param>
@@ -1021,6 +1037,260 @@ namespace SAS.Data.SqlServer
         }
 
         #endregion
+
+        #region 短消息pms基本操作
+
+        // <summary>
+        /// 获得指定ID的短消息的内容
+        /// </summary>
+        /// <param name="pmid">短消息pmid</param>
+        /// <returns>短消息内容</returns>
+        public IDataReader GetPrivateMessageInfo(int pmId)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@pmid", (DbType)SqlDbType.Int,4, pmId),
+			                        };
+            string commandText = string.Format("SELECT TOP 1 {0} FROM [{1}pms] WHERE [pmid]=@pmid",
+                                                DbFields.PMS,
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
+        }
+
+
+        /// <summary>
+        /// 得到当用户的短消息数量
+        /// </summary>
+        /// <param name="userId">用户ID</param>
+        /// <param name="folder">所属文件夹(0:收件箱,1:发件箱,2:草稿箱)</param>
+        /// <param name="state">短消息状态(0:已读短消息、1:未读短消息、-1:全部短消息)</param>
+        /// <returns>短消息数量</returns>
+        public int GetPrivateMessageCount(Guid userId, int folder, int state)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@userid",(DbType)SqlDbType.UniqueIdentifier,16,userId),
+									   DbHelper.MakeInParam("@folder",(DbType)SqlDbType.Int,4,folder),								   
+									   DbHelper.MakeInParam("@state",(DbType)SqlDbType.Int,4,state)
+								   };
+            return TypeConverter.ObjectToInt(
+                                 DbHelper.ExecuteScalar(CommandType.StoredProcedure,
+                                                        string.Format("{0}getpmcount", BaseConfigs.GetTablePrefix),
+                                                        parms));
+        }
+
+        /// <summary>
+        /// 得到公共消息数量
+        /// </summary>
+        /// <returns>公共消息数量</returns>
+        public int GetAnnouncePrivateMessageCount()
+        {
+            return TypeConverter.ObjectToInt(
+                             DbHelper.ExecuteScalar(CommandType.Text,
+                                                    string.Format("SELECT COUNT(pmid) FROM [{0}pms] WHERE [msgtoid] = '00000000-0000-0000-0000-000000000000'", BaseConfigs.GetTablePrefix)));
+        }
+
+        /// <summary>
+        /// 创建短消息
+        /// </summary>
+        /// <param name="__privatemessageinfo">短消息内容</param>
+        /// <param name="savetosentbox">设置短消息是否在发件箱保留(0为不保留, 1为保留)</param>
+        /// <returns>短消息在数据库中的pmid</returns>
+        public int CreatePrivateMessage(PrivateMessageInfo privateMessageInfo, int saveToSentBox)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@pmid",(DbType)SqlDbType.Int,4,privateMessageInfo.Pmid),
+									   DbHelper.MakeInParam("@msgfrom",(DbType)SqlDbType.NVarChar,20,privateMessageInfo.Msgfrom),
+									   DbHelper.MakeInParam("@msgfromid",(DbType)SqlDbType.UniqueIdentifier,16,privateMessageInfo.Msgfromid),
+									   DbHelper.MakeInParam("@msgto",(DbType)SqlDbType.NVarChar,20,privateMessageInfo.Msgto),
+									   DbHelper.MakeInParam("@msgtoid",(DbType)SqlDbType.UniqueIdentifier,16,privateMessageInfo.Msgtoid),
+									   DbHelper.MakeInParam("@folder",(DbType)SqlDbType.SmallInt,2,privateMessageInfo.Folder),
+									   DbHelper.MakeInParam("@new",(DbType)SqlDbType.Int,4,privateMessageInfo.New),
+									   DbHelper.MakeInParam("@subject",(DbType)SqlDbType.NVarChar,80,privateMessageInfo.Subject),
+									   DbHelper.MakeInParam("@postdatetime",(DbType)SqlDbType.DateTime,8,DateTime.Parse(privateMessageInfo.Postdatetime)),
+									   DbHelper.MakeInParam("@message",(DbType)SqlDbType.NText,0,privateMessageInfo.Message),
+									   DbHelper.MakeInParam("@savetosentbox",(DbType)SqlDbType.Int,4,saveToSentBox)
+								   };
+            return TypeConverter.ObjectToInt(
+                                 DbHelper.ExecuteScalar(CommandType.StoredProcedure,
+                                                        string.Format("{0}createpm", BaseConfigs.GetTablePrefix), parms), -1);
+        }
+
+        /// <summary>
+        /// 删除指定用户的短信息
+        /// </summary>
+        /// <param name="userId">用户ID</param>
+        /// <param name="pmitemid">要删除的短信息列表(数组)</param>
+        /// <returns>删除记录数</returns>
+        public int DeletePrivateMessages(Guid userId, string pmIdList)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@userid", (DbType)SqlDbType.UniqueIdentifier,16, userId)
+			                      };
+            string commandText = string.Format("DELETE FROM [{0}pms] WHERE [pmid] IN ({1}) AND ([msgtoid] = @userid OR [msgfromid] = @userid)",
+                                                BaseConfigs.GetTablePrefix,
+                                                pmIdList);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
+        /// 获得新短消息数
+        /// </summary>
+        /// <returns></returns>
+        public int GetNewPMCount(Guid userId)
+        {
+            string commandText = string.Format("SELECT COUNT([pmid]) AS [pmcount] FROM [{0}pms] WHERE [new] = 1 AND [folder] = 0 AND [msgtoid] = '{1}'",
+                                                BaseConfigs.GetTablePrefix,
+                                                userId);
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText));
+        }
+
+        /// <summary>
+        /// 设置短信息状态
+        /// </summary>
+        /// <param name="pmid">短信息ID</param>
+        /// <param name="state">状态值</param>
+        /// <returns>更新记录数</returns>
+        public int SetPrivateMessageState(int pmId, byte state)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@pmid", (DbType)SqlDbType.Int,1,pmId),
+									   DbHelper.MakeInParam("@state",(DbType)SqlDbType.TinyInt,1,state)
+								   };
+            string commandText = string.Format("UPDATE [{0}pms] SET [new]=@state WHERE [pmid]=@pmid", BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
+        /// 获得指定用户的短信息列表
+        /// </summary>
+        /// <param name="userId">用户ID</param>
+        /// <param name="folder">短信息类型(0:收件箱,1:发件箱,2:草稿箱)</param>
+        /// <param name="pagesize">每页显示短信息数</param>
+        /// <param name="pageindex">当前要显示的页数</param>
+        /// <param name="inttype">筛选条件1为未读</param>
+        /// <returns>短信息列表</returns>
+        public IDataReader GetPrivateMessageList(Guid userId, int folder, int pageSize, int pageIndex, int intType)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@userid",(DbType)SqlDbType.UniqueIdentifier,16,userId),
+									   DbHelper.MakeInParam("@folder",(DbType)SqlDbType.Int,4,folder),
+									   DbHelper.MakeInParam("@pagesize", (DbType)SqlDbType.Int,4,pageSize),
+									   DbHelper.MakeInParam("@pageindex",(DbType)SqlDbType.Int,4,pageIndex),
+								       DbHelper.MakeInParam("@inttype",(DbType)SqlDbType.VarChar,500,intType)
+								   };
+            return DbHelper.ExecuteReader(CommandType.StoredProcedure, string.Format("{0}getpmlist", BaseConfigs.GetTablePrefix), parms);
+        }
+
+        /// <summary>
+        /// 获得指定用户的短信息列表
+        /// </summary>
+        /// <param name="pagesize">每页显示短信息数,为-1时返回全部</param>
+        /// <param name="pageindex">当前要显示的页数</param>
+        /// <returns>短信息列表</returns>
+        public IDataReader GetAnnouncePrivateMessageList(int pageSize, int pageIndex)
+        {
+            string commandText = "";
+            if (pageSize == -1)
+                commandText = string.Format("SELECT {0} FROM [{1}pms] WHERE [msgtoid] = '00000000-0000-0000-0000-000000000000' ORDER BY [pmid] DESC",
+                                             DbFields.PMS, BaseConfigs.GetTablePrefix);
+            else if (pageIndex <= 1)
+                commandText = string.Format("SELECT TOP {0} {1} FROM [{2}pms] WHERE [msgtoid] = '00000000-0000-0000-0000-000000000000'  ORDER BY [pmid] DESC",
+                                             pageSize, DbFields.PMS, BaseConfigs.GetTablePrefix);
+            else
+                commandText = string.Format("SELECT TOP {0} {1} FROM [{2}pms] WHERE [msgtoid] = '00000000-0000-0000-0000-000000000000' AND [pmid] < (SELECT MIN([pmid]) FROM (SELECT TOP {3} [pmid] FROM [{2}pms] WHERE [msgtoid] = '00000000-0000-0000-0000-000000000000'  ORDER BY [pmid] DESC) AS tblTmp)  ORDER BY [pmid] DESC",
+                                             pageSize, DbFields.PMS, BaseConfigs.GetTablePrefix, (pageIndex - 1) * pageSize);
+
+            return DbHelper.ExecuteReader(CommandType.Text, commandText);
+        }
+
+        /// <summary>
+        /// 更新短信发送和接收者的用户名
+        /// </summary>
+        /// <param name="uid">Uid</param>
+        /// <param name="newUserName">新用户名</param>
+        public void UpdatePMSenderAndReceiver(Guid uid, string newUserName)
+        {
+            DbParameter[] parms =  { 
+                                        DbHelper.MakeInParam("@uid", (DbType)SqlDbType.UniqueIdentifier, 16, uid),
+                                        DbHelper.MakeInParam("@username", (DbType)SqlDbType.VarChar, 20, newUserName)
+                                    };
+            string commandText = string.Format("UPDATE [{0}pms] SET [msgfrom]=@username WHERE [msgfromid]=@uid", BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+
+            commandText = string.Format("UPDATE [{0}pms] SET [msgto]=@username  WHERE [msgtoid]=@uid", BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        // <summary>
+        /// 删除短消息
+        /// </summary>
+        /// <param name="isNew">是否删除新短消息</param>
+        /// <param name="postDateTime">发送日期</param>
+        /// <param name="msgFromList">发送者列表</param>
+        /// <param name="lowerUpper">是否区分大小写</param>
+        /// <param name="subject">主题</param>
+        /// <param name="message">内容</param>
+        /// <param name="isUpdateUserNewPm">是否更新用户短消息数</param>
+        /// <returns></returns>
+        public string DeletePrivateMessages(bool isNew, string postDateTime, string msgFromList, bool lowerUpper, string subject, string message, bool isUpdateUserNewPm)
+        {
+            string commandText = "WHERE [pmid]>0";
+
+            if (isNew)
+                commandText += " AND [new]=0";
+
+            if (!Utils.StrIsNullOrEmpty(postDateTime))
+                commandText += string.Format(" AND DATEDIFF(day,postdatetime,getdate())>={0}", postDateTime);
+
+            if (msgFromList != "")
+            {
+                commandText += " AND (";
+                foreach (string msgfrom in msgFromList.Split(','))
+                {
+                    if (!Utils.StrIsNullOrEmpty(msgfrom))
+                    {
+                        if (lowerUpper)
+                            commandText += string.Format(" [msgfrom]='{0}' OR", msgfrom);
+                        else
+                            commandText += string.Format(" [msgfrom] COLLATE Chinese_PRC_CS_AS_WS ='{0}' OR", msgfrom);
+                    }
+                }
+                commandText = commandText.Substring(0, commandText.Length - 3) + ")";
+            }
+
+            if (subject != "")
+            {
+                commandText += " AND (";
+                foreach (string sub in subject.Split(','))
+                {
+                    if (!Utils.StrIsNullOrEmpty(sub))
+                        commandText += string.Format(" [subject] LIKE '%{0}%' OR ", RegEsc(sub));
+                }
+                commandText = commandText.Substring(0, commandText.Length - 3) + ")";
+            }
+
+            if (message != "")
+            {
+                commandText += " AND (";
+                foreach (string mess in message.Split(','))
+                {
+                    if (!Utils.StrIsNullOrEmpty(mess))
+                        commandText += string.Format(" [message] LIKE '%{0}%' OR ", RegEsc(mess));
+                }
+                commandText = commandText.Substring(0, commandText.Length - 3) + ")";
+            }
+
+            if (isUpdateUserNewPm)
+            {
+                DbHelper.ExecuteNonQuery(string.Format("UPDATE [{0}users] SET [newpm]=0 WHERE [uid] IN (SELECT [msgtoid] FROM [{0}pms] {1})", BaseConfigs.GetTablePrefix, commandText));
+            }
+            DbHelper.ExecuteNonQuery(string.Format("DELETE FROM [{0}pms] {1}", BaseConfigs.GetTablePrefix, commandText));
+            return commandText;
+        }
+
+        #endregion
+
+        
+
 
     }
 }
