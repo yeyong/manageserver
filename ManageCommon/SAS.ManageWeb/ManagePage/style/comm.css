@@ -1,0 +1,41 @@
+﻿
+
+body{ margin:0px; padding:0px; font-size:12px; background:#fff; font-family:宋体, Arial, Helvetica, sans-serif;}
+span,p,ol,ul,li,form,input,ul,li,dt,dl,dd,em,a,h1,h2,h3,h4,h5,h6,i,iframe,center{ margin:0px; padding:0px;}
+input,ul,li{list-style-type:none;}
+em{ font-style:normal;}
+img{ border:0px;}
+*html{ overflow-x:hidden;}
+html,body{ height:100%;}
+
+body{ scrollbar-darkshadow-color:#808080; scrollbar-face-color:#DDDDDD; scrollbar-highlight-color:#EEEEEE; scrollbar-shadow-color:#DEE3E7; scrollbar-3dlight-color:#D1D7DC; scrollbar-arrow-color:#000000; scrollbar-track-color:#EDEDED;}
+
+/*链接颜色*/
+.zt1:link, .zt1:visited{ text-decoration:none; color:#426293;}
+.zt1:hover{ color:#E50029; text-decoration:underline;}
+.zt2:link, .zt2:visited{ text-decoration:none; color:#000;}
+.zt2:hover{ color:#E50029; text-decoration:underline;}
+
+
+
+
+.zi1{ color:#ff0000;}
+.zi2{ color:#38506C;}
+
+
+/*按钮*/
+input.an1{ width:auto; height:22px; line-height:22px; padding:0px 2px; text-align:center; letter-spacing:1px; background:url(../images/admin-bg3.png) repeat-x 0px -227px; color:#065081; border:1px solid #9ab3c3; cursor:pointer;}
+input.an2{ width:auto; height:20px; line-height:20px; padding:0px 2px; text-align:center; letter-spacing:1px; background:url(../images/admin-bg3.png) repeat-x 0px -227px; color:#065081; border:1px solid #9ab3c3; cursor:pointer;}
+input.an3{ width:65px; height:25px; line-height:25px; text-align:center; letter-spacing:1px; background:url(../images/admin-bg.png) no-repeat 0px -229px; color:#fff; border:0px; cursor:pointer;}
+input.an4{ width:auto; height:24px; line-height:24px; padding:0px 2px; text-align:center; letter-spacing:1px; background:url(../images/admin-bg3.png) repeat-x 0px -279px; color:#065081; border:1px solid #9ab3c3; cursor:pointer;}
+
+
+.input1{ height:20px; line-height:20px; border:1px solid #7ea2c0; padding:0px 2px;}
+.input2{ height:18px; line-height:18px; border:1px solid #7f9db9; padding:0px 2px;}
+
+.ginput1{ width:90%; border:none; background:none; height:22px; line-height:22px; padding:0px 3px;}
+.ginput2{ width:90%; border:1px solid #fff; background:#F0F8FF; height:20px; line-height:20px; padding:0px 3px;}
+.ginput3{ width:90%; border:1px solid #eee; background:#fff; height:20px; line-height:20px; padding:0px 3px;}
+.ginput4{ width:90%; border:1px solid #3399FF; background:#C0DDFC; height:20px; line-height:20px; padding:0px 3px;}
+
+select{ color:#000000; background-color:#FFFFFF;}
