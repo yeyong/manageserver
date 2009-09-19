@@ -48,6 +48,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="aspx\1\login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="aspx\1\login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>Default.aspx</DependentUpon>
@@ -109,6 +116,7 @@
     <Content Include="SAS.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="aspx\1\login.aspx" />
     <Content Include="config\urls.config" />
     <Content Include="ManagePage\images\admin-bg.png" />
     <Content Include="ManagePage\images\admin-bg1.png" />

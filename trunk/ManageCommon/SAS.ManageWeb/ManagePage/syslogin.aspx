@@ -37,7 +37,7 @@
 				<span class="adlrt1lt">验证码：</span>
 				<span class="adlrt1rt">
 				<em class="adlrt2">
-				<input id="vcode" onkeydown="if(event.keyCode==13)  document.getElementById('login').focus();" type="text" size="20" name="vcode" autocomplete="off" class="input1" style="width:55px;" />
+				<input id="vcode" onkeydown="if(event.keyCode==13)  document.getElementById('login').focus();" type="text" size="20" name="vcode" autocomplete="off" class="input1" style="width:55px;height:25px" />
 				</em>
 				<em class="adlrt2">
 				<img id="vcodeimg" style="cursor:hand" onclick="this.src='../tools/VerifyImagePage.aspx?time=' + Math.random()" title="点击刷新验证码" align="absMiddle" src="" alt="" />
