@@ -39,3 +39,6 @@ input.an4{ width:auto; height:24px; line-height:24px; padding:0px 2px; text-alig
 .ginput4{ width:90%; border:1px solid #3399FF; background:#C0DDFC; height:20px; line-height:20px; padding:0px 3px;}
 
 select{ color:#000000; background-color:#FFFFFF;}
+
+.FormBase,.FormFocus,.FormCode,.formnoborder{ font-family:Arial, Helvetica, sans-serif; background-color: #fff; padding:0.2em 0;border:1px double #ccc;}
+.FormFocus { border: 1px double #3399ff; background-color: #c0ddfc;}

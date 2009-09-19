@@ -357,7 +357,10 @@ namespace SAS.Logic
                 OnlineUserInfo onlineuser = new OnlineUserInfo();
                 string ip = SASRequest.GetIP();
                 Guid userid = uid;
-                userid = new Guid(LogicUtils.GetCookie("userid"));
+                if (!string.IsNullOrEmpty(LogicUtils.GetCookie("userid")))
+                {
+                    userid = new Guid(LogicUtils.GetCookie("userid"));
+                }
                 string password = (Utils.StrIsNullOrEmpty(passwd) ? LogicUtils.GetCookiePassword(passwordkey) : LogicUtils.GetCookiePassword(passwd, passwordkey));
 
                 // 如果密码非Base64编码字符串则怀疑被非法篡改, 直接置身份为游客
@@ -452,8 +455,8 @@ namespace SAS.Logic
         /// <summary>
         /// 用户在线信息维护。判断当前用户的身份(会员还是游客),是否在在线列表中存在,如果存在则更新会员的当前动,不存在则建立.
         /// </summary>
-        /// <param name="passwordkey">用户密码</param
-        /// <param name="timeout">在线超时时间</param>>
+        /// <param name="passwordkey">用户密码</param>
+        /// <param name="timeout">在线超时时间</param>
         public static OnlineUserInfo UpdateInfo(string passwordkey, int timeout)
         {
             return UpdateInfo(passwordkey, timeout, new Guid("00000000-0000-0000-0000-000000000000"), "");

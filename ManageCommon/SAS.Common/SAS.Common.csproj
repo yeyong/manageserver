@@ -46,6 +46,7 @@
     <Compile Include="Arithmetic.cs" />
     <Compile Include="Encrypt.cs" />
     <Compile Include="Generic\ISASGeneric.cs" />
+    <Compile Include="Generic\SASDictionary.cs" />
     <Compile Include="Generic\SASList.cs" />
     <Compile Include="Generic\SASSortedList.cs" />
     <Compile Include="Generic\Singleton.cs" />

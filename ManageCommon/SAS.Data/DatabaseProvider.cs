@@ -26,7 +26,7 @@ namespace SAS.Data
             }
             catch
             {
-                throw new Exception("请检查DNT.config中Dbtype节点数据库类型是否正确，例如：SqlServer、Access、MySql");
+                throw new Exception("请检查SAS.config中Dbtype节点数据库类型是否正确，例如：SqlServer、Access、MySql");
             }
         }
 

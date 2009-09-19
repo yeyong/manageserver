@@ -169,7 +169,7 @@ namespace SAS.Config
         private int m_htmltitle = 0; //是否使用html标题
         private string m_htmltitleusergroup = "";  //可以使用html标题的用户组
 
-        private bool m_specifytemplate = false;  //版块是否指定模板
+        private int m_specifytemplate = 0;  //版块是否指定模板
         private string m_verifyimageassemly = "";//验证码生成所使用的程序集
 
 
@@ -1446,7 +1446,7 @@ namespace SAS.Config
         /// <summary>
         /// 版块是否指定模板
         /// </summary>
-        public bool Specifytemplate
+        public int Specifytemplate
         {
             get { return m_specifytemplate; }
             set { m_specifytemplate = value; }

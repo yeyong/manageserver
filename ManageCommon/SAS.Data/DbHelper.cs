@@ -87,11 +87,11 @@ namespace SAS.Data
                         {
                             try
                             {
-                                m_provider = (IDbProvider)Activator.CreateInstance(Type.GetType(string.Format("NTW.Data.{0}Provider, NTW.Data.{0}", BaseConfigs.GetDbType), false, true));
+                                m_provider = (IDbProvider)Activator.CreateInstance(Type.GetType(string.Format("SAS.Data.{0}Provider, SAS.Data.{0}", BaseConfigs.GetDbType), false, true));
                             }
                             catch
                             {
-                                throw new Exception("请检查NTW.config中Dbtype节点数据库类型是否正确，例如：SqlServer、Access、MySql");
+                                throw new Exception("请检查SAS.config中Dbtype节点数据库类型是否正确，例如：SqlServer、Access、MySql");
                             }
 
                         }

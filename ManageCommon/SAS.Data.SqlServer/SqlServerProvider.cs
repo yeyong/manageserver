@@ -3,7 +3,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 
-namespace SAS.Data.SqlServer
+namespace SAS.Data
 {
     public class SqlServerProvider : IDbProvider
     {
