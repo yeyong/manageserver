@@ -8,14 +8,14 @@
 /*登录*/
 .adlog{ width:100%; height:auto; background:url(../images/admin-bg1.png) repeat-x;}
 .adlog1{ width:996px; height:229px; margin:0px auto; background-position:0px 0px;}
-.adlog2{ width:440px; height:auto; margin:0px auto;}
+.adlog2{ width:540px; height:auto; margin:0px auto;}
 .adlog2lt{ width:auto; height:auto; margin-top:30px; float:left;}
 .adlog2ce{ width:1px; height:108px; margin-left:20px; float:left; background-position:-995px -229px;}
 .adlog2rt{ width:200px; height:auto; float:left; margin-left:20px;}
-.adlrt1{ width:200px; height:30px; line-height:18px; float:left; margin-top:4px; margin-bottom:4px;}
+.adlrt1{ width:300px; height:30px; line-height:18px; float:left; margin-top:4px; margin-bottom:4px;}
 .adlrt1tu{ width:16px; height:16px; float:left; background-position:0px -352px; margin-right:8px;}
 .adlrt1lt{ width:55px; height:30px; line-height:30px; float:left; color:#0e5595; text-align:right; padding-right:5px;}
-.adlrt1rt{ width:120px; height:30px; line-height:30px; float:left;}
+.adlrt1rt{ width:220px; height:30px; line-height:30px; float:left;}
 .adlrt1rt2{ width:64px; height:25px; float:left;}
 .adlrt2{ width:auto; height:22px; vertical-align:middle; float:left; margin-right:2px;}
 .adbot{ width:100%; height:185px; background:url(../images/admin-bg2.png) repeat-x; position:absolute; bottom:0px; z-index:-1;}
