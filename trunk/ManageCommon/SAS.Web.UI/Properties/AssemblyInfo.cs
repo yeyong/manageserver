@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过下列属性集
 // 控制。更改这些属性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("通用操作类库")]
-[assembly: AssemblyDescription("放置通用操作类型的公用类和方法")]
+[assembly: AssemblyTitle("页面继承父类")]
+[assembly: AssemblyDescription("负责页面公共事务的处理")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("www.sirius.org.cn")]
-[assembly: AssemblyProduct("天狼星工作室")]
+[assembly: AssemblyProduct("页面继承父类")]
 [assembly: AssemblyCopyright("Copyright © www.sirius.org.cn 2009")]
 [assembly: AssemblyTrademark("Studio After 80s")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("9b18e54e-65d2-4615-9707-4eb27ddc8264")]
+[assembly: Guid("c1ff2434-66c4-4c1b-9d5f-8703abf3bba1")]
 
 // 程序集的版本信息由下面四个值组成:
 //

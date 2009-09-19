@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过下列属性集
 // 控制。更改这些属性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("通用操作类库")]
-[assembly: AssemblyDescription("放置通用操作类型的公用类和方法")]
+[assembly: AssemblyTitle("SAS.Control")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("www.sirius.org.cn")]
-[assembly: AssemblyProduct("天狼星工作室")]
-[assembly: AssemblyCopyright("Copyright © www.sirius.org.cn 2009")]
-[assembly: AssemblyTrademark("Studio After 80s")]
+[assembly: AssemblyCompany("WwW.YlmF.CoM")]
+[assembly: AssemblyProduct("SAS.Control")]
+[assembly: AssemblyCopyright("Copyright © WwW.YlmF.CoM 2009")]
+[assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // 将 ComVisible 设置为 false 使此程序集中的类型
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("9b18e54e-65d2-4615-9707-4eb27ddc8264")]
+[assembly: Guid("e2f95f47-fe65-4b98-acf0-ee4285f3bca1")]
 
 // 程序集的版本信息由下面四个值组成:
 //

@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F6CFD248-E9E3-480A-B518-526298AAF81E}</ProjectGuid>
+    <ProjectGuid>{2EA29B20-569F-421C-B359-7E7F8C7045CD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SAS.Entity</RootNamespace>
-    <AssemblyName>SAS.Entity</AssemblyName>
+    <RootNamespace>SAS.Plugin</RootNamespace>
+    <AssemblyName>SAS.Plugin</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -37,21 +37,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IpInfo.cs" />
-    <Compile Include="NoticeInfo.cs" />
-    <Compile Include="NoticeinfoCollection.cs" />
-    <Compile Include="OnlineUserInfo.cs" />
-    <Compile Include="PrivateMessageInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReceivePMSettingType.cs" />
-    <Compile Include="StatInfo.cs" />
-    <Compile Include="StatVarInfo.cs" />
-    <Compile Include="TemplateAboutInfo.cs" />
-    <Compile Include="TemplateInfo.cs" />
-    <Compile Include="UserAction.cs" />
-    <Compile Include="UserGroupInfo.cs" />
-    <Compile Include="UserInfo.cs" />
-    <Compile Include="VerifyImageInfo.cs" />
+    <Compile Include="VerifyImage\IVerifyImage.cs" />
+    <Compile Include="VerifyImage\VerifyImage.cs" />
+    <Compile Include="VerifyImage\VerifyImageProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SAS.Entity\SAS.Entity.csproj">
+      <Project>{F6CFD248-E9E3-480A-B518-526298AAF81E}</Project>
+      <Name>SAS.Entity</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

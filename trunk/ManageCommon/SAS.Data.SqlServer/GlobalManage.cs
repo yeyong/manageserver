@@ -151,53 +151,7 @@ namespace SAS.Data.SqlServer
 
         #endregion
 
-        #region 统计信息statistics表操作
-
-        /// <summary>
-        /// 获得统计列
-        /// </summary>
-        /// <returns>统计列</returns>
-        public DataTable GetStatisticsRow()
-        {
-            string commandText = string.Format("SELECT TOP 1 {0} FROM [{1}statistics]", DbFields.STATISTICS, BaseConfigs.GetTablePrefix);
-            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
-        }
-
-        /// <summary>
-        /// 更新指定名称的统计项
-        /// </summary>
-        /// <param name="param">项目名称</param>
-        /// <param name="Value">指定项的值</param>
-        /// <returns>更新数</returns>
-        public int UpdateStatistics(string param, string strValue)
-        {
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            if (!Utils.StrIsNullOrEmpty(param))
-            {
-                sb.AppendFormat("UPDATE [{0}statistics] SET {1}= '{2}'", BaseConfigs.GetTablePrefix, param, strValue);
-                return DbHelper.ExecuteNonQuery(CommandType.Text, sb.ToString());
-            }
-            return 0;
-        }
-
-        /// <summary>
-        /// 更新最后回复人用户名
-        /// </summary>
-        /// <param name="lastUserId">Uid</param>
-        /// <param name="lastUserName">新用户名</param>
-        /// <returns></returns>
-        public int UpdateStatisticsLastUserName(int lastUserId, string lastUserName)
-        {
-            DbParameter[] parms = { 
-                                        DbHelper.MakeInParam("@lastuserid", (DbType)SqlDbType.Int, 4, lastUserId),
-                                        DbHelper.MakeInParam("@lastusername", (DbType)SqlDbType.VarChar, 200, lastUserName)
-                                    };
-            string commandText = string.Format("UPDATE [{0}statistics] SET [st_lastuser]=@lastusername WHERE [st_lastuserid]=@lastuserid",
-                                                BaseConfigs.GetTablePrefix);
-            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
-        }
-
-        #endregion
+        
 
         #region 通知notice基本操作
 
@@ -452,6 +406,349 @@ namespace SAS.Data.SqlServer
             return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.StoredProcedure,
                                                                     string.Format("{0}getnoticecount", BaseConfigs.GetTablePrefix),
                                                                     parms));
+        }
+
+        #endregion
+
+        #region IP禁止操作
+
+        /// <summary>
+        /// 添加被禁止的ip
+        /// </summary>
+        /// <param name="info"></param>
+        public void AddBannedIp(IpInfo info)
+        {
+            DbParameter[] parameters = {
+                                         DbHelper.MakeInParam("@ip1",(DbType)SqlDbType.Int, 4, info.Ip1),
+                                         DbHelper.MakeInParam("@ip2",(DbType)SqlDbType.Int, 4, info.Ip2),
+                                         DbHelper.MakeInParam("@ip3",(DbType)SqlDbType.Int, 4, info.Ip3),
+                                         DbHelper.MakeInParam("@ip4",(DbType)SqlDbType.Int, 4, info.Ip4),
+                                         DbHelper.MakeInParam("@admin",(DbType)SqlDbType.NVarChar,50,info.Username),
+                                         DbHelper.MakeInParam("@dateline",(DbType)SqlDbType.NVarChar,50,info.Dateline),
+                                         DbHelper.MakeInParam("@expiration",(DbType)SqlDbType.NVarChar,50,info.Expiration)
+                                       };
+
+            string sql = string.Format("INSERT INTO [{0}banned](ip1,ip2,ip3,ip4,admin,dateline,expiration) VALUES(@ip1,@ip2,@ip3,@ip4,@admin,@dateline,@expiration)",
+                                        BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteNonQuery(CommandType.Text, sql, parameters);
+        }
+
+        /// <summary>
+        /// 获得被禁止ip列表
+        /// </summary>
+        /// <returns></returns>
+        public IDataReader GetBannedIpList()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}banned] ORDER BY [bdid] DESC",
+                                                DbFields.BANNED,
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText);
+        }
+
+        /// <summary>
+        /// 获取指定分页的禁止IP列表
+        /// </summary>
+        /// <param name="num"></param>
+        /// <param name="pageId"></param>
+        /// <returns></returns>
+        public IDataReader GetBannedIpList(int num, int pageId)
+        {
+            string commandText = string.Format("SELECT TOP {0} {1} FROM [{2}banned]  WHERE [bdid] NOT IN (SELECT TOP {3} [bdid] FROM [{2}banned] ORDER BY [bdid] DESC) ORDER BY [bdid] DESC",
+                                                num,
+                                                DbFields.BANNED,
+                                                BaseConfigs.GetTablePrefix,
+                                                (pageId - 1) * num);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText);
+        }
+
+        /// <summary>
+        /// 显示被禁止的ip数量
+        /// </summary>
+        /// <returns></returns>
+        public int GetBannedIpCount()
+        {
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, string.Format("SELECT COUNT(bdid) FROM [{0}banned]", BaseConfigs.GetTablePrefix)));
+        }
+
+        /// <summary>
+        /// 删除选中的ip地址段
+        /// </summary>
+        /// <param name="bannedIdList"></param>
+        public int DeleteBanIp(string bannedIdList)
+        {
+            string commandText = string.Format("DELETE FROM [{0}banned] WHERE [bdid] IN({1})", BaseConfigs.GetTablePrefix, bannedIdList);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
+        }
+
+        /// <summary>
+        /// 编辑banip结束时间
+        /// </summary>
+        /// <param name="iplist"></param>
+        /// <param name="endTime"></param>
+        public int UpdateBanIpExpiration(int id, string endTime)
+        {
+            DbParameter[] parameters = {
+                                         DbHelper.MakeInParam("@id",(DbType)SqlDbType.Int, 4, id),
+                                         DbHelper.MakeInParam("@expiration",(DbType)SqlDbType.DateTime, 8, DateTime.Parse(endTime)),
+                                       };
+            string commandText = string.Format("UPDATE [{0}banned] SET [expiration] = @expiration WHERE [idbdidid", BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parameters);
+        }
+
+        #endregion
+
+        #region 统计,统计信息stats,statvars表操作
+
+        /// <summary>
+        /// 更新统计变量
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="variable"></param>
+        /// <param name="value"></param>
+        public void UpdateStatVars(string type, string variable, string value)
+        {
+            DbParameter[] parms = {
+                DbHelper.MakeInParam("@type", (DbType)SqlDbType.Char, 20, type),
+                DbHelper.MakeInParam("@variable", (DbType)SqlDbType.Char, 20, variable),
+                DbHelper.MakeInParam("@value", (DbType)SqlDbType.Text, 0, value)
+            };
+
+            if (DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("UPDATE [{0}statvars] SET [value]=@value WHERE [type]=@type AND [variable]=@variable", BaseConfigs.GetTablePrefix), parms) == 0)
+                DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("INSERT INTO [{0}statvars] ([type],[variable],[value]) VALUES(@type, @variable, @value)", BaseConfigs.GetTablePrefix), parms);
+        }
+
+        /// <summary>
+        /// 获得所有统计信息
+        /// </summary>
+        /// <returns></returns>
+        public IDataReader GetAllStats()
+        {
+            string commandText = string.Format("SELECT [type], [variable], [count] FROM [{0}stats] ORDER BY [type],[variable]",
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText);
+        }
+
+        /// <summary>
+        /// 获得所有统计
+        /// </summary>
+        /// <returns></returns>
+        public IDataReader GetAllStatVars()
+        {
+            string commandText = string.Format("SELECT [type], [variable], [value] FROM [{0}statvars] ORDER BY [type],[variable]",
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText);
+        }
+
+        /// <summary>
+        /// 统计板块数量
+        /// </summary>
+        /// <returns></returns>
+        public int GetForumCount()
+        {
+            string commandText = string.Format("SELECT COUNT(1) FROM [{0}pageModule] WHERE [pm_sort]>0 AND [pm_status]>0", BaseConfigs.GetTablePrefix);
+            return (int)DbHelper.ExecuteScalar(CommandType.Text, commandText);
+        }
+
+        /// <summary>
+        /// 获得今日新用户数
+        /// </summary>
+        /// <returns></returns>
+        public int GetTodayNewMemberCount()
+        {
+            string commandText = string.Format("SELECT COUNT(1) FROM [{0}personInfo] WHERE [ps_createDate]>='{1}'",
+                                                BaseConfigs.GetTablePrefix,
+                                                DateTime.Now.ToString("yyyy-MM-dd"));
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText));
+        }
+
+        /// <summary>
+        /// 获得管理员数量
+        /// </summary>
+        /// <returns></returns>
+        public int GetAdminCount()
+        {
+            string commandText = string.Format("SELECT COUNT(1) FROM [{0}personInfo] WHERE [ps_pg_id]>0",
+                                                BaseConfigs.GetTablePrefix,
+                                                DateTime.Now.ToString("yyyy-MM-dd"));
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText));
+        }
+
+        /// <summary>
+        /// 获得用户排行
+        /// </summary>
+        /// <param name="count"></param>
+        /// <param name="postTableId"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public IDataReader GetUsersRank(int count, string postTableId, string type)
+        {
+            if (!Utils.IsNumeric(postTableId))
+                postTableId = "1";
+
+            string commandText = "";
+            switch (type)
+            {
+                //case "posts":
+                //    commandText = string.Format("SELECT TOP {0} [ps_name], [ps_id], [posts] FROM [{1}personInfo] ORDER BY [posts] DESC, [ps_id]", count, BaseConfigs.GetTablePrefix);
+                //    break;
+                //case "digestposts":
+                //    commandText = string.Format("SELECT TOP {0} [ps_name], [ps_id], [digestposts] FROM [{1}personInfo] ORDER BY [digestposts] DESC, [ps_id]", count, BaseConfigs.GetTablePrefix);
+                //    break;
+                //case "thismonth":
+                //    commandText = string.Format("SELECT DISTINCT TOP {0} [poster] AS [username], [posterid] AS [uid], COUNT(pid) AS [posts] FROM [{1}posts{2}] WHERE [postdatetime]>='{3}' AND [invisible]=0 AND [posterid]>0 GROUP BY [poster], [posterid] ORDER BY [posts] DESC", count, BaseConfigs.GetTablePrefix, postTableId, DateTime.Now.AddDays(-30).ToString("yyyy-MM-dd"));
+                //    break;
+                //case "today":
+                //    commandText = string.Format("SELECT DISTINCT TOP {0} [poster] AS [username], [posterid] AS [uid], COUNT(pid) AS [posts] FROM [{1}posts{2}] WHERE [postdatetime]>='{3}' AND [invisible]=0 AND [posterid]>0 GROUP BY [poster], [posterid] ORDER BY [posts] DESC", count, BaseConfigs.GetTablePrefix, postTableId, DateTime.Now.ToString("yyyy-MM-dd"));
+                //    break;
+                case "credits":
+                    commandText = string.Format("SELECT TOP {0} [ps_name], [ps_id], [ps_credits] FROM [{1}personInfo] ORDER BY [ps_credits] DESC, [ps_id]", count, BaseConfigs.GetTablePrefix);
+                    break;
+                //case "extcredits1":
+                //    commandText = string.Format("SELECT TOP {0} [username], [uid], [extcredits1] FROM [{1}users] ORDER BY [extcredits1] DESC, [uid]", count, BaseConfigs.GetTablePrefix);
+                //    break;
+                //case "extcredits2":
+                //    commandText = string.Format("SELECT TOP {0} [username], [uid], [extcredits2] FROM [{1}users] ORDER BY [extcredits2] DESC, [uid]", count, BaseConfigs.GetTablePrefix);
+                //    break;
+                //case "extcredits3":
+                //    commandText = string.Format("SELECT TOP {0} [username], [uid], [extcredits3] FROM [{1}users] ORDER BY [extcredits3] DESC, [uid]", count, BaseConfigs.GetTablePrefix);
+                //    break;
+                //case "extcredits4":
+                //    commandText = string.Format("SELECT TOP {0} [username], [uid], [extcredits4] FROM [{1}users] ORDER BY [extcredits4] DESC, [uid]", count, BaseConfigs.GetTablePrefix);
+                //    break;
+                //case "extcredits5":
+                //    commandText = string.Format("SELECT TOP {0} [username], [uid], [extcredits5] FROM [{1}users] ORDER BY [extcredits5] DESC, [uid]", count, BaseConfigs.GetTablePrefix);
+                //    break;
+                //case "extcredits6":
+                //    commandText = string.Format("SELECT TOP {0} [username], [uid], [extcredits6] FROM [{1}users] ORDER BY [extcredits6] DESC, [uid]", count, BaseConfigs.GetTablePrefix);
+                //    break;
+                //case "extcredits7":
+                //    commandText = string.Format("SELECT TOP {0} [username], [uid], [extcredits7] FROM [{1}users] ORDER BY [extcredits7] DESC, [uid]", count, BaseConfigs.GetTablePrefix);
+                //    break;
+                //case "extcredits8":
+                //    commandText = string.Format("SELECT TOP {0} [username], [uid], [extcredits8] FROM [{1}users] ORDER BY [extcredits8] DESC, [uid]", count, BaseConfigs.GetTablePrefix);
+                //    break;
+                case "oltime":
+                    commandText = string.Format("SELECT TOP {0} [ps_name], [ps_id], [ps_onlinetime] FROM [{1}personInfo] ORDER BY [ps_onlinetime] DESC, [ps_id]", count, BaseConfigs.GetTablePrefix);
+                    break;
+                default:
+                    return null;
+
+            }
+            return DbHelper.ExecuteReader(CommandType.Text, commandText);
+        }
+
+        /// <summary>
+        /// 获得用户排行
+        /// </summary>
+        /// <param name="filed">当月还是总在线时间</param>
+        /// <returns></returns>
+        public IDataReader GetUserByOnlineTime(string field)
+        {
+            string commandText = string.Format("SELECT TOP 20 [o].[uid], [u].[ps_name], [o].[{0}] FROM [{1}onlinetime] [o] LEFT JOIN [{1}personInfo] [u] ON [o].[uid]=[u].[ps_id] ORDER BY [o].[{0}] DESC",
+                                                field,
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText);
+        }
+
+        /// <summary>
+        /// 更新统计数据
+        /// </summary>
+        /// <param name="browser"></param>
+        /// <param name="os"></param>
+        /// <param name="visitorsAdd"></param>
+        public void UpdateStatCount(string browser, string os, string visitorsAdd)
+        {
+            string month = DateTime.Now.Year + DateTime.Now.Month.ToString("00");
+            string dayofweek = ((int)DateTime.Now.DayOfWeek).ToString();
+
+            string commandText = string.Format("UPDATE [{0}stats] SET [count]=[count]+1 WHERE ([type]='total' AND [variable]='hits') {1} OR ([type]='month' AND [variable]='{2}') OR ([type]='week' AND [variable]='{3}') OR ([type]='hour' AND [variable]='{4}')",
+                                                BaseConfigs.GetTablePrefix,
+                                                visitorsAdd,
+                                                month,
+                                                dayofweek,
+                                                DateTime.Now.Hour.ToString("00"));
+            int affectedrows = DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
+
+            int updaterows = Utils.StrIsNullOrEmpty(visitorsAdd) ? 4 : 7;
+            if (updaterows > affectedrows)
+            {
+                UpdateStats("browser", browser, 0);
+                UpdateStats("os", os, 0);
+                UpdateStats("total", "members", 0);
+                UpdateStats("total", "guests", 0);
+                UpdateStats("total", "hits", 0);
+                UpdateStats("month", month, 0);
+                UpdateStats("week", dayofweek, 0);
+                UpdateStats("hour", DateTime.Now.Hour.ToString("00"), 0);
+            }
+        }
+
+        public void UpdateStats(string type, string variable, int count)
+        {
+            DbParameter[] parms = {
+                DbHelper.MakeInParam("@type", (DbType)SqlDbType.Char, 10, type),
+                DbHelper.MakeInParam("@variable", (DbType)SqlDbType.Char, 20, variable),
+                DbHelper.MakeInParam("@count", (DbType)SqlDbType.Int, 4, count)
+            };
+            string commandText = string.Format("UPDATE [{0}stats] SET [count]=[count]+@count WHERE [type]=@type AND [variable]=@variable",
+                                                BaseConfigs.GetTablePrefix);
+            if (DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) == 0)
+            {
+                if (count == 0)
+                    parms[2].Value = 1;
+
+                commandText = string.Format("INSERT INTO [{0}stats] ([type],[variable],[count]) VALUES(@type, @variable, @count)",
+                                             BaseConfigs.GetTablePrefix);
+                DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+            }
+        }
+
+        #endregion
+
+        #region 统计信息statistics表操作
+
+        /// <summary>
+        /// 获得统计列
+        /// </summary>
+        /// <returns>统计列</returns>
+        public DataTable GetStatisticsRow()
+        {
+            string commandText = string.Format("SELECT TOP 1 {0} FROM [{1}statistics]", DbFields.STATISTICS, BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 更新指定名称的统计项
+        /// </summary>
+        /// <param name="param">项目名称</param>
+        /// <param name="Value">指定项的值</param>
+        /// <returns>更新数</returns>
+        public int UpdateStatistics(string param, string strValue)
+        {
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            if (!Utils.StrIsNullOrEmpty(param))
+            {
+                sb.AppendFormat("UPDATE [{0}statistics] SET {1}= '{2}'", BaseConfigs.GetTablePrefix, param, strValue);
+                return DbHelper.ExecuteNonQuery(CommandType.Text, sb.ToString());
+            }
+            return 0;
+        }
+
+        /// <summary>
+        /// 更新最后回复人用户名
+        /// </summary>
+        /// <param name="lastUserId">Uid</param>
+        /// <param name="lastUserName">新用户名</param>
+        /// <returns></returns>
+        public int UpdateStatisticsLastUserName(int lastUserId, string lastUserName)
+        {
+            DbParameter[] parms = { 
+                                        DbHelper.MakeInParam("@lastuserid", (DbType)SqlDbType.Int, 4, lastUserId),
+                                        DbHelper.MakeInParam("@lastusername", (DbType)SqlDbType.VarChar, 200, lastUserName)
+                                    };
+            string commandText = string.Format("UPDATE [{0}statistics] SET [st_lastuser]=@lastusername WHERE [st_lastuserid]=@lastuserid",
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
         }
 
         #endregion

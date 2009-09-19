@@ -55,6 +55,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\syslogin.aspx.cs">
+      <DependentUpon>syslogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\syslogin.aspx.designer.cs">
+      <DependentUpon>syslogin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +73,10 @@
     <ProjectReference Include="..\SAS.Config\SAS.Config.csproj">
       <Project>{5325F618-33FA-4B03-9A3E-96ED8C554F6C}</Project>
       <Name>SAS.Config</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SAS.Control\SAS.Control.csproj">
+      <Project>{B16EF345-37D9-43FE-B371-8627BC6F3E43}</Project>
+      <Name>SAS.Control</Name>
     </ProjectReference>
     <ProjectReference Include="..\SAS.Data.SqlServer\SAS.Data.SqlServer.csproj">
       <Project>{7A7B0B03-0109-408C-BC7A-7FA36911C924}</Project>
@@ -255,6 +266,7 @@
     <Content Include="ManagePage\style\admin.css" />
     <Content Include="ManagePage\style\comm.css" />
     <Content Include="ManagePage\syslogin.aspx" />
+    <Content Include="tools\VerifyImagePage.aspx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ManagePage\images\admin-gif\Thumbs.db" />

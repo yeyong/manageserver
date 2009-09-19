@@ -40,6 +40,11 @@ namespace SAS.Data
         /// 短消息信息表字段
         /// </summary>
         public const string PMS = "[pmid],[msgfrom],[msgfromid],[msgto],[msgtoid],[folder],[new],[subject],[postdatetime],[message]";
+
+        /// <summary>
+        /// 禁用IP列表字段
+        /// </summary>
+        public const string BANNED = "[id],[ip1],[ip2],[ip3],[ip4],[admin],[dateline],[expiration]";
        
     }
 }

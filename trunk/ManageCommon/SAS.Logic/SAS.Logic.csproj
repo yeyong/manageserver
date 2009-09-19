@@ -47,15 +47,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin\AdminUserGroups.cs" />
     <Compile Include="Caches.cs" />
+    <Compile Include="HttpModule.cs" />
     <Compile Include="Ips.cs" />
     <Compile Include="IpSearch.cs" />
+    <Compile Include="LogicPageTemplate.cs" />
     <Compile Include="LogicUtils.cs" />
     <Compile Include="Notices.cs" />
     <Compile Include="OnlineUsers.cs" />
     <Compile Include="PrivateMessages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SASCacheStrategy.cs" />
+    <Compile Include="admin\SASControlContainer.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Statistics.cs" />
     <Compile Include="Stats.cs" />
     <Compile Include="Templates.cs" />

@@ -153,28 +153,28 @@ namespace SAS.Logic
                 return null;
 
             TemplateInfo templateinfo = null;
-            DataRow[] dr = GetValidTemplateList().Select("templateid = " + templateid.ToString());
+            DataRow[] dr = GetValidTemplateList().Select("tp_id = " + templateid.ToString());
 
             if (dr.Length > 0)
             {
                 templateinfo = new TemplateInfo();
-                templateinfo.Templateid = Int16.Parse(dr[0]["templateid"].ToString());
-                templateinfo.Name = dr[0]["name"].ToString();
-                templateinfo.Directory = dr[0]["directory"].ToString();
-                templateinfo.Copyright = dr[0]["copyright"].ToString();
+                templateinfo.Templateid = Int16.Parse(dr[0]["tp_id"].ToString());
+                templateinfo.Name = dr[0]["tp_name"].ToString();
+                templateinfo.Directory = dr[0]["tp_directory"].ToString();
+                templateinfo.Copyright = dr[0]["tp_copyright"].ToString();
             }
 
             if (templateinfo == null)
             {
-                dr = GetValidTemplateList().Select("templateid = 1");
+                dr = GetValidTemplateList().Select("tp_id = 1");
 
                 if (dr.Length > 0)
                 {
                     templateinfo = new TemplateInfo();
-                    templateinfo.Templateid = Int16.Parse(dr[0]["templateid"].ToString());
-                    templateinfo.Name = dr[0]["name"].ToString();
-                    templateinfo.Directory = dr[0]["directory"].ToString();
-                    templateinfo.Copyright = dr[0]["copyright"].ToString();
+                    templateinfo.Templateid = Int16.Parse(dr[0]["tp_id"].ToString());
+                    templateinfo.Name = dr[0]["tp_name"].ToString();
+                    templateinfo.Directory = dr[0]["tp_directory"].ToString();
+                    templateinfo.Copyright = dr[0]["tp_copyright"].ToString();
                 }
             }
             return templateinfo;

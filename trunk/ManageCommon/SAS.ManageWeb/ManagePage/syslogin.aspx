@@ -1,5 +1,8 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<%@ Page Language="C#" %>
+﻿<%@ Page Language="C#" Inherits="SAS.ManageWeb.ManagePage.syslogin"  EnableViewstate ="false" Codebehind="syslogin.aspx.cs" AutoEventWireup="True" %>
+<%@ Register TagPrefix="cc1" Namespace="SAS.Control" Assembly="SAS.Control" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
 <head runat="server">
@@ -24,33 +27,37 @@
 		<div class="adlog2rt">
 			<p class="adlrt1">
 				<span class="adlrt1lt">用户名：</span>
-				<span class="adlrt1rt"><input type="text" name="textfield" class="input1" style="width:120px;" /></span>
+				<span class="adlrt1rt"><cc1:textbox id="UserName" runat="server" RequiredFieldType="暂无校验" Text="" size="20" ></cc1:textbox></span>
 			</p>
 			<p class="adlrt1">
 				<span class="adlrt1lt">密　码：</span>
-				<span class="adlrt1rt"><input type="text" name="textfield" class="input1" style="width:120px;" /></span>
+				<span class="adlrt1rt"><cc1:textbox id="PassWord" runat="server" RequiredFieldType="暂无校验" Text="" TextMode="Password" size="20"  ></cc1:textbox></span>
 			</p>
 			<p class="adlrt1">
 				<span class="adlrt1lt">验证码：</span>
 				<span class="adlrt1rt">
 				<em class="adlrt2">
-				<input type="text" name="textfield" class="input1" style="width:55px;" />
+				<input id="vcode" onkeydown="if(event.keyCode==13)  document.getElementById('login').focus();" type="text" size="20" name="vcode" autocomplete="off" class="input1" style="width:55px;" />
 				</em>
 				<em class="adlrt2">
-				<img alt="" src="images/ad/ad-2.png" />
+				<img id="vcodeimg" style="cursor:hand" onclick="this.src='../tools/VerifyImagePage.aspx?time=' + Math.random()" title="点击刷新验证码" align="absMiddle" src="" alt="" />
+				<script type="text/javascript">
+                        document.getElementById('vcodeimg').src='../tools/VerifyImagePage.aspx?id=<%=olid.ToString()%>&time=' + Math.random();
+                        document.getElementById('vcode').value = "";
+					</script>
 				</em>
 				</span>
 			</p>
 			<p class="adlrt1">
 				<span class="adlrt1lt"></span>
-				<span class="adlrt1rt2"><input type="button" name="button1" class="an3" value="登 录" /></span>
+				<span class="adlrt1rt2"><input id="login" type="submit" class="an3" value="登 录" /></span>
 			</p>
 		</div>
 	</div>
 </div>
-<div class="adbot"></div>
+<div class="adbot"><%=footer%></div>
 </form>
-
+<div id="copyright"></div>
 </body>
 
 </html>
