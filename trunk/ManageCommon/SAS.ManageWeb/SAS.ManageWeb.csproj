@@ -32,16 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Web.Extensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
@@ -72,12 +63,206 @@
       <Name>SAS.Common</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\SAS.Config\SAS.Config.csproj">
+      <Project>{5325F618-33FA-4B03-9A3E-96ED8C554F6C}</Project>
+      <Name>SAS.Config</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SAS.Data.SqlServer\SAS.Data.SqlServer.csproj">
+      <Project>{7A7B0B03-0109-408C-BC7A-7FA36911C924}</Project>
+      <Name>SAS.Data.SqlServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SAS.Data\SAS.Data.csproj">
+      <Project>{E15BF13F-EC22-47A3-ACF4-AA79738FB7E8}</Project>
+      <Name>SAS.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SAS.Entity\SAS.Entity.csproj">
+      <Project>{F6CFD248-E9E3-480A-B518-526298AAF81E}</Project>
+      <Name>SAS.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SAS.Logic\SAS.Logic.csproj">
+      <Project>{9145299A-21C2-4558-A956-2DBDCBF477DE}</Project>
+      <Name>SAS.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SAS.Web.UI\SAS.Web.UI.csproj">
+      <Project>{15188167-C7FB-4A1B-9AC0-480A26825AAF}</Project>
+      <Name>SAS.Web.UI</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="config\general.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ipdata\ipdata.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SAS.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="config\urls.config" />
+    <Content Include="ManagePage\images\admin-bg.png" />
+    <Content Include="ManagePage\images\admin-bg1.png" />
+    <Content Include="ManagePage\images\admin-bg2.png" />
+    <Content Include="ManagePage\images\admin-bg3.png" />
+    <Content Include="ManagePage\images\admin-bg4.png" />
+    <Content Include="ManagePage\images\admin-bg5.png" />
+    <Content Include="ManagePage\images\admin-gif\access-1.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-10.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-100.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-101.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-102.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-103.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-104.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-105.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-106.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-107.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-108.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-109.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-11.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-110.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-111.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-112.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-113.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-114.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-115.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-116.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-117.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-118.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-119.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-12.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-120.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-121.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-122.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-123.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-124.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-125.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-126.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-127.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-128.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-129.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-13.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-130.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-131.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-132.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-133.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-134.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-135.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-136.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-137.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-138.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-139.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-14.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-140.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-141.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-142.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-143.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-144.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-145.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-146.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-15.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-16.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-17.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-18.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-19.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-2.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-24.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-25.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-26.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-27.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-3.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-32.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-33.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-34.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-35.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-36.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-37.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-4.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-40.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-41.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-42.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-43.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-44.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-45.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-46.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-47.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-48.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-49.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-5.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-50.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-51.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-52.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-53.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-54.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-55.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-56.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-57.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-58.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-59.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-6.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-60.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-61.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-62.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-63.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-64.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-65.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-66.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-67.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-68.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-69.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-7.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-70.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-71.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-72.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-73.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-74.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-75.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-76.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-77.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-78.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-79.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-8.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-80.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-81.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-82.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-83.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-84.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-85.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-86.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-87.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-88.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-89.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-9.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-90.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-91.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-92.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-93.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-94.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-95.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-96.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-97.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-98.gif" />
+    <Content Include="ManagePage\images\admin-gif\access-99.gif" />
+    <Content Include="ManagePage\images\admin-win1.png" />
+    <Content Include="ManagePage\images\admin-win2.png" />
+    <Content Include="ManagePage\images\ad\ad-2.png" />
+    <Content Include="ManagePage\images\arrow1.gif" />
+    <Content Include="ManagePage\images\arrow1b.gif" />
+    <Content Include="ManagePage\images\arrow2.gif" />
+    <Content Include="ManagePage\images\logo1.png" />
+    <Content Include="ManagePage\images\logo2.png" />
+    <Content Include="ManagePage\images\minus.gif" />
+    <Content Include="ManagePage\images\plus.gif" />
+    <Content Include="ManagePage\scripts\jquery.js" />
+    <Content Include="ManagePage\style\admin.css" />
+    <Content Include="ManagePage\style\comm.css" />
+    <Content Include="ManagePage\syslogin.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ManagePage\images\admin-gif\Thumbs.db" />
+    <None Include="ManagePage\images\ad\Thumbs.db" />
+    <None Include="ManagePage\images\Thumbs.db" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="templates\default\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
