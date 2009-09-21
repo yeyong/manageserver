@@ -34,7 +34,7 @@ namespace SAS.Data.DataProvider
                 userinfo.Ps_init = reader["Ps_init"].ToString();
                 userinfo.ps_secques = reader["ps_secques"].ToString();
                 userinfo.Ps_isLock = TypeConverter.StrToBool(reader["Ps_isLock"].ToString().Trim(), false);
-                userinfo.Ps_gender = TypeConverter.StrToInt(reader["Pd_gender"].ToString(), 0);
+                userinfo.Ps_gender = TypeConverter.StrToInt(reader["Ps_gender"].ToString(), 0);
                 userinfo.Ps_pg_id = TypeConverter.StrToInt(reader["Ps_pg_id"].ToString(), 0);
                 userinfo.Ps_ug_id = TypeConverter.StrToInt(reader["Ps_ug_id"].ToString(), 0);
                 userinfo.Ps_company = reader["Ps_company"].ToString();
