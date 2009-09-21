@@ -123,5 +123,15 @@ namespace SAS.Logic
 
             return userInfo == null ? new Guid("00000000-0000-0000-0000-000000000000") : userInfo.Ps_id;
         }
+
+        /// <summary>
+        /// 更新用户积分和最后登录时间
+        /// </summary>
+        /// <param name="uid">用户id</param>
+        public static void UpdateUserCreditsAndVisit(Guid uid, string ip)
+        {
+            //UserCredits.UpdateUserCredits(uid);
+            SAS.Data.DataProvider.Users.UpdateUserLastvisit(uid, ip);
+        }
     }
 }

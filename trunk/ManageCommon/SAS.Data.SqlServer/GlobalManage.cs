@@ -752,5 +752,295 @@ namespace SAS.Data.SqlServer
         }
 
         #endregion
+
+        #region 登录日志loginlog操作
+
+        /// <summary>
+        /// 根据IP获取错误登录记录
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <returns></returns>
+        public DataTable GetErrLoginRecordByIP(string ip)
+        {
+            DbParameter[] parms = {
+										 DbHelper.MakeInParam("@ip",(DbType)SqlDbType.Char,15, ip),
+			                        };
+            string commandText = string.Format("SELECT TOP 1 [errcount], [lastupdate] FROM [{0}failedlogins] WHERE [ip]=@ip", BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText, parms).Tables[0];
+        }
+
+        /// <summary>
+        /// 增加指定IP的错误记录数
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <returns></returns>
+        public int AddErrLoginCount(string ip)
+        {
+            DbParameter[] parms = {
+										 DbHelper.MakeInParam("@ip",(DbType)SqlDbType.Char,15, ip),
+			                        };
+            string commandText = string.Format("UPDATE [{0}failedlogins] SET [errcount]=[errcount]+1, [lastupdate]=GETDATE() WHERE [ip]=@ip",
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
+        /// 增加指定IP的错误记录
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <returns></returns>
+        public int AddErrLoginRecord(string ip)
+        {
+            DbParameter[] parms = {
+										 DbHelper.MakeInParam("@ip",(DbType)SqlDbType.Char,15, ip),
+			                        };
+            string commandText = string.Format("INSERT INTO [{0}failedlogins] ([ip], [errcount], [lastupdate]) VALUES(@ip, 1, GETDATE())",
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
+        /// 将指定IP的错误登录次数重置为1
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <returns></returns>
+        public int ResetErrLoginCount(string ip)
+        {
+            DbParameter[] parms = {
+										 DbHelper.MakeInParam("@ip",(DbType)SqlDbType.Char,15, ip),
+			                        };
+            string commandText = string.Format("UPDATE [{0}failedlogins] SET [errcount]=1, [lastupdate]=GETDATE() WHERE [ip]=@ip",
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
+        /// 删除指定IP或者超过15分钟的记录
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <returns></returns>
+        public int DeleteErrLoginRecord(string ip)
+        {
+            DbParameter[] parms = {
+										 DbHelper.MakeInParam("@ip",(DbType)SqlDbType.Char,15, ip),
+			                      };
+            string commandText = string.Format("DELETE FROM [{0}failedlogins] WHERE [ip]=@ip OR DATEDIFF(n,[lastupdate], GETDATE()) > 15",
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        #endregion
+
+        #region 菜单表navs操作
+
+        /// <summary>
+        /// 得到自定义菜单
+        /// </summary>
+        /// <returns></returns>
+        public IDataReader GetNavigation(bool getAllNavigation)
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}navs] {2} ORDER BY [parentid],[displayorder],[id]",
+                                                DbFields.NAVS,
+                                                BaseConfigs.GetTablePrefix,
+                                                getAllNavigation ? "" : " WHERE [available]=1 ");
+            return DbHelper.ExecuteReader(CommandType.Text, commandText);
+        }
+
+        /// <summary>
+        /// 得到拥有子菜单的主菜单ID
+        /// </summary>
+        /// <returns></returns>
+        public IDataReader GetNavigationHasSub()
+        {
+            string commandText = string.Format("SELECT DISTINCT [parentid] FROM [{0}navs] ORDER BY [parentid]", BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText);
+        }
+
+        /// <summary>
+        /// 删除菜单
+        /// </summary>
+        /// <param name="id"></param>
+        public void DeleteNavigation(int id)
+        {
+            string commandText = String.Format("DELETE FROM [{0}navs] WHERE [id] = {1}", BaseConfigs.GetTablePrefix, id);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
+        }
+
+        /// <summary>
+        /// 添加菜单
+        /// </summary>
+        /// <param name="nav">导航菜单</param>
+        public void InsertNavigation(NavInfo nav)
+        {
+            DbParameter[] param = {
+                                         DbHelper.MakeInParam("@parentid",(DbType)SqlDbType.Int,4,nav.Parentid),
+                                         DbHelper.MakeInParam("@name",(DbType)SqlDbType.NChar, 50, nav.Name),
+                                         DbHelper.MakeInParam("@title",(DbType)SqlDbType.NChar, 255, nav.Title),
+                                         DbHelper.MakeInParam("@url",(DbType)SqlDbType.Char, 255, nav.Url),
+                                         DbHelper.MakeInParam("@target",(DbType)SqlDbType.TinyInt, 1, nav.Target),
+                                         DbHelper.MakeInParam("@available",(DbType)SqlDbType.TinyInt,1,nav.Available),
+                                         DbHelper.MakeInParam("@displayorder",(DbType)SqlDbType.SmallInt,2,nav.Displayorder),
+                                         DbHelper.MakeInParam("@level",(DbType)SqlDbType.TinyInt,1,nav.Level)
+                                       };
+            string commandText = String.Format("INSERT INTO [{0}navs] ([parentid],[name],[title],[url],[target],[navstype],[available],[displayorder],[level]) VALUES(@parentid,@name,@title,@url,@target,1,@available,@displayorder,@level)",
+                                                BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, param);
+        }
+
+        /// <summary>
+        /// 更校菜单
+        /// </summary>
+        /// <param name="nav">导航菜单</param>
+        public void UpdateNavigation(NavInfo nav)
+        {
+            DbParameter[] param = {
+                                         DbHelper.MakeInParam("@name",(DbType)SqlDbType.NChar, 50, nav.Name),
+                                         DbHelper.MakeInParam("@title",(DbType)SqlDbType.NChar, 255, nav.Title),
+                                         DbHelper.MakeInParam("@url",(DbType)SqlDbType.Char, 255, nav.Url),
+                                         DbHelper.MakeInParam("@target",(DbType)SqlDbType.TinyInt, 1, nav.Target),
+                                         DbHelper.MakeInParam("@available",(DbType)SqlDbType.TinyInt,1,nav.Available),
+                                         DbHelper.MakeInParam("@displayorder",(DbType)SqlDbType.SmallInt,2,nav.Displayorder),
+                                         DbHelper.MakeInParam("@level",(DbType)SqlDbType.TinyInt,1,nav.Level),
+                                         DbHelper.MakeInParam("@id",(DbType)SqlDbType.Int,4,nav.Id)
+                                       };
+            string commandText = String.Format("UPDATE [{0}navs] set [name]=@name,[title]=@title,[url]=@url,[target]=@target,[available]=@available,[displayorder]=@displayorder,[level]=@level WHERE id=@id",
+                                                BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, param);
+        }
+
+        #endregion
+
+        #region 广告表advertisements操作
+
+        /// <summary>
+        /// 获取广告
+        /// </summary>
+        /// <returns>广告列表</returns>
+        public DataTable GetAdsTable()
+        {
+            string commandText = string.Format("SELECT [advid], [adtype], [addisplayorder], [targets], [parameters], [code] FROM [{0}advertisements] WHERE [adavailable]=1 AND [starttime] <='{1}' AND [endtime] >='{1}' ORDER BY [addisplayorder], [advid] DESC",
+                                                BaseConfigs.GetTablePrefix,
+                                                DateTime.Now.ToShortDateString());
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 添加广告信息
+        /// </summary>
+        /// <param name="available">广告是否有效</param>
+        /// <param name="type">广告类型</param>
+        /// <param name="displayOrder">显示顺序</param>
+        /// <param name="title">广告标题</param>
+        /// <param name="targets">投放位置</param>
+        /// <param name="parameters">相关参数</param>
+        /// <param name="code">广告代码</param>
+        /// <param name="startDateTime">起始日期</param>
+        /// <param name="endDateTime">结束日期</param>
+        public void AddAdInfo(int available, string type, int displayOrder, string title, string targets, string parameters, string code, string startTime, string endTime)
+        {
+            DbParameter[] parms = { 
+                                        DbHelper.MakeInParam("@available", (DbType)SqlDbType.Int, 4, available),
+                                        DbHelper.MakeInParam("@type", (DbType)SqlDbType.NVarChar, 50, type),
+                                        DbHelper.MakeInParam("@displayorder", (DbType)SqlDbType.Int, 4, displayOrder),
+                                        DbHelper.MakeInParam("@title", (DbType)SqlDbType.NVarChar, 50, title),
+                                        DbHelper.MakeInParam("@targets", (DbType)SqlDbType.NVarChar, 255, targets),
+                                        DbHelper.MakeInParam("@parameters", (DbType)SqlDbType.NText, 0, parameters),
+                                        DbHelper.MakeInParam("@code", (DbType)SqlDbType.NText, 0, code),
+                                        DbHelper.MakeInParam("@starttime", (DbType)SqlDbType.DateTime, 8, DateTime.Parse(startTime)),
+                                        DbHelper.MakeInParam("@endtime", (DbType)SqlDbType.DateTime, 8, DateTime.Parse(endTime))                                        
+                                    };
+            string commandText = string.Format("INSERT INTO  [{0}advertisements] ([adavailable],[adtype],[addisplayorder],[title],[targets],[parameters],[code],[starttime],[endtime]) VALUES(@available,@type,@displayorder,@title,@targets,@parameters,@code,@starttime,@endtime)",
+                                                BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
+        /// 获取广告
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetAdvertisements()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}advertisements] ORDER BY [advid] ASC",
+                                                DbFields.ADVERTISEMENTS,
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 删除广告列表            
+        /// </summary>
+        /// <param name="aidList">广告列表Id</param>
+        public void DeleteAdvertisement(string aidList)
+        {
+            string commandText = string.Format("DELETE FROM [{0}advertisements] WHERE [advid] IN ({1})",
+                                                BaseConfigs.GetTablePrefix,
+                                                aidList);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
+        }
+
+        /// <summary>
+        /// 更新广告可用状态
+        /// </summary>
+        /// <param name="aidList">广告Id</param>
+        /// <param name="available"></param>
+        /// <returns></returns>
+        public int UpdateAdvertisementAvailable(string aidList, int available)
+        {
+            DbParameter[] parms = { 
+                                        DbHelper.MakeInParam("@available", (DbType)SqlDbType.Int, 4, available)
+                                    };
+            string commandText = string.Format("UPDATE [{0}advertisements] SET [adavailable]=@available  WHERE [advid] IN ({1})",
+                                                BaseConfigs.GetTablePrefix,
+                                                aidList);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
+        /// 更新广告
+        /// </summary>
+        /// <param name="adId">广告Id</param>
+        /// <param name="available">是否生效</param>
+        /// <param name="type">广告类型</param>
+        /// <param name="displayorder">显示顺序</param>
+        /// <param name="title">广告标题</param>
+        /// <param name="targets">广告投放范围</param>
+        /// <param name="parameters">展现方式</param>
+        /// <param name="code">广告内容</param>
+        /// <param name="startTime">生效时间</param>
+        /// <param name="endTime">结束时间</param>
+        public int UpdateAdvertisement(int aid, int available, string type, int displayOrder, string title, string targets, string parameters, string code, string startTime, string endTime)
+        {
+            DbParameter[] parms = {
+                                        DbHelper.MakeInParam("@aid", (DbType)SqlDbType.Int, 4, aid),
+                                        DbHelper.MakeInParam("@available", (DbType)SqlDbType.Int, 4, available),
+                                        DbHelper.MakeInParam("@type", (DbType)SqlDbType.NVarChar, 50, type),
+                                        DbHelper.MakeInParam("@displayorder", (DbType)SqlDbType.Int, 4, displayOrder),
+                                        DbHelper.MakeInParam("@title", (DbType)SqlDbType.NVarChar, 50, title),
+                                        DbHelper.MakeInParam("@targets", (DbType)SqlDbType.NVarChar, 255, targets),
+                                        DbHelper.MakeInParam("@parameters", (DbType)SqlDbType.NText, 0, parameters),
+                                        DbHelper.MakeInParam("@code", (DbType)SqlDbType.NText, 0, code),
+                                        DbHelper.MakeInParam("@starttime", (DbType)SqlDbType.DateTime, 8, DateTime.Parse(startTime)),
+                                        DbHelper.MakeInParam("@endtime", (DbType)SqlDbType.DateTime, 8, DateTime.Parse(endTime))
+                                    };
+            string commandText = string.Format("UPDATE [{0}advertisements] SET [adavailable]=@available,[adtype]=@type, [addisplayorder]=@displayorder,[title]=@title,[targets]=@targets,[parameters]=@parameters,[code]=@code,[starttime]=@starttime,[endtime]=@endtime WHERE [advid]=@aid",
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
+        /// 获取广告
+        /// </summary>
+        /// <param name="aId">广告Id</param>
+        /// <returns></returns>
+        public DataTable GetAdvertisement(int aid)
+        {
+            //此函数放在Advs.cs文件中较好
+            string commandText = string.Format("SELECT {0} FROM [{1}advertisements] WHERE [advid]={2}",
+                                                DbFields.ADVERTISEMENTS,
+                                                BaseConfigs.GetTablePrefix, aid);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        #endregion
     }
 }
