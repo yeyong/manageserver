@@ -37,7 +37,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdShowInfo.cs" />
+    <Compile Include="AdTypeEnum.cs" />
     <Compile Include="IpInfo.cs" />
+    <Compile Include="NavInfo.cs" />
     <Compile Include="NoticeInfo.cs" />
     <Compile Include="NoticeinfoCollection.cs" />
     <Compile Include="OnlineUserInfo.cs" />

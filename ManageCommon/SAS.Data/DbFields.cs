@@ -45,6 +45,16 @@ namespace SAS.Data
         /// 禁用IP列表字段
         /// </summary>
         public const string BANNED = "[id],[ip1],[ip2],[ip3],[ip4],[admin],[dateline],[expiration]";
+
+        /// <summary>
+        /// 菜单列表字段
+        /// </summary>
+        public const string NAVS = "[id],[parentid],[name],[title],[url],[target],[navstype],[available],[displayorder],[highlight],[level]";
+
+        /// <summary>
+        /// 广告表字段
+        /// </summary>
+        public const string ADVERTISEMENTS = "[advid],[adavailable],[adtype],[addisplayorder],[title],[targets],[starttime],[endtime],[code],[parameters]";
        
     }
 }

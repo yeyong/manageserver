@@ -37,5 +37,34 @@ namespace SAS.Logic
             return list;
         }
 
+        /// <summary>
+        /// 返回模板列表的下拉框html
+        ///</summary>
+        /// <returns>下拉框html</returns>
+        public static string GetTemplateListBoxOptionsCache()
+        {
+            lock (lockHelper)
+            {
+                SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+                string str = cache.RetrieveObject("/SAS/UI/TemplateListBoxOptions") as string;
+                if (Utils.StrIsNullOrEmpty(str))
+                {
+                    StringBuilder sb = new StringBuilder();
+                    DataTable dt = Templates.GetValidTemplateList();
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        sb.AppendFormat("<li><a href=\"##\" onclick=\"window.location.href='{0}showtemplate.aspx?templateid={1}'\">{2}</a></li>",
+                                         BaseConfigs.GetSitePath,
+                                         dr["tp_id"],
+                                         dr["tp_name"].ToString().Trim());
+                    }
+                    str = sb.ToString();
+                    cache.AddObject("/SAS/UI/TemplateListBoxOptions", str);
+                    dt.Dispose();
+                }
+                return str;
+            }
+        }
+
     }
 }

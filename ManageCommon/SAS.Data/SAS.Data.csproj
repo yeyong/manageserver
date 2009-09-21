@@ -37,7 +37,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseProvider.cs" />
+    <Compile Include="DataProvider\Advertisenments.cs" />
     <Compile Include="DataProvider\Ips.cs" />
+    <Compile Include="DataProvider\LoginLogs.cs" />
+    <Compile Include="DataProvider\Navs.cs" />
     <Compile Include="DataProvider\Notices.cs" />
     <Compile Include="DataProvider\OnlineUsers.cs" />
     <Compile Include="DataProvider\PrivateMessages.cs" />

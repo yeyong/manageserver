@@ -383,6 +383,21 @@ namespace SAS.Data.SqlServer
         }
 
         /// <summary>
+        /// 更新用户最后登录时间
+        /// </summary>
+        /// <param name="uid">用户id</param>
+        public void UpdateUserLastvisit(Guid uid, string ip)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@uid", (DbType)SqlDbType.UniqueIdentifier, 16, uid),
+									   DbHelper.MakeInParam("@ip", (DbType)SqlDbType.Char,15, ip)
+								   };
+            string commandText = string.Format("UPDATE [{0}personInfo] SET [ps_lastactivity]=GETDATE(), [ps_loginIP]=@ip WHERE [ps_id] =@uid",
+                                                BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
         /// 设置用户信息表中未读短消息的数量
         /// </summary>
         /// <param name="uid">用户ID</param>

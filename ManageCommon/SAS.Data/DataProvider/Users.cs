@@ -440,14 +440,14 @@ namespace SAS.Data.DataProvider
         ////}
 
 
-        /////// <summary>
-        /////// 更新用户最后登录时间
-        /////// </summary>
-        /////// <param name="uid">用户id</param>
-        ////public static void UpdateUserLastvisit(Guid uid, string ip)
-        ////{
-        ////    DatabaseProvider.GetInstance().UpdateUserLastvisit(uid, ip);
-        ////}
+        /// <summary>
+        /// 更新用户最后登录时间
+        /// </summary>
+        /// <param name="uid">用户id</param>
+        public static void UpdateUserLastvisit(Guid uid, string ip)
+        {
+            DatabaseProvider.GetInstance().UpdateUserLastvisit(uid, ip);
+        }
 
         /////// <summary>
         /////// 更新用户当前的在线状态

@@ -174,7 +174,7 @@ namespace SAS.Config
 
 
         private int m_statstatus = 0;//是否开启浏览统计
-
+        private int m_oltimespan = 20;//用户在线时间更新时长(分钟):
         private int m_iisurlrewrite = 0; //是否启用IIS的URL重写
 
         private int m_notificationreserveddays = 7;//通知在系统中保留天数
@@ -1469,6 +1469,15 @@ namespace SAS.Config
         {
             get { return m_statstatus; }
             set { m_statstatus = value; }
+        }
+
+        /// <summary>
+        /// 用户在线时间更新时长(分钟)
+        /// </summary>
+        public int Oltimespan
+        {
+            get { return m_oltimespan; }
+            set { m_oltimespan = value; }
         }
 
 

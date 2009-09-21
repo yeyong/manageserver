@@ -177,12 +177,12 @@ namespace SAS.Data
         ///// <returns>成功返回true否则false</returns>
         //void UpdateUserSecques(Guid uid, string secques);
 
-        ///// <summary>
-        ///// 更新用户最后访问时间
-        ///// </summary>
-        ///// <param name="uid">用户id</param>
-        ///// <param name="ip"></param>
-        //void UpdateUserLastvisit(Guid uid, string ip);
+        /// <summary>
+        /// 更新用户最后访问时间
+        /// </summary>
+        /// <param name="uid">用户id</param>
+        /// <param name="ip"></param>
+        void UpdateUserLastvisit(Guid uid, string ip);
 
         ///// <summary>
         ///// 更新用户在线信息
@@ -1088,6 +1088,145 @@ namespace SAS.Data
         /// <param name="lastUserName">新用户名</param>
         /// <returns></returns>
         int UpdateStatisticsLastUserName(int lastUserId, string lastUserName);
+
+        #endregion
+
+        #region 登录日志loginlog操作
+
+        /// <summary>
+        /// 返加登录错误日志列表
+        /// </summary>
+        /// <param name="ip">ip地址</param>
+        /// <returns></returns>
+        DataTable GetErrLoginRecordByIP(string ip);
+
+        /// <summary>
+        /// 添加错误登录次数
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <returns></returns>
+        int AddErrLoginCount(string ip);
+
+        /// <summary>
+        /// 重置登录错误次数
+        /// </summary>
+        /// <param name="ip">ip地址</param>
+        /// <returns></returns>
+        int ResetErrLoginCount(string ip);
+
+        /// <summary>
+        /// 添加错误登录记录
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <returns></returns>
+        int AddErrLoginRecord(string ip);
+
+        /// <summary>
+        /// 删除指定ip地址的登录错误日志
+        /// </summary>
+        /// <param name="ip">ip地址</param>
+        /// <returns>int</returns>
+        int DeleteErrLoginRecord(string ip);
+
+        #endregion
+
+        #region 菜单表navs操作
+
+        /// <summary>
+        /// 得到自定义菜单
+        /// </summary>
+        /// <returns></returns>
+        IDataReader GetNavigation(bool getAllNavigation);
+
+        /// <summary>
+        /// 得到拥有子菜单的主菜单ID
+        /// </summary>
+        /// <returns></returns>
+        IDataReader GetNavigationHasSub();
+
+        /// <summary>
+        /// 删除菜单
+        /// </summary>
+        /// <param name="id"></param>
+        void DeleteNavigation(int id);
+
+        /// <summary>
+        /// 添加菜单
+        /// </summary>
+        /// <param name="nav">导航菜单</param>
+        void InsertNavigation(NavInfo nav);
+
+        /// <summary>
+        /// 更校菜单
+        /// </summary>
+        /// <param name="nav">导航菜单</param>
+        void UpdateNavigation(NavInfo nav);
+
+        #endregion
+
+        #region 广告表advertisements操作
+
+        /// <summary>
+        /// 获取广告
+        /// </summary>
+        /// <returns>广告列表</returns>
+        DataTable GetAdsTable();
+
+        /// <summary>
+        /// 添加广告信息
+        /// </summary>
+        /// <param name="available">广告是否有效</param>
+        /// <param name="type">广告类型</param>
+        /// <param name="displayOrder">显示顺序</param>
+        /// <param name="title">广告标题</param>
+        /// <param name="targets">投放位置</param>
+        /// <param name="parameters">相关参数</param>
+        /// <param name="code">广告代码</param>
+        /// <param name="startDateTime">起始日期</param>
+        /// <param name="endDateTime">结束日期</param>
+        void AddAdInfo(int available, string type, int displayOrder, string title, string targets, string parameters, string code, string startTime, string endTime);
+
+        /// <summary>
+        /// 获取广告
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetAdvertisements();
+
+        /// <summary>
+        /// 删除广告列表            
+        /// </summary>
+        /// <param name="aidList">广告列表Id</param>
+        void DeleteAdvertisement(string aidList);
+
+        /// <summary>
+        /// 更新广告可用状态
+        /// </summary>
+        /// <param name="aidList">广告Id</param>
+        /// <param name="available"></param>
+        /// <returns></returns>
+        int UpdateAdvertisementAvailable(string aidList, int available);
+
+        /// <summary>
+        /// 更新广告
+        /// </summary>
+        /// <param name="adId">广告Id</param>
+        /// <param name="available">是否生效</param>
+        /// <param name="type">广告类型</param>
+        /// <param name="displayorder">显示顺序</param>
+        /// <param name="title">广告标题</param>
+        /// <param name="targets">广告投放范围</param>
+        /// <param name="parameters">展现方式</param>
+        /// <param name="code">广告内容</param>
+        /// <param name="startTime">生效时间</param>
+        /// <param name="endTime">结束时间</param>
+        int UpdateAdvertisement(int aid, int available, string type, int displayOrder, string title, string targets, string parameters, string code, string startTime, string endTime);
+
+        /// <summary>
+        /// 获取广告
+        /// </summary>
+        /// <param name="aId">广告Id</param>
+        /// <returns></returns>
+        DataTable GetAdvertisement(int aid);
 
         #endregion
     }

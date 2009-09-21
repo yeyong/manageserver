@@ -48,12 +48,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="admin\AdminUserGroups.cs" />
+    <Compile Include="Advertisements.cs" />
+    <Compile Include="Avatars.cs" />
     <Compile Include="Caches.cs" />
     <Compile Include="HttpModule.cs" />
     <Compile Include="Ips.cs" />
     <Compile Include="IpSearch.cs" />
     <Compile Include="LogicPageTemplate.cs" />
     <Compile Include="LogicUtils.cs" />
+    <Compile Include="LoginLogs.cs" />
+    <Compile Include="Navs.cs" />
     <Compile Include="Notices.cs" />
     <Compile Include="OnlineUsers.cs" />
     <Compile Include="PrivateMessages.cs" />
