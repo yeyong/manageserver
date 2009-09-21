@@ -413,7 +413,7 @@ namespace SAS.Entity
         public int ps_invisible
         {
             set { _ps_invisible = value; }
-            get { return ps_invisible; }
+            get { return _ps_invisible; }
         }
 
         /// <summary>

@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-    
+    <a href="ManagePage/login.aspx">后台</a>
     </div>
     </form>
 </body>

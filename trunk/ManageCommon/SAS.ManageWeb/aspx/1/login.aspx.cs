@@ -17,6 +17,7 @@ namespace SAS.ManageWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             config = GeneralConfigs.GetConfig();
+            virtualLogin();
         }
 
         /// <summary>
@@ -28,14 +29,14 @@ namespace SAS.ManageWeb
             
 
             LogicUtils.WriteUserCookie(
-                                new Guid("4b89cbf8-4c1d-408d-9bd1-4855dbd43553"),
+                                new Guid("0cb7fdf8-2f1c-407e-b851-d6dbf6776c10"),
                                 TypeConverter.StrToInt(SASRequest.GetString("expires"), -1),
                                 config.Passwordkey,
                                 SASRequest.GetInt("templateid", 0),
                                 SASRequest.GetInt("loginmode", -1));
             OnlineUsers.UpdateAction(olid, UserAction.Login.ActionID, 0, config.Onlinetimeout);
             LoginLogs.DeleteLoginLog(SASRequest.GetIP());
-            Users.UpdateUserCreditsAndVisit(new Guid("4b89cbf8-4c1d-408d-9bd1-4855dbd43553"), SASRequest.GetIP());
+            Users.UpdateUserCreditsAndVisit(new Guid("0cb7fdf8-2f1c-407e-b851-d6dbf6776c10"), SASRequest.GetIP());
         }
     }
 }

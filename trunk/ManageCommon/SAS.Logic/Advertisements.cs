@@ -70,9 +70,9 @@ namespace SAS.Logic
             }
 
             if (selectstr == "")
-                selectstr = "type='" + typestr + "'  AND [targets] Like '%全部%'";
+                selectstr = "adtype='" + typestr + "'  AND [targets] Like '%全部%'";
             else
-                selectstr = "type='" + typestr + "'  AND ([targets] Like '%" + selectstr + "%' OR [targets] Like '%全部%')";
+                selectstr = "adtype='" + typestr + "'  AND ([targets] Like '%" + selectstr + "%' OR [targets] Like '%全部%')";
 
             return selectstr;
         }
