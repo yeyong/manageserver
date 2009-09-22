@@ -942,12 +942,12 @@ namespace SAS.Data.SqlServer
             string commandText = string.Format("SELECT [total] FROM [{0}onlinetime] WHERE [uid]=@uid", BaseConfigs.GetTablePrefix);
             int total = TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText, parms));
 
-            commandText = string.Format("UPDATE [{0}users] SET [oltime]={1} WHERE [oltime]<{1} AND [uid]=@uid", BaseConfigs.GetTablePrefix, total);
+            commandText = string.Format("UPDATE [{0}personInfo] SET [ps_onlinetime]={1} WHERE [ps_onlinetime]<{1} AND [ps_id]=@uid", BaseConfigs.GetTablePrefix, total);
             if (DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms) < 1)
             {
                 try
                 {
-                    commandText = string.Format("UPDATE [{0}onlinetime] SET [total]=(SELECT [oltime] FROM [{0}users] WHERE [uid]=@uid) WHERE [uid]=@uid",
+                    commandText = string.Format("UPDATE [{0}onlinetime] SET [total]=(SELECT [ps_onlinetime] FROM [{0}personInfo] WHERE [ps_id]=@uid) WHERE [uid]=@uid",
                                                  BaseConfigs.GetTablePrefix);
                     DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
                 }
