@@ -42,6 +42,18 @@ namespace SAS.Data.SqlServer
             return str;
         }
 
+        private string GetSqlstringByPostDatetime(string commandText, DateTime postdatetimeStart, DateTime postdatetimeEnd)
+        {
+            //日期需要改成参数，以后需要重构！需要先修改后台传递参数方式
+            if (!Utils.StrIsNullOrEmpty(postdatetimeStart.ToString()))
+                commandText += string.Format(" AND [av_postdatetime]>='{0}'", postdatetimeStart.ToString("yyyy-MM-dd HH:mm:ss"));
+
+            if (!Utils.StrIsNullOrEmpty(postdatetimeEnd.ToString()))
+                commandText += string.Format(" AND [av_postdatetime]<='{0}'", postdatetimeEnd.AddDays(1).ToString("yyyy-MM-dd HH:mm:ss"));
+
+            return commandText;
+        }
+
         #region 模板类template操作
 
         /// <summary>
@@ -827,6 +839,190 @@ namespace SAS.Data.SqlServer
             string commandText = string.Format("DELETE FROM [{0}failedlogins] WHERE [ip]=@ip OR DATEDIFF(n,[lastupdate], GETDATE()) > 15",
                                                 BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        #endregion
+
+        #region 管理员访问日志操作
+
+        /// <summary>
+        /// 添加访问日志
+        /// </summary>
+        /// <param name="uid">用户UID</param>
+        /// <param name="userName">用户名</param>
+        /// <param name="groupId">所属组ID</param>
+        /// <param name="groupTitle">所属组名称</param>
+        /// <param name="ip">IP地址</param>
+        /// <param name="actions">动作</param>
+        /// <param name="others"></param>
+        public void AddVisitLog(Guid uid, string userName, int groupId, string groupTitle, string ip, string actions, string others)
+        {
+            DbParameter[] parms = {
+					DbHelper.MakeInParam("@uid", (DbType)SqlDbType.UniqueIdentifier, 16, uid),
+					DbHelper.MakeInParam("@username", (DbType)SqlDbType.VarChar, 50, userName),
+					DbHelper.MakeInParam("@groupid", (DbType)SqlDbType.Int, 4, groupId),
+					DbHelper.MakeInParam("@grouptitle", (DbType)SqlDbType.VarChar, 50, groupTitle),
+					DbHelper.MakeInParam("@ip", (DbType)SqlDbType.VarChar, 15, ip),
+					DbHelper.MakeInParam("@actions", (DbType)SqlDbType.VarChar, 500, actions),
+					DbHelper.MakeInParam("@others", (DbType)SqlDbType.VarChar, 1000, others)
+				};
+            string commandText = string.Format("INSERT INTO [{0}adminvisitlog] ([av_ps_id],[av_ps_name],[av_ug_id],[av_ug_name],[av_ip],[av_actions],[av_others]) VALUES (@uid,@username,@groupid,@grouptitle,@ip,@actions,@others)",
+                                                BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
+        /// 删除访问日志
+        /// </summary>
+        public void DeleteVisitLogs()
+        {
+            DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("DELETE FROM [{0}adminvisitlog]", BaseConfigs.GetTablePrefix));
+        }
+
+        /// <summary>
+        /// 删除访问日志
+        /// </summary>
+        /// <param name="condition">查询条件</param>
+        public void DeleteVisitLogs(string condition)
+        {
+            string commandText = string.Format("DELETE FROM [{0}adminvisitlog] WHERE {1}", BaseConfigs.GetTablePrefix, condition);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
+        }
+
+        /// <summary>
+        /// 得到当前指定页数的后台访问日志记录(表)
+        /// </summary>
+        /// <param name="pagesize">当前分页的尺寸大小</param>
+        /// <param name="currentpage">当前页码</param>
+        /// <returns></returns>
+        public DataTable GetVisitLogList(int pageSize, int currentPage)
+        {
+            int pagetop = (currentPage - 1) * pageSize;
+            string commandText;
+
+            if (currentPage == 1)
+                commandText = string.Format("SELECT TOP {0} {1} FROM [{2}adminvisitlog] ORDER BY [av_id] DESC",
+                                             pageSize,
+                                             DbFields.ADMIN_VISIT_LOG,
+                                             BaseConfigs.GetTablePrefix);
+            else
+                commandText = string.Format("SELECT TOP {0} {1} FROM [{2}adminvisitlog]  WHERE [av_id] < (SELECT MIN([av_id]) FROM (SELECT TOP {3} [av_id] FROM [{2}adminvisitlog] ORDER BY [av_id] DESC) AS tblTmp )  ORDER BY [av_id] DESC",
+                                             pageSize,
+                                             DbFields.ADMIN_VISIT_LOG,
+                                             BaseConfigs.GetTablePrefix,
+                                             pagetop);
+
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 得到当前指定条件和页数的后台访问日志记录(表)
+        /// </summary>
+        /// <param name="pagesize">当前分页的尺寸大小</param>
+        /// <param name="currentpage">当前页码</param>
+        /// <param name="condition">查询条件</param>
+        /// <returns></returns>
+        public DataTable GetVisitLogList(int pageSize, int currentPage, string condition)
+        {
+            int pagetop = (currentPage - 1) * pageSize;
+            string commandText;
+
+            if (currentPage == 1)
+                commandText = string.Format("SELECT TOP {0} {1} FROM [{2}adminvisitlog] WHERE {3} ORDER BY [av_id] DESC",
+                                             pageSize,
+                                             DbFields.ADMIN_VISIT_LOG,
+                                             BaseConfigs.GetTablePrefix,
+                                             condition);
+            else
+                commandText = string.Format("SELECT TOP {0} {1} FROM [{2}adminvisitlog]  WHERE [av_id] < (SELECT MIN([av_id])  FROM (SELECT TOP {3} [av_id] FROM [{2}adminvisitlog] WHERE {4} ORDER BY [av_id] DESC) AS tblTmp ) AND {4} ORDER BY [av_id] DESC",
+                                             pageSize,
+                                             DbFields.ADMIN_VISIT_LOG,
+                                             BaseConfigs.GetTablePrefix,
+                                             pagetop,
+                                             condition);
+
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 获取访问日志数
+        /// </summary>
+        /// <returns></returns>
+        public int GetVisitLogCount()
+        {
+            string commandText = string.Format("SELECT COUNT(av_id) FROM [{0}adminvisitlog]", BaseConfigs.GetTablePrefix);
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0].Rows[0][0]);
+        }
+
+        /// <summary>
+        /// 获取访问日志数
+        /// </summary>
+        /// <param name="condition"></param>
+        /// <returns></returns>
+        public int GetVisitLogCount(string condition)
+        {
+            string commandText = string.Format("SELECT COUNT(av_id) FROM [{0}adminvisitlog] WHERE {1}", BaseConfigs.GetTablePrefix, condition);
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0].Rows[0][0]);
+        }
+
+        /// <summary>
+        /// 删除指定条件的访问日志
+        /// </summary>
+        /// <param name="deleteMod">删除方式</param>
+        /// <param name="visitId">管理日志Id</param>
+        /// <param name="deleteNum">删除条数</param>
+        /// <param name="deleteFrom">删除从何时起</param>
+        /// <returns></returns>
+        public string DelVisitLogCondition(string deleteMod, string visitId, string deleteNum, string deleteFrom)
+        {
+            string condition = null;
+            switch (deleteMod)
+            {
+                case "chkall":
+                    if (visitId != "")
+                        condition = string.Format(" [av_id] IN ({0})", visitId);
+                    break;
+                case "deleteNum":
+                    if (deleteNum != "" && Utils.IsNumeric(deleteNum))
+                        condition = string.Format(" [av_id] NOT IN (SELECT TOP {0} [av_id] FROM [{1}adminvisitlog] ORDER BY [av_id] DESC)",
+                                                   deleteNum,
+                                                   BaseConfigs.GetTablePrefix);
+                    break;
+                case "deleteFrom":
+                    if (deleteFrom != "")
+                        condition = " [av_postdatetime]<'" + deleteFrom + "'";
+                    break;
+            }
+            return condition;
+        }
+
+
+        /// <summary>
+        /// 获取管理日志条件
+        /// </summary>
+        /// <param name="postDateTimeStart">访问起始日期</param>
+        /// <param name="postDateTimeEnd">访问结束日期</param>
+        /// <param name="userName">用户名</param>
+        /// <param name="others">其它</param>
+        /// <returns></returns>
+        public string SearchVisitLog(DateTime postDateTimeStart, DateTime postDateTimeEnd, string userName, string others)
+        {
+            string commandText = GetSqlstringByPostDatetime(" [av_id]>0", postDateTimeStart, postDateTimeEnd);
+
+            if (!Utils.StrIsNullOrEmpty(others))
+                commandText += string.Format(" AND [av_others] LIKE '%{0}%'", RegEsc(others));
+
+            if (!Utils.StrIsNullOrEmpty(userName))
+            {
+                commandText += " AND (";
+                foreach (string word in userName.Split(','))
+                {
+                    if (!Utils.StrIsNullOrEmpty(word))
+                        commandText += string.Format(" [av_ps_name] LIKE '%{0}%' OR ", RegEsc(word));
+                }
+                commandText = commandText.Substring(0, commandText.Length - 3) + ")";
+            }
+            return commandText;
         }
 
         #endregion

@@ -6,10 +6,16 @@
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
 <head runat="server">
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <title>登录</title>
 <link href="style/comm.css" type="text/css" rel="stylesheet" />
 <link href="style/admin.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript">
+    if (top.location != self.location) {
+        top.location.href = "syslogin.aspx";
+    }
+		</script>
 </head>
 
 <body>
@@ -19,10 +25,10 @@
 <div class="adlog">
 	<p class="adlog1 adbg"></p>
 	<div class="adlog2" style="height:30px; margin-top:50px;">
-		<p class="adlrt1 zi1" style=" float:right; letter-spacing:1px; display:none;"><span class="adlrt1tu adbg"></span>验证码错误,请重新输入</p>
+		<asp:literal id="Msg" runat="server"></asp:literal></p>
 	</div>
 	<div class="adlog2">
-		<p class="adlog2lt"><img src="images/logo1.png" alt="" title="" /></p>
+		<p class="adlog2lt"><img src="images/logo1.png" alt="" title="" />
 		<p class="adlog2ce adbg"></p>
 		<div class="adlog2rt">
 			<p class="adlrt1">
@@ -37,7 +43,7 @@
 				<span class="adlrt1lt">验证码：</span>
 				<span class="adlrt1rt">
 				<em class="adlrt2">
-				<input id="vcode" onkeydown="if(event.keyCode==13)  document.getElementById('login').focus();" type="text" size="20" name="vcode" autocomplete="off" class="input1" style="width:55px;height:25px" />
+				<input id="vcode" onkeydown="if(event.keyCode==13)  document.getElementById('login').focus();" type="text" size="20" name="vcode" autocomplete="off" class="input1" style="width:55px;" />
 				</em>
 				<em class="adlrt2">
 				<img id="vcodeimg" style="cursor:hand" onclick="this.src='../tools/VerifyImagePage.aspx?time=' + Math.random()" title="点击刷新验证码" align="absMiddle" src="" alt="" />

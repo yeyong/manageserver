@@ -1130,6 +1130,82 @@ namespace SAS.Data
 
         #endregion
 
+        #region 管理员访问日志操作
+
+        /// <summary>
+        /// 添加访问日志
+        /// </summary>
+        /// <param name="uid">用户UID</param>
+        /// <param name="userName">用户名</param>
+        /// <param name="groupId">所属组ID</param>
+        /// <param name="groupTitle">所属组名称</param>
+        /// <param name="ip">IP地址</param>
+        /// <param name="actions">动作</param>
+        /// <param name="others"></param>
+        void AddVisitLog(Guid uid, string userName, int groupId, string groupTitle, string ip, string actions, string others);
+
+        /// <summary>
+        /// 删除访问日志
+        /// </summary>
+        void DeleteVisitLogs();
+
+        /// <summary>
+        /// 删除访问日志
+        /// </summary>
+        /// <param name="condition">查询条件</param>
+        void DeleteVisitLogs(string condition);
+
+        /// <summary>
+        /// 获取访问日志列表
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="currentPage"></param>
+        /// <param name="condition"></param>
+        /// <returns></returns>
+        DataTable GetVisitLogList(int pageSize, int currentPage, string condition);
+
+        /// <summary>
+        /// 获取访问日志列表
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="currentPage"></param>
+        /// <returns></returns>
+        DataTable GetVisitLogList(int pageSize, int currentPage);
+
+        /// <summary>
+        /// 获取访问日志数
+        /// </summary>
+        /// <param name="condition"></param>
+        /// <returns></returns>
+        int GetVisitLogCount(string condition);
+        /// <summary>
+        /// 获取访问日志数
+        /// </summary>
+        /// <returns></returns>
+        int GetVisitLogCount();
+
+        /// <summary>
+        /// 删除指定条件的访问日志
+        /// </summary>
+        /// <param name="deleteMod">删除方式</param>
+        /// <param name="visitId">管理日志Id</param>
+        /// <param name="deleteNum">删除条数</param>
+        /// <param name="deleteFrom">删除从何时起</param>
+        /// <returns></returns>
+        string DelVisitLogCondition(string deleteMod, string visitId, string deleteNum, string deleteFrom);
+
+        /// <summary>
+        /// 获取管理日志条件
+        /// </summary>
+        /// <param name="postDateTimeStart">访问起始日期</param>
+        /// <param name="postDateTimeEnd">访问结束日期</param>
+        /// <param name="userName">用户名</param>
+        /// <param name="others">其它</param>
+        /// <returns></returns>
+        string SearchVisitLog(DateTime postDateTimeStart, DateTime postDateTimeEnd, string userName, string others);
+
+        #endregion
+
         #region 菜单表navs操作
 
         /// <summary>

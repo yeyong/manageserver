@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using SAS.Common;
 
 // 有关程序集的常规信息通过下列属性集
 // 控制。更改这些属性值可修改
@@ -8,9 +9,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("逻辑处理层")]
 [assembly: AssemblyDescription("存放逻辑处理操作")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("www.zhaoshang-zj.org")]
+[assembly: AssemblyCompany("www.sirius.org.cn")]
 [assembly: AssemblyProduct("逻辑处理层")]
-[assembly: AssemblyCopyright("Copyright © www.zhaoshang-zj.org 2009")]
+[assembly: AssemblyCopyright("Copyright © www.sirius.org.cn 2009")]
 [assembly: AssemblyTrademark("Studio After 80s.")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +33,5 @@ using System.Runtime.InteropServices;
 // 可以指定所有这些值，也可以使用“内部版本号”和“修订号”的默认值，
 // 方法是按如下所示使用“*”:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion(Utils.ASSEMBLY_VERSION)]
+[assembly: AssemblyFileVersion(Utils.ASSEMBLY_VERSION)]

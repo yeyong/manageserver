@@ -34,19 +34,19 @@ namespace SAS.Entity
         private int _ps_scores;
         private int _ps_pg_id;
 
-        private int? _ps_ug_id;
+        private int _ps_ug_id;
 
         private int _ps_tempid;
         private int _ps_isemail;
         private int _ps_bdsound;
         private int _ps_status;
 
-        private int? _ps_onlinetime;
+        private int _ps_onlinetime;
 
         private bool _ps_isdetail;
         private bool _ps_iscreater;
         private Guid _ps_creater;
-        private int? _ps_newmess;
+        private int _ps_newmess;
         private string _ps_lastactivity;
         private string _ps_secques;
         private int _ps_pageviews;
@@ -275,7 +275,7 @@ namespace SAS.Entity
         /// <summary>
         /// 用户组ID
         /// </summary>
-        public int? Ps_ug_id
+        public int Ps_ug_id
         {
             set { _ps_ug_id = value; }
             get { return _ps_ug_id; }
@@ -320,7 +320,7 @@ namespace SAS.Entity
         /// <summary>
         /// 在线时长
         /// </summary>
-        public int? Ps_onlinetime
+        public int Ps_onlinetime
         {
             set { _ps_onlinetime = value; }
             get { return _ps_onlinetime; }
@@ -356,7 +356,7 @@ namespace SAS.Entity
         /// <summary>
         /// 新短消息数
         /// </summary>
-        public int? Ps_newMess
+        public int Ps_newMess
         {
             set { _ps_newmess = value; }
             get { return _ps_newmess; }

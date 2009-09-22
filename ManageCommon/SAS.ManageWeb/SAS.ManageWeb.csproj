@@ -277,6 +277,7 @@
     <Content Include="tools\VerifyImagePage.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="config\localupgradeini.config" />
     <None Include="ManagePage\images\admin-gif\Thumbs.db" />
     <None Include="ManagePage\images\ad\Thumbs.db" />
     <None Include="ManagePage\images\Thumbs.db" />

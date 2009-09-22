@@ -44,7 +44,7 @@ namespace SAS.Data
         /// <summary>
         /// 禁用IP列表字段
         /// </summary>
-        public const string BANNED = "[id],[ip1],[ip2],[ip3],[ip4],[admin],[dateline],[expiration]";
+        public const string BANNED = "[bdid],[ip1],[ip2],[ip3],[ip4],[admin],[dateline],[expiration]";
 
         /// <summary>
         /// 菜单列表字段
@@ -55,6 +55,11 @@ namespace SAS.Data
         /// 广告表字段
         /// </summary>
         public const string ADVERTISEMENTS = "[advid],[adavailable],[adtype],[addisplayorder],[title],[targets],[starttime],[endtime],[code],[parameters]";
+
+        /// <summary>
+        /// 管理员日志表字段
+        /// </summary>
+        public const string ADMIN_VISIT_LOG = "[av_id],[av_ps_id],[av_ps_name],[av_ug_id],[av_ug_name],[av_ip],[av_postdatetime],[av_actions],[av_others]";
        
     }
 }
