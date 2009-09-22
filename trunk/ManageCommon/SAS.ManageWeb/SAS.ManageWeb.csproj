@@ -62,6 +62,17 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\framepage\top.aspx.cs">
+      <DependentUpon>top.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\syslogin.aspx.cs">
       <DependentUpon>syslogin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -270,14 +281,18 @@
     <Content Include="ManagePage\images\logo2.png" />
     <Content Include="ManagePage\images\minus.gif" />
     <Content Include="ManagePage\images\plus.gif" />
-    <Content Include="ManagePage\scripts\jquery.js" />
-    <Content Include="ManagePage\style\admin.css" />
-    <Content Include="ManagePage\style\comm.css" />
     <Content Include="ManagePage\syslogin.aspx" />
     <Content Include="tools\VerifyImagePage.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="config\localupgradeini.config" />
+    <Content Include="ManagePage\framepage\top.aspx" />
+    <Content Include="ManagePage\framepage\managerbody.aspx" />
+    <Content Include="ManagePage\index.aspx" />
+    <Content Include="ManagePage\styles\dntmanager.css" />
+    <Content Include="ManagePage\substance\edit.aspx" />
+    <Content Include="ManagePage\substance\list.aspx" />
+    <Content Include="ManagePage\substance\show.aspx" />
     <None Include="ManagePage\images\admin-gif\Thumbs.db" />
     <None Include="ManagePage\images\ad\Thumbs.db" />
     <None Include="ManagePage\images\Thumbs.db" />

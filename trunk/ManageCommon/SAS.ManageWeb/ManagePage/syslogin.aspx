@@ -1,11 +1,11 @@
-﻿<%@ Page Language="C#" Inherits="SAS.ManageWeb.ManagePage.syslogin"  EnableViewstate ="false" Codebehind="syslogin.aspx.cs" AutoEventWireup="True" %>
+﻿<%@ Page Language="C#" Inherits="SAS.ManageWeb.ManagePage.syslogin"  EnableViewstate ="false" Codebehind="syslogin.aspx.cs"%>
 <%@ Register TagPrefix="cc1" Namespace="SAS.Control" Assembly="SAS.Control" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
-<head runat="server">
+<head>
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <title>登录</title>
@@ -20,12 +20,12 @@
 
 <body>
 
-<form id="form1" runat="server">
+<form id="form1" runat="server" method="post">
 
 <div class="adlog">
 	<p class="adlog1 adbg"></p>
 	<div class="adlog2" style="height:30px; margin-top:50px;">
-		<asp:literal id="Msg" runat="server"></asp:literal></p>
+		<asp:literal id="Msg" runat="server"></asp:literal>
 	</div>
 	<div class="adlog2">
 		<p class="adlog2lt"><img src="images/logo1.png" alt="" title="" />

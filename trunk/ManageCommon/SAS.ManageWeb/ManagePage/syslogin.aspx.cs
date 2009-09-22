@@ -94,7 +94,7 @@ namespace SAS.ManageWeb.ManagePage
                     LogicUtils.GetCookiePassword(Context.Request.Cookies["sasadmin"]["key"].ToString(), config.Passwordkey) !=
                     (oluserinfo.ol_password + SAS.Logic.Users.GetUserInfo(oluserinfo.ol_ps_id).ps_secques + oluserinfo.ol_ps_id.ToString()))
                 {
-                    Msg.Text = "<p class=\"adlrt1 zi1\" style=\" float:right; letter-spacing:1px;\" align=\"absMiddle\"><span class=\"adlrt1tu adbg\">请重新进行管理员登录</span></p>";
+                    Msg.Text = "<p class=\"adlrt1 zi1\" style=\" float:right; letter-spacing:1px;\" align=\"absMiddle\"><span class=\"adlrt1tu adbg\"></span>请重新进行管理员登录</p>";
                 }
 
                 if (oluserinfo.ol_ps_id != new Guid("00000000-0000-0000-0000-000000000000") && usergroupinfo.ug_pg_id == 1 && oluserinfo.ol_name.Trim() != "")
@@ -108,19 +108,19 @@ namespace SAS.ManageWeb.ManagePage
 
                 if (SASRequest.GetString("result") == "1")
                 {
-                    Msg.Text = "<p class=\"adlrt1 zi1\" style=\" float:right; letter-spacing:1px;\" align=\"absMiddle\"><span class=\"adlrt1tu adbg\">用户不存在或密码错误</span></p>";
+                    Msg.Text = "<p class=\"adlrt1 zi1\" style=\" float:right; letter-spacing:1px;\" align=\"absMiddle\"><span class=\"adlrt1tu adbg\"></span>用户不存在或密码错误</p>";
                     return;
                 }
 
                 if (SASRequest.GetString("result") == "2")
                 {
-                    Msg.Text = "<p class=\"adlrt1 zi1\" style=\" float:right; letter-spacing:1px;\" align=\"absMiddle\"><span class=\"adlrt1tu adbg\">用户不是管理员身分,因此无法登陆后台</span></p>";
+                    Msg.Text = "<p class=\"adlrt1 zi1\" style=\" float:right; letter-spacing:1px;\" align=\"absMiddle\"><span class=\"adlrt1tu adbg\"></span>用户不是管理员身分,因此无法登陆后台</p>";
                     return;
                 }
 
                 if (SASRequest.GetString("result") == "3")
                 {
-                    Msg.Text = "<p class=\"adlrt1 zi1\" style=\" float:right; letter-spacing:1px;\" align=\"absMiddle\"><span class=\"adlrt1tu adbg\">验证码错误,请重新输入</span></p>";
+                    Msg.Text = "<p class=\"adlrt1 zi1\" style=\" float:right; letter-spacing:1px;\" align=\"absMiddle\"><span class=\"adlrt1tu adbg\"></span>验证码错误,请重新输入</p>";
                     return;
                 }
 
@@ -152,7 +152,7 @@ namespace SAS.ManageWeb.ManagePage
             //else 
             if (config.Passwordmode == 0)
                 userInfo = Users.GetUserInfo(Users.CheckPassword(SASRequest.GetString("username"), Utils.MD5(SASRequest.GetString("password")), false));
-            else//第三方加密验证模式
+            //else//第三方加密验证模式
                 //userInfo = Users.CheckThirdPartPassword(DNTRequest.GetString("username"), DNTRequest.GetString("password"), -1, null);
 
             if (userInfo != null)
@@ -197,6 +197,25 @@ namespace SAS.ManageWeb.ManagePage
             }
             else
                 Response.Redirect("syslogin.aspx?result=1");
+        }
+
+        protected override void SavePageStateToPersistenceMedium(object viewState)
+        {
+            base.SavePageStateToPersistenceMedium(viewState);
+        }
+
+        protected override object LoadPageStateFromPersistenceMedium()
+        {
+            object o = new object();
+            try
+            {
+                o = base.LoadPageStateFromPersistenceMedium();
+            }
+            catch
+            {
+                o = null;
+            }
+            return o;
         }
     }
 
