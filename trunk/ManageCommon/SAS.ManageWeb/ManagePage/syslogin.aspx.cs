@@ -88,7 +88,117 @@ namespace SAS.ManageWeb.ManagePage
                     return;
                 }
                 #endregion
+
+                #region 显示相关页面登陆提交信息
+                if (Context.Request.Cookies["sasadmin"] == null || Context.Request.Cookies["sasadmin"]["key"] == null ||
+                    LogicUtils.GetCookiePassword(Context.Request.Cookies["sasadmin"]["key"].ToString(), config.Passwordkey) !=
+                    (oluserinfo.ol_password + SAS.Logic.Users.GetUserInfo(oluserinfo.ol_ps_id).ps_secques + oluserinfo.ol_ps_id.ToString()))
+                {
+                    Msg.Text = "<p class=\"adlrt1 zi1\" style=\" float:right; letter-spacing:1px;\" align=\"absMiddle\"><span class=\"adlrt1tu adbg\">请重新进行管理员登录</span></p>";
+                }
+
+                if (oluserinfo.ol_ps_id != new Guid("00000000-0000-0000-0000-000000000000") && usergroupinfo.ug_pg_id == 1 && oluserinfo.ol_name.Trim() != "")
+                {
+                    UserName.Text = oluserinfo.ol_name;
+                    UserName.AddAttributes("readonly", "true");
+                    UserName.CssClass = "nofocus";
+                    UserName.Attributes.Add("onfocus", "this.className='nofocus';");
+                    UserName.Attributes.Add("onblur", "this.className='nofocus';");
+                }
+
+                if (SASRequest.GetString("result") == "1")
+                {
+                    Msg.Text = "<p class=\"adlrt1 zi1\" style=\" float:right; letter-spacing:1px;\" align=\"absMiddle\"><span class=\"adlrt1tu adbg\">用户不存在或密码错误</span></p>";
+                    return;
+                }
+
+                if (SASRequest.GetString("result") == "2")
+                {
+                    Msg.Text = "<p class=\"adlrt1 zi1\" style=\" float:right; letter-spacing:1px;\" align=\"absMiddle\"><span class=\"adlrt1tu adbg\">用户不是管理员身分,因此无法登陆后台</span></p>";
+                    return;
+                }
+
+                if (SASRequest.GetString("result") == "3")
+                {
+                    Msg.Text = "<p class=\"adlrt1 zi1\" style=\" float:right; letter-spacing:1px;\" align=\"absMiddle\"><span class=\"adlrt1tu adbg\">验证码错误,请重新输入</span></p>";
+                    return;
+                }
+
+                if (SASRequest.GetString("result") == "4")
+                {
+                    Msg.Text = "";
+                    return;
+                }
+                #endregion
             }
+
+            if (Page.IsPostBack)
+                VerifyLoginInf();//对提供的信息进行验证
+            else
+                Response.Redirect("syslogin.aspx?result=4");
+        }
+
+        public void VerifyLoginInf()
+        {
+            if (!SAS.Logic.OnlineUsers.CheckUserVerifyCode(olid, SASRequest.GetString("vcode")))
+            {
+                Response.Redirect("syslogin.aspx?result=3");
+                return;
+            }
+
+            UserInfo userInfo = null;
+            //if (config.Passwordmode == 1)
+            //    userInfo = Users.GetUserInfo(Users.CheckDvBbsPassword(DNTRequest.GetString("username"), DNTRequest.GetString("password")));
+            //else 
+            if (config.Passwordmode == 0)
+                userInfo = Users.GetUserInfo(Users.CheckPassword(SASRequest.GetString("username"), Utils.MD5(SASRequest.GetString("password")), false));
+            else//第三方加密验证模式
+                //userInfo = Users.CheckThirdPartPassword(DNTRequest.GetString("username"), DNTRequest.GetString("password"), -1, null);
+
+            if (userInfo != null)
+            {
+                UserGroupInfo usergroupinfo = AdminUserGroups.AdminGetUserGroupInfo(userInfo.Ps_ug_id);
+
+                if (usergroupinfo.ug_pg_id == 1)
+                {
+                    LogicUtils.WriteUserCookie(userInfo.Ps_id, 1440, GeneralConfigs.GetConfig().Passwordkey);
+
+                    UserGroupInfo userGroupInfo = AdminUserGroups.AdminGetUserGroupInfo(userInfo.Ps_ug_id);
+
+                    HttpCookie cookie = new HttpCookie("sasadmin");
+                    cookie.Values["key"] = LogicUtils.SetCookiePassword(userInfo.Ps_password + userInfo.ps_secques + userInfo.Ps_id, config.Passwordkey);
+                    cookie.Expires = DateTime.Now.AddMinutes(30);
+                    HttpContext.Current.Response.AppendCookie(cookie);
+
+                    AdminVistLogs.InsertLog(userInfo.Ps_id, userInfo.Ps_name, userInfo.Ps_ug_id, userGroupInfo.ug_name, SASRequest.GetIP(), "后台管理员登陆", "");
+
+                    try
+                    {
+                        SoftInfo.LoadSoftInfo();
+                    }
+                    catch
+                    {
+                        Response.Write("<script type=\"text/javascript\">top.location.href='index.aspx';</script>");
+                        Response.End();
+                    }
+
+                    //升级general.config文件
+                    try
+                    {
+                        GeneralConfigs.Serialiaze(GeneralConfigs.GetConfig(), Server.MapPath("../config/general.config"));
+                    }
+                    catch { }
+
+                    Response.Write("<script type=\"text/javascript\">top.location.href='index.aspx';</script>");
+                    Response.End();
+                }
+                else
+                    Response.Redirect("syslogin.aspx?result=2");
+            }
+            else
+                Response.Redirect("syslogin.aspx?result=1");
         }
     }
+
+
 }

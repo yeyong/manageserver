@@ -42,3 +42,5 @@ select{ color:#000000; background-color:#FFFFFF;}
 
 .FormBase,.FormFocus,.FormCode,.formnoborder{ font-family:Arial, Helvetica, sans-serif; background-color: #fff; padding:0.2em 0;border:1px double #ccc;}
 .FormFocus { border: 1px double #3399ff; background-color: #c0ddfc;}
+
+.nofocus { border:1px solid #CCC; background:#EEE; color:#545454; padding:0.4em 0;}
