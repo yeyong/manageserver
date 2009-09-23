@@ -9,8 +9,7 @@
 <meta name="keywords" content="" />
 <meta name="description" content="天狼星工作室综合管理后台" />
 <title>天狼星工作室综合管理后台</title>
-<link href="style/comm.css" type="text/css" rel="stylesheet" />
-<link href="style/admin.css" type="text/css" rel="stylesheet" />
+<link href="styles/dntmanager.css" rel="stylesheet" type="text/css" />
 </head>
 
 <frameset rows="43,*" frameborder="no" border="0" framespacing="0">
