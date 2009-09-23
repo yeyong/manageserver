@@ -119,7 +119,7 @@ namespace SAS.Web.UI
             }
             else
             {
-                HttpCookie cookie = HttpContext.Current.Request.Cookies["dntadmin"];
+                HttpCookie cookie = HttpContext.Current.Request.Cookies["sasadmin"];
                 cookie.Values["key"] = LogicUtils.SetCookiePassword(oluserinfo.ol_password + secques + oluserinfo.ol_ps_id.ToString(), config.Passwordkey);
                 cookie.Values["userid"] = oluserinfo.ol_ps_id.ToString();
                 cookie.Expires = DateTime.Now.AddMinutes(30);
@@ -414,7 +414,7 @@ namespace SAS.Web.UI
         /// <returns></returns>
         private FavoriteStatus GetFavoriteStatus()
         {
-            string configPath = Utils.GetMapPath(BaseConfigs.GetSitePath.ToLower() + "admin/xml/navmenu.config");
+            string configPath = Utils.GetMapPath(BaseConfigs.GetSitePath.ToLower() + "ManagePage/xml/navmenu.config");
             //string pagename = DNTRequest.GetPageName().ToLower() + DNTRequest.GetUrl().Substring(DNTRequest.GetUrl().IndexOf('?')).ToLower();
             string url = SASRequest.GetUrl().ToLower();
             string pagename = url.Substring(url.LastIndexOf('/') + 1);
