@@ -33,10 +33,15 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Button.cs" />
+    <Compile Include="DataGrid.cs" />
+    <Compile Include="DropDownList.cs" />
     <Compile Include="TextBox.cs" />
     <Compile Include="WebControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -45,6 +50,10 @@
     <ProjectReference Include="..\SAS.Common\SAS.Common.csproj">
       <Project>{203EB763-E07B-4047-9473-D16F84B2E554}</Project>
       <Name>SAS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SAS.Data\SAS.Data.csproj">
+      <Project>{E15BF13F-EC22-47A3-ACF4-AA79738FB7E8}</Project>
+      <Name>SAS.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

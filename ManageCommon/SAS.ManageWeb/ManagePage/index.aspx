@@ -6,7 +6,7 @@
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
-<meta name="keywords" content="" />
+<meta name="keywords" content="天狼星,工作室" />
 <meta name="description" content="天狼星工作室综合管理后台" />
 <title>天狼星工作室综合管理后台</title>
 <link href="styles/dntmanager.css" rel="stylesheet" type="text/css" />

@@ -62,6 +62,13 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\framepage\managerbody.aspx.cs">
+      <DependentUpon>managerbody.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\framepage\managerbody.aspx.designer.cs">
+      <DependentUpon>managerbody.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\framepage\top.aspx.cs">
       <DependentUpon>top.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -76,12 +83,47 @@
     <Compile Include="ManagePage\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\rapidset\managemainmenu.aspx.cs">
+      <DependentUpon>managemainmenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\rapidset\managemainmenu.aspx.designer.cs">
+      <DependentUpon>managemainmenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\rapidset\managesubmenu.aspx.cs">
+      <DependentUpon>managesubmenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\rapidset\managesubmenu.aspx.designer.cs">
+      <DependentUpon>managesubmenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\rapidset\managesubmenuitem.aspx.cs">
+      <DependentUpon>managesubmenuitem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\rapidset\managesubmenuitem.aspx.designer.cs">
+      <DependentUpon>managesubmenuitem.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\rapidset\systeminf.aspx.cs">
+      <DependentUpon>systeminf.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\rapidset\systeminf.aspx.designer.cs">
+      <DependentUpon>systeminf.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\syslogin.aspx.cs">
       <DependentUpon>syslogin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManagePage\syslogin.aspx.designer.cs">
       <DependentUpon>syslogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\UserControls\PageInfo.ascx.cs">
+      <DependentUpon>PageInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\UserControls\PageInfo.ascx.designer.cs">
+      <DependentUpon>PageInfo.ascx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -289,6 +331,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="config\localupgradeini.config" />
+    <Content Include="javascript\common.js" />
     <Content Include="ManagePage\framepage\top.aspx" />
     <Content Include="ManagePage\framepage\managerbody.aspx" />
     <Content Include="ManagePage\images\add.gif" />
@@ -577,7 +620,21 @@
     <Content Include="ManagePage\images\zoomin.gif" />
     <Content Include="ManagePage\images\zoomout.gif" />
     <Content Include="ManagePage\index.aspx" />
+    <Content Include="ManagePage\js\ajaxhelper.js" />
+    <Content Include="ManagePage\js\calendar.js" />
+    <Content Include="ManagePage\js\colorpicker.js" />
+    <Content Include="ManagePage\js\common.js" />
+    <Content Include="ManagePage\js\divcover.js" />
+    <Content Include="ManagePage\js\draglist.js" />
     <Content Include="ManagePage\js\modalpopup.js" />
+    <Content Include="ManagePage\js\navbar.js" />
+    <Content Include="ManagePage\js\tabstrip.js" />
+    <Content Include="ManagePage\rapidset\managemainmenu.aspx" />
+    <Content Include="ManagePage\rapidset\managesubmenu.aspx" />
+    <Content Include="ManagePage\rapidset\managesubmenuitem.aspx" />
+    <Content Include="ManagePage\rapidset\systeminf.aspx" />
+    <Content Include="ManagePage\styles\datagrid.css" />
+    <Content Include="ManagePage\styles\default.css" />
     <Content Include="ManagePage\styles\dntmanager.css" />
     <Content Include="ManagePage\styles\modelpopup.css" />
     <Content Include="ManagePage\styles\nav.css" />
@@ -587,10 +644,12 @@
     <Content Include="ManagePage\substance\edit.aspx" />
     <Content Include="ManagePage\substance\list.aspx" />
     <Content Include="ManagePage\substance\show.aspx" />
+    <Content Include="ManagePage\UserControls\PageInfo.ascx" />
     <Content Include="ManagePage\xml\navmenu.js" />
     <None Include="ManagePage\images\admin-gif\Thumbs.db" />
     <None Include="ManagePage\images\ad\Thumbs.db" />
     <None Include="ManagePage\images\Thumbs.db" />
+    <Content Include="ManagePage\xml\navmenu.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="templates\default\" />

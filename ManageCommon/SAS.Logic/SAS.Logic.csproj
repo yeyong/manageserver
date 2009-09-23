@@ -53,6 +53,7 @@
     <Compile Include="LogicPageTemplate.cs" />
     <Compile Include="LogicUtils.cs" />
     <Compile Include="LoginLogs.cs" />
+    <Compile Include="admin\MenuManage.cs" />
     <Compile Include="Navs.cs" />
     <Compile Include="Notices.cs" />
     <Compile Include="OnlineUsers.cs" />
