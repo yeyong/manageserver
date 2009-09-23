@@ -66,6 +66,9 @@
       <DependentUpon>top.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ManagePage\framepage\top.aspx.designer.cs">
+      <DependentUpon>top.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -290,6 +293,9 @@
     <Content Include="ManagePage\framepage\managerbody.aspx" />
     <Content Include="ManagePage\index.aspx" />
     <Content Include="ManagePage\styles\dntmanager.css" />
+    <Content Include="ManagePage\styles\modelpopup.css" />
+    <Content Include="ManagePage\style\admin.css" />
+    <Content Include="ManagePage\style\comm.css" />
     <Content Include="ManagePage\substance\edit.aspx" />
     <Content Include="ManagePage\substance\list.aspx" />
     <Content Include="ManagePage\substance\show.aspx" />
