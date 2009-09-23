@@ -1,38 +1,110 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="True" CodeBehind="top.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.top" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
-
 <head runat="server">
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-<meta http-equiv="X-UA-Compatible" content="IE=7" />
-<meta name="description" content="网站简介" />
-<meta name="keywords" content="" />
-<title>head</title>
-<link href="../style/comm.css" type="text/css" rel="stylesheet" />
-<link href="../style/admin.css" type="text/css" rel="stylesheet" />
-<style type="text/css">
-	    body {margin:0;}
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <title>head</title>
+    <link href="../styles/dntmanager.css" type="text/css" rel="stylesheet" />
+    <link href="../styles/modelpopup.css" type="text/css" rel="stylesheet" />
+
+    <script type="text/javascript" src="../js/modalpopup.js"></script>
+
+    <script type="text/javascript" src="../xml/navmenu.js"></script>
+
+    <style type="text/css">
+        body
+        {
+            margin: 0;
+        }
     </style>
 </head>
-
 <body>
-
-<div class="head">
-	<p class="logo"><a href="#"><img src="../images/logo2.png" title="" alt="" /></a></p>
-	<ul class="hdce">
-		<li class="hdceli1"><span>项目名称</span></li>
-		<li class="hdceli2"><span><a href="#">项目名称</a></span></li>
-	</ul>
-	<div class="hdrt">
-		<p class="hdrt1">您好，<span class="zi1">Admin</span> (<a href="../substance/settings.aspx" target="main" class="zt1">密码保护</a>) ｜ <a href="#" class="zt1">退出</a></p>
-		<p class="hdrt2">
-		布局：
-		<img alt="" title="" src="../images/admin-win1.png" />
-		<img alt="" title="" src="../images/admin-win2.png" />
-		</p>
-	</div>
-</div>
-
+    <div id="MenuTab">
+        <ul id="MainMenu">
+            <li class="MenuDrop">
+                <div class="MenuDropOut" onmouseover="this.className='MenuDropOn'" onmouseout="this.className='MenuDropOut'">
+                    <a href="javascript:void(0);" onmouseover="javascript:top.mainFrame.setshorcutmenu('block');"
+                        onmouseout="javascript:top.mainFrame.setshorcutmenu('none');">快捷操作</a>
+                </div>
+            </li>
+        </ul>
+        <div class="SearchBar">
+            <input type="hidden" id="searchtype" value="function" />
+            <dl>
+                <dt><span id="searcheoption" onclick="javascript:top.mainFrame.setseachmenu('block');"
+                    style="cursor: hand">功能</span>
+                    <button type="button" class="OutButton" onmouseover="this.className='OverButton'"
+                        onmouseout="this.className='OutButton'" onclick="javascript:top.mainFrame.setseachmenu('block');"
+                        onfocus="this.blur();">
+                    </button>
+                </dt>
+                <dd>
+                    <input id="searchinfo" onkeydown="if(event.keyCode==13){document.getElementById('dosearch').focus();}"
+                        type="text" /></dd>
+                <dd>
+                    <button type="button" id="dosearch" class="SubmitButton" alt="点击搜索" onclick="javascript:top.mainFrame.Search(document.getElementById('searchinfo').value,document.getElementById('searchtype').value);">
+                    </button>
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div id="setting" style="display: none;">
+    </div>
 </body>
+
+
+<script type="text/javascript">
+
+    function LoadMainMenu() {
+        var menuText = "";
+        for (var i = 0; i < toptabmenu.length; i++) {
+            var mod = (i % 7) + 1;
+            menuText += "<li id='NtTab" + (i + 1) + "' ><div id='NtDiv" + (i + 1) + "'  Class='Currenttab" + mod + "'>";
+            menuText += "<a href='#' id='NtA" + (i + 1) + "' class='CurrentHoverTab" + mod + "'";
+            menuText += " onclick=\"javscript:locationurl('" + toptabmenu[i]["mainmenulist"].split(",")[0] + "','" + toptabmenu[i]["id"] + "','" + toptabmenu[i]["mainmenulist"];
+            menuText += "','" + toptabmenu[i]["defaulturl"] + "');\" onfocus='this.blur();'>" + toptabmenu[i]["title"] + "</a></div></li>";
+        }
+        document.getElementById("MainMenu").innerHTML += menuText;
+    }
+    LoadMainMenu();
+
+    function setseachtype(searchtype) {
+        document.getElementById("searchtype").value = searchtype;
+        switch (searchtype) {
+            case 'function': document.getElementById("searcheoption").innerHTML = '功能'; break;
+            case 'user': document.getElementById("searcheoption").innerHTML = '用户'; break;
+        }
+    }
+
+    function locationurl(showmenuid, toptabmenuid, mainmenulist, defaulturl) {
+        var menucount = toptabmenu.length;
+        j = menucount;
+
+        /*得新进行实始化设置*/
+        for (i = 1; i <= menucount; i++) {
+            document.getElementById("NtDiv" + i).className = "tab" + (i % 7);
+            document.getElementById("NtTab" + i).style.zIndex = j;
+            document.getElementById("NtA" + i).className = "";
+            j--;
+        }
+
+
+        /*设置当前点中的菜单项样式*/
+        document.getElementById("NtA" + toptabmenuid).className = 'CurrentHoverTab' + (toptabmenuid % 7);
+        document.getElementById('NtDiv' + toptabmenuid).className = 'Currenttab' + (toptabmenuid % 7);
+        document.getElementById('NtTab' + toptabmenuid).style.zIndex = menucount + 1;
+
+        //alert(defaulturl);
+        top.mainFrame.location.href = '../framepage/managerbody.aspx?showmenuid=' + showmenuid + '&toptabmenuid=' + toptabmenuid + '&mainmenulist=' + mainmenulist + '&defaulturl=' + defaulturl;
+
+    }
+
+    document.getElementById("searchtype").value = 'function';
+    locationurl(toptabmenu[0]["mainmenulist"].split(",")[0], toptabmenu[0]["id"], toptabmenu[0]["mainmenulist"], toptabmenu[0]["defaulturl"]);
+</script>
 
 </html>
