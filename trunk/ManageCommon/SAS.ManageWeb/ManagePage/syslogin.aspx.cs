@@ -148,12 +148,12 @@ namespace SAS.ManageWeb.ManagePage
 
             UserInfo userInfo = null;
             //if (config.Passwordmode == 1)
-            //    userInfo = Users.GetUserInfo(Users.CheckDvBbsPassword(DNTRequest.GetString("username"), DNTRequest.GetString("password")));
+            //    userInfo = Users.GetUserInfo(Users.CheckDvBbsPassword(SASRequest.GetString("username"), SASRequest.GetString("password")));
             //else 
             if (config.Passwordmode == 0)
                 userInfo = Users.GetUserInfo(Users.CheckPassword(SASRequest.GetString("username"), Utils.MD5(SASRequest.GetString("password")), false));
             //else//第三方加密验证模式
-                //userInfo = Users.CheckThirdPartPassword(DNTRequest.GetString("username"), DNTRequest.GetString("password"), -1, null);
+                //userInfo = Users.CheckThirdPartPassword(SASRequest.GetString("username"), SASRequest.GetString("password"), -1, null);
 
             if (userInfo != null)
             {

@@ -5,8 +5,8 @@
 <head runat="server">
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
     <meta http-equiv="X-UA-Compatible" content="IE=7" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
+    <meta name="keywords" content="天狼星,工作室" />
+    <meta name="description" content="天狼星工作室综合管理后台" />
     <title>head</title>
     <link href="../styles/dntmanager.css" type="text/css" rel="stylesheet" />
     <link href="../styles/modelpopup.css" type="text/css" rel="stylesheet" />
@@ -24,34 +24,22 @@
 </head>
 <body>
     <div id="MenuTab">
-        <ul id="MainMenu">
-            <li class="MenuDrop">
-                <div class="MenuDropOut" onmouseover="this.className='MenuDropOn'" onmouseout="this.className='MenuDropOut'">
-                    <a href="javascript:void(0);" onmouseover="javascript:top.mainFrame.setshorcutmenu('block');"
-                        onmouseout="javascript:top.mainFrame.setshorcutmenu('none');">快捷操作</a>
-                </div>
-            </li>
-        </ul>
-        <div class="SearchBar">
-            <input type="hidden" id="searchtype" value="function" />
-            <dl>
-                <dt><span id="searcheoption" onclick="javascript:top.mainFrame.setseachmenu('block');"
-                    style="cursor: hand">功能</span>
-                    <button type="button" class="OutButton" onmouseover="this.className='OverButton'"
-                        onmouseout="this.className='OutButton'" onclick="javascript:top.mainFrame.setseachmenu('block');"
-                        onfocus="this.blur();">
-                    </button>
-                </dt>
-                <dd>
-                    <input id="searchinfo" onkeydown="if(event.keyCode==13){document.getElementById('dosearch').focus();}"
-                        type="text" /></dd>
-                <dd>
-                    <button type="button" id="dosearch" class="SubmitButton" alt="点击搜索" onclick="javascript:top.mainFrame.Search(document.getElementById('searchinfo').value,document.getElementById('searchtype').value);">
-                    </button>
-                </dd>
-            </dl>
-        </div>
-    </div>
+		<ul id="MainMenu">
+		    <li class="MenuDrop">
+		        <div class="MenuDropOut" onmouseover="this.className='MenuDropOn'" onmouseout="this.className='MenuDropOut'">
+		            <a href="javascript:void(0);" onmouseover="javascript:top.mainFrame.setshorcutmenu('block');" onmouseout="javascript:top.mainFrame.setshorcutmenu('none');" >快捷操作</a>
+		        </div>
+		    </li>
+		</ul>		
+		<div class="SearchBar">
+			<input type="hidden" id="searchtype" value="function" />
+				<dl>
+					<dt><span id="searcheoption" onclick="javascript:top.mainFrame.setseachmenu('block');" style="cursor:hand">功能</span><button type="button"  class="OutButton" onmouseover="this.className='OverButton'" onmouseout="this.className='OutButton'" onclick="javascript:top.mainFrame.setseachmenu('block');"  onfocus="this.blur();"></button></dt>
+					<dd><input id="searchinfo" onkeydown="if(event.keyCode==13){document.getElementById('dosearch').focus();}"  type="text" /></dd>
+					<dd><button type="button" id="dosearch" class="SubmitButton" alt="点击搜索" onclick="javascript:top.mainFrame.Search(document.getElementById('searchinfo').value,document.getElementById('searchtype').value);" ></button></dd>
+				</dl>
+		</div>		
+	</div>
     <div id="setting" style="display: none;">
     </div>
 </body>
