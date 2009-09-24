@@ -5,12 +5,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
-     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
     <meta http-equiv="X-UA-Compatible" content="IE=7" />
     <meta name="keywords" content="天狼星,工作室" />
     <meta name="description" content="天狼星工作室综合管理后台" />
     <title>天狼星工作室综合管理后台</title>
-     <link href="../styles/datagrid.css" type="text/css" rel="stylesheet" />
+    <link href="../styles/datagrid.css" type="text/css" rel="stylesheet" />
     <link href="../styles/dntmanager.css" type="text/css" rel="stylesheet" />        
     <link href="../styles/modelpopup.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript" src="../js/modalpopup.js"></script>

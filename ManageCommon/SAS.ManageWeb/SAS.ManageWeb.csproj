@@ -90,6 +90,13 @@
     <Compile Include="ManagePage\rapidset\managemainmenu.aspx.designer.cs">
       <DependentUpon>managemainmenu.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\rapidset\managemenubackupfile.aspx.cs">
+      <DependentUpon>managemenubackupfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\rapidset\managemenubackupfile.aspx.designer.cs">
+      <DependentUpon>managemenubackupfile.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\rapidset\managesubmenu.aspx.cs">
       <DependentUpon>managesubmenu.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -630,6 +637,7 @@
     <Content Include="ManagePage\js\navbar.js" />
     <Content Include="ManagePage\js\tabstrip.js" />
     <Content Include="ManagePage\rapidset\managemainmenu.aspx" />
+    <Content Include="ManagePage\rapidset\managemenubackupfile.aspx" />
     <Content Include="ManagePage\rapidset\managesubmenu.aspx" />
     <Content Include="ManagePage\rapidset\managesubmenuitem.aspx" />
     <Content Include="ManagePage\rapidset\systeminf.aspx" />
@@ -641,9 +649,6 @@
     <Content Include="ManagePage\styles\tab.css" />
     <Content Include="ManagePage\style\admin.css" />
     <Content Include="ManagePage\style\comm.css" />
-    <Content Include="ManagePage\substance\edit.aspx" />
-    <Content Include="ManagePage\substance\list.aspx" />
-    <Content Include="ManagePage\substance\show.aspx" />
     <Content Include="ManagePage\UserControls\PageInfo.ascx" />
     <Content Include="ManagePage\xml\navmenu.js" />
     <None Include="ManagePage\images\admin-gif\Thumbs.db" />
@@ -652,6 +657,8 @@
     <Content Include="ManagePage\xml\navmenu.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ManagePage\global\" />
+    <Folder Include="ManagePage\xml\backup\" />
     <Folder Include="templates\default\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
