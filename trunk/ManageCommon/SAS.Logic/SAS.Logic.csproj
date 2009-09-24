@@ -47,6 +47,7 @@
     <Compile Include="Advertisements.cs" />
     <Compile Include="Avatars.cs" />
     <Compile Include="Caches.cs" />
+    <Compile Include="Databases.cs" />
     <Compile Include="HttpModule.cs" />
     <Compile Include="Ips.cs" />
     <Compile Include="IpSearch.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Statistics.cs" />
     <Compile Include="Stats.cs" />
     <Compile Include="Templates.cs" />
+    <Compile Include="TopicStats.cs" />
     <Compile Include="Urls.cs" />
     <Compile Include="UserGroups.cs" />
     <Compile Include="Users.cs" />

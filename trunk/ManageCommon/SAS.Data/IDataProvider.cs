@@ -1305,5 +1305,95 @@ namespace SAS.Data
         DataTable GetAdvertisement(int aid);
 
         #endregion
+
+        #region 数据库databases操作
+
+        /// <summary>
+        /// 恢复备份数据库          
+        /// </summary>
+        /// <param name="backupPath">备份文件路径</param>
+        /// <param name="serverName">服务器名称</param>
+        /// <param name="userName">数据库用户名</param>
+        /// <param name="password">数据库密码</param>
+        /// <param name="dbName">数据库名称</param>
+        /// <param name="fileName">备份文件名</param>
+        /// <returns></returns>
+        string RestoreDatabase(string backUpPath, string serverName, string userName, string passWord, string strDbName, string strFileName);
+
+        /// <summary>
+        /// 备份数据库
+        /// </summary>
+        /// <param name="backUpPath">备份文件路径</param>
+        /// <param name="serverName">服务器名称</param>
+        /// <param name="userName">数据库用户名</param>
+        /// <param name="passWord">数据库密码</param>
+        /// <param name="dbName">数据库名称</param>
+        /// <param name="strFileName">备份文件名</param>
+        /// <returns></returns>
+        string BackUpDatabase(string backUpPath, string serverName, string userName, string passWord, string strDbName, string strFileName);
+
+        /// <summary>
+        /// 获取数据库名称
+        /// </summary>
+        /// <returns></returns>
+        string GetDbName();
+
+        /// <summary>
+        /// 开始填充全文索引
+        /// </summary>
+        /// <param name="dbName"></param>
+        /// <returns></returns>
+        int StartFullIndex(string dbName);
+
+        /// <summary>
+        /// 构建相应表及全文索引
+        /// </summary>
+        /// <param name="tableName"></param>
+        void CreatePostTableAndIndex(string tableName);
+
+        /// <summary>
+        /// 收缩数据库
+        /// </summary>
+        /// <param name="shrinkSize">收缩大小</param>
+        /// <param name="dbName">数据库名</param>
+        void ShrinkDataBase(string shrinkSize, string dbName);
+
+        /// <summary>
+        /// 清空数据库日志
+        /// </summary>
+        /// <param name="dbName"></param>
+        void ClearDBLog(string dbName);
+
+        /// <summary>
+        /// 运行SQL语句
+        /// </summary>
+        /// <param name="sql">Sql语句</param>
+        /// <returns></returns>
+        string RunSql(string sql);
+
+        /////// <summary>
+        /////// 更新分表存储过程
+        /////// </summary>
+        ////void UpdatePostSP();
+
+        /// <summary>
+        /// 获取数据库版本
+        /// </summary>
+        /// <returns></returns>
+        string GetDataBaseVersion();
+
+        #endregion
+
+        #region 专题处理Topic
+
+        /// <summary>
+        /// 更新主题浏览量
+        /// </summary>
+        /// <param name="tid">主题id</param>
+        /// <param name="viewCount">浏览量</param>
+        /// <returns>成功返回1，否则返回0</returns>
+        int UpdateTopicViewCount(int tid, int viewCount);
+
+        #endregion
     }
 }

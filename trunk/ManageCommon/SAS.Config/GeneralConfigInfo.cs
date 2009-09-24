@@ -20,7 +20,8 @@ namespace SAS.Config
         private int m_isframeshow = 0;   //是否以框架方式显示  1是　0不是
         private int m_admintools = 0; //是否使用管理员客户端工具,0=不使用,1=仅论坛创始人可用,2=管理员可用
         private int m_indexpage = 0; //首页类型, 0=论坛首页, 1=聚合首页
-        private string m_linktext = "<a href=\"http://www.zhaoshang-zj.org\" title=\"The Official SAS!NT Site\" target=\"_blank\">SAS!NT</a>"; //外部链接html
+        private string m_linktext = "<a href=\"http://www.sirius.org.cn\" title=\"The Studio after 80s\" target=\"_blank\">Sirius Studio</a>"; //外部链接html
+        private string m_statcode = ""; //统计代码
 
         private string m_passwordkey = "1234567890"; //用户密码Key
 
@@ -178,6 +179,7 @@ namespace SAS.Config
         private int m_iisurlrewrite = 0; //是否启用IIS的URL重写
 
         private int m_notificationreserveddays = 7;//通知在系统中保留天数
+        private int m_maxindexsubforumcount = 0;//首页显示的子版最大数,0为不限制
         private int m_whosonlinecontract = 0;  //在线列表是否隐藏游客: 1 是 0 否
         private int m_deletingexpireduserfrequency = 5;//删除过期用户频率(单位:时间)
         private int m_onlineoptimization = 0;//用户在线表性能优化开关
@@ -302,6 +304,15 @@ namespace SAS.Config
         {
             get { return m_linktext; }
             set { m_linktext = value; }
+        }
+
+        /// <summary>
+        /// 统计代码
+        /// </summary>
+        public string Statcode
+        {
+            get { return m_statcode; }
+            set { m_statcode = value; }
         }
 
         /// <summary>
@@ -1506,6 +1517,15 @@ namespace SAS.Config
         {
             get { return m_whosonlinecontract; }
             set { m_whosonlinecontract = value; }
+        }
+
+        /// <summary>
+        /// 首页显示最大子版数
+        /// </summary>
+        public int Maxindexsubforumcount
+        {
+            get { return m_maxindexsubforumcount; }
+            set { m_maxindexsubforumcount = value; }
         }
 
         /// <summary>

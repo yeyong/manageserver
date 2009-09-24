@@ -51,6 +51,7 @@
     <Compile Include="StatVarInfo.cs" />
     <Compile Include="TemplateAboutInfo.cs" />
     <Compile Include="TemplateInfo.cs" />
+    <Compile Include="TopicView.cs" />
     <Compile Include="UserAction.cs" />
     <Compile Include="UserGroupInfo.cs" />
     <Compile Include="UserInfo.cs" />
