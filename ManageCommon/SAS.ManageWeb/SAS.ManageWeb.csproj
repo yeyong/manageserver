@@ -76,6 +76,13 @@
     <Compile Include="ManagePage\framepage\top.aspx.designer.cs">
       <DependentUpon>top.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\global\global_baseset.aspx.cs">
+      <DependentUpon>global_baseset.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_baseset.aspx.designer.cs">
+      <DependentUpon>global_baseset.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -132,9 +139,20 @@
     <Compile Include="ManagePage\UserControls\PageInfo.ascx.designer.cs">
       <DependentUpon>PageInfo.ascx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\UserControls\TextareaResize.ascx.cs">
+      <DependentUpon>TextareaResize.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\UserControls\TextareaResize.ascx.designer.cs">
+      <DependentUpon>TextareaResize.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SAS.Cache\SAS.Cache.csproj">
+      <Project>{7A65B383-BFA6-4B0D-AA97-2C24F5B2F613}</Project>
+      <Name>SAS.Cache</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SAS.Common\SAS.Common.csproj">
       <Project>{203EB763-E07B-4047-9473-D16F84B2E554}</Project>
       <Name>SAS.Common</Name>
@@ -337,10 +355,24 @@
     <Content Include="tools\VerifyImagePage.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Interop.SQLDMO.dll" />
+    <Content Include="bin\SAS.Cache.dll" />
+    <Content Include="bin\SAS.Cache.pdb" />
+    <Content Include="bin\SAS.Config.dll" />
+    <Content Include="bin\SAS.Config.pdb" />
+    <Content Include="bin\SAS.Data.dll" />
+    <Content Include="bin\SAS.Data.pdb" />
+    <Content Include="bin\SAS.Data.SqlServer.dll" />
+    <Content Include="bin\SAS.Data.SqlServer.pdb" />
+    <Content Include="bin\SAS.Entity.dll" />
+    <Content Include="bin\SAS.Entity.pdb" />
+    <Content Include="bin\SAS.Logic.dll" />
+    <Content Include="bin\SAS.Logic.pdb" />
     <Content Include="config\localupgradeini.config" />
     <Content Include="javascript\common.js" />
     <Content Include="ManagePage\framepage\top.aspx" />
     <Content Include="ManagePage\framepage\managerbody.aspx" />
+    <Content Include="ManagePage\global\global_baseset.aspx" />
     <Content Include="ManagePage\images\add.gif" />
     <Content Include="ManagePage\images\addmenu.gif" />
     <Content Include="ManagePage\images\addremoveprograms.gif" />
@@ -650,6 +682,7 @@
     <Content Include="ManagePage\style\admin.css" />
     <Content Include="ManagePage\style\comm.css" />
     <Content Include="ManagePage\UserControls\PageInfo.ascx" />
+    <Content Include="ManagePage\UserControls\TextareaResize.ascx" />
     <Content Include="ManagePage\xml\navmenu.js" />
     <None Include="ManagePage\images\admin-gif\Thumbs.db" />
     <None Include="ManagePage\images\ad\Thumbs.db" />
@@ -657,7 +690,6 @@
     <Content Include="ManagePage\xml\navmenu.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ManagePage\global\" />
     <Folder Include="ManagePage\xml\backup\" />
     <Folder Include="templates\default\" />
   </ItemGroup>

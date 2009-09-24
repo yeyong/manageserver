@@ -10,6 +10,7 @@ using SAS.Common;
 using SAS.Data;
 using SAS.Config;
 using SAS.Entity;
+using SQLDMO;
 
 namespace SAS.Data.SqlServer
 {
@@ -1235,6 +1236,374 @@ namespace SAS.Data.SqlServer
                                                 DbFields.ADVERTISEMENTS,
                                                 BaseConfigs.GetTablePrefix, aid);
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        #endregion
+
+        #region 数据库databases操作
+
+        /// <summary>
+        /// 恢复备份数据库          
+        /// </summary>
+        /// <param name="backupPath">备份文件路径</param>
+        /// <param name="serverName">服务器名称</param>
+        /// <param name="userName">数据库用户名</param>
+        /// <param name="password">数据库密码</param>
+        /// <param name="dbName">数据库名称</param>
+        /// <param name="fileName">备份文件名</param>
+        /// <returns></returns>
+        public string RestoreDatabase(string backUpPath, string serverName, string userName, string password, string strDbName, string strFileName)
+        {
+            #region 数据库的恢复的代码
+
+            SQLServer svr = new SQLServerClass();
+            try
+            {
+                svr.Connect(serverName, userName, password);
+                QueryResults qr = svr.EnumProcesses(-1);
+                int iColPIDNum = -1;
+                int iColDbName = -1;
+                for (int i = 1; i <= qr.Columns; i++)
+                {
+                    string strName = qr.get_ColumnName(i);
+                    if (strName.ToUpper().Trim() == "SPID")
+                        iColPIDNum = i;
+                    else if (strName.ToUpper().Trim() == "DBNAME")
+                        iColDbName = i;
+
+                    if (iColPIDNum != -1 && iColDbName != -1)
+                        break;
+                }
+
+                for (int i = 1; i <= qr.Rows; i++)
+                {
+                    string strDBName = qr.GetColumnString(i, iColDbName);
+                    if (strDBName.ToUpper() == strDbName.ToUpper())
+                        svr.KillProcess(qr.GetColumnLong(i, iColPIDNum));
+                }
+
+                Restore res = new RestoreClass();
+                res.Action = 0;
+                res.Files = backUpPath + strFileName + ".config";
+                res.Database = strDbName;
+                res.ReplaceDatabase = true;
+                res.SQLRestore(svr);
+                return "";
+            }
+            catch (Exception err)
+            {
+                return err.Message.Replace("'", " ").Replace("\n", " ").Replace("\\", "/");
+            }
+            finally
+            {
+                svr.DisConnect();
+            }
+            #endregion
+        }
+
+        /// <summary>
+        /// 备份数据库
+        /// </summary>
+        /// <param name="backUpPath">备份文件路径</param>
+        /// <param name="serverName">服务器名称</param>
+        /// <param name="userName">数据库用户名</param>
+        /// <param name="passWord">数据库密码</param>
+        /// <param name="dbName">数据库名称</param>
+        /// <param name="strFileName">备份文件名</param>
+        /// <returns></returns>
+        public string BackUpDatabase(string backUpPath, string serverName, string userName, string password, string strDbName, string strFileName)
+        {
+            SQLServer svr = new SQLServerClass();
+            try
+            {
+                svr.Connect(serverName, userName, password);
+                Backup bak = new BackupClass();
+                bak.Action = 0;
+                bak.Initialize = true;
+                bak.Files = backUpPath + strFileName + ".config";
+                bak.Database = strDbName;
+                bak.SQLBackup(svr);
+                return string.Empty;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message.Replace("'", " ").Replace("\n", " ").Replace("\\", "/");
+            }
+            finally
+            {
+                svr.DisConnect();
+            }
+        }
+
+        /// <summary>
+        /// 获取数据库名称
+        /// </summary>
+        /// <returns></returns>
+        public string GetDbName()
+        {
+            foreach (string info in BaseConfigs.GetDBConnectString.Split(';'))
+            {
+                if (info.ToLower().IndexOf("initial catalog") >= 0 || info.ToLower().IndexOf("database") >= 0)
+                    return info.Split('=')[1].Trim();
+            }
+            return "sas";
+        }
+
+        /// <summary>
+        /// 开始填充全文索引
+        /// </summary>
+        /// <param name="dbName"></param>
+        /// <returns></returns>
+        public int StartFullIndex(string dbName)
+        {
+            return DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("USE {0};EXECUTE sp_fulltext_database 'enable';", dbName));
+        }
+
+        /// <summary>
+        /// 构建相应表及全文索引
+        /// </summary>
+        /// <param name="tableName"></param>
+        public void CreatePostTableAndIndex(string tableName)
+        {
+            DbHelper.ExecuteNonQuery(CommandType.Text, GetSpecialTableFullIndexSQL(tableName, GetDbName()));
+        }
+
+        /// <summary>
+        /// 得到指定帖子分表的全文索引建立(填充)语句
+        /// </summary>
+        /// <param name="tablename"></param>
+        /// <returns></returns>
+        public string GetSpecialTableFullIndexSQL(string tableName, string dbName)
+        {
+            #region 建表
+
+            StringBuilder sqlBuilder = new StringBuilder();
+            sqlBuilder.Append("IF EXISTS (SELECT * FROM sysobjects WHERE id = object_id(N'[{0}]') AND OBJECTPROPERTY(id, N'IsUserTable') = 1)  DROP TABLE [{0}];");
+            sqlBuilder.Append("CREATE TABLE [{0}] ([pid] [int] NOT NULL ,[fid] [int] NOT NULL ,");
+            sqlBuilder.Append("[tid] [int] NOT NULL ,[parentid] [int] NOT NULL ,[layer] [int] NOT NULL ,[poster] [nvarchar] (20) NOT NULL ,");
+            sqlBuilder.Append("[posterid] [int] NOT NULL ,[title] [nvarchar] (80) NOT NULL ,[postdatetime] [smalldatetime] NOT NULL ,");
+            sqlBuilder.Append("[message] [ntext] NOT NULL ,[ip] [nvarchar] (15) NOT NULL ,");
+            sqlBuilder.Append("[lastedit] [nvarchar] (50) NOT NULL ,[invisible] [int] NOT NULL ,[usesig] [int] NOT NULL ,[htmlon] [int] NOT NULL ,");
+            sqlBuilder.Append("[smileyoff] [int] NOT NULL ,[parseurloff] [int] NOT NULL ,[bbcodeoff] [int] NOT NULL ,[attachment] [int] NOT NULL ,[rate] [int] NOT NULL ,");
+            sqlBuilder.Append("[ratetimes] [int] NOT NULL ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY];");
+            sqlBuilder.Append("ALTER TABLE [{0}] WITH NOCHECK ADD CONSTRAINT [PK_{0}] PRIMARY KEY  CLUSTERED ([pid])  ON [PRIMARY];");
+
+            sqlBuilder.Append("ALTER TABLE [{0}] ADD ");
+            sqlBuilder.Append("CONSTRAINT [DF_{0}_pid] DEFAULT (0) FOR [pid],");
+            sqlBuilder.Append("CONSTRAINT [DF_{0}_parentid] DEFAULT (0) FOR [parentid],CONSTRAINT [DF_{0}_layer] DEFAULT (0) FOR [layer],");
+            sqlBuilder.Append("CONSTRAINT [DF_{0}_poster] DEFAULT ('') FOR [poster],CONSTRAINT [DF_{0}_posterid] DEFAULT (0) FOR [posterid],");
+            sqlBuilder.Append("CONSTRAINT [DF_{0}_postdatetime] DEFAULT (getdate()) FOR [postdatetime],CONSTRAINT [DF_{0}_message] DEFAULT ('') FOR [message],");
+            sqlBuilder.Append("CONSTRAINT [DF_{0}_ip] DEFAULT ('') FOR [ip],CONSTRAINT [DF_{0}_lastedit] DEFAULT ('') FOR [lastedit],");
+            sqlBuilder.Append("CONSTRAINT [DF_{0}_invisible] DEFAULT (0) FOR [invisible],CONSTRAINT [DF_{0}_usesig] DEFAULT (0) FOR [usesig],");
+            sqlBuilder.Append("CONSTRAINT [DF_{0}_htmlon] DEFAULT (0) FOR [htmlon],CONSTRAINT [DF_{0}_smileyoff] DEFAULT (0) FOR [smileyoff],");
+            sqlBuilder.Append("CONSTRAINT [DF_{0}_parseurloff] DEFAULT (0) FOR [parseurloff],CONSTRAINT [DF_{0}_bbcodeoff] DEFAULT (0) FOR [bbcodeoff],");
+            sqlBuilder.Append("CONSTRAINT [DF_{0}_attachment] DEFAULT (0) FOR [attachment],CONSTRAINT [DF_{0}_rate] DEFAULT (0) FOR [rate],");
+            sqlBuilder.Append("CONSTRAINT [DF_{0}_ratetimes] DEFAULT (0) FOR [ratetimes];");
+
+            sqlBuilder.Append("CREATE  INDEX [parentid] ON [{0}]([parentid]) ON [PRIMARY];");
+            sqlBuilder.Append("CREATE  UNIQUE  INDEX [showtopic] ON [{0}]([tid], [invisible], [pid]) ON [PRIMARY];");
+            sqlBuilder.Append("CREATE  INDEX [treelist] ON [{0}]([tid], [invisible], [parentid]) ON [PRIMARY];");
+
+            #endregion
+
+            #region 建全文索引
+
+            sqlBuilder.Append("USE {1} \r\n");
+            sqlBuilder.Append("EXECUTE sp_fulltext_database 'enable'; \r\n");
+            sqlBuilder.Append("IF(SELECT DATABASEPROPERTY('[{1}]','isfulltextenabled'))=0  EXECUTE sp_fulltext_database 'enable';");
+            sqlBuilder.Append("IF EXISTS (SELECT * FROM sysfulltextcatalogs WHERE name ='pk_{0}_msg')  EXECUTE sp_fulltext_catalog 'pk_{0}_msg','drop';");
+            sqlBuilder.Append("IF EXISTS (SELECT * FROM sysfulltextcatalogs WHERE name ='pk_{0}_msg')  EXECUTE sp_fulltext_table '[{0}]', 'drop' ;");
+            sqlBuilder.Append("EXECUTE sp_fulltext_catalog 'pk_{0}_msg','create';");
+            sqlBuilder.Append("EXECUTE sp_fulltext_table '[{0}]','create','pk_{0}_msg','pk_{0}';");
+            sqlBuilder.Append("EXECUTE sp_fulltext_column '[{0}]','message','add';");
+            sqlBuilder.Append("EXECUTE sp_fulltext_table '[{0}]','activate';");
+            sqlBuilder.Append("EXECUTE sp_fulltext_catalog 'pk_{0}_msg','start_full';");
+
+            #endregion
+
+            return string.Format(sqlBuilder.ToString(), tableName, dbName);
+        }
+
+        /// <summary>
+        /// 收缩数据库
+        /// </summary>
+        /// <param name="shrinkSize">收缩大小</param>
+        /// <param name="dbName">数据库名</param>
+        public void ShrinkDataBase(string shrinkSize, string dbName)
+        {
+            StringBuilder sqlBuilder = new StringBuilder("SET NOCOUNT ON ");
+
+            sqlBuilder.Append("DECLARE @LogicalFileName sysname, @MaxMinutes INT, @NewSize INT ");
+            sqlBuilder.AppendFormat("USE [{0}] -- 要操作的数据库名 ", dbName);
+            sqlBuilder.AppendFormat("SELECT @LogicalFileName = '{0}_log', -- 日志文件名 ", dbName);
+            sqlBuilder.Append("@MaxMinutes = 10, -- Limit on time allowed to wrap log. ");
+            sqlBuilder.Append("@NewSize = 1 -- 你想设定的日志文件的大小(M) ");
+            sqlBuilder.Append("-- Setup / initialize ");
+            sqlBuilder.Append("DECLARE @OriginalSize int ");
+            sqlBuilder.AppendFormat("SELECT @OriginalSize = {0}", shrinkSize);
+            sqlBuilder.Append("FROM sysfiles ");
+            sqlBuilder.Append("WHERE name = @LogicalFileName ");
+            sqlBuilder.Append("SELECT 'Original Size of ' + db_name() + ' LOG is ' + ");
+            sqlBuilder.Append("CONVERT(VARCHAR(30),@OriginalSize) + ' 8K pages or ' + ");
+            sqlBuilder.Append("CONVERT(VARCHAR(30),(@OriginalSize*8/1024)) + 'MB' ");
+            sqlBuilder.Append("FROM sysfiles ");
+            sqlBuilder.Append("WHERE name = @LogicalFileName ");
+            sqlBuilder.Append("CREATE TABLE DummyTrans ");
+            sqlBuilder.Append("(DummyColumn char (8000) not null) ");
+            sqlBuilder.Append("DECLARE @Counter INT, ");
+            sqlBuilder.Append("@StartTime DATETIME, ");
+            sqlBuilder.Append("@TruncLog VARCHAR(255) ");
+            sqlBuilder.Append("SELECT @StartTime = GETDATE(), ");
+            sqlBuilder.Append("@TruncLog = 'BACKUP LOG ' + db_name() + ' WITH TRUNCATE_ONLY' ");
+            sqlBuilder.Append("DBCC SHRINKFILE (@LogicalFileName, @NewSize) ");
+            sqlBuilder.Append("EXEC (@TruncLog) ");
+            sqlBuilder.Append("-- Wrap the log if necessary. ");
+            sqlBuilder.Append("WHILE @MaxMinutes > DATEDIFF (mi, @StartTime, GETDATE()) -- time has not expired ");
+            sqlBuilder.Append("AND @OriginalSize = (SELECT size FROM sysfiles WHERE name = @LogicalFileName) ");
+            sqlBuilder.Append("AND (@OriginalSize * 8 /1024) > @NewSize ");
+            sqlBuilder.Append("BEGIN -- Outer loop. ");
+            sqlBuilder.Append("SELECT @Counter = 0 ");
+            sqlBuilder.Append("WHILE ((@Counter < @OriginalSize / 16) AND (@Counter < 50000)) ");
+            sqlBuilder.Append("BEGIN -- update ");
+            sqlBuilder.Append("INSERT DummyTrans VALUES ('Fill Log') ");
+            sqlBuilder.Append("DELETE DummyTrans ");
+            sqlBuilder.Append("SELECT @Counter = @Counter + 1 ");
+            sqlBuilder.Append("END ");
+            sqlBuilder.Append("EXEC (@TruncLog) ");
+            sqlBuilder.Append("END ");
+            sqlBuilder.Append("SELECT 'Final Size of ' + db_name() + ' LOG is ' + ");
+            sqlBuilder.Append("CONVERT(VARCHAR(30),size) + ' 8K pages or ' + ");
+            sqlBuilder.Append("CONVERT(VARCHAR(30),(size*8/1024)) + 'MB' ");
+            sqlBuilder.Append("FROM sysfiles ");
+            sqlBuilder.Append("WHERE name = @LogicalFileName ");
+            sqlBuilder.Append("DROP TABLE DummyTrans ");
+            sqlBuilder.Append("SET NOCOUNT OFF ");
+
+            DbHelper.ExecuteDataset(CommandType.Text, sqlBuilder.ToString());
+        }
+
+        /// <summary>
+        /// 清空数据库日志
+        /// </summary>
+        /// <param name="dbName"></param>
+        public void ClearDBLog(string dbName)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@DBName", (DbType)SqlDbType.VarChar, 50, dbName),
+			};
+            DbHelper.ExecuteNonQuery(CommandType.StoredProcedure, string.Format("{0}shrinklog", BaseConfigs.GetTablePrefix), parms);
+        }
+
+        /// <summary>
+        /// 运行SQL语句
+        /// </summary>
+        /// <param name="sql">Sql语句</param>
+        /// <returns></returns>
+        public string RunSql(string sql)
+        {
+            string errorInfo = "";
+            if (sql != "")
+            {
+                SqlConnection conn = new SqlConnection(DbHelper.ConnectionString);
+                conn.Open();
+                string[] sqlArray = Utils.SplitString(sql, "--/* Discuz!NT SQL Separator */--");
+                foreach (string sqlStr in sqlArray)
+                {
+                    if (Utils.StrIsNullOrEmpty(sqlStr))   //当读到空的Sql语句则继续
+                    {
+                        continue;
+                    }
+                    using (SqlTransaction trans = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            DbHelper.ExecuteNonQuery(CommandType.Text, sqlStr);
+                            trans.Commit();
+                        }
+                        catch (Exception ex)
+                        {
+                            trans.Rollback();
+                            string message = ex.Message.Replace("'", " ");
+                            message = message.Replace("\\", "/");
+                            message = message.Replace("\r\n", "\\r\\n");
+                            message = message.Replace("\r", "\\r");
+                            message = message.Replace("\n", "\\n");
+                            errorInfo += message + "<br />";
+                        }
+                    }
+                }
+                conn.Close();
+            }
+            return errorInfo;
+        }
+
+        /////// <summary>
+        /////// 更新分表存储过程
+        /////// </summary>
+        ////public void UpdatePostSP()
+        ////{
+        ////    #region 更新分表的存储过程
+        ////    foreach (DataRow dr in DatabaseProvider.GetInstance().GetDatechTableIds())
+        ////    {
+        ////        CreateStoreProc(TypeConverter.ObjectToInt(dr["id"]));
+        ////    }
+        ////    #endregion
+        ////}
+
+        ////public void CreateStoreProc(int tableListMaxId)
+        ////{
+        ////    #region 创建分表存储过程
+        ////    StringBuilder sb = new StringBuilder();
+
+        ////    string detachTablePath = "";
+        ////    if (DbHelper.ExecuteScalar(CommandType.Text, "SELECT @@VERSION").ToString().Substring(20, 24).Trim().IndexOf("2000") >= 0)
+        ////        detachTablePath = Utils.GetMapPath(BaseConfigs.GetForumPath.ToLower() + "config/detachtable_2000.config");
+        ////    else
+        ////        detachTablePath = Utils.GetMapPath(BaseConfigs.GetForumPath.ToLower() + "config/detachtable_2005.config");
+
+        ////    if (!File.Exists(detachTablePath))
+        ////    {
+        ////        throw new FileNotFoundException("分表存储过程文件不存在!");
+        ////    }
+        ////    using (StreamReader objReader = new StreamReader(detachTablePath, Encoding.UTF8))
+        ////    {
+        ////        sb.Append(objReader.ReadToEnd());
+        ////        objReader.Close();
+        ////    }
+
+        ////    sb.Replace("\"", "'").Replace("dnt_posts1", BaseConfigs.GetTablePrefix + "posts" + tableListMaxId);
+        ////    sb.Replace("maxtablelistid", tableListMaxId.ToString());
+        ////    sb.Replace("dnt_createpost", BaseConfigs.GetTablePrefix + "createpost" + tableListMaxId);
+        ////    sb.Replace("dnt_getfirstpostid", BaseConfigs.GetTablePrefix + "getfirstpost" + tableListMaxId + "id");
+        ////    //sb.Replace("dnt_getpostcount", BaseConfigs.GetTablePrefix + "getpost" + tableListMaxId + "count");
+        ////    sb.Replace("dnt_deletepostbypid", BaseConfigs.GetTablePrefix + "deletepost" + tableListMaxId + "bypid");
+        ////    sb.Replace("dnt_getposttree", BaseConfigs.GetTablePrefix + "getpost" + tableListMaxId + "tree");
+        ////    sb.Replace("dnt_getsinglepost", BaseConfigs.GetTablePrefix + "getsinglepost" + tableListMaxId);
+        ////    sb.Replace("dnt_updatepost", BaseConfigs.GetTablePrefix + "updatepost" + tableListMaxId);
+        ////    sb.Replace("dnt_getnewtopics", BaseConfigs.GetTablePrefix + "getnewtopics");
+        ////    sb.Replace("dnt_getpostlist1", BaseConfigs.GetTablePrefix + "getpostlist" + tableListMaxId);
+        ////    sb.Replace("dnt_deletetopicbytidlist1", BaseConfigs.GetTablePrefix + "deletetopicbytidlist" + tableListMaxId);
+        ////    sb.Replace("dnt_getreplypid1", BaseConfigs.GetTablePrefix + "getreplypid" + tableListMaxId);
+        ////    sb.Replace("dnt_getnewtopics1", BaseConfigs.GetTablePrefix + "getnewtopics" + tableListMaxId);
+        ////    sb.Replace("dnt_getlastpostlist1", BaseConfigs.GetTablePrefix + "getlastpostlist" + tableListMaxId);
+        ////    sb.Replace("dnt_getdebatepostlist1", BaseConfigs.GetTablePrefix + "getdebatepostlist" + tableListMaxId);
+        ////    sb.Replace("dnt_getpostcountbycondition1", BaseConfigs.GetTablePrefix + "getpostcountbycondition" + tableListMaxId);
+        ////    sb.Replace("dnt_getpostlistbycondition1", BaseConfigs.GetTablePrefix + "getpostlistbycondition" + tableListMaxId);
+        ////    sb.Replace("dnt_", BaseConfigs.GetTablePrefix);
+
+        ////    DatabaseProvider.GetInstance().CreatePostProcedure(sb.ToString());
+
+        ////    #endregion
+        ////}
+
+
+        /// <summary>
+        /// 获取数据库版本
+        /// </summary>
+        /// <returns></returns>
+        public string GetDataBaseVersion()
+        {
+            return DbHelper.ExecuteScalar(CommandType.Text, "SELECT @@version").ToString();
         }
 
         #endregion
