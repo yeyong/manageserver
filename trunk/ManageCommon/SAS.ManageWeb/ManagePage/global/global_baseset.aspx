@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" CodeBehind="global_baseset.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.global_baseset" AutoEventWireup="True" %>
+﻿<%@ Page Language="C#" CodeBehind="global_baseset.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.global_baseset"%>
 <%@ Register TagPrefix="cc1" Namespace="SAS.Control" Assembly="SAS.Control" %>
 <%@ Register TagPrefix="uc1" TagName="TextareaResize" Src="../UserControls/TextareaResize.ascx" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

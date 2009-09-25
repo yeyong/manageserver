@@ -180,8 +180,10 @@ namespace SAS.Config
 
         private int m_notificationreserveddays = 7;//通知在系统中保留天数
         private int m_maxindexsubforumcount = 0;//首页显示的子版最大数,0为不限制
+        private string m_postnocustom = "";
         private int m_whosonlinecontract = 0;  //在线列表是否隐藏游客: 1 是 0 否
         private int m_deletingexpireduserfrequency = 5;//删除过期用户频率(单位:时间)
+        private int m_allowfloatwin = 1;//是否开启弹窗效果
         private int m_onlineoptimization = 0;//用户在线表性能优化开关
         private int m_onlineusercountcacheminute = 0;//在线用户数统计缓存时间，0为实时统计
         #endregion
@@ -1520,6 +1522,15 @@ namespace SAS.Config
         }
 
         /// <summary>
+        /// 帖子自定义楼号
+        /// </summary>
+        public string Postnocustom
+        {
+            get { return m_postnocustom; }
+            set { m_postnocustom = value; }
+        }
+
+        /// <summary>
         /// 首页显示最大子版数
         /// </summary>
         public int Maxindexsubforumcount
@@ -1540,6 +1551,15 @@ namespace SAS.Config
                 return m_deletingexpireduserfrequency;
             }
             set { m_deletingexpireduserfrequency = value; }
+        }
+
+        /// <summary>
+        /// 是否开启弹窗效果
+        /// </summary>
+        public int Allowfloatwin
+        {
+            get { return m_allowfloatwin; }
+            set { m_allowfloatwin = value; }
         }
 
         /// <summary>

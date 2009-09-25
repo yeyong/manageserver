@@ -66,5 +66,21 @@ namespace SAS.Logic
             }
         }
 
+        #region 后台管理重设缓存
+
+        private static void RemoveObject(string key)
+        {
+            SASCache.GetCacheService().RemoveObject(key);
+        }
+
+        /// <summary>
+        /// 重新设置论坛基本设置
+        ///</summary>
+        public static void ReSetConfig()
+        {
+            RemoveObject(CacheKeys.FORUM_SETTING);
+        }
+
+        #endregion
     }
 }
