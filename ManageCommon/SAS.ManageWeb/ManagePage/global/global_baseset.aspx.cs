@@ -196,11 +196,11 @@ namespace SAS.ManageWeb.ManagePage
                 configInfo.OnlineUserCountCacheMinute = Convert.ToInt32(onlineusercountcacheminute.Text);
                 GeneralConfigs.Serialiaze(configInfo, Server.MapPath("../../config/general.config"));
                 Urls.config = configInfo;
-                if (configInfo.Aspxrewrite == 1)
-                    AdminForums.SetForumsPathList(true, configInfo.Extname);
-                else
-                    AdminForums.SetForumsPathList(false, configInfo.Extname);
-                SAS.Cache.SASCache.GetCacheService().RemoveObject("/Forum/ForumList");
+                ////if (configInfo.Aspxrewrite == 1)
+                ////    AdminForums.SetForumsPathList(true, configInfo.Extname);
+                ////else
+                ////    AdminForums.SetForumsPathList(false, configInfo.Extname);
+                SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/ForumList");
                 SAS.Logic.TopicStats.SetQueueCount();
                 Caches.ReSetConfig();
                 AdminVistLogs.InsertLog(this.userid, this.username, this.usergroupid, this.grouptitle, this.ip, "基本设置", "");

@@ -83,6 +83,20 @@
     <Compile Include="ManagePage\global\global_baseset.aspx.designer.cs">
       <DependentUpon>global_baseset.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\global\global_templatesgrid.aspx.cs">
+      <DependentUpon>global_templatesgrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_templatesgrid.aspx.designer.cs">
+      <DependentUpon>global_templatesgrid.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\global\global_uiandshowstyle.aspx.cs">
+      <DependentUpon>global_uiandshowstyle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_uiandshowstyle.aspx.designer.cs">
+      <DependentUpon>global_uiandshowstyle.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -360,6 +374,8 @@
     <Content Include="ManagePage\framepage\top.aspx" />
     <Content Include="ManagePage\framepage\managerbody.aspx" />
     <Content Include="ManagePage\global\global_baseset.aspx" />
+    <Content Include="ManagePage\global\global_templatesgrid.aspx" />
+    <Content Include="ManagePage\global\global_uiandshowstyle.aspx" />
     <Content Include="ManagePage\images\add.gif" />
     <Content Include="ManagePage\images\addmenu.gif" />
     <Content Include="ManagePage\images\addremoveprograms.gif" />
