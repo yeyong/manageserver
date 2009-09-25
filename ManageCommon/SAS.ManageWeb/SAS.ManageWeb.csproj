@@ -355,19 +355,6 @@
     <Content Include="tools\VerifyImagePage.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Interop.SQLDMO.dll" />
-    <Content Include="bin\SAS.Cache.dll" />
-    <Content Include="bin\SAS.Cache.pdb" />
-    <Content Include="bin\SAS.Config.dll" />
-    <Content Include="bin\SAS.Config.pdb" />
-    <Content Include="bin\SAS.Data.dll" />
-    <Content Include="bin\SAS.Data.pdb" />
-    <Content Include="bin\SAS.Data.SqlServer.dll" />
-    <Content Include="bin\SAS.Data.SqlServer.pdb" />
-    <Content Include="bin\SAS.Entity.dll" />
-    <Content Include="bin\SAS.Entity.pdb" />
-    <Content Include="bin\SAS.Logic.dll" />
-    <Content Include="bin\SAS.Logic.pdb" />
     <Content Include="config\localupgradeini.config" />
     <Content Include="javascript\common.js" />
     <Content Include="ManagePage\framepage\top.aspx" />
