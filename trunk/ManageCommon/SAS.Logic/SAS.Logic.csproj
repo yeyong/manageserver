@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin\AdminTemplates.cs" />
     <Compile Include="admin\AdminVistLogs.cs" />
     <Compile Include="admin\AdminUserGroups.cs" />
     <Compile Include="Advertisements.cs" />
