@@ -1395,5 +1395,15 @@ namespace SAS.Data
         int UpdateTopicViewCount(int tid, int viewCount);
 
         #endregion
+
+        #region 板块处理forum操作
+
+        /// <summary>
+        /// 更新版块和用户模板Id
+        /// </summary>
+        /// <param name="templateIdList">模板Id列表</param>
+        void UpdateForumAndUserTemplateId(string templateIdList);
+
+        #endregion
     }
 }
