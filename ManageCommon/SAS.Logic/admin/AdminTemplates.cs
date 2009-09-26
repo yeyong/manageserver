@@ -43,7 +43,7 @@ namespace SAS.Logic
             int count = TypeConverter.ObjectToInt(Data.DataProvider.Templates.GetValidTemplateList().Compute("Max(tp_id)", "")) + 1;
             foreach (DirectoryInfo dir in dirInfo.GetDirectories())
             {
-                if (dir != null)
+                if (dir != null && !dir.Attributes.ToString().Contains(System.IO.FileAttributes.Hidden.ToString()))
                 {
                     bool itemexist = false;
                     foreach (DataRow dr in dt.Rows)
