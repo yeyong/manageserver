@@ -691,10 +691,11 @@
     <None Include="ManagePage\images\ad\Thumbs.db" />
     <None Include="ManagePage\images\Thumbs.db" />
     <Content Include="ManagePage\xml\navmenu.config" />
+    <Content Include="templates\default\about.xml" />
+    <Content Include="templates\default\templatevariable.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ManagePage\xml\backup\" />
-    <Folder Include="templates\default\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />

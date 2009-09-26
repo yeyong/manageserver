@@ -72,30 +72,30 @@
                     <HeaderStyle Width="20px" />
                     <ItemTemplate>
 							<input id="templateid" onclick="checkedEnabledButton(this.form,'templateid','IntoDB','DelRec','DelTemplates')" type="checkbox" 
-							value="<%# DataBinder.Eval(Container, "DataItem.templateid").ToString() %>"	name="templateid" />
-							<input type="hidden" name="temp<%# DataBinder.Eval(Container, "DataItem.templateid").ToString() %>" 
-							value="<%# DataBinder.Eval(Container, "DataItem.directory").ToString() %>" />
+							value="<%# DataBinder.Eval(Container, "DataItem.tp_id").ToString() %>"	name="templateid" />
+							<input type="hidden" name="temp<%# DataBinder.Eval(Container, "DataItem.tp_id").ToString() %>" 
+							value="<%# DataBinder.Eval(Container, "DataItem.tp_directory").ToString() %>" />
 					</ItemTemplate>
                 </asp:TemplateColumn>
-                <asp:BoundColumn DataField="templateid" HeaderText="ID [递增]" Visible="false"></asp:BoundColumn>
+                <asp:BoundColumn DataField="tp_id" HeaderText="ID [递增]" Visible="false"></asp:BoundColumn>
                 <asp:TemplateColumn HeaderText="模板名称">
                     <itemstyle horizontalalign="Left" />
                     <ItemTemplate>
-						    &nbsp;<span id="<%# DataBinder.Eval(Container, "DataItem.name").ToString() %>" onmouseover="showMenu(this.id, 0, 0, 1, 0);" style="font-weight:bold">
-							    <%# DataBinder.Eval(Container, "DataItem.name").ToString() %>&nbsp;
+						    &nbsp;<span id="<%# DataBinder.Eval(Container, "DataItem.tp_name").ToString() %>" onmouseover="showMenu(this.id, 0, 0, 1, 0);" style="font-weight:bold">
+							    <%# DataBinder.Eval(Container, "DataItem.tp_name").ToString()%>&nbsp;
 							    <img src="../images/eye.gif" style="vertical-align:middle" />
 							</span>
-							<div id="<%# DataBinder.Eval(Container, "DataItem.name").ToString() %>_menu" style="display:none">
-							    <img src="../../templates/<%# DataBinder.Eval(Container, "DataItem.name").ToString() %>/about.png" onerror="this.src='../../images/common/none.gif'" />
+							<div id="<%# DataBinder.Eval(Container, "DataItem.tp_name").ToString() %>_menu" style="display:none">
+							    <img src="../../templates/<%# DataBinder.Eval(Container, "DataItem.tp_directory").ToString() %>/about.png" onerror="this.src='../../images/common/none.gif'" />
 							</div>
 					</ItemTemplate>
                 </asp:TemplateColumn>
-                <asp:BoundColumn DataField="directory" HeaderText="存放路径"></asp:BoundColumn>
-                <asp:BoundColumn DataField="copyright" HeaderText="版权"></asp:BoundColumn>
-                <asp:BoundColumn DataField="author" HeaderText="作者"></asp:BoundColumn>
-                <asp:BoundColumn DataField="createdate" HeaderText="创建日期" ReadOnly="true"></asp:BoundColumn>
-                <asp:BoundColumn DataField="ver" HeaderText="模板版本"></asp:BoundColumn>
-                <asp:BoundColumn DataField="fordntver" HeaderText="论坛版本" ReadOnly="true"></asp:BoundColumn>
+                <asp:BoundColumn DataField="tp_directory" HeaderText="存放路径"></asp:BoundColumn>
+                <asp:BoundColumn DataField="tp_copyright" HeaderText="版权"></asp:BoundColumn>
+                <asp:BoundColumn DataField="tp_author" HeaderText="作者"></asp:BoundColumn>
+                <asp:BoundColumn DataField="tp_createdate" HeaderText="创建日期" ReadOnly="true"></asp:BoundColumn>
+                <asp:BoundColumn DataField="tp_ver" HeaderText="模板版本"></asp:BoundColumn>
+                <asp:BoundColumn DataField="tp_fordntver" HeaderText="论坛版本" ReadOnly="true"></asp:BoundColumn>
                 <asp:TemplateColumn HeaderText="已入库">
                     <ItemTemplate>
 						<asp:Label id=Label1 runat="server" Text='<%# Valid(DataBinder.Eval(Container, "DataItem.valid").ToString())%>'></asp:Label>
@@ -103,7 +103,7 @@
                 </asp:TemplateColumn>
                 <asp:TemplateColumn HeaderText="" HeaderStyle-Width="60px">
                     <ItemTemplate>
-						<asp:Label id=Label2 runat="server" Text='<%# CreateStr(DataBinder.Eval(Container, "DataItem.name").ToString(),DataBinder.Eval(Container, "DataItem.directory").ToString(),DataBinder.Eval(Container, "DataItem.templateid").ToString())%>'></asp:Label>
+						<asp:Label id=Label2 runat="server" Text='<%# CreateStr(DataBinder.Eval(Container, "DataItem.tp_name").ToString(),DataBinder.Eval(Container, "DataItem.tp_directory").ToString(),DataBinder.Eval(Container, "DataItem.tp_id").ToString())%>'></asp:Label>
 					</ItemTemplate>
                 </asp:TemplateColumn>
             </Columns>

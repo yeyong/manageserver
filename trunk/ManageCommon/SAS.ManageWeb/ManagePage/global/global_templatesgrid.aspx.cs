@@ -48,13 +48,13 @@ namespace SAS.ManageWeb.ManagePage
             string templateidlist = "0";
             foreach (DataRow dr in buildGridData().Select("valid =1"))
             {
-                DirectoryInfo dirinfo = new DirectoryInfo(path + dr["directory"].ToString() + "/");
-                if (dr["directory"].ToString().ToLower() == "default")
+                DirectoryInfo dirinfo = new DirectoryInfo(path + dr["tp_directory"].ToString() + "/");
+                if (dr["tp_directory"].ToString().ToLower() == "default")
                     continue;
                 if (!dirinfo.Exists)
                 {
-                    templatepath += dr["directory"].ToString() + " ,";
-                    templateidlist += "," + dr["templateid"].ToString();
+                    templatepath += dr["tp_directory"].ToString() + " ,";
+                    templateidlist += "," + dr["tp_id"].ToString();
                 }
             }
 
@@ -90,7 +90,7 @@ namespace SAS.ManageWeb.ManagePage
                         return;
                     }
 
-                    int maxdbtemplateid = TypeConverter.ObjectToInt(Templates.GetValidTemplateList().Compute("Max(templateid)", ""));
+                    int maxdbtemplateid = TypeConverter.ObjectToInt(Templates.GetValidTemplateList().Compute("Max(tp_id)", ""));
                     foreach (string templateid in templateidlist.Split(','))
                     {
                         if (Utils.StrToInt(templateid, 0) > maxdbtemplateid)
@@ -166,7 +166,7 @@ namespace SAS.ManageWeb.ManagePage
                     }
 
                     path = Utils.GetMapPath(@"..\..\templates\");
-                    int maxdbtemplateid = TypeConverter.ObjectToInt(Templates.GetValidTemplateList().Compute("Max(templateid)", ""));
+                    int maxdbtemplateid = TypeConverter.ObjectToInt(Templates.GetValidTemplateList().Compute("Max(tp_id)", ""));
 
                     foreach (string templateid in templateidlist.Split(','))
                     {
@@ -196,7 +196,7 @@ namespace SAS.ManageWeb.ManagePage
                             base.RegisterStartupScript("", "<script>alert('无法更新数据库');window.location.href='global_templatesgrid.aspx';</script>");
                         }
 
-                        CreateTemplateByDirectory(dr["directory"].ToString().Trim());
+                        CreateTemplateByDirectory(dr["tp_directory"].ToString().Trim());
                     }
 
                     SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/TemplateList");
@@ -274,7 +274,7 @@ namespace SAS.ManageWeb.ManagePage
 
             DataGrid1.SaveDSViewState = true;
             DataGrid1.TableHeaderName = "模板列表";
-            DataGrid1.DataKeyField = "templateid";
+            DataGrid1.DataKeyField = "tp_id";
             DataGrid1.AllowPaging = false;
             DataGrid1.AllowSorting = false;
             DataGrid1.ShowFooter = false;
