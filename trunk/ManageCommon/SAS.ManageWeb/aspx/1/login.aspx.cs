@@ -20,6 +20,12 @@ namespace SAS.ManageWeb
             virtualLogin();
         }
 
+        protected override void ShowPage()
+        {
+            pagetitle = "登录页面";
+            base.ShowPage();
+        }
+
         /// <summary>
         /// 测试用登录临时方法
         /// </summary>
