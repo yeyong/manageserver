@@ -36,14 +36,26 @@
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Button.cs" />
+    <Compile Include="Calendar.cs" />
+    <Compile Include="CheckBoxList.cs" />
+    <Compile Include="ColorPicker.cs" />
     <Compile Include="DataGrid.cs" />
     <Compile Include="DropDownList.cs" />
     <Compile Include="Hint.cs" />
     <Compile Include="RadioButtonList.cs" />
+    <Compile Include="tab\TabEditor.cs" />
+    <Compile Include="tab\TabControlDesigner.cs" />
+    <Compile Include="tab\TabControl.cs" />
+    <Compile Include="tab\TabEditorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="tab\TabPage.cs" />
+    <Compile Include="tab\TabPageCollection.cs" />
     <Compile Include="TextBox.cs" />
     <Compile Include="WebControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
