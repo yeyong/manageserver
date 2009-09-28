@@ -83,6 +83,13 @@
     <Compile Include="ManagePage\global\global_baseset.aspx.designer.cs">
       <DependentUpon>global_baseset.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\global\global_templatesedit.aspx.cs">
+      <DependentUpon>global_templatesedit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_templatesedit.aspx.designer.cs">
+      <DependentUpon>global_templatesedit.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\global\global_templatesgrid.aspx.cs">
       <DependentUpon>global_templatesgrid.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -90,12 +97,26 @@
     <Compile Include="ManagePage\global\global_templatesgrid.aspx.designer.cs">
       <DependentUpon>global_templatesgrid.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\global\global_templatetree.aspx.cs">
+      <DependentUpon>global_templatetree.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_templatetree.aspx.designer.cs">
+      <DependentUpon>global_templatetree.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\global\global_uiandshowstyle.aspx.cs">
       <DependentUpon>global_uiandshowstyle.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManagePage\global\global_uiandshowstyle.aspx.designer.cs">
       <DependentUpon>global_uiandshowstyle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\global\global_usergrid.aspx.cs">
+      <DependentUpon>global_usergrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_usergrid.aspx.designer.cs">
+      <DependentUpon>global_usergrid.aspx</DependentUpon>
     </Compile>
     <Compile Include="ManagePage\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
@@ -370,12 +391,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="config\localupgradeini.config" />
+    <Content Include="favicon.ico" />
     <Content Include="javascript\common.js" />
     <Content Include="ManagePage\framepage\top.aspx" />
     <Content Include="ManagePage\framepage\managerbody.aspx" />
     <Content Include="ManagePage\global\global_baseset.aspx" />
+    <Content Include="ManagePage\global\global_templatesedit.aspx" />
     <Content Include="ManagePage\global\global_templatesgrid.aspx" />
+    <Content Include="ManagePage\global\global_templatetree.aspx" />
     <Content Include="ManagePage\global\global_uiandshowstyle.aspx" />
+    <Content Include="ManagePage\global\global_usergrid.aspx" />
     <Content Include="ManagePage\images\add.gif" />
     <Content Include="ManagePage\images\addmenu.gif" />
     <Content Include="ManagePage\images\addremoveprograms.gif" />
@@ -676,6 +701,8 @@
     <Content Include="ManagePage\rapidset\managesubmenu.aspx" />
     <Content Include="ManagePage\rapidset\managesubmenuitem.aspx" />
     <Content Include="ManagePage\rapidset\systeminf.aspx" />
+    <Content Include="ManagePage\styles\calendar.css" />
+    <Content Include="ManagePage\styles\colorpicker.css" />
     <Content Include="ManagePage\styles\datagrid.css" />
     <Content Include="ManagePage\styles\default.css" />
     <Content Include="ManagePage\styles\dntmanager.css" />
@@ -692,7 +719,12 @@
     <None Include="ManagePage\images\Thumbs.db" />
     <Content Include="ManagePage\xml\navmenu.config" />
     <Content Include="templates\default\about.xml" />
+    <Content Include="templates\default\login.htm" />
     <Content Include="templates\default\templatevariable.xml" />
+    <Content Include="templates\default\_copyright.htm" />
+    <Content Include="templates\default\_footer.htm" />
+    <Content Include="templates\default\_header.htm" />
+    <Content Include="templates\default\_pageheader.htm" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ManagePage\xml\backup\" />
