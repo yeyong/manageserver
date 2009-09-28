@@ -435,12 +435,32 @@ namespace SAS.Data
         ///// <returns></returns>
         //DataTable UserList(int pageSize, int currentPage, string condition);
 
-        ///// <summary>
-        ///// 获取按条件搜索得到的用户列表
-        ///// </summary>
-        ///// <param name="searchCondition">搜索条件</param>
-        ///// <returns></returns>
-        //DataTable Global_UserGrid(string searchCondition);
+        /// <summary>
+        /// 获取用户查询条件
+        /// </summary>
+        /// <param name="isLike">模糊查询</param>
+        /// <param name="isPostDateTime">发帖日期</param>
+        /// <param name="userName">用户名</param>
+        /// <param name="nickName">昵称</param>
+        /// <param name="userGroup">用户组</param>
+        /// <param name="email">Email</param>
+        /// <param name="credits_Start">积分起始值</param>
+        /// <param name="credits_End">积分结束值 </param>
+        /// <param name="lastIp">最全登录IP</param>
+        /// <param name="posts">帖数</param>
+        /// <param name="digestPosts">精华帖数</param>
+        /// <param name="uid">Uid</param>
+        /// <param name="joindateStart">注册起始日期</param>
+        /// <param name="joindateEnd">注册结束日期</param>
+        /// <returns></returns>
+        string Global_UserGrid_SearchCondition(bool isLike, bool isPostDateTime, string userName, string nickName, string userGroup, string email, string creditsStart, string creditsEnd, string lastIp, string posts, string digestPosts, string uid, string joindateStart, string joindateEnd);
+
+        /// <summary>
+        /// 获取按条件搜索得到的用户列表
+        /// </summary>
+        /// <param name="searchCondition">搜索条件</param>
+        /// <returns></returns>
+        DataTable Global_UserGrid(string searchCondition);
 
         ///// <summary>
         ///// 获取符合条件的用户数
