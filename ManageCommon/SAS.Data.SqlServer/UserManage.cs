@@ -459,6 +459,101 @@ namespace SAS.Data.SqlServer
             return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
         }
 
+        /// <summary>
+        /// 获取用户查询条件
+        /// </summary>
+        /// <param name="isLike">模糊查询</param>
+        /// <param name="isPostDateTime">发帖日期</param>
+        /// <param name="userName">用户名</param>
+        /// <param name="nickName">昵称</param>
+        /// <param name="userGroup">用户组</param>
+        /// <param name="email">Email</param>
+        /// <param name="credits_Start">积分起始值</param>
+        /// <param name="credits_End">积分结束值 </param>
+        /// <param name="lastIp">最全登录IP</param>
+        /// <param name="posts">帖数</param>
+        /// <param name="digestPosts">精华帖数</param>
+        /// <param name="uid">Uid</param>
+        /// <param name="joindateStart">注册起始日期</param>
+        /// <param name="joindateEnd">注册结束日期</param>
+        /// <returns></returns>
+        public string Global_UserGrid_SearchCondition(bool isLike, bool isPostDateTime, string userName, string nickName, string userGroup, string email, string creditsStart, string creditsEnd, string lastIp, string posts, string digestPosts, string uid, string joinDateStart, string joinDateEnd)
+        {
+            string tableName = string.Format("[{0}personInfo]", BaseConfigs.GetTablePrefix);
+            StringBuilder sqlBuilder = new StringBuilder(" " + tableName + ".[ps_id]<>'00000000-0000-0000-0000-000000000000' ");
+
+            if (isLike)
+            {
+                if (!Utils.StrIsNullOrEmpty(userName))
+                    sqlBuilder.AppendFormat(" AND {1}.[ps_name] like'%{0}%'", RegEsc(userName), tableName);
+                if (!Utils.StrIsNullOrEmpty(nickName))
+                    sqlBuilder.AppendFormat(" AND {1}.[ps_nickName] like'%{0}%'", RegEsc(nickName), tableName);
+            }
+            else
+            {
+                if (!Utils.StrIsNullOrEmpty(userName))
+                    sqlBuilder.AppendFormat(" AND {1}.[ps_name] ='{0}'", userName, tableName);
+                if (!Utils.StrIsNullOrEmpty(nickName))
+                    sqlBuilder.AppendFormat(" AND {1}.[ps_nickName] ='{0}'", nickName, tableName);
+            }
+
+            if (TypeConverter.StrToInt(userGroup) > 0)
+                sqlBuilder.AppendFormat(" AND {1}.[ps_ug_id]={0}", userGroup, tableName);
+
+            if (!Utils.StrIsNullOrEmpty(email))
+                sqlBuilder.AppendFormat(" AND {1}.[ps_email] LIKE '%{0}%'", RegEsc(email), tableName);
+
+            if (!Utils.StrIsNullOrEmpty(creditsStart))
+                sqlBuilder.AppendFormat(" AND {1}.[ps_credits] >={0}", creditsStart, tableName);
+
+            if (!Utils.StrIsNullOrEmpty(creditsEnd))
+                sqlBuilder.AppendFormat(" AND {1}.[ps_credits] <={0}", creditsEnd, tableName);
+
+            if (!Utils.StrIsNullOrEmpty(lastIp))
+                sqlBuilder.AppendFormat(" AND {1}.[ps_loginIP] LIKE '%{0}%'", RegEsc(lastIp), tableName);
+
+            ////if (!Utils.StrIsNullOrEmpty(posts))
+            ////    sqlBuilder.AppendFormat(" AND {1}.[posts] >={0}", posts, tableName);
+
+            ////if (!Utils.StrIsNullOrEmpty(digestPosts))
+            ////    sqlBuilder.AppendFormat(" AND {1}.[digestposts] >={0}", digestPosts, tableName);
+
+            if (uid != "" && uid != "00000000-0000-0000-0000-000000000000")
+            {
+                uid = uid.Replace(", ", ",");
+
+                if (uid.IndexOf(",") == 0)
+                    uid = uid.Substring(1, uid.Length - 1);
+
+                if (uid.LastIndexOf(",") == (uid.Length - 1))
+                    uid = uid.Substring(0, uid.Length - 1);
+
+                if (uid != "" && uid != "00000000-0000-0000-0000-000000000000")
+                    sqlBuilder.AppendFormat(" AND {1}.[ps_id] IN({0})", uid, tableName);
+            }
+
+            if (isPostDateTime)
+            {
+                sqlBuilder.AppendFormat(" AND {1}.[ps_createDate] >='{0}'", DateTime.Parse(joinDateStart).ToString("yyyy-MM-dd HH:mm:ss"), tableName);
+                sqlBuilder.AppendFormat(" AND {1}.[ps_createDate] <='{0}'", DateTime.Parse(joinDateEnd).ToString("yyyy-MM-dd HH:mm:ss"), tableName);
+            }
+            return sqlBuilder.ToString();
+        }
+
+        /// <summary>
+        /// 获取按条件搜索得到的用户列表
+        /// </summary>
+        /// <param name="searchCondition">搜索条件</param>
+        /// <returns></returns>
+        public DataTable Global_UserGrid(string searchCondition)
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}personInfo] WHERE {2}",
+                                                DbFields.USERS,
+                                                BaseConfigs.GetTablePrefix,
+                                                searchCondition);
+            return DbHelper.ExecuteDataset(commandText).Tables[0];
+        }
+
         #endregion
 
         #region 在线用户OnlineUser表基本操作
@@ -698,7 +793,7 @@ namespace SAS.Data.SqlServer
         /// <returns></returns>
         public int SetUserOnlineState(Guid uid, int onlineState)
         {
-            string commandText = string.Format("UPDATE [{0}personInfo] SET [ps_status]={1},[ps_lastactivity]=GETDATE(),[ps_lastLogin]=GETDATE() WHERE [ps_id]={2}",
+            string commandText = string.Format("UPDATE [{0}personInfo] SET [ps_status]={1},[ps_lastactivity]=GETDATE(),[ps_lastLogin]=GETDATE() WHERE [ps_id]='{2}'",
                                                 BaseConfigs.GetTablePrefix,
                                                 onlineState,
                                                 uid);
