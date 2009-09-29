@@ -650,14 +650,14 @@ namespace SAS.Data.DataProvider
         ////    DatabaseProvider.GetInstance().UpdateUserAdminIdByGroupId(adminId, groupId);
         ////}
 
-        /////// <summary>
-        /////// 更新用户到禁言组
-        /////// </summary>
-        /////// <param name="uidList">用户Id列表</param>
-        ////public static void UpdateUserToStopTalkGroup(string uidList)
-        ////{
-        ////    DatabaseProvider.GetInstance().SetStopTalkUser(uidList);
-        ////}
+        /// <summary>
+        /// 更新用户到禁言组
+        /// </summary>
+        /// <param name="uidList">用户Id列表</param>
+        public static void UpdateUserToStopTalkGroup(string uidList)
+        {
+            DatabaseProvider.GetInstance().SetStopTalkUser(uidList);
+        }
 
         ///// <summary>
         ///// 清除用户所发帖数以及精华数
@@ -698,16 +698,16 @@ namespace SAS.Data.DataProvider
         ////    return DatabaseProvider.GetInstance().GetUserListByGroupid(groupIdList);
         ////}
 
-        /////// <summary>
-        /////// 获取当前页用户列表
-        /////// </summary>
-        /////// <param name="pageSize">每页记录数</param>
-        /////// <param name="currentPage">当前页数</param>
-        /////// <returns></returns>
-        ////public static DataTable GetUserListByCurrentPage(int pageSize, int currentPage)
-        ////{
-        ////    return DatabaseProvider.GetInstance().GetUserList(pageSize, currentPage);
-        ////}
+        /// <summary>
+        /// 获取当前页用户列表
+        /// </summary>
+        /// <param name="pageSize">每页记录数</param>
+        /// <param name="currentPage">当前页数</param>
+        /// <returns></returns>
+        public static DataTable GetUserListByCurrentPage(int pageSize, int currentPage)
+        {
+            return DatabaseProvider.GetInstance().GetUserList(pageSize, currentPage);
+        }
 
         /////// <summary>
         /////// 获取用户名列表指定的Email列表
@@ -749,17 +749,17 @@ namespace SAS.Data.DataProvider
         ////    DatabaseProvider.GetInstance().DeleteUserByUidlist(uidList);
         ////}
 
-        /////// <summary>
-        /////// 删除用户信息
-        /////// </summary>
-        /////// <param name="uid">用户Id</param>
-        /////// <param name="delPosts">是否删除帖子</param>
-        /////// <param name="delPms">是否删除短信</param>
-        /////// <returns></returns>
-        ////public static bool DeleteUser(Guid uid, bool delPosts, bool delPms)
-        ////{
-        ////    return DatabaseProvider.GetInstance().DelUserAllInf(uid, delPosts, delPms);
-        ////}
+        /// <summary>
+        /// 删除用户信息
+        /// </summary>
+        /// <param name="uid">用户Id</param>
+        /// <param name="delPosts">是否删除帖子</param>
+        /// <param name="delPms">是否删除短信</param>
+        /// <returns></returns>
+        public static bool DeleteUser(Guid uid, bool delPosts, bool delPms)
+        {
+            return DatabaseProvider.GetInstance().DelUserAllInf(uid, delPosts, delPms);
+        }
 
         /////// <summary>
         /////// 清空用户Id列表中的验证码
@@ -956,36 +956,36 @@ namespace SAS.Data.DataProvider
             return DatabaseProvider.GetInstance().Global_UserGrid(searchCondition);
         }
 
-        /////// <summary>
-        /////// 获取用户列表
-        /////// </summary>
-        /////// <param name="pagesize">页面大小</param>
-        /////// <param name="currentpage">当前页</param>
-        /////// <param name="condition">条件</param>
-        /////// <returns></returns>
-        ////public static DataTable GetUserList(int pagesize, int currentpage, string condition)
-        ////{
-        ////    return DatabaseProvider.GetInstance().UserList(pagesize, currentpage, condition);
-        ////}
+        /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <param name="pagesize">页面大小</param>
+        /// <param name="currentpage">当前页</param>
+        /// <param name="condition">条件</param>
+        /// <returns></returns>
+        public static DataTable GetUserList(int pagesize, int currentpage, string condition)
+        {
+            return DatabaseProvider.GetInstance().UserList(pagesize, currentpage, condition);
+        }
 
-        /////// <summary>
-        /////// 获取符合条件的用户数
-        /////// </summary>
-        /////// <param name="condition"></param>
-        /////// <returns></returns>
-        ////public static int GetUserCount(string condition)
-        ////{
-        ////    return DatabaseProvider.GetInstance().Global_UserGrid_RecordCount(condition);
-        ////}
+        /// <summary>
+        /// 获取符合条件的用户数
+        /// </summary>
+        /// <param name="condition"></param>
+        /// <returns></returns>
+        public static int GetUserCount(string condition)
+        {
+            return DatabaseProvider.GetInstance().Global_UserGrid_RecordCount(condition);
+        }
 
-        /////// <summary>
-        /////// 获取用户查询条件
-        /////// </summary>
-        /////// <param name="getstring"></param>
-        /////// <returns></returns>
-        ////public static string GetUserListCondition(string getstring)
-        ////{
-        ////    return DatabaseProvider.GetInstance().Global_UserGrid_GetCondition(getstring);
-        ////}
+        /// <summary>
+        /// 获取用户查询条件
+        /// </summary>
+        /// <param name="getstring"></param>
+        /// <returns></returns>
+        public static string GetUserListCondition(string getstring)
+        {
+            return DatabaseProvider.GetInstance().Global_UserGrid_GetCondition(getstring);
+        }
     }
 }

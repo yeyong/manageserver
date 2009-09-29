@@ -26,7 +26,7 @@ namespace SAS.ManageWeb.ManagePage
 
                 joindateEnd.SelectedDate = DateTime.Now;
 
-                UserGroup.AddTableData(UserGroups.GetUserGroupForDataTable(), "grouptitle", "groupid");
+                UserGroup.AddTableData(UserGroups.GetUserGroupForDataTable(), "pg_name", "pg_id");
                 if ((SASRequest.GetString("username") != null) && (SASRequest.GetString("username") != ""))
                 {
                     ViewState["condition"] = Users.GetUserListCondition(SASRequest.GetString("username"));

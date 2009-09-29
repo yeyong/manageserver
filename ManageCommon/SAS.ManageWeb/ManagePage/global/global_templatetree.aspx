@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" CodeBehind="global_templatetree.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.global_templatetree" AutoEventWireup="True" %>
+﻿<%@ Page Language="C#" CodeBehind="global_templatetree.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.global_templatetree"%>
 <%@ Register TagPrefix="cc3" Namespace="SAS.Control" Assembly="SAS.Control" %>
 <%@ Register TagPrefix="cc2" Namespace="SAS.Control" Assembly="SAS.Control" %>
 <%@ Register Src="../UserControls/PageInfo.ascx" TagName="PageInfo" TagPrefix="uc1" %>
