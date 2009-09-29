@@ -60,6 +60,11 @@ namespace SAS.Data
         /// 管理员日志表字段
         /// </summary>
         public const string ADMIN_VISIT_LOG = "[av_id],[av_ps_id],[av_ps_name],[av_ug_id],[av_ug_name],[av_ip],[av_postdatetime],[av_actions],[av_others]";
+
+        /// <summary>
+        /// 数据表分表字段
+        /// </summary>
+        public const string TABLE_LIST = "[id],[createdatetime],[description],[mintid],[maxtid]";
        
     }
 }

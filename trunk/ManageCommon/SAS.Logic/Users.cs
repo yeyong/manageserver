@@ -125,6 +125,15 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 得到论坛中用户总数
+        /// </summary>
+        /// <returns>用户总数</returns>
+        public static int GetUserCount(string condition)
+        {
+            return (condition == "") ? SAS.Data.DataProvider.Users.GetUserCount() : Data.DataProvider.Users.GetUserCount(condition);
+        }
+
+        /// <summary>
         /// 更新用户积分和最后登录时间
         /// </summary>
         /// <param name="uid">用户id</param>
@@ -132,6 +141,84 @@ namespace SAS.Logic
         {
             //UserCredits.UpdateUserCredits(uid);
             SAS.Data.DataProvider.Users.UpdateUserLastvisit(uid, ip);
+        }
+
+        /// <summary>
+        /// 更新用户到禁言组
+        /// </summary>
+        /// <param name="uidList">用户Id列表</param>
+        public static void UpdateUserToStopTalkGroup(string uidList)
+        {
+            SAS.Data.DataProvider.Users.UpdateUserToStopTalkGroup(uidList);
+        }
+
+        /// <summary>
+        /// 获取当前页用户列表
+        /// </summary>
+        /// <param name="pageSize">每页记录数</param>
+        /// <param name="currentPage">当前页数</param>
+        /// <returns></returns>
+        public static DataTable GetUserListByCurrentPage(int pageSize, int currentPage)
+        {
+            return Data.DataProvider.Users.GetUserListByCurrentPage(pageSize, currentPage);
+        }
+
+        /// <summary>
+        /// 获取用户查询条件
+        /// </summary>
+        /// <param name="isLike">模糊查询</param>
+        /// <param name="isPostDateTime">发帖日期</param>
+        /// <param name="userName">用户名</param>
+        /// <param name="nickName">昵称</param>
+        /// <param name="userGroup">用户组</param>
+        /// <param name="email">Email</param>
+        /// <param name="credits_Start">积分起始值</param>
+        /// <param name="credits_End">积分结束值 </param>
+        /// <param name="lastIp">最全登录IP</param>
+        /// <param name="posts">帖数</param>
+        /// <param name="digestPosts">精华帖数</param>
+        /// <param name="uid">Uid</param>
+        /// <param name="joindateStart">注册起始日期</param>
+        /// <param name="joindateEnd">注册结束日期</param>
+        /// <returns></returns>
+        public static string GetUsersSearchCondition(bool isLike, bool isPostDateTime, string userName, string nickName,
+            string userGroup, string email, string credits_Start, string credits_End, string lastIp, string posts, string digestPosts,
+            string uid, string joindateStart, string joindateEnd)
+        {
+            return Data.DataProvider.Users.GetUsersSearchCondition(isLike, isPostDateTime, userName, nickName,
+                userGroup, email, credits_Start, credits_End, lastIp, posts, digestPosts, uid, joindateStart, joindateEnd);
+        }
+
+        /// <summary>
+        /// 获取按条件搜索得到的用户列表
+        /// </summary>
+        /// <param name="searchCondition">搜索条件</param>
+        /// <returns></returns>
+        public static DataTable GetUsersByCondition(string searchCondition)
+        {
+            return Data.DataProvider.Users.GetUsersByCondition(searchCondition);
+        }
+
+        /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <param name="pagesize">页面大小</param>
+        /// <param name="currentpage">当前页</param>
+        /// <param name="condition">条件</param>
+        /// <returns></returns>
+        public static DataTable GetUserList(int pagesize, int currentpage, string condition)
+        {
+            return Data.DataProvider.Users.GetUserList(pagesize, currentpage, condition);
+        }
+
+        /// <summary>
+        /// 获取用户查询条件
+        /// </summary>
+        /// <param name="getstring"></param>
+        /// <returns></returns>
+        public static string GetUserListCondition(string getstring)
+        {
+            return SAS.Data.DataProvider.Users.GetUserListCondition(getstring);
         }
     }
 }

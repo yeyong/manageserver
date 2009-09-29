@@ -108,6 +108,147 @@ namespace SAS.Data.SqlServer
         }
 
         /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="currentPage"></param>
+        /// <returns></returns>
+        public DataTable GetUserList(int pageSize, int currentPage)
+        {
+            int pagetop = (currentPage - 1) * pageSize;
+            string commandText;
+            if (currentPage == 1)
+                commandText = string.Format("SELECT TOP {0} [{1}personInfo].[ps_id], [{1}personInfo].[ps_name],[{1}personInfo].[ps_nickName], [{1}personInfo].[ps_createDate], [{1}personInfo].[ps_credits], [{1}personInfo].[ps_lastactivity], [{1}personInfo].[ps_email],[{1}personInfo].[ps_lastLogin],[{1}personInfo].[ps_lastLogin],[{1}personDetail].[pd_website],[{1}userGroup].[ug_name] FROM [{1}personInfo] LEFT JOIN [{1}personDetail] ON [{1}personDetail].[pd_id] = [{1}personInfo].[ps_id] LEFT JOIN [{1}userGroup] ON [{1}userGroup].[ug_id]=[{1}personInfo].[ps_ug_id] ORDER BY [{1}personInfo].[ps_id] DESC",
+                                             pageSize,
+                                             BaseConfigs.GetTablePrefix);
+            else
+                commandText = string.Format("SELECT TOP {0} [{1}personInfo].[ps_id], [{1}personInfo].[ps_name],[{1}personInfo].[ps_nickName], [{1}personInfo].[ps_createDate], [{1}personInfo].[ps_credits], [{1}personInfo].[ps_lastactivity], [{1}personInfo].[ps_email],[{1}personInfo].[ps_lastLogin],[{1}personInfo].[ps_lastLogin],[{1}personDetail].[pd_website],[{1}userGroup].[ug_name] FROM [{1}personInfo],[{1}personDetail],[{1}userGroup] WHERE [{1}personDetail].[pd_id] = [{1}personInfo].[ps_id] AND  [{1}userGroup].[ug_id]=[{1}personInfo].[ps_ug_id] AND [{1}personInfo].[ps_id] < (SELECT min([ps_id])  FROM (SELECT TOP {2} [ps_id] FROM [{1}personInfo] ORDER BY [ps_id] DESC) AS tblTmp )  ORDER BY [{1}personInfo].[ps_id] DESC",
+                                             pageSize,
+                                             BaseConfigs.GetTablePrefix,
+                                             pagetop);
+
+            return DbHelper.ExecuteDataset(commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 获取指定条件和分页下的用户列表信息
+        /// </summary>
+        /// <param name="pageSize">页面大小</param>
+        /// <param name="currentPage">当前页</param>
+        /// <param name="condition">条件</param>
+        /// <returns></returns>
+        public DataTable UserList(int pageSize, int currentPage, string condition)
+        {
+            int pagetop = (currentPage - 1) * pageSize;
+            string commandText;
+            if (currentPage == 1)
+                  commandText = string.Format("SELECT TOP {0} [{1}personInfo].[ps_id], [{1}personInfo].[ps_name],[{1}personInfo].[ps_nickName], [{1}personInfo].[ps_createDate], [{1}personInfo].[ps_credits], [{1}personInfo].[ps_lastactivity], [{1}personInfo].[ps_email],[{1}personInfo].[ps_lastLogin],[{1}personInfo].[ps_lastLogin],[{1}personDetail].[pd_website],[{1}userGroup].[ug_name] FROM [{1}personInfo] LEFT JOIN [{1}personDetail] ON [{1}personDetail].[pd_id] = [{1}personInfo].[ps_id] LEFT JOIN [{1}userGroup] ON [{1}userGroup].[ug_id]=[{1}personInfo].[ps_ug_id] WHERE {2} ORDER BY [{1}personInfo].[ps_id] DESC",
+                                             pageSize,
+                                             BaseConfigs.GetTablePrefix,
+                                             condition);
+            else
+                commandText = string.Format("SELECT TOP {0} [{1}personInfo].[ps_id], [{1}personInfo].[ps_name],[{1}personInfo].[ps_nickName], [{1}personInfo].[ps_createDate], [{1}personInfo].[ps_credits], [{1}personInfo].[ps_lastactivity], [{1}personInfo].[ps_email],[{1}personInfo].[ps_lastLogin],[{1}personInfo].[ps_lastLogin],[{1}personDetail].[pd_website],[{1}userGroup].[ug_name] FROM [{1}personInfo],[{1}personDetail],[{1}userGroup] WHERE [{1}personDetail].[pd_id] = [{1}personInfo].[ps_id] AND  [{1}userGroup].[ug_id]=[{1}personInfo].[ps_ug_id] AND [{1}personInfo].[ps_id] < (SELECT min([ps_id])  FROM (SELECT TOP {2} [ps_id] FROM [{1}personInfo] WHERE {4} ORDER BY [ps_id] DESC) AS tblTmp ) AND {4} ORDER BY [{1}personInfo].[ps_id] DESC",
+                                             pageSize,
+                                             BaseConfigs.GetTablePrefix,
+                                             condition,
+                                             pagetop,
+                                             condition);
+
+            return DbHelper.ExecuteDataset(commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 删除指定用户的所有信息
+        /// </summary>
+        /// <param name="uid">指定的用户uid</param>
+        /// <param name="delposts">是否删除帖子</param>
+        /// <param name="delpms">是否删除短消息</param>
+        /// <returns></returns>
+        public bool DelUserAllInf(Guid uid, bool delPosts, bool delPms)
+        {
+            SqlConnection conn = new SqlConnection(DbHelper.ConnectionString);
+            conn.Open();
+            using (SqlTransaction trans = conn.BeginTransaction())
+            {
+                try
+                {
+                    DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("DELETE FROM [{0}personInfo] WHERE [ps_id]='{1}'",
+                                                                              BaseConfigs.GetTablePrefix, uid));
+                    DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("DELETE FROM [{0}personDetail] WHERE [pd_id]='{1}'",
+                                                                              BaseConfigs.GetTablePrefix, uid));
+                    DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("DELETE FROM [{0}onlinetime] WHERE [uid]='{1}'",
+                                                                              BaseConfigs.GetTablePrefix, uid));
+                    //DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("DELETE FROM [{0}polls] WHERE [uid]={1}",
+                    //                                                          BaseConfigs.GetTablePrefix, uid));
+                    //DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("DELETE FROM [{0}favorites] WHERE [uid]={1}",
+                    //                                                          BaseConfigs.GetTablePrefix, uid));
+
+                    if (delPosts)
+                    {
+                        DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("Delete From [{0}topics] Where [posterid]='{1}'",
+                                                                                  BaseConfigs.GetTablePrefix, uid));
+                        //清除用户所发的帖子
+                        foreach (DataRow dr in DbHelper.ExecuteDataset(CommandType.Text, string.Format("SELECT {0} FROM [{1}tablelist]", DbFields.TABLE_LIST, BaseConfigs.GetTablePrefix)).Tables[0].Rows)
+                        {
+                            if (dr["id"].ToString() != "")
+                                DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("DELETE FROM  [{0}posts{1}] WHERE [posterid]={2}",
+                                                                                          BaseConfigs.GetTablePrefix, dr["id"].ToString(), uid));
+                        }
+                    }
+                    else
+                    {
+                        DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("UPDATE [{0}topics] SET [poster]='该用户已被删除' Where [posterid]={1}",
+                                                                                  BaseConfigs.GetTablePrefix, uid));
+                        DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("UPDATE [{0}topics] SET [lastposter]='该用户已被删除' Where [lastpostid]={1}",
+                                                                                  BaseConfigs.GetTablePrefix, uid));
+
+                        //清除用户所发的帖子
+                        foreach (DataRow dr in DbHelper.ExecuteDataset(CommandType.Text, string.Format("SELECT {0} FROM [{1}tablelist]", DbFields.TABLE_LIST, BaseConfigs.GetTablePrefix)).Tables[0].Rows)
+                        {
+                            if (dr["id"].ToString() != "")
+                                DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("UPDATE [{0}posts{1}] SET [poster]='该用户已被删除' WHERE [posterid]={2}",
+                                                                                          BaseConfigs.GetTablePrefix, dr["id"].ToString(), uid));
+                        }
+                    }
+
+                    if (delPms)
+                        DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("DELETE FROM [{0}pms] Where [msgfromid]={1}",
+                                                                                  BaseConfigs.GetTablePrefix, uid));
+                    else
+                    {
+                        DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("UPDATE [{0}pms] SET [msgfrom]='该用户已被删除' WHERE [msgfromid]={1}",
+                                                                                  BaseConfigs.GetTablePrefix, uid));
+                        DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("UPDATE [{0}pms] SET [msgto]='该用户已被删除' WHERE [msgtoid]={1}",
+                                                                                  BaseConfigs.GetTablePrefix, uid));
+                    }
+
+                    //删除版主表的相关用户信息
+                    DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("DELETE FROM [{0}moderators] WHERE [uid]={1}",
+                                                                              BaseConfigs.GetTablePrefix, uid));
+                    //更新当前论坛总人数
+                    DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("UPDATE [{0}Statistics] SET [totalusers]=[totalusers]-1",
+                                                                              BaseConfigs.GetTablePrefix));
+
+                    DataTable dt = DbHelper.ExecuteDataset(CommandType.Text, string.Format("SELECT TOP 1 [uid],[username] FROM [{0}users] ORDER BY [uid] DESC",
+                                                                              BaseConfigs.GetTablePrefix)).Tables[0];
+                    //更新当前论坛最新注册会员信息
+                    if (dt.Rows.Count > 0)
+                        DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("UPDATE [{0}Statistics] SET [lastuserid]={1}, [lastusername]='{2}'",
+                                                                                  BaseConfigs.GetTablePrefix, dt.Rows[0][0], dt.Rows[0][1]));
+
+                    trans.Commit();
+                }
+                catch (Exception ex)
+                {
+                    trans.Rollback();
+                    throw ex;
+                }
+            }
+            conn.Close();
+            return true;
+        }
+
+        /// <summary>
         /// 检测Email和安全项
         /// </summary>
         /// <param name="username">用户名</param>
@@ -398,6 +539,18 @@ namespace SAS.Data.SqlServer
         }
 
         /// <summary>
+        /// 禁言用户
+        /// </summary>
+        /// <param name="uidList">用户Id列表</param>
+        public void SetStopTalkUser(string uidList)
+        {
+            string commandText = string.Format("UPDATE [{0}personInfo] SET [ps_ug_id]=4, [ps_pg_id]=0  WHERE [ps_id] IN ({1})",
+                                                BaseConfigs.GetTablePrefix,
+                                                uidList);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
+        }
+
+        /// <summary>
         /// 设置用户信息表中未读短消息的数量
         /// </summary>
         /// <param name="uid">用户ID</param>
@@ -552,6 +705,27 @@ namespace SAS.Data.SqlServer
                                                 BaseConfigs.GetTablePrefix,
                                                 searchCondition);
             return DbHelper.ExecuteDataset(commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 获取用户查询条件
+        /// </summary>
+        /// <param name="getstring"></param>
+        /// <returns></returns>
+        public string Global_UserGrid_GetCondition(string getString)
+        {
+            return string.Format("[{0}personInfo].[ps_name]='{1}'", BaseConfigs.GetTablePrefix, getString);
+        }
+
+        /// <summary>
+        /// 获取符合条件的用户数
+        /// </summary>
+        /// <param name="condition"></param>
+        /// <returns></returns>
+        public int Global_UserGrid_RecordCount(string condition)
+        {
+            string commandText = string.Format("SELECT COUNT(ps_id) FROM [{0}personInfo]  WHERE {1}", BaseConfigs.GetTablePrefix, condition);
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteDataset(commandText).Tables[0].Rows[0][0]);
         }
 
         #endregion

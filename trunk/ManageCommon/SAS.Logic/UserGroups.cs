@@ -56,5 +56,14 @@ namespace SAS.Logic
             return userGroupInfoList[6];
         }
 
+        /// <summary>
+        /// 获取用户组列表
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetUserGroupForDataTable()
+        {
+            return Data.DataProvider.UserGroups.GetUserGroupForDataTable();
+        }
+
     }
 }

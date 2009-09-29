@@ -288,11 +288,11 @@ namespace SAS.Data
         ///// <param name="groupId">用户组Id</param>
         //void UpdateUserAdminIdByGroupId(int adminId, int groupId);
 
-        ///// <summary>
-        ///// 禁言用户
-        ///// </summary>
-        ///// <param name="uidList">用户Id列表</param>
-        //void SetStopTalkUser(string uidList);
+        /// <summary>
+        /// 禁言用户
+        /// </summary>
+        /// <param name="uidList">用户Id列表</param>
+        void SetStopTalkUser(string uidList);
 
         ///// <summary>
         ///// 更新Email验证信息
@@ -315,13 +315,13 @@ namespace SAS.Data
         ///// <returns></returns>
         //DataTable GetUserListByGroupid(string groupIdList);
 
-        ///// <summary>
-        ///// 获取用户列表
-        ///// </summary>
-        ///// <param name="pageSize"></param>
-        ///// <param name="currentPage"></param>
-        ///// <returns></returns>
-        //DataTable GetUserList(int pageSize, int currentPage);
+        /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <param name="pageSize"></param>
+        /// <param name="currentPage"></param>
+        /// <returns></returns>
+        DataTable GetUserList(int pageSize, int currentPage);
 
         ///// <summary>
         ///// 获取用户名列表指定的Email列表
@@ -343,14 +343,14 @@ namespace SAS.Data
         ///// <param name="uidList">用户Id列表</param>
         //void DeleteUserByUidlist(string uidList);
 
-        ///// <summary>
-        ///// 删除用户信息
-        ///// </summary>
-        ///// <param name="uid"></param>
-        ///// <param name="delPosts"></param>
-        ///// <param name="delPms"></param>
-        ///// <returns></returns>
-        //bool DelUserAllInf(Guid uid, bool delPosts, bool delPms);
+        /// <summary>
+        /// 删除用户信息
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="delPosts"></param>
+        /// <param name="delPms"></param>
+        /// <returns></returns>
+        bool DelUserAllInf(Guid uid, bool delPosts, bool delPms);
 
         ///// <summary>
         ///// 清空指定用户的认证串
@@ -426,14 +426,14 @@ namespace SAS.Data
         ///// <param name="userId">用户ID</param>
         //void UpdateUserOnlineInfo(int groupId, Guid userId);
 
-        ///// <summary>
-        ///// 获取指定条件和分页下的用户列表信息
-        ///// </summary>
-        ///// <param name="pageSize">页面大小</param>
-        ///// <param name="currentPage">当前页</param>
-        ///// <param name="condition">条件</param>
-        ///// <returns></returns>
-        //DataTable UserList(int pageSize, int currentPage, string condition);
+        /// <summary>
+        /// 获取指定条件和分页下的用户列表信息
+        /// </summary>
+        /// <param name="pageSize">页面大小</param>
+        /// <param name="currentPage">当前页</param>
+        /// <param name="condition">条件</param>
+        /// <returns></returns>
+        DataTable UserList(int pageSize, int currentPage, string condition);
 
         /// <summary>
         /// 获取用户查询条件
@@ -462,19 +462,19 @@ namespace SAS.Data
         /// <returns></returns>
         DataTable Global_UserGrid(string searchCondition);
 
-        ///// <summary>
-        ///// 获取符合条件的用户数
-        ///// </summary>
-        ///// <param name="condition"></param>
-        ///// <returns></returns>
-        //int Global_UserGrid_RecordCount(string condition);
+        /// <summary>
+        /// 获取符合条件的用户数
+        /// </summary>
+        /// <param name="condition"></param>
+        /// <returns></returns>
+        int Global_UserGrid_RecordCount(string condition);
 
-        ///// <summary>
-        ///// 获取用户查询条件
-        ///// </summary>
-        ///// <param name="getstring"></param>
-        ///// <returns></returns>
-        //string Global_UserGrid_GetCondition(string getString);
+        /// <summary>
+        /// 获取用户查询条件
+        /// </summary>
+        /// <param name="getstring"></param>
+        /// <returns></returns>
+        string Global_UserGrid_GetCondition(string getString);
 
         #endregion
 
