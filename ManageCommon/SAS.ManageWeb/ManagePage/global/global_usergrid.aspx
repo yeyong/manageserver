@@ -129,39 +129,39 @@
                             <asp:TemplateColumn HeaderText="<input title='选中/取消' onclick='Check(this.form,this.checked)' type='checkbox' name='chkall' id='chkall' />">
                                 <HeaderStyle Width="20px" />
                                 <ItemTemplate>
-						            <%# DataBinder.Eval(Container, "DataItem.uid").ToString() != "1" ? "<input id=\"uid\" onclick=\"checkedEnabledButton(this.form,'uid','StopTalk','DeleteUser')\" type=\"checkbox\" value=\"" + DataBinder.Eval(Container, "DataItem.uid").ToString() + "\"	name=\"uid\">" : ""%>
+						            <%# DataBinder.Eval(Container, "DataItem.ps_id").ToString() != "1" ? "<input id=\"uid\" onclick=\"checkedEnabledButton(this.form,'uid','StopTalk','DeleteUser')\" type=\"checkbox\" value=\"" + DataBinder.Eval(Container, "DataItem.ps_id").ToString() + "\"	name=\"uid\">" : ""%>
 						        </ItemTemplate>
                             </asp:TemplateColumn>
                             <asp:TemplateColumn HeaderText="">
                                 <ItemTemplate>
-							        <a href="#" onclick="javascript:window.location.href='global_edituser.aspx?uid=<%# DataBinder.Eval(Container, "DataItem.uid").ToString()%>&condition=<%=ViewState["condition"]==null?"":Discuz.Common.Utils.HtmlEncode(ViewState["condition"].ToString().Replace("'","~^").Replace("%","~$"))%>';">编辑</a>
+							        <a href="#" onclick="javascript:window.location.href='global_edituser.aspx?uid=<%# DataBinder.Eval(Container, "DataItem.ps_id").ToString()%>&condition=<%=ViewState["condition"]==null?"":SAS.Common.Utils.HtmlEncode(ViewState["condition"].ToString().Replace("'","~^").Replace("%","~$"))%>';">编辑</a>
 						        </ItemTemplate>
                             </asp:TemplateColumn>
                             <asp:TemplateColumn HeaderText="">
                                 <ItemTemplate>
-					    	        <a href="#" onclick="javascript:window.location.href='global_givemedals.aspx?uid=<%# DataBinder.Eval(Container, "DataItem.uid").ToString()%>&condition=<%=ViewState["condition"]==null?"":Discuz.Common.Utils.HtmlEncode(ViewState["condition"].ToString().Replace("'","~^").Replace("%","~$"))%>';">勋章</a>
+					    	        <a href="#" onclick="javascript:window.location.href='global_givemedals.aspx?uid=<%# DataBinder.Eval(Container, "DataItem.ps_id").ToString()%>&condition=<%=ViewState["condition"]==null?"":SAS.Common.Utils.HtmlEncode(ViewState["condition"].ToString().Replace("'","~^").Replace("%","~$"))%>';">勋章</a>
 						        </ItemTemplate>
                             </asp:TemplateColumn>
-                            <asp:BoundColumn DataField="uid" HeaderText="用户ID" Visible="false"></asp:BoundColumn>
+                            <asp:BoundColumn DataField="ps_id" HeaderText="用户ID" Visible="false"></asp:BoundColumn>
                             <asp:TemplateColumn HeaderText="用户名">
                                 <ItemTemplate>
-							        <a href="../../userinfo-<%# DataBinder.Eval(Container, "DataItem.uid")%>.aspx" target="_blank"><%# DataBinder.Eval(Container, "DataItem.username")%></a>
+							        <a href="../../userinfo-<%# DataBinder.Eval(Container, "DataItem.ps_id")%>.aspx" target="_blank"><%# DataBinder.Eval(Container, "DataItem.ps_name")%></a>
 						        </ItemTemplate>
                             </asp:TemplateColumn>
                             <asp:TemplateColumn HeaderText="头像">
                                 <ItemTemplate>
-							        <img src="../../tools/avatar.aspx?uid=<%# DataBinder.Eval(Container, "DataItem.uid")%>&size=small" onerror="this.onerror=null;this.src='../../templates/default/images/noavatar_small.gif';" />
+							        <img src="../../tools/avatar.aspx?uid=<%# DataBinder.Eval(Container, "DataItem.ps_id")%>&size=small" onerror="this.onerror=null;this.src='../../templates/default/images/noavatar_small.gif';" />
 						        </ItemTemplate>
                             </asp:TemplateColumn>
-                            <asp:BoundColumn DataField="grouptitle" HeaderText="所属组"></asp:BoundColumn>
-                            <asp:BoundColumn DataField="nickname" HeaderText="昵称"></asp:BoundColumn>
-                            <asp:BoundColumn DataField="posts" HeaderText="发帖数"></asp:BoundColumn>
-                            <asp:BoundColumn DataField="joindate" HeaderText="注册时间" DataFormatString="{0:yyyy-MM-dd}"></asp:BoundColumn>
-                            <asp:BoundColumn DataField="credits" HeaderText="积分"></asp:BoundColumn>
-                            <asp:BoundColumn DataField="email" HeaderText="邮箱"></asp:BoundColumn>
+                            <asp:BoundColumn DataField="ug_name" HeaderText="所属组"></asp:BoundColumn>
+                            <asp:BoundColumn DataField="ps_nickName" HeaderText="昵称"></asp:BoundColumn>
+                            <%--<asp:BoundColumn DataField="posts" HeaderText="发帖数"></asp:BoundColumn>--%>
+                            <asp:BoundColumn DataField="ps_createDate" HeaderText="注册时间" DataFormatString="{0:yyyy-MM-dd}"></asp:BoundColumn>
+                            <asp:BoundColumn DataField="ps_credits" HeaderText="积分"></asp:BoundColumn>
+                            <asp:BoundColumn DataField="ps_email" HeaderText="邮箱"></asp:BoundColumn>
                             <asp:TemplateColumn HeaderText="最后活动/上次访问时间">
                                 <ItemTemplate>
-                                    <%# DataBinder.Eval(Container, "DataItem.lastactivity")%><br /><%# DataBinder.Eval(Container, "DataItem.lastvisit")%>
+                                    <%# DataBinder.Eval(Container, "DataItem.ps_lastactivity")%><br /><%# DataBinder.Eval(Container, "DataItem.ps_lastLogin")%>
 						        </ItemTemplate>
                             </asp:TemplateColumn>
                         </Columns>

@@ -9,8 +9,8 @@ override protected void OnInit(EventArgs e)
 {
 
 	/* 
-		This page was created by Studio after 80s Template Engine at 2009-9-28 11:55:14.
-		本页面代码由Studio after 80s模板引擎生成于 2009-9-28 11:55:14. 
+		This page was created by Studio after 80s Template Engine at 2009-10-6 10:45:08.
+		本页面代码由Studio after 80s模板引擎生成于 2009-10-6 10:45:08. 
 	*/
 
 	base.OnInit(e);
@@ -75,6 +75,7 @@ override protected void OnInit(EventArgs e)
 	templateBuilder.Append("<body onkeydown=\"if(event.keyCode==27) return false;\">\r\n");
 
 
+	templateBuilder.Append("<a href=\"http://www.sirius.com/ManagePage/index.aspx\">管理页面</a>\r\n");
 
 	templateBuilder.Append("Powered by <strong><a href=\"http://www.sirius.org.cn\" target=\"_blank\" title=\"天狼星工作室\">Studio after 80s</a></strong> <em class=\"f_bold\">1.0.0</em>\r\n");
 

@@ -26,7 +26,7 @@ namespace SAS.ManageWeb.ManagePage
 
                 joindateEnd.SelectedDate = DateTime.Now;
 
-                UserGroup.AddTableData(UserGroups.GetUserGroupForDataTable(), "pg_name", "pg_id");
+                UserGroup.AddTableData(UserGroups.GetUserGroupForDataTable(), "ug_name", "ug_id");
                 if ((SASRequest.GetString("username") != null) && (SASRequest.GetString("username") != ""))
                 {
                     ViewState["condition"] = Users.GetUserListCondition(SASRequest.GetString("username"));
@@ -174,7 +174,7 @@ namespace SAS.ManageWeb.ManagePage
                             {
                                 if (Convert.ToInt32(uid) > 1) //判断是不是当前Uid是不是系统初始化时生成的Uid
                                 {
-                                    int deluserid = Convert.ToInt32(uid);
+                                    Guid deluserid = new Guid(uid);
                                     ////if (AlbumPluginProvider.GetInstance() != null)
                                     ////{
                                     ////    AlbumPluginProvider.GetInstance().Delete(deluserid);
@@ -254,7 +254,7 @@ namespace SAS.ManageWeb.ManagePage
             this.ResetSearchTable.Click += new EventHandler(this.ResetSearchTable_Click);
 
             DataGrid1.TableHeaderName = "用户列表";
-            DataGrid1.DataKeyField = "uid";
+            DataGrid1.DataKeyField = "ps_id";
             DataGrid1.AllowSorting = false;
             DataGrid1.ColumnSpan = 12;
         }

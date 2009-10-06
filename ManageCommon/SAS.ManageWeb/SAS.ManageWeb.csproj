@@ -83,6 +83,13 @@
     <Compile Include="ManagePage\global\global_baseset.aspx.designer.cs">
       <DependentUpon>global_baseset.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\global\global_edituser.aspx.cs">
+      <DependentUpon>global_edituser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_edituser.aspx.designer.cs">
+      <DependentUpon>global_edituser.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\global\global_templatesedit.aspx.cs">
       <DependentUpon>global_templatesedit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -216,6 +223,10 @@
     <ProjectReference Include="..\SAS.Logic\SAS.Logic.csproj">
       <Project>{9145299A-21C2-4558-A956-2DBDCBF477DE}</Project>
       <Name>SAS.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SAS.Plugin\SAS.Plugin.csproj">
+      <Project>{2EA29B20-569F-421C-B359-7E7F8C7045CD}</Project>
+      <Name>SAS.Plugin</Name>
     </ProjectReference>
     <ProjectReference Include="..\SAS.Web.UI\SAS.Web.UI.csproj">
       <Project>{15188167-C7FB-4A1B-9AC0-480A26825AAF}</Project>
@@ -396,6 +407,7 @@
     <Content Include="ManagePage\framepage\top.aspx" />
     <Content Include="ManagePage\framepage\managerbody.aspx" />
     <Content Include="ManagePage\global\global_baseset.aspx" />
+    <Content Include="ManagePage\global\global_edituser.aspx" />
     <Content Include="ManagePage\global\global_templatesedit.aspx" />
     <Content Include="ManagePage\global\global_templatesgrid.aspx" />
     <Content Include="ManagePage\global\global_templatetree.aspx" />
