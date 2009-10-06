@@ -16,13 +16,14 @@ namespace SAS.ManageWeb
         GeneralConfigInfo config;
         protected void Page_Load(object sender, EventArgs e)
         {
-            config = GeneralConfigs.GetConfig();
-            virtualLogin();
+            
         }
 
         protected override void ShowPage()
         {
             pagetitle = "登录页面";
+            config = GeneralConfigs.GetConfig();
+            virtualLogin();
             base.ShowPage();
         }
 
