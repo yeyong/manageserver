@@ -134,6 +134,27 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 更新用户组
+        /// </summary>
+        /// <param name="uid">用户ID</param>
+        /// <param name="groupID">用户组ID</param>
+        public static void UpdateUserGroup(Guid uid, int groupId)
+        {
+            //Discuz.Data.Users.UpdateUserGroup(uid, groupID);
+            UpdateUserGroup(uid.ToString(), groupId);
+        }
+
+        /// <summary>
+        /// 更新用户的用户组信息
+        /// </summary>
+        /// <param name="uidList">用户ID列表</param>
+        /// <param name="groupId">用户组ID</param>
+        public static void UpdateUserGroup(string uidList, int groupId)
+        {
+            SAS.Data.DataProvider.Users.UpdateUserGroup(uidList, groupId);
+        }
+
+        /// <summary>
         /// 更新用户积分和最后登录时间
         /// </summary>
         /// <param name="uid">用户id</param>

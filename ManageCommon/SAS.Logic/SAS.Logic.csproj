@@ -50,6 +50,7 @@
     <Compile Include="Avatars.cs" />
     <Compile Include="Caches.cs" />
     <Compile Include="Databases.cs" />
+    <Compile Include="Emails.cs" />
     <Compile Include="HttpModule.cs" />
     <Compile Include="Ips.cs" />
     <Compile Include="IpSearch.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Templates.cs" />
     <Compile Include="TopicStats.cs" />
     <Compile Include="Urls.cs" />
+    <Compile Include="UserCredits.cs" />
     <Compile Include="UserGroups.cs" />
     <Compile Include="Users.cs" />
   </ItemGroup>
@@ -97,6 +99,10 @@
     <ProjectReference Include="..\SAS.Entity\SAS.Entity.csproj">
       <Project>{F6CFD248-E9E3-480A-B518-526298AAF81E}</Project>
       <Name>SAS.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SAS.Plugin\SAS.Plugin.csproj">
+      <Project>{2EA29B20-569F-421C-B359-7E7F8C7045CD}</Project>
+      <Name>SAS.Plugin</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

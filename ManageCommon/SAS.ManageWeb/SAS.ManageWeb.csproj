@@ -52,8 +52,9 @@
       <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="aspx\1\login.aspx.designer.cs">
-      <DependentUpon>login.aspx</DependentUpon>
+    <Compile Include="aspx\1\test.aspx.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -401,6 +402,7 @@
     <Content Include="tools\VerifyImagePage.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="aspx\1\test.aspx" />
     <Content Include="config\localupgradeini.config" />
     <Content Include="favicon.ico" />
     <Content Include="javascript\common.js" />
@@ -726,6 +728,7 @@
     <Content Include="ManagePage\UserControls\PageInfo.ascx" />
     <Content Include="ManagePage\UserControls\TextareaResize.ascx" />
     <Content Include="ManagePage\xml\navmenu.js" />
+    <Content Include="config\email.config" />
     <None Include="ManagePage\images\admin-gif\Thumbs.db" />
     <None Include="ManagePage\images\ad\Thumbs.db" />
     <None Include="ManagePage\images\Thumbs.db" />

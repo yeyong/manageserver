@@ -1425,5 +1425,12 @@ namespace SAS.Data
         void UpdateForumAndUserTemplateId(string templateIdList);
 
         #endregion
+
+        /// <summary>
+        /// 获取指定用户ID列表的邮件信息
+        /// </summary>
+        /// <param name="uids">用户id列表</param>
+        /// <returns></returns>
+        DataTable GetMailTable(string uids);
     }
 }

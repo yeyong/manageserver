@@ -113,24 +113,6 @@ namespace SAS.ManageWeb.ManagePage {
         protected global::SAS.Control.TextBox regip;
         
         /// <summary>
-        /// posts 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::SAS.Control.TextBox posts;
-        
-        /// <summary>
-        /// digestposts 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::SAS.Control.TextBox digestposts;
-        
-        /// <summary>
         /// info1 控件。
         /// </summary>
         /// <remarks>
@@ -275,15 +257,6 @@ namespace SAS.ManageWeb.ManagePage {
         protected global::SAS.Control.TextBox bday;
         
         /// <summary>
-        /// tpp 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::SAS.Control.TextBox tpp;
-        
-        /// <summary>
         /// templateid 控件。
         /// </summary>
         /// <remarks>
@@ -401,15 +374,6 @@ namespace SAS.ManageWeb.ManagePage {
         protected global::SAS.Control.RadioButtonList sigstatus;
         
         /// <summary>
-        /// ppp 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::SAS.Control.TextBox ppp;
-        
-        /// <summary>
         /// showemail 控件。
         /// </summary>
         /// <remarks>
@@ -428,15 +392,6 @@ namespace SAS.ManageWeb.ManagePage {
         protected global::SAS.Control.RadioButtonList invisible;
         
         /// <summary>
-        /// icq 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::SAS.Control.TextBox icq;
-        
-        /// <summary>
         /// yahoo 控件。
         /// </summary>
         /// <remarks>
@@ -453,15 +408,6 @@ namespace SAS.ManageWeb.ManagePage {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::SAS.Control.TextBox skype;
-        
-        /// <summary>
-        /// customstatus 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::SAS.Control.TextBox customstatus;
         
         /// <summary>
         /// bio 控件。
@@ -662,15 +608,6 @@ namespace SAS.ManageWeb.ManagePage {
         protected global::SAS.Control.TabPage tabPage44;
         
         /// <summary>
-        /// medalslist 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater medalslist;
-        
-        /// <summary>
         /// reason 控件。
         /// </summary>
         /// <remarks>
@@ -732,24 +669,6 @@ namespace SAS.ManageWeb.ManagePage {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::SAS.Control.TextBox pmsound;
-        
-        /// <summary>
-        /// accessmasks 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::SAS.Control.RadioButtonList accessmasks;
-        
-        /// <summary>
-        /// groupexpiry 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::SAS.Control.TextBox groupexpiry;
         
         /// <summary>
         /// extgroupids 控件。
