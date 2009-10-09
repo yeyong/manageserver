@@ -45,6 +45,9 @@
     <Compile Include="BaseConfigInfoCollection.cs" />
     <Compile Include="BaseConfigs.cs" />
     <Compile Include="DefaultConfigFileManager.cs" />
+    <Compile Include="EmailConfigFileManager.cs" />
+    <Compile Include="EmailConfigInfo.cs" />
+    <Compile Include="EmailConfigs.cs" />
     <Compile Include="GeneralConfigFileManager.cs" />
     <Compile Include="GeneralConfigInfo.cs" />
     <Compile Include="GeneralConfigs.cs" />

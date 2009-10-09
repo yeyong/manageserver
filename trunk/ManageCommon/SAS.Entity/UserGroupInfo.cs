@@ -29,7 +29,7 @@ namespace SAS.Entity
         private int _ug_maxspacephotosize;
         private int _ug_pg_id;
         private string _ug_color;
-        private bool _ug_isSystem;
+        private int _ug_isSystem;
 
         /// <summary>
         /// 用户组ID
@@ -50,7 +50,7 @@ namespace SAS.Entity
         }
 
         /// <summary>
-        /// 用户组积分上限
+        /// 用户组积分下限
         /// </summary>
         public int ug_scorehight
         {
@@ -59,7 +59,7 @@ namespace SAS.Entity
         }
 
         /// <summary>
-        /// 用户组积分下限
+        /// 用户组积分上限
         /// </summary>
         public int ug_scorelow
         {
@@ -223,7 +223,7 @@ namespace SAS.Entity
         /// <summary>
         /// 是否为系统创建
         /// </summary>
-        public bool ug_isSystem
+        public int ug_isSystem
         {
             set { _ug_isSystem = value; }
             get { return _ug_isSystem; }

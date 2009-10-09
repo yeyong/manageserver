@@ -1607,5 +1607,16 @@ namespace SAS.Data.SqlServer
         }
 
         #endregion
+
+        public DataTable GetMailTable(string uids)
+        {
+            if (!Utils.IsSafeSqlString(uids))
+                return new DataTable();
+
+            string commandText = string.Format("SELECT [ps_id],[ps_name],[ps_email] FROM [{0}personInfo]  WHERE [ps_email] IS NOT NULL AND [ps_id] IN ({1})",
+                                               BaseConfigs.GetTablePrefix,
+                                               uids);
+            return DbHelper.ExecuteDataset(commandText).Tables[0];
+        }
     }
 }

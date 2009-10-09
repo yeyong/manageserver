@@ -85,7 +85,7 @@
                                             <tr>
                                                 <td style="width: 90px">UID:</td>
                                                 <td>
-                                                    <%=Discuz.Common.DNTRequest.GetString("uid")%>
+                                                    <%=SAS.Common.SASRequest.GetString("uid")%>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -101,20 +101,20 @@
                                                     <cc1:TextBox ID="regip" runat="server" RequiredFieldType="IP地址" MaxLength="15" Size="11"></cc1:TextBox>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                           <%-- <tr>
                                                 <td>发帖数:</td>
                                                 <td>
                                                     <cc1:TextBox ID="posts" runat="server" Width="56px" RequiredFieldType="数据校验" CanBeNull="必填"
                                                         MaxLength="9"></cc1:TextBox>
                                                 </td>
-                                            </tr>
-                                            <tr>
+                                            </tr>--%>
+                                            <%--<tr>
                                                 <td>精华帖数:</td>
                                                 <td>
                                                     <cc1:TextBox ID="digestposts" runat="server" Width="56px" RequiredFieldType="数据校验"
                                                         CanBeNull="必填" MaxLength="4"></cc1:TextBox>
                                                 </td>
-                                            </tr>
+                                            </tr>--%>
                                         </table>
                                     </td>
                                 </tr>
@@ -220,12 +220,12 @@
                                                     <cc1:TextBox ID="bday" runat="server" RequiredFieldType="暂无校验" MaxLength="10" Size="12"></cc1:TextBox>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                           <%-- <tr>
                                                 <td>每页主题数</td>
                                                 <td>
                                                     <cc1:TextBox ID="tpp" runat="server" Width="88px" HintInfo="论坛每页显示的主题数,0为论坛默认设置" RequiredFieldType="数据校验" MaxLength="4" CanBeNull="必填"></cc1:TextBox>
                                                 </td>
-                                            </tr>
+                                            </tr>--%>
                                             <tr>
                                                 <td>风格:</td>
                                                 <td>
@@ -295,7 +295,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>最后发帖时间:</td>
+                                                <td>最后修改密码时间:</td>
                                                 <td>
                                                     <cc1:TextBox ID="lastpost" runat="server" Size="15" RequiredFieldType="日期时间" CanBeNull="必填"></cc1:TextBox>
                                                 </td>
@@ -315,12 +315,12 @@
                                                     </cc1:RadioButtonList>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <%--<tr>
                                                 <td>每页帖数:</td>
                                                 <td>
                                                     <cc1:TextBox ID="ppp" runat="server" Width="88px" HintInfo="查看主题时每页显示的帖子数,0为论坛默认设置" RequiredFieldType="数据校验" MaxLength="4" CanBeNull="必填"></cc1:TextBox>
                                                 </td>
-                                            </tr>
+                                            </tr>--%>
                                             <tr>
                                                 <td>是否显示邮箱:</td>
                                                 <td>
@@ -339,12 +339,12 @@
                                                     </cc1:RadioButtonList>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <%--<tr>
                                                 <td>ICQ号码:</td>
                                                 <td>
                                                     <cc1:TextBox ID="icq" runat="server" RequiredFieldType="暂无校验" IsReplaceInvertedComma="false" MaxLength="12" Size="13"></cc1:TextBox>
                                                 </td>
-                                            </tr>
+                                            </tr>--%>
                                             <tr>
                                                 <td>Yahoo Messenger帐号:</td>
                                                 <td>
@@ -357,12 +357,12 @@
                                                     <cc1:TextBox ID="skype" runat="server" RequiredFieldType="暂无校验" IsReplaceInvertedComma="false" MaxLength="40" Size="20"></cc1:TextBox>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <%--<tr>
                                                 <td>自定义头衔:</td>
                                                 <td>
                                                     <cc1:TextBox ID="customstatus" runat="server" RequiredFieldType="暂无校验" IsReplaceInvertedComma="false" MaxLength="50" Size="20"></cc1:TextBox>
                                                 </td>
-                                            </tr>
+                                            </tr>--%>
                                         </table>
                                     </td>
                                 </tr>
@@ -459,7 +459,7 @@
                                     <td style="border: 1px solid rgb(234, 233, 225);" nowrap="nowrap" width="40%">名称</td>
                                     <td style="border: 1px solid rgb(234, 233, 225);" nowrap="nowrap" width="20%"><input title="选中/取消选中 本页所有Case" onclick="CheckAll(this.form)" type="checkbox" name="chkall" id="chkall" />授予该勋章</td>
                                 </tr>
-                                <asp:Repeater ID="medalslist" runat="server">
+                               <%-- <asp:Repeater ID="medalslist" runat="server">
                                     <ItemTemplate>
                                         <tr class="mouseoutstyle" onmouseover="this.className='mouseoverstyle'" onmouseout="this.className='mouseoutstyle'">
                                             <td style="border: 1px solid rgb(234, 233, 225);" nowrap="nowrap"><img src="../../images/medals/<%# DataBinder.Eval(Container.DataItem,"image").ToString()%>" height="25px" /></td>
@@ -478,7 +478,7 @@
                                             </td>
                                         </tr>
                                     </AlternatingItemTemplate>
-                                </asp:Repeater>
+                                </asp:Repeater>--%>
                             </table>
                             </td>
                             </tr>
@@ -526,7 +526,7 @@
                 <td class="td2">短消息铃声</td>
                 <td class="td2"><cc1:TextBox ID="pmsound" runat="server" Width="208px" RequiredFieldType="暂无校验"></cc1:TextBox></td>
             </tr>
-            <tr>
+           <%-- <tr>
                 <td>是否使用特殊权限</td>
                 <td>
                     <cc1:RadioButtonList ID="accessmasks" runat="server">
@@ -534,11 +534,11 @@
                         <asp:ListItem Value="0">否</asp:ListItem>
                     </cc1:RadioButtonList>
                 </td>
-            </tr>
-            <tr>
+            </tr>--%>
+           <%-- <tr>
                 <td>组过期时间</td>
                 <td><cc1:TextBox ID="groupexpiry" runat="server" Width="192px" RequiredFieldType="暂无校验"></cc1:TextBox></td>
-            </tr>
+            </tr>--%>
             <tr>
                 <td class="td2">扩展用户组</td>
                 <td class="td2">
