@@ -45,7 +45,7 @@ namespace SAS.Data.DataProvider
         /// </summary>
         /// <param name="uid"></param>
         /// <returns></returns>
-        public static bool DeleteNoticeByUid(Guid uid)
+        public static bool DeleteNoticeByUid(int uid)
         {
             return DatabaseProvider.GetInstance().DeleteNoticeByUid(uid);
         }
@@ -83,10 +83,10 @@ namespace SAS.Data.DataProvider
         {
             NoticeInfo noticeinfo = new NoticeInfo();
             noticeinfo.Nid = TypeConverter.ObjectToInt(reader["nid"], 0);
-            noticeinfo.Uid = new Guid(reader["uid"].ToString().Trim());
+            noticeinfo.Uid = TypeConverter.ObjectToInt(reader["uid"], 0);
             noticeinfo.Type = (Noticetype)TypeConverter.ObjectToInt(reader["type"], 0);
             noticeinfo.New = TypeConverter.ObjectToInt(reader["new"], 0);
-            noticeinfo.Posterid = new Guid(reader["posterid"].ToString());
+            noticeinfo.Posterid = TypeConverter.ObjectToInt(reader["posterid"], 0);
             noticeinfo.Poster = reader["poster"].ToString().Trim();
             noticeinfo.Note = Utils.HtmlDecode(reader["note"].ToString());
             noticeinfo.Postdatetime = reader["postdatetime"].ToString();
@@ -99,7 +99,7 @@ namespace SAS.Data.DataProvider
         /// </summary>
         /// <param name="Uid"></param>
         /// <returns></returns>
-        public static int GetLatestNoticeID(Guid userid)
+        public static int GetLatestNoticeID(int userid)
         {
             int latestnid = 0;
             IDataReader reader = DatabaseProvider.GetInstance().GetNoticeByUid(userid, Noticetype.All, 1, 1);
@@ -117,7 +117,7 @@ namespace SAS.Data.DataProvider
         /// <param name="type"></param>
         /// <param name="uid"></param>
         /// <returns></returns>
-        public static int ReNewNotice(int type, Guid uid)
+        public static int ReNewNotice(int type, int uid)
         {
             return DatabaseProvider.GetInstance().ReNewNotice(type, uid);
         }
@@ -127,7 +127,7 @@ namespace SAS.Data.DataProvider
         /// </summary>
         /// <param name="userid"></param>
         /// <returns></returns>
-        public static NoticeInfo[] GetNewNotices(Guid userid)
+        public static NoticeInfo[] GetNewNotices(int userid)
         {
             IDataReader reader = DatabaseProvider.GetInstance().GetNewNotices(userid);
             System.Collections.Generic.List<NoticeInfo> list = new System.Collections.Generic.List<NoticeInfo>();
@@ -144,7 +144,7 @@ namespace SAS.Data.DataProvider
         /// </summary>
         /// <param name="uid">用户id</param>
         /// <returns>通知集合</returns>
-        public static NoticeinfoCollection GetNoticeInfoCollectionByUid(Guid uid)
+        public static NoticeinfoCollection GetNoticeInfoCollectionByUid(int uid)
         {
             return NoticeinfoCollectionDTO(DatabaseProvider.GetInstance().GetNoticeByUid(uid, 0));
         }
@@ -155,7 +155,7 @@ namespace SAS.Data.DataProvider
         /// </summary>
         /// <param name="uid">用户id</param>
         /// <returns>通知集合</returns>
-        public static NoticeinfoCollection GetNoticeinfoCollectionByUid(Guid uid, Noticetype noticetype)
+        public static NoticeinfoCollection GetNoticeinfoCollectionByUid(int uid, Noticetype noticetype)
         {
             return NoticeinfoCollectionDTO(DatabaseProvider.GetInstance().GetNoticeByUid(uid, noticetype));
         }
@@ -166,7 +166,7 @@ namespace SAS.Data.DataProvider
         /// <param name="uid">指定用户id</param>
         /// <param name="noticetype">通知类型</param>
         /// <returns></returns>
-        public static int GetNoticeCountByUid(Guid uid, Noticetype noticetype)
+        public static int GetNoticeCountByUid(int uid, Noticetype noticetype)
         {
             return DatabaseProvider.GetInstance().GetNoticeCountByUid(uid, noticetype);
         }
@@ -176,7 +176,7 @@ namespace SAS.Data.DataProvider
         /// </summary>
         /// <param name="uid">用户id</param>
         /// <returns>通知集合</returns>
-        public static NoticeinfoCollection GetNoticeinfoCollectionByUid(Guid uid, Noticetype noticetype, int pageid, int pagesize)
+        public static NoticeinfoCollection GetNoticeinfoCollectionByUid(int uid, Noticetype noticetype, int pageid, int pagesize)
         {
             return NoticeinfoCollectionDTO(DatabaseProvider.GetInstance().GetNoticeByUid(uid, noticetype, pageid, pagesize));
         }
@@ -202,7 +202,7 @@ namespace SAS.Data.DataProvider
         /// </summary>
         /// <param name="uid">用户id</param>
         /// <returns>通知集合</returns>
-        public static int GetNewNoticeCountByUid(Guid uid)
+        public static int GetNewNoticeCountByUid(int uid)
         {
             return DatabaseProvider.GetInstance().GetNewNoticeCountByUid(uid);
         }
@@ -212,7 +212,7 @@ namespace SAS.Data.DataProvider
         /// </summary>
         /// <param name="uid">用户id</param>
         /// <param name="newtype">通知新旧状态(1:新通知 0:旧通知)</param>
-        public static void UpdateNoticeNewByUid(Guid uid, int newtype)
+        public static void UpdateNoticeNewByUid(int uid, int newtype)
         {
             DatabaseProvider.GetInstance().UpdateNoticeNewByUid(uid, newtype);
         }
@@ -223,7 +223,7 @@ namespace SAS.Data.DataProvider
         /// <param name="userid">用户ID</param>
         /// <param name="state">通知状态(0为已读，1为未读)</param>
         /// <returns></returns>
-        public static int GetNoticeCount(Guid userid, int state)
+        public static int GetNoticeCount(int userid, int state)
         {
             return DatabaseProvider.GetInstance().GetNoticeCount(userid, state);
         }

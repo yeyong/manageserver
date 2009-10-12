@@ -17,7 +17,7 @@ namespace SAS.Data.DataProvider
         /// <param name="actions">动作</param>
         /// <param name="others"></param>
         /// <returns></returns>
-        public static void InsertLog(Guid uid, string username, int groupid, string grouptitle, string ip, string actions, string others)
+        public static void InsertLog(int uid, string username, int groupid, string grouptitle, string ip, string actions, string others)
         {
             SAS.Data.DatabaseProvider.GetInstance().AddVisitLog(uid, username, groupid, grouptitle, ip, actions, others);
         }

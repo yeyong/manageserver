@@ -303,7 +303,7 @@ namespace SAS.Data.DataProvider
             {
                 ShortUserInfo u = new ShortUserInfo();
                 u.Ps_name = reader["Ps_name"].ToString();
-                u.Ps_id = new Guid(reader["Ps_id"].ToString());
+                u.Ps_id = Utils.StrToInt(reader["Ps_id"], 0);
                 //if (type == "digestposts")
                 //    u.Digestposts = Utils.StrToInt(reader["digestposts"], 0);
                 //else 
@@ -367,7 +367,7 @@ namespace SAS.Data.DataProvider
             {
                 ShortUserInfo u = new ShortUserInfo();
                 u.Ps_name = reader["Ps_name"].ToString();
-                u.Ps_id = new Guid(reader["Ps_id"].ToString());
+                u.Ps_id = Utils.StrToInt(reader["Ps_id"], 0);
                 u.Ps_onlinetime = Utils.StrToInt(reader[field], 0);
                 u.Ps_password = string.Empty;
                 u.ps_secques = string.Empty;

@@ -183,7 +183,7 @@ namespace SAS.Logic
         /// <param name="userid">用户ID</param>
         /// <param name="useradminid">用户管理组ID</param>
         /// <returns></returns>
-        public static string GetNavigationString(Guid userid, int useradminid)
+        public static string GetNavigationString(int userid, int useradminid)
         {
             string mainnavstr = "";
             string nav;
@@ -201,7 +201,7 @@ namespace SAS.Logic
                             break;
                         case 1:
                             {
-                                if (userid != new Guid("00000000-0000-0000-0000-000000000000"))
+                                if (userid != -1)
                                     mainnavstr += nav;
                                 break;
                             }

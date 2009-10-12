@@ -22,7 +22,7 @@ namespace SAS.Logic
         /// <param name="delposts">是否删除帖子</param>
         /// <param name="delpms">是否删除短消息</param>
         /// <returns></returns>
-        public static bool DelUserAllInf(Guid uid, bool delposts, bool delpms)
+        public static bool DelUserAllInf(int uid, bool delposts, bool delpms)
         {
             bool val = Data.DataProvider.Users.DeleteUser(uid, delposts, delpms);
             if (val)

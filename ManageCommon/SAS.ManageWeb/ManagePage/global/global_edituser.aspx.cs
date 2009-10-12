@@ -19,7 +19,7 @@ namespace SAS.ManageWeb.ManagePage
         {
             if (!Page.IsPostBack)
             {
-                if (!AllowEditUser(this.userid, new Guid(SASRequest.GetString("uid"))))
+                if (!AllowEditUser(this.userid, SASRequest.GetInt("uid", -1)))
                 {
                     Response.Write("<script>alert('非创始人身份不能修改其它管理员的信息!');window.location.href='global_usergrid.aspx';</script>");
                     Response.End();
@@ -29,7 +29,7 @@ namespace SAS.ManageWeb.ManagePage
             }
         }
 
-        private bool AllowEditUser(Guid managerUId, Guid targetUId)
+        private bool AllowEditUser(int managerUId, int targetUId)
         {
             #region 是否可以编辑用户
             int managerGroupId = Users.GetUserInfo(managerUId).Ps_ug_id;
@@ -38,10 +38,10 @@ namespace SAS.ManageWeb.ManagePage
                 return false;
             }
             int targetGroupId = Users.GetUserInfo(targetUId).Ps_ug_id;
-            string founderUId = BaseConfigs.GetBaseConfig().Founderuid;
+            int founderUId = BaseConfigs.GetBaseConfig().Founderuid;
             if (managerUId == targetUId)    //可自身修改
                 return true;
-            else if (managerUId == new Guid(founderUId))  //创始人可修改
+            else if (managerUId == founderUId)  //创始人可修改
                 return true;
             else if (managerGroupId == targetGroupId)   //管理组相同的不能修改
                 return false;
@@ -50,13 +50,13 @@ namespace SAS.ManageWeb.ManagePage
             #endregion
         }
 
-        public bool AllowEditUserInfo(Guid uid, bool redirect)
+        public bool AllowEditUserInfo(int uid, bool redirect)
         {
             #region 是否允许编辑用户信息
 
-            if ((BaseConfigs.GetBaseConfig().Founderuid.Equals(uid.ToString().Trim())) && (uid == this.userid))
+            if ((BaseConfigs.GetBaseConfig().Founderuid == uid) && (uid == this.userid))
                 return true;
-            if (!BaseConfigs.GetBaseConfig().Founderuid.Equals(uid.ToString().Trim())) //当要编辑的用户信息不是创建人的信息时
+            if (BaseConfigs.GetBaseConfig().Founderuid != uid) //当要编辑的用户信息不是创建人的信息时
                 return true;
             if (redirect)
             {
@@ -199,7 +199,7 @@ namespace SAS.ManageWeb.ManagePage
         ////    #endregion
         ////}
 
-        public void LoadCurrentUserInfo(Guid uid)
+        public void LoadCurrentUserInfo(int uid)
         {
             #region 加载相关信息
 
@@ -237,7 +237,7 @@ namespace SAS.ManageWeb.ManagePage
                 }
             }
 
-            if (uid == new Guid(BaseConfigs.GetFounderUid))
+            if (uid == BaseConfigs.GetFounderUid)
             {
                 groupid.Enabled = false;
             }
@@ -483,8 +483,7 @@ namespace SAS.ManageWeb.ManagePage
 
             if (this.CheckCookie())
             {
-                if (string.IsNullOrEmpty(SASRequest.GetString("uid"))) return;
-                if (!AllowEditUserInfo(new Guid(SASRequest.GetString("uid")), true)) return;
+                if (!AllowEditUserInfo(SASRequest.GetInt("uid", -1), true)) return;
 
                 Response.Redirect("global_resetpassword.aspx?uid=" + SASRequest.GetString("uid"));
             }
@@ -499,14 +498,13 @@ namespace SAS.ManageWeb.ManagePage
 
             if (this.CheckCookie())
             {
-                if (string.IsNullOrEmpty(SASRequest.GetString("uid"))) return;
-                userInfo = AdminUsers.GetUserInfo(new Guid(SASRequest.GetString("uid")));
+                userInfo = AdminUsers.GetUserInfo(SASRequest.GetInt("uid", -1));
 
-                if (!AllowEditUserInfo(new Guid(SASRequest.GetString("uid")), true)) return;
+                if (!AllowEditUserInfo(SASRequest.GetInt("uid", -1), true)) return;
 
                 if (ViewState["Groupid"].ToString() != "4") //当用户不是系统禁言组时
                 {
-                    if (userInfo.Ps_id != new Guid("00000000-0000-0000-0000-000000000000")) //判断是不是当前uid是不是系统初始化时生成的uid
+                    if (userInfo.Ps_id > 1) //判断是不是当前uid是不是系统初始化时生成的uid
                     {
                         ////if (AlbumPluginProvider.GetInstance() != null)
                         ////    AlbumPluginProvider.GetInstance().Ban(userInfo.Uid);
@@ -546,12 +544,7 @@ namespace SAS.ManageWeb.ManagePage
 
             if (this.CheckCookie())
             {
-                Guid uid = new Guid("00000000-0000-0000-0000-000000000000");
-
-                if (string.IsNullOrEmpty(SASRequest.GetString("uid")))
-                {
-                    uid = new Guid(SASRequest.GetString("uid"));
-                }
+                int uid = SASRequest.GetInt("uid", -1);
 
                 if (!AllowEditUserInfo(uid, true)) return;
 

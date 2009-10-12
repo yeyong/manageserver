@@ -68,7 +68,7 @@ namespace SAS.Config
         }
 
         //得到论坛创建人ID
-        public static string GetFounderUid
+        public static int GetFounderUid
         {
             get
             {

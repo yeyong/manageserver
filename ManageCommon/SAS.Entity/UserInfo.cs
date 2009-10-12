@@ -8,8 +8,8 @@ namespace SAS.Entity
     public class ShortUserInfo
     {
         #region Model
-        private Guid _ps_id;
-        private Guid _ps_en_id;
+        private int _ps_id;
+        private int _ps_en_id;
         private string _ps_name;
 
         private string _ps_nickname;
@@ -45,7 +45,7 @@ namespace SAS.Entity
 
         private bool _ps_isdetail;
         private bool _ps_iscreater;
-        private Guid _ps_creater;
+        private int _ps_creater;
         private int _ps_newmess;
         private string _ps_lastactivity;
         private string _ps_secques;
@@ -59,7 +59,7 @@ namespace SAS.Entity
         /// <summary>
         /// 用户ID
         /// </summary>
-        public Guid Ps_id
+        public int Ps_id
         {
             set { _ps_id = value; }
             get { return _ps_id; }
@@ -68,7 +68,7 @@ namespace SAS.Entity
         /// <summary>
         /// 所属商家实体ID（0（默认），个人用户）
         /// </summary>
-        public Guid Ps_en_id
+        public int Ps_en_id
         {
             set { _ps_en_id = value; }
             get { return _ps_en_id; }
@@ -345,9 +345,9 @@ namespace SAS.Entity
         }
 
         /// <summary>
-        /// 创建人（00000000-0000-0000-0000-000000000000，为自创）
+        /// 创建人（0，为自创）
         /// </summary>
-        public Guid Ps_creater
+        public int Ps_creater
         {
             set { _ps_creater = value; }
             get { return _ps_creater; }
@@ -443,7 +443,7 @@ namespace SAS.Entity
     public class UserInfo : ShortUserInfo
     {
         #region Model
-        private Guid _pd_id;
+        private int _pd_id;
         private string _pd_name;
         private string _pd_birthday;
         private string _pd_msn;
@@ -473,7 +473,7 @@ namespace SAS.Entity
         /// <summary>
         /// 用户ID
         /// </summary>
-        public Guid Pd_id
+        public int Pd_id
         {
             set { _pd_id = value; }
             get { return _pd_id; }

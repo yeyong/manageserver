@@ -38,9 +38,9 @@ namespace SAS.Logic
         /// <param name="userId">用户ID</param>
         /// <param name="folder">所属文件夹(0:收件箱,1:发件箱,2:草稿箱)</param>
         /// <returns>短消息数量</returns>
-        public static int GetPrivateMessageCount(Guid userId, int folder)
+        public static int GetPrivateMessageCount(int userId, int folder)
         {
-            return userId != new Guid("00000000-0000-0000-0000-000000000000") ? GetPrivateMessageCount(userId, folder, -1) : 0;
+            return userId > 0 ? GetPrivateMessageCount(userId, folder, -1) : 0;
         }
 
         /// <summary>
@@ -50,9 +50,9 @@ namespace SAS.Logic
         /// <param name="folder">所属文件夹(0:收件箱,1:发件箱,2:草稿箱)</param>
         /// <param name="state">短消息状态(0:已读短消息、1:未读短消息、2:最近消息（7天内）、-1:全部短消息)</param>
         /// <returns>短消息数量</returns>
-        public static int GetPrivateMessageCount(Guid userId, int folder, int state)
+        public static int GetPrivateMessageCount(int userId, int folder, int state)
         {
-            return userId != new Guid("00000000-0000-0000-0000-000000000000") ? SAS.Data.DataProvider.PrivateMessages.GetPrivateMessageCount(userId, folder, state) : 0;
+            return userId > 0 ? SAS.Data.DataProvider.PrivateMessages.GetPrivateMessageCount(userId, folder, state) : 0;
         }
 
 
@@ -91,7 +91,7 @@ namespace SAS.Logic
         /// <param name="userId">用户ID</param>
         /// <param name="pmitemid">要删除的短信息列表(数组)</param>
         /// <returns>删除记录数</returns>
-        public static int DeletePrivateMessage(Guid userId, string[] pmitemid)
+        public static int DeletePrivateMessage(int userId, string[] pmitemid)
         {
             if (!Utils.IsNumericArray(pmitemid))
                 return -1;
@@ -109,9 +109,9 @@ namespace SAS.Logic
         /// <param name="userId">用户ID</param>
         /// <param name="pmid">要删除的短信息ID</param>
         /// <returns>删除记录数</returns>
-        public static int DeletePrivateMessage(Guid userId, int pmid)
+        public static int DeletePrivateMessage(int userId, int pmid)
         {
-            return userId != new Guid("00000000-0000-0000-0000-000000000000") ? DeletePrivateMessage(userId, new string[] { pmid.ToString() }) : 0;
+            return userId > 0 ? DeletePrivateMessage(userId, new string[] { pmid.ToString() }) : 0;
         }
 
         /// <summary>
@@ -134,9 +134,9 @@ namespace SAS.Logic
         /// <param name="pageindex">当前要显示的页数</param>
         /// <param name="inttype">筛选条件1为未读</param>
         /// <returns>短信息列表</returns>
-        public static List<PrivateMessageInfo> GetPrivateMessageCollection(Guid userId, int folder, int pagesize, int pageindex, int readStatus)
+        public static List<PrivateMessageInfo> GetPrivateMessageCollection(int userId, int folder, int pagesize, int pageindex, int readStatus)
         {
-            return (userId != new Guid("00000000-0000-0000-0000-000000000000") && pageindex > 0 && pagesize > 0) ? SAS.Data.DataProvider.PrivateMessages.GetPrivateMessageCollection(userId, folder, pagesize, pageindex, readStatus) : null;
+            return (userId > 0 && pageindex > 0 && pagesize > 0) ? SAS.Data.DataProvider.PrivateMessages.GetPrivateMessageCollection(userId, folder, pagesize, pageindex, readStatus) : null;
         }
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace SAS.Logic
         /// <param name="pageindex">当前要显示的页数</param>
         /// <param name="strwhere">筛选条件</param>
         /// <returns>收件箱短消息列表</returns>
-        public static List<PrivateMessageInfo> GetPrivateMessageListForIndex(Guid userId, int pagesize, int pageindex, int inttype)
+        public static List<PrivateMessageInfo> GetPrivateMessageListForIndex(int userId, int pagesize, int pageindex, int inttype)
         {
             List<PrivateMessageInfo> list = GetPrivateMessageCollection(userId, 0, pagesize, pageindex, inttype);
             if (list.Count > 0)
@@ -178,7 +178,7 @@ namespace SAS.Logic
         /// </summary>
         /// <param name="userId">用户ID</param>
         /// <returns></returns>
-        public static int GetLatestPMID(Guid userId)
+        public static int GetLatestPMID(int userId)
         {
             List<PrivateMessageInfo> list = SAS.Data.DataProvider.PrivateMessages.GetPrivateMessageCollection(userId, 0, 1, 1, 0);
             int latestpmid = 0;

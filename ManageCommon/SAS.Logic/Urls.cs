@@ -96,7 +96,7 @@ namespace SAS.Logic
         }
 
 
-        public static string UserInfoAspxRewrite(Guid userid)
+        public static string UserInfoAspxRewrite(int userid)
         {
             //当使用伪aspx
             if (config.Aspxrewrite == 1)

@@ -10,9 +10,9 @@ namespace SAS.Entity
 
         private int m_pmid;	//短消息ID
         private string m_msgfrom;	//发送人姓名
-        private Guid m_msgfromid;	//发件人UID
+        private int m_msgfromid;	//发件人UID
         private string m_msgto;	//收送人姓名
-        private Guid m_msgtoid;	//收件人UID
+        private int m_msgtoid;	//收件人UID
         private int m_folder;	//文件箱
         private int m_new = 0;	//是否未读
         private string m_subject;	//标题
@@ -38,7 +38,7 @@ namespace SAS.Entity
         ///<summary>
         ///发件人UID
         ///</summary>
-        public Guid Msgfromid
+        public int Msgfromid
         {
             get { return m_msgfromid; }
             set { m_msgfromid = value; }
@@ -56,7 +56,7 @@ namespace SAS.Entity
         ///<summary>
         ///收件人UID
         ///</summary>
-        public Guid Msgtoid
+        public int Msgtoid
         {
             get { return m_msgtoid; }
             set { m_msgtoid = value; }

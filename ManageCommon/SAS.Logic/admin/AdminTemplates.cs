@@ -88,7 +88,7 @@ namespace SAS.Logic
         /// <param name="groupId">操作者的组Id</param>
         /// <param name="groupTitle">操作者的组名称</param>
         /// <param name="ip">操作者的Ip</param>
-        public static void RemoveTemplateInDB(string templateIdList, Guid uid, string userName, int groupId, string groupTitle, string ip)
+        public static void RemoveTemplateInDB(string templateIdList, int uid, string userName, int groupId, string groupTitle, string ip)
         {
             #region 移除模板
             GeneralConfigInfo configInfo = GeneralConfigs.GetConfig();
@@ -109,7 +109,7 @@ namespace SAS.Logic
             #endregion
         }
 
-        public static void DeleteTemplate(string templateIdList, Guid uid, string userName, int groupId, string groupTitle, string ip)
+        public static void DeleteTemplate(string templateIdList, int uid, string userName, int groupId, string groupTitle, string ip)
         {
             RemoveTemplateInDB(templateIdList, uid, userName, groupId, groupTitle, ip);
             foreach (string templateid in templateIdList.Split(','))

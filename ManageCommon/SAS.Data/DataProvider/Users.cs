@@ -14,7 +14,7 @@ namespace SAS.Data.DataProvider
         /// </summary>
         /// <param name="uid">用户id</param>
         /// <returns>用户信息</returns>
-        public static UserInfo GetUserInfo(Guid uid)
+        public static UserInfo GetUserInfo(int uid)
         {
             return LoadSingleUserInfo(DatabaseProvider.GetInstance().GetUserInfoToReader(uid));
         }
@@ -25,8 +25,8 @@ namespace SAS.Data.DataProvider
             if (reader.Read())
             {
                 userinfo = new UserInfo();
-                userinfo.Ps_id = new Guid(reader["Ps_id"].ToString());
-                userinfo.Ps_en_id = new Guid(reader["Ps_en_id"].ToString());
+                userinfo.Ps_id = TypeConverter.StrToInt(reader["Ps_id"].ToString(), 0);
+                userinfo.Ps_en_id = TypeConverter.StrToInt(reader["Ps_en_id"].ToString(), 0);
                 userinfo.Ps_name = reader["Ps_name"].ToString();
                 userinfo.Ps_nickName = reader["Ps_nickName"].ToString();
                 userinfo.Ps_password = reader["Ps_password"].ToString();
@@ -64,7 +64,7 @@ namespace SAS.Data.DataProvider
                 userinfo.Ps_status = TypeConverter.StrToInt(reader["Ps_status"].ToString(), 0);
                 userinfo.Ps_isDetail = TypeConverter.StrToBool(reader["Ps_isDetail"].ToString().Trim(), true);
                 userinfo.Ps_isCreater = TypeConverter.StrToBool(reader["Ps_isCreater"].ToString().Trim(), false);
-                userinfo.Ps_creater = new Guid(reader["Ps_creater"].ToString().Trim());
+                userinfo.Ps_creater = TypeConverter.StrToInt(reader["Ps_creater"].ToString(), 0);
 
                 userinfo.Pd_website = reader["Pd_website"].ToString();
                 userinfo.Pd_QQ = reader["Pd_QQ"].ToString();
@@ -105,8 +105,8 @@ namespace SAS.Data.DataProvider
             if (reader.Read())
             {
                 userInfo = new ShortUserInfo();
-                userInfo.Ps_id = new Guid(reader["Ps_id"].ToString());
-                userInfo.Ps_en_id = new Guid(reader["Ps_en_id"].ToString());
+                userInfo.Ps_id = TypeConverter.StrToInt(reader["Ps_id"].ToString(), 0);
+                userInfo.Ps_en_id = TypeConverter.StrToInt(reader["Ps_en_id"].ToString(), 0);
                 userInfo.Ps_name = reader["Ps_name"].ToString();
                 userInfo.Ps_nickName = reader["Ps_nickName"].ToString();
                 userInfo.Ps_password = reader["Ps_password"].ToString();
@@ -144,7 +144,7 @@ namespace SAS.Data.DataProvider
                 userInfo.Ps_status = TypeConverter.StrToInt(reader["Ps_status"].ToString(), 0);
                 userInfo.Ps_isDetail = TypeConverter.StrToBool(reader["Ps_isDetail"].ToString().Trim(), true);
                 userInfo.Ps_isCreater = TypeConverter.StrToBool(reader["Ps_isCreater"].ToString().Trim(), false);
-                userInfo.Ps_creater = new Guid(reader["Ps_creater"].ToString().Trim());
+                userInfo.Ps_creater = TypeConverter.StrToInt(reader["Ps_creater"].ToString().Trim(),0);
                 userInfo.ps_salt = reader["ps_salt"].ToString().Trim();
             }
             reader.Close();
@@ -156,7 +156,7 @@ namespace SAS.Data.DataProvider
         /// </summary>
         /// <param name="uid">用户id</param>
         /// <returns>用户信息</returns>
-        public static ShortUserInfo GetShortUserInfo(Guid uid)
+        public static ShortUserInfo GetShortUserInfo(int uid)
         {
             return LoadSingleShortUserInfo(DatabaseProvider.GetInstance().GetShortUserInfoToReader(uid));
         }
@@ -260,7 +260,7 @@ namespace SAS.Data.DataProvider
             if (reader.Read())
             {
                 userInfo = new ShortUserInfo();
-                userInfo.Ps_id = new Guid(reader[0].ToString());
+                userInfo.Ps_id = Utils.StrToInt(reader[0].ToString(), -1);
                 userInfo.Ps_ug_id = Utils.StrToInt(reader[1].ToString(), -1);
                 userInfo.Ps_pg_id = Utils.StrToInt(reader[2].ToString(), -1);
             }
@@ -275,7 +275,7 @@ namespace SAS.Data.DataProvider
         /// <param name="password">密码</param>
         /// <param name="originalpassword">是否非MD5密码</param>
         /// <returns>如果用户密码正确则返回uid, 否则返回-1</returns>
-        public static ShortUserInfo CheckPassword(Guid uid, string password, bool originalpassword)
+        public static ShortUserInfo CheckPassword(int uid, string password, bool originalpassword)
         {
             IDataReader reader = DatabaseProvider.GetInstance().CheckPassword(uid, password, originalpassword);
             ShortUserInfo userInfo = null;
@@ -283,7 +283,7 @@ namespace SAS.Data.DataProvider
             if (reader.Read())
             {
                 userInfo = new ShortUserInfo();
-                userInfo.Ps_id = new Guid(reader[0].ToString());
+                userInfo.Ps_id = Utils.StrToInt(reader[0].ToString(), -1);
                 userInfo.Ps_ug_id = Utils.StrToInt(reader[1].ToString(), -1);
                 userInfo.Ps_pg_id = Utils.StrToInt(reader[2].ToString(), -1);
             }
@@ -296,14 +296,14 @@ namespace SAS.Data.DataProvider
         /// </summary>
         /// <param name="email">email地址</param>
         /// <returns>用户uid</returns>
-        public static Guid FindUserEmail(string email)
+        public static int FindUserEmail(string email)
         {
             IDataReader reader = DatabaseProvider.GetInstance().FindUserEmail(email);
 
-            Guid uid = new Guid("00000000-0000-0000-0000-000000000000");
+            int uid = -1;
             if (reader.Read())
             {
-                uid = new Guid(reader[0].ToString().Trim());
+                uid = Utils.StrToInt(reader[0].ToString(), -1);
             }
             reader.Close();
             return uid;
@@ -332,7 +332,7 @@ namespace SAS.Data.DataProvider
         /// </summary>
         /// <param name="__userinfo">用户信息</param>
         /// <returns>返回用户ID, 如果已存在该用户名则返回-1</returns>
-        public static Guid CreateUser(UserInfo userinfo)
+        public static int CreateUser(UserInfo userinfo)
         {
             return DatabaseProvider.GetInstance().CreateUser(userinfo);
         }
@@ -353,7 +353,7 @@ namespace SAS.Data.DataProvider
         /// <param name="uid">用户id</param>
         /// <param name="authstr">验证串</param>
         /// <param name="authflag">验证标志</param>
-        public static void UpdateAuthStr(Guid uid, string authstr, int authflag)
+        public static void UpdateAuthStr(int uid, string authstr, int authflag)
         {
             DatabaseProvider.GetInstance().UpdateAuthStr(uid, authstr, authflag);
         }
@@ -411,7 +411,7 @@ namespace SAS.Data.DataProvider
         /////// <param name="avatarheight">头像高度</param>
         /////// <param name="templateid">模板Id</param>
         /////// <returns>如果用户不存在则返回false, 否则返回true</returns>
-        ////public static void UpdateUserPreference(Guid uid, string avatar, int avatarwidth, int avatarheight, int templateid)
+        ////public static void UpdateUserPreference(int uid, string avatar, int avatarwidth, int avatarheight, int templateid)
         ////{
         ////    DatabaseProvider.GetInstance().UpdateUserPreference(uid, avatar, avatarwidth, avatarheight, templateid);
         ////}
@@ -423,7 +423,7 @@ namespace SAS.Data.DataProvider
         /////// <param name="password">密码</param>
         /////// <param name="originalpassword">是否非MD5密码</param>
         /////// <returns>成功返回true否则false</returns>
-        ////public static void UpdateUserPassword(Guid uid, string password, bool originalpassword)
+        ////public static void UpdateUserPassword(int uid, string password, bool originalpassword)
         ////{
         ////    DatabaseProvider.GetInstance().UpdateUserPassword(uid, password, originalpassword);
         ////}
@@ -434,7 +434,7 @@ namespace SAS.Data.DataProvider
         /////// <param name="uid">用户id</param>
         /////// <param name="userSecques">用户安全问题答案的存储数据</param>
         /////// <returns>成功返回true否则false</returns>
-        ////public static void UpdateUserSecques(Guid uid, string userSecques)
+        ////public static void UpdateUserSecques(int uid, string userSecques)
         ////{
         ////    DatabaseProvider.GetInstance().UpdateUserSecques(uid, userSecques);
         ////}
@@ -444,7 +444,7 @@ namespace SAS.Data.DataProvider
         /// 更新用户最后登录时间
         /// </summary>
         /// <param name="uid">用户id</param>
-        public static void UpdateUserLastvisit(Guid uid, string ip)
+        public static void UpdateUserLastvisit(int uid, string ip)
         {
             DatabaseProvider.GetInstance().UpdateUserLastvisit(uid, ip);
         }
@@ -478,7 +478,7 @@ namespace SAS.Data.DataProvider
         /////// </summary>
         /////// <param name="uid">用户uid列表</param>
         /////// <param name="state">当前在线状态(0:离线,1:在线)</param>
-        ////public static void UpdateUserOnlineState(Guid uid, int state, string activitytime)
+        ////public static void UpdateUserOnlineState(int uid, int state, string activitytime)
         ////{
         ////    switch (state)
         ////    {
@@ -501,7 +501,7 @@ namespace SAS.Data.DataProvider
         /////// 更新用户当前的在线时间和最后活动时间
         /////// </summary>
         /////// <param name="uid">用户uid</param>
-        ////public static void UpdateUserOnlineTime(Guid uid, string activitytime)
+        ////public static void UpdateUserOnlineTime(int uid, string activitytime)
         ////{
         ////    DatabaseProvider.GetInstance().UpdateUserLastActivity(uid, activitytime);
         ////}
@@ -512,7 +512,7 @@ namespace SAS.Data.DataProvider
         /// <param name="uid">用户ID</param>
         /// <param name="pmnum">短消息数量</param>
         /// <returns>更新记录个数</returns>
-        public static int SetUserNewPMCount(Guid uid, int pmnum)
+        public static int SetUserNewPMCount(int uid, int pmnum)
         {
             return DatabaseProvider.GetInstance().SetUserNewPMCount(uid, pmnum);
         }
@@ -523,7 +523,7 @@ namespace SAS.Data.DataProvider
         /////// <param name="uid">用户ID</param>
         /////// <param name="subval">短消息将要减小的值,负数为加</param>
         /////// <returns>更新记录个数</returns>
-        ////public static int DecreaseNewPMCount(Guid uid, int subval)
+        ////public static int DecreaseNewPMCount(int uid, int subval)
         ////{
         ////    return DatabaseProvider.GetInstance().DecreaseNewPMCount(uid, subval);
         ////}
@@ -594,7 +594,7 @@ namespace SAS.Data.DataProvider
         /////// <param name="groupid">用户组id</param>
         /////// <param name="groupexpiry">过期时间</param>
         /////// <param name="uid">用户id</param>
-        ////public static void UpdateBanUser(int groupid, string groupexpiry, Guid uid)
+        ////public static void UpdateBanUser(int groupid, string groupexpiry, int uid)
         ////{
         ////    DatabaseProvider.GetInstance().UpdateBanUser(groupid, groupexpiry, uid);
         ////}
@@ -674,7 +674,7 @@ namespace SAS.Data.DataProvider
         /////// <param name="authstr">验证字符串</param>
         /////// <param name="authtime">验证时间</param>
         /////// <param name="uid">用户Id</param>
-        ////public static void UpdateEmailValidateInfo(string authstr, DateTime authTime, Guid uid)
+        ////public static void UpdateEmailValidateInfo(string authstr, DateTime authTime, int uid)
         ////{
         ////    DatabaseProvider.GetInstance().UpdateEmailValidateInfo(authstr, authTime, uid);
         ////}
@@ -756,7 +756,7 @@ namespace SAS.Data.DataProvider
         /// <param name="delPosts">是否删除帖子</param>
         /// <param name="delPms">是否删除短信</param>
         /// <returns></returns>
-        public static bool DeleteUser(Guid uid, bool delPosts, bool delPms)
+        public static bool DeleteUser(int uid, bool delPosts, bool delPms)
         {
             return DatabaseProvider.GetInstance().DelUserAllInf(uid, delPosts, delPms);
         }
@@ -854,7 +854,7 @@ namespace SAS.Data.DataProvider
         /// <param name="start_uid">起始UId</param>
         /// <param name="end_uid">终止UID</param>
         /// <returns></returns>
-        public static IDataReader GetUsers(Guid start_uid, Guid end_uid)
+        public static IDataReader GetUsers(int start_uid, int end_uid)
         {
             return DatabaseProvider.GetInstance().GetUsers(start_uid, end_uid);
         }
@@ -884,7 +884,7 @@ namespace SAS.Data.DataProvider
         /////// <param name="statcount">获取数量</param>
         /////// <param name="lastuid">最小用户ID</param>
         /////// <returns></returns>
-        ////public static IDataReader GetTopUsers(int statcount, Guid lastuid)
+        ////public static IDataReader GetTopUsers(int statcount, int lastuid)
         ////{
         ////    return DatabaseProvider.GetInstance().GetTopUsers(statcount, lastuid);
         ////}
@@ -905,7 +905,7 @@ namespace SAS.Data.DataProvider
         /////// </summary>
         /////// <param name="groupid">用户组id</param>
         /////// <param name="userid">用户ID</param>
-        ////public static void UpdateUserOtherInfo(int groupid, Guid userid)
+        ////public static void UpdateUserOtherInfo(int groupid, int userid)
         ////{
         ////    DatabaseProvider.GetInstance().UpdateUserOtherInfo(groupid, userid);
         ////}
@@ -915,7 +915,7 @@ namespace SAS.Data.DataProvider
         /////// </summary>
         /////// <param name="groupid">用户组id</param>
         /////// <param name="userid">用户ID</param>
-        ////public static void UpdateUserOnlineInfo(int groupid, Guid userid)
+        ////public static void UpdateUserOnlineInfo(int groupid, int userid)
         ////{
         ////    DatabaseProvider.GetInstance().UpdateUserOnlineInfo(groupid, userid);
         ////}

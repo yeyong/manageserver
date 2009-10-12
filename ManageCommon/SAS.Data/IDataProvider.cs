@@ -17,14 +17,14 @@ namespace SAS.Data
         /// </summary>
         /// <param name="uid"></param>
         /// <returns></returns>
-        IDataReader GetUserInfoToReader(Guid uid);
+        IDataReader GetUserInfoToReader(int uid);
 
         /// <summary>
         /// 返回指定用户的简短信息
         /// </summary>
         /// <param name="uid">用户id</param>
         /// <returns>用户信息</returns>
-        IDataReader GetShortUserInfoToReader(Guid uid);
+        IDataReader GetShortUserInfoToReader(int uid);
 
         /// <summary>
         /// 更改用户组
@@ -92,7 +92,7 @@ namespace SAS.Data
         /// <param name="passWord">密码</param>
         /// <param name="originalPassword">是否非MD5密码</param>
         /// <returns>如果用户密码正确则返回uid, 否则返回-1</returns>
-        IDataReader CheckPassword(Guid uid, string passWord, bool originalPassword);
+        IDataReader CheckPassword(int uid, string passWord, bool originalPassword);
 
         /// <summary>
         /// 查找用户Email
@@ -118,7 +118,7 @@ namespace SAS.Data
         /// </summary>
         /// <param name="userinfo">用户信息</param>
         /// <returns>返回用户ID, 如果已存在该用户名则返回-1</returns>
-        Guid CreateUser(UserInfo userinfo);
+        int CreateUser(UserInfo userinfo);
 
         /// <summary>
         /// 更新用户
@@ -133,7 +133,7 @@ namespace SAS.Data
         /// <param name="uid">用户id</param>
         /// <param name="authStr">验证串</param>
         /// <param name="authFlag">验证标志</param>
-        void UpdateAuthStr(Guid uid, string authStr, int authFlag);
+        void UpdateAuthStr(int uid, string authStr, int authFlag);
 
         ///// <summary>
         ///// 更新指定用户的个人资料
@@ -158,7 +158,7 @@ namespace SAS.Data
         ///// <param name="avatarHeight">头像高度</param>
         ///// <param name="templateId">模板Id</param>
         ///// <returns>如果用户不存在则返回false, 否则返回true</returns>
-        //void UpdateUserPreference(Guid uid, string avatar, int avatarWidth, int avatarHeight, int templateId);
+        //void UpdateUserPreference(int uid, string avatar, int avatarWidth, int avatarHeight, int templateId);
 
         ///// <summary>
         ///// 更新用户密码
@@ -167,7 +167,7 @@ namespace SAS.Data
         ///// <param name="passWord">密码</param>
         ///// <param name="originalPassWord">是否非MD5密码</param>
         ///// <returns>成功返回true否则false</returns>
-        //void UpdateUserPassword(Guid uid, string passWord, bool originalPassWord);
+        //void UpdateUserPassword(int uid, string passWord, bool originalPassWord);
 
         ///// <summary>
         ///// 更新用户安全问题
@@ -175,14 +175,14 @@ namespace SAS.Data
         ///// <param name="uid">用户id</param>
         ///// <param name="secques">用户安全问题答案的存储数据</param>
         ///// <returns>成功返回true否则false</returns>
-        //void UpdateUserSecques(Guid uid, string secques);
+        //void UpdateUserSecques(int uid, string secques);
 
         /// <summary>
         /// 更新用户最后访问时间
         /// </summary>
         /// <param name="uid">用户id</param>
         /// <param name="ip"></param>
-        void UpdateUserLastvisit(Guid uid, string ip);
+        void UpdateUserLastvisit(int uid, string ip);
 
         ///// <summary>
         ///// 更新用户在线信息
@@ -206,7 +206,7 @@ namespace SAS.Data
         ///// <param name="uid">用户uid列表</param>
         ///// <param name="onlineState">当前在线状态(0:离线,1:在线)</param>
         ///// <param name="activityTime"></param>
-        //void UpdateUserOnlineStateAndLastActivity(Guid uid, int onlineState, string activityTime);
+        //void UpdateUserOnlineStateAndLastActivity(int uid, int onlineState, string activityTime);
 
         ///// <summary>
         ///// 更新用户在线信息
@@ -214,14 +214,14 @@ namespace SAS.Data
         ///// <param name="uid">用户uid列表</param>
         ///// <param name="onlineState">当前在线状态(0:离线,1:在线)</param>
         ///// <param name="activityTime"></param>
-        //void UpdateUserOnlineStateAndLastVisit(Guid uid, int onlineState, string activityTime);
+        //void UpdateUserOnlineStateAndLastVisit(int uid, int onlineState, string activityTime);
 
         ///// <summary>
         ///// 更新用户在线时间
         ///// </summary>
         ///// <param name="uid">用户uid</param>
         ///// <param name="activityTime"></param>
-        //void UpdateUserLastActivity(Guid uid, string activityTime);
+        //void UpdateUserLastActivity(int uid, string activityTime);
 
         /// <summary>
         /// 设置用户信息表中未读短消息的数量
@@ -229,7 +229,7 @@ namespace SAS.Data
         /// <param name="uid">用户ID</param>
         /// <param name="pmNum">短消息数量</param>
         /// <returns>更新记录个数</returns>
-        int SetUserNewPMCount(Guid uid, int pmNum);
+        int SetUserNewPMCount(int uid, int pmNum);
 
         ///// <summary>
         ///// 将用户的未读短信息数量减小一个指定的值
@@ -237,7 +237,7 @@ namespace SAS.Data
         ///// <param name="uid">用户ID</param>
         ///// <param name="subval">短消息将要减小的值,负数为加</param>
         ///// <returns>更新记录个数</returns>
-        //int DecreaseNewPMCount(Guid uid, int subVal);
+        //int DecreaseNewPMCount(int uid, int subVal);
 
         ///// <summary>
         ///// 根据验证字串获取用户Id
@@ -265,7 +265,7 @@ namespace SAS.Data
         ///// <param name="groupId">用户组id</param>
         ///// <param name="groupExpiry">过期时间</param>
         ///// <param name="uid">用户id</param>
-        //void UpdateBanUser(int groupId, string groupExpiry, Guid uid);
+        //void UpdateBanUser(int groupId, string groupExpiry, int uid);
 
         ///// <summary>
         ///// 获取指定论坛的特殊用户
@@ -300,7 +300,7 @@ namespace SAS.Data
         ///// <param name="authStr"></param>
         ///// <param name="authTime"></param>
         ///// <param name="uid"></param>
-        //void UpdateEmailValidateInfo(string authStr, DateTime authTime, Guid uid);
+        //void UpdateEmailValidateInfo(string authStr, DateTime authTime, int uid);
 
         ///// <summary>
         ///// 更新用户积分
@@ -350,7 +350,7 @@ namespace SAS.Data
         /// <param name="delPosts"></param>
         /// <param name="delPms"></param>
         /// <returns></returns>
-        bool DelUserAllInf(Guid uid, bool delPosts, bool delPms);
+        bool DelUserAllInf(int uid, bool delPosts, bool delPms);
 
         ///// <summary>
         ///// 清空指定用户的认证串
@@ -394,7 +394,7 @@ namespace SAS.Data
         /// <param name="startUid"></param>
         /// <param name="endUid"></param>
         /// <returns></returns>
-        IDataReader GetUsers(Guid startUid, Guid endUid);
+        IDataReader GetUsers(int startUid, int endUid);
 
         ///// <summary>
         ///// 获取指定数量的用户
@@ -402,7 +402,7 @@ namespace SAS.Data
         ///// <param name="statCount"></param>
         ///// <param name="lastUid"></param>
         ///// <returns></returns>
-        //IDataReader GetTopUsers(int statCount, Guid lastUid);
+        //IDataReader GetTopUsers(int statCount, int lastUid);
 
         ///// <summary>
         ///// 得到论坛中最后注册的用户ID和用户名
@@ -417,14 +417,14 @@ namespace SAS.Data
         ///// </summary>
         ///// <param name="groupId">用户组id</param>
         ///// <param name="userId">用户ID</param>
-        //void UpdateUserOtherInfo(int groupId, Guid userId);
+        //void UpdateUserOtherInfo(int groupId, int userId);
 
         ///// <summary>
         ///// 更新在线表用户信息
         ///// </summary>
         ///// <param name="groupId">用户组id</param>
         ///// <param name="userId">用户ID</param>
-        //void UpdateUserOnlineInfo(int groupId, Guid userId);
+        //void UpdateUserOnlineInfo(int groupId, int userId);
 
         /// <summary>
         /// 获取指定条件和分页下的用户列表信息
@@ -533,7 +533,7 @@ namespace SAS.Data
         /// <param name="userId"></param>
         /// <param name="passWord"></param>
         /// <returns></returns>
-        DataTable GetOnlineUser(Guid userId, string passWord);
+        DataTable GetOnlineUser(int userId, string passWord);
 
         /// <summary>
         /// 获取在线用户信息
@@ -541,7 +541,7 @@ namespace SAS.Data
         /// <param name="userId"></param>
         /// <param name="ip"></param>
         /// <returns>用户的详细信息</returns>
-        DataTable GetOnlineUserByIP(Guid userId, string ip);
+        DataTable GetOnlineUserByIP(int userId, string ip);
 
         /// <summary>
         /// 检查用户验证码
@@ -566,7 +566,7 @@ namespace SAS.Data
         /// <param name="uid">在线用户id</param>
         /// <param name="onlineState">在线用户状态</param>
         /// <returns></returns>
-        int SetUserOnlineState(Guid uid, int onlineState);
+        int SetUserOnlineState(int uid, int onlineState);
 
         /// <summary>
         /// 更新用户的当前动作及相关信息
@@ -637,7 +637,7 @@ namespace SAS.Data
         /// </summary>
         /// <param name="userId">用户ID</param>
         /// <param name="groupId">组名</param>
-        void UpdateGroupid(Guid userId, int groupId);
+        void UpdateGroupid(int userId, int groupId);
 
         /// <summary>
         /// 删除在线表中的一行
@@ -671,20 +671,20 @@ namespace SAS.Data
         /// </summary>
         /// <param name="olTimeSpan">在线时间间隔</param>
         /// <param name="uid">当前用户id</param>
-        void UpdateOnlineTime(int olTimeSpan, Guid uid);
+        void UpdateOnlineTime(int olTimeSpan, int uid);
 
         /// <summary>
         /// 同步在线时间
         /// </summary>
         /// <param name="uid">用户id</param>
-        void SynchronizeOnlineTime(Guid uid);
+        void SynchronizeOnlineTime(int uid);
 
         /// <summary>
         /// 根据Uid获得Olid
         /// </summary>
         /// <param name="uid"></param>
         /// <returns></returns>
-        int GetOlidByUid(Guid uid);
+        int GetOlidByUid(int uid);
 
         /// <summary>
         /// 更新用户新短消息数
@@ -787,7 +787,7 @@ namespace SAS.Data
         /// <param name="folder">所属文件夹(0:收件箱,1:发件箱,2:草稿箱)</param>
         /// <param name="state">短消息状态(0:已读短消息、1:未读短消息、2:最近消息（7天内）、-1:全部短消息)</param>
         /// <returns>短消息数量</returns>
-        int GetPrivateMessageCount(Guid userId, int folder, int state);
+        int GetPrivateMessageCount(int userId, int folder, int state);
 
         /// <summary>
         /// 得到公共消息数量
@@ -809,14 +809,14 @@ namespace SAS.Data
         /// <param name="userId">用户ID</param>
         /// <param name="pmitemidList">要删除的短信息列表</param>
         /// <returns>删除记录数</returns>
-        int DeletePrivateMessages(Guid userId, string pmIdList);
+        int DeletePrivateMessages(int userId, string pmIdList);
 
         /// <summary>
         /// 获取新短消息数
         /// </summary>
         /// <param name="userId">用户ID</param>
         /// <returns></returns>
-        int GetNewPMCount(Guid userId);
+        int GetNewPMCount(int userId);
 
         /// <summary>
         /// 设置短信息状态
@@ -835,7 +835,7 @@ namespace SAS.Data
         /// <param name="pageIndex">当前要显示的页数</param>
         /// <param name="intType">筛选条件1为未读</param>
         /// <returns>短信息列表</returns>
-        IDataReader GetPrivateMessageList(Guid userId, int folder, int pageSize, int pageIndex, int intType);
+        IDataReader GetPrivateMessageList(int userId, int folder, int pageSize, int pageIndex, int intType);
 
         /// <summary>
         /// 获得公共消息列表
@@ -850,7 +850,7 @@ namespace SAS.Data
         /// </summary>
         /// <param name="uid">Uid</param>
         /// <param name="newUserName">新用户名</param>
-        void UpdatePMSenderAndReceiver(Guid uid, string newUserName);
+        void UpdatePMSenderAndReceiver(int uid, string newUserName);
 
         /// <summary>
         /// 删除短消息
@@ -895,7 +895,7 @@ namespace SAS.Data
         /// </summary>
         /// <param name="uid">指定的通知id</param>
         /// <returns></returns>
-        bool DeleteNoticeByUid(Guid uid);
+        bool DeleteNoticeByUid(int uid);
 
         /// <summary>
         /// 删除指定通知类型和天数内的通知
@@ -919,7 +919,7 @@ namespace SAS.Data
         /// <param name="pageId">分页id</param>
         /// <param name="pageSize">页面尽寸</param>
         /// <returns></returns>
-        IDataReader GetNoticeByUid(Guid uid, Noticetype noticeType, int pageId, int pageSize);
+        IDataReader GetNoticeByUid(int uid, Noticetype noticeType, int pageId, int pageSize);
 
         /// <summary>
         /// 将某一类通知更改为未读状态
@@ -927,14 +927,14 @@ namespace SAS.Data
         /// <param name="type">通知类型</param>
         /// <param name="uid">用户ID</param>
         /// <returns></returns>
-        int ReNewNotice(int type, Guid uid);
+        int ReNewNotice(int type, int uid);
 
         /// <summary>
         /// 获得指定用户的新通知
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        IDataReader GetNewNotices(Guid userId);
+        IDataReader GetNewNotices(int userId);
 
         /// <summary>
         /// 获取指定用户和通知类型的通知信息
@@ -942,7 +942,7 @@ namespace SAS.Data
         /// <param name="uid">指定的用户id</param>
         /// <param name="noticeType">通知类型</param>
         /// <returns></returns>
-        IDataReader GetNoticeByUid(Guid uid, Noticetype noticeType);
+        IDataReader GetNoticeByUid(int uid, Noticetype noticeType);
 
         /// <summary>
         /// 获取指定用户id及通知类型的通知数
@@ -950,21 +950,21 @@ namespace SAS.Data
         /// <param name="uid">指定用户id</param>
         /// <param name="noticeType">通知类型</param>
         /// <returns></returns>
-        int GetNoticeCountByUid(Guid uid, Noticetype noticeType);
+        int GetNoticeCountByUid(int uid, Noticetype noticeType);
 
         /// <summary>
         /// 获取指定用户和分页下的通知
         /// </summary>
         /// <param name="uid">用户id</param>
         /// <returns>通知集合</returns>
-        int GetNewNoticeCountByUid(Guid uid);
+        int GetNewNoticeCountByUid(int uid);
 
         /// <summary>
         /// 更新指定用户的通知新旧状态
         /// </summary>
         /// <param name="uid">用户id</param>
         /// <param name="newType">通知新旧状态(1:新通知 0:旧通知)</param>
-        void UpdateNoticeNewByUid(Guid uid, int newType);
+        void UpdateNoticeNewByUid(int uid, int newType);
 
         /// <summary>
         /// 得到通知数
@@ -972,7 +972,7 @@ namespace SAS.Data
         /// <param name="userId">用户ID</param>
         /// <param name="state">通知状态(0为已读，1为未读)</param>
         /// <returns></returns>
-        int GetNoticeCount(Guid userId, int state);
+        int GetNoticeCount(int userId, int state);
 
         #endregion
 
@@ -1162,7 +1162,7 @@ namespace SAS.Data
         /// <param name="ip">IP地址</param>
         /// <param name="actions">动作</param>
         /// <param name="others"></param>
-        void AddVisitLog(Guid uid, string userName, int groupId, string groupTitle, string ip, string actions, string others);
+        void AddVisitLog(int uid, string userName, int groupId, string groupTitle, string ip, string actions, string others);
 
         /// <summary>
         /// 删除访问日志

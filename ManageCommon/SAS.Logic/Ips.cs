@@ -89,12 +89,12 @@ namespace SAS.Logic
             SAS.Data.DataProvider.Ips.DelBanIp(iplist);
         }
 
-        public static void EditBanIp(string[] expiration, string[] hiddenexpiration, string[] hiddenid, int useradminid, Guid userid)
+        public static void EditBanIp(string[] expiration, string[] hiddenexpiration, string[] hiddenid, int useradminid, int userid)
         {
             for (int i = 0; i < expiration.Length; i++)
             {
                 //1-管理员 2-超版
-                if (useradminid != 1 && userid != Users.GetShortUserInfo(new Guid(hiddenid[i])).Ps_id)
+                if (useradminid != 1 && userid != Users.GetShortUserInfo(TypeConverter.StrToInt(hiddenid[i])).Ps_id)
                     continue;
 
                 if (expiration[i] != hiddenexpiration[i])

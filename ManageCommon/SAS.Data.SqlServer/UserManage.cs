@@ -22,10 +22,10 @@ namespace SAS.Data.SqlServer
         /// </summary>
         /// <param name="uid">用户id</param>
         /// <returns>用户信息</returns>
-        public IDataReader GetUserInfoToReader(Guid uid)
+        public IDataReader GetUserInfoToReader(int uid)
         {
             DbParameter[] parms = {
-									   DbHelper.MakeInParam("@uid", (DbType)SqlDbType.UniqueIdentifier,16, uid)
+									   DbHelper.MakeInParam("@uid", (DbType)SqlDbType.Int,4, uid)
 			                      };
             return DbHelper.ExecuteReader(CommandType.StoredProcedure, string.Format("{0}getuserinfo", BaseConfigs.GetTablePrefix), parms);
         }
@@ -35,10 +35,10 @@ namespace SAS.Data.SqlServer
         /// </summary>
         /// <param name="uid">用id</param>
         /// <returns>用户简短信息</returns>
-        public IDataReader GetShortUserInfoToReader(Guid uid)
+        public IDataReader GetShortUserInfoToReader(int uid)
         {
             DbParameter[] parms = {
-									   DbHelper.MakeInParam("@uid", (DbType)SqlDbType.UniqueIdentifier,16, uid),
+									   DbHelper.MakeInParam("@uid", (DbType)SqlDbType.Int,4, uid),
 			                      };
             return DbHelper.ExecuteReader(CommandType.StoredProcedure, string.Format("{0}getshortuserinfo", BaseConfigs.GetTablePrefix), parms);
         }
@@ -164,7 +164,7 @@ namespace SAS.Data.SqlServer
         /// <param name="delposts">是否删除帖子</param>
         /// <param name="delpms">是否删除短消息</param>
         /// <returns></returns>
-        public bool DelUserAllInf(Guid uid, bool delPosts, bool delPms)
+        public bool DelUserAllInf(int uid, bool delPosts, bool delPms)
         {
             SqlConnection conn = new SqlConnection(DbHelper.ConnectionString);
             conn.Open();
@@ -172,9 +172,9 @@ namespace SAS.Data.SqlServer
             {
                 try
                 {
-                    DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("DELETE FROM [{0}personInfo] WHERE [ps_id]='{1}'",
+                    DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("DELETE FROM [{0}personInfo] WHERE [ps_id]={1}",
                                                                               BaseConfigs.GetTablePrefix, uid));
-                    DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("DELETE FROM [{0}personDetail] WHERE [pd_id]='{1}'",
+                    DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("DELETE FROM [{0}personDetail] WHERE [pd_id]={1}",
                                                                               BaseConfigs.GetTablePrefix, uid));
                     DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("DELETE FROM [{0}onlinetime] WHERE [uid]='{1}'",
                                                                               BaseConfigs.GetTablePrefix, uid));
@@ -185,7 +185,7 @@ namespace SAS.Data.SqlServer
 
                     if (delPosts)
                     {
-                        DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("Delete From [{0}topics] Where [posterid]='{1}'",
+                        DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("Delete From [{0}topics] Where [posterid]={1}",
                                                                                   BaseConfigs.GetTablePrefix, uid));
                         //清除用户所发的帖子
                         foreach (DataRow dr in DbHelper.ExecuteDataset(CommandType.Text, string.Format("SELECT {0} FROM [{1}tablelist]", DbFields.TABLE_LIST, BaseConfigs.GetTablePrefix)).Tables[0].Rows)
@@ -310,10 +310,10 @@ namespace SAS.Data.SqlServer
         /// <param name="groupid">用户组id</param>
         /// <param name="adminid">管理id</param>
         /// <returns>如果用户密码正确则返回uid, 否则返回-1</returns>
-        public IDataReader CheckPassword(Guid uid, string passWord, bool originalPassWord)
+        public IDataReader CheckPassword(int uid, string passWord, bool originalPassWord)
         {
             DbParameter[] parms = {
-									   DbHelper.MakeInParam("@uid",(DbType)SqlDbType.UniqueIdentifier,16,uid),
+									   DbHelper.MakeInParam("@uid",(DbType)SqlDbType.Int,4,uid),
 									   DbHelper.MakeInParam("@password",(DbType)SqlDbType.Char,32, originalPassWord ? Utils.MD5(passWord) : passWord)
 								   };
             return DbHelper.ExecuteReader(CommandType.StoredProcedure, string.Format("{0}checkpasswordbyuid", BaseConfigs.GetTablePrefix), parms);
@@ -357,10 +357,10 @@ namespace SAS.Data.SqlServer
         /// </summary>
         /// <param name="__userinfo">用户信息</param>
         /// <returns>返回用户ID, 如果已存在该用户名则返回-1</returns>
-        public Guid CreateUser(UserInfo userInfo)
+        public int CreateUser(UserInfo userInfo)
         {
             DbParameter[] parms = {
-					DbHelper.MakeInParam("@ps_en_id", (DbType)SqlDbType.UniqueIdentifier,16,userInfo.Ps_en_id),
+					DbHelper.MakeInParam("@ps_en_id", (DbType)SqlDbType.Int,4,userInfo.Ps_en_id),
 					DbHelper.MakeInParam("@ps_name", (DbType)SqlDbType.VarChar,50,userInfo.Ps_name),
 					DbHelper.MakeInParam("@ps_nickName", (DbType)SqlDbType.VarChar,50,userInfo.Ps_nickName),
 					DbHelper.MakeInParam("@ps_gender", (DbType)SqlDbType.SmallInt,2,userInfo.Ps_gender),
@@ -389,7 +389,7 @@ namespace SAS.Data.SqlServer
 					DbHelper.MakeInParam("@ps_onlinetime", (DbType)SqlDbType.Int,4,userInfo.Ps_onlinetime),
 					DbHelper.MakeInParam("@ps_isDetail", (DbType)SqlDbType.Bit,1,userInfo.Ps_isDetail),
 					DbHelper.MakeInParam("@ps_isCreater", (DbType)SqlDbType.Bit,1,userInfo.Ps_isCreater),
-					DbHelper.MakeInParam("@ps_creater", (DbType)SqlDbType.UniqueIdentifier,16,userInfo.Ps_creater),
+					DbHelper.MakeInParam("@ps_creater", (DbType)SqlDbType.Int,4,userInfo.Ps_creater),
 					DbHelper.MakeInParam("@ps_lastactivity", (DbType)SqlDbType.Char,19,userInfo.Ps_lastactivity),
 					DbHelper.MakeInParam("@ps_secques", (DbType)SqlDbType.Char,8,userInfo.ps_secques),
 					DbHelper.MakeInParam("@ps_pageviews", (DbType)SqlDbType.Int,4,userInfo.ps_pageviews),
@@ -424,7 +424,7 @@ namespace SAS.Data.SqlServer
 					DbHelper.MakeInParam("@pd_bio", (DbType)SqlDbType.Text,16,userInfo.pd_bio)
 		    };
 
-            return new Guid(DbHelper.ExecuteScalar(CommandType.StoredProcedure, string.Format("{0}createuser", BaseConfigs.GetTablePrefix), parms).ToString());
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.StoredProcedure, string.Format("{0}createuser", BaseConfigs.GetTablePrefix), parms), -1);
         }
 
         /// <summary>
@@ -435,7 +435,7 @@ namespace SAS.Data.SqlServer
         public bool UpdateUser(UserInfo userInfo)
         {
             DbParameter[] parms = {
-					DbHelper.MakeInParam("@ps_en_id", (DbType)SqlDbType.UniqueIdentifier,16,userInfo.Ps_en_id),
+					DbHelper.MakeInParam("@ps_en_id", (DbType)SqlDbType.Int,4,userInfo.Ps_en_id),
 					DbHelper.MakeInParam("@ps_name", (DbType)SqlDbType.VarChar,50,userInfo.Ps_name),
 					DbHelper.MakeInParam("@ps_nickName", (DbType)SqlDbType.VarChar,50,userInfo.Ps_nickName),
 					DbHelper.MakeInParam("@ps_gender", (DbType)SqlDbType.SmallInt,2,userInfo.Ps_gender),
@@ -464,7 +464,7 @@ namespace SAS.Data.SqlServer
 					DbHelper.MakeInParam("@ps_onlinetime", (DbType)SqlDbType.Int,4,userInfo.Ps_onlinetime),
 					DbHelper.MakeInParam("@ps_isDetail", (DbType)SqlDbType.Bit,1,userInfo.Ps_isDetail),
 					DbHelper.MakeInParam("@ps_isCreater", (DbType)SqlDbType.Bit,1,userInfo.Ps_isCreater),
-					DbHelper.MakeInParam("@ps_creater", (DbType)SqlDbType.UniqueIdentifier,16,userInfo.Ps_creater),
+					DbHelper.MakeInParam("@ps_creater", (DbType)SqlDbType.Int,4,userInfo.Ps_creater),
 					DbHelper.MakeInParam("@ps_lastactivity", (DbType)SqlDbType.Char,19,userInfo.Ps_lastactivity),
 					DbHelper.MakeInParam("@ps_secques", (DbType)SqlDbType.Char,8,userInfo.ps_secques),
 					DbHelper.MakeInParam("@ps_pageviews", (DbType)SqlDbType.Int,4,userInfo.ps_pageviews),
@@ -513,10 +513,10 @@ namespace SAS.Data.SqlServer
         /// <param name="uid">用户id</param>
         /// <param name="authstr">验证串</param>
         /// <param name="authflag">验证标志</param>
-        public void UpdateAuthStr(Guid uid, string authStr, int authFlag)
+        public void UpdateAuthStr(int uid, string authStr, int authFlag)
         {
             DbParameter[] parms = {
-									   DbHelper.MakeInParam("@uid", (DbType)SqlDbType.UniqueIdentifier, 16, uid), 
+									   DbHelper.MakeInParam("@uid", (DbType)SqlDbType.Int, 4, uid), 
 									   DbHelper.MakeInParam("@authstr", (DbType)SqlDbType.VarChar, 20, authStr),
 									   DbHelper.MakeInParam("@authflag", (DbType)SqlDbType.TinyInt, 2, authFlag) 
 								   };
@@ -527,10 +527,10 @@ namespace SAS.Data.SqlServer
         /// 更新用户最后登录时间
         /// </summary>
         /// <param name="uid">用户id</param>
-        public void UpdateUserLastvisit(Guid uid, string ip)
+        public void UpdateUserLastvisit(int uid, string ip)
         {
             DbParameter[] parms = {
-									   DbHelper.MakeInParam("@uid", (DbType)SqlDbType.UniqueIdentifier, 16, uid),
+									   DbHelper.MakeInParam("@uid", (DbType)SqlDbType.Int, 4, uid),
 									   DbHelper.MakeInParam("@ip", (DbType)SqlDbType.Char,15, ip)
 								   };
             string commandText = string.Format("UPDATE [{0}personInfo] SET [ps_lastactivity]=GETDATE(), [ps_loginIP]=@ip WHERE [ps_id] =@uid",
@@ -556,10 +556,10 @@ namespace SAS.Data.SqlServer
         /// <param name="uid">用户ID</param>
         /// <param name="pmnum">短消息数量</param>
         /// <returns>更新记录个数</returns>
-        public int SetUserNewPMCount(Guid uid, int pmNum)
+        public int SetUserNewPMCount(int uid, int pmNum)
         {
             DbParameter[] parms = {
-									   DbHelper.MakeInParam("@uid", (DbType)SqlDbType.UniqueIdentifier, 16, uid), 
+									   DbHelper.MakeInParam("@uid", (DbType)SqlDbType.Int, 4, uid), 
 									   DbHelper.MakeInParam("@value", (DbType)SqlDbType.Int, 4, pmNum)
 			                      };
             string commandText = string.Format("UPDATE [{0}personInfo] SET [ps_newMess]=@value WHERE [ps_id]=@uid", BaseConfigs.GetTablePrefix);
@@ -601,11 +601,11 @@ namespace SAS.Data.SqlServer
         /// <param name="startUid"></param>
         /// <param name="endUid"></param>
         /// <returns></returns>
-        public IDataReader GetUsers(Guid startUid, Guid endUid)
+        public IDataReader GetUsers(int startUid, int endUid)
         {
             DbParameter[] parms = {
-				DbHelper.MakeInParam("@start_uid", (DbType)SqlDbType.UniqueIdentifier, 16, startUid),
-				DbHelper.MakeInParam("@end_uid", (DbType)SqlDbType.UniqueIdentifier, 16, endUid)
+				DbHelper.MakeInParam("@start_uid", (DbType)SqlDbType.Int, 4, startUid),
+				DbHelper.MakeInParam("@end_uid", (DbType)SqlDbType.Int, 4, endUid)
 			};
             string commandText = string.Format("SELECT [ps_id] FROM [{0}personInfo] WHERE [ps_id] >= @start_uid AND [ps_id]<=@end_uid",
                                                 BaseConfigs.GetTablePrefix);
@@ -633,7 +633,7 @@ namespace SAS.Data.SqlServer
         public string Global_UserGrid_SearchCondition(bool isLike, bool isPostDateTime, string userName, string nickName, string userGroup, string email, string creditsStart, string creditsEnd, string lastIp, string posts, string digestPosts, string uid, string joinDateStart, string joinDateEnd)
         {
             string tableName = string.Format("[{0}personInfo]", BaseConfigs.GetTablePrefix);
-            StringBuilder sqlBuilder = new StringBuilder(" " + tableName + ".[ps_id]<>'00000000-0000-0000-0000-000000000000' ");
+            StringBuilder sqlBuilder = new StringBuilder(" " + tableName + ".[ps_id]>0 ");
 
             if (isLike)
             {
@@ -671,7 +671,7 @@ namespace SAS.Data.SqlServer
             ////if (!Utils.StrIsNullOrEmpty(digestPosts))
             ////    sqlBuilder.AppendFormat(" AND {1}.[digestposts] >={0}", digestPosts, tableName);
 
-            if (uid != "" && uid != "00000000-0000-0000-0000-000000000000")
+            if (uid != "")
             {
                 uid = uid.Replace(", ", ",");
 
@@ -681,7 +681,7 @@ namespace SAS.Data.SqlServer
                 if (uid.LastIndexOf(",") == (uid.Length - 1))
                     uid = uid.Substring(0, uid.Length - 1);
 
-                if (uid != "" && uid != "00000000-0000-0000-0000-000000000000")
+                if (uid != "")
                     sqlBuilder.AppendFormat(" AND {1}.[ps_id] IN({0})", uid, tableName);
             }
 
@@ -766,7 +766,7 @@ namespace SAS.Data.SqlServer
         {
             return TypeConverter.ObjectToInt(
                                  DbHelper.ExecuteDataset(CommandType.Text,
-                                                         string.Format("SELECT COUNT(ol_id) FROM [{0}online] WHERE [ol_ps_id]<>'00000000-0000-0000-0000-000000000000'", BaseConfigs.GetTablePrefix)).Tables[0].Rows[0][0]);
+                                                         string.Format("SELECT COUNT(ol_id) FROM [{0}online] WHERE [ol_ps_id]>0", BaseConfigs.GetTablePrefix)).Tables[0].Rows[0][0]);
         }
 
         /// <summary>
@@ -809,10 +809,10 @@ namespace SAS.Data.SqlServer
         /// <param name="userId">在线用户ID</param>
         /// <param name="password">用户密码</param>
         /// <returns>用户的详细信息</returns>
-        public DataTable GetOnlineUser(Guid userId, string passWord)
+        public DataTable GetOnlineUser(int userId, string passWord)
         {
             DbParameter[] parms =  { 
-                                        DbHelper.MakeInParam("@userid", (DbType)SqlDbType.UniqueIdentifier, 16, userId),
+                                        DbHelper.MakeInParam("@userid", (DbType)SqlDbType.Int, 4, userId),
                                         DbHelper.MakeInParam("@password", (DbType)SqlDbType.Char, 32, passWord)
                                     };
             return DbHelper.ExecuteDataset(CommandType.StoredProcedure, string.Format("{0}getonlineuser", BaseConfigs.GetTablePrefix), parms).Tables[0];
@@ -824,10 +824,10 @@ namespace SAS.Data.SqlServer
         /// <param name="userId">在线用户ID</param>
         /// <param name="ip">IP</param>
         /// <returns></returns>
-        public DataTable GetOnlineUserByIP(Guid userId, string ip)
+        public DataTable GetOnlineUserByIP(int userId, string ip)
         {
             DbParameter[] parms = { 
-                                        DbHelper.MakeInParam("@userid", (DbType)SqlDbType.UniqueIdentifier, 16, userId),
+                                        DbHelper.MakeInParam("@userid", (DbType)SqlDbType.Int, 4, userId),
                                         DbHelper.MakeInParam("@ip", (DbType)SqlDbType.VarChar, 15, ip)
                                     };
             return DbHelper.ExecuteDataset(CommandType.StoredProcedure, string.Format("{0}getonlineuserbyip", BaseConfigs.GetTablePrefix), parms).Tables[0];
@@ -871,7 +871,7 @@ namespace SAS.Data.SqlServer
             // 如果timeout为负数则代表不需要精确更新用户是否在线的状态
             if (timeOut > 0)
             {
-                if (onlineUserInfo.ol_ps_id != new Guid("00000000-0000-0000-0000-000000000000"))
+                if (onlineUserInfo.ol_ps_id > 0)
                     onlinestate = 0;
             }
             else
@@ -882,7 +882,7 @@ namespace SAS.Data.SqlServer
 
             DbParameter[] parms = {
 									   DbHelper.MakeInParam("@onlinestate",(DbType)SqlDbType.Int,4,onlinestate),
-									   DbHelper.MakeInParam("@ol_ps_id",(DbType)SqlDbType.UniqueIdentifier,16,onlineUserInfo.ol_ps_id),
+									   DbHelper.MakeInParam("@ol_ps_id",(DbType)SqlDbType.Int,4,onlineUserInfo.ol_ps_id),
 									   DbHelper.MakeInParam("@ol_ip",(DbType)SqlDbType.VarChar,50,onlineUserInfo.ol_ip),
 									   DbHelper.MakeInParam("@ol_name",(DbType)SqlDbType.VarChar,50,onlineUserInfo.ol_name),
 									   DbHelper.MakeInParam("@ol_nickName",(DbType)SqlDbType.VarChar,50,onlineUserInfo.ol_nickName),
@@ -935,7 +935,7 @@ namespace SAS.Data.SqlServer
             {
                 timeoutStrBuilder.Append(",");
                 timeoutStrBuilder.Append(dr["ol_id"].ToString());
-                if (dr["ol_ps_id"].ToString() != "00000000-0000-0000-0000-000000000000")
+                if (dr["ol_ps_id"].ToString() != "-1")
                 {
                     memberStrBuilder.Append(",");
                     memberStrBuilder.Append(dr["ol_ps_id"].ToString());
@@ -965,9 +965,9 @@ namespace SAS.Data.SqlServer
         /// <param name="uid">用户Id</param>
         /// <param name="onlinestate">在线状态，1在线</param>
         /// <returns></returns>
-        public int SetUserOnlineState(Guid uid, int onlineState)
+        public int SetUserOnlineState(int uid, int onlineState)
         {
-            string commandText = string.Format("UPDATE [{0}personInfo] SET [ps_status]={1},[ps_lastactivity]=GETDATE(),[ps_lastLogin]=GETDATE() WHERE [ps_id]='{2}'",
+            string commandText = string.Format("UPDATE [{0}personInfo] SET [ps_status]={1},[ps_lastactivity]=GETDATE(),[ps_lastLogin]=GETDATE() WHERE [ps_id]={2}",
                                                 BaseConfigs.GetTablePrefix,
                                                 onlineState,
                                                 uid);
@@ -1115,7 +1115,7 @@ namespace SAS.Data.SqlServer
         /// </summary>
         /// <param name="userId">用户ID</param>
         /// <param name="groupid">组名</param>
-        public void UpdateGroupid(Guid userId, int groupId)
+        public void UpdateGroupid(int userId, int groupId)
         {
             string commandText = string.Format("UPDATE [{0}online] SET [ol_ug_id]={1} WHERE [ol_ps_id]={2}",
                                                 BaseConfigs.GetTablePrefix,
@@ -1133,11 +1133,11 @@ namespace SAS.Data.SqlServer
             DbParameter[] parms = {
 									   DbHelper.MakeInParam("@ip",(DbType)SqlDbType.VarChar,50,ip)
 								   };
-            string commandText = string.Format("UPDATE [{0}personInfo] SET [ps_status]=0,[ps_lastactivity]=GETDATE() WHERE [ps_id] IN (SELECT [ol_ps_id] FROM [{0}online] WHERE [ol_ps_id]<>'00000000-0000-0000-0000-000000000000' AND [ol_ip]=@ip)",
+            string commandText = string.Format("UPDATE [{0}personInfo] SET [ps_status]=0,[ps_lastactivity]=GETDATE() WHERE [ps_id] IN (SELECT [ol_ps_id] FROM [{0}online] WHERE [ol_ps_id]>0 AND [ol_ip]=@ip)",
                                                 BaseConfigs.GetTablePrefix);
             DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
             if (ip != "0.0.0.0")
-                return DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("DELETE FROM [{0}online] WHERE [ol_ps_id]='00000000-0000-0000-0000-000000000000' AND [ol_ip]=@ip", BaseConfigs.GetTablePrefix), parms);
+                return DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("DELETE FROM [{0}online] WHERE [ol_ps_id]=-1 AND [ol_ip]=@ip", BaseConfigs.GetTablePrefix), parms);
             return 0;
         }
 
@@ -1177,10 +1177,10 @@ namespace SAS.Data.SqlServer
         /// </summary>
         /// <param name="olTimeSpan">在线时间间隔</param>
         /// <param name="uid">当前用户id</param>
-        public void UpdateOnlineTime(int oltimeSpan, Guid uid)
+        public void UpdateOnlineTime(int oltimeSpan, int uid)
         {
             DbParameter[] parms = {
-                                    DbHelper.MakeInParam("@uid", (DbType)SqlDbType.UniqueIdentifier, 16, uid),
+                                    DbHelper.MakeInParam("@uid", (DbType)SqlDbType.Int, 4, uid),
                                     DbHelper.MakeInParam("@oltimespan", (DbType)SqlDbType.SmallInt, 2, oltimeSpan),
                                     DbHelper.MakeInParam("@lastupdate", (DbType)SqlDbType.DateTime, 8, DateTime.Now),
                                     DbHelper.MakeInParam("@expectedlastupdate", (DbType)SqlDbType.DateTime, 8, DateTime.Now.AddMinutes(0 - oltimeSpan))
@@ -1203,10 +1203,10 @@ namespace SAS.Data.SqlServer
         /// 同步在线时间
         /// </summary>
         /// <param name="uid">用户id</param>
-        public void SynchronizeOnlineTime(Guid uid)
+        public void SynchronizeOnlineTime(int uid)
         {
             DbParameter[] parms = {
-                                    DbHelper.MakeInParam("@uid", (DbType)SqlDbType.UniqueIdentifier, 16, uid),
+                                    DbHelper.MakeInParam("@uid", (DbType)SqlDbType.Int, 4, uid),
                                   };
             string commandText = string.Format("SELECT [total] FROM [{0}onlinetime] WHERE [uid]=@uid", BaseConfigs.GetTablePrefix);
             int total = TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText, parms));
@@ -1229,9 +1229,9 @@ namespace SAS.Data.SqlServer
         /// </summary>
         /// <param name="uid">uid</param>
         /// <returns>olid</returns>
-        public int GetOlidByUid(Guid uid)
+        public int GetOlidByUid(int uid)
         {
-            string commandText = string.Format("SELECT [ol_id] FROM [{0}online] WHERE [ol_ps_id]='{1}'", BaseConfigs.GetTablePrefix, uid);
+            string commandText = string.Format("SELECT [ol_id] FROM [{0}online] WHERE [ol_ps_id]={1}", BaseConfigs.GetTablePrefix, uid);
             return TypeConverter.ObjectToInt(DbHelper.ExecuteScalarToStr(CommandType.Text, commandText), -1);
         }
 
@@ -1348,10 +1348,10 @@ namespace SAS.Data.SqlServer
         /// <param name="folder">所属文件夹(0:收件箱,1:发件箱,2:草稿箱)</param>
         /// <param name="state">短消息状态(0:已读短消息、1:未读短消息、-1:全部短消息)</param>
         /// <returns>短消息数量</returns>
-        public int GetPrivateMessageCount(Guid userId, int folder, int state)
+        public int GetPrivateMessageCount(int userId, int folder, int state)
         {
             DbParameter[] parms = {
-									   DbHelper.MakeInParam("@userid",(DbType)SqlDbType.UniqueIdentifier,16,userId),
+									   DbHelper.MakeInParam("@userid",(DbType)SqlDbType.Int,4,userId),
 									   DbHelper.MakeInParam("@folder",(DbType)SqlDbType.Int,4,folder),								   
 									   DbHelper.MakeInParam("@state",(DbType)SqlDbType.Int,4,state)
 								   };
@@ -1369,7 +1369,7 @@ namespace SAS.Data.SqlServer
         {
             return TypeConverter.ObjectToInt(
                              DbHelper.ExecuteScalar(CommandType.Text,
-                                                    string.Format("SELECT COUNT(pmid) FROM [{0}pms] WHERE [msgtoid] = '00000000-0000-0000-0000-000000000000'", BaseConfigs.GetTablePrefix)));
+                                                    string.Format("SELECT COUNT(pmid) FROM [{0}pms] WHERE [msgtoid] = 0", BaseConfigs.GetTablePrefix)));
         }
 
         /// <summary>
@@ -1383,9 +1383,9 @@ namespace SAS.Data.SqlServer
             DbParameter[] parms = {
 									   DbHelper.MakeInParam("@pmid",(DbType)SqlDbType.Int,4,privateMessageInfo.Pmid),
 									   DbHelper.MakeInParam("@msgfrom",(DbType)SqlDbType.NVarChar,20,privateMessageInfo.Msgfrom),
-									   DbHelper.MakeInParam("@msgfromid",(DbType)SqlDbType.UniqueIdentifier,16,privateMessageInfo.Msgfromid),
+									   DbHelper.MakeInParam("@msgfromid",(DbType)SqlDbType.Int,4,privateMessageInfo.Msgfromid),
 									   DbHelper.MakeInParam("@msgto",(DbType)SqlDbType.NVarChar,20,privateMessageInfo.Msgto),
-									   DbHelper.MakeInParam("@msgtoid",(DbType)SqlDbType.UniqueIdentifier,16,privateMessageInfo.Msgtoid),
+									   DbHelper.MakeInParam("@msgtoid",(DbType)SqlDbType.Int,4,privateMessageInfo.Msgtoid),
 									   DbHelper.MakeInParam("@folder",(DbType)SqlDbType.SmallInt,2,privateMessageInfo.Folder),
 									   DbHelper.MakeInParam("@new",(DbType)SqlDbType.Int,4,privateMessageInfo.New),
 									   DbHelper.MakeInParam("@subject",(DbType)SqlDbType.NVarChar,80,privateMessageInfo.Subject),
@@ -1404,10 +1404,10 @@ namespace SAS.Data.SqlServer
         /// <param name="userId">用户ID</param>
         /// <param name="pmitemid">要删除的短信息列表(数组)</param>
         /// <returns>删除记录数</returns>
-        public int DeletePrivateMessages(Guid userId, string pmIdList)
+        public int DeletePrivateMessages(int userId, string pmIdList)
         {
             DbParameter[] parms = {
-									   DbHelper.MakeInParam("@userid", (DbType)SqlDbType.UniqueIdentifier,16, userId)
+									   DbHelper.MakeInParam("@userid", (DbType)SqlDbType.Int,4, userId)
 			                      };
             string commandText = string.Format("DELETE FROM [{0}pms] WHERE [pmid] IN ({1}) AND ([msgtoid] = @userid OR [msgfromid] = @userid)",
                                                 BaseConfigs.GetTablePrefix,
@@ -1419,9 +1419,9 @@ namespace SAS.Data.SqlServer
         /// 获得新短消息数
         /// </summary>
         /// <returns></returns>
-        public int GetNewPMCount(Guid userId)
+        public int GetNewPMCount(int userId)
         {
-            string commandText = string.Format("SELECT COUNT([pmid]) AS [pmcount] FROM [{0}pms] WHERE [new] = 1 AND [folder] = 0 AND [msgtoid] = '{1}'",
+            string commandText = string.Format("SELECT COUNT([pmid]) AS [pmcount] FROM [{0}pms] WHERE [new] = 1 AND [folder] = 0 AND [msgtoid] = {1}",
                                                 BaseConfigs.GetTablePrefix,
                                                 userId);
             return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText));
@@ -1452,10 +1452,10 @@ namespace SAS.Data.SqlServer
         /// <param name="pageindex">当前要显示的页数</param>
         /// <param name="inttype">筛选条件1为未读</param>
         /// <returns>短信息列表</returns>
-        public IDataReader GetPrivateMessageList(Guid userId, int folder, int pageSize, int pageIndex, int intType)
+        public IDataReader GetPrivateMessageList(int userId, int folder, int pageSize, int pageIndex, int intType)
         {
             DbParameter[] parms = {
-									   DbHelper.MakeInParam("@userid",(DbType)SqlDbType.UniqueIdentifier,16,userId),
+									   DbHelper.MakeInParam("@userid",(DbType)SqlDbType.Int,4,userId),
 									   DbHelper.MakeInParam("@folder",(DbType)SqlDbType.Int,4,folder),
 									   DbHelper.MakeInParam("@pagesize", (DbType)SqlDbType.Int,4,pageSize),
 									   DbHelper.MakeInParam("@pageindex",(DbType)SqlDbType.Int,4,pageIndex),
@@ -1474,13 +1474,13 @@ namespace SAS.Data.SqlServer
         {
             string commandText = "";
             if (pageSize == -1)
-                commandText = string.Format("SELECT {0} FROM [{1}pms] WHERE [msgtoid] = '00000000-0000-0000-0000-000000000000' ORDER BY [pmid] DESC",
+                commandText = string.Format("SELECT {0} FROM [{1}pms] WHERE [msgtoid] = 0 ORDER BY [pmid] DESC",
                                              DbFields.PMS, BaseConfigs.GetTablePrefix);
             else if (pageIndex <= 1)
-                commandText = string.Format("SELECT TOP {0} {1} FROM [{2}pms] WHERE [msgtoid] = '00000000-0000-0000-0000-000000000000'  ORDER BY [pmid] DESC",
+                commandText = string.Format("SELECT TOP {0} {1} FROM [{2}pms] WHERE [msgtoid] = 0 ORDER BY [pmid] DESC",
                                              pageSize, DbFields.PMS, BaseConfigs.GetTablePrefix);
             else
-                commandText = string.Format("SELECT TOP {0} {1} FROM [{2}pms] WHERE [msgtoid] = '00000000-0000-0000-0000-000000000000' AND [pmid] < (SELECT MIN([pmid]) FROM (SELECT TOP {3} [pmid] FROM [{2}pms] WHERE [msgtoid] = '00000000-0000-0000-0000-000000000000'  ORDER BY [pmid] DESC) AS tblTmp)  ORDER BY [pmid] DESC",
+                commandText = string.Format("SELECT TOP {0} {1} FROM [{2}pms] WHERE [msgtoid] = 0 AND [pmid] < (SELECT MIN([pmid]) FROM (SELECT TOP {3} [pmid] FROM [{2}pms] WHERE [msgtoid] = 0  ORDER BY [pmid] DESC) AS tblTmp)  ORDER BY [pmid] DESC",
                                              pageSize, DbFields.PMS, BaseConfigs.GetTablePrefix, (pageIndex - 1) * pageSize);
 
             return DbHelper.ExecuteReader(CommandType.Text, commandText);
@@ -1491,10 +1491,10 @@ namespace SAS.Data.SqlServer
         /// </summary>
         /// <param name="uid">Uid</param>
         /// <param name="newUserName">新用户名</param>
-        public void UpdatePMSenderAndReceiver(Guid uid, string newUserName)
+        public void UpdatePMSenderAndReceiver(int uid, string newUserName)
         {
             DbParameter[] parms =  { 
-                                        DbHelper.MakeInParam("@uid", (DbType)SqlDbType.UniqueIdentifier, 16, uid),
+                                        DbHelper.MakeInParam("@uid", (DbType)SqlDbType.Int, 4, uid),
                                         DbHelper.MakeInParam("@username", (DbType)SqlDbType.VarChar, 20, newUserName)
                                     };
             string commandText = string.Format("UPDATE [{0}pms] SET [msgfrom]=@username WHERE [msgfromid]=@uid", BaseConfigs.GetTablePrefix);

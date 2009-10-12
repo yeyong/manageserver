@@ -57,7 +57,7 @@ namespace SAS.ManageWeb.ManagePage
                 #region 进行权限判断
 
                 UserGroupInfo usergroupinfo = AdminUserGroups.AdminGetUserGroupInfo(oluserinfo.ol_ug_id);
-                if (oluserinfo.ol_ps_id == new Guid("00000000-0000-0000-0000-000000000000") || usergroupinfo.ug_pg_id != 1)
+                if (oluserinfo.ol_ps_id <= 0 || usergroupinfo.ug_pg_id != 1)
                 {
                     Context.Response.Redirect(BaseConfigs.GetSitePath + "ManagePage/syslogin.aspx");
                     return;

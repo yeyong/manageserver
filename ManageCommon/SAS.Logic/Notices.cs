@@ -48,9 +48,9 @@ namespace SAS.Logic
         /// <param name="uid">指定用户id</param>
         /// <param name="noticetype">通知类型</param>
         /// <returns></returns>
-        public static int GetNoticeCountByUid(Guid uid, Noticetype noticetype)
+        public static int GetNoticeCountByUid(int uid, Noticetype noticetype)
         {
-            return uid != new Guid("00000000-0000-0000-0000-000000000000") ? SAS.Data.DataProvider.Notices.GetNoticeCountByUid(uid, noticetype) : 0;
+            return uid > 0 ? SAS.Data.DataProvider.Notices.GetNoticeCountByUid(uid, noticetype) : 0;
         }
 
 
@@ -59,9 +59,9 @@ namespace SAS.Logic
         /// </summary>
         /// <param name="uid">用户id</param>
         /// <returns>通知集合</returns>
-        public static NoticeinfoCollection GetNoticeinfoCollectionByUid(Guid uid, Noticetype noticetype, int pageid, int pagesize)
+        public static NoticeinfoCollection GetNoticeinfoCollectionByUid(int uid, Noticetype noticetype, int pageid, int pagesize)
         {
-            return (uid != new Guid("00000000-0000-0000-0000-000000000000") && pageid > 0) ? SAS.Data.DataProvider.Notices.GetNoticeinfoCollectionByUid(uid, noticetype, pageid, pagesize) : null;
+            return (uid > 0 && pageid > 0) ? SAS.Data.DataProvider.Notices.GetNoticeinfoCollectionByUid(uid, noticetype, pageid, pagesize) : null;
         }
 
         ///// <summary>
@@ -130,9 +130,9 @@ namespace SAS.Logic
         /// </summary>
         /// <param name="uid">用户id</param>
         /// <returns>通知集合</returns>
-        public static int GetNewNoticeCountByUid(Guid uid)
+        public static int GetNewNoticeCountByUid(int uid)
         {
-            return uid != new Guid("00000000-0000-0000-0000-000000000000") ? SAS.Data.DataProvider.Notices.GetNewNoticeCountByUid(uid) : 0;
+            return uid > 0 ? SAS.Data.DataProvider.Notices.GetNewNoticeCountByUid(uid) : 0;
         }
 
         /// <summary>
@@ -140,9 +140,9 @@ namespace SAS.Logic
         /// </summary>
         /// <param name="uid">用户id</param>
         /// <param name="newtype">通知新旧状态(1:新通知 0:旧通知)</param>
-        public static void UpdateNoticeNewByUid(Guid uid, int newtype)
+        public static void UpdateNoticeNewByUid(int uid, int newtype)
         {
-            if (uid != new Guid("00000000-0000-0000-0000-000000000000"))
+            if (uid > 0)
                 SAS.Data.DataProvider.Notices.UpdateNoticeNewByUid(uid, newtype);
         }
 
@@ -152,9 +152,9 @@ namespace SAS.Logic
         /// <param name="userid">用户ID</param>
         /// <param name="state">通知状态(0为已读，1为未读)</param>
         /// <returns></returns>
-        public static int GetNoticeCount(Guid userid, int state)
+        public static int GetNoticeCount(int userid, int state)
         {
-            return userid != new Guid("00000000-0000-0000-0000-000000000000") ? SAS.Data.DataProvider.Notices.GetNoticeCount(userid, state) : 0;
+            return userid > 0 ? SAS.Data.DataProvider.Notices.GetNoticeCount(userid, state) : 0;
         }
 
         /// <summary>
@@ -162,9 +162,9 @@ namespace SAS.Logic
         /// </summary>
         /// <param name="Uid"></param>
         /// <returns></returns>
-        public static int GetLatestNoticeID(Guid userid)
+        public static int GetLatestNoticeID(int userid)
         {
-            return userid != new Guid("00000000-0000-0000-0000-000000000000") ? SAS.Data.DataProvider.Notices.GetLatestNoticeID(userid) : 0;
+            return userid > 0 ? SAS.Data.DataProvider.Notices.GetLatestNoticeID(userid) : 0;
         }
 
         /// <summary>
@@ -172,9 +172,9 @@ namespace SAS.Logic
         /// </summary>
         /// <param name="userid">用户ID</param>
         /// <returns></returns>
-        public static NoticeInfo[] GetNewNotices(Guid userid)
+        public static NoticeInfo[] GetNewNotices(int userid)
         {
-            return userid != new Guid("00000000-0000-0000-0000-000000000000") ? SAS.Data.DataProvider.Notices.GetNewNotices(userid) : null;
+            return userid > 0 ? SAS.Data.DataProvider.Notices.GetNewNotices(userid) : null;
         }
     }
 }
