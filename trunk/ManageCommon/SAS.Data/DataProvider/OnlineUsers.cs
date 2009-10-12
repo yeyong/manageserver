@@ -76,7 +76,7 @@ namespace SAS.Data.DataProvider
         /// <param name="userid">在线用户ID</param>
         /// <param name="password">用户密码</param>
         /// <returns>用户的详细信息</returns>
-        public static OnlineUserInfo GetOnlineUser(Guid userid, string password)
+        public static OnlineUserInfo GetOnlineUser(int userid, string password)
         {
             OnlineUserInfo onlineuserinfo = null;
             DataTable dt = DatabaseProvider.GetInstance().GetOnlineUser(userid, password);
@@ -94,7 +94,7 @@ namespace SAS.Data.DataProvider
         /// 获得指定用户的详细信息
         /// </summary>
         /// <returns>用户的详细信息</returns>
-        public static OnlineUserInfo GetOnlineUserByIP(Guid userid, string ip)
+        public static OnlineUserInfo GetOnlineUserByIP(int userid, string ip)
         {
             OnlineUserInfo oluser = null;
             DataTable dt = DatabaseProvider.GetInstance().GetOnlineUserByIP(userid, ip);
@@ -112,7 +112,7 @@ namespace SAS.Data.DataProvider
         {
             OnlineUserInfo info = new OnlineUserInfo();
             info.ol_id = TypeConverter.ObjectToInt(reader["ol_id"]);
-            info.ol_ps_id = new Guid(reader["ol_ps_id"].ToString());
+            info.ol_ps_id = TypeConverter.ObjectToInt(reader["ol_ps_id"]);
             info.ol_ip = reader["ol_ip"].ToString();
             info.ol_name = reader["ol_name"].ToString();
             info.ol_nickName = reader["ol_nickName"].ToString();
@@ -145,7 +145,7 @@ namespace SAS.Data.DataProvider
         {
             OnlineUserInfo info = new OnlineUserInfo();
             info.ol_id = TypeConverter.ObjectToInt(dr["ol_id"]);
-            info.ol_ps_id = new Guid(dr["ol_ps_id"].ToString());
+            info.ol_ps_id = TypeConverter.ObjectToInt(dr["ol_ps_id"]);
             info.ol_ip = dr["ol_ip"].ToString();
             info.ol_name = dr["ol_name"].ToString();
             info.ol_nickName = dr["ol_nickName"].ToString();
@@ -203,7 +203,7 @@ namespace SAS.Data.DataProvider
         /// <param name="uid">在线用户id</param>
         /// <param name="onlinestate">在线用户状态</param>
         /// <returns></returns>
-        public static int SetUserOnlineState(Guid uid, int onlinestate)
+        public static int SetUserOnlineState(int uid, int onlinestate)
         {
             return DatabaseProvider.GetInstance().SetUserOnlineState(uid, 1);
         }
@@ -309,7 +309,7 @@ namespace SAS.Data.DataProvider
         /// </summary>
         /// <param name="userid">用户ID</param>
         /// <param name="groupid">组名</param>
-        public static void UpdateGroupid(Guid userid, int groupid)
+        public static void UpdateGroupid(int userid, int groupid)
         {
             DatabaseProvider.GetInstance().UpdateGroupid(userid, groupid);
         }
@@ -369,7 +369,7 @@ namespace SAS.Data.DataProvider
             while (reader.Read())
             {
                 OnlineUserInfo onlineUserInfo = LoadSingleOnlineUser(reader);
-                if (onlineUserInfo.ol_ps_id != new Guid("00000000-0000-0000-0000-000000000000") && GeneralConfigs.GetConfig().Whosonlinecontract == 0)
+                if (onlineUserInfo.ol_ps_id > 0 || (onlineUserInfo.ol_ps_id == -1 && GeneralConfigs.GetConfig().Whosonlinecontract == 0))
                 {
                     onlineUserInfo.ol_actionname = UserAction.GetActionDescriptionByID((int)(onlineUserInfo.ol_action));
                     coll.Add(onlineUserInfo);
@@ -385,7 +385,7 @@ namespace SAS.Data.DataProvider
         /// </summary>
         /// <param name="oltimespan">在线时间间隔</param>
         /// <param name="uid">当前用户id</param>
-        public static void UpdateOnlineTime(int oltimespan, Guid uid)
+        public static void UpdateOnlineTime(int oltimespan, int uid)
         {
             DatabaseProvider.GetInstance().UpdateOnlineTime(oltimespan, uid);
         }
@@ -394,7 +394,7 @@ namespace SAS.Data.DataProvider
         /// 同步在线时间
         /// </summary>
         /// <param name="uid">用户id</param>
-        public static void SynchronizeOnlineTime(Guid uid)
+        public static void SynchronizeOnlineTime(int uid)
         {
             DatabaseProvider.GetInstance().SynchronizeOnlineTime(uid);
         }
@@ -404,7 +404,7 @@ namespace SAS.Data.DataProvider
         /// </summary>
         /// <param name="uid"></param>
         /// <returns></returns>
-        public static int GetOlidByUid(Guid uid)
+        public static int GetOlidByUid(int uid)
         {
             return DatabaseProvider.GetInstance().GetOlidByUid(uid);
         }

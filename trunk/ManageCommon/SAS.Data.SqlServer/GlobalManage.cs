@@ -176,10 +176,10 @@ namespace SAS.Data.SqlServer
         public int CreateNoticeInfo(NoticeInfo noticeInfo)
         {
             DbParameter[] parms = { 
-                                        DbHelper.MakeInParam("@uid", (DbType)SqlDbType.UniqueIdentifier, 16, noticeInfo.Uid),
+                                        DbHelper.MakeInParam("@uid", (DbType)SqlDbType.Int, 4, noticeInfo.Uid),
                                         DbHelper.MakeInParam("@type", (DbType)SqlDbType.Int, 4, noticeInfo.Type),
                                         DbHelper.MakeInParam("@new", (DbType)SqlDbType.Int, 4, noticeInfo.New),
-                                        DbHelper.MakeInParam("@posterid", (DbType)SqlDbType.UniqueIdentifier, 16, noticeInfo.Posterid),
+                                        DbHelper.MakeInParam("@posterid", (DbType)SqlDbType.Int, 4, noticeInfo.Posterid),
                                         DbHelper.MakeInParam("@poster", (DbType)SqlDbType.NChar, 20, noticeInfo.Poster),
                                         DbHelper.MakeInParam("@note", (DbType)SqlDbType.NText, 0, noticeInfo.Note),
                                         DbHelper.MakeInParam("@postdatetime", (DbType)SqlDbType.DateTime, 8, noticeInfo.Postdatetime)
@@ -198,10 +198,10 @@ namespace SAS.Data.SqlServer
         {
             DbParameter[] parms = { 
                                         DbHelper.MakeInParam("@nid", (DbType)SqlDbType.Int, 4, noticeInfo.Nid),
-                                        DbHelper.MakeInParam("@uid", (DbType)SqlDbType.UniqueIdentifier, 16, noticeInfo.Uid),
+                                        DbHelper.MakeInParam("@uid", (DbType)SqlDbType.Int, 4, noticeInfo.Uid),
                                         DbHelper.MakeInParam("@type", (DbType)SqlDbType.Int, 4, noticeInfo.Type),
                                         DbHelper.MakeInParam("@new", (DbType)SqlDbType.Int, 4, noticeInfo.New),
-                                        DbHelper.MakeInParam("@posterid", (DbType)SqlDbType.UniqueIdentifier, 16, noticeInfo.Posterid),
+                                        DbHelper.MakeInParam("@posterid", (DbType)SqlDbType.Int, 4, noticeInfo.Posterid),
                                         DbHelper.MakeInParam("@poster", (DbType)SqlDbType.NChar, 20, noticeInfo.Poster),
                                         DbHelper.MakeInParam("@note", (DbType)SqlDbType.NText, 0, noticeInfo.Note),
                                         DbHelper.MakeInParam("@postdatetime", (DbType)SqlDbType.DateTime, 8, noticeInfo.Postdatetime)
@@ -228,11 +228,11 @@ namespace SAS.Data.SqlServer
         /// </summary>
         /// <param name="uid">指定的通知id</param>
         /// <returns></returns>
-        public bool DeleteNoticeByUid(Guid uid)
+        public bool DeleteNoticeByUid(int uid)
         {
             string commandText = string.Format("DELETE FROM [{0}notices] WHERE [uid] = @uid", BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText,
-                                            DbHelper.MakeInParam("@uid", (DbType)SqlDbType.UniqueIdentifier, 16, uid)) > 0;
+                                            DbHelper.MakeInParam("@uid", (DbType)SqlDbType.Int, 4, uid)) > 0;
         }
 
         /// <summary>
@@ -280,7 +280,7 @@ namespace SAS.Data.SqlServer
         /// <param name="pageId">分页id</param>
         /// <param name="pageSize">页面尽寸</param>
         /// <returns></returns>
-        public IDataReader GetNoticeByUid(Guid uid, Noticetype noticeType, int pageId, int pageSize)
+        public IDataReader GetNoticeByUid(int uid, Noticetype noticeType, int pageId, int pageSize)
         {
             string commandText = "";
             if (pageId == 1)
@@ -309,12 +309,12 @@ namespace SAS.Data.SqlServer
         /// <param name="type">通知类型</param>
         /// <param name="uid">用户ID</param>
         /// <returns></returns>
-        public int ReNewNotice(int type, Guid uid)
+        public int ReNewNotice(int type, int uid)
         {
             DbParameter[] parms = {
 						   DbHelper.MakeInParam("@type",(DbType)SqlDbType.Int, 4, type),
                            DbHelper.MakeInParam("@date",(DbType)SqlDbType.DateTime, 4, DateTime.Now),
-						   DbHelper.MakeInParam("@uid",(DbType)SqlDbType.UniqueIdentifier, 16, uid)
+						   DbHelper.MakeInParam("@uid",(DbType)SqlDbType.Int, 4, uid)
 					   };
             string commandText = string.Format("UPDATE [{0}notices] SET [new]=1,[postdatetime]=@date WHERE [nn_type]=@type AND [uid]=@uid",
                                                 BaseConfigs.GetTablePrefix);
@@ -334,11 +334,11 @@ namespace SAS.Data.SqlServer
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public IDataReader GetNewNotices(Guid userId)
+        public IDataReader GetNewNotices(int userId)
         {
             string commandText = string.Format("SELECT Top 5 [nid], [uid], [nn_type], [new], [posterid], [poster], [note], [postdatetime]  FROM [{0}notices] WHERE [uid] = @uid AND [new] = 1 ORDER BY [postdatetime] DESC",
                                                 BaseConfigs.GetTablePrefix);
-            return DbHelper.ExecuteReader(CommandType.Text, commandText, DbHelper.MakeInParam("@uid", (DbType)SqlDbType.UniqueIdentifier, 16, userId));
+            return DbHelper.ExecuteReader(CommandType.Text, commandText, DbHelper.MakeInParam("@uid", (DbType)SqlDbType.Int, 4, userId));
         }
 
         /// <summary>
@@ -347,10 +347,10 @@ namespace SAS.Data.SqlServer
         /// <param name="uid">指定的用户id</param>
         /// <param name="noticeType">通知类型</param>
         /// <returns></returns>
-        public IDataReader GetNoticeByUid(Guid uid, Noticetype noticeType)
+        public IDataReader GetNoticeByUid(int uid, Noticetype noticeType)
         {
             DbParameter[] parms = { 
-                                        DbHelper.MakeInParam("@uid", (DbType)SqlDbType.UniqueIdentifier, 16, uid),
+                                        DbHelper.MakeInParam("@uid", (DbType)SqlDbType.Int, 4, uid),
                                         DbHelper.MakeInParam("@type", (DbType)SqlDbType.Int, 4, noticeType),
                                   };
             return DbHelper.ExecuteReader(CommandType.Text, string.Format("{0}getnoticebyuid", BaseConfigs.GetTablePrefix), parms);
@@ -362,10 +362,10 @@ namespace SAS.Data.SqlServer
         /// <param name="uid">指定用户id</param>
         /// <param name="noticeType">通知类型</param>
         /// <returns></returns>
-        public int GetNoticeCountByUid(Guid uid, Noticetype noticeType)
+        public int GetNoticeCountByUid(int uid, Noticetype noticeType)
         {
             DbParameter[] parms = { 
-                                        DbHelper.MakeInParam("@uid", (DbType)SqlDbType.UniqueIdentifier, 16, uid),
+                                        DbHelper.MakeInParam("@uid", (DbType)SqlDbType.Int, 4, uid),
                                         DbHelper.MakeInParam("@type", (DbType)SqlDbType.Int, 4, (int)noticeType)
                                   };
             return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.StoredProcedure,
@@ -378,10 +378,10 @@ namespace SAS.Data.SqlServer
         /// </summary>
         /// <param name="uid">用户id</param>
         /// <returns>通知集合</returns>
-        public int GetNewNoticeCountByUid(Guid uid)
+        public int GetNewNoticeCountByUid(int uid)
         {
             DbParameter[] parms = { 
-                                        DbHelper.MakeInParam("@uid", (DbType)SqlDbType.UniqueIdentifier, 16, uid)                                        
+                                        DbHelper.MakeInParam("@uid", (DbType)SqlDbType.Int, 4, uid)                                        
                                   };
             return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.StoredProcedure,
                                                                     string.Format("{0}getnewnoticecountbyuid", BaseConfigs.GetTablePrefix),
@@ -393,11 +393,11 @@ namespace SAS.Data.SqlServer
         /// </summary>
         /// <param name="uid">用户id</param>
         /// <param name="newType">通知新旧状态(1:新通知 0:旧通知)</param>
-        public void UpdateNoticeNewByUid(Guid uid, int newType)
+        public void UpdateNoticeNewByUid(int uid, int newType)
         {
             DbParameter[] parms = {                                    
                                     DbHelper.MakeInParam("@new", (DbType)SqlDbType.Int, 4, newType),
-                                    DbHelper.MakeInParam("@uid", (DbType)SqlDbType.UniqueIdentifier, 16, uid)
+                                    DbHelper.MakeInParam("@uid", (DbType)SqlDbType.Int, 4, uid)
                                 };
             string commandText = string.Format("Update [{0}notices] SET [new] = @new WHERE [uid] = @uid", BaseConfigs.GetTablePrefix);
             DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
@@ -409,10 +409,10 @@ namespace SAS.Data.SqlServer
         /// <param name="userId">用户ID</param>
         /// <param name="state">通知状态(0为已读，1为未读)</param>
         /// <returns></returns>
-        public int GetNoticeCount(Guid userId, int state)
+        public int GetNoticeCount(int userId, int state)
         {
             DbParameter[] parms = {
-									   DbHelper.MakeInParam("@userid",(DbType)SqlDbType.UniqueIdentifier,16, userId),
+									   DbHelper.MakeInParam("@userid",(DbType)SqlDbType.Int,4, userId),
 									   DbHelper.MakeInParam("@type",(DbType)SqlDbType.Int,4, -1),
 									   DbHelper.MakeInParam("@state",(DbType)SqlDbType.Int,4,state)
 								   };
@@ -856,10 +856,10 @@ namespace SAS.Data.SqlServer
         /// <param name="ip">IP地址</param>
         /// <param name="actions">动作</param>
         /// <param name="others"></param>
-        public void AddVisitLog(Guid uid, string userName, int groupId, string groupTitle, string ip, string actions, string others)
+        public void AddVisitLog(int uid, string userName, int groupId, string groupTitle, string ip, string actions, string others)
         {
             DbParameter[] parms = {
-					DbHelper.MakeInParam("@uid", (DbType)SqlDbType.UniqueIdentifier, 16, uid),
+					DbHelper.MakeInParam("@uid", (DbType)SqlDbType.Int, 4, uid),
 					DbHelper.MakeInParam("@username", (DbType)SqlDbType.VarChar, 50, userName),
 					DbHelper.MakeInParam("@groupid", (DbType)SqlDbType.Int, 4, groupId),
 					DbHelper.MakeInParam("@grouptitle", (DbType)SqlDbType.VarChar, 50, groupTitle),

@@ -43,7 +43,7 @@ namespace SAS.Web.UI
         /// <summary>
         /// 当前用户的用户ID
         /// </summary>
-        protected internal Guid userid;
+        protected internal int userid;
         /// <summary>
         /// 当前用户的在线表ID
         /// </summary>
@@ -456,16 +456,11 @@ namespace SAS.Web.UI
             //if (MallPluginProvider.GetInstance() == null)
             //    config.Enablemall = 0;
             LoadUrlConfig();
-            userid = new Guid("00000000-0000-0000-0000-000000000000");
-            if (!string.IsNullOrEmpty(LogicUtils.GetCookie("userid")))
-            {
-                userid = new Guid(LogicUtils.GetCookie("userid"));
-            }
+            userid = Utils.StrToInt(LogicUtils.GetCookie("userid"), -1);
 
             // 如果启用游客页面缓存，则对游客输出缓存页
-            if (userid == new Guid("00000000-0000-0000-0000-000000000000") && config.Guestcachepagetimeout > 0 && GetUserCachePage(pagename))
+            if (userid == -1 && config.Guestcachepagetimeout > 0 && GetUserCachePage(pagename))
                 return;
-
             AddMetaInfo(config.Seokeywords, config.Seodescription, config.Seohead);
 
             if (config.Nocacheheaders == 1)
@@ -505,7 +500,7 @@ namespace SAS.Web.UI
             olid = oluserinfo.ol_id;
 
             //确保头像可以取到
-            if (userid != new Guid("00000000-0000-0000-0000-000000000000"))
+            if (userid > 0)
                 useravatar = Avatars.GetAvatarUrl(userid.ToString(), AvatarSize.Small);
 
             if (Utils.InArray(SASRequest.GetString("selectedtemplateid"), Templates.GetValidTemplateIDList()))
@@ -534,14 +529,14 @@ namespace SAS.Web.UI
                 return;
             }
 
-            onlineusercount = (userid != new Guid("00000000-0000-0000-0000-000000000000")) ? OnlineUsers.GetOnlineAllUserCount() : OnlineUsers.GetCacheOnlineAllUserCount();
+            onlineusercount = (userid != -1) ? OnlineUsers.GetOnlineAllUserCount() : OnlineUsers.GetCacheOnlineAllUserCount();
 
             //校验用户是否可以访问论坛
             if (!ValidateUserPermission())
                 return;
 
             //更新用户在线时长
-            if (userid != new Guid("00000000-0000-0000-0000-000000000000"))
+            if (userid != -1)
                 OnlineUsers.UpdateOnlineTime(config.Oltimespan, userid);
 
             templatepath = Templates.GetTemplateItem(templateid).Directory;
@@ -1084,7 +1079,7 @@ namespace SAS.Web.UI
         }
 
 
-        protected string UserInfoAspxRewrite(Guid userid)
+        protected string UserInfoAspxRewrite(int userid)
         {
             return Urls.UserInfoAspxRewrite(userid);
         }
@@ -1097,7 +1092,7 @@ namespace SAS.Web.UI
         /// <returns></returns>
         protected string UserInfoAspxRewrite(string userid)
         {
-            return UserInfoAspxRewrite(new Guid(userid));
+            return UserInfoAspxRewrite(Utils.StrToInt(userid, 0));
         }
 
 

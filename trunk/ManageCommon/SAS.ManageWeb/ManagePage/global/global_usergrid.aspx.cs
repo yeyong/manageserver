@@ -125,10 +125,10 @@ namespace SAS.ManageWeb.ManagePage
                 string[] uids = uidlist.Split(',');
                 foreach (string uid in uids)
                 {
-                    if (!string.IsNullOrEmpty(uid))
+                    int iuid = int.Parse(uid);
+                    if (iuid != 0)
                     {
 
-                        Guid iuid = new Guid(uid);
                         //SpacePluginProvider.GetInstance().Ban(iuid);
                         //AlbumPluginProvider.GetInstance().Ban(iuid);
                         SAS.Logic.OnlineUsers.DeleteUserByUid(iuid);
@@ -145,11 +145,11 @@ namespace SAS.ManageWeb.ManagePage
             #endregion
         }
 
-        private bool CheckSponser(string uid)
+        private bool CheckSponser(int uid)
         {
             #region 检查创建人
 
-            return !((BaseConfigs.GetBaseConfig().Founderuid == uid) && (!BaseConfigs.GetBaseConfig().Founderuid.Equals(this.userid.ToString())));
+            return !((BaseConfigs.GetBaseConfig().Founderuid == uid) && (BaseConfigs.GetBaseConfig().Founderuid != this.userid));
 
             #endregion
         }
@@ -170,11 +170,11 @@ namespace SAS.ManageWeb.ManagePage
                     {
                         if (uid != "")
                         {
-                            if (CheckSponser(uid))
+                            if (CheckSponser(Convert.ToInt32(uid)))
                             {
                                 if (Convert.ToInt32(uid) > 1) //判断是不是当前Uid是不是系统初始化时生成的Uid
                                 {
-                                    Guid deluserid = new Guid(uid);
+                                    int deluserid = Convert.ToInt32(uid);
                                     ////if (AlbumPluginProvider.GetInstance() != null)
                                     ////{
                                     ////    AlbumPluginProvider.GetInstance().Delete(deluserid);

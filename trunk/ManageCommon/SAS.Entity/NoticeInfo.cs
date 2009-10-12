@@ -53,10 +53,10 @@ namespace SAS.Entity
     {
 
         private int m_nid;
-        private Guid m_uid;
+        private int m_uid;
         private Noticetype m_type;
         private int m_new;
-        private Guid m_posterid;
+        private int m_posterid;
         private string m_poster;
         private string m_note;
         private string m_postdatetime;
@@ -73,7 +73,7 @@ namespace SAS.Entity
         /// <summary>
         /// 通知用户ID
         /// </summary>
-        public Guid Uid
+        public int Uid
         {
             set { m_uid = value; }
             get { return m_uid; }
@@ -100,7 +100,7 @@ namespace SAS.Entity
         ///<summary>
         ///作者用户ID
         ///</summary>
-        public Guid Posterid
+        public int Posterid
         {
             get { return m_posterid; }
             set { m_posterid = value; }

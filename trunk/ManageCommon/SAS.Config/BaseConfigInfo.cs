@@ -14,7 +14,7 @@ namespace SAS.Config
         private string m_tableprefix = "ntw_";		// 数据库中表的前缀
         private string m_sitepath = "/";			// 站点内的根路径
         private string m_dbtype = "";
-        private string m_founderuid = "00000000-0000-0000-0000-000000000000";				// 创始人
+        private int m_founderuid = 0;				// 创始人
 
         #endregion
 
@@ -64,7 +64,7 @@ namespace SAS.Config
         /// <summary>
         /// 创始人ID
         /// </summary>
-        public string Founderuid
+        public int Founderuid
         {
             get { return m_founderuid; }
             set { m_founderuid = value; }

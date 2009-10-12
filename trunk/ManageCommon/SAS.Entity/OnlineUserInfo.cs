@@ -9,7 +9,7 @@ namespace SAS.Entity
     {
         #region Model
         private int _ol_id;
-        private Guid _ol_ps_id;
+        private int _ol_ps_id;
         private string _ol_ip;
         private string _ol_name;
         private string _ol_nickname;
@@ -44,7 +44,7 @@ namespace SAS.Entity
         /// <summary>
         /// 用户ID
         /// </summary>
-        public Guid ol_ps_id
+        public int ol_ps_id
         {
             set { _ol_ps_id = value; }
             get { return _ol_ps_id; }

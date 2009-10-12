@@ -25,7 +25,7 @@ namespace SAS.Logic
         /// <param name="actions">动作</param>
         /// <param name="others"></param>
         /// <returns></returns>
-        public static bool InsertLog(Guid uid, string userName, int groupId, string groupTitle, string ip, string actions, string others)
+        public static bool InsertLog(int uid, string userName, int groupId, string groupTitle, string ip, string actions, string others)
         {
             try
             {

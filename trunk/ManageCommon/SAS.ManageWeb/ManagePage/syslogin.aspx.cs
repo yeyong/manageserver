@@ -76,7 +76,7 @@ namespace SAS.ManageWeb.ManagePage
 
                 #region 用户身份判断
                 UserGroupInfo usergroupinfo = AdminUserGroups.AdminGetUserGroupInfo(oluserinfo.ol_ug_id);
-                if (oluserinfo.ol_ps_id == new Guid("00000000-0000-0000-0000-000000000000") || usergroupinfo.ug_pg_id != 1)
+                if (oluserinfo.ol_ps_id <= 0 || usergroupinfo.ug_pg_id != 1)
                 {
                     string message = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">";
                     message += "<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>无法确认您的身份</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
@@ -97,7 +97,7 @@ namespace SAS.ManageWeb.ManagePage
                     Msg.Text = "<p class=\"adlrt1 zi1\" style=\" float:right; letter-spacing:1px;\" align=\"absMiddle\"><span class=\"adlrt1tu adbg\"></span>请重新进行管理员登录</p>";
                 }
 
-                if (oluserinfo.ol_ps_id != new Guid("00000000-0000-0000-0000-000000000000") && usergroupinfo.ug_pg_id == 1 && oluserinfo.ol_name.Trim() != "")
+                if (oluserinfo.ol_ps_id > 0 && usergroupinfo.ug_pg_id == 1 && oluserinfo.ol_name.Trim() != "")
                 {
                     UserName.Text = oluserinfo.ol_name;
                     UserName.AddAttributes("readonly", "true");

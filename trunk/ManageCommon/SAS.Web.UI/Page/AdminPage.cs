@@ -26,7 +26,7 @@ namespace SAS.Web.UI
         /// <summary>
         /// 当前用户的用户ID
         /// </summary>
-        protected internal Guid userid;
+        protected internal int userid;
 
         /// <summary>
         /// 当前用户的用户组ID
@@ -102,7 +102,7 @@ namespace SAS.Web.UI
             // 获取用户信息
             OnlineUserInfo oluserinfo = OnlineUsers.UpdateInfo(config.Passwordkey, config.Onlinetimeout);
             UserGroupInfo usergroupinfo = AdminUserGroups.AdminGetUserGroupInfo(oluserinfo.ol_ug_id);
-            if (oluserinfo.ol_ps_id == new Guid("00000000-0000-0000-0000-000000000000") || usergroupinfo.ug_pg_id != 1)
+            if (oluserinfo.ol_ps_id <= 0 || usergroupinfo.ug_pg_id != 1)
             {
                 Context.Response.Redirect(BaseConfigs.GetSitePath + "ManagePage/syslogin.aspx");
                 return;
@@ -241,7 +241,7 @@ namespace SAS.Web.UI
             // 获取用户信息
             OnlineUserInfo oluserinfo = OnlineUsers.UpdateInfo(config.Passwordkey, config.Onlinetimeout);
             UserGroupInfo usergroupinfo = AdminUserGroups.AdminGetUserGroupInfo(oluserinfo.ol_pg_id);
-            if (oluserinfo.ol_ps_id == new Guid("00000000-0000-0000-0000-000000000000") || usergroupinfo.ug_pg_id != 1)
+            if (oluserinfo.ol_ps_id <= 0 || usergroupinfo.ug_pg_id != 1)
             {
                 Context.Response.Redirect(BaseConfigs.GetSitePath + "ManagePage/syslogin.aspx");
                 return false;
@@ -269,13 +269,13 @@ namespace SAS.Web.UI
         /// </summary>
         /// <param name="uid"></param>
         /// <returns></returns>
-        public bool IsFounderUid(Guid uid)
+        public bool IsFounderUid(int uid)
         {
-            if (BaseConfigs.GetBaseConfig().Founderuid == "00000000-0000-0000-0000-000000000000") return true;
+            if (BaseConfigs.GetBaseConfig().Founderuid == 0) return true;
             else
             {
                 //如果当前登陆后台的用户就是论坛的创始人
-                if (BaseConfigs.GetBaseConfig().Founderuid == uid.ToString())
+                if (BaseConfigs.GetBaseConfig().Founderuid == uid)
                 {
                     return true;
                 }

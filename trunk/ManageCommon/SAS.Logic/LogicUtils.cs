@@ -146,7 +146,7 @@ namespace SAS.Logic
         /// <param name="passwordkey">用户密码Key</param>
         /// <param name="templateid">用户当前要使用的界面风格</param>
         /// <param name="invisible">用户当前的登录模式(正常或隐身)</param>
-        public static void WriteUserCookie(Guid uid, int expires, string passwordkey, int templateid, int invisible)
+        public static void WriteUserCookie(int uid, int expires, string passwordkey, int templateid, int invisible)
         {
             UserInfo userinfo = SAS.Data.DataProvider.Users.GetUserInfo(uid);
             WriteUserCookie(userinfo, expires, passwordkey, templateid, invisible);
@@ -218,7 +218,7 @@ namespace SAS.Logic
         /// <param name="uid">用户Id</param>
         /// <param name="expires">cookie有效期</param>
         /// <param name="passwordkey">用户密码Key</param>
-        public static void WriteUserCookie(Guid uid, int expires, string passwordkey)
+        public static void WriteUserCookie(int uid, int expires, string passwordkey)
         {
             WriteUserCookie(uid, expires, passwordkey, 0, -1);
         }

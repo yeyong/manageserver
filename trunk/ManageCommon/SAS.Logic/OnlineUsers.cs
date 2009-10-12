@@ -128,7 +128,7 @@ namespace SAS.Logic
                 }
             }
             // 统计用户
-            DataRow[] dr = dt.Select("ol_ps_id<>'00000000-0000-0000-0000-000000000000'");
+            DataRow[] dr = dt.Select("ol_ps_id>0");
             user = dr == null ? 0 : dr.Length;
 
             //统计隐身用户
@@ -202,7 +202,7 @@ namespace SAS.Logic
         /// <param name="userid">在线用户ID</param>
         /// <param name="password">用户密码</param>
         /// <returns>用户的详细信息</returns>
-        private static OnlineUserInfo GetOnlineUser(Guid userid, string password)
+        private static OnlineUserInfo GetOnlineUser(int userid, string password)
         {
             return SAS.Data.DataProvider.OnlineUsers.GetOnlineUser(userid, password);
         }
@@ -211,7 +211,7 @@ namespace SAS.Logic
         /// 获得指定用户的详细信息
         /// </summary>
         /// <returns>用户的详细信息</returns>
-        private static OnlineUserInfo GetOnlineUserByIP(Guid userid, string ip)
+        private static OnlineUserInfo GetOnlineUserByIP(int userid, string ip)
         {
             return SAS.Data.DataProvider.OnlineUsers.GetOnlineUserByIP(userid, ip);
         }
@@ -239,7 +239,7 @@ namespace SAS.Logic
         {
             OnlineUserInfo onlineuserinfo = new OnlineUserInfo();
 
-            onlineuserinfo.ol_ps_id = new Guid("00000000-0000-0000-0000-000000000000");
+            onlineuserinfo.ol_ps_id = -1;
             onlineuserinfo.ol_name = "游客";
             onlineuserinfo.ol_nickName = "游客";
             onlineuserinfo.ol_password = "";
@@ -264,10 +264,10 @@ namespace SAS.Logic
         /// 增加一个会员信息到在线列表中。用户login.aspx或在线用户信息超时,但用户仍在线的情况下重新生成用户在线列表
         /// </summary>
         /// <param name="uid"></param>
-        private static OnlineUserInfo CreateUser(Guid uid, int timeout)
+        private static OnlineUserInfo CreateUser(int uid, int timeout)
         {
             OnlineUserInfo onlineuserinfo = new OnlineUserInfo();
-            if (uid != new Guid("00000000-0000-0000-0000-000000000000"))
+            if (uid > 0)
             {
                 ShortUserInfo ui = Users.GetShortUserInfo(uid);
                 if (ui != null)
@@ -303,7 +303,7 @@ namespace SAS.Logic
                             ni.Postdatetime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                             ni.Type = Noticetype.AttentionNotice;
                             ni.Poster = "";
-                            ni.Posterid = new Guid("00000000-0000-0000-0000-000000000000");
+                            ni.Posterid = 0;
                             ni.Uid = ui.Ps_id;
                             Notices.CreateNoticeInfo(ni);
                         }
@@ -350,24 +350,20 @@ namespace SAS.Logic
         /// <param name="passwordkey">论坛passwordkey</param>
         /// <param name="timeout">在线超时时间</param>
         /// <param name="passwd">用户密码</param>
-        public static OnlineUserInfo UpdateInfo(string passwordkey, int timeout, Guid uid, string passwd)
+        public static OnlineUserInfo UpdateInfo(string passwordkey, int timeout, int uid, string passwd)
         {
             lock (SynObject)
             {
                 OnlineUserInfo onlineuser = new OnlineUserInfo();
                 string ip = SASRequest.GetIP();
-                Guid userid = uid;
-                if (!string.IsNullOrEmpty(LogicUtils.GetCookie("userid")))
-                {
-                    userid = new Guid(LogicUtils.GetCookie("userid"));
-                }
+                int userid = TypeConverter.StrToInt(LogicUtils.GetCookie("userid"), uid);
                 string password = (Utils.StrIsNullOrEmpty(passwd) ? LogicUtils.GetCookiePassword(passwordkey) : LogicUtils.GetCookiePassword(passwd, passwordkey));
 
                 // 如果密码非Base64编码字符串则怀疑被非法篡改, 直接置身份为游客
                 if (password.Length == 0 || !Utils.IsBase64String(password))
-                    userid = new Guid("00000000-0000-0000-0000-000000000000");
+                    userid = -1;
 
-                if (userid != new Guid("00000000-0000-0000-0000-000000000000"))
+                if (userid != -1)
                 {
                     onlineuser = GetOnlineUser(userid, password);
 
@@ -388,7 +384,7 @@ namespace SAS.Logic
                     {
                         // 判断密码是否正确
                         userid = Users.CheckPassword(userid, password, false);
-                        if (userid != new Guid("00000000-0000-0000-0000-000000000000"))
+                        if (userid != -1)
                         {
                             SAS.Data.DataProvider.OnlineUsers.DeleteRowsByIP(ip);
                             CheckIp(ip);
@@ -398,7 +394,7 @@ namespace SAS.Logic
                         {
                             CheckIp(ip);
                             // 如密码错误则在在线表中创建游客
-                            onlineuser = GetOnlineUserByIP(new Guid("00000000-0000-0000-0000-000000000000"), ip);
+                            onlineuser = GetOnlineUserByIP(-1, ip);
                             if (onlineuser == null)
                                 return CreateGuestUser(timeout);
                         }
@@ -406,7 +402,7 @@ namespace SAS.Logic
                 }
                 else
                 {
-                    onlineuser = GetOnlineUserByIP(new Guid("00000000-0000-0000-0000-000000000000"), ip);
+                    onlineuser = GetOnlineUserByIP(-1, ip);
                     //更新流量统计
                     if (!SASRequest.GetPageName().EndsWith("ajax.aspx") && GeneralConfigs.GetConfig().Statstatus == 1)
                         Stats.UpdateStatCount(true, onlineuser != null);
@@ -459,7 +455,7 @@ namespace SAS.Logic
         /// <param name="timeout">在线超时时间</param>
         public static OnlineUserInfo UpdateInfo(string passwordkey, int timeout)
         {
-            return UpdateInfo(passwordkey, timeout, new Guid("00000000-0000-0000-0000-000000000000"), "");
+            return UpdateInfo(passwordkey, timeout, -1, "");
         }
 
         #endregion
@@ -616,7 +612,7 @@ namespace SAS.Logic
         /// </summary>
         /// <param name="userid">用户ID</param>
         /// <param name="groupid">组名</param>
-        public static void UpdateGroupid(Guid userid, int groupid)
+        public static void UpdateGroupid(int userid, int groupid)
         {
             SAS.Data.DataProvider.OnlineUsers.UpdateGroupid(userid, groupid);
         }
@@ -656,7 +652,7 @@ namespace SAS.Logic
 
             foreach (OnlineUserInfo onlineUserInfo in coll)
             {
-                if (onlineUserInfo.ol_ps_id == new Guid("00000000-0000-0000-0000-000000000000"))
+                if (onlineUserInfo.ol_ps_id == -1)
                     guest++;
 
                 if (onlineUserInfo.ol_invisible == 1)
@@ -691,7 +687,7 @@ namespace SAS.Logic
 
             foreach (OnlineUserInfo onlineUserInfo in coll)
             {
-                if (onlineUserInfo.ol_ps_id != new Guid("00000000-0000-0000-0000-000000000000"))
+                if (onlineUserInfo.ol_ps_id > 0)
                     user++;
 
                 if (onlineUserInfo.ol_invisible == 1)
@@ -719,7 +715,7 @@ namespace SAS.Logic
         /// </summary>
         /// <param name="oltimespan">在线时间间隔</param>
         /// <param name="uid">当前用户id</param>
-        public static void UpdateOnlineTime(int oltimespan, Guid uid)
+        public static void UpdateOnlineTime(int oltimespan, int uid)
         {
             //为0代表关闭统计功能
             if (oltimespan != 0)
@@ -751,7 +747,7 @@ namespace SAS.Logic
         /// </summary>
         /// <param name="uid"></param>
         /// <returns></returns>
-        public static int GetOlidByUid(Guid uid)
+        public static int GetOlidByUid(int uid)
         {
             return SAS.Data.DataProvider.OnlineUsers.GetOlidByUid(uid);
         }
@@ -761,7 +757,7 @@ namespace SAS.Logic
         /// </summary>
         /// <param name="uid">要删除用户的Uid</param>
         /// <returns></returns>
-        public static int DeleteUserByUid(Guid uid)
+        public static int DeleteUserByUid(int uid)
         {
             return DeleteRows(GetOlidByUid(uid));
         }

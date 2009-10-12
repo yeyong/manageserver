@@ -34,7 +34,7 @@ namespace SAS.Data.DataProvider
         /// <param name="folder">所属文件夹(0:收件箱,1:发件箱,2:草稿箱)</param>
         /// <param name="state">短消息状态(0:已读短消息、1:未读短消息、2:最近消息（7天内）、-1:全部短消息)</param>
         /// <returns>短消息数量</returns>
-        public static int GetPrivateMessageCount(Guid userId, int folder, int state)
+        public static int GetPrivateMessageCount(int userId, int folder, int state)
         {
             return DatabaseProvider.GetInstance().GetPrivateMessageCount(userId, folder, state);
         }
@@ -65,7 +65,7 @@ namespace SAS.Data.DataProvider
         /// <param name="userId">用户ID</param>
         /// <param name="pmitemidList">要删除的短信息列表</param>
         /// <returns>删除记录数</returns>
-        public static int DeletePrivateMessages(Guid userId, string pmitemidList)
+        public static int DeletePrivateMessages(int userId, string pmitemidList)
         {
             return DatabaseProvider.GetInstance().DeletePrivateMessages(userId, pmitemidList);
         }
@@ -75,7 +75,7 @@ namespace SAS.Data.DataProvider
         /// </summary>
         /// <param name="userId">用户ID</param>
         /// <returns></returns>
-        public static int GetNewPMCount(Guid userId)
+        public static int GetNewPMCount(int userId)
         {
             return DatabaseProvider.GetInstance().GetNewPMCount(userId);
         }
@@ -100,7 +100,7 @@ namespace SAS.Data.DataProvider
         /// <param name="pageindex">当前要显示的页数</param>
         /// <param name="strwhere">筛选条件1为未读</param>
         /// <returns>短信息列表</returns>
-        public static List<PrivateMessageInfo> GetPrivateMessageCollection(Guid userId, int folder, int pagesize, int pageindex, int readStatus)
+        public static List<PrivateMessageInfo> GetPrivateMessageCollection(int userId, int folder, int pagesize, int pageindex, int readStatus)
         {
             List<PrivateMessageInfo> coll = new List<PrivateMessageInfo>();
             IDataReader reader = DatabaseProvider.GetInstance().GetPrivateMessageList(userId, folder, pagesize, pageindex, readStatus);
@@ -141,7 +141,7 @@ namespace SAS.Data.DataProvider
         /// </summary>
         /// <param name="uid">Uid</param>
         /// <param name="newUserName">新用户名</param>
-        public static void UpdatePMSenderAndReceiver(Guid uid, string newUserName)
+        public static void UpdatePMSenderAndReceiver(int uid, string newUserName)
         {
             DatabaseProvider.GetInstance().UpdatePMSenderAndReceiver(uid, newUserName);
         }
@@ -156,9 +156,9 @@ namespace SAS.Data.DataProvider
             PrivateMessageInfo info = new PrivateMessageInfo();
             info.Pmid = TypeConverter.StrToInt(reader["pmid"].ToString());
             info.Msgfrom = reader["msgfrom"].ToString();
-            info.Msgfromid = new Guid(reader["msgfromid"].ToString());
+            info.Msgfromid = TypeConverter.StrToInt(reader["msgfromid"].ToString());
             info.Msgto = reader["msgto"].ToString();
-            info.Msgtoid = new Guid(reader["msgtoid"].ToString());
+            info.Msgtoid = TypeConverter.StrToInt(reader["msgtoid"].ToString());
             info.Folder = TypeConverter.StrToInt(reader["folder"].ToString());
             info.New = TypeConverter.StrToInt(reader["new"].ToString());
             info.Subject = reader["subject"].ToString();

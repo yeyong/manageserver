@@ -21,7 +21,7 @@ namespace SAS.Logic
         /// </summary>
         /// <param name="uid">用户id</param>
         /// <returns>用户信息</returns>
-        public static UserInfo GetUserInfo(Guid uid)
+        public static UserInfo GetUserInfo(int uid)
         {
             return SAS.Data.DataProvider.Users.GetUserInfo(uid);
         }
@@ -31,7 +31,7 @@ namespace SAS.Logic
         /// </summary>
         /// <param name="uid">用户id</param>
         /// <returns>用户信息</returns>
-        public static ShortUserInfo GetShortUserInfo(Guid uid)
+        public static ShortUserInfo GetShortUserInfo(int uid)
         {
             return SAS.Data.DataProvider.Users.GetShortUserInfo(uid);
         }
@@ -66,10 +66,10 @@ namespace SAS.Logic
         /// </summary>
         /// <param name="username">用户名</param>
         /// <returns>用户id</returns>
-        public static Guid GetUserId(string username)
+        public static int GetUserId(string username)
         {
             ShortUserInfo userInfo = SAS.Data.DataProvider.Users.GetShortUserInfoByName(username);
-            return (userInfo != null) ? userInfo.Ps_id : new Guid("00000000-0000-0000-0000-000000000000");
+            return (userInfo != null) ? userInfo.Ps_id : 0;
         }
 
         /// <summary>
@@ -104,11 +104,11 @@ namespace SAS.Logic
         /// <param name="password">密码</param>
         /// <param name="originalpassword">是否非MD5密码</param>
         /// <returns>如果正确则返回用户id, 否则返回-1</returns>
-        public static Guid CheckPassword(string username, string password, bool originalpassword)
+        public static int CheckPassword(string username, string password, bool originalpassword)
         {
             ShortUserInfo userInfo = SAS.Data.DataProvider.Users.CheckPassword(username, password, originalpassword);
 
-            return userInfo == null ? new Guid("00000000-0000-0000-0000-000000000000") : userInfo.Ps_id;
+            return userInfo == null ? -1 : userInfo.Ps_id;
         }
 
         /// <summary>
@@ -117,11 +117,11 @@ namespace SAS.Logic
         /// <param name="uid">用户ID</param>
         /// <param name="password">用户密码</param>
         /// <returns>如果用户密码正确则返回true, 否则返回false</returns>
-        public static Guid CheckPassword(Guid uid, string password, bool originalpassword)
+        public static int CheckPassword(int uid, string password, bool originalpassword)
         {
             ShortUserInfo userInfo = SAS.Data.DataProvider.Users.CheckPassword(uid, password, originalpassword);
 
-            return userInfo == null ? new Guid("00000000-0000-0000-0000-000000000000") : userInfo.Ps_id;
+            return userInfo == null ? -1 : userInfo.Ps_id;
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace SAS.Logic
         /// </summary>
         /// <param name="uid">用户ID</param>
         /// <param name="groupID">用户组ID</param>
-        public static void UpdateUserGroup(Guid uid, int groupId)
+        public static void UpdateUserGroup(int uid, int groupId)
         {
             //Discuz.Data.Users.UpdateUserGroup(uid, groupID);
             UpdateUserGroup(uid.ToString(), groupId);
@@ -158,7 +158,7 @@ namespace SAS.Logic
         /// 更新用户积分和最后登录时间
         /// </summary>
         /// <param name="uid">用户id</param>
-        public static void UpdateUserCreditsAndVisit(Guid uid, string ip)
+        public static void UpdateUserCreditsAndVisit(int uid, string ip)
         {
             //UserCredits.UpdateUserCredits(uid);
             SAS.Data.DataProvider.Users.UpdateUserLastvisit(uid, ip);
