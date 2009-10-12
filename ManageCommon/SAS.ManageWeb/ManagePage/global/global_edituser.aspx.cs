@@ -571,7 +571,7 @@ namespace SAS.ManageWeb.ManagePage
             #region 发送EMAIL
 
             string authstr = LogicUtils.CreateAuthStr(20);
-            Emails.DiscuzSmtpMail(userName.Text, email.Text, "", authstr);
+            Emails.SASSmtpMail(userName.Text, email.Text, "", authstr);
             string uid = SASRequest.GetString("uid");
             //DbHelper.ExecuteNonQuery("UPDATE [" + BaseConfigs.GetTablePrefix + "userfields] SET [Authstr]='" + authstr + "' , [Authtime]='" + DateTime.Now.ToString() + "' ,[Authflag]=1  WHERE [uid]=" + uid);
             Users.UpdateEmailValidateInfo(authstr, DateTime.Now, int.Parse(uid));
@@ -917,8 +917,8 @@ namespace SAS.ManageWeb.ManagePage
         private bool AllowDeleteUser(int managerUId, int byDeleterUId)
         {
             #region 判断将要删除的用户是否是创始人
-            int managerGroupId = Users.GetUserInfo(managerUId).Groupid;
-            int byDeleterGruopid = Users.GetUserInfo(byDeleterUId).Groupid;
+            int managerGroupId = Users.GetUserInfo(managerUId).Ps_ug_id;
+            int byDeleterGruopid = Users.GetUserInfo(byDeleterUId).Ps_ug_id;
             int founderUId = BaseConfigs.GetBaseConfig().Founderuid;
             if (byDeleterUId == founderUId) //判断被删除人是否为创始人
             {
@@ -964,15 +964,15 @@ namespace SAS.ManageWeb.ManagePage
             this.DelUserInfo.Click += new EventHandler(this.DelUserInfo_Click);
             this.ReSendEmail.Click += new EventHandler(this.ReSendEmail_Click);
             this.CalculatorScore.Click += new EventHandler(this.CalculatorScore_Click);
-            this.ResetUserDigestPost.Click += new EventHandler(this.ResetUserDigestPost_Click);
-            this.ResetUserPost.Click += new EventHandler(this.ResetUserPost_Click);
+            ////this.ResetUserDigestPost.Click += new EventHandler(this.ResetUserDigestPost_Click);
+            ////this.ResetUserPost.Click += new EventHandler(this.ResetUserPost_Click);
 
-            this.GivenMedal.Click += new EventHandler(this.GivenMedal_Click);
+            ////this.GivenMedal.Click += new EventHandler(this.GivenMedal_Click);
 
             foreach (UserGroupInfo userGroupInfo in UserGroups.GetUserGroupList())
             {
-                groupid.Items.Add(new ListItem(userGroupInfo.Grouptitle, userGroupInfo.Groupid.ToString()));
-                extgroupids.Items.Add(new ListItem(userGroupInfo.Grouptitle, userGroupInfo.Groupid.ToString()));
+                groupid.Items.Add(new ListItem(userGroupInfo.ug_name, userGroupInfo.ug_id.ToString()));
+                extgroupids.Items.Add(new ListItem(userGroupInfo.ug_name, userGroupInfo.ug_id.ToString()));
             }
             templateid.AddTableData(Templates.GetValidTemplateList(), "name", "templateid");
             templateid.Items[0].Text = "默认";
@@ -983,7 +983,7 @@ namespace SAS.ManageWeb.ManagePage
                 return;
             }
             LoadCurrentUserInfo(SASRequest.GetInt("uid", -1));
-            LoadScoreInf(SASRequest.GetString("uid"), SASRequest.GetString("fieldname"));
+            ////LoadScoreInf(SASRequest.GetString("uid"), SASRequest.GetString("fieldname"));
         }
 
         #endregion
