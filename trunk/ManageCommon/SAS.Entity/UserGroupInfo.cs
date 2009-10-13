@@ -27,9 +27,10 @@ namespace SAS.Entity
         private string _ug_attachextensions;
         private int _ug_maxspaceattachsize;
         private int _ug_maxspacephotosize;
+        private int _ug_maxsigsize;
         private int _ug_pg_id;
         private string _ug_color;
-        private int _ug_isSystem;
+        private int _ug_isSystem;       
 
         /// <summary>
         /// 用户组ID
@@ -173,6 +174,15 @@ namespace SAS.Entity
         {
             set { _ug_maxsizeperday = value; }
             get { return _ug_maxsizeperday; }
+        }
+
+        /// <summary>
+        /// 签名最多字节
+        /// </summary>
+        public int ug_maxsigsize
+        {
+            set { _ug_maxsigsize = value; }
+            get { return _ug_maxsigsize; }
         }
 
         /// <summary>

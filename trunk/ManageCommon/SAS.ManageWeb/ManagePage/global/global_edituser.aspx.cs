@@ -613,21 +613,21 @@ namespace SAS.ManageWeb.ManagePage
                 }
 
                 userInfo = AdminUsers.GetUserInfo(uid);
-                userInfo.Username = userName.Text;
-                userInfo.Nickname = nickname.Text;
-                userInfo.Accessmasks = Convert.ToInt32(accessmasks.SelectedValue);
+                userInfo.Ps_name = userName.Text;
+                userInfo.Ps_nickName = nickname.Text;
+                ////userInfo.Accessmasks = Convert.ToInt32(accessmasks.SelectedValue);
 
                 //当用户组发生变化时则相应更新用户的管理组字段
-                if (userInfo.Groupid.ToString() != groupid.SelectedValue)
+                if (userInfo.Ps_ug_id.ToString() != groupid.SelectedValue)
                 {
-                    userInfo.Adminid = UserGroups.GetUserGroupInfo(int.Parse(groupid.SelectedValue)).Radminid;
+                    userInfo.Ps_pg_id = UserGroups.GetUserGroupInfo(int.Parse(groupid.SelectedValue)).ug_pg_id;
                 }
 
                 //userInfo.Avatarshowid = 0;
 
                 if ((bday.Text == "0000-00-00") || (bday.Text == "0000-0-0") | (bday.Text.Trim() == ""))
                 {
-                    userInfo.Bday = "";
+                    userInfo.Pd_birthday = "";
                 }
                 else
                 {
@@ -638,13 +638,13 @@ namespace SAS.ManageWeb.ManagePage
                     }
                     else
                     {
-                        userInfo.Bday = bday.Text;
+                        userInfo.Pd_birthday = bday.Text;
                     }
                 }
 
                 if (Utils.IsNumeric(credits.Text.Replace("-", "")))
                 {
-                    userInfo.Credits = Convert.ToInt32(credits.Text);
+                    userInfo.Ps_credits = Convert.ToInt32(credits.Text);
                 }
                 else
                 {
@@ -658,155 +658,155 @@ namespace SAS.ManageWeb.ManagePage
                     return;
                 }
 
-                userInfo.Email = email.Text;
-                userInfo.Gender = Convert.ToInt32(gender.SelectedValue);
-                userInfo.Groupexpiry = Convert.ToInt32(groupexpiry.Text);
-                userInfo.Extgroupids = extgroupids.GetSelectString(",");
+                userInfo.Ps_email = email.Text;
+                userInfo.Ps_gender = Convert.ToInt32(gender.SelectedValue);
+                ////userInfo.Groupexpiry = Convert.ToInt32(groupexpiry.Text);
+                ////userInfo.Extgroupids = extgroupids.GetSelectString(",");
 
-                if ((groupid.SelectedValue != "1") && (userInfo.Uid == 1))
+                if ((groupid.SelectedValue != "1") && (userInfo.Ps_id == 1))
                 {
                     base.RegisterStartupScript("", "<script>alert('初始化系统管理员的所属用户组设置不能修改为其它组!');window.location.href='global_edituser.aspx?uid=" + SASRequest.GetString("uid") + "';</script>");
                     return;
                 }
 
-                userInfo.Groupid = Convert.ToInt32(groupid.SelectedValue);
-                userInfo.Invisible = Convert.ToInt32(invisible.SelectedValue);
-                userInfo.Joindate = joindate.Text;
-                userInfo.Lastactivity = lastactivity.Text;
-                userInfo.Lastip = lastip.Text;
-                userInfo.Lastpost = lastpost.Text;
-                userInfo.Lastvisit = lastvisit.Text;
-                userInfo.Newpm = Convert.ToInt32(newpm.SelectedValue);
-                userInfo.Newsletter = (ReceivePMSettingType)GetNewsLetter();
-                userInfo.Oltime = Convert.ToInt32(oltime.Text);
-                userInfo.Pageviews = Convert.ToInt32(pageviews.Text);
-                userInfo.Pmsound = Convert.ToInt32(pmsound.Text);
-                userInfo.Posts = Convert.ToInt32(posts.Text);
-                userInfo.Ppp = Convert.ToInt32(ppp.Text);
-                userInfo.Regip = regip.Text;
-                userInfo.Digestposts = Convert.ToInt32(digestposts.Text);
+                userInfo.Ps_ug_id = Convert.ToInt32(groupid.SelectedValue);
+                userInfo.ps_invisible = Convert.ToInt32(invisible.SelectedValue);
+                userInfo.Ps_createDate = joindate.Text;
+                userInfo.Ps_lastactivity = lastactivity.Text;
+                userInfo.Ps_loginIP = lastip.Text;
+                ////userInfo.Lastpost = lastpost.Text;
+                userInfo.Ps_lastLogin = lastvisit.Text;
+                userInfo.ps_newpm = Convert.ToInt32(newpm.SelectedValue);
+                userInfo.ps_newsletter = (ReceivePMSettingType)GetNewsLetter();
+                userInfo.Ps_onlinetime = Convert.ToInt32(oltime.Text);
+                userInfo.ps_pageviews = Convert.ToInt32(pageviews.Text);
+                userInfo.Ps_bdSound = Convert.ToInt32(pmsound.Text);
+                ////userInfo.Posts = Convert.ToInt32(posts.Text);
+                ////userInfo.Ppp = Convert.ToInt32(ppp.Text);
+                userInfo.Ps_regIP = regip.Text;
+                ////userInfo.Digestposts = Convert.ToInt32(digestposts.Text);
 
-                if (secques.SelectedValue == "1") userInfo.Secques = ""; //清空安全码
+                if (secques.SelectedValue == "1") userInfo.ps_secques = ""; //清空安全码
 
-                userInfo.Showemail = Convert.ToInt32(showemail.SelectedValue);
-                userInfo.Sigstatus = Convert.ToInt32(sigstatus.SelectedValue);
-                userInfo.Templateid = Convert.ToInt32(templateid.SelectedValue);
-                userInfo.Tpp = Convert.ToInt32(tpp.Text);
+                userInfo.Ps_isEmail = Convert.ToInt32(showemail.SelectedValue);
+                userInfo.ps_issign = Convert.ToInt32(sigstatus.SelectedValue);
+                userInfo.Ps_tempID = Convert.ToInt32(templateid.SelectedValue);
+                ////userInfo.Tpp = Convert.ToInt32(tpp.Text);
 
 
-                if (Utils.IsNumeric(extcredits1.Text.Replace("-", "")))
-                {
-                    userInfo.Extcredits1 = float.Parse(extcredits1.Text);
-                }
-                else
-                {
-                    base.RegisterStartupScript("", "<script>alert('用户扩展积分不能为空或大于7位 !');</script>");
-                    return;
-                }
+                ////if (Utils.IsNumeric(extcredits1.Text.Replace("-", "")))
+                ////{
+                ////    userInfo.Extcredits1 = float.Parse(extcredits1.Text);
+                ////}
+                ////else
+                ////{
+                ////    base.RegisterStartupScript("", "<script>alert('用户扩展积分不能为空或大于7位 !');</script>");
+                ////    return;
+                ////}
 
-                if (Utils.IsNumeric(extcredits2.Text.Replace("-", "")))
-                {
-                    userInfo.Extcredits2 = float.Parse(extcredits2.Text);
-                }
-                else
-                {
-                    base.RegisterStartupScript("", "<script>alert('用户扩展积分不能为空或大于7位 !');</script>");
-                    return;
-                }
+                ////if (Utils.IsNumeric(extcredits2.Text.Replace("-", "")))
+                ////{
+                ////    userInfo.Extcredits2 = float.Parse(extcredits2.Text);
+                ////}
+                ////else
+                ////{
+                ////    base.RegisterStartupScript("", "<script>alert('用户扩展积分不能为空或大于7位 !');</script>");
+                ////    return;
+                ////}
 
-                if (Utils.IsNumeric(extcredits3.Text.Replace("-", "")))
-                {
-                    userInfo.Extcredits3 = float.Parse(extcredits3.Text);
-                }
-                else
-                {
-                    base.RegisterStartupScript("", "<script>alert('用户扩展积分不能为空或大于7位 !');</script>");
-                    return;
-                }
+                ////if (Utils.IsNumeric(extcredits3.Text.Replace("-", "")))
+                ////{
+                ////    userInfo.Extcredits3 = float.Parse(extcredits3.Text);
+                ////}
+                ////else
+                ////{
+                ////    base.RegisterStartupScript("", "<script>alert('用户扩展积分不能为空或大于7位 !');</script>");
+                ////    return;
+                ////}
 
-                if (Utils.IsNumeric(extcredits4.Text.Replace("-", "")))
-                {
-                    userInfo.Extcredits4 = float.Parse(extcredits4.Text);
-                }
-                else
-                {
-                    base.RegisterStartupScript("", "<script>alert('用户扩展积分不能为空或大于7位 !');</script>");
-                    return;
-                }
+                ////if (Utils.IsNumeric(extcredits4.Text.Replace("-", "")))
+                ////{
+                ////    userInfo.Extcredits4 = float.Parse(extcredits4.Text);
+                ////}
+                ////else
+                ////{
+                ////    base.RegisterStartupScript("", "<script>alert('用户扩展积分不能为空或大于7位 !');</script>");
+                ////    return;
+                ////}
 
-                if (Utils.IsNumeric(extcredits5.Text.Replace("-", "")))
-                {
-                    userInfo.Extcredits5 = float.Parse(extcredits5.Text);
-                }
-                else
-                {
-                    base.RegisterStartupScript("", "<script>alert('用户扩展积分不能为空或大于7位 !');</script>");
-                    return;
-                }
+                ////if (Utils.IsNumeric(extcredits5.Text.Replace("-", "")))
+                ////{
+                ////    userInfo.Extcredits5 = float.Parse(extcredits5.Text);
+                ////}
+                ////else
+                ////{
+                ////    base.RegisterStartupScript("", "<script>alert('用户扩展积分不能为空或大于7位 !');</script>");
+                ////    return;
+                ////}
 
-                if (Utils.IsNumeric(extcredits6.Text.Replace("-", "")))
-                {
-                    userInfo.Extcredits6 = float.Parse(extcredits6.Text);
-                }
-                else
-                {
-                    base.RegisterStartupScript("", "<script>alert('用户扩展积分不能为空或大于7位 !');</script>");
-                    return;
-                }
+                ////if (Utils.IsNumeric(extcredits6.Text.Replace("-", "")))
+                ////{
+                ////    userInfo.Extcredits6 = float.Parse(extcredits6.Text);
+                ////}
+                ////else
+                ////{
+                ////    base.RegisterStartupScript("", "<script>alert('用户扩展积分不能为空或大于7位 !');</script>");
+                ////    return;
+                ////}
 
-                if (Utils.IsNumeric(extcredits7.Text.Replace("-", "")))
-                {
-                    userInfo.Extcredits7 = float.Parse(extcredits7.Text);
-                }
-                else
-                {
-                    base.RegisterStartupScript("", "<script>alert('用户扩展积分不能为空或大于7位 !');</script>");
-                    return;
-                }
+                ////if (Utils.IsNumeric(extcredits7.Text.Replace("-", "")))
+                ////{
+                ////    userInfo.Extcredits7 = float.Parse(extcredits7.Text);
+                ////}
+                ////else
+                ////{
+                ////    base.RegisterStartupScript("", "<script>alert('用户扩展积分不能为空或大于7位 !');</script>");
+                ////    return;
+                ////}
 
-                if (Utils.IsNumeric(extcredits8.Text.Replace("-", "")))
-                {
-                    userInfo.Extcredits8 = float.Parse(extcredits8.Text);
-                }
-                else
-                {
-                    base.RegisterStartupScript("", "<script>alert('用户扩展积分不能为空或大于7位 !');</script>");
-                    return;
-                }
+                ////if (Utils.IsNumeric(extcredits8.Text.Replace("-", "")))
+                ////{
+                ////    userInfo.Extcredits8 = float.Parse(extcredits8.Text);
+                ////}
+                ////else
+                ////{
+                ////    base.RegisterStartupScript("", "<script>alert('用户扩展积分不能为空或大于7位 !');</script>");
+                ////    return;
+                ////}
 
 
                 //用户扩展信息
-                userInfo.Website = website.Text;
-                userInfo.Icq = icq.Text;
-                userInfo.Qq = qq.Text;
-                userInfo.Yahoo = yahoo.Text;
-                userInfo.Msn = msn.Text;
-                userInfo.Skype = skype.Text;
-                userInfo.Location = location.Text;
-                userInfo.Customstatus = customstatus.Text;
+                userInfo.Pd_website = website.Text;
+                ////userInfo.Icq = icq.Text;
+                userInfo.Pd_QQ = qq.Text;
+                userInfo.Pd_Yahoo = yahoo.Text;
+                userInfo.Pd_MSN = msn.Text;
+                userInfo.Pd_Skype = skype.Text;
+                userInfo.Pd_address_1 = location.Text;
+                ////userInfo.Customstatus = customstatus.Text;
                 //userInfo.Avatar = avatar.Text;
                 //userInfo.Avatarheight = Convert.ToInt32(avatarheight.Text);
                 //userInfo.Avatarwidth = Convert.ToInt32(avatarwidth.Text);
-                userInfo.Bio = bio.Text;
-                if (signature.Text.Length > UserGroups.GetUserGroupInfo(userInfo.Groupid).Maxsigsize)
+                userInfo.pd_bio = bio.Text;
+                if (signature.Text.Length > UserGroups.GetUserGroupInfo(userInfo.Ps_ug_id).ug_maxsigsize)
                 {
-                    errorInfo = "更新的签名长度超过 " + UserGroups.GetUserGroupInfo(userInfo.Groupid).Maxsigsize + " 字符的限制，未能更新。";
+                    errorInfo = "更新的签名长度超过 " + UserGroups.GetUserGroupInfo(userInfo.Ps_ug_id).ug_maxsigsize + " 字符的限制，未能更新。";
                 }
                 else
                 {
-                    userInfo.Signature = signature.Text;
+                    userInfo.Pd_sign = signature.Text;
                     //签名UBB转换HTML
-                    PostpramsInfo _postpramsinfo = new PostpramsInfo();
-                    _postpramsinfo.Showimages = UserGroups.GetUserGroupInfo(userInfo.Groupid).Allowsigimgcode;
-                    _postpramsinfo.Sdetail = signature.Text;
-                    userInfo.Sightml = UBB.UBBToHTML(_postpramsinfo);
+                    ////PostpramsInfo _postpramsinfo = new PostpramsInfo();
+                    ////_postpramsinfo.Showimages = UserGroups.GetUserGroupInfo(userInfo.Groupid).Allowsigimgcode;
+                    ////_postpramsinfo.Sdetail = signature.Text;
+                    ////userInfo.Sightml = UBB.UBBToHTML(_postpramsinfo);
                 }
 
-                userInfo.Realname = realname.Text;
-                userInfo.Idcard = idcard.Text;
-                userInfo.Mobile = mobile.Text;
-                userInfo.Phone = phone.Text;
-                userInfo.Medals = SASRequest.GetString("medalid");
+                userInfo.Pd_name = realname.Text;
+                userInfo.pd_idcard = idcard.Text;
+                userInfo.Pd_mobile = mobile.Text;
+                userInfo.Pd_phone = phone.Text;
+                ////userInfo.Medals = SASRequest.GetString("medalid");
 
                 if (IsEditUserName.Checked)
                 {
@@ -815,39 +815,39 @@ namespace SAS.ManageWeb.ManagePage
 
                 if (AdminUsers.UpdateUserAllInfo(userInfo))
                 {
-                    OnlineUsers.DeleteUserByUid(userInfo.Uid);    //移除该用户的在线信息，使之重建在线表信息
-                    if (ViewState["Groupid"].ToString() != userInfo.Groupid.ToString())
-                    {
-                        if (userInfo.Groupid == 4)
-                        {
-                            if (AlbumPluginProvider.GetInstance() != null)
-                            {
-                                AlbumPluginProvider.GetInstance().Ban(userInfo.Uid);
-                            }
-                            if (SpacePluginProvider.GetInstance() != null)
-                            {
-                                SpacePluginProvider.GetInstance().Ban(userInfo.Uid);
-                            }
-                        }
-                        else
-                        {
-                            if (AlbumPluginProvider.GetInstance() != null)
-                            {
-                                AlbumPluginProvider.GetInstance().UnBan(userInfo.Uid);
-                            }
-                            if (SpacePluginProvider.GetInstance() != null)
-                            {
-                                SpacePluginProvider.GetInstance().UnBan(userInfo.Uid);
-                            }
-                        }
-                    }
+                    OnlineUsers.DeleteUserByUid(userInfo.Ps_id);    //移除该用户的在线信息，使之重建在线表信息
+                    ////if (ViewState["Groupid"].ToString() != userInfo.Groupid.ToString())
+                    ////{
+                    ////    if (userInfo.Groupid == 4)
+                    ////    {
+                    ////        if (AlbumPluginProvider.GetInstance() != null)
+                    ////        {
+                    ////            AlbumPluginProvider.GetInstance().Ban(userInfo.Uid);
+                    ////        }
+                    ////        if (SpacePluginProvider.GetInstance() != null)
+                    ////        {
+                    ////            SpacePluginProvider.GetInstance().Ban(userInfo.Uid);
+                    ////        }
+                    ////    }
+                    ////    else
+                    ////    {
+                    ////        if (AlbumPluginProvider.GetInstance() != null)
+                    ////        {
+                    ////            AlbumPluginProvider.GetInstance().UnBan(userInfo.Uid);
+                    ////        }
+                    ////        if (SpacePluginProvider.GetInstance() != null)
+                    ////        {
+                    ////            SpacePluginProvider.GetInstance().UnBan(userInfo.Uid);
+                    ////        }
+                    ////    }
+                    ////}
                     if (userName.Text != ViewState["username"].ToString())
                     {
                         AdminUsers.UserNameChange(userInfo, ViewState["username"].ToString());
                     }
                     //删除头像
                     if (delavart.Checked)
-                        Avatars.DeleteAvatar(userInfo.Uid.ToString());
+                        Avatars.DeleteAvatar(userInfo.Ps_id.ToString());
                     AdminVistLogs.InsertLog(this.userid, this.username, this.usergroupid, this.grouptitle, this.ip, "后台编辑用户", "用户名:" + userName.Text);
                     if (errorInfo == "")
                     {
@@ -882,20 +882,20 @@ namespace SAS.ManageWeb.ManagePage
                     bool delpost = !(deltype.SelectedValue.IndexOf("1") >= 0);
                     bool delpms = !(deltype.SelectedValue.IndexOf("2") >= 0);
 
-                    if (SpacePluginProvider.GetInstance() != null)
-                    {
-                        SpacePluginProvider.GetInstance().Delete(uid);
-                    }
+                    ////if (SpacePluginProvider.GetInstance() != null)
+                    ////{
+                    ////    SpacePluginProvider.GetInstance().Delete(uid);
+                    ////}
 
-                    if (AlbumPluginProvider.GetInstance() != null)
-                    {
-                        AlbumPluginProvider.GetInstance().Delete(uid);
-                    }
+                    ////if (AlbumPluginProvider.GetInstance() != null)
+                    ////{
+                    ////    AlbumPluginProvider.GetInstance().Delete(uid);
+                    ////}
                     if (AdminUsers.DelUserAllInf(uid, delpost, delpms))
                     {
                         //删除该用户头像
                         Avatars.DeleteAvatar(uid.ToString());
-                        AdminUsers.UpdateForumsFieldModerators(userName.Text);
+                        ////AdminUsers.UpdateForumsFieldModerators(userName.Text);
 
                         AdminVistLogs.InsertLog(this.userid, this.username, this.usergroupid, this.grouptitle, this.ip, "后台删除用户", "用户名:" + userName.Text);
                         base.RegisterStartupScript("PAGE", "window.location.href='global_usergrid.aspx?condition=" + SASRequest.GetString("condition") + "';");
@@ -940,7 +940,7 @@ namespace SAS.ManageWeb.ManagePage
             #region 计算积分
             if (this.CheckCookie())
             {
-                credits.Text = UserCredits.GetUserCreditsByUid(SASRequest.GetInt("uid", -1)).ToString();
+                ////credits.Text = UserCredits.GetUserCreditsByUid(SASRequest.GetInt("uid", -1)).ToString();
             }
             #endregion
         }
@@ -974,7 +974,7 @@ namespace SAS.ManageWeb.ManagePage
                 groupid.Items.Add(new ListItem(userGroupInfo.ug_name, userGroupInfo.ug_id.ToString()));
                 extgroupids.Items.Add(new ListItem(userGroupInfo.ug_name, userGroupInfo.ug_id.ToString()));
             }
-            templateid.AddTableData(Templates.GetValidTemplateList(), "name", "templateid");
+            templateid.AddTableData(Templates.GetValidTemplateList(), "tp_name", "tp_id");
             templateid.Items[0].Text = "默认";
             TabControl1.InitTabPage();
             if (SASRequest.GetString("uid") == "")

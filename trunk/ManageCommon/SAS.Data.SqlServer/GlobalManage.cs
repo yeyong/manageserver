@@ -162,9 +162,7 @@ namespace SAS.Data.SqlServer
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
         }
 
-        #endregion
-
-        
+        #endregion        
 
         #region 通知notice基本操作
 
@@ -419,6 +417,26 @@ namespace SAS.Data.SqlServer
             return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.StoredProcedure,
                                                                     string.Format("{0}getnoticecount", BaseConfigs.GetTablePrefix),
                                                                     parms));
+        }
+
+        #endregion
+
+        #region 公告处理announcements表基本操作
+
+        /// <summary>
+        /// 更新公告的创建者用户名
+        /// </summary>
+        /// <param name="posterId">posterId</param>
+        /// <param name="poster">新用户名</param>
+        public void UpdateAnnouncementPoster(int posterId, string poster)
+        {
+            DbParameter[] parms = { 
+                                        DbHelper.MakeInParam("@posterid", (DbType)SqlDbType.Int, 4, posterId),
+                                        DbHelper.MakeInParam("@poster", (DbType)SqlDbType.VarChar, 20, poster)
+                                    };
+            string commandText = string.Format("UPDATE [{0}announcements] SET [poster]=@poster WHERE [posterid]=@posterid",
+                                                BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
         }
 
         #endregion
@@ -1617,6 +1635,16 @@ namespace SAS.Data.SqlServer
                                                BaseConfigs.GetTablePrefix,
                                                uids);
             return DbHelper.ExecuteDataset(commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 获得脏字过滤列表
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetBanWordList()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}badword]", DbFields.WORDS, BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
         }
     }
 }

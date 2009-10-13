@@ -294,13 +294,13 @@ namespace SAS.Data
         /// <param name="uidList">用户Id列表</param>
         void SetStopTalkUser(string uidList);
 
-        ///// <summary>
-        ///// 更新Email验证信息
-        ///// </summary>
-        ///// <param name="authStr"></param>
-        ///// <param name="authTime"></param>
-        ///// <param name="uid"></param>
-        //void UpdateEmailValidateInfo(string authStr, DateTime authTime, int uid);
+        /// <summary>
+        /// 更新Email验证信息
+        /// </summary>
+        /// <param name="authStr"></param>
+        /// <param name="authTime"></param>
+        /// <param name="uid"></param>
+        void UpdateEmailValidateInfo(string authStr, DateTime authTime, int uid);
 
         ///// <summary>
         ///// 更新用户积分
@@ -864,6 +864,17 @@ namespace SAS.Data
         /// <param name="isUpdateUserNewPm">是否更新用户短消息数</param>
         /// <returns></returns>
         string DeletePrivateMessages(bool isnew, string postDateTime, string msgFromList, bool lowerUpper, string subject, string message, bool isUpdateUserNewPm);
+
+        #endregion
+
+        #region 公告处理announcements表基本操作
+
+        /// <summary>
+        /// 更新公告的创建者用户名
+        /// </summary>
+        /// <param name="posterId">posterId</param>
+        /// <param name="poster">新用户名</param>
+        void UpdateAnnouncementPoster(int posterId, string poster);
 
         #endregion
 
@@ -1432,5 +1443,11 @@ namespace SAS.Data
         /// <param name="uids">用户id列表</param>
         /// <returns></returns>
         DataTable GetMailTable(string uids);
+
+        /// <summary>
+        /// 获取屏蔽词列表
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetBanWordList();
     }
 }

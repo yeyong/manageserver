@@ -45,5 +45,18 @@ namespace SAS.Logic
 
             return tmpitem == null ? new UserGroupInfo() : tmpitem;
         }
+
+        /// <summary>
+        /// 根据用户Id获取用户积分
+        /// </summary>
+        /// <param name="uid">用户id</param>
+        /// <returns>用户积分</returns>
+        ////public static int GetUserCreditsByUid(int uid)
+        ////{
+        ////    ///根据公式计算用户的总积分,并更新
+        ////    object expression = Arithmetic.ComputeExpression(GetCreditsArithmetic(uid));
+
+        ////    return Utils.StrToInt(Math.Floor(Utils.StrToFloat(expression, 0)), 0);
+        ////}
     }
 }

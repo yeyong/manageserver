@@ -22,6 +22,11 @@ namespace SAS.Logic
         private static object lockHelper = new object();
 
         /// <summary>
+        /// 数字正则式静态实例
+        /// </summary>
+        private static Regex r = new Regex("\\{(\\d+)\\}", Utils.GetRegexCompiledOptions());
+
+        /// <summary>
         /// 获得禁止的ip列表
         /// </summary>
         /// <returns>禁止列表</returns>
@@ -35,6 +40,36 @@ namespace SAS.Logic
                 SAS.Cache.SASCache.GetCacheService().AddObject("/SAS/BannedIp", list);
             }
             return list;
+        }
+
+        /// <summary>
+        /// 返回脏字过滤列表
+        /// </summary>
+        /// <returns>返回脏字过滤列表数组</returns>
+        public static string[,] GetBanWordList()
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            string[,] str = cache.RetrieveObject("/SAS/BanWordList") as string[,];
+            if (str == null)
+            {
+                DataTable dt = DatabaseProvider.GetInstance().GetBanWordList();
+                str = new string[dt.Rows.Count, 2];
+                string temp = "";
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    temp = dt.Rows[i]["find"].ToString().Trim();
+                    foreach (Match m in r.Matches(temp))
+                    {
+                        temp = temp.Replace(m.Groups[0].ToString(), m.Groups[0].ToString().Replace("{", ".{0,"));
+                    }
+                    str[i, 0] = temp.Replace("\\", "\\\\").Replace("\"", "\\\"").Replace("'", "\'").Replace("[", "\\[").Replace("]", "\\]");
+                    str[i, 1] = dt.Rows[i]["replacement"].ToString().Trim();
+                }
+                cache.AddObject("/SAS/BanWordList", str);
+                dt.Dispose();
+            }
+            return str;
         }
 
         /// <summary>

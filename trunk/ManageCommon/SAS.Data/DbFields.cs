@@ -19,7 +19,7 @@ namespace SAS.Data
         /// <summary>
         /// 用户组信息表字段
         /// </summary>
-        public const string USER_GROUPS = "[ug_id],[ug_name],[ug_scorehight],[ug_scorelow],[ug_logo],[ug_readaccess],[ug_allowvisit],[ug_allowcommunity],[ug_allowdown],[ug_allowup],[ug_allowsearch],[ug_allowavatar],[ug_allowshop],[ug_allowinvisible],[ug_maxattachsize],[ug_maxsizeperday],[ug_attachextensions],[ug_maxspaceattachsize],[ug_maxspacephotosize],[ug_pg_id],[ug_color],[ug_isSystem]";
+        public const string USER_GROUPS = "[ug_id],[ug_name],[ug_scorehight],[ug_scorelow],[ug_logo],[ug_readaccess],[ug_allowvisit],[ug_allowcommunity],[ug_allowdown],[ug_allowup],[ug_allowsearch],[ug_allowavatar],[ug_allowshop],[ug_allowinvisible],[ug_maxattachsize],[ug_maxsizeperday],[ug_maxsigsize],[ug_attachextensions],[ug_maxspaceattachsize],[ug_maxspacephotosize],[ug_pg_id],[ug_color],[ug_isSystem]";
 
         /// <summary>
         /// 用户信息表字段
@@ -49,7 +49,7 @@ namespace SAS.Data
         /// <summary>
         /// 菜单列表字段
         /// </summary>
-        public const string NAVS = "[id],[parentid],[name],[title],[url],[target],[navstype],[available],[displayorder],[highlight],[level]";
+        public const string NAVS = "[id],[parentid],[name],[title],[url],[target],[navstype],[available],[displayorder],[lightstyle],[level]";
 
         /// <summary>
         /// 广告表字段
@@ -65,6 +65,11 @@ namespace SAS.Data
         /// 数据表分表字段
         /// </summary>
         public const string TABLE_LIST = "[id],[createdatetime],[description],[mintid],[maxtid]";
+
+        /// <summary>
+        /// 脏词列表
+        /// </summary>
+        public const string WORDS = "[id],[admin],[find],[replacement]";
        
     }
 }

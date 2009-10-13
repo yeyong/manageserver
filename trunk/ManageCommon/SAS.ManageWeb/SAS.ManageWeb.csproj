@@ -77,6 +77,13 @@
     <Compile Include="ManagePage\framepage\top.aspx.designer.cs">
       <DependentUpon>top.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\global\global_adduser.aspx.cs">
+      <DependentUpon>global_adduser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_adduser.aspx.designer.cs">
+      <DependentUpon>global_adduser.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\global\global_baseset.aspx.cs">
       <DependentUpon>global_baseset.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -90,6 +97,13 @@
     </Compile>
     <Compile Include="ManagePage\global\global_edituser.aspx.designer.cs">
       <DependentUpon>global_edituser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\global\global_emailconfig.aspx.cs">
+      <DependentUpon>global_emailconfig.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_emailconfig.aspx.designer.cs">
+      <DependentUpon>global_emailconfig.aspx</DependentUpon>
     </Compile>
     <Compile Include="ManagePage\global\global_templatesedit.aspx.cs">
       <DependentUpon>global_templatesedit.aspx</DependentUpon>
@@ -405,11 +419,16 @@
     <Content Include="aspx\1\test.aspx" />
     <Content Include="config\localupgradeini.config" />
     <Content Include="favicon.ico" />
+    <Content Include="images\common\noavatar_large.gif" />
+    <Content Include="images\common\noavatar_medium.gif" />
+    <Content Include="images\common\noavatar_small.gif" />
     <Content Include="javascript\common.js" />
     <Content Include="ManagePage\framepage\top.aspx" />
     <Content Include="ManagePage\framepage\managerbody.aspx" />
+    <Content Include="ManagePage\global\global_adduser.aspx" />
     <Content Include="ManagePage\global\global_baseset.aspx" />
     <Content Include="ManagePage\global\global_edituser.aspx" />
+    <Content Include="ManagePage\global\global_emailconfig.aspx" />
     <Content Include="ManagePage\global\global_templatesedit.aspx" />
     <Content Include="ManagePage\global\global_templatesgrid.aspx" />
     <Content Include="ManagePage\global\global_templatetree.aspx" />
@@ -740,6 +759,7 @@
     <Content Include="templates\default\_footer.htm" />
     <Content Include="templates\default\_header.htm" />
     <Content Include="templates\default\_pageheader.htm" />
+    <Content Include="tools\avatar.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ManagePage\xml\backup\" />

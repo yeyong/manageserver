@@ -43,6 +43,7 @@ namespace SAS.Data.DataProvider
                 info.ug_attachextensions = dr["ug_attachextensions"].ToString();
                 info.ug_maxspaceattachsize = TypeConverter.StrToInt(dr["ug_maxspaceattachsize"].ToString());
                 info.ug_maxspacephotosize = TypeConverter.StrToInt(dr["ug_maxspacephotosize"].ToString());
+                info.ug_maxsigsize = TypeConverter.StrToInt(dr["ug_maxsigsize"].ToString());
                 info.ug_pg_id = TypeConverter.StrToInt(dr["ug_pg_id"].ToString());
                 info.ug_color = dr["ug_color"].ToString();
                 info.ug_isSystem = TypeConverter.StrToInt(dr["ug_isSystem"].ToString());

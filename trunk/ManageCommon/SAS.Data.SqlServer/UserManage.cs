@@ -499,7 +499,8 @@ namespace SAS.Data.SqlServer
                     DbHelper.MakeInParam("@pd_authtime", (DbType)SqlDbType.SmallDateTime,4,userInfo.pd_authtime),
 					DbHelper.MakeInParam("@pd_authflag", (DbType)SqlDbType.TinyInt,1,userInfo.pd_authflag),
 					DbHelper.MakeInParam("@pd_idcard", (DbType)SqlDbType.VarChar,50,userInfo.pd_idcard),
-					DbHelper.MakeInParam("@pd_bio", (DbType)SqlDbType.Text,16,userInfo.pd_bio)
+					DbHelper.MakeInParam("@pd_bio", (DbType)SqlDbType.Text,16,userInfo.pd_bio),
+                    DbHelper.MakeInParam("@ps_id", (DbType)SqlDbType.Int,4,userInfo.Ps_id)
                 };
 
             return TypeConverter.ObjectToInt(DbHelper.ExecuteNonQuery(CommandType.StoredProcedure,
@@ -534,6 +535,25 @@ namespace SAS.Data.SqlServer
 									   DbHelper.MakeInParam("@ip", (DbType)SqlDbType.Char,15, ip)
 								   };
             string commandText = string.Format("UPDATE [{0}personInfo] SET [ps_lastactivity]=GETDATE(), [ps_loginIP]=@ip WHERE [ps_id] =@uid",
+                                                BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
+        /// 更新Email验证信息
+        /// </summary>
+        /// <param name="authStr"></param>
+        /// <param name="authTime"></param>
+        /// <param name="uid"></param>
+        public void UpdateEmailValidateInfo(string authStr, DateTime authTime, int uid)
+        {
+            DbParameter[] parms = 
+			{
+				DbHelper.MakeInParam("@authstr",(DbType)SqlDbType.VarChar,20,authStr),
+                DbHelper.MakeInParam("@authtime",(DbType)SqlDbType.DateTime,8,authTime),
+                DbHelper.MakeInParam("@uid", (DbType)SqlDbType.Int,4, uid)
+			};
+            string commandText = string.Format("UPDATE [{0}personDetail] SET [pd_authstr]=@authstr,[pd_authtime]=@authtime ,[pd_authflag]=1  WHERE [pd_id]=@uid",
                                                 BaseConfigs.GetTablePrefix);
             DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
         }

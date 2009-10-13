@@ -16,6 +16,60 @@ namespace SAS.Logic
     public class AdminUsers : Users
     {
         /// <summary>
+        /// 更新用户全部信息
+        /// </summary>
+        /// <param name="__userinfo"></param>
+        /// <returns></returns>
+        public static bool UpdateUserAllInfo(UserInfo userInfo)
+        {
+            Users.UpdateUser(userInfo);
+
+            //当用户不是版主(超级版主)或管理员
+            ////if ((userInfo.Adminid == 0) || (userInfo.Adminid > 3))
+            ////{
+            ////    //删除用户在版主列表中相关数据
+            ////    Data.Moderators.DeleteModerator(userInfo.Uid);
+            ////    //同时更新版块相关的版主信息
+            ////    UpdateForumsFieldModerators(userInfo.Username);
+            ////}
+
+            #region 以下为更新该用户的扩展信息
+
+            string signature = Utils.HtmlEncode(LogicUtils.BanWordFilter(userInfo.Pd_sign));
+
+            UserGroupInfo usergroupinfo = AdminUserGroups.AdminGetUserGroupInfo(userInfo.Ps_ug_id);
+            GeneralConfigInfo config = GeneralConfigs.GetConfig();
+
+            ////PostpramsInfo postPramsInfo = new PostpramsInfo();
+            ////postPramsInfo.Usergroupid = usergroupinfo.Groupid;
+            ////postPramsInfo.Attachimgpost = config.Attachimgpost;
+            ////postPramsInfo.Showattachmentpath = config.Showattachmentpath;
+            ////postPramsInfo.Hide = 0;
+            ////postPramsInfo.Price = 0;
+            ////postPramsInfo.Sdetail = userInfo.Signature;
+            ////postPramsInfo.Smileyoff = 1;
+            ////postPramsInfo.Bbcodeoff = 1 - usergroupinfo.Allowsigbbcode;
+            ////postPramsInfo.Parseurloff = 1;
+            ////postPramsInfo.Showimages = usergroupinfo.Allowsigimgcode;
+            ////postPramsInfo.Allowhtml = 0;
+            ////postPramsInfo.Smiliesinfo = Smilies.GetSmiliesListWithInfo();
+            ////postPramsInfo.Customeditorbuttoninfo = Editors.GetCustomEditButtonListWithInfo();
+            ////postPramsInfo.Smiliesmax = config.Smiliesmax;
+            ////postPramsInfo.Signature = 1;
+            ////postPramsInfo.Onlinetimeout = config.Onlinetimeout;
+
+            userInfo.Pd_sign = signature;
+            userInfo.pd_authstr = LogicUtils.CreateAuthStr(20);
+            ////userInfo.Sightml = UBB.UBBToHTML(postPramsInfo);
+            Users.UpdateUser(userInfo);
+
+            #endregion
+
+            ////Users.UpdateUserForumSetting(userInfo);
+            return true;
+        }
+
+        /// <summary>
         /// 更新用户名
         /// </summary>
         /// <param name="userInfo">当前用户信息</param>
