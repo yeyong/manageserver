@@ -125,7 +125,36 @@ namespace SAS.Logic
         }
 
         /// <summary>
-        /// 得到论坛中用户总数
+        /// 根据指定的email查找用户并返回用户uid
+        /// </summary>
+        /// <param name="email">email地址</param>
+        /// <returns>用户uid</returns>
+        public static bool ValidateEmail(string email)
+        {
+            if (GeneralConfigs.GetConfig().Doublee == 0 && SAS.Data.DataProvider.Users.FindUserEmail(email) != -1)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// 根据指定的email查找用户并返回用户uid
+        /// </summary>
+        /// <param name="email">email地址</param>
+        /// <returns>用户uid</returns>
+        public static bool ValidateEmail(string email, int uid)
+        {
+            int userid = SAS.Data.DataProvider.Users.FindUserEmail(email);
+            if (GeneralConfigs.GetConfig().Doublee == 0 && userid != -1 && uid != userid)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// 得到站中用户总数
         /// </summary>
         /// <returns>用户总数</returns>
         public static int GetUserCount(string condition)
@@ -171,6 +200,17 @@ namespace SAS.Logic
         public static void UpdateUserToStopTalkGroup(string uidList)
         {
             SAS.Data.DataProvider.Users.UpdateUserToStopTalkGroup(uidList);
+        }
+
+        /// <summary>
+        /// 更新Email验证信息
+        /// </summary>
+        /// <param name="authstr">验证字符串</param>
+        /// <param name="authtime">验证时间</param>
+        /// <param name="uid">用户Id</param>
+        public static void UpdateEmailValidateInfo(string authstr, DateTime authTime, int uid)
+        {
+            SAS.Data.DataProvider.Users.UpdateEmailValidateInfo(authstr, authTime, uid);
         }
 
         /// <summary>
