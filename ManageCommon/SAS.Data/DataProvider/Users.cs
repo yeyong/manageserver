@@ -668,16 +668,16 @@ namespace SAS.Data.DataProvider
         //    DatabaseProvider.GetInstance().ClearPosts(uid);
         //}
 
-        /////// <summary>
-        /////// 更新Email验证信息
-        /////// </summary>
-        /////// <param name="authstr">验证字符串</param>
-        /////// <param name="authtime">验证时间</param>
-        /////// <param name="uid">用户Id</param>
-        ////public static void UpdateEmailValidateInfo(string authstr, DateTime authTime, int uid)
-        ////{
-        ////    DatabaseProvider.GetInstance().UpdateEmailValidateInfo(authstr, authTime, uid);
-        ////}
+        /// <summary>
+        /// 更新Email验证信息
+        /// </summary>
+        /// <param name="authstr">验证字符串</param>
+        /// <param name="authtime">验证时间</param>
+        /// <param name="uid">用户Id</param>
+        public static void UpdateEmailValidateInfo(string authstr, DateTime authTime, int uid)
+        {
+            DatabaseProvider.GetInstance().UpdateEmailValidateInfo(authstr, authTime, uid);
+        }
 
         /////// <summary>
         /////// 更新用户积分

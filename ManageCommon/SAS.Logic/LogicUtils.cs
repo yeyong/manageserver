@@ -809,6 +809,29 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 替换原始字符串中的脏字词语
+        /// </summary>
+        /// <param name="text">原始字符串</param>
+        /// <returns>替换后的结果</returns>
+        public static string BanWordFilter(string text)
+        {
+            StringBuilder sb = new StringBuilder(text);
+            string[,] str = Caches.GetBanWordList();
+            int count = str.Length / 2;
+            for (int i = 0; i < count; i++)
+            {
+                if (str[i, 1] != "{BANNED}" && str[i, 1] != "{MOD}")
+                {
+                    sb = new StringBuilder().Append(
+                                  Regex.Replace(sb.ToString(), str[i, 0].Replace("*", "\\*"),
+                                        str[i, 1],
+                                        Utils.GetRegexCompiledOptions()));
+                }
+            }
+            return sb.ToString();
+        }
+
+        /// <summary>
         /// 返回当前页面是否是跨站提交
         /// </summary>
         /// <returns>当前页面是否是跨站提交</returns>

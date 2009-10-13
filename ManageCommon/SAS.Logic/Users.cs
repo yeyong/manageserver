@@ -163,6 +163,32 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 创建新用户.
+        /// </summary>
+        /// <param name="__userinfo">用户信息</param>
+        /// <returns>返回用户ID, 如果已存在该用户名则返回-1</returns>
+        public static int CreateUser(UserInfo userinfo)
+        {
+            if (GetUserId(userinfo.Ps_name) > 0)
+                return -1;
+
+            return SAS.Data.DataProvider.Users.CreateUser(userinfo);
+        }
+
+        /// <summary>
+        /// 更新用户
+        /// </summary>
+        /// <param name="userinfo">用户信息</param>
+        /// <returns>是否更新成功</returns>
+        public static bool UpdateUser(UserInfo userinfo)
+        {
+            if (userinfo == null)
+                return false;
+
+            return SAS.Data.DataProvider.Users.UpdateUser(userinfo);
+        }
+
+        /// <summary>
         /// 更新用户组
         /// </summary>
         /// <param name="uid">用户ID</param>

@@ -56,7 +56,7 @@
                                             <tr>
                                                 <td>头像:</td>
                                                 <td>
-                                                    <img src="../../tools/avatar.aspx?uid=<%=userInfo.Uid%>&size=small" onerror="this.onerror=null;this.src='../../templates/default/images/noavatar_small.gif';" />
+                                                    <img src="../../tools/avatar.aspx?uid=<%=userInfo.Ps_id%>&size=small" onerror="this.onerror=null;this.src='../../templates/default/images/noavatar_small.gif';" />
                                                     <asp:CheckBox ID="delavart" runat="server" Text="删除头像"></asp:CheckBox>
                                                 </td>
                                             </tr>

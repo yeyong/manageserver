@@ -38,6 +38,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Page\Avatar.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Page\Globals.cs" />
     <Compile Include="Page\AdminPage.cs">
       <SubType>ASPXCodeBehind</SubType>
