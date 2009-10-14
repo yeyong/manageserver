@@ -106,6 +106,13 @@
     <Compile Include="ManagePage\global\global_emailconfig.aspx.designer.cs">
       <DependentUpon>global_emailconfig.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\global\global_logandshrinkdb.aspx.cs">
+      <DependentUpon>global_logandshrinkdb.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_logandshrinkdb.aspx.designer.cs">
+      <DependentUpon>global_logandshrinkdb.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\global\global_templatesedit.aspx.cs">
       <DependentUpon>global_templatesedit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -430,6 +437,7 @@
     <Content Include="ManagePage\global\global_baseset.aspx" />
     <Content Include="ManagePage\global\global_edituser.aspx" />
     <Content Include="ManagePage\global\global_emailconfig.aspx" />
+    <Content Include="ManagePage\global\global_logandshrinkdb.aspx" />
     <Content Include="ManagePage\global\global_templatesedit.aspx" />
     <Content Include="ManagePage\global\global_templatesgrid.aspx" />
     <Content Include="ManagePage\global\global_templatetree.aspx" />
@@ -753,8 +761,11 @@
     <None Include="ManagePage\images\ad\Thumbs.db" />
     <None Include="ManagePage\images\Thumbs.db" />
     <Content Include="ManagePage\xml\navmenu.config" />
+    <Content Include="templates\default\about.png" />
     <Content Include="templates\default\about.xml" />
     <Content Include="templates\default\login.htm" />
+    <Content Include="templates\default\studio\_studioheader.htm" />
+    <Content Include="templates\default\studio\studioindex.htm" />
     <Content Include="templates\default\templatevariable.xml" />
     <Content Include="templates\default\_copyright.htm" />
     <Content Include="templates\default\_footer.htm" />
