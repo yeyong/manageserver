@@ -62,7 +62,14 @@ namespace SAS.ManageWeb.ManagePage
                     fs.Close();
                 }
 
-                base.RegisterStartupScript("PAGE", "window.location.href='global_templatetree.aspx?path=" + ViewState["path"].ToString() + "&templateid=" + ViewState["templateid"].ToString() + "&templatename=" + ViewState["templatename"].ToString() + "';");
+                //modify the path wrong
+                string returnPath = ViewState["path"].ToString();
+                if (returnPath.Split('\\').Length > 0)
+                {
+                    returnPath = returnPath.Split('\\')[0];
+                }
+
+                base.RegisterStartupScript("PAGE", "window.location.href='global_templatetree.aspx?path=" + returnPath + "&templateid=" + ViewState["templateid"].ToString() + "&templatename=" + ViewState["templatename"].ToString() + "';");
             }
 
             #endregion
