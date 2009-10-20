@@ -172,7 +172,7 @@ function in_array(needle, haystack) {
 var clipboardswfdata;
 function setcopy(text, alertmsg){
 	if(is_ie) {
-		clipboardData.setData('Text', text);
+	    clipboardData.setData('Text', text);
 		if(alertmsg) {
 			alert(alertmsg);
 		}
@@ -2163,4 +2163,4 @@ function AC_GetArgs(args, classid, mimeType)
     return ret;
 }
  
-                
+              
