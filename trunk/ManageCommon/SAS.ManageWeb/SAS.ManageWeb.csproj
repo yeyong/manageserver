@@ -53,6 +53,10 @@
       <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="aspx\1\posttopic.aspx.cs">
+      <DependentUpon>posttopic.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="aspx\1\test.aspx.cs">
       <DependentUpon>test.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -63,6 +67,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\forum\forum_option.aspx.cs">
+      <DependentUpon>forum_option.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\forum\forum_option.aspx.designer.cs">
+      <DependentUpon>forum_option.aspx</DependentUpon>
     </Compile>
     <Compile Include="ManagePage\framepage\managerbody.aspx.cs">
       <DependentUpon>managerbody.aspx</DependentUpon>
@@ -576,6 +587,12 @@
     <Content Include="javascript\ajax.js" />
     <Content Include="javascript\bbcode.js" />
     <Content Include="javascript\common.js" />
+    <Content Include="javascript\dnteditor.js" />
+    <Content Include="javascript\editor.js" />
+    <Content Include="javascript\post.js" />
+    <Content Include="javascript\post_editor.js" />
+    <Content Include="javascript\template_utils.js" />
+    <Content Include="ManagePage\forum\forum_option.aspx" />
     <Content Include="ManagePage\framepage\top.aspx" />
     <Content Include="ManagePage\framepage\managerbody.aspx" />
     <Content Include="ManagePage\global\global_adduser.aspx" />
@@ -908,16 +925,22 @@
     <Content Include="ManagePage\xml\navmenu.config" />
     <Content Include="templates\default\about.png" />
     <Content Include="templates\default\about.xml" />
+    <Content Include="templates\default\sas.css" />
     <Content Include="templates\default\editor.css" />
+    <Content Include="templates\default\images\portalbox_bg.gif" />
     <Content Include="templates\default\login.htm" />
+    <Content Include="templates\default\posttopic.htm" />
     <Content Include="templates\default\studio\_studioheader.htm" />
     <Content Include="templates\default\studio\studioindex.htm" />
     <Content Include="templates\default\templatevariable.xml" />
+    <Content Include="templates\default\_ajaxquickreply.htm" />
     <Content Include="templates\default\_copyright.htm" />
     <Content Include="templates\default\_editor.htm" />
     <Content Include="templates\default\_footer.htm" />
     <Content Include="templates\default\_header.htm" />
     <Content Include="templates\default\_pageheader.htm" />
+    <Content Include="templates\default\_post.htm" />
+    <Content Include="templates\default\_seditor.htm" />
     <Content Include="tools\avatar.aspx" />
   </ItemGroup>
   <ItemGroup>

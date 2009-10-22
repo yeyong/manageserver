@@ -1646,5 +1646,15 @@ namespace SAS.Data.SqlServer
             string commandText = string.Format("SELECT {0} FROM [{1}badword]", DbFields.WORDS, BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
         }
+
+        /// <summary>
+        /// 以DataReader返回自定义编辑器按钮列表
+        /// </summary>
+        /// <returns></returns>
+        public IDataReader GetCustomEditButtonList()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}bbcodes] WHERE [available] = 1", DbFields.BBCODES, BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText);
+        }
     }
 }

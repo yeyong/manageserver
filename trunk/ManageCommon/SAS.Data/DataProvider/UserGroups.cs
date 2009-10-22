@@ -30,6 +30,7 @@ namespace SAS.Data.DataProvider
                 info.ug_scorelow = TypeConverter.StrToInt(dr["ug_scorelow"].ToString());
                 info.ug_logo = dr["ug_logo"].ToString().Trim();
                 info.ug_readaccess = TypeConverter.StrToInt(dr["ug_readaccess"].ToString().Trim());
+                info.Ug_allowcusbbcode = TypeConverter.StrToInt(dr["ug_allowcusbbcode"].ToString().Trim());
                 info.ug_allowvisit = TypeConverter.StrToInt(dr["ug_allowvisit"].ToString());
                 info.ug_allowcommunity = TypeConverter.StrToInt(dr["ug_allowcommunity"].ToString());
                 info.ug_allowdown = TypeConverter.StrToInt(dr["ug_allowdown"].ToString());
@@ -38,6 +39,7 @@ namespace SAS.Data.DataProvider
                 info.ug_allowavatar = TypeConverter.StrToInt(dr["ug_allowavatar"].ToString());
                 info.ug_allowshop = TypeConverter.StrToInt(dr["ug_allowshop"].ToString());
                 info.ug_allowinvisible = TypeConverter.StrToInt(dr["ug_allowinvisible"].ToString());
+                info.Ug_allowhidecode = TypeConverter.StrToInt(dr["ug_allowhidecode"].ToString());
                 info.ug_maxattachsize = TypeConverter.StrToInt(dr["ug_maxattachsize"].ToString());
                 info.ug_maxsizeperday = TypeConverter.StrToInt(dr["ug_maxsizeperday"].ToString());
                 info.ug_attachextensions = dr["ug_attachextensions"].ToString();
@@ -47,6 +49,7 @@ namespace SAS.Data.DataProvider
                 info.ug_pg_id = TypeConverter.StrToInt(dr["ug_pg_id"].ToString());
                 info.ug_color = dr["ug_color"].ToString();
                 info.ug_isSystem = TypeConverter.StrToInt(dr["ug_isSystem"].ToString());
+                info.Allowsetreadperm = TypeConverter.StrToInt(dr["allowsetreadperm"].ToString());
                 
                 userGruopInfoList.Add(info);
             }

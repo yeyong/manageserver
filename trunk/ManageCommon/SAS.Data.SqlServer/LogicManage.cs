@@ -32,6 +32,18 @@ namespace SAS.Data.SqlServer
             DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
         }
 
+        /// <summary>
+        /// 获得全部版块列表
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetForumsTable()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}forums] AS [f] LEFT JOIN [{1}forumfields] AS [ff] ON [f].[fid]=[ff].[fid] ORDER BY [f].[displayorder]",
+                                                DbFields.FORUMS_JOIN_FIELDS,
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
         #endregion
     }
 }

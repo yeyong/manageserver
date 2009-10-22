@@ -64,7 +64,7 @@ namespace SAS.Config
         private string m_seotitle = ""; //标题附加字
         private string m_seokeywords = ""; //Meta Keywords
         private string m_seodescription = ""; //Meta Description
-        private string m_seohead = "<meta name=\"generator\" content=\"SAS!NT\" />"; //其他头部信息
+        private string m_seohead = "<meta name=\"generator\" content=\"Siriuts Studio\" />"; //其他头部信息
 
         private int m_rssstatus = 1; //rssstatus
         private int m_rssttl = 60; //RSS TTL(分钟)
@@ -104,9 +104,9 @@ namespace SAS.Config
         private int m_tpp = 26; //每页主题数
         private int m_ppp = 16; //每页帖子数
         private int m_maxfavorites = 30; //收藏夹容量
-        private int m_maxavatarsize = 20480; //头像最大尺寸(字节)
-        private int m_maxavatarwidth = 120; //头像最大宽度(像素)
-        private int m_maxavatarheight = 120; //头像最大高度(像素)
+        //private int m_maxavatarsize = 20480; //头像最大尺寸(字节)
+        //private int m_maxavatarwidth = 120; //头像最大宽度(像素)
+        //private int m_maxavatarheight = 120; //头像最大高度(像素)
         private int m_maxpolloptions = 10; //投票最大选项数
         private int m_maxattachments = 10; //最大允许的上传附件数
 
@@ -116,7 +116,7 @@ namespace SAS.Config
         private int m_watermarkstatus = 3; //图片附件添加水印 0=不使用 1=左上 2=中上 3=右上 4=左中 ... 9=右下
         private int m_watermarktype = 0; //图片附件添加何种水印 0=文字 1=图片
         private int m_watermarktransparency = 5; //图片水印透明度 取值范围1--10 (10为不透明)
-        private string m_watermarktext = "By SAS!NT";  //图片附件添加文字水印的内容 {1}表示论坛标题 {2}表示论坛地址 {3}表示当前日期 {4}表示当前时间, 例如: {3} {4}上传于{1} {2}
+        private string m_watermarktext = "Sirius Studio";  //图片附件添加文字水印的内容 {1}表示论坛标题 {2}表示论坛地址 {3}表示当前日期 {4}表示当前时间, 例如: {3} {4}上传于{1} {2}
         private string m_watermarkpic = "watermark.gif";   //使用的水印图片的名称
         private string m_watermarkfontname = "Tahoma"; //图片附件添加文字水印的字体
         private int m_watermarkfontsize = 12; //图片附件添加文字水印的大小(像素)
@@ -128,7 +128,7 @@ namespace SAS.Config
         private int m_reasonpm = 0; //是否将管理操作的理由短消息通知作者
         private int m_moderactions = 1; //是否在主题查看页面显示管理操作
         private int m_karmaratelimit = 4; //评分时间限制(小时)
-        private int m_losslessdel = 200; //删贴不减积分时间期限(天)
+        private int m_losslessdel = 200; //删帖不减积分时间期限(天)
         private int m_edittimelimit = 10; //编辑帖子时间限制(分钟)
         private int m_editedby = 1; //编辑帖子附加编辑记录
         private int m_defaulteditormode = 1; //默认的编辑器模式 0=ubb代码编辑器 1=可视化编辑器
@@ -169,33 +169,66 @@ namespace SAS.Config
 
         private int m_htmltitle = 0; //是否使用html标题
         private string m_htmltitleusergroup = "";  //可以使用html标题的用户组
-
-        private int m_specifytemplate = 0;  //版块是否指定模板
+        private int m_specifytemplate = 0;  //版块是否指定模板 (0:为未指定)
         private string m_verifyimageassemly = "";//验证码生成所使用的程序集
-
-
+        private int m_mytopicsavetime = 30;//我的主题保留时间
+        private int m_mypostsavetime = 30;//我的帖子保留时间        
+        private int m_myattachmentsavetime = 30;//我的附件保留时间
+        private int m_enabletag = 0;//是否启用Tag功能        
+        private int m_enablemall = 1;//是否开启商场 (0:不开启 1:开启 2:开启高级模式)
+        private int m_statscachelife = 120;//统计缓存时间(分钟)
         private int m_statstatus = 0;//是否开启浏览统计
+        private int m_pvfrequence = 60; //页面访问量更新频率(页面数)
         private int m_oltimespan = 20;//用户在线时间更新时长(分钟):
+
+        //private string m_defaultpositivecolor = "FF0000";//默认正方颜色        
+        //private string m_defaultnegativecolor = "00FF00";//默认反方颜色
+        //private string m_defaultpositivebordercolor = "336699";//默认正方边框颜色        
+        //private string m_defaultnegativebordercolor = "A9CD62";//默认反方边框颜色        
+        private string m_recommenddebates = "";
+
+        private int m_gpp = 16;//每页商品数
+        //private int m_allowdiggs = 0;//是否允顶
+
+        private int m_debatepagesize = 5;
+        private int m_hottagcount = 10; //首页热门标签数量
+        private int m_disablepostad = 0;  //新用户广告强力屏蔽(0:不开启 1:开启)
+        private int m_disablepostadregminute = 60;  //用户注册N分钟内进行新用户广告强力屏蔽功能检查,默认60分钟
+        private int m_disablepostadpostcount = 5;   //用户发帖N帖内进行新用户广告强力屏蔽功能检查,默认5帖
+        private string m_disablepostadregular = "((\\d{4}|\\d{4}-)?(\\d(?:\\s*)){7})|((\\d{3}|\\d{3}-)?\\d{8})|(1(?:\\s*)[35](?:\\s*)[0123456789](?:\\s*)(\\d(?:\\s*)){8})\r\n[qQ](.+?)(\\d(?:\\s*)){7}"; //新用户广告强力屏蔽功能正则表达式
+        private int m_whosonlinecontract = 0;  //在线列表是否隐藏游客: 1 是 0 否
+        private string m_postnocustom = "";
         private int m_iisurlrewrite = 0; //是否启用IIS的URL重写
 
         private int m_notificationreserveddays = 7;//通知在系统中保留天数
         private int m_maxindexsubforumcount = 0;//首页显示的子版最大数,0为不限制
-        private string m_postnocustom = "";
-        private int m_whosonlinecontract = 0;  //在线列表是否隐藏游客: 1 是 0 否
         private int m_deletingexpireduserfrequency = 5;//删除过期用户频率(单位:时间)
+        private int m_replynotificationstatus = 1;//是否设置默认回帖通知用户，0为不通知
+        private int m_replyemailstatus = 1;//是否设置默认回帖短信息通知用户，0为不通知
         private int m_allowfloatwin = 1;//是否开启弹窗效果
+        private int m_allwoforumindexpost = 1;//是否开启首页发帖功能
         private int m_onlineoptimization = 0;//用户在线表性能优化开关
         private int m_onlineusercountcacheminute = 0;//在线用户数统计缓存时间，0为实时统计
+        private int m_avatarmethod = 1;//头像显示方式，0使用动态地址调用头像，1使用静态地址调用头像
+        private string m_msgforwardlist = "";//不需要提示信息的页面
+        private int m_quickforward = 0;//是否开启跳转
         #endregion
 
         #region 属性
+
+        public int Debatepagesize
+        {
+            get { return m_debatepagesize; }
+            set { m_debatepagesize = value; }
+
+        }
 
         /// <summary>
         /// 版权文字 (只读)
         /// </summary>
         public string Sitecopyright
         {
-            get { return "Copyright &copy; 2008-" + DateTime.Now.Year.ToString() + " <a href=\"http://www.zhaoshang-zj.org\" target=\"_blank\">SAS Inc</a>."; }
+            get { return "Copyright &copy; 2008-" + DateTime.Now.Year.ToString() + " <a href=\"http://www.sirius.org.cn\" target=\"_blank\">SAS Inc</a>."; }
         }
 
         /// <summary>
@@ -968,6 +1001,7 @@ namespace SAS.Config
             set { m_ppp = value; }
         }
 
+
         /// <summary>
         /// 收藏夹容量
         /// </summary>
@@ -977,33 +1011,33 @@ namespace SAS.Config
             set { m_maxfavorites = value; }
         }
 
-        /// <summary>
-        /// 头像最大尺寸(字节)
-        /// </summary>
-        public int Maxavatarsize
-        {
-            get { return m_maxavatarsize; }
-            set { m_maxavatarsize = value; }
-        }
+        ///// <summary>
+        ///// 头像最大尺寸(字节)
+        ///// </summary>
+        //public int Maxavatarsize
+        //{
+        //    get { return m_maxavatarsize; }
+        //    set { m_maxavatarsize = value; }
+        //}
 
-        /// <summary>
-        /// 头像最大宽度(像素)
-        /// </summary>
-        public int Maxavatarwidth
-        {
-            //get { return m_maxavatarwidth<130 ? 130: m_maxavatarwidth;} //当宽度小于165时,返回165
-            get { return m_maxavatarwidth; } //当宽度小于165时,返回165
-            set { m_maxavatarwidth = value; }
-        }
+        ///// <summary>
+        ///// 头像最大宽度(像素)
+        ///// </summary>
+        //public int Maxavatarwidth
+        //{
+        //    //get { return m_maxavatarwidth<130 ? 130: m_maxavatarwidth;} //当宽度小于165时,返回165
+        //    get { return m_maxavatarwidth; } //当宽度小于165时,返回165
+        //    set { m_maxavatarwidth = value; }
+        //}
 
-        /// <summary>
-        /// 头像最大高度(像素)
-        /// </summary>
-        public int Maxavatarheight
-        {
-            get { return m_maxavatarheight; }
-            set { m_maxavatarheight = value; }
-        }
+        ///// <summary>
+        ///// 头像最大高度(像素)
+        ///// </summary>
+        //public int Maxavatarheight
+        //{
+        //    get { return m_maxavatarheight; }
+        //    set { m_maxavatarheight = value; }
+        //}
 
         /// <summary>
         /// 投票最大选项数
@@ -1177,7 +1211,7 @@ namespace SAS.Config
         }
 
         /// <summary>
-        /// 删贴不减积分时间期限(天)
+        /// 删帖不减积分时间期限(天)
         /// </summary>
         public int Losslessdel
         {
@@ -1464,7 +1498,6 @@ namespace SAS.Config
             get { return m_specifytemplate; }
             set { m_specifytemplate = value; }
         }
-
         /// <summary>
         /// 验证码生成所使用的程序集
         /// </summary>
@@ -1474,6 +1507,59 @@ namespace SAS.Config
             set { m_verifyimageassemly = value; }
         }
 
+        /// <summary>
+        /// 我的主题保留时间
+        /// </summary>
+        public int Mytopicsavetime
+        {
+            get { return m_mytopicsavetime; }
+            set { m_mytopicsavetime = value; }
+        }
+
+        /// <summary>
+        /// 我的帖子保留时间
+        /// </summary>
+        public int Mypostsavetime
+        {
+            get { return m_mypostsavetime; }
+            set { m_mypostsavetime = value; }
+        }
+
+        /// <summary>
+        /// 我的附件保留时间
+        /// </summary>
+        public int Myattachmentsavetime
+        {
+            get { return m_myattachmentsavetime; }
+            set { m_myattachmentsavetime = value; }
+        }
+
+        /// <summary>
+        /// 是否启用Tag功能
+        /// </summary>
+        public int Enabletag
+        {
+            get { return m_enabletag; }
+            set { m_enabletag = value; }
+        }
+
+        /// <summary>
+        /// 是否启用商场功能(0:不开启 1:开启普通模式 2:开启高级模式)
+        /// </summary>
+        public int Enablemall
+        {
+            get { return m_enablemall; }
+            set { m_enablemall = value; }
+        }
+
+        /// <summary>
+        /// 统计缓存时间(分钟)
+        /// </summary>
+        public int Statscachelife
+        {
+            get { return m_statscachelife; }
+            set { m_statscachelife = value; }
+        }
 
         /// <summary>
         /// 统计是否开启
@@ -1485,6 +1571,15 @@ namespace SAS.Config
         }
 
         /// <summary>
+        /// 页面访问量更新频率
+        /// </summary>
+        public int Pvfrequence
+        {
+            get { return m_pvfrequence; }
+            set { m_pvfrequence = value; }
+        }
+
+        /// <summary>
         /// 用户在线时间更新时长(分钟)
         /// </summary>
         public int Oltimespan
@@ -1493,23 +1588,72 @@ namespace SAS.Config
             set { m_oltimespan = value; }
         }
 
-
         /// <summary>
-        /// 是否启用IIS的URL重写
+        /// 
         /// </summary>
-        public int Iisurlrewrite
+        public string Recommenddebates
         {
-            get { return m_iisurlrewrite; }
-            set { m_iisurlrewrite = value; }
+            get { return m_recommenddebates; }
+            set { m_recommenddebates = value; }
         }
 
         /// <summary>
-        /// 通知保留天数
+        /// 
         /// </summary>
-        public int Notificationreserveddays
+        public int Gpp
         {
-            get { return m_notificationreserveddays; }
-            set { m_notificationreserveddays = value; }
+            get { return m_gpp; }
+            set { m_gpp = value; }
+        }
+
+        /// <summary>
+        /// 首页热门标签数量
+        /// </summary>
+        public int Hottagcount
+        {
+            get { return m_hottagcount; }
+            set { m_hottagcount = value; }
+        }
+        //public int Allowdiggs
+        //{
+        //    get { return m_allowdiggs; }
+        //    set { m_allowdiggs = value; }
+        //}
+
+        /// <summary>
+        /// 新用户广告强力屏蔽
+        /// </summary>
+        public int Disablepostad
+        {
+            get { return m_disablepostad; }
+            set { m_disablepostad = value; }
+        }
+
+        /// <summary>
+        /// 用户注册N分钟内进行新用户广告强力屏蔽功能检查
+        /// </summary>
+        public int Disablepostadregminute
+        {
+            get { return m_disablepostadregminute; }
+            set { m_disablepostadregminute = value; }
+        }
+
+        /// <summary>
+        /// 用户发帖N帖内进行新用户广告强力屏蔽功能检查
+        /// </summary>
+        public int Disablepostadpostcount
+        {
+            get { return m_disablepostadpostcount; }
+            set { m_disablepostadpostcount = value; }
+        }
+
+        /// <summary>
+        /// 新用户广告强力屏蔽功能正则表达式
+        /// </summary>
+        public string Disablepostadregular
+        {
+            get { return m_disablepostadregular; }
+            set { m_disablepostadregular = value; }
         }
 
         /// <summary>
@@ -1531,6 +1675,23 @@ namespace SAS.Config
         }
 
         /// <summary>
+        /// 是否启用IIS的URL重写
+        /// </summary>
+        public int Iisurlrewrite
+        {
+            get { return m_iisurlrewrite; }
+            set { m_iisurlrewrite = value; }
+        }
+
+        /// <summary>
+        /// 通知保留天数
+        /// </summary>
+        public int Notificationreserveddays
+        {
+            get { return m_notificationreserveddays; }
+            set { m_notificationreserveddays = value; }
+        }
+        /// <summary>
         /// 首页显示最大子版数
         /// </summary>
         public int Maxindexsubforumcount
@@ -1538,7 +1699,6 @@ namespace SAS.Config
             get { return m_maxindexsubforumcount; }
             set { m_maxindexsubforumcount = value; }
         }
-
         /// <summary>
         /// 删除过期用户频率
         /// </summary>
@@ -1552,14 +1712,34 @@ namespace SAS.Config
             }
             set { m_deletingexpireduserfrequency = value; }
         }
+        /// <summary>
+        /// 设置是否默认回帖通知用户
+        /// </summary>
+        public int Replynotificationstatus
+        {
+            get { return m_replynotificationstatus; }
+            set { m_replynotificationstatus = value; }
+        }
 
         /// <summary>
-        /// 是否开启弹窗效果
+        /// 设置是否默认回帖短信息通知用户
         /// </summary>
+        public int Replyemailstatus
+        {
+            get { return m_replyemailstatus; }
+            set { m_replyemailstatus = value; }
+        }
+
         public int Allowfloatwin
         {
             get { return m_allowfloatwin; }
             set { m_allowfloatwin = value; }
+        }
+
+        public int Allwoforumindexpost
+        {
+            get { return m_allwoforumindexpost; }
+            set { m_allwoforumindexpost = value; }
         }
 
         /// <summary>
@@ -1578,6 +1758,33 @@ namespace SAS.Config
         {
             get { return m_onlineusercountcacheminute; }
             set { m_onlineusercountcacheminute = value; }
+        }
+
+        /// <summary>
+        /// 头像显示方式，0使用动态地址调用头像，1使用静态地址调用头像
+        /// </summary>
+        public int AvatarMethod
+        {
+            get { return m_avatarmethod; }
+            set { m_avatarmethod = value; }
+        }
+
+        /// <summary>
+        /// 不需要提示信息的页面
+        /// </summary>
+        public string Msgforwardlist
+        {
+            get { return m_msgforwardlist; }
+            set { m_msgforwardlist = value; }
+        }
+
+        /// <summary>
+        /// 是否开启跳转
+        /// </summary>
+        public int Quickforward
+        {
+            get { return m_quickforward; }
+            set { m_quickforward = value; }
         }
         #endregion
     }

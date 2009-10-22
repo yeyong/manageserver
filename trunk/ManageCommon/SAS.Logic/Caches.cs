@@ -101,6 +101,55 @@ namespace SAS.Logic
             }
         }
 
+        /// <summary>
+        /// 获得编辑器自定义按钮信息的javascript数组
+        /// </summary>
+        /// <returns>表情符的javascript数组</returns>
+        public static string GetCustomEditButtonList()
+        {
+            lock (lockHelper)
+            {
+                SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+                string str = cache.RetrieveObject("/SAS/UI/CustomEditButtonList") as string;
+                if (str == null)//此处这样判断是为了防止数据库中无记录时会将str赋值成""的情况，参见下面加载数据代码
+                {
+                    StringBuilder sb = new StringBuilder();
+                    IDataReader dr = DatabaseProvider.GetInstance().GetCustomEditButtonList();
+                    try
+                    {
+                        while (dr.Read())
+                        {
+                            //说明:[标签名,对应图标文件名,[参数1描述,参数2描述,...],[参数1默认值,参数2默认值,...]]
+                            //实例["fly","swf.gif",["请输入flash网址","请输入flash宽度","请输入flash高度"],["http://","200","200"],3]
+                            sb.AppendFormat(",'{0}':['", Utils.ReplaceStrToScript(dr["tag"].ToString()));
+                            sb.Append(Utils.ReplaceStrToScript(dr["tag"].ToString()));
+                            sb.Append("','");
+                            sb.Append(Utils.ReplaceStrToScript(dr["icon"].ToString()));
+                            sb.Append("','");
+                            sb.Append(Utils.ReplaceStrToScript(dr["explanation"].ToString()));
+                            sb.Append("',['");
+                            sb.Append(Utils.ReplaceStrToScript(dr["paramsdescript"].ToString()).Replace(",", "','"));
+                            sb.Append("'],['");
+                            sb.Append(Utils.ReplaceStrToScript(dr["paramsdefvalue"].ToString()).Replace(",", "','"));
+                            sb.Append("'],");
+                            sb.Append(Utils.ReplaceStrToScript(dr["params"].ToString()));
+                            sb.Append("]");
+                        }
+                        if (sb.Length > 0)
+                            sb.Remove(0, 1);
+
+                        str = Utils.ClearBR(sb.ToString());
+                        cache.AddObject("/SAS/UI/CustomEditButtonList", str);
+                    }
+                    finally
+                    {
+                        dr.Close();
+                    }
+                }
+                return str;
+            }
+        }
+
         #region 后台管理重设缓存
 
         private static void RemoveObject(string key)

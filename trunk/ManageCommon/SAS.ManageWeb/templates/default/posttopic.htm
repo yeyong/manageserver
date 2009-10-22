@@ -1,0 +1,95 @@
+﻿<%template _header%>
+<script type="text/javascript" reload="1">
+    var postminchars = parseInt('{config.minpostsize}');
+    var postmaxchars = parseInt('{config.maxpostsize}');
+    var disablepostctrl = parseInt('{disablepost}');
+    var forumpath = "{forumpath}";
+    var posturl = forumpath + 'posttopic.aspx?forumid={forumid}&forumpage={forumpageid}';
+    var postaction = '{rooturl}posttopic.aspx?infloat=1&forumid={forumid}&'
+    function closenewthread() {
+        if ($('floatwin_newthread'))
+            $('floatwin_newthread').parentNode.removeChild($('floatwin_newthread'));
+        if ($('floatwin_newthread_mask'))
+            $('floatwin_newthread_mask').parentNode.removeChild($('floatwin_newthread_mask'));
+    }
+</script>
+
+<%if page_err==0%>
+<%if {ispost}%>
+	<%if {infloat}==1%>	
+       <%if {fromindex}!=1%>
+	     <%if {needaudit}%>
+		 <script type="text/javascript">
+		     $('returnmessage').className = '';
+		     //submithandle_newthread('forumdisplay.php?fid=5', '非常感谢，管理员设置了需要对新主题进行审核，现在将转入主题列表，您的帖子通过审核后将被显示出来。');
+		     floatwin('open_confirm', -1, 390, 130);
+		     $('floatwin_confirm').innerHTML = '<div><h3 class="float_ctrl"><em id="floatwin_confirm_title">提示信息</em><span><a href="javascript:;" class="float_close" onclick="floatwinreset = 1;floatwin(\'close_confirm\');">&nbsp;</a></span></h3></div><div id="floatwin_confirm_content">非常感谢，管理员设置了需要对新主题进行审核，现在将转入主题列表，您的帖子通过审核后将被显示出来。<br><button onclick="location.href=\'{rooturl}{msgbox_url}\';floatwin(\'close_confirm\')">确定</button></div>'
+		     floatwinreset = 1;
+		     closeEditorwin();
+		 </script>
+		    
+
+		 <%else%>
+		 <script type="text/javascript">
+		     $('returnmessage').className = '';
+		     location.href = '{rooturl}{msgbox_url}';	
+		</script>
+		 <%/if%>
+		
+	   <%/if%>
+	<%else%>
+	<%template _msgbox%>
+	<%/if%>
+<%else%>
+<%if {infloat}==0%>
+
+<div class="wrap s_clear" id="wrap">
+<div class="main">
+	<div class="nojs" style="position:relative;">
+	<div id="floatwinnojs">
+	<%/if%>
+	<script>
+	    function geteditormessage(theform) {
+	        var message = wysiwyg ? html2bbcode(getEditorContents()) : (!theform.parseurloff.checked ? parseurl(theform.message.value) : theform.message.value);
+	        theform.message.value = message;
+	    }
+	</script>
+<%if {infloat}==1%>
+	<div id="floatlayout_newthread" class="float" style="width: 600px; height: 410px;">
+	<%else%>
+	<div id="floatlayout_newthread" class="float">
+	<%/if%>
+	<%if {infloat}==1%>
+<form method="post" name="postform" id="postform" action="{rooturl}posttopic.aspx?infloat=1&forumid={forumid}&" enctype="multipart/form-data" onsubmit="return validate(this);">	
+	<%else%>
+<form method="post" name="postform" id="postform" action="" enctype="multipart/form-data" onsubmit="return validate(this);">
+	<%/if%>
+<%template _post%>
+<script  reload="1">
+	openEditor();
+	initAttach();
+	</script>
+</form>
+</div>
+<%if {infloat}==0%>
+	</div>
+	</div>
+</div>
+</div>
+	<%/if%>
+	</div>
+	<script type="text/javascript" reload="1">
+	    if (getQueryString('restore') == '1') {
+	        loadData(true);
+	    }
+	</script>
+	<%/if%>
+<%else%>
+
+<%/if%>
+<%if {infloat}!=1%>
+<script type="text/javascript" src="javascript/template_calendar.js"></script>
+<%/if%>
+
+<%template _copyright%>
+<%template _footer%>

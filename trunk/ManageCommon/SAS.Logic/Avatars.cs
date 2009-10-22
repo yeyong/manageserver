@@ -52,6 +52,43 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 获取头像地址
+        /// </summary>
+        /// <param name="uid">用户id</param>
+        /// <param name="avatarSize">图片尺寸</param>
+        /// <returns>图片地址</returns>
+        public static string GetAvatarUrl(int uid, AvatarSize avatarSize)
+        {
+            string size = "";
+            switch (avatarSize)
+            {
+                case AvatarSize.Large:
+                    size = "large";
+                    break;
+                case AvatarSize.Medium:
+                    size = "medium";
+                    break;
+                case AvatarSize.Small:
+                    size = "small";
+                    break;
+            }
+            if (GeneralConfigs.GetConfig().AvatarMethod == 0)
+                return string.Format("{0}tools/avatar.aspx?uid={1}&size={2}", Utils.GetRootUrl(SAS.Config.BaseConfigs.GetSitePath), uid, size);
+            else
+                return Avatars.GetAvatarUrl(uid.ToString(), avatarSize);
+        }
+
+        /// <summary>
+        /// 获取中等头像地址
+        /// </summary>
+        /// <param name="uid">用户id</param>
+        /// <returns>图片地址</returns>
+        public static string GetAvatarUrl(int uid)
+        {
+            return GetAvatarUrl(uid, AvatarSize.Medium);
+        }
+
+        /// <summary>
         /// 获取默认头像
         /// </summary>
         /// <param name="avatarSize"></param>

@@ -14,6 +14,7 @@ namespace SAS.Entity
         private int _ug_scorelow;
         private string _ug_logo;
         private int _ug_readaccess;
+        private int _ug_allowcusbbcode;
         private int _ug_allowvisit;
         private int _ug_allowcommunity;
         private int _ug_allowdown;
@@ -22,6 +23,8 @@ namespace SAS.Entity
         private int _ug_allowavatar;
         private int _ug_allowshop;
         private int _ug_allowinvisible;
+        private int _ug_allowhidecode;
+        private int _ug_allowhtml;
         private int _ug_maxattachsize;
         private int _ug_maxsizeperday;
         private string _ug_attachextensions;
@@ -30,7 +33,8 @@ namespace SAS.Entity
         private int _ug_maxsigsize;
         private int _ug_pg_id;
         private string _ug_color;
-        private int _ug_isSystem;       
+        private int _ug_isSystem;
+        private int m_allowsetreadperm;	//是否允许设置阅读积分权限
 
         /// <summary>
         /// 用户组ID
@@ -46,8 +50,14 @@ namespace SAS.Entity
         /// </summary>
         public string ug_name
         {
-            set { _ug_name = value; }
             get { return _ug_name; }
+            set
+            {
+                if ((_ug_color != null) && (_ug_color != string.Empty))
+                    _ug_name = string.Format("<font color=\"{0}\">{1}</font>", _ug_color, value);
+                else
+                    _ug_name = value;
+            }
         }
 
         /// <summary>
@@ -84,6 +94,15 @@ namespace SAS.Entity
         {
             set { _ug_readaccess = value; }
             get { return _ug_readaccess; }
+        }
+
+        /// <summary>
+        /// 是否允许使用bbcode0-不允许；1-允许
+        /// </summary>
+        public int Ug_allowcusbbcode
+        {
+            set { _ug_allowcusbbcode = value; }
+            get { return _ug_allowcusbbcode; }
         }
 
         /// <summary>
@@ -156,6 +175,24 @@ namespace SAS.Entity
         {
             set { _ug_allowinvisible = value; }
             get { return _ug_allowinvisible; }
+        }
+
+        /// <summary>
+        /// 是否允许使用hide代码
+        /// </summary>
+        public int Ug_allowhidecode
+        {
+            set { _ug_allowhidecode = value; }
+            get { return _ug_allowhidecode; }
+        }
+
+        /// <summary>
+        /// 是否允许发布html贴
+        /// </summary>
+        public int Ug_allowhtml
+        {
+            set { _ug_allowhtml = value; }
+            get { return _ug_allowhtml; }
         }
 
         /// <summary>
@@ -237,6 +274,15 @@ namespace SAS.Entity
         {
             set { _ug_isSystem = value; }
             get { return _ug_isSystem; }
+        }
+
+        ///<summary>
+        ///是否允许设置阅读积分权限
+        ///</summary>
+        public int Allowsetreadperm
+        {
+            get { return m_allowsetreadperm; }
+            set { m_allowsetreadperm = value; }
         }
         #endregion Model
     }
