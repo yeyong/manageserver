@@ -64,7 +64,7 @@
 	var allowhtml = parseInt('{htmlon}');
 	var forumallowhtml = parseInt('1');
 	var allowsmilies = 1 - parseInt('{smileyoff}');
-	var allowbbcode = parseInt('{usergroupinfo.allowcusbbcode}') == 1 && parseInt('{forum.allowbbcode}') == 1;
+	var allowbbcode = parseInt('{usergroupinfo.ug_allowcusbbcode}') == 1 && parseInt('{forum.allowbbcode}') == 1;
 	var allowimgcode = parseInt('{forum.allowimgcode}');
 
 	var wysiwyg = (is_ie || is_moz || (is_opera && opera.version() >= 9)) && parseInt('{config.Defaulteditormode}') && allowbbcode == 1 ? 1 : 0;//bbinsert == 1 ? 1 : 0;
@@ -208,7 +208,7 @@
 
 		<div class="popupmenu_popup" id="{editorid}_popup_hide_menu" style="display: none">
 		<ul unselectable="on">
-			<%if {usergroupinfo.Allowhidecode}==1%><li><a id="{editorid}_popup_hide" title="隐藏内容">隐藏内容</a></li><%/if%>
+			<%if {usergroupinfo.ug_allowhidecode}==1%><li><a id="{editorid}_popup_hide" title="隐藏内容">隐藏内容</a></li><%/if%>
 			<li><a id="{editorid}_cmd_table" title="表格">表格</a></li>
 			<li><a id="{editorid}_cmd_free" title="免费信息">免费信息</a></li>
 		</ul>

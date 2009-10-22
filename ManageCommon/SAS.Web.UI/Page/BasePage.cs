@@ -618,8 +618,10 @@ namespace SAS.Web.UI
         /// <param name="url">转向地址</param>
         public void SetMetaRefresh(int sec, string url)
         {
-
-            meta = meta + "\r\n<meta http-equiv=\"refresh\" content=\"" + sec.ToString() + "; url=" + url + "\" />";
+            if (infloat != 1)
+            {
+                meta = meta + "\r\n<meta http-equiv=\"refresh\" content=\"" + sec.ToString() + "; url=" + url + "\" />";
+            }
             //AddScript("window.setInterval('location.replace(\"" + url + "\");'," + (sec*1000).ToString() + ");");
 
         }
@@ -772,6 +774,33 @@ namespace SAS.Web.UI
             {
                 msgbox_text = msgbox_text + "<br />" + strinfo;
             }
+        }
+
+        /// <summary>
+        /// 增加提示信息
+        /// </summary>
+        /// <param name="strinfo">提示信息</param>
+        public void MsgForward(string forwardName, bool spJump)
+        {
+            if (config.Quickforward == 1 && infloat == 0)
+            {
+                if (Utils.InArray(forwardName, config.Msgforwardlist))
+                {
+                    if (spJump)
+                    {
+                        System.Web.HttpContext.Current.Response.Redirect(msgbox_url);
+                    }
+                    else
+                    {
+                        System.Web.HttpContext.Current.Response.Redirect(forumpath + msgbox_url);
+                    }
+                }
+            }
+        }
+
+        public void MsgForward(string forwardName)
+        {
+            MsgForward(forwardName, false);
         }
 
         //public void AddUserCpMsgLine(string strinfo)

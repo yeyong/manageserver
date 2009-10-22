@@ -52,6 +52,7 @@
     <Compile Include="Caches.cs" />
     <Compile Include="Databases.cs" />
     <Compile Include="Emails.cs" />
+    <Compile Include="Forums.cs" />
     <Compile Include="HttpModule.cs" />
     <Compile Include="Ips.cs" />
     <Compile Include="IpSearch.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Templates.cs" />
     <Compile Include="TopicStats.cs" />
     <Compile Include="Urls.cs" />
+    <Compile Include="UserAuthority.cs" />
     <Compile Include="UserCredits.cs" />
     <Compile Include="UserGroups.cs" />
     <Compile Include="Users.cs" />

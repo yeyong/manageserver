@@ -1435,6 +1435,12 @@ namespace SAS.Data
         /// <param name="templateIdList">模板Id列表</param>
         void UpdateForumAndUserTemplateId(string templateIdList);
 
+        /// <summary>
+        /// 获取板块列表
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetForumsTable();
+
         #endregion
 
         /// <summary>
@@ -1449,5 +1455,11 @@ namespace SAS.Data
         /// </summary>
         /// <returns></returns>
         DataTable GetBanWordList();
+
+        /// <summary>
+        /// 获取自定义按钮列表
+        /// </summary>
+        /// <returns></returns>
+        IDataReader GetCustomEditButtonList();
     }
 }
