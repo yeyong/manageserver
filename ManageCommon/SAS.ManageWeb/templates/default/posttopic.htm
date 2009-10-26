@@ -85,7 +85,32 @@
 	</script>
 	<%/if%>
 <%else%>
-
+    <%if {ispost}%>
+		<%if {needlogin}%>
+			<%template _login%>
+		<%else%>
+		 <%if {infloat}==1%>
+         <p>{msgbox_text}</p>
+		 <%else%>
+		   <%template _errmsgbox%>
+		 <%/if%>
+		<%/if%>
+	<%else%>
+	    <%if {infloat}==1%>
+	    <div class="floatbox floatbox1">
+	    <h3 class="float_ctrl">
+		    <span>
+			    <a href="javascript:;" class="float_close" onclick="floatwin('close_newthread');" title="关闭">关闭</a>
+		    </span>
+	    </h3>
+	    <div class="gateform">
+	    <h3>{msgbox_text}</h3>
+	    </div>
+	    </div>
+	     <%else%>
+	       <%template _errmsgbox%>
+	     <%/if%>
+	<%/if%>
 <%/if%>
 <%if {infloat}!=1%>
 <script type="text/javascript" src="javascript/template_calendar.js"></script>

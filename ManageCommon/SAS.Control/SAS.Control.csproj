@@ -46,6 +46,7 @@
     <Compile Include="ColorPicker.cs" />
     <Compile Include="DataGrid.cs" />
     <Compile Include="DropDownList.cs" />
+    <Compile Include="DropDownTreeList.cs" />
     <Compile Include="Hint.cs" />
     <Compile Include="RadioButtonList.cs" />
     <Compile Include="tab\TabEditor.cs" />

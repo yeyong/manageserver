@@ -307,5 +307,15 @@ namespace SAS.Logic
         {
             return SAS.Data.DataProvider.Users.GetUserListCondition(getstring);
         }
+
+        /// <summary>
+        /// 更改用户组用户的管理权限
+        /// </summary>
+        /// <param name="adminId">管理组Id</param>
+        /// <param name="groupId">用户组Id</param>
+        public static void UpdateUserAdminIdByGroupId(int adminId, int groupId)
+        {
+            SAS.Data.DataProvider.Users.UpdateUserAdminIdByGroupId(adminId, groupId);
+        }
     }
 }

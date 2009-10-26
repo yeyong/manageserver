@@ -748,6 +748,23 @@ namespace SAS.Data.SqlServer
             return TypeConverter.ObjectToInt(DbHelper.ExecuteDataset(commandText).Tables[0].Rows[0][0]);
         }
 
+        /// <summary>
+        /// 更改用户管理权限Id
+        /// </summary>
+        /// <param name="adminId">管理组Id</param>
+        /// <param name="groupId">用户组Id</param>
+        public void UpdateUserAdminIdByGroupId(int adminId, int groupId)
+        {
+            DbParameter[] parms = 
+			{
+				DbHelper.MakeInParam("@adminid",(DbType)SqlDbType.Int, 4,adminId),
+                DbHelper.MakeInParam("@groupid",(DbType)SqlDbType.Int, 4,groupId)
+			};
+            string commandText = string.Format("UPDATE [{0}personInfo] SET [ps_pg_id]=@adminid WHERE [ps_ug_id]=@groupid",
+                                                BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
         #endregion
 
         #region 在线用户OnlineUser表基本操作
@@ -1339,6 +1356,258 @@ namespace SAS.Data.SqlServer
             string commandText = string.Format("SELECT ISNULL(MAX(ug_id), 0) FROM [{0}userGroup]", BaseConfigs.GetTablePrefix);
             return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText));
         }
+
+        /// <summary>
+        /// 获取积分用户组
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetUserGroup()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}userGroup] WHERE [ug_pg_id]= 0 AND [ug_id]>8 AND [ug_isSystem]=0 ORDER BY [ug_id]",
+                                                DbFields.USER_GROUPS,
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 更新用户组信息
+        /// </summary>
+        /// <param name="userGroupInfo">用户组信息</param>
+        public void UpdateUserGroup(UserGroupInfo userGroupInfo)
+        {
+            DbParameter[] parms = 
+					{
+						DbHelper.MakeInParam("@Radminid",(DbType)SqlDbType.Int,4,(userGroupInfo.ug_id == 1) ? 1 : userGroupInfo.ug_pg_id),
+						DbHelper.MakeInParam("@Grouptitle",(DbType)SqlDbType.NVarChar,50, Utils.RemoveFontTag(userGroupInfo.ug_name)),
+						DbHelper.MakeInParam("@Creditshigher",(DbType)SqlDbType.Int,4,userGroupInfo.ug_scorehight),
+						DbHelper.MakeInParam("@Creditslower",(DbType)SqlDbType.Int,4, userGroupInfo.ug_scorelow),
+						DbHelper.MakeInParam("@Stars",(DbType)SqlDbType.Int,4,userGroupInfo.Stars),
+						DbHelper.MakeInParam("@Color",(DbType)SqlDbType.Char,7,userGroupInfo.ug_color),
+						DbHelper.MakeInParam("@Groupavatar",(DbType)SqlDbType.NVarChar,60,userGroupInfo.ug_logo),
+						DbHelper.MakeInParam("@Readaccess",(DbType)SqlDbType.Int,4,userGroupInfo.ug_readaccess),
+                        DbHelper.MakeInParam("@Allowcommunity",(DbType)SqlDbType.Int,4,userGroupInfo.ug_allowcommunity),
+						DbHelper.MakeInParam("@Allowvisit",(DbType)SqlDbType.Int,4,userGroupInfo.ug_allowvisit),
+						DbHelper.MakeInParam("@Allowpost",(DbType)SqlDbType.Int,4,userGroupInfo.Allowpost),
+						DbHelper.MakeInParam("@Allowreply",(DbType)SqlDbType.Int,4,userGroupInfo.Allowreply),
+						DbHelper.MakeInParam("@Allowpostpoll",(DbType)SqlDbType.Int,4,userGroupInfo.Allowpostpoll),
+						DbHelper.MakeInParam("@Allowgetattach",(DbType)SqlDbType.Int,4,userGroupInfo.ug_allowdown),
+						DbHelper.MakeInParam("@Allowpostattach",(DbType)SqlDbType.Int,4,userGroupInfo.Allowpostattach),
+						DbHelper.MakeInParam("@Allowvote",(DbType)SqlDbType.Int,4,userGroupInfo.Allowvote),
+						DbHelper.MakeInParam("@Allowsearch",(DbType)SqlDbType.Int,4,userGroupInfo.ug_allowsearch),
+						DbHelper.MakeInParam("@Allowavatar",(DbType)SqlDbType.Int,4,userGroupInfo.ug_allowavatar),
+						DbHelper.MakeInParam("@Allowuseblog",(DbType)SqlDbType.Int,4,userGroupInfo.ug_allowshop),
+						DbHelper.MakeInParam("@Allowinvisible",(DbType)SqlDbType.Int,4,userGroupInfo.ug_allowinvisible),
+						DbHelper.MakeInParam("@Allowsetreadperm",(DbType)SqlDbType.Int,4,userGroupInfo.Allowsetreadperm),
+						DbHelper.MakeInParam("@Allowsetattachperm",(DbType)SqlDbType.Int,4,userGroupInfo.Allowsetattachperm),
+						DbHelper.MakeInParam("@Allowhidecode",(DbType)SqlDbType.Int,4,userGroupInfo.Ug_allowhidecode),
+						DbHelper.MakeInParam("@Allowhtml",(DbType)SqlDbType.Int,4,userGroupInfo.Ug_allowhtml),
+						DbHelper.MakeInParam("@Allowcusbbcode",(DbType)SqlDbType.Int,4,userGroupInfo.Ug_allowcusbbcode),
+						DbHelper.MakeInParam("@Allownickname",(DbType)SqlDbType.Int,4,userGroupInfo.Allownickname),
+						DbHelper.MakeInParam("@Allowviewpro",(DbType)SqlDbType.Int,4,userGroupInfo.Allowviewpro),
+						DbHelper.MakeInParam("@Allowviewstats",(DbType)SqlDbType.Int,4,userGroupInfo.Allowviewstats),
+						DbHelper.MakeInParam("@Disableperiodctrl",(DbType)SqlDbType.Int,4,userGroupInfo.Disableperiodctrl),
+						DbHelper.MakeInParam("@Reasonpm",(DbType)SqlDbType.Int,4,userGroupInfo.Reasonpm),		
+						DbHelper.MakeInParam("@Maxpmnum",(DbType)SqlDbType.SmallInt,2,userGroupInfo.Maxpmnum),
+						DbHelper.MakeInParam("@Maxsigsize",(DbType)SqlDbType.SmallInt,2,userGroupInfo.ug_maxsigsize),
+						DbHelper.MakeInParam("@Maxattachsize",(DbType)SqlDbType.Int,4,userGroupInfo.Ug_maxattachsize),
+						DbHelper.MakeInParam("@Maxsizeperday",(DbType)SqlDbType.Int,4,userGroupInfo.Ug_maxsizeperday),
+						DbHelper.MakeInParam("@Attachextensions",(DbType)SqlDbType.Char,100,userGroupInfo.ug_attachextensions),
+                        DbHelper.MakeInParam("@Maxspaceattachsize",(DbType)SqlDbType.Int,4,userGroupInfo.ug_maxspaceattachsize),
+                        DbHelper.MakeInParam("@Maxspacephotosize",(DbType)SqlDbType.Int,4,userGroupInfo.ug_maxspacephotosize),
+						DbHelper.MakeInParam("@Groupid",(DbType)SqlDbType.Int,4,userGroupInfo.ug_id)
+			};
+
+            string commandText = string.Format("UPDATE [{0}userGroup]  SET [ug_pg_id]=@Radminid,[ug_name]=@Grouptitle,[ug_scorehight]=@Creditshigher," +
+                                                "[ug_scorelow]=@Creditslower,[stars]=@Stars,[ug_color]=@Color,[ug_logo]=@Groupavatar,[ug_readaccess]=@Readaccess,[ug_allowcommunity]=@Allowcommunity," +
+                                                "[ug_allowvisit]=@Allowvisit,[allowpost]=@Allowpost,[allowreply]=@Allowreply,[allowpostpoll]=@Allowpostpoll, [ug_allowdown]=@Allowgetattach," +
+                                                "[allowpostattach]=@Allowpostattach,[allowvote]=@Allowvote,[ug_allowsearch]=@Allowsearch,[ug_allowavatar]=@Allowavatar," +
+                                                "[ug_allowshop]=@Allowuseblog,[ug_allowinvisible]=@Allowinvisible,[allowsetreadperm]=@Allowsetreadperm,[allowsetattachperm]=@Allowsetattachperm," +
+                                                "[ug_allowhidecode]=@Allowhidecode,[ug_allowhtml]=@Allowhtml,[ug_allowcusbbcode]=@Allowcusbbcode,[allownickname]=@Allownickname,[allowviewpro]=@Allowviewpro," +
+                                                "[allowviewstats]=@Allowviewstats,[disableperiodctrl]=@Disableperiodctrl,[reasonpm]=@Reasonpm,[maxpmnum]=@Maxpmnum," +
+                                                "[ug_maxsigsize]=@Maxsigsize,[ug_maxattachsize]=@Maxattachsize,[ug_maxsizeperday]=@Maxsizeperday,[ug_attachextensions]=@Attachextensions," +
+                                                "[ug_maxspaceattachsize]=@Maxspaceattachsize,[ug_maxspacephotosize]=@Maxspacephotosize  WHERE [groupid]=@Groupid",
+                                                BaseConfigs.GetTablePrefix);
+
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
+        /// 获取用户组
+        /// </summary>
+        /// <param name="creditsHigher"></param>
+        /// <param name="creditsLower"></param>
+        /// <returns></returns>
+        public DataTable GetUserGroupByCreditsHigherAndLower(int creditsHigher, int creditsLower)
+        {
+            DbParameter[] parms = { 
+                                        DbHelper.MakeInParam("@Creditshigher", (DbType)SqlDbType.Int, 4, creditsHigher),
+                                        DbHelper.MakeInParam("@Creditslower", (DbType)SqlDbType.Int, 4, creditsLower)
+                                    };
+            string commandText = string.Format("SELECT [ug_id] FROM [{0}userGroup] WHERE [ug_id]>8 AND [ug_pg_id]=0 AND [ug_scorehight]=@Creditshigher AND [ug_scorelow]=@Creditslower",
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText, parms).Tables[0];
+        }
+
+        /// <summary>
+        /// 更新在线表
+        /// </summary>
+        /// <param name="groupId">用户组ID</param>
+        /// <param name="displayOrder">序号</param>
+        /// <param name="img">图片</param>
+        /// <param name="title">名称</param>
+        /// <returns></returns>
+        public int UpdateOnlineList(int groupId, int displayOrder, string img, string title)
+        {
+            DbParameter[] parms = { 
+                                        DbHelper.MakeInParam("@groupid", (DbType)SqlDbType.Int, 4, groupId),
+                                        DbHelper.MakeInParam("@displayorder", (DbType)SqlDbType.Int, 4, displayOrder),
+                                        DbHelper.MakeInParam("@img", (DbType)SqlDbType.VarChar, 200, img),
+                                        DbHelper.MakeInParam("@title", (DbType)SqlDbType.NVarChar, 200, title)
+                                    };
+            string commandText = string.Format("UPDATE [{0}userGroupIcon] SET [ui_displayOrder]=@displayorder, [ui_ug_name]=@title, [ui_img]=@img  WHERE [ui_id]=@groupid",
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
+        /// 更新在线表
+        /// </summary>
+        /// <param name="userGroupInfo"></param>
+        public void UpdateOnlineList(UserGroupInfo userGroupInfo)
+        {
+            DbParameter[] parms = { 
+                                        DbHelper.MakeInParam("@groupid", (DbType)SqlDbType.Int, 4, userGroupInfo.ug_id),
+                                        DbHelper.MakeInParam("@title", (DbType)SqlDbType.NVarChar, 50, Utils.RemoveFontTag(userGroupInfo.ug_name))
+                                    };
+            string commandText = string.Format("UPDATE [{0}userGroupIcon] SET [ui_ug_name]=@title WHERE [ui_id]=@groupid", BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
+        /// 获取最小的积分上限
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetMinCreditHigher()
+        {
+            string commandText = string.Format("SELECT MIN(ug_scorehight) FROM [{0}userGroup] WHERE [ug_id]>8 AND [ug_pg_id]=0 ",
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 获取最大积分下限
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetMaxCreditLower()
+        {
+            string commandText = string.Format("SELECT MAX(ug_scorelow) FROM [{0}userGroup] WHERE [ug_id]>8 AND [ug_pg_id]=0 ",
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 获取用户组
+        /// </summary>
+        /// <param name="creditsHigher"></param>
+        /// <returns></returns>
+        public DataTable GetUserGroupByCreditshigher(int creditsHigher)
+        {
+            DbParameter parm = DbHelper.MakeInParam("@Creditshigher", (DbType)SqlDbType.Int, 4, creditsHigher);
+            string commandText = string.Format("SELECT TOP 1 [ug_id],[ug_scorehight],[ug_scorelow] FROM [{0}userGroup] WHERE [ug_id]>8 AND [ug_pg_id]=0  AND [ug_scorehight]<=@Creditshigher AND @Creditshigher<[ug_scorelow]",
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText, parm).Tables[0];
+        }
+
+        /// <summary>
+        /// 更新用户组
+        /// </summary>
+        /// <param name="currentCreditsHigher"></param>
+        /// <param name="creditsHigher"></param>
+        public void UpdateUserGroupCreidtsLower(int currentCreditsHigher, int creditsHigher)
+        {
+            DbParameter[] parms = { 
+                                        DbHelper.MakeInParam("@creditslower", (DbType)SqlDbType.Int, 4, creditsHigher),
+                                        DbHelper.MakeInParam("@creditshigher", (DbType)SqlDbType.Int, 4, currentCreditsHigher)
+                                    };
+            string commandText = string.Format("UPDATE [{0}userGroup] SET [ug_scorelow]=@creditslower WHERE [ug_id]>8 AND [ug_pg_id]=0 AND [ug_scorehight]=@creditshigher",
+                                                BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
+        /// 获取用户组数
+        /// </summary>
+        /// <param name="creditsHigher"></param>
+        /// <returns></returns>
+        public int GetGroupCountByCreditsLower(int creditsHigher)
+        {
+            string commandText = string.Format("SELECT [ug_id] FROM [{0}userGroup] WHERE [ug_id]>8 AND [ug_pg_id]=0 AND [ug_scorelow]={1}",
+                                                BaseConfigs.GetTablePrefix,
+                                                creditsHigher);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0].Rows.Count;
+        }
+
+        public void UpdateUserGroupsCreditsLowerByCreditsLower(int creditsLower, int creditsHigher)
+        {
+            DbParameter[] parms = { 
+                                        DbHelper.MakeInParam("@Creditshigher", (DbType)SqlDbType.Int, 4, creditsHigher),
+                                        DbHelper.MakeInParam("@Creditslower", (DbType)SqlDbType.Int, 4, creditsLower)
+                                    };
+            string commandText = string.Format("UPDATE [{0}userGroup] SET [ug_scorelow]=@Creditslower WHERE [ug_id]>8 AND [ug_pg_id]=0 AND [ug_scorelow]=@Creditshigher",
+                                                BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteDataset(CommandType.Text, commandText, parms);
+        }
+
+
+        public void UpdateUserGroupsCreditsHigherByCreditsHigher(int creditsHigher, int creditsLower)
+        {
+            DbParameter[] parms = { 
+                                        DbHelper.MakeInParam("@Creditshigher", (DbType)SqlDbType.Int, 4, creditsHigher),
+                                        DbHelper.MakeInParam("@Creditslower", (DbType)SqlDbType.Int, 4, creditsLower)
+            };
+            string commandText = string.Format("UPDATE [{0}userGroup] SET [ug_scorehight]=@Creditshigher WHERE [ug_id]>8 AND [ug_pg_id]=0 AND [ug_scorehight]=@Creditslower",
+                                                BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteDataset(CommandType.Text, commandText, parms);
+        }
+
+        public DataTable GetUserGroupCreditsLowerAndHigher(int groupiId)
+        {
+            string commandText = string.Format("SELECT TOP 1 [ug_id],[ug_scorehight],[ug_scorelow] FROM [{0}userGroup]  WHERE [ug_id]= {1}",
+                                                BaseConfigs.GetTablePrefix,
+                                                groupiId);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        #endregion
+
+        #region 管理组admingroup personGroup操作
+
+        /// <summary>
+        /// 获得到指定管理组信息
+        /// </summary>
+        /// <returns>管理组信息</returns>
+        public DataTable GetAdminGroupList()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}personGroup]",
+                                                DbFields.ADMIN_GROUPS,
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 删除指定的管理组信息
+        /// </summary>
+        /// <param name="admingid">管理组ID</param>
+        /// <returns>更改记录数</returns>
+        public int DeleteAdminGroupInfo(short adminGid)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@admingid",(DbType)SqlDbType.SmallInt,2,adminGid),
+								   };
+            string commandText = string.Format("DELETE FROM [{0}personGroup] WHERE [pg_id] = @admingid",
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }        
 
         #endregion
 

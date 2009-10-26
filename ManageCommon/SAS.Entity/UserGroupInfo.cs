@@ -35,6 +35,19 @@ namespace SAS.Entity
         private string _ug_color;
         private int _ug_isSystem;
         private int m_allowsetreadperm;	//是否允许设置阅读积分权限
+        private int m_allowpostattach;	//是否允许发布附件
+        private int m_allowsetattachperm;	//是否允许设置下载积分限制
+        private int m_stars;//星星数目
+        private int m_allowpost;	//是否允许发新主题
+        private int m_allowreply;	//是否允许回复
+        private int m_allowpostpoll;	//是否允许发起投票
+        private int m_allowvote;	//是否允许参与投票
+        private int m_allownickname;	//是否允许使用昵称
+        private int m_allowviewpro;	//是否允许查看用户资料
+        private int m_allowviewstats;	//是否允许查看统计
+        private int m_disableperiodctrl;	//是否不受时间段限制
+        private int m_reasonpm;	//是否将操作理由短消息通知作者
+        private int m_maxpmnum;	//短消息最多条数
 
         /// <summary>
         /// 用户组ID
@@ -198,7 +211,7 @@ namespace SAS.Entity
         /// <summary>
         /// 附件最大尺寸
         /// </summary>
-        public int ug_maxattachsize
+        public int Ug_maxattachsize
         {
             set { _ug_maxattachsize = value; }
             get { return _ug_maxattachsize; }
@@ -207,7 +220,7 @@ namespace SAS.Entity
         /// <summary>
         /// 每天最大尺寸
         /// </summary>
-        public int ug_maxsizeperday
+        public int Ug_maxsizeperday
         {
             set { _ug_maxsizeperday = value; }
             get { return _ug_maxsizeperday; }
@@ -284,6 +297,121 @@ namespace SAS.Entity
             get { return m_allowsetreadperm; }
             set { m_allowsetreadperm = value; }
         }
+
+        ///<summary>
+        ///是否发布附件
+        ///</summary>
+        public int Allowpostattach
+        {
+            get { return m_allowpostattach; }
+            set { m_allowpostattach = value; }
+        }
+
+        ///<summary>
+        ///是否允许设置下载积分限制
+        ///</summary>
+        public int Allowsetattachperm
+        {
+            get { return m_allowsetattachperm; }
+            set { m_allowsetattachperm = value; }
+        }
+
+        ///<summary>
+        ///星星数目
+        ///</summary>
+        public int Stars
+        {
+            get { return m_stars; }
+            set { m_stars = value; }
+        }
+
+        ///<summary>
+        ///是否允许发帖
+        ///</summary>
+        public int Allowpost
+        {
+            get { return m_allowpost; }
+            set { m_allowpost = value; }
+        }
+
+        ///<summary>
+        ///是否允许回复
+        ///</summary>
+        public int Allowreply
+        {
+            get { return m_allowreply; }
+            set { m_allowreply = value; }
+        }
+
+        ///<summary>
+        ///是否允许发起投票
+        ///</summary>
+        public int Allowpostpoll
+        {
+            get { return m_allowpostpoll; }
+            set { m_allowpostpoll = value; }
+        }
+
+        ///<summary>
+        ///是否允许参与投票
+        ///</summary>
+        public int Allowvote
+        {
+            get { return m_allowvote; }
+            set { m_allowvote = value; }
+        }
+
+        ///<summary>
+        ///是否允许使用昵称
+        ///</summary>
+        public int Allownickname
+        {
+            get { return m_allownickname; }
+            set { m_allownickname = value; }
+        }
+
+        ///<summary>
+        ///是否允许查看用户资料
+        ///</summary>
+        public int Allowviewpro
+        {
+            get { return m_allowviewpro; }
+            set { m_allowviewpro = value; }
+        }
+        ///<summary>
+        ///是否允许查看统计
+        ///</summary>
+        public int Allowviewstats
+        {
+            get { return m_allowviewstats; }
+            set { m_allowviewstats = value; }
+        }
+        ///<summary>
+        ///是否不受时间段限制
+        ///</summary>
+        public int Disableperiodctrl
+        {
+            get { return m_disableperiodctrl; }
+            set { m_disableperiodctrl = value; }
+        }
+        ///<summary>
+        ///是否操作理由短消息通知作者
+        ///</summary>
+        public int Reasonpm
+        {
+            get { return m_reasonpm; }
+            set { m_reasonpm = value; }
+        }
+        ///<summary>
+        ///短消息最多条数
+        ///</summary>
+        public int Maxpmnum
+        {
+            get { return m_maxpmnum; }
+            set { m_maxpmnum = value; }
+        }
+
+
         #endregion Model
     }
 }

@@ -134,5 +134,30 @@ namespace SAS.Logic
             }
             return needaudit;
         }
+
+        /// <summary>
+        /// 上传附件权限控制
+        /// </summary>
+        /// <param name="forum">版块信息</param>
+        /// <param name="usergroupinfo">当前用户的用户组信息</param>
+        /// <param name="userId">当前用户Id</param>
+        /// <returns></returns>
+        public static bool PostAttachAuthority(ForumInfo forum, UserGroupInfo userGroupInfo, int userId, ref string msg)
+        {
+            if (!Forums.AllowPostAttachByUserID(forum.Permuserlist, userId))
+            {
+                if (!Forums.AllowPostAttach(forum.Postattachperm, userGroupInfo.ug_id))
+                {
+                    msg = "您没有在该版块上传附件的权限";
+                    return false;
+                }
+                else if (userGroupInfo.Allowpostattach != 1)
+                {
+                    msg = string.Format("您当前的身份 \"{0}\" 没有上传附件的权限", userGroupInfo.ug_name);
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }

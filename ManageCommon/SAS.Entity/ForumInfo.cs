@@ -16,7 +16,7 @@ namespace SAS.Entity
         private int m_subforumcount; //论坛包括的子论坛个数
         private string m_name = "";	//论坛名称
         private int m_status;	//是否显示
-        private int m_colcount;	//设置该论坛的子论坛在列表时分几列显示
+        //private int m_colcount;	//设置该论坛的子论坛在列表时分几列显示
         private int m_displayorder;	//显示顺序
         private int m_templateid;	//风格id,0为默认
         private int m_topics;	//主题数
@@ -138,14 +138,14 @@ namespace SAS.Entity
             set { m_status = value; }
         }
 
-        /// <summary>
-        /// 设置该论坛的子论坛在列表时分几列显示
-        /// </summary>
-        public int Colcount
-        {
-            get { return m_colcount; }
-            set { m_colcount = value; }
-        }
+        ///// <summary>
+        ///// 设置该论坛的子论坛在列表时分几列显示
+        ///// </summary>
+        //public int Colcount
+        //{
+        //    get { return m_colcount; }
+        //    set { m_colcount = value; }
+        //}
         ///<summary>
         ///显示顺序
         ///</summary>

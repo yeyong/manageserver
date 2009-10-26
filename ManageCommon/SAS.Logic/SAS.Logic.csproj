@@ -43,11 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin\AdminForums.cs" />
+    <Compile Include="admin\AdminForumStats.cs" />
+    <Compile Include="admin\AdminGroups.cs" />
     <Compile Include="admin\AdminUsers.cs" />
     <Compile Include="admin\AdminTemplates.cs" />
     <Compile Include="admin\AdminVistLogs.cs" />
     <Compile Include="admin\AdminUserGroups.cs" />
+    <Compile Include="admin\ForumOperator.cs" />
     <Compile Include="Advertisements.cs" />
+    <Compile Include="Attachments.cs" />
     <Compile Include="Avatars.cs" />
     <Compile Include="Caches.cs" />
     <Compile Include="Databases.cs" />
@@ -76,6 +81,7 @@
     <Compile Include="Stats.cs" />
     <Compile Include="Templates.cs" />
     <Compile Include="TopicStats.cs" />
+    <Compile Include="TopicTypes.cs" />
     <Compile Include="Urls.cs" />
     <Compile Include="UserAuthority.cs" />
     <Compile Include="UserCredits.cs" />

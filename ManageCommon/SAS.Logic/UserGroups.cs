@@ -65,5 +65,38 @@ namespace SAS.Logic
             return Data.DataProvider.UserGroups.GetUserGroupForDataTable();
         }
 
+        /// <summary>
+        /// 获取管理组列表
+        /// </summary>
+        /// <returns></returns>
+        public static List<UserGroupInfo> GetAdminUserGroup()
+        {
+            List<UserGroupInfo> list = GetUserGroupList();
+            List<UserGroupInfo> adminList = new List<UserGroupInfo>();
+            foreach (UserGroupInfo userGroupInfo in list)
+            {
+                if (userGroupInfo.ug_pg_id != 0)
+                    adminList.Add(userGroupInfo);
+            }
+            return adminList;
+        }
+
+        /// <summary>
+        /// 获取积分用户组
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetCreditUserGroup()
+        {
+            return Data.DataProvider.UserGroups.GetCreditUserGroup();
+        }
+
+        /// <summary>
+        /// 更新用户组信息
+        /// </summary>
+        /// <param name="info">用户组信息</param>
+        public static void UpdateUserGroup(UserGroupInfo info)
+        {
+            Data.DataProvider.UserGroups.UpdateUserGroup(info);
+        }
     }
 }

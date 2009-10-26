@@ -37,18 +37,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminGroupInfo.cs" />
     <Compile Include="AdShowInfo.cs" />
     <Compile Include="AdTypeEnum.cs" />
+    <Compile Include="Album\AlbumCategoryInfo.cs" />
+    <Compile Include="Album\AlbumInfo.cs" />
+    <Compile Include="AttachmentInfo.cs" />
     <Compile Include="ForumInfo.cs" />
+    <Compile Include="ForumSpecialUserPower.cs" />
     <Compile Include="IpInfo.cs" />
     <Compile Include="NavInfo.cs" />
     <Compile Include="NoticeInfo.cs" />
     <Compile Include="NoticeinfoCollection.cs" />
     <Compile Include="OnlineUserInfo.cs" />
+    <Compile Include="Album\PhotoInfo.cs" />
+    <Compile Include="Album\PhotoStatus.cs" />
     <Compile Include="PostInfo.cs" />
     <Compile Include="PrivateMessageInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReceivePMSettingType.cs" />
+    <Compile Include="ShowtopicPageAttachmentInfo.cs" />
     <Compile Include="StatInfo.cs" />
     <Compile Include="StatVarInfo.cs" />
     <Compile Include="TemplateAboutInfo.cs" />
