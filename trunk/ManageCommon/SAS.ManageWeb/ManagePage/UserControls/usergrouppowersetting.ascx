@@ -8,55 +8,55 @@
     }
     function validatebonusprice()
     {
-        if(document.getElementById("<%=usergroupright.ClientID%>_16").checked)
-        {
-            var min = document.getElementById("minbonusprice").value;
-            var max = document.getElementById("maxbonusprice").value;
-            if(!isNumber(min))
-            {
-                resetPage();
-                alert("最低悬赏价格非数字");
-                document.getElementById("minbonusprice").focus();
-                document.getElementById("minbonusprice").value = "";
-                return false;
-            }
-            if(!isNumber(max))
-            {
-                resetPage();
-                alert("最高悬赏价格非数字");
-                document.getElementById("maxbonusprice").focus();
-                document.getElementById("maxbonusprice").value = "";
-                return false;
-            }
-            if(parseInt(min) < 1)
-            {
-                resetPage();
-                alert("最低悬赏价格必须大于0");
-                document.getElementById("minbonusprice").focus();
-                document.getElementById("minbonusprice").value = "";
-                return false;
-            }
-            if(parseInt(max) > 32767)
-            {
-                resetPage();
-                alert("最高悬赏价格必须小于32767");
-                document.getElementById("maxbonusprice").focus();
-                document.getElementById("maxbonusprice").value = "";
-                return false;
-            }
-            if (parseInt(max) <= parseInt(min))
-            {
-                resetPage();
-                alert("最高悬赏价格必须高于最低悬赏价格");
-                document.getElementById("minbonusprice").focus();
-                return;
-            }
-        }
-        else
-        {
-            document.getElementById("minbonusprice").value = 0;
-            document.getElementById("maxbonusprice").value = 0;
-        }
+//        if(document.getElementById("<%=usergroupright.ClientID%>_16").checked)
+//        {
+//            var min = document.getElementById("minbonusprice").value;
+//            var max = document.getElementById("maxbonusprice").value;
+//            if(!isNumber(min))
+//            {
+//                resetPage();
+//                alert("最低悬赏价格非数字");
+//                document.getElementById("minbonusprice").focus();
+//                document.getElementById("minbonusprice").value = "";
+//                return false;
+//            }
+//            if(!isNumber(max))
+//            {
+//                resetPage();
+//                alert("最高悬赏价格非数字");
+//                document.getElementById("maxbonusprice").focus();
+//                document.getElementById("maxbonusprice").value = "";
+//                return false;
+//            }
+//            if(parseInt(min) < 1)
+//            {
+//                resetPage();
+//                alert("最低悬赏价格必须大于0");
+//                document.getElementById("minbonusprice").focus();
+//                document.getElementById("minbonusprice").value = "";
+//                return false;
+//            }
+//            if(parseInt(max) > 32767)
+//            {
+//                resetPage();
+//                alert("最高悬赏价格必须小于32767");
+//                document.getElementById("maxbonusprice").focus();
+//                document.getElementById("maxbonusprice").value = "";
+//                return false;
+//            }
+//            if (parseInt(max) <= parseInt(min))
+//            {
+//                resetPage();
+//                alert("最高悬赏价格必须高于最低悬赏价格");
+//                document.getElementById("minbonusprice").focus();
+//                return;
+//            }
+//        }
+//        else
+//        {
+//            document.getElementById("minbonusprice").value = 0;
+//            document.getElementById("maxbonusprice").value = 0;
+//        }
         return true;
     }
 </script>
