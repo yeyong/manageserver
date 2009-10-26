@@ -12,6 +12,16 @@ namespace SAS.Data.DataProvider
     public class Forums
     {
         /// <summary>
+        /// 创建版块
+        /// </summary>
+        /// <param name="forumInfo">版块信息</param>
+        /// <returns>新建版块Fid</returns>
+        public static int CreateForumInfo(ForumInfo forumInfo)
+        {
+            return DatabaseProvider.GetInstance().InsertForumsInf(forumInfo);
+        }
+
+        /// <summary>
         /// 返回全部版块列表并缓存
         /// </summary>
         /// <returns>板块信息数组</returns>
@@ -32,7 +42,7 @@ namespace SAS.Data.DataProvider
                     forum.Subforumcount = TypeConverter.StrToInt(dr["subforumcount"].ToString(), 0);
                     forum.Name = dr["name"].ToString();
                     forum.Status = TypeConverter.StrToInt(dr["status"].ToString(), 0);
-                    forum.Colcount = TypeConverter.StrToInt(dr["colcount"].ToString(), 0);
+                    //forum.Colcount = TypeConverter.StrToInt(dr["colcount"].ToString(), 0);
                     forum.Displayorder = TypeConverter.StrToInt(dr["displayorder"].ToString(), 0);
                     forum.Templateid = TypeConverter.StrToInt(dr["templateid"].ToString(), 0);
                     forum.Topics = TypeConverter.StrToInt(dr["topics"].ToString(), 0);
@@ -111,12 +121,81 @@ namespace SAS.Data.DataProvider
         }
 
         /// <summary>
+        /// 获得版块下的子版块列表
+        /// </summary>
+        /// <param name="fid">版块id</param>
+        /// <returns>子版块列表</returns>
+        public static DataTable GetSubForumTable(int fid)
+        {
+            return DatabaseProvider.GetInstance().GetSubForumTable(fid);
+        }
+
+        /// <summary>
         /// 更新版块和用户模板Id
         /// </summary>
         /// <param name="templateIdList">模板Id列表</param>
         public static void UpdateForumAndUserTemplateId(string templateIdList)
         {
             DatabaseProvider.GetInstance().UpdateForumAndUserTemplateId(templateIdList);
+        }
+
+        /// <summary>
+        /// 更新版块信息
+        /// </summary>
+        /// <param name="forumInfo">版块信息</param>
+        public static void UpdateForumInfo(ForumInfo forumInfo)
+        {
+            DatabaseProvider.GetInstance().SaveForumsInfo(forumInfo);
+        }
+
+        /// <summary>
+        /// 更新版本子版数
+        /// </summary>
+        /// <param name="fid">版块Id</param>
+        public static void UpdateSubForumCount(int fid)
+        {
+            DatabaseProvider.GetInstance().UpdateSubForumCount(fid);
+        }
+
+        /// <summary>
+        /// 更新子版块数量
+        /// </summary>
+        /// <param name="subforumcount">子板块数</param>
+        /// <param name="fid">板块ID</param>
+        public static void UpdateSubForumCount(int subforumcount, int fid)
+        {
+            DatabaseProvider.GetInstance().UpdateSubForumCount(subforumcount, fid);
+        }
+
+        /// <summary>
+        /// 移动版块位置
+        /// </summary>
+        /// <param name="currentfid">当前板块ID</param>
+        /// <param name="targetfid"></param>
+        /// <param name="isaschildnode"></param>
+        /// <param name="extname"></param>
+        public static void MovingForumsPos(string currentfid, string targetfid, bool isaschildnode, string extname)
+        {
+            DatabaseProvider.GetInstance().MovingForumsPos(currentfid, targetfid, isaschildnode, extname);
+        }
+
+        /// <summary>
+        /// 更新版块显示顺序，将大于当前显示顺序的版块显示顺序加1
+        /// </summary>
+        /// <param name="minDisplayOrder"></param>
+        public static void UpdateFourmsDisplayOrder(int minDisplayOrder)
+        {
+            DatabaseProvider.GetInstance().UpdateForumsDisplayOrder(minDisplayOrder);
+        }
+
+        /// <summary>
+        /// 检查rewritename是否存在或非法
+        /// </summary>
+        /// <param name="rewriteName"></param>
+        /// <returns>如果存在或者非法的Rewritename则返回true,否则为false</returns>
+        public static bool CheckRewriteNameInvalid(string rewriteName)
+        {
+            return DatabaseProvider.GetInstance().CheckForumRewriteNameExists(rewriteName);
         }
     }
 }

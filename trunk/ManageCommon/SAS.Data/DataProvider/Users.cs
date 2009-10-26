@@ -640,15 +640,15 @@ namespace SAS.Data.DataProvider
         //    DatabaseProvider.GetInstance().UpdateMedals(uid, medals);
         //}
 
-        /////// <summary>
-        /////// 更改用户组用户的管理权限
-        /////// </summary>
-        /////// <param name="adminId">管理组Id</param>
-        /////// <param name="groupId">用户组Id</param>
-        ////public static void UpdateUserAdminIdByGroupId(int adminId, int groupId)
-        ////{
-        ////    DatabaseProvider.GetInstance().UpdateUserAdminIdByGroupId(adminId, groupId);
-        ////}
+        /// <summary>
+        /// 更改用户组用户的管理权限
+        /// </summary>
+        /// <param name="adminId">管理组Id</param>
+        /// <param name="groupId">用户组Id</param>
+        public static void UpdateUserAdminIdByGroupId(int adminId, int groupId)
+        {
+            DatabaseProvider.GetInstance().UpdateUserAdminIdByGroupId(adminId, groupId);
+        }
 
         /// <summary>
         /// 更新用户到禁言组

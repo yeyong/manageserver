@@ -281,12 +281,12 @@ namespace SAS.Data
         ///// <param name="fid">板块id</param>
         //void UpdateSpecialUser(string permUserList, int fid);
 
-        ///// <summary>
-        ///// 更改用户管理权限Id
-        ///// </summary>
-        ///// <param name="adminId">管理组Id</param>
-        ///// <param name="groupId">用户组Id</param>
-        //void UpdateUserAdminIdByGroupId(int adminId, int groupId);
+        /// <summary>
+        /// 更改用户管理权限Id
+        /// </summary>
+        /// <param name="adminId">管理组Id</param>
+        /// <param name="groupId">用户组Id</param>
+        void UpdateUserAdminIdByGroupId(int adminId, int groupId);
 
         /// <summary>
         /// 禁言用户
@@ -485,6 +485,105 @@ namespace SAS.Data
         /// </summary>
         /// <returns></returns>
         DataTable GetUserGroups();
+
+        /// <summary>
+        /// 获取积分用户组
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetUserGroup();
+
+        /// <summary>
+        /// 更新用户组信息
+        /// </summary>
+        /// <param name="userGroupInfo">用户组信息</param>
+        void UpdateUserGroup(UserGroupInfo userGroupInfo);
+
+        /// <summary>
+        /// 获取用户组
+        /// </summary>
+        /// <param name="creditsHigher"></param>
+        /// <param name="creditsLower"></param>
+        /// <returns></returns>
+        DataTable GetUserGroupByCreditsHigherAndLower(int creditsHigher, int creditsLower);
+
+        /// <summary>
+        /// 更新在线表
+        /// </summary>
+        /// <param name="groupId">用户组ID</param>
+        /// <param name="displayOrder">序号</param>
+        /// <param name="img">图片</param>
+        /// <param name="title">名称</param>
+        /// <returns></returns>
+        int UpdateOnlineList(int groupId, int displayOrder, string img, string title);
+
+        /// <summary>
+        /// 更新在线表
+        /// </summary>
+        /// <param name="userGroupInfo"></param>
+        void UpdateOnlineList(UserGroupInfo userGroupInfo);
+
+        /// <summary>
+        /// 获取最小的积分上限
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetMinCreditHigher();
+
+        /// <summary>
+        /// 获取最大积分下限
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetMaxCreditLower();
+
+        /// <summary>
+        /// 获取用户组
+        /// </summary>
+        /// <param name="creditsHigher"></param>
+        /// <returns></returns>
+        DataTable GetUserGroupByCreditshigher(int creditsHigher);
+
+        /// <summary>
+        /// 更新用户组
+        /// </summary>
+        /// <param name="currentCreditsHigher"></param>
+        /// <param name="creditsHigher"></param>
+        void UpdateUserGroupCreidtsLower(int currentCreditsHigher, int creditsHigher);
+
+        /// <summary>
+        /// 获取用户组数
+        /// </summary>
+        /// <param name="creditsHigher"></param>
+        /// <returns></returns>
+        int GetGroupCountByCreditsLower(int creditsHigher);
+
+        /// <summary>
+        /// 更新用户组
+        /// </summary>
+        /// <param name="creditsHigher"></param>
+        /// <param name="creditsLower"></param>
+        void UpdateUserGroupsCreditsHigherByCreditsHigher(int creditsHigher, int creditsLower);
+        /// <summary>
+        /// 更新用户组
+        /// </summary>
+        /// <param name="creditsLower"></param>
+        /// <param name="creditsHigher"></param>
+        void UpdateUserGroupsCreditsLowerByCreditsLower(int creditsLower, int creditsHigher);
+
+        #endregion
+
+        #region 管理组admingroup personGroup操作
+
+        /// <summary>
+        /// 获取管理组列表
+        /// </summary>
+        /// <returns>管理组信息</returns>
+        DataTable GetAdminGroupList();
+
+        /// <summary>
+        /// 删除指定的管理组信息
+        /// </summary>
+        /// <param name="adminGid">管理组ID</param>
+        /// <returns>更改记录数</returns>
+        int DeleteAdminGroupInfo(short adminGid);
 
         #endregion
 
@@ -875,6 +974,30 @@ namespace SAS.Data
         /// <param name="posterId">posterId</param>
         /// <param name="poster">新用户名</param>
         void UpdateAnnouncementPoster(int posterId, string poster);
+
+        #endregion
+
+        #region  附件attachments
+
+        /// <summary>
+        /// 将系统设置的附件类型以DataTable的方式存入缓存
+        /// </summary>
+        /// <returns>系统设置的附件类型</returns>
+        DataTable GetAttachmentType();
+
+        /// <summary>
+        /// 获取用户上传的文件大小
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+        int GetUploadFileSizeByUserId(int uid);
+
+        /// <summary>
+        /// 获取指定用户id下未使用的附件
+        /// </summary>
+        /// <param name="userId">指定用户id</param>
+        /// <returns></returns>
+        IDataReader GetNoUsedAttachmentListByTid(int userId);
 
         #endregion
 
@@ -1427,7 +1550,24 @@ namespace SAS.Data
 
         #endregion
 
+        #region 专题分类处理TopicTypes
+
+        /// <summary>
+        /// 获取指定关键字的主题类型
+        /// </summary>
+        /// <param name="searthKeyWord"></param>
+        /// <returns></returns>
+        DataTable GetTopicTypes(string searthKeyWord);
+        #endregion
+
         #region 板块处理forum操作
+
+        /// <summary>
+        /// 插入板块信息
+        /// </summary>
+        /// <param name="forumInfo"></param>
+        /// <returns></returns>
+        int InsertForumsInf(ForumInfo forumInfo);
 
         /// <summary>
         /// 更新版块和用户模板Id
@@ -1440,6 +1580,69 @@ namespace SAS.Data
         /// </summary>
         /// <returns></returns>
         DataTable GetForumsTable();
+
+        /// <summary>
+        /// 获取子版块列表
+        /// </summary>
+        /// <param name="fid"></param>
+        /// <returns></returns>
+        DataTable GetSubForumTable(int fid);
+
+        /// <summary>
+        /// 保存板块信息
+        /// </summary>
+        /// <param name="forumInfo">版块信息</param>
+        void SaveForumsInfo(ForumInfo forumInfo);
+
+        /// <summary>
+        /// 更新子版块数量
+        /// </summary>
+        /// <param name="subForumCount">子板块数</param>
+        /// <param name="fid">板块ID</param>
+        void UpdateSubForumCount(int subForumCount, int fid);
+
+        /// <summary>
+        /// 更新子版块数
+        /// </summary>
+        /// <param name="fid"></param>
+        void UpdateSubForumCount(int fid);
+
+        /// <summary>
+        /// 移动版块位置
+        /// </summary>
+        /// <param name="currentFid">当前板块ID</param>
+        /// <param name="targetFid"></param>
+        /// <param name="isAsChildNode"></param>
+        /// <param name="extName"></param>
+        void MovingForumsPos(string currentFid, string targetFid, bool isAsChildNode, string extName);
+
+        /// <summary>
+        /// 更新版块显示顺序
+        /// </summary>
+        /// <param name="minDisplayOrder"></param>
+        void UpdateForumsDisplayOrder(int minDisplayOrder);
+
+        /// <summary>
+        /// 检查rewritename是否存在或非法
+        /// </summary>
+        /// <param name="rewriteName"></param>
+        /// <returns>如果存在或者非法的Rewritename则返回true,否则为false</returns>
+        bool CheckForumRewriteNameExists(string rewriteName);
+        #endregion
+
+        #region 表情操作smiles
+
+        /// <summary>
+        /// 获取表情
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetSmiliesListDataTable();
+
+        /// <summary>
+        /// 获取表情
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetSmilieTypes();
 
         #endregion
 

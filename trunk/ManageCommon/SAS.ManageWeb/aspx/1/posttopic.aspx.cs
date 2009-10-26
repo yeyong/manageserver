@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Text;
+using System.Data;
+using System.Text.RegularExpressions;
 
 using SAS.Logic;
 using SAS.Common;
 using SAS.Config;
 using SAS.Entity;
+using SAS.Plugin.Album;
 
 namespace SAS.ManageWeb
 {
@@ -22,9 +22,9 @@ namespace SAS.ManageWeb
         /// </summary>
         public PostInfo postinfo = new PostInfo();
         /// <summary>
-        /// 
+        /// 是否需要登录
         /// </summary>
-        GeneralConfigInfo config;
+        public bool needlogin = false;
         /// <summary>
         /// 是否为主题帖
         /// </summary>
@@ -98,16 +98,41 @@ namespace SAS.ManageWeb
         /// </summary>
         public int usesig = LogicUtils.GetCookie("sigstatus") == "0" ? 0 : 1;
         /// <summary>
+        /// 相册列表
+        /// </summary>
+        public DataTable albumlist;
+        /// <summary>
+        /// 是否允许同时发布到相册
+        /// </summary>
+        public bool caninsertalbum = false;
+        /// <summary>
         /// 是否允许上传附件
         /// </summary>
         public bool canpostattach;
         /// <summary>
+        /// 允许的附件类型和大小数组
+        /// </summary>
+        public string attachextensions;
+        /// <summary>
+        /// 允许的附件类型
+        /// </summary>
+        public string attachextensionsnosize;
+        /// <summary>
+        /// 今天可上传附件大小
+        /// </summary>
+        public int attachsize;
+        /// <summary>
         /// 当前用户信息
         /// </summary>
         public ShortUserInfo userinfo = new ShortUserInfo();
+        /// <summary>
+        /// 权限校验提示信息
+        /// </summary>
+        string msg = "";
         public int topicid = 0;
         public bool needaudit = false;
         public int fromindex = SASRequest.GetInt("fromindex", 0);
+        AlbumPluginBase apb = AlbumPluginProvider.GetInstance();
 
         protected override void ShowPage()
         {
@@ -122,6 +147,7 @@ namespace SAS.ManageWeb
             }
 
             #region 获取并检查版块信息
+            forumid = 2;
             forum = Forums.GetForumInfo(forumid);
             if (forum == null || forum.Layer == 0)
             {
@@ -146,6 +172,26 @@ namespace SAS.ManageWeb
             bbcodeoff = (forum.Allowbbcode == 1 && usergroupinfo.Ug_allowcusbbcode == 1) ? 0 : 1;
             allowimg = forum.Allowimgcode;
             #endregion
+
+            #region  附件信息绑定
+            //得到用户可以上传的文件类型
+            string attachmentTypeSelect = Attachments.GetAllowAttachmentType(usergroupinfo, forum);
+            attachextensions = Attachments.GetAttachmentTypeArray(attachmentTypeSelect);
+            attachextensionsnosize = Attachments.GetAttachmentTypeString(attachmentTypeSelect);
+            //得到今天允许用户上传的附件总大小(字节)
+            int MaxTodaySize = (userid > 0 ? MaxTodaySize = Attachments.GetUploadFileSizeByuserid(userid) : 0);
+            attachsize = usergroupinfo.Ug_maxsizeperday - MaxTodaySize;//今天可上传得大小
+            //是否有上传附件的权限
+            canpostattach = UserAuthority.PostAttachAuthority(forum, usergroupinfo, userid, ref msg);
+
+            if (canpostattach && (userinfo != null && userinfo.Ps_id > 0) && apb != null && config.Enablealbum == 1 &&
+            (UserGroups.GetUserGroupInfo(userinfo.Ps_ug_id).ug_maxspacephotosize - apb.GetPhotoSizeByUserid(userid) > 0))
+            {
+                caninsertalbum = true;
+                albumlist = apb.GetSpaceAlbumByUserId(userid);
+            }
+            #endregion
+
 
             if (ispost)
             {

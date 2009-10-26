@@ -8,5 +8,7 @@ namespace SAS.Cache
     {
         public const string FORUM_URLS = "/SAS/Urls";
         public const string FORUM_SETTING = "/SAS/Setting";
+        public const string FORUM_ADMIN_GROUP_LIST = "/SAS/AdminGroupList";
+        public const string FORUM_USER_GROUP_LIST = "/SAS/UserGroupList";
     }
 }

@@ -37,9 +37,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseProvider.cs" />
+    <Compile Include="DataProvider\AdminGroups.cs" />
     <Compile Include="DataProvider\AdminVisitLogs.cs" />
     <Compile Include="DataProvider\Advertisenments.cs" />
     <Compile Include="DataProvider\Announcements.cs" />
+    <Compile Include="DataProvider\Attachments.cs" />
     <Compile Include="DataProvider\Databases.cs" />
     <Compile Include="DataProvider\Forums.cs" />
     <Compile Include="DataProvider\Ips.cs" />
@@ -48,10 +50,12 @@
     <Compile Include="DataProvider\Notices.cs" />
     <Compile Include="DataProvider\OnlineUsers.cs" />
     <Compile Include="DataProvider\PrivateMessages.cs" />
+    <Compile Include="DataProvider\Smilies.cs" />
     <Compile Include="DataProvider\Statistics.cs" />
     <Compile Include="DataProvider\Stats.cs" />
     <Compile Include="DataProvider\Templates.cs" />
     <Compile Include="DataProvider\TopicStats.cs" />
+    <Compile Include="DataProvider\TopicTypes.cs" />
     <Compile Include="DataProvider\UserGroups.cs" />
     <Compile Include="DataProvider\Users.cs" />
     <Compile Include="DbException.cs" />

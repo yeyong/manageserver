@@ -68,6 +68,27 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\forum\forum_addforums.aspx.cs">
+      <DependentUpon>forum_addforums.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\forum\forum_addforums.aspx.designer.cs">
+      <DependentUpon>forum_addforums.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\forum\forum_editforums.aspx.cs">
+      <DependentUpon>forum_editforums.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\forum\forum_editforums.aspx.designer.cs">
+      <DependentUpon>forum_editforums.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\forum\forum_forumstree.aspx.cs">
+      <DependentUpon>forum_forumstree.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\forum\forum_forumstree.aspx.designer.cs">
+      <DependentUpon>forum_forumstree.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\forum\forum_option.aspx.cs">
       <DependentUpon>forum_option.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -96,12 +117,33 @@
     <Compile Include="ManagePage\global\global_adduser.aspx.designer.cs">
       <DependentUpon>global_adduser.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\global\global_adminusergroupgrid.aspx.cs">
+      <DependentUpon>global_adminusergroupgrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_adminusergroupgrid.aspx.designer.cs">
+      <DependentUpon>global_adminusergroupgrid.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\global\global_baseset.aspx.cs">
       <DependentUpon>global_baseset.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManagePage\global\global_baseset.aspx.designer.cs">
       <DependentUpon>global_baseset.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\global\global_editgroup.aspx.cs">
+      <DependentUpon>global_editgroup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_editgroup.aspx.designer.cs">
+      <DependentUpon>global_editgroup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\global\global_editsysadminusergroup.aspx.cs">
+      <DependentUpon>global_editsysadminusergroup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_editsysadminusergroup.aspx.designer.cs">
+      <DependentUpon>global_editsysadminusergroup.aspx</DependentUpon>
     </Compile>
     <Compile Include="ManagePage\global\global_edituser.aspx.cs">
       <DependentUpon>global_edituser.aspx</DependentUpon>
@@ -123,6 +165,13 @@
     </Compile>
     <Compile Include="ManagePage\global\global_logandshrinkdb.aspx.designer.cs">
       <DependentUpon>global_logandshrinkdb.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\global\global_sysadminusergroupgrid.aspx.cs">
+      <DependentUpon>global_sysadminusergroupgrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_sysadminusergroupgrid.aspx.designer.cs">
+      <DependentUpon>global_sysadminusergroupgrid.aspx</DependentUpon>
     </Compile>
     <Compile Include="ManagePage\global\global_templatesedit.aspx.cs">
       <DependentUpon>global_templatesedit.aspx</DependentUpon>
@@ -158,6 +207,13 @@
     </Compile>
     <Compile Include="ManagePage\global\global_usergrid.aspx.designer.cs">
       <DependentUpon>global_usergrid.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\global\global_usergroupgrid.aspx.cs">
+      <DependentUpon>global_usergroupgrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_usergroupgrid.aspx.designer.cs">
+      <DependentUpon>global_usergroupgrid.aspx</DependentUpon>
     </Compile>
     <Compile Include="ManagePage\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
@@ -221,6 +277,10 @@
     </Compile>
     <Compile Include="ManagePage\UserControls\TextareaResize.ascx.designer.cs">
       <DependentUpon>TextareaResize.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\UserControls\usergrouppowersetting.ascx.cs">
+      <DependentUpon>usergrouppowersetting.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -592,19 +652,27 @@
     <Content Include="javascript\post.js" />
     <Content Include="javascript\post_editor.js" />
     <Content Include="javascript\template_utils.js" />
+    <Content Include="ManagePage\forum\forum_addforums.aspx" />
+    <Content Include="ManagePage\forum\forum_editforums.aspx" />
+    <Content Include="ManagePage\forum\forum_forumstree.aspx" />
     <Content Include="ManagePage\forum\forum_option.aspx" />
     <Content Include="ManagePage\framepage\top.aspx" />
     <Content Include="ManagePage\framepage\managerbody.aspx" />
     <Content Include="ManagePage\global\global_adduser.aspx" />
+    <Content Include="ManagePage\global\global_adminusergroupgrid.aspx" />
     <Content Include="ManagePage\global\global_baseset.aspx" />
+    <Content Include="ManagePage\global\global_editgroup.aspx" />
+    <Content Include="ManagePage\global\global_editsysadminusergroup.aspx" />
     <Content Include="ManagePage\global\global_edituser.aspx" />
     <Content Include="ManagePage\global\global_emailconfig.aspx" />
     <Content Include="ManagePage\global\global_logandshrinkdb.aspx" />
+    <Content Include="ManagePage\global\global_sysadminusergroupgrid.aspx" />
     <Content Include="ManagePage\global\global_templatesedit.aspx" />
     <Content Include="ManagePage\global\global_templatesgrid.aspx" />
     <Content Include="ManagePage\global\global_templatetree.aspx" />
     <Content Include="ManagePage\global\global_uiandshowstyle.aspx" />
     <Content Include="ManagePage\global\global_usergrid.aspx" />
+    <Content Include="ManagePage\global\global_usergroupgrid.aspx" />
     <Content Include="ManagePage\images\add.gif" />
     <Content Include="ManagePage\images\addmenu.gif" />
     <Content Include="ManagePage\images\addremoveprograms.gif" />
@@ -917,6 +985,7 @@
     <Content Include="ManagePage\style\comm.css" />
     <Content Include="ManagePage\UserControls\PageInfo.ascx" />
     <Content Include="ManagePage\UserControls\TextareaResize.ascx" />
+    <Content Include="ManagePage\UserControls\usergrouppowersetting.ascx" />
     <Content Include="ManagePage\xml\navmenu.js" />
     <Content Include="config\email.config" />
     <None Include="ManagePage\images\admin-gif\Thumbs.db" />
@@ -934,14 +1003,19 @@
     <Content Include="templates\default\studio\studioindex.htm" />
     <Content Include="templates\default\templatevariable.xml" />
     <Content Include="templates\default\_ajaxquickreply.htm" />
+    <Content Include="templates\default\_attachmentinfo.htm" />
     <Content Include="templates\default\_copyright.htm" />
     <Content Include="templates\default\_editor.htm" />
+    <Content Include="templates\default\_errmsgbox.htm" />
     <Content Include="templates\default\_footer.htm" />
     <Content Include="templates\default\_header.htm" />
     <Content Include="templates\default\_pageheader.htm" />
     <Content Include="templates\default\_post.htm" />
+    <Content Include="templates\default\_postattachments.htm" />
     <Content Include="templates\default\_seditor.htm" />
+    <Content Include="templates\default\_smiley.htm" />
     <Content Include="tools\avatar.aspx" />
+    <Content Include="tools\ajax.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ManagePage\xml\backup\" />

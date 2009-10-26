@@ -1626,6 +1626,36 @@ namespace SAS.Data.SqlServer
 
         #endregion
 
+        #region 表情操作simlies
+
+        /// <summary>
+        /// 得到表情符数据
+        /// </summary>
+        /// <returns>表情符表</returns>
+        public DataTable GetSmiliesListDataTable()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}smilies] ORDER BY [smtype],[displayorder],[id]",
+                                                DbFields.SMILIES,
+                                                BaseConfigs.GetTablePrefix);
+            DataSet ds = DbHelper.ExecuteDataset(System.Data.CommandType.Text, commandText);
+            return (ds != null && ds.Tables.Count > 0) ? ds.Tables[0] : new DataTable();
+        }
+
+        /// <summary>
+        /// 获得表情分类列表
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetSmilieTypes()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}smilies] WHERE [smtype]=0 ORDER BY [displayorder],[id]",
+                                                DbFields.SMILIES,
+                                                BaseConfigs.GetTablePrefix);
+            DataSet ds = DbHelper.ExecuteDataset(System.Data.CommandType.Text, commandText);
+            return (ds != null && ds.Tables.Count > 0) ? ds.Tables[0] : new DataTable();
+        }
+
+        #endregion
+
         public DataTable GetMailTable(string uids)
         {
             if (!Utils.IsSafeSqlString(uids))

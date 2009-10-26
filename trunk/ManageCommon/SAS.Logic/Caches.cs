@@ -150,6 +150,65 @@ namespace SAS.Logic
             }
         }
 
+        /// <summary>
+        /// 获得表情分类列表
+        /// </summary>
+        /// <returns>表情分类列表</returns>
+        public static DataTable GetSmilieTypesCache()
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            DataTable smilietypes = cache.RetrieveObject("/SAS/UI/SmiliesTypeList") as DataTable;
+            if (smilietypes == null || smilietypes.Rows.Count == 0)
+            {
+                smilietypes = SAS.Data.DataProvider.Smilies.GetSmilieTypes();
+                cache.AddObject("/SAS/UI/SmiliesTypeList", smilietypes);
+            }
+            return smilietypes;
+        }
+
+        /// <summary>
+        /// 获得表情符的json数据
+        /// </summary>
+        /// <returns>表情符的json数据</returns>
+        public static string GetSmiliesCache()
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            string str = cache.RetrieveObject("/SAS/UI/SmiliesList") as string;
+            if (Utils.StrIsNullOrEmpty(str))
+            {
+                StringBuilder builder = new StringBuilder();
+                DataTable dt = SAS.Data.DataProvider.Smilies.GetSmiliesListDataTable();
+
+                foreach (DataRow drCate in dt.Copy().Rows)
+                {
+                    if (drCate["smtype"].ToString() == "0")
+                    {
+                        builder.AppendFormat("'{0}': [\r\n", drCate["code"].ToString().Trim().Replace("'", "\\'"));
+                        bool flag = false;
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            if (dr["smtype"].ToString() == drCate["id"].ToString())
+                            {
+                                builder.Append("{'code' : '");
+                                builder.Append(dr["code"].ToString().Trim().Replace("'", "\\'"));
+                                builder.Append("', 'url' : '");
+                                builder.Append(dr["url"].ToString().Trim().Replace("'", "\\'"));
+                                builder.Append("'},\r\n");
+                                flag = true;
+                            }
+                        }
+                        if (builder.Length > 0 && flag)
+                            builder.Remove(builder.Length - 3, 3);
+                        builder.Append("\r\n],\r\n");
+                    }
+                }
+                builder.Remove(builder.Length - 3, 3);
+                str = builder.ToString();
+                cache.AddObject("/SAS/UI/SmiliesList", str);
+            }
+            return str;
+        }
+
         #region 后台管理重设缓存
 
         private static void RemoveObject(string key)
@@ -163,6 +222,22 @@ namespace SAS.Logic
         public static void ReSetConfig()
         {
             RemoveObject(CacheKeys.FORUM_SETTING);
+        }
+
+        /// <summary>
+        /// 重新设置管理组信息
+        ///</summary>
+        public static void ReSetAdminGroupList()
+        {
+            RemoveObject(CacheKeys.FORUM_ADMIN_GROUP_LIST);
+        }
+
+        /// <summary>
+        /// 重新设置用户组信息
+        ///</summary>
+        public static void ReSetUserGroupList()
+        {
+            RemoveObject(CacheKeys.FORUM_USER_GROUP_LIST);
         }
 
         #endregion
