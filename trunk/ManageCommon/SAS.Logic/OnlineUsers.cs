@@ -182,7 +182,7 @@ namespace SAS.Logic
                     // 如果有匹配的则更新为匹配的图例
                     if ((int.Parse(dr["ui_id"].ToString()) == 0 && img == "") || (int.Parse(dr["ui_id"].ToString()) == groupid))
                     {
-                        img = "<img src=\"" + BaseConfigs.GetSitePath + "images/groupicons/" + dr["img"].ToString() + "\" />";
+                        img = "<img src=\"" + BaseConfigs.GetSitePath + "images/groupicons/" + dr["ui_img"].ToString() + "\" />";
                     }
                 }
             }

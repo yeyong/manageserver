@@ -62,5 +62,38 @@ namespace SAS.Logic
             return SAS.Data.DataProvider.AdminGroups.DeleteAdminGroupInfo(admingid);
         }
 
+        /// <summary>
+        /// 设置管理组信息
+        /// </summary>
+        /// <param name="__admingroupsInfo">管理组信息</param>
+        /// <returns>更改记录数</returns>
+        public static int SetAdminGroupInfo(AdminGroupInfo admingroupsInfo, int userGroupId)
+        {
+            //当已有记录时
+            if (AdminGroups.GetAdminGroupInfo(userGroupId) != null)
+            {
+                //更新相应的管理组
+                return SAS.Data.DataProvider.AdminGroups.SetAdminGroupInfo(admingroupsInfo);
+            }
+            else
+            {
+                //建立相应的用户组
+                return CreateAdminGroupInfo(admingroupsInfo);
+            }
+        }
+
+        /// <summary>
+        /// 创建一个新的管理组信息
+        /// </summary>
+        /// <param name="__admingroupsInfo">要添加的管理组信息</param>
+        /// <returns>更改记录数</returns>
+        public static int CreateAdminGroupInfo(AdminGroupInfo admingroupsInfo)
+        {
+            SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/UserGroupList");
+            SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/AdminGroupList");
+
+            return SAS.Data.DataProvider.AdminGroups.CreateAdminGroupInfo(admingroupsInfo);
+        }
+
     }
 }

@@ -98,5 +98,24 @@ namespace SAS.Logic
         {
             Data.DataProvider.UserGroups.UpdateUserGroup(info);
         }
+
+        /// <summary>
+        /// 获取除指定id的用户组外的普通用户组
+        /// </summary>
+        /// <param name="groupid">用户组</param>
+        /// <returns></returns>
+        public static DataTable GetUserGroupExceptGroupid(int groupid)
+        {
+            return Data.DataProvider.UserGroups.GetUserGroupExceptGroupid(groupid);
+        }
+
+        /// <summary>
+        /// 删除用户组
+        /// </summary>
+        /// <param name="groupid">用户组Id</param>
+        public static void DeleteUserGroupInfo(int groupid)
+        {
+            Data.DataProvider.UserGroups.DeleteUserGroupInfo(groupid);
+        }
     }
 }
