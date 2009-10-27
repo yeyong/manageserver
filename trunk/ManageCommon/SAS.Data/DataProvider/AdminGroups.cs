@@ -56,6 +56,26 @@ namespace SAS.Data.DataProvider
         }
 
         /// <summary>
+        /// 设置管理组信息
+        /// </summary>
+        /// <param name="admingroupsInfo">管理组信息</param>
+        /// <returns>更改记录数</returns>
+        public static int SetAdminGroupInfo(AdminGroupInfo admingroupsInfo)
+        {
+            return DatabaseProvider.GetInstance().SetAdminGroupInfo(admingroupsInfo);
+        }
+
+        /// <summary>
+        /// 创建一个新的管理组信息
+        /// </summary>
+        /// <param name="__admingroupsInfo">要添加的管理组信息</param>
+        /// <returns>更改记录数</returns>
+        public static int CreateAdminGroupInfo(AdminGroupInfo admingroupsInfo)
+        {
+            return DatabaseProvider.GetInstance().CreateAdminGroupInfo(admingroupsInfo);
+        }
+
+        /// <summary>
         /// 删除指定的管理组信息
         /// </summary>
         /// <param name="admingid">管理组ID</param>

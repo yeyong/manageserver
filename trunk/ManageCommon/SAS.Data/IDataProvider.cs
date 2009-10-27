@@ -568,6 +568,32 @@ namespace SAS.Data
         /// <param name="creditsHigher"></param>
         void UpdateUserGroupsCreditsLowerByCreditsLower(int creditsLower, int creditsHigher);
 
+        /// <summary>
+        /// 获取除指定id的用户组外的普通用户组
+        /// </summary>
+        /// <param name="groupid">用户组</param>
+        /// <returns></returns>
+        DataTable GetUserGroupExceptGroupid(int groupId);
+
+        /// <summary>
+        /// 是否是系统组
+        /// </summary>
+        /// <param name="groupId">用户组ID</param>
+        /// <returns></returns>
+        bool IsSystemOrTemplateUserGroup(int groupId);
+
+        /// <summary>
+        /// 更新用户组积分上下限
+        /// </summary>
+        /// <param name="groupid"></param>
+        void UpdateUserGroupLowerAndHigherToLimit(int groupId);
+
+        /// <summary>
+        /// 删除用户组
+        /// </summary>
+        /// <param name="groupId"></param>
+        void DeleteUserGroupInfo(int groupId);
+
         #endregion
 
         #region 管理组admingroup personGroup操作
@@ -577,6 +603,20 @@ namespace SAS.Data
         /// </summary>
         /// <returns>管理组信息</returns>
         DataTable GetAdminGroupList();
+
+        /// <summary>
+        /// 设置管理组信息
+        /// </summary>
+        /// <param name="adminGroupsInfo">管理组信息</param>
+        /// <returns></returns>
+        int SetAdminGroupInfo(AdminGroupInfo adminGroupsInfo);
+
+        /// <summary>
+        /// 创建一个新的管理组信息
+        /// </summary>
+        /// <param name="adminGroupsInfo">要添加的管理组信息</param>
+        /// <returns>更改记录数</returns>
+        int CreateAdminGroupInfo(AdminGroupInfo adminGroupsInfo);
 
         /// <summary>
         /// 删除指定的管理组信息
