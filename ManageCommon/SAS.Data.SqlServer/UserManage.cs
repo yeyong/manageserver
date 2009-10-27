@@ -1425,7 +1425,7 @@ namespace SAS.Data.SqlServer
                                                 "[ug_allowhidecode]=@Allowhidecode,[ug_allowhtml]=@Allowhtml,[ug_allowcusbbcode]=@Allowcusbbcode,[allownickname]=@Allownickname,[allowviewpro]=@Allowviewpro," +
                                                 "[allowviewstats]=@Allowviewstats,[disableperiodctrl]=@Disableperiodctrl,[reasonpm]=@Reasonpm,[maxpmnum]=@Maxpmnum," +
                                                 "[ug_maxsigsize]=@Maxsigsize,[ug_maxattachsize]=@Maxattachsize,[ug_maxsizeperday]=@Maxsizeperday,[ug_attachextensions]=@Attachextensions," +
-                                                "[ug_maxspaceattachsize]=@Maxspaceattachsize,[ug_maxspacephotosize]=@Maxspacephotosize  WHERE [groupid]=@Groupid",
+                                                "[ug_maxspaceattachsize]=@Maxspaceattachsize,[ug_maxspacephotosize]=@Maxspacephotosize  WHERE [ug_id]=@Groupid",
                                                 BaseConfigs.GetTablePrefix);
 
             DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
