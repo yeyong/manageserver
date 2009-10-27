@@ -187,5 +187,43 @@ namespace SAS.Data.DataProvider
         {
             DatabaseProvider.GetInstance().UpdateUserGroupsCreditsHigherByCreditsHigher(Creditshigher, Creditslower);
         }
+
+        /// <summary>
+        /// 获取除指定id的用户组外的普通用户组
+        /// </summary>
+        /// <param name="groupid">用户组</param>
+        /// <returns></returns>
+        public static DataTable GetUserGroupExceptGroupid(int groupid)
+        {
+            return DatabaseProvider.GetInstance().GetUserGroupExceptGroupid(groupid);
+        }
+
+        /// <summary>
+        /// 是否是系统组
+        /// </summary>
+        /// <param name="groupid">用户组ID</param>
+        /// <returns></returns>
+        public static bool IsSystemOrTemplateUserGroup(int groupid)
+        {
+            return DatabaseProvider.GetInstance().IsSystemOrTemplateUserGroup(groupid);
+        }
+
+        /// <summary>
+        /// 更新用户组积分上下限
+        /// </summary>
+        /// <param name="groupid"></param>
+        public static void UpdateUserGroupLowerAndHigherToLimit(int groupid)
+        {
+            DatabaseProvider.GetInstance().UpdateUserGroupLowerAndHigherToLimit(groupid);
+        }
+
+        /// <summary>
+        /// 删除用户组
+        /// </summary>
+        /// <param name="groupid">用户组Id</param>
+        public static void DeleteUserGroupInfo(int groupid)
+        {
+            DatabaseProvider.GetInstance().DeleteUserGroupInfo(groupid);
+        }
     }
 }
