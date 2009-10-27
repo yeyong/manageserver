@@ -85,7 +85,7 @@ namespace SAS.ManageWeb.ManagePage
 
             if (this.CheckCookie())
             {
-                userGroupInfo = AdminUserGroups.AdminGetUserGroupInfo(SASRequest.GetInt("ug_id", -1));
+                userGroupInfo = AdminUserGroups.AdminGetUserGroupInfo(SASRequest.GetInt("groupid", -1));
                 userGroupInfo.ug_isSystem = 0;
                 userGroupInfo.ug_readaccess = Convert.ToInt32(readaccess.Text);
                 userGroupInfo.Allowviewstats = 0;

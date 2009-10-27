@@ -131,6 +131,13 @@
     <Compile Include="ManagePage\global\global_baseset.aspx.designer.cs">
       <DependentUpon>global_baseset.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\global\global_editadminusergroup.aspx.cs">
+      <DependentUpon>global_editadminusergroup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_editadminusergroup.aspx.designer.cs">
+      <DependentUpon>global_editadminusergroup.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\global\global_editgroup.aspx.cs">
       <DependentUpon>global_editgroup.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -661,6 +668,7 @@
     <Content Include="ManagePage\global\global_adduser.aspx" />
     <Content Include="ManagePage\global\global_adminusergroupgrid.aspx" />
     <Content Include="ManagePage\global\global_baseset.aspx" />
+    <Content Include="ManagePage\global\global_editadminusergroup.aspx" />
     <Content Include="ManagePage\global\global_editgroup.aspx" />
     <Content Include="ManagePage\global\global_editsysadminusergroup.aspx" />
     <Content Include="ManagePage\global\global_edituser.aspx" />
