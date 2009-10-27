@@ -934,7 +934,7 @@ namespace SAS.Data.SqlServer
 									   DbHelper.MakeInParam("@ol_lastsearchtime",(DbType)SqlDbType.DateTime,8,DateTime.Parse(onlineUserInfo.ol_lastsearchtime)),
 									   DbHelper.MakeInParam("@ol_lastupdatetime",(DbType)SqlDbType.DateTime,8,DateTime.Parse(onlineUserInfo.ol_lastupdatetime)),
 									   DbHelper.MakeInParam("@ol_pm_id",(DbType)SqlDbType.Int,4,onlineUserInfo.ol_pm_id),
-									   DbHelper.MakeInParam("@ol_pm_name",(DbType)SqlDbType.VarChar,200,onlineUserInfo.ol_pm_name),
+									   DbHelper.MakeInParam("@ol_pm_name",(DbType)SqlDbType.VarChar,200,""),
 									   DbHelper.MakeInParam("@ol_verifycode",(DbType)SqlDbType.VarChar,50,onlineUserInfo.ol_verifycode),
 									   DbHelper.MakeInParam("@ol_newpms",(DbType)SqlDbType.Int,4,onlineUserInfo.ol_newpms),
 									   DbHelper.MakeInParam("@ol_newnotices",(DbType)SqlDbType.Int,4,onlineUserInfo.ol_newnotices)
@@ -1578,6 +1578,57 @@ namespace SAS.Data.SqlServer
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
         }
 
+        /// <summary>
+        /// 获取除指定id的用户组外的普通用户组
+        /// </summary>
+        /// <param name="groupid">用户组</param>
+        /// <returns></returns>
+        public DataTable GetUserGroupExceptGroupid(int groupId)
+        {
+            string commandText = string.Format("SELECT [groupid] FROM [{0}userGroup] WHERE [ug_pg_id]=0 And [ug_id]>8 AND [ug_id]<>{1}",
+                                                BaseConfigs.GetTablePrefix,
+                                                groupId);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 是否是系统组
+        /// </summary>
+        /// <param name="groupId">用户组ID</param>
+        /// <returns></returns>
+        public bool IsSystemOrTemplateUserGroup(int groupId)
+        {
+            string commandText = string.Format("SELECT TOP 1 {0}  FROM [{1}userGroup] WHERE [ug_isSystem]=1 AND [ug_id]={2}",
+                                                DbFields.USER_GROUPS,
+                                                BaseConfigs.GetTablePrefix,
+                                                groupId);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0].Rows.Count > 0;
+        }
+
+        /// <summary>
+        /// 更新用户组积分上下限
+        /// </summary>
+        /// <param name="groupid"></param>
+        public void UpdateUserGroupLowerAndHigherToLimit(int groupId)
+        {
+            string commandText = string.Format("UPDATE [{0}userGroup] SET [ug_scorehight]=-9999999 ,creditslower=9999999  WHERE [ug_id]={1}",
+                                                BaseConfigs.GetTablePrefix,
+                                                groupId);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
+        }
+
+        /// <summary>
+        /// 删除用户组
+        /// </summary>
+        /// <param name="groupId"></param>
+        public void DeleteUserGroupInfo(int groupId)
+        {
+            string commandText = string.Format("DELETE FROM [{0}userGroup] Where [ug_id]={1}",
+                                                BaseConfigs.GetTablePrefix,
+                                                groupId);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
+        }
+
         #endregion
 
         #region 管理组admingroup personGroup操作
@@ -1592,6 +1643,41 @@ namespace SAS.Data.SqlServer
                                                 DbFields.ADMIN_GROUPS,
                                                 BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 设置管理组信息
+        /// </summary>
+        /// <param name="__admingroupsInfo">管理组信息</param>
+        /// <returns>更改记录数</returns>
+        public int SetAdminGroupInfo(AdminGroupInfo adminGroupsInfo)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@admingid",(DbType)SqlDbType.SmallInt,2,adminGroupsInfo.Admingid),
+                                       DbHelper.MakeInParam("@pg_name",(DbType)SqlDbType.NChar,50,adminGroupsInfo.AdminGroupName),
+                                       DbHelper.MakeInParam("@pg_allowSelf",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Pg_allowSelf),
+                                       DbHelper.MakeInParam("@pg_allowSys",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Pg_allowSys),
+                                       DbHelper.MakeInParam("@pg_ext1",(DbType)SqlDbType.Text,16,adminGroupsInfo.Pg_ext1),
+                                       DbHelper.MakeInParam("@pg_status",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Pg_status),
+									   DbHelper.MakeInParam("@alloweditpost",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Alloweditpost),
+									   //DbHelper.MakeInParam("@alloweditpoll",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Alloweditpoll),
+									   DbHelper.MakeInParam("@allowstickthread",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowstickthread),
+									   DbHelper.MakeInParam("@allowmodpost",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowmodpost),
+									   DbHelper.MakeInParam("@allowdelpost",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowdelpost),
+									   DbHelper.MakeInParam("@allowmassprune",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowmassprune),
+									   DbHelper.MakeInParam("@allowrefund",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowrefund),
+									   DbHelper.MakeInParam("@allowcensorword",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowcensorword),
+									   DbHelper.MakeInParam("@allowviewip",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowviewip),
+									   DbHelper.MakeInParam("@allowbanip",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowbanip),
+									   DbHelper.MakeInParam("@allowedituser",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowedituser),
+									   DbHelper.MakeInParam("@allowmoduser",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowmoduser),
+									   DbHelper.MakeInParam("@allowbanuser",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowbanuser),
+									   DbHelper.MakeInParam("@allowpostannounce",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowpostannounce),
+									   DbHelper.MakeInParam("@allowviewlog",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowviewlog),
+									   //DbHelper.MakeInParam("@disablepostctrl",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Disablepostctrl),
+                                       DbHelper.MakeInParam("@allowviewrealname",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowviewrealname)
+								   };
+            return DbHelper.ExecuteNonQuery(CommandType.StoredProcedure, string.Format("{0}updateadmingroup", BaseConfigs.GetTablePrefix), parms);
         }
 
         /// <summary>
