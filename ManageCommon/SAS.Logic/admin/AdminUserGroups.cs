@@ -28,6 +28,16 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 得到管理组字段信息
+        /// </summary>
+        /// <param name="groupid"></param>
+        /// <returns></returns>
+        public static AdminGroupInfo AdminGetAdminGroupInfo(int groupid)
+        {
+            return AdminGroups.GetAdminGroupInfo(groupid);
+        }
+
+        /// <summary>
         /// 更新用户组信息
         /// </summary>
         /// <param name="userGroupInfo">用户组信息</param>
@@ -229,6 +239,63 @@ namespace SAS.Logic
                     }
             }
             return true;
+        }
+
+        /// <summary>
+        /// 删除指定用户组
+        /// </summary>
+        /// <param name="groupid"></param>
+        /// <returns></returns>
+        new public static bool DeleteUserGroupInfo(int groupid)
+        {
+            try
+            {
+                if (SAS.Data.DataProvider.UserGroups.IsSystemOrTemplateUserGroup(groupid))
+                {
+                    //当为系统初始组或模板组时,则不允许删除
+                    return false;
+                }
+
+                //当为用户组时
+                if (groupid >= 9)
+                {
+                    DataTable dt = UserGroups.GetUserGroupExceptGroupid(groupid);
+                    if (dt.Rows.Count > 1)
+                    {
+                        UserGroupInfo info = UserGroups.GetUserGroupInfo(groupid);
+                        if (info.ug_pg_id == 0)
+                        {
+                            int creditshigher = info.ug_scorehight;
+                            int creditslower = info.ug_scorelow;
+                            SystemCheckCredits("delete", ref creditshigher, ref creditslower, groupid);
+                        }
+                    }
+                    else
+                    {
+                        if (dt.Rows.Count == 1)
+                        {
+                            //当系统删除当前组后只有一个组存在时则直接设置唯一组下限,但不修改唯一组上限的值
+                            Data.DataProvider.UserGroups.UpdateUserGroupLowerAndHigherToLimit(Utils.StrToInt(dt.Rows[0][0], 0));
+                        }
+                        else
+                        { //系统中用户组只有一个时
+                            opresult = "当前用户组为系统中唯一的用户组,因此系统无法删除";
+                            return false;
+                        }
+                    }
+                }
+                UserGroups.DeleteUserGroupInfo(groupid);
+                AdminGroups.DeleteAdminGroupInfo(short.Parse(groupid.ToString()));
+                Data.DataProvider.OnlineUsers.DeleteOnlineByUserGroup(groupid);
+                Caches.ReSetAdminGroupList();
+                Caches.ReSetUserGroupList();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
