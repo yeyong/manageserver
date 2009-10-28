@@ -21,7 +21,7 @@ namespace SAS.Entity
         private byte m_allowmodpost;		//允许审核帖子
         private byte m_allowdelpost;		//允许删除帖子
         private byte m_allowmassprune;		//允许批量删除
-        private byte m_allowrefund;			//允许强制退款(当主题被设置为收费阅读时有效)
+        //private byte m_allowrefund;			//允许强制退款(当主题被设置为收费阅读时有效)
         private byte m_allowcensorword;		//允许设置词语过滤
         private byte m_allowviewip;			//允许查看IP
         private byte m_allowbanip;			//允许禁止IP
@@ -135,14 +135,14 @@ namespace SAS.Entity
             get { return m_allowmassprune; }
             set { m_allowmassprune = value; }
         }
-        ///<summary>
-        ///允许强制退款(当主题被设置为收费阅读时有效)
-        ///</summary>
-        public byte Allowrefund
-        {
-            get { return m_allowrefund; }
-            set { m_allowrefund = value; }
-        }
+        /////<summary>
+        /////允许强制退款(当主题被设置为收费阅读时有效)
+        /////</summary>
+        //public byte Allowrefund
+        //{
+        //    get { return m_allowrefund; }
+        //    set { m_allowrefund = value; }
+        //}
         ///<summary>
         ///允许设置词语过滤
         ///</summary>

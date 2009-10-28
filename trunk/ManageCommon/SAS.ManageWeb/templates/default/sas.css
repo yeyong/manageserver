@@ -38,6 +38,39 @@ hr {border:0 solid #E6E7E1;clear:both;margin:1em 0;}
 .popupmenu_popup{overflow:hidden;zoom:1;line-height:normal;padding:10px;border:1px solid #CAD9EA;background:#FFF url("images/portalbox_bg.gif");background-repeat:repeat-x;background-position: 0 1px;text-align:left;}
 .headermenu_popup{width:170px; }
 	.headermenu_popup li{float: left;width: 7em;line-height: 24px;height: 24px;overflow: hidden;border-bottom: 1px solid #E8E8E8;}
+/*Rate*/
+		.newrate{overflow:hidden;margin:20px 0;}
+			.newrate dt{float:left;width:80px;padding-top:7px;text-align:center;}
+				.newrate dt strong{height:46px;padding:12px 8px;font-size:24px;background:#FFF4DD;}
+				.newrate dt p{padding-top:10px;}
+				.newrate dt strong a,.newrate dt strong a em{line-height:48px;height:48px;color:#F60;}
+			.newrate dd{margin-left:80px;}
+				.newrate dd ul li{float:left;list-style:none;width:67px;height:84px;overflow:hidden;margin:0 4px;text-align:center;}
+			.rateavatar{padding:8px 0;}
+			.rateavatar img{margin:auto;}
+			.attach_popup {border-color:#FFFFFF;border-style:solid;border-width:5px 5px 0;width:180px;}
+			.newrate .attach_popup{width:auto;}
+			.cornerlayger {padding:6px 8px;}
+				.newrate .cornerlayger{color:#999;border:1px solid #CCC;background:#F7F9F8;white-space:nowrap;}
+				.newrate .cornerlayger em{color:#F60;}
+			.minicorner {height:6px;margin-top:-1px;}
+				.newrate .minicorner{background:url(images/ratesrcorebg.gif) no-repeat 5px 0;}
+/*Attach*/
+		.postattachlist{overflow:hidden;margin-top:2em;font-size:12px;border-bottom:1px dashed #EBEBEB;}
+		.t_attachlist {float:left;height:50px;overflow:hidden;zoom:1;padding:10px;width:45%;}
+		.t_attachlist_img {clear:both;margin-top:10px;overflow:hidden;zoom:1;padding:10px;}
+		.attachimg {height:auto;overflow:visible;}
+		.t_attach {background:#FFF;filter:alpha(opacity=85%);opacity:0.85;}
+/*Form Style*/
+.formtable{width:100%;}
+	.formtable th{padding:5px 2px;width:150px;font-weight:400;vertical-align:top;}
+		.formtable th a{font-weight:400;color:#09C;text-decoration:underline;}
+	.formtable td{padding:5px 2px;}
+	.formtable .sep_space th{height:40px;}
+.txt,.txtarea{padding:2px;*padding:0 2px;height:16px;*height:20px;border:1px solid;border-color:#999 #CCC #CCC #999;background:#FFF;}
+.txtarea{height:auto;}
+.checkbox,.radio{margin:0;width:15px;}
+.drop,.dropmenu{background:url(images/icon_drop.gif) no-repeat 96% 45%;padding-right:14px;cursor:pointer;}
 /*footer*/
 #footer{padding:12px 0;}
 	#footlinks{float:right;margin-top:-3px;text-align:right;}

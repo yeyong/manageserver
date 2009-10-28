@@ -95,5 +95,10 @@ namespace SAS.Logic
             return SAS.Data.DataProvider.AdminGroups.CreateAdminGroupInfo(admingroupsInfo);
         }
 
+        public static void ChangeUserAdminidByGroupid(int radminId, int groupId)
+        {
+            if (radminId > 0 && groupId > 0)
+                SAS.Data.DataProvider.AdminGroups.ChangeUserAdminidByGroupid(radminId, groupId);
+        }
     }
 }

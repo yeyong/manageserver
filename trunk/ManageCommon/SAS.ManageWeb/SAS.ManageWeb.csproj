@@ -290,6 +290,42 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="silverlight\album\CommonValues.cs" />
+    <Compile Include="silverlight\album\Common\ControlBase.cs" />
+    <Compile Include="silverlight\album\LayoutManager.cs" />
+    <Compile Include="silverlight\album\Page.xaml.cs">
+      <DependentUpon>Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="silverlight\album\PhotoDataSet.cs" />
+    <Compile Include="silverlight\album\PhotoItem.cs" />
+    <Compile Include="silverlight\album\Properties\AssemblyInfo.cs" />
+    <Compile Include="silverlight\album\UserControl\GenuineSlice.xaml.cs">
+      <DependentUpon>GenuineSlice.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="silverlight\album\UserControl\PhotoSlice.xaml.cs">
+      <DependentUpon>PhotoSlice.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="silverlight\album\UserControl\SortBar.xaml.cs">
+      <DependentUpon>SortBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="silverlight\album\UserControl\SortNavigator.cs" />
+    <Compile Include="silverlight\album\UserControl\ThumSlice.xaml.cs">
+      <DependentUpon>ThumSlice.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="silverlight\album\UserControl\TracingIcon.xaml.cs">
+      <DependentUpon>TracingIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="silverlight\pages\Ad.xaml.cs">
+      <DependentUpon>Ad.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="silverlight\Properties\AssemblyInfo.cs" />
+    <Compile Include="silverlight\util\ADHelper.cs" />
+    <Compile Include="silverlight\util\ADMediaHelper.cs" />
+    <Compile Include="silverlight\util\ADRemote.cs" />
+    <Compile Include="silverlight\util\BaseDownloader.cs" />
+    <Compile Include="silverlight\util\ImageDownloaderHelper.cs" />
+    <Compile Include="silverlight\util\MediaDownloaderHelper.cs" />
+    <Compile Include="silverlight\util\RemoteBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SAS.Cache\SAS.Cache.csproj">
@@ -503,6 +539,30 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="aspx\1\test.aspx" />
+    <Content Include="bin\Interop.SQLDMO.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\SAS.Cache.dll" />
+    <Content Include="bin\SAS.Cache.pdb" />
+    <Content Include="bin\SAS.Common.dll" />
+    <Content Include="bin\SAS.Common.pdb" />
+    <Content Include="bin\SAS.Config.dll" />
+    <Content Include="bin\SAS.Config.pdb" />
+    <Content Include="bin\SAS.Control.dll" />
+    <Content Include="bin\SAS.Control.pdb" />
+    <Content Include="bin\SAS.Data.dll" />
+    <Content Include="bin\SAS.Data.pdb" />
+    <Content Include="bin\SAS.Data.SqlServer.dll" />
+    <Content Include="bin\SAS.Data.SqlServer.pdb" />
+    <Content Include="bin\SAS.Entity.dll" />
+    <Content Include="bin\SAS.Entity.pdb" />
+    <Content Include="bin\SAS.Logic.dll" />
+    <Content Include="bin\SAS.Logic.pdb" />
+    <Content Include="bin\SAS.ManageWeb.dll" />
+    <Content Include="bin\SAS.ManageWeb.pdb" />
+    <Content Include="bin\SAS.Plugin.dll" />
+    <Content Include="bin\SAS.Plugin.pdb" />
+    <Content Include="bin\SAS.Web.UI.dll" />
+    <Content Include="bin\SAS.Web.UI.pdb" />
     <Content Include="config\localupgradeini.config" />
     <Content Include="editor\cp_editor.htm" />
     <Content Include="editor\editor.css" />
@@ -658,6 +718,7 @@
     <Content Include="javascript\editor.js" />
     <Content Include="javascript\post.js" />
     <Content Include="javascript\post_editor.js" />
+    <Content Include="javascript\template_attach.js" />
     <Content Include="javascript\template_utils.js" />
     <Content Include="ManagePage\forum\forum_addforums.aspx" />
     <Content Include="ManagePage\forum\forum_editforums.aspx" />
@@ -996,12 +1057,93 @@
     <Content Include="ManagePage\UserControls\usergrouppowersetting.ascx" />
     <Content Include="ManagePage\xml\navmenu.js" />
     <Content Include="config\email.config" />
+    <Content Include="config\schedule.config" />
     <None Include="ManagePage\images\admin-gif\Thumbs.db" />
     <None Include="ManagePage\images\ad\Thumbs.db" />
     <None Include="ManagePage\images\Thumbs.db" />
+    <None Include="silverlight\album\Assets\Font\FuturaStd-Heavy.otf" />
+    <None Include="silverlight\album\DiscuzAlbum.suo" />
     <Content Include="ManagePage\xml\navmenu.config" />
+    <Content Include="silverlight\ad.htm" />
+    <Content Include="silverlight\album\Assets\Image\btnBottomBg.png" />
+    <Content Include="silverlight\album\Assets\Image\btnBottomStroke.png" />
+    <Content Include="silverlight\album\Assets\Image\btnBottomStroke_flip.png" />
+    <Content Include="silverlight\album\Assets\Image\btnRandom.png" />
+    <Content Include="silverlight\album\Assets\Image\btnSort.png" />
+    <Content Include="silverlight\album\Assets\Image\discuz_logo.png" />
+    <Content Include="silverlight\album\Assets\Image\grassSphere.png" />
+    <Content Include="silverlight\album\Assets\Image\leftArrow.png" />
+    <Content Include="silverlight\album\Assets\Image\loadingGrid_text.png" />
+    <Content Include="silverlight\album\Assets\Image\minus_icon.png" />
+    <Content Include="silverlight\album\Assets\Image\plus_icon.png" />
+    <Content Include="silverlight\album\Assets\Image\screenArrow_hover.png" />
+    <Content Include="silverlight\album\Assets\Image\screenArrow_none.png" />
+    <Content Include="silverlight\album\Assets\Image\screenArrow_normal.png" />
+    <Content Include="silverlight\album\Assets\Image\sliceBG.png" />
+    <Content Include="silverlight\album\Assets\Image\sliceBG_shadow.png" />
+    <Content Include="silverlight\album\Assets\Image\sliceCounter_bg.png" />
+    <Content Include="silverlight\album\Assets\Image\sortArrow_hover.png" />
+    <Content Include="silverlight\album\Assets\Image\sortArrow_normal.png" />
+    <Content Include="silverlight\album\Assets\Image\sortDividor.png" />
+    <Content Include="silverlight\album\Assets\Image\topButton_disable.png" />
+    <Content Include="silverlight\album\Assets\Image\topButton_hover.png" />
+    <Content Include="silverlight\album\Assets\Image\topButton_normal.png" />
+    <Content Include="silverlight\album\Assets\Image\topNavi_left.png" />
+    <Content Include="silverlight\album\Assets\Image\topNavi_middle.png" />
+    <Content Include="silverlight\album\Assets\Image\topNavi_right.png" />
+    <Content Include="silverlight\album\Assets\Photo\photoAuthor.png" />
+    <Content Include="silverlight\album\Assets\Photo\photoTitle.png" />
+    <Content Include="silverlight\album\ClientBin\DiscuzAlbum.dll" />
+    <Content Include="silverlight\album\DiscuzAlbum.csproj" />
+    <Content Include="silverlight\album\DiscuzAlbum.sln" />
+    <Content Include="silverlight\album\index.html" />
+    <Content Include="silverlight\album\index.html.js" />
+    <Content Include="silverlight\album\Silverlight.js" />
+    <Content Include="silverlight\assets\Images\heros01.png" />
+    <Content Include="silverlight\assets\Images\heros02.png" />
+    <Content Include="silverlight\assets\Images\heros03.png" />
+    <Content Include="silverlight\assets\Images\msnbc.png" />
+    <Content Include="silverlight\ClientBin\Discuz.Silverlight.dll" />
+    <Content Include="silverlight\Discuz.Silverlight.csproj" />
+    <Content Include="silverlight\js\ad.js" />
+    <Content Include="silverlight\js\InstallCreateSilverlight.js" />
+    <Content Include="silverlight\js\InstallExperience.js" />
+    <Content Include="silverlight\js\InstallGuidance.js" />
+    <Content Include="silverlight\js\Silverlight.js" />
+    <Content Include="silverlight\js\utils.js" />
+    <Content Include="silverlight\PieChart\Assets\Image\discuz_logo.png" />
+    <Content Include="silverlight\PieChart\Assets\Image\logoHighlight.png" />
+    <Content Include="silverlight\PieChart\Assets\Image\logoHighlight2.png" />
+    <Content Include="silverlight\PieChart\Assets\Image\pieResult.png" />
+    <Content Include="silverlight\PieChart\Assets\Image\pie_popup.png" />
+    <Content Include="silverlight\PieChart\ClientBin\PieChart.xap" />
+    <Content Include="silverlight\PieChart\index.html" />
+    <Content Include="silverlight\PieChart\index.html.js" />
+    <Content Include="silverlight\PieChart\piechart.js" />
+    <Content Include="silverlight\PieChart\Silverlight.js" />
+    <Content Include="silverlight\player\Assets\Image\player_logo.png" />
+    <Content Include="silverlight\player\BasePlayer.js" />
+    <Content Include="silverlight\player\Default.html" />
+    <Content Include="silverlight\player\MicrosoftAjax.js" />
+    <Content Include="silverlight\player\player.js" />
+    <Content Include="silverlight\player\PlayerStrings.js" />
+    <Content Include="silverlight\player\preview.jpg" />
+    <Content Include="silverlight\player\showtopiccontainer.js" />
+    <Content Include="silverlight\player\Silverlight.js" />
+    <Content Include="silverlight\player\StartPlayer.js" />
+    <Content Include="silverlight\UploadFile\ClientBin\MultiFileUpload.dll" />
+    <Content Include="silverlight\UploadFile\ClientBin\MultiFileUpload.pdb" />
+    <Content Include="silverlight\UploadFile\ClientBin\MultiFileUpload.xap" />
+    <Content Include="silverlight\UploadFile\ClientBin\System.Json.dll" />
+    <Content Include="silverlight\UploadFile\ClientBin\System.Json.xml" />
+    <Content Include="silverlight\UploadFile\ClientBin\System.Windows.Controls.Data.dll" />
+    <Content Include="silverlight\UploadFile\ClientBin\System.Windows.Controls.Data.xml" />
+    <Content Include="silverlight\UploadFile\ClientBin\System.Xml.Serialization.dll" />
+    <Content Include="silverlight\UploadFile\ClientBin\System.Xml.Serialization.xml" />
+    <Content Include="silverlight\UploadFile\Silverlight.js" />
     <Content Include="templates\default\about.png" />
     <Content Include="templates\default\about.xml" />
+    <Content Include="templates\default\float.css" />
     <Content Include="templates\default\sas.css" />
     <Content Include="templates\default\editor.css" />
     <Content Include="templates\default\images\portalbox_bg.gif" />
@@ -1024,6 +1166,52 @@
     <Content Include="templates\default\_smiley.htm" />
     <Content Include="tools\avatar.aspx" />
     <Content Include="tools\ajax.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="silverlight\album\Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="silverlight\album\UserControl\GenuineSlice.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="silverlight\album\UserControl\PhotoSlice.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="silverlight\album\UserControl\PhotoThum.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="silverlight\album\UserControl\SortBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="silverlight\album\UserControl\ThumSlice.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="silverlight\album\UserControl\TracingIcon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="silverlight\pages\Ad.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="silverlight\player\audio.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="silverlight\player\player.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="silverlight\UploadFile\ClientBin\AppManifest.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ManagePage\xml\backup\" />

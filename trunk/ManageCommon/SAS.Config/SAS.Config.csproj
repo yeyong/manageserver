@@ -56,6 +56,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider\BaseConfigProvider.cs" />
     <Compile Include="Provider\ConfigProvider.cs" />
+    <Compile Include="ScheduleConfigFileManager.cs" />
+    <Compile Include="ScheduleConfigInfo.cs" />
+    <Compile Include="ScheduleConfigs.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SAS.Common\SAS.Common.csproj">

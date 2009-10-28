@@ -42,7 +42,7 @@ namespace SAS.Data.DataProvider
             admingroup.Allowmodpost = byte.Parse(dr["allowmodpost"].ToString());
             admingroup.Allowdelpost = byte.Parse(dr["allowdelpost"].ToString());
             admingroup.Allowmassprune = byte.Parse(dr["allowmassprune"].ToString());
-            admingroup.Allowrefund = byte.Parse(dr["allowrefund"].ToString());
+            //admingroup.Allowrefund = byte.Parse(dr["allowrefund"].ToString());
             admingroup.Allowcensorword = byte.Parse(dr["allowcensorword"].ToString());
             admingroup.Allowviewip = byte.Parse(dr["allowviewip"].ToString());
             admingroup.Allowbanip = byte.Parse(dr["allowbanip"].ToString());
@@ -83,6 +83,11 @@ namespace SAS.Data.DataProvider
         public static int DeleteAdminGroupInfo(short admingid)
         {
             return DatabaseProvider.GetInstance().DeleteAdminGroupInfo(admingid);
+        }
+
+        public static void ChangeUserAdminidByGroupid(int radminId, int groupId)
+        {
+            DatabaseProvider.GetInstance().UpdateUserAdminIdByGroupId(radminId, groupId);
         }
     }
 }

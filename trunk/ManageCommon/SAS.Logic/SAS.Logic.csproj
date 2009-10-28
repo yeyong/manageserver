@@ -74,11 +74,16 @@
     <Compile Include="admin\SASControlContainer.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ScheduledEvents\Event.cs" />
+    <Compile Include="ScheduledEvents\EventLogs.cs" />
+    <Compile Include="ScheduledEvents\EventManager.cs" />
+    <Compile Include="ScheduledEvents\IEvent.cs" />
     <Compile Include="SoftInfo.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Statistics.cs" />
     <Compile Include="Stats.cs" />
+    <Compile Include="Tags.cs" />
     <Compile Include="Templates.cs" />
     <Compile Include="TopicStats.cs" />
     <Compile Include="TopicTypes.cs" />

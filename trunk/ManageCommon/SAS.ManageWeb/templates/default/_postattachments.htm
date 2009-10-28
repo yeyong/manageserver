@@ -39,8 +39,7 @@ function LoadSilverlight(pluginID, max) {
 						<td class="attachnum"></td>
 						<td class="attachctrl"></td>
 						<td class="attachname">文件名</td>
-						<%if {userid}!=-1 && {usergroupinfo.Allowsetattachperm}==1%><td class="attachview">阅读权限</td><%/if%>
-						
+						<%if {userid}!=-1 && {usergroupinfo.Allowsetattachperm}==1%><td class="attachview">阅读权限</td><%/if%>						
 						<%if {config.enablealbum}==1 && {caninsertalbum}%><td>选择相册</td><%/if%>
 						<td class="attachdel"></td>
 					</tr>
@@ -66,8 +65,7 @@ function LoadSilverlight(pluginID, max) {
 							</span>
 							<input type="hidden" name="attachid" />
 						</td>
-						<%if {userid}!=-1 && {usergroupinfo.Allowsetattachperm}==1%><td class="attachview"><input type="text" name="sl_readperm" value="0"size="1" class="txt" /></td><%/if%>
-						
+						<%if {userid}!=-1 && {usergroupinfo.Allowsetattachperm}==1%><td class="attachview"><input type="text" name="sl_readperm" value="0"size="1" class="txt" /></td><%/if%>						
 						<%if {config.enablealbum}==1 && {caninsertalbum}%>
 							<td  style="vertical-align:top;">
 								<select name="albums" style="display:none">
@@ -93,10 +91,7 @@ function LoadSilverlight(pluginID, max) {
 							</span>
 							<input type="hidden" name="localid" />
 						</td>
-						<%if {userid}!=-1 && {usergroupinfo.Allowsetattachperm}==1%><td class="attachview"><input type="text" name="readperm" value="0"size="1" class="txt" /></td><%/if%>
-								
-
-						<%if {config.enablealbum}==1 && {caninsertalbum}%>
+						<%if {userid}!=-1 && {usergroupinfo.Allowsetattachperm}==1%><td class="attachview"><input type="text" name="readperm" value="0"size="1" class="txt" /></td><%/if%>						<%if {config.enablealbum}==1 && {caninsertalbum}%>
 							<td  style="vertical-align:top;">
 								<select name="sl_albums" style="display:none">
 								<option value="0"></option>

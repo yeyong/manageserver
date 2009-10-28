@@ -1656,6 +1656,108 @@ namespace SAS.Data.SqlServer
 
         #endregion
 
+        #region 标签操作Tags
+
+        /// <summary>
+        /// 获取Tag信息
+        /// </summary>
+        /// <param name="tagId">标签id</param>
+        /// <returns></returns>
+        public IDataReader GetTagInfo(int tagId)
+        {
+            DbParameter[] parms = {
+                                    DbHelper.MakeInParam("@tagid",(DbType)SqlDbType.Int,4,tagId)
+                                  };
+            return DbHelper.ExecuteReader(CommandType.StoredProcedure, string.Format("{0}gettaginfo", BaseConfigs.GetTablePrefix), parms);
+        }
+
+        /// <summary>
+        /// 更新TAG
+        /// </summary>
+        /// <param name="tagId">标签ID</param>
+        /// <param name="orderId">排序</param>
+        /// <param name="color">颜色</param>
+        public void UpdateForumTags(int tagId, int orderId, string color)
+        {
+            DbParameter[] parms = 
+			{
+				DbHelper.MakeInParam("@orderid", (DbType)SqlDbType.Int,4, orderId),
+                DbHelper.MakeInParam("@color", (DbType)SqlDbType.Char,6, color),
+				DbHelper.MakeInParam("@tagid", (DbType)SqlDbType.Int,4,tagId)
+			};
+            string commandText = string.Format("UPDATE [{0}tags] SET [orderid]=@orderid,[color]=@color WHERE [tagid]=@tagid",
+                                                BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
+        /// 返回论坛Tag列表
+        /// </summary>
+        /// <param name="tagname">查询关键字</param>
+        /// <param name="type">全部0 锁定1 开放2</param>
+        /// <returns></returns>
+        public DataTable GetForumTags(string tagName, int type)
+        {
+            //type 全部0 锁定1 开放2
+            string commandText = string.Format("SELECT {0} FROM [{1}tags]  {2} ",
+                                        DbFields.TAGS,
+                                        BaseConfigs.GetTablePrefix,
+                                        !Utils.StrIsNullOrEmpty(tagName) ? " WHERE [tagname] LIKE '%" + RegEsc(tagName) + "%'" : "");
+
+            if (type == 1)
+                commandText += !Utils.StrIsNullOrEmpty(tagName) ? " AND [orderid] < 0 " : " WHERE [orderid] < 0 ";
+            else if (type == 2)
+                commandText += !Utils.StrIsNullOrEmpty(tagName) ? " AND [orderid] >= 0" : " WHERE [orderid] >= 0 ";
+
+            commandText += " ORDER BY [fcount] DESC";
+
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        #endregion
+
+        #region 计划任务处理
+
+        /// <summary>
+        /// 设置上次任务计划的执行时间
+        /// </summary>
+        /// <param name="key">任务的标识</param>
+        /// <param name="serverName">主机名</param>
+        /// <param name="lastExecuted">最后执行时间</param>
+        public void SetLastExecuteScheduledEventDateTime(string key, string serverName, DateTime lastExecuted)
+        {
+            DbParameter[] parms = {
+                DbHelper.MakeInParam("@key", (DbType)SqlDbType.VarChar, 100, key),
+                DbHelper.MakeInParam("@servername", (DbType)SqlDbType.VarChar, 100, serverName),
+                DbHelper.MakeInParam("@lastexecuted", (DbType)SqlDbType.DateTime, 8, lastExecuted)
+            };
+            DbHelper.ExecuteNonQuery(CommandType.StoredProcedure,
+                                     string.Format("{0}setlastexecutescheduledeventdatetime", BaseConfigs.GetTablePrefix),
+                                     parms);
+        }
+        /// <summary>
+        /// 获取上次任务计划的执行时间
+        /// </summary>
+        /// <param name="key">任务的标识</param>
+        /// <param name="serverName">主机名</param>
+        /// <returns></returns>
+        public DateTime GetLastExecuteScheduledEventDateTime(string key, string serverName)
+        {
+            DbParameter[] parms = {
+                DbHelper.MakeInParam("@key", (DbType)SqlDbType.VarChar, 100, key),
+                DbHelper.MakeInParam("@servername", (DbType)SqlDbType.VarChar, 100, serverName),
+                DbHelper.MakeOutParam("@lastexecuted", (DbType)SqlDbType.DateTime, 8)
+            };
+
+            DbHelper.ExecuteNonQuery(CommandType.StoredProcedure,
+                                     string.Format("{0}getlastexecutescheduledeventdatetime", BaseConfigs.GetTablePrefix),
+                                     parms);
+
+            return Convert.IsDBNull(parms[2].Value) ? DateTime.MinValue : Convert.ToDateTime(parms[2].Value);
+        }
+
+        #endregion
+
         public DataTable GetMailTable(string uids)
         {
             if (!Utils.IsSafeSqlString(uids))

@@ -1686,6 +1686,52 @@ namespace SAS.Data
 
         #endregion
 
+        #region 标签操作Tags
+
+        /// <summary>
+        /// 获取Tag信息
+        /// </summary>
+        /// <param name="tagId">标签id</param>
+        /// <returns></returns>
+        IDataReader GetTagInfo(int tagId);
+
+        /// <summary>
+        /// 更新TAG
+        /// </summary>
+        /// <param name="tagId">标签ID</param>
+        /// <param name="orderId">排序</param>
+        /// <param name="color">颜色</param>
+        void UpdateForumTags(int tagId, int orderId, string color);
+
+        /// <summary>
+        /// 返回论坛Tag列表
+        /// </summary>
+        /// <param name="tagKey">查询关键字</param>
+        /// <param name="type">全部0 锁定1 开放2</param>
+        /// <returns></returns>
+        DataTable GetForumTags(string tagKey, int type);
+
+        #endregion
+
+        #region 计划任务处理
+
+        /// <summary>
+        /// 设置上次任务计划的执行时间
+        /// </summary>
+        /// <param name="key">任务的标识</param>
+        /// <param name="serverName">主机名</param>
+        /// <param name="lastExecuted">最后执行时间</param>
+        void SetLastExecuteScheduledEventDateTime(string key, string serverName, DateTime lastExecuted);
+        /// <summary>
+        /// 获取上次任务计划的执行时间
+        /// </summary>
+        /// <param name="key">任务的标识</param>
+        /// <param name="serverName">主机名</param>
+        /// <returns></returns>
+        DateTime GetLastExecuteScheduledEventDateTime(string key, string serverName);
+
+        #endregion
+
         /// <summary>
         /// 获取指定用户ID列表的邮件信息
         /// </summary>
