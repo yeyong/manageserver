@@ -43,6 +43,7 @@
     <Compile Include="DataProvider\Announcements.cs" />
     <Compile Include="DataProvider\Attachments.cs" />
     <Compile Include="DataProvider\Databases.cs" />
+    <Compile Include="DataProvider\Event.cs" />
     <Compile Include="DataProvider\Forums.cs" />
     <Compile Include="DataProvider\Ips.cs" />
     <Compile Include="DataProvider\LoginLogs.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="DataProvider\Smilies.cs" />
     <Compile Include="DataProvider\Statistics.cs" />
     <Compile Include="DataProvider\Stats.cs" />
+    <Compile Include="DataProvider\Tags.cs" />
     <Compile Include="DataProvider\Templates.cs" />
     <Compile Include="DataProvider\TopicStats.cs" />
     <Compile Include="DataProvider\TopicTypes.cs" />

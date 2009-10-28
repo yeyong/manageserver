@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SAS.ManageWeb\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -59,6 +63,7 @@
     <Compile Include="ShowtopicPageAttachmentInfo.cs" />
     <Compile Include="StatInfo.cs" />
     <Compile Include="StatVarInfo.cs" />
+    <Compile Include="TagInfo.cs" />
     <Compile Include="TemplateAboutInfo.cs" />
     <Compile Include="TemplateInfo.cs" />
     <Compile Include="TopicInfo.cs" />

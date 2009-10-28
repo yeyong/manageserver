@@ -9,7 +9,7 @@ namespace SAS.Data
         /// <summary>
         /// 管理组admingroup personGroup表字段
         /// </summary>
-        public const string ADMIN_GROUPS = "[pg_id],[pg_name],[pg_allowSys],[pg_allowSelf],[pg_status],[pg_ext1],[alloweditpost],[allowstickthread],[allowmodpost],[allowdelpost],[allowmassprune],[allowrefund],[allowcensorword],[allowviewip],[allowbanip],[allowedituser],[allowmoduser],[allowbanuser],[allowpostannounce],[allowviewlog],[allowviewrealname]";
+        public const string ADMIN_GROUPS = "[pg_id],[pg_name],[pg_allowSys],[pg_allowSelf],[pg_status],[pg_ext1],[alloweditpost],[allowstickthread],[allowmodpost],[allowdelpost],[allowmassprune],[allowcensorword],[allowviewip],[allowbanip],[allowedituser],[allowmoduser],[allowbanuser],[allowpostannounce],[allowviewlog],[allowviewrealname]";
 
         /// <summary>
         /// 广告表字段
@@ -75,6 +75,11 @@ namespace SAS.Data
         /// 数据表分表字段
         /// </summary>
         public const string TABLE_LIST = "[id],[createdatetime],[description],[mintid],[maxtid]";
+
+        /// <summary>
+        /// 标签表字段
+        /// </summary>
+        public const string TAGS = "[tagid],[tagname],[userid],[postdatetime],[orderid],[color],[count],[fcount],[pcount],[scount],[vcount],[gcount]";
 
         /// <summary>
         /// 用户组信息表字段

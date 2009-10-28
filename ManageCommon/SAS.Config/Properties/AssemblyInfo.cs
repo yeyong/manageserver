@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("配置文件层")]
 [assembly: AssemblyDescription("配置文件读取")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("www.zhaoshang-zj.org")]
+[assembly: AssemblyCompany("www.sirius.org.cn")]
 [assembly: AssemblyProduct("配置文件层")]
-[assembly: AssemblyCopyright("Copyright © www.zhaoshang-zj.org 2009")]
+[assembly: AssemblyCopyright("Copyright © www.sirius.org.cn 2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

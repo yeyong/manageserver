@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAS.Control", "SAS.Control\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAS.Plugin.PasswordMode", "SAS.Plugin.PasswordMode\SAS.Plugin.PasswordMode.csproj", "{D2DA07DC-6CB2-435B-BD95-5D624F239DCC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAS.Album", "SQS.Album\SAS.Album.csproj", "{F9C383FF-BECD-41A0-A831-1ADE5CE6DD78}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -83,6 +85,10 @@ Global
 		{D2DA07DC-6CB2-435B-BD95-5D624F239DCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2DA07DC-6CB2-435B-BD95-5D624F239DCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2DA07DC-6CB2-435B-BD95-5D624F239DCC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9C383FF-BECD-41A0-A831-1ADE5CE6DD78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9C383FF-BECD-41A0-A831-1ADE5CE6DD78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9C383FF-BECD-41A0-A831-1ADE5CE6DD78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9C383FF-BECD-41A0-A831-1ADE5CE6DD78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

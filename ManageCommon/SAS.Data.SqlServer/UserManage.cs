@@ -1665,7 +1665,7 @@ namespace SAS.Data.SqlServer
 									   DbHelper.MakeInParam("@allowmodpost",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowmodpost),
 									   DbHelper.MakeInParam("@allowdelpost",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowdelpost),
 									   DbHelper.MakeInParam("@allowmassprune",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowmassprune),
-									   DbHelper.MakeInParam("@allowrefund",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowrefund),
+									   //DbHelper.MakeInParam("@allowrefund",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowrefund),
 									   DbHelper.MakeInParam("@allowcensorword",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowcensorword),
 									   DbHelper.MakeInParam("@allowviewip",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowviewip),
 									   DbHelper.MakeInParam("@allowbanip",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowbanip),
@@ -1678,6 +1678,38 @@ namespace SAS.Data.SqlServer
                                        DbHelper.MakeInParam("@allowviewrealname",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowviewrealname)
 								   };
             return DbHelper.ExecuteNonQuery(CommandType.StoredProcedure, string.Format("{0}updateadmingroup", BaseConfigs.GetTablePrefix), parms);
+        }
+
+        /// <summary>
+        /// 创建一个新的管理组信息
+        /// </summary>
+        /// <param name="__admingroupsInfo">要添加的管理组信息</param>
+        /// <returns>更改记录数</returns>
+        public int CreateAdminGroupInfo(AdminGroupInfo adminGroupsInfo)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@admingid",(DbType)SqlDbType.SmallInt,2,adminGroupsInfo.Admingid),
+                                       DbHelper.MakeInParam("@pg_name",(DbType)SqlDbType.NChar,50,adminGroupsInfo.AdminGroupName),
+                                       DbHelper.MakeInParam("@pg_allowSelf",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Pg_allowSelf),
+                                       DbHelper.MakeInParam("@pg_allowSys",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Pg_allowSys),
+                                       DbHelper.MakeInParam("@pg_ext1",(DbType)SqlDbType.Text,16,adminGroupsInfo.Pg_ext1),
+                                       DbHelper.MakeInParam("@pg_status",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Pg_status),
+									   DbHelper.MakeInParam("@alloweditpost",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Alloweditpost),
+									   DbHelper.MakeInParam("@allowstickthread",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowstickthread),
+									   DbHelper.MakeInParam("@allowmodpost",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowmodpost),
+									   DbHelper.MakeInParam("@allowdelpost",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowdelpost),
+									   DbHelper.MakeInParam("@allowmassprune",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowmassprune),
+									   DbHelper.MakeInParam("@allowcensorword",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowcensorword),
+									   DbHelper.MakeInParam("@allowviewip",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowviewip),
+									   DbHelper.MakeInParam("@allowbanip",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowbanip),
+									   DbHelper.MakeInParam("@allowedituser",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowedituser),
+									   DbHelper.MakeInParam("@allowmoduser",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowmoduser),
+									   DbHelper.MakeInParam("@allowbanuser",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowbanuser),
+									   DbHelper.MakeInParam("@allowpostannounce",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowpostannounce),
+									   DbHelper.MakeInParam("@allowviewlog",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowviewlog),
+                                       DbHelper.MakeInParam("@allowviewrealname",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowviewrealname)
+								   };
+            return DbHelper.ExecuteNonQuery(CommandType.StoredProcedure, string.Format("{0}createadmingroup", BaseConfigs.GetTablePrefix), parms);
         }
 
         /// <summary>

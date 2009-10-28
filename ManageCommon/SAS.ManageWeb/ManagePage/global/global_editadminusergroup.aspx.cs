@@ -200,6 +200,7 @@ namespace SAS.ManageWeb.ManagePage
                 {
                     adminGroupInfo = new AdminGroupInfo();
                     adminGroupInfo.Admingid = (short)userGroupInfo.ug_id;
+                    adminGroupInfo.AdminGroupName = "";
                     //插入相应的管理组
                     adminGroupInfo.Alloweditpost = BoolToByte(admingroupright.Items[0].Selected);
                     //adminGroupInfo.Alloweditpoll = BoolToByte(admingroupright.Items[1].Selected);
@@ -207,7 +208,7 @@ namespace SAS.ManageWeb.ManagePage
                     adminGroupInfo.Allowmodpost = 0;
                     adminGroupInfo.Allowdelpost = BoolToByte(admingroupright.Items[2].Selected);
                     adminGroupInfo.Allowmassprune = BoolToByte(admingroupright.Items[3].Selected);
-                    adminGroupInfo.Allowrefund = 0;
+                    //adminGroupInfo.Allowrefund = 0;
                     adminGroupInfo.Allowcensorword = 0; ;
                     adminGroupInfo.Allowviewip = BoolToByte(admingroupright.Items[4].Selected);
                     adminGroupInfo.Allowbanip = 0;
