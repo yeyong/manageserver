@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Arithmetic.cs" />
     <Compile Include="Encrypt.cs" />
+    <Compile Include="FTP.cs" />
     <Compile Include="Generic\ISASGeneric.cs" />
     <Compile Include="Generic\SASDictionary.cs" />
     <Compile Include="Generic\SASList.cs" />

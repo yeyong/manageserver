@@ -289,6 +289,18 @@ namespace SAS.Album.Data
             return true;
         }
 
+        public void CreatePhotoTags(string tags, int photoid, int userid, string postdatetime)
+        {
+            DbParameter[] parms = {
+                DbHelper.MakeInParam("@tags", (DbType)SqlDbType.NVarChar, 55, tags),
+                DbHelper.MakeInParam("@photoid", (DbType)SqlDbType.Int, 4, photoid),
+                DbHelper.MakeInParam("@userid", (DbType)SqlDbType.Int, 4, userid),
+                DbHelper.MakeInParam("@postdatetime", (DbType)SqlDbType.DateTime, 8, postdatetime)                
+            };
+
+            DbHelper.ExecuteNonQuery(CommandType.StoredProcedure, string.Format("{0}createphototags", BaseConfigs.GetTablePrefix), parms);
+        }
+
         #endregion
 
         public DataTable GetSearchAlbumList(int pagesize, string albumids)

@@ -48,6 +48,8 @@
     <Compile Include="EmailConfigFileManager.cs" />
     <Compile Include="EmailConfigInfo.cs" />
     <Compile Include="EmailConfigs.cs" />
+    <Compile Include="FTPConfigInfo.cs" />
+    <Compile Include="FTPConfigInfoCollection.cs" />
     <Compile Include="GeneralConfigFileManager.cs" />
     <Compile Include="GeneralConfigInfo.cs" />
     <Compile Include="GeneralConfigs.cs" />
