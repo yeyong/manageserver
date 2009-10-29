@@ -9,7 +9,7 @@ using SAS.Config.Provider;
 using SAS.Entity;
 using SAS.Logic;
 
-namespace SAS.Web.UI
+namespace SAS.Logic
 {
     /// <summary>
     /// 页面基类

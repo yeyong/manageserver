@@ -83,5 +83,34 @@ namespace SAS.Album.Data
             }
             return acic;
         }
+
+        public static SAS.Common.Generic.List<PhotoInfo> GetSpacePhotosInfo(DataTable dt)
+        {
+            if (dt == null || dt.Rows.Count == 0)
+                return new SAS.Common.Generic.List<PhotoInfo>();
+
+            SAS.Common.Generic.List<PhotoInfo> photosinfoarray = new SAS.Common.Generic.List<PhotoInfo>();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                PhotoInfo photo = new PhotoInfo();
+                photo.Photoid = TypeConverter.ObjectToInt(dt.Rows[i]["photoid"]);
+                photo.Filename = dt.Rows[i]["filename"].ToString();
+                photo.Attachment = dt.Rows[i]["attachment"].ToString();
+                photo.Filesize = TypeConverter.ObjectToInt(dt.Rows[i]["filesize"]);
+                photo.Description = dt.Rows[i]["description"].ToString();
+                photo.Postdate = dt.Rows[i]["postdate"].ToString();
+                photo.Albumid = TypeConverter.ObjectToInt(dt.Rows[i]["albumid"]);
+                photo.Userid = TypeConverter.ObjectToInt(dt.Rows[i]["userid"]);
+                photo.Title = dt.Rows[i]["title"].ToString();
+                photo.Views = TypeConverter.ObjectToInt(dt.Rows[i]["views"]);
+                photo.Commentstatus = (PhotoStatus)TypeConverter.ObjectToInt(dt.Rows[i]["commentstatus"]);
+                photo.Tagstatus = (PhotoStatus)TypeConverter.ObjectToInt(dt.Rows[i]["tagstatus"]);
+                photo.Comments = TypeConverter.ObjectToInt(dt.Rows[i]["comments"]);
+
+                photosinfoarray.Add(photo);
+            }
+            dt.Dispose();
+            return photosinfoarray;
+        }
     }
 }

@@ -11,7 +11,7 @@ using SAS.Entity;
 
 namespace SAS.ManageWeb
 {
-    public partial class login : SAS.Web.UI.BasePage
+    public partial class login : BasePage
     {
         GeneralConfigInfo config;
         protected void Page_Load(object sender, EventArgs e)

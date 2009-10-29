@@ -42,10 +42,16 @@
     <Compile Include="AlbumPlugin.cs" />
     <Compile Include="Albums.cs" />
     <Compile Include="AlbumTags.cs" />
+    <Compile Include="Config\AlbumConfigFileManager.cs" />
+    <Compile Include="Config\AlbumConfigInfo.cs" />
+    <Compile Include="Config\AlbumConfigs.cs" />
     <Compile Include="Data\DbProvider.cs" />
     <Compile Include="Data\DTOProvider.cs" />
     <Compile Include="Data\SqlDataProvider.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="Pages\usercpalbummanage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

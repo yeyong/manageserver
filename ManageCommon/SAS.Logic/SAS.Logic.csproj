@@ -52,6 +52,9 @@
     <Compile Include="Advertisements.cs" />
     <Compile Include="Attachments.cs" />
     <Compile Include="Avatars.cs" />
+    <Compile Include="BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Caches.cs" />
     <Compile Include="Databases.cs" />
     <Compile Include="Emails.cs" />
