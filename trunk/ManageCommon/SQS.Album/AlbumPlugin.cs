@@ -120,12 +120,12 @@ namespace SAS.Album
             return DbProvider.GetInstance().GetAlbumListByCondition(type, focusphotocount, vaildDays);
         }
 
-        public override Discuz.Entity.PhotoInfo GetPhotoEntity(System.Data.IDataReader reader)
+        public override SAS.Entity.PhotoInfo GetPhotoEntity(System.Data.IDataReader reader)
         {
             return DTOProvider.GetPhotoEntity(reader);
         }
 
-        public override Discuz.Entity.AlbumInfo GetAlbumEntity(System.Data.IDataReader reader)
+        public override SAS.Entity.AlbumInfo GetAlbumEntity(System.Data.IDataReader reader)
         {
             return DTOProvider.GetAlbumEntity(reader);
         }
@@ -140,7 +140,7 @@ namespace SAS.Album
             return DbProvider.GetInstance().GetSpaceAlbumByUserId(userid);
         }
 
-        public override Discuz.Common.Generic.List<AlbumCategoryInfo> GetAlbumCategory()
+        public override SAS.Common.Generic.List<AlbumCategoryInfo> GetAlbumCategory()
         {
             return DbProvider.GetInstance().GetAlbumCategory();
         }

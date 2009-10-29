@@ -37,7 +37,7 @@ namespace SAS.Album
                 }
                 else
                 {
-                    builder.AppendFormat(@"{{""photoid"":{0},""userid"":{1},""title"":""{2}"",""image"":""{3}"",""square"":""{4}"",""thumbnail"":""{5}""}},", dr["photoid"], dr["userid"], dr["title"].ToString().Trim().Replace("\"", "\\\""), BaseConfigs.GetForumPath + dr["filename"].ToString().Trim(), Globals.GetSquareImage(BaseConfigs.GetForumPath + dr["filename"].ToString().Trim()), Globals.GetThumbnailImage(BaseConfigs.GetForumPath + dr["filename"].ToString().Trim()));
+                    builder.AppendFormat(@"{{""photoid"":{0},""userid"":{1},""title"":""{2}"",""image"":""{3}"",""square"":""{4}"",""thumbnail"":""{5}""}},", dr["photoid"], dr["userid"], dr["title"].ToString().Trim().Replace("\"", "\\\""), BaseConfigs.GetSitePath + dr["filename"].ToString().Trim(), Globals.GetSquareImage(BaseConfigs.GetSitePath + dr["filename"].ToString().Trim()), Globals.GetThumbnailImage(BaseConfigs.GetSitePath + dr["filename"].ToString().Trim()));
                 }
             }
             builder.Remove(builder.Length - 1, 1);
