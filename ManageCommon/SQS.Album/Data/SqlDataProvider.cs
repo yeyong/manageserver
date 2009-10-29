@@ -134,7 +134,92 @@ namespace SAS.Album.Data
             return (int)DbHelper.ExecuteScalar(CommandType.Text, commandText);
         }
 
+        public bool SaveSpaceAlbum(AlbumInfo spaceAlbum)
+        {
+            DbParameter[] parms = 
+				{
+					DbHelper.MakeInParam("@albumid", (DbType)SqlDbType.Int, 4, spaceAlbum.Albumid),
+					DbHelper.MakeInParam("@albumcateid", (DbType)SqlDbType.Int, 4, spaceAlbum.Albumcateid),
+					DbHelper.MakeInParam("@title", (DbType)SqlDbType.NChar, 50,spaceAlbum.Title),
+					DbHelper.MakeInParam("@description", (DbType)SqlDbType.NChar, 200,spaceAlbum.Description),
+					DbHelper.MakeInParam("@password", (DbType)SqlDbType.NChar, 50,spaceAlbum.Password),
+					DbHelper.MakeInParam("@imgcount", (DbType)SqlDbType.Int, 4,spaceAlbum.Imgcount),
+					DbHelper.MakeInParam("@logo", (DbType)SqlDbType.NChar, 255, spaceAlbum.Logo),
+					DbHelper.MakeInParam("@type", (DbType)SqlDbType.Int, 8,spaceAlbum.Type)
+				};
+            string commandText = String.Format("UPDATE [{0}albums] SET [albumcateid] = @albumcateid, [title] = @title, [description] = @description, [password] = @password, [imgcount] = @imgcount, [logo] = @logo, [altype] = @type WHERE [albumid] = @albumid", BaseConfigs.GetTablePrefix);
+
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+
+            return true;
+        }
+
+        public IDataReader GetFocusPhotoList(int type, int focusphotocount, int validDays)
+        {
+            return GetFocusPhotoList(type, focusphotocount, validDays, -1);
+        }
+
+        public IDataReader GetFocusPhotoList(int type, int focusphotocount, int validDays, int uid)
+        {
+            DbParameter[] parms = {
+                                    DbHelper.MakeInParam("@validDays", (DbType)SqlDbType.Int, 4, validDays),
+                                    DbHelper.MakeInParam("@uid", (DbType)SqlDbType.Int, 4, uid)
+                               };
+            string commandText = string.Format("SELECT TOP {0} [p].* FROM [{1}photos] [p],[{1}albums] [a] WHERE DATEDIFF(d, [postdate], getdate()) < @validDays AND [a].[albumid] = [p].[albumid] AND [a].[altype]=0{2}",
+                                        focusphotocount, BaseConfigs.GetTablePrefix, uid > 1 ? " AND [p].[userid] =@uid" : string.Empty);
+            switch (type)
+            {
+                case 0:
+                    commandText += " ORDER BY [p].[views] DESC";
+                    break;
+                case 1:
+                    commandText += " ORDER BY [p].[comments] DESC";
+                    break;
+                case 2:
+                    commandText += " ORDER BY [p].[postdate] DESC";
+                    break;
+                default:
+                    commandText += " ORDER BY [p].[views] DESC";
+                    break;
+            }
+            return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
+        }
+
         #endregion
+
+        public DataTable GetSearchAlbumList(int pagesize, string albumids)
+        {
+            string commandText = string.Format("SELECT TOP {1} [{0}albums].[albumid], [{0}albums].[title], [{0}albums].[username], [{0}albums].[userid], [{0}albums].[createdatetime], [{0}albums].[imgcount], [{0}albums].[views], [{0}albumcategories].[albumcateid],[{0}albumcategories].[title] AS [categorytitle] FROM [{0}albums] LEFT JOIN [{0}albumcategories] ON [{0}albumcategories].[albumcateid] = [{0}albums].[albumcateid] WHERE [{0}albums].[albumid] IN({2}) ORDER BY CHARINDEX(CONVERT(VARCHAR(8),[{0}albums].[albumid]),'{2}')", BaseConfigs.GetTablePrefix, pagesize, albumids);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        public DataTable GetSpaceAlbumByUserId(int userid)
+        {
+            return DbHelper.ExecuteDataset(CommandType.Text, "SELECT * FROM [" + BaseConfigs.GetTablePrefix + "albums] WHERE [userid]=" + userid).Tables[0];
+        }
+
+        public IDataReader GetAlbumListByCondition(int type, int focusphotocount, int vaildDays)
+        {
+            DbParameter parm = DbHelper.MakeInParam("@vailddays", (DbType)SqlDbType.Int, 4, vaildDays);
+            string commandText = string.Format("SELECT TOP {0} * FROM [{1}albums] WHERE DATEDIFF(d, [createdatetime], getdate()) < @vailddays AND [imgcount]>0 AND [altype]=0", focusphotocount, BaseConfigs.GetTablePrefix);
+
+            switch (type)
+            {
+                case 0:
+                    commandText += " ORDER BY [createdatetime] DESC";
+                    break;
+                case 1:
+                    commandText += " ORDER BY [views] DESC";
+                    break;
+                case 2:
+                    commandText += " ORDER BY [imgcount] DESC";
+                    break;
+                default:
+                    commandText += " ORDER BY [createdatetime] DESC";
+                    break;
+            }
+            return DbHelper.ExecuteReader(CommandType.Text, commandText, parm);
+        }
 
         public IDataReader GetHotTagsListForPhoto(int count)
         {

@@ -49,6 +49,27 @@ namespace SAS.Album.Data
             return album;
         }
 
+        public static PhotoInfo GetPhotoEntity(IDataReader reader)
+        {
+            PhotoInfo photoinfo = new PhotoInfo();
+            photoinfo.Photoid = TypeConverter.ObjectToInt(reader["photoid"]);
+            photoinfo.Filename = reader["filename"].ToString();
+            photoinfo.Attachment = reader["attachment"].ToString();
+            photoinfo.Filesize = TypeConverter.ObjectToInt(reader["filesize"]);
+            photoinfo.Description = reader["description"].ToString();
+            photoinfo.Postdate = reader["postdate"].ToString();
+            photoinfo.Albumid = TypeConverter.ObjectToInt(reader["albumid"]);
+            photoinfo.Userid = TypeConverter.ObjectToInt(reader["userid"]);
+            photoinfo.Title = reader["title"].ToString();
+            photoinfo.Views = TypeConverter.ObjectToInt(reader["views"]);
+            photoinfo.Commentstatus = (PhotoStatus)TypeConverter.ObjectToInt(reader["commentstatus"]);
+            photoinfo.Tagstatus = (PhotoStatus)TypeConverter.ObjectToInt(reader["tagstatus"]);
+            photoinfo.Comments = TypeConverter.ObjectToInt(reader["comments"]);
+            photoinfo.Username = reader["username"].ToString();
+
+            return photoinfo;
+        }
+
         public static SAS.Common.Generic.List<AlbumCategoryInfo> GetAlbumCategory()
         {
             SASCache cache = SASCache.GetCacheService();
