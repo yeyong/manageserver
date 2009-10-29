@@ -68,7 +68,7 @@
 		<%loop singleAlbumInfo albumInfoArray%>
 		<li>
 		<div class="pictureimg">
-			<a href='usercpspacemanagephoto.aspx?albumid={singleAlbumInfo[Albumid]}' title='点击管理相册内容'>
+			<a href='usercpmanagephoto.aspx?albumid={singleAlbumInfo[Albumid]}' title='点击管理相册内容'>
 			<img src='{singleAlbumInfo[Logo]}' alt='{singleAlbumInfo[Title]}' title='{singleAlbumInfo[Description]}' style='border: 1px solid #ccc; padding:4px' />
 			</a>
 			<%if {singleAlbumInfo[altype]}!="0"%>
@@ -77,11 +77,11 @@
 		</div>
 		<h4>{singleAlbumInfo[Title]}</h4>
 		<p>时间:{singleAlbumInfo[Createdatetime]}</p>
-		<p>{singleAlbumInfo[Imgcount]}张图片  <a href="usercpspacephotoadd.aspx?albumid={singleAlbumInfo[Albumid]}">增加图片</a>&nbsp;&nbsp;<a href='usercpmanagealbum.aspx?page={pageid}&mod=edit&albumid={singleAlbumInfo[Albumid]}#edit'>编辑</a>
+		<p>{singleAlbumInfo[Imgcount]}张图片  <a href="usercpphotoadd.aspx?albumid={singleAlbumInfo[Albumid]}">增加图片</a>&nbsp;&nbsp;<a href='usercpmanagealbum.aspx?page={pageid}&mod=edit&albumid={singleAlbumInfo[Albumid]}#edit'>编辑</a>
 			<%csharp%>
 				string temptitle = singleAlbumInfo["Title"].ToString().Trim().Replace("&quot;","\&quot;");
 			<%/csharp%> 
-		&nbsp;&nbsp;<a href='usercpspacemanagealbum.aspx?mod=delete&albumid={singleAlbumInfo[Albumid]}' onclick='return delAlert("{temptitle}")'>删除</a></p>
+		&nbsp;&nbsp;<a href='usercpmanagealbum.aspx?mod=delete&albumid={singleAlbumInfo[Albumid]}' onclick='return delAlert("{temptitle}")'>删除</a></p>
 		</li>
 		<%/loop%>
 		<%else%>

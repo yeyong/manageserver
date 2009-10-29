@@ -59,6 +59,7 @@
     <Compile Include="Databases.cs" />
     <Compile Include="Emails.cs" />
     <Compile Include="Forums.cs" />
+    <Compile Include="FTPs.cs" />
     <Compile Include="HttpModule.cs" />
     <Compile Include="Ips.cs" />
     <Compile Include="IpSearch.cs" />

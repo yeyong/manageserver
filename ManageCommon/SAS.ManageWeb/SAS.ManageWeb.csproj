@@ -689,6 +689,7 @@
     <Content Include="images\common\noavatar_large.gif" />
     <Content Include="images\common\noavatar_medium.gif" />
     <Content Include="images\common\noavatar_small.gif" />
+    <Content Include="images\invalid.gif" />
     <Content Include="images\lock.gif" />
     <Content Include="images\posticons\0.gif" />
     <Content Include="images\posticons\1.gif" />
@@ -1055,6 +1056,7 @@
     <Content Include="config\email.config" />
     <Content Include="config\schedule.config" />
     <Content Include="config\album.config" />
+    <Content Include="config\ftp.config" />
     <None Include="ManagePage\images\admin-gif\Thumbs.db" />
     <None Include="ManagePage\images\ad\Thumbs.db" />
     <None Include="ManagePage\images\Thumbs.db" />
@@ -1062,6 +1064,7 @@
     <Content Include="templates\default\about.png" />
     <Content Include="templates\default\about.xml" />
     <Content Include="templates\default\album\usercpmanagealbum.htm" />
+    <Content Include="templates\default\album\usercpphotoadd.htm" />
     <Content Include="templates\default\album\_albummenu.htm" />
     <Content Include="templates\default\float.css" />
     <Content Include="templates\default\images\arrow_down_big.gif" />
