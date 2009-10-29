@@ -34,15 +34,18 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlbumFeeds.cs" />
     <Compile Include="AlbumPlugin.cs" />
     <Compile Include="Albums.cs" />
     <Compile Include="AlbumTags.cs" />
     <Compile Include="Data\DbProvider.cs" />
     <Compile Include="Data\DTOProvider.cs" />
     <Compile Include="Data\SqlDataProvider.cs" />
+    <Compile Include="Globals.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
