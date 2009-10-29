@@ -71,6 +71,36 @@ hr {border:0 solid #E6E7E1;clear:both;margin:1em 0;}
 .txtarea{height:auto;}
 .checkbox,.radio{margin:0;width:15px;}
 .drop,.dropmenu{background:url(images/icon_drop.gif) no-repeat 96% 45%;padding-right:14px;cursor:pointer;}
+/*UserCenter*/
+.with_side{margin-bottom:10px;background:#FFF url(images/sidebg.gif) repeat-y 100% 0;border:1px solid #C8DCFF;}
+	.cpmain{float:left;overflow:hidden;margin-left:-180px;width:100%;}
+	.cpcontent{margin-left:180px;width:auto;padding:20px 25px;}
+		.cpcontent h1,.main h1{font-size:16px;font-weight:400;margin-bottom:5px;}
+		.cpcontent h1{margin-bottom:15px;}
+.with_side .side{float:right;padding-bottom:20px;width:180px;}
+	.with_side .side .avatar{margin:20px 25px 10px;}
+	.with_side .side h2{margin:20px 25px 10px;color:#999;font-size:14px;}
+	.with_side .side a{color:#09C;text-decoration:underline;}
+	.sideinner{padding:0 25px;}
+	.sideinner .tabs{margin:5px 0;}
+	.sideinner .tabs li{line-height:2em;}
+	.shadowline {margin:5px 0;border-bottom-color:#FFF;border-top-color:#C8DCEC;border-width:1px 0;}
+.cm_header{padding:6px; border:solid #E6E7E1;border-width:1px 0;background:#F5F5F5;}
+.itemtitle{clear:both;overflow:hidden;margin-bottom:10px;line-height:23px;}
+	.itemtitle h1{float:left;margin:0 20px 0 0;}
+	.postpm{color:#09C;float:right;font-weight:700;}
+	.itemtitle ul{float:left;}
+	.itemtitle li{float:left;margin-right:5px;}
+		.itemtitle ul a{display:block;overflow:hidden;height:23px;cursor:pointer;}
+		* html .itemtitle ul a{float:left;}
+		.itemtitle ul a span{display:block;padding:0 7px;*padding:1px 7px 0;*line-height:22px;}
+		.itemtitle ul a:hover{background:#F5F5F5 url(images/btn_block.gif) no-repeat 0 -46px;text-decoration:none;}
+		.itemtitle ul a:hover span{background:url(images/btn_block.gif) no-repeat 100% -69px;}
+		.itemtitle ul .current a,.itemtitle ul .current a:hover{background:url(images/btn_block.gif) no-repeat 0 0;}
+		.itemtitle ul .current a span,.itemtitle ul .current a:hover span{background:url(images/btn_block.gif) no-repeat 100% -23px;color:#FFF;}
+.avatararea { float: left; margin-right: 20px; width: 120px; }
+	.avatararea a { display:block; margin: 15px 0; width: 119px; height: 31px; line-height: 31px; text-align: center; background: url(images/bigbtn.gif) no-repeat; font-size: 14px; }
+	.avatararea a:hover { text-decoration: none; }
 /*footer*/
 #footer{padding:12px 0;}
 	#footlinks{float:right;margin-top:-3px;text-align:right;}

@@ -11,7 +11,7 @@ using SAS.Plugin.Album;
 
 namespace SAS.ManageWeb
 {
-    public class posttopic : SAS.Web.UI.BasePage
+    public class posttopic : BasePage
     {
         /// <summary>
         /// 主题信息

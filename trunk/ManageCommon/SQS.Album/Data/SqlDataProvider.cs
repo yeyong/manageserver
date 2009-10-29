@@ -57,6 +57,25 @@ namespace SAS.Album.Data
 
         #region	相册 操作类
 
+        public bool AddSpaceAlbum(AlbumInfo spaceAlbum)
+        {
+            DbParameter[] parms = 
+				{
+					DbHelper.MakeInParam("@userid", (DbType)SqlDbType.Int, 4,spaceAlbum.Userid),
+					DbHelper.MakeInParam("@albumcateid", (DbType)SqlDbType.Int, 4,spaceAlbum.Albumcateid),
+					DbHelper.MakeInParam("@title", (DbType)SqlDbType.NChar, 50,spaceAlbum.Title),
+					DbHelper.MakeInParam("@description", (DbType)SqlDbType.NChar, 200,spaceAlbum.Description),
+					DbHelper.MakeInParam("@password", (DbType)SqlDbType.NChar, 50,spaceAlbum.Password),
+					DbHelper.MakeInParam("@type", (DbType)SqlDbType.Int, 8,spaceAlbum.Type),
+                    DbHelper.MakeInParam("@username", (DbType)SqlDbType.NChar, 20, spaceAlbum.Username)
+				};
+            string commandText = String.Format("INSERT INTO [{0}albums] ([userid], [username], [albumcateid], [title], [description], [password], [altype]) VALUES ( @userid, @username, @albumcateid, @title, @description, @password, @type)", BaseConfigs.GetTablePrefix);
+            //向关联表中插入相关数据
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+
+            return true;
+        }
+
         public int AddSpacePhoto(PhotoInfo photoinfo)
         {
             DbParameter[] parms = 
@@ -183,6 +202,91 @@ namespace SAS.Album.Data
                     break;
             }
             return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
+        }
+
+        public int GetSpaceAlbumsCount(int userid)
+        {
+            try
+            {
+                return (int)DbHelper.ExecuteScalar(CommandType.Text,
+                                                   "SELECT COUNT([albumid]) FROM [" + BaseConfigs.GetTablePrefix + "albums] WHERE [userid]=@userid",
+                                                   DbHelper.MakeInParam("@userid", (DbType)SqlDbType.Int, 4, userid));
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        public DataTable SpaceAlbumsList(int pageSize, int currentPage, int userid)
+        {
+            DbParameter parm = DbHelper.MakeInParam("@userid", (DbType)SqlDbType.Int, 4, userid);
+            int pageTop = (currentPage - 1) * pageSize;
+            string commandText = "";
+            if (currentPage == 1)
+                commandText = string.Format("SELECT TOP {0} * FROM [{1}albums] WHERE [userid]=@userid ORDER BY [albumid] DESC", pageSize, BaseConfigs.GetTablePrefix);
+            else
+                commandText = string.Format("SELECT TOP {0} * FROM [{1}albums] WHERE [albumid] < (SELECT min([albumid])  FROM "
+                                            + "(SELECT TOP {2} [albumid] FROM [{1}albums] WHERE [userid]=@userid ORDER BY [albumid] DESC) AS tblTmp ) AND [userid]=@userid ORDER BY [albumid] DESC",
+                                            pageSize, BaseConfigs.GetTablePrefix, pageTop);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText, parm).Tables[0];
+        }        
+
+        /// <summary>
+        /// 通过相册ID得到相册中所有图片的信息
+        /// </summary>
+        /// <param name="albumid">相册ID</param>
+        /// <param name="errormsg"></param>
+        /// <returns></returns>
+        public DataTable GetSpacePhotoByAlbumID(int albumid)
+        {
+            DbParameter[] parms = 
+				{
+					DbHelper.MakeInParam("@albumid", (DbType)SqlDbType.Int, 4,albumid)
+				};
+            //向关联表中插入相关数据
+            return DbHelper.ExecuteDataset(CommandType.Text, String.Format("SELECT * FROM [{0}photos] WHERE [albumid] = @albumid", BaseConfigs.GetTablePrefix), parms).Tables[0];
+        }
+
+        public bool DeleteSpacePhotoByIDList(string photoidlist, int albumid, int userid)
+        {
+            if (photoidlist == "")
+                return false;
+            if (!Utils.IsNumericList(photoidlist))
+                return false;
+
+            IDataReader reader = DbHelper.ExecuteReader(CommandType.Text, "SELECT [filename],[isattachment] FROM [" + BaseConfigs.GetTablePrefix + "photos] WHERE [photoid] IN( " + photoidlist + " ) AND [userid]=" + userid, null);
+            while (reader.Read())
+            {
+                try
+                {
+                    string file = Utils.GetMapPath(BaseConfigs.GetSitePath + reader["filename"].ToString());
+                    if (reader["isattachment"].ToString() == "0")    //如果是附件图片，则不删除原图，但缩略图、方图将被删除
+                    {
+                        System.IO.File.Delete(file);
+                    }
+                    string thumbnailimg = file.Replace(Path.GetExtension(file), "_thumbnail" + Path.GetExtension(file));
+                    if (File.Exists(thumbnailimg))
+                        File.Delete(thumbnailimg);
+                    string squareimg = file.Replace(Path.GetExtension(file), "_square" + Path.GetExtension(file));
+                    if (File.Exists(squareimg))
+                        File.Delete(squareimg);
+                }
+                catch
+                { }
+            }
+            reader.Close();
+
+            DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("DELETE FROM [{0}photos] WHERE [photoid] IN ({1}) AND [userid]={2}", BaseConfigs.GetTablePrefix, photoidlist, userid));
+            return true;
+        }
+
+        public bool DeleteSpaceAlbum(int albumId, int userid)
+        {
+            //删除照片及文件
+            string commandText = string.Format("DELETE FROM [{0}albums] WHERE [albumid]={1} AND [userid]={2}", BaseConfigs.GetTablePrefix, albumId, userid);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
+            return true;
         }
 
         #endregion
