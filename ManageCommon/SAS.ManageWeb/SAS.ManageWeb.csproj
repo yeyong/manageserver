@@ -369,6 +369,10 @@
       <Project>{15188167-C7FB-4A1B-9AC0-480A26825AAF}</Project>
       <Name>SAS.Web.UI</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SQS.Album\SAS.Album.csproj">
+      <Project>{F9C383FF-BECD-41A0-A831-1ADE5CE6DD78}</Project>
+      <Name>SAS.Album</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="config\general.config" />
@@ -541,6 +545,8 @@
     <Content Include="aspx\1\test.aspx" />
     <Content Include="bin\Interop.SQLDMO.dll" />
     <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\SAS.Album.dll" />
+    <Content Include="bin\SAS.Album.pdb" />
     <Content Include="bin\SAS.Cache.dll" />
     <Content Include="bin\SAS.Cache.pdb" />
     <Content Include="bin\SAS.Common.dll" />
