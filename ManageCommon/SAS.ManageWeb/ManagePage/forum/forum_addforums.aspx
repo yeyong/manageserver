@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" CodeBehind="forum_addforums.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.forum_addforums" AutoEventWireup="True" %>
+﻿<%@ Page Language="C#" CodeBehind="forum_addforums.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.forum_addforums"%>
 <%@ Register TagPrefix="uc1" TagName="TextareaResize" Src="../UserControls/TextareaResize.ascx" %>
 <%@ Register TagPrefix="cc2" Namespace="SAS.Control" Assembly="SAS.Control" %>
 <%@ Register TagPrefix="cc3" Namespace="SAS.Control" Assembly="SAS.Control" %>
@@ -6,8 +6,7 @@
 
 <html>
 <head>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />    
     <meta name="keywords" content="天狼星,工作室" />
     <meta name="description" content="天狼星工作室综合管理后台" />
     <title>天狼星工作室综合管理后台-栏目增加</title>
@@ -21,6 +20,7 @@
 		<link href="../styles/dntmanager.css" type="text/css" rel="stylesheet" />        
         <link href="../styles/modelpopup.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="../js/modalpopup.js"></script>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
 </head>
 <body>
     <form id="Form1" method="post" runat="server">

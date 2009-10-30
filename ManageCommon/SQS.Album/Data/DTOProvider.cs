@@ -112,5 +112,21 @@ namespace SAS.Album.Data
             dt.Dispose();
             return photosinfoarray;
         }
+
+        public static PhotoInfo GetPhotoInfo(IDataReader reader)
+        {
+            if (reader.Read())
+            {
+                PhotoInfo pi = GetPhotoEntity(reader);
+                reader.Close();
+                return pi;
+            }
+            else
+            {
+                reader.Close();
+                return null;
+            }
+        }
+
     }
 }

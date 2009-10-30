@@ -52,6 +52,9 @@
     <Compile Include="Page\VerifyImagePage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="UserCpPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SAS.Cache\SAS.Cache.csproj">

@@ -1,5 +1,5 @@
-﻿<%@ Page Language="C#" Inherits="SAS.ManageWeb.ManagePage.index" Codebehind="index.aspx.cs" AutoEventWireup="True" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<%@ Page Language="C#" Inherits="SAS.ManageWeb.ManagePage.index" Codebehind="index.aspx.cs"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 
 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml">
 
@@ -10,6 +10,9 @@
 <meta name="description" content="天狼星工作室综合管理后台" />
 <title>天狼星工作室综合管理后台</title>
 <link href="styles/dntmanager.css" rel="stylesheet" type="text/css" />
+<style>
+	body {margin:0;}
+</style>
 </head>
 
 <frameset rows="43,*" frameborder="no" border="0" framespacing="0">
