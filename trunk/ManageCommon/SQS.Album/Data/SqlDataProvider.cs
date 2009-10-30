@@ -301,6 +301,79 @@ namespace SAS.Album.Data
             DbHelper.ExecuteNonQuery(CommandType.StoredProcedure, string.Format("{0}createphototags", BaseConfigs.GetTablePrefix), parms);
         }
 
+        public int GetSpacePhotosCount(int albumid)
+        {
+            try
+            {
+                return (int)DbHelper.ExecuteScalar(CommandType.Text,
+                                                   string.Format("SELECT COUNT([photoid]) FROM [{0}photos] WHERE [albumid]=@albumid", BaseConfigs.GetTablePrefix),
+                                                   DbHelper.MakeInParam("@albumid", (DbType)SqlDbType.Int, 4, albumid));
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        public DataTable SpacePhotosList(int pageSize, int currentPage, int userid, int albumid)
+        {
+            DbParameter[] parms = 
+				{
+					DbHelper.MakeInParam("@userid", (DbType)SqlDbType.Int, 4,userid),
+					DbHelper.MakeInParam("@albumid", (DbType)SqlDbType.Int, 4,albumid)
+				};
+            int pageTop = (currentPage - 1) * pageSize;
+            string commandText = "";
+            if (currentPage == 1)
+                commandText = string.Format("SELECT TOP {0} * FROM [{1}photos] WHERE [userid]=@userid AND [albumid]=@albumid ORDER BY [photoid] ASC", pageSize, BaseConfigs.GetTablePrefix);
+            else
+                commandText = string.Format("SELECT TOP {0} * FROM [{1}photos] WHERE [photoid] > (SELECT MAX([photoid])  FROM (SELECT TOP {2} [photoid] FROM [{1}photos] WHERE "
+                                            + "[userid]=@userid AND [albumid]=@albumid ORDER BY [photoid] ASC) AS tblTmp ) AND [userid]=@userid AND [albumid]=@albumid ORDER BY [photoid] ASC",
+                                            pageSize, BaseConfigs.GetTablePrefix, pageTop);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText, parms).Tables[0];
+        }
+
+        public int ChangeAlbum(int targetAlbumId, string photoIdList, int userid)
+        {
+            if (!Utils.IsNumericList(photoIdList))
+                return 0;
+
+            string commandText = string.Format("UPDATE [{0}photos] SET albumid={1} WHERE photoid IN ({2}) AND [userid]={3}", BaseConfigs.GetTablePrefix, targetAlbumId, photoIdList, userid);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
+        }
+
+        /// <summary>
+        /// 获得照片信息
+        /// </summary>
+        /// <param name="photoid">图片Id</param>
+        /// <param name="albumid">相册Id</param>
+        /// <param name="mode">模式,0=当前图片,1上一张,2下一张</param>
+        /// <returns></returns>
+        public IDataReader GetPhotoByID(int photoid, int albumid, byte mode)
+        {
+            DbParameter[] parms = 
+				{
+					DbHelper.MakeInParam("@photoid", (DbType)SqlDbType.Int, 4,photoid),
+                    DbHelper.MakeInParam("@albumid", (DbType)SqlDbType.Int, 4, albumid)
+				};
+            string commandText;
+
+            switch (mode)
+            {
+                case 1:
+                    commandText = "SELECT TOP 1 * FROM [{0}photos] WHERE [albumid] = @albumid AND [photoid]<@photoid ORDER BY [photoid] DESC";
+                    break;
+                case 2:
+                    commandText = "SELECT TOP 1 * FROM [{0}photos] WHERE [albumid] = @albumid AND [photoid]>@photoid ORDER BY [photoid] ASC";
+                    break;
+                default:
+                    commandText = "SELECT * FROM [{0}photos] WHERE [photoid] = @photoid";
+                    break;
+            }
+            //向关联表中插入相关数据
+            return DbHelper.ExecuteReader(CommandType.Text, string.Format(commandText, BaseConfigs.GetTablePrefix), parms);
+        }
+
         #endregion
 
         public DataTable GetSearchAlbumList(int pagesize, string albumids)

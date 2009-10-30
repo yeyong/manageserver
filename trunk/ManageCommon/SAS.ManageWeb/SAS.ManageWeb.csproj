@@ -62,6 +62,9 @@
       <DependentUpon>test.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="aspx\usercpprofile.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>Default.aspx</DependentUpon>
@@ -96,6 +99,13 @@
     </Compile>
     <Compile Include="ManagePage\forum\forum_option.aspx.designer.cs">
       <DependentUpon>forum_option.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\forum\forum_userrights.aspx.cs">
+      <DependentUpon>forum_userrights.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\forum\forum_userrights.aspx.designer.cs">
+      <DependentUpon>forum_userrights.aspx</DependentUpon>
     </Compile>
     <Compile Include="ManagePage\framepage\managerbody.aspx.cs">
       <DependentUpon>managerbody.aspx</DependentUpon>
@@ -508,32 +518,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="aspx\1\test.aspx" />
-    <Content Include="bin\Interop.SQLDMO.dll" />
-    <Content Include="bin\Newtonsoft.Json.dll" />
-    <Content Include="bin\SAS.Album.dll" />
-    <Content Include="bin\SAS.Album.pdb" />
-    <Content Include="bin\SAS.Cache.dll" />
-    <Content Include="bin\SAS.Cache.pdb" />
-    <Content Include="bin\SAS.Common.dll" />
-    <Content Include="bin\SAS.Common.pdb" />
-    <Content Include="bin\SAS.Config.dll" />
-    <Content Include="bin\SAS.Config.pdb" />
-    <Content Include="bin\SAS.Control.dll" />
-    <Content Include="bin\SAS.Control.pdb" />
-    <Content Include="bin\SAS.Data.dll" />
-    <Content Include="bin\SAS.Data.pdb" />
-    <Content Include="bin\SAS.Data.SqlServer.dll" />
-    <Content Include="bin\SAS.Data.SqlServer.pdb" />
-    <Content Include="bin\SAS.Entity.dll" />
-    <Content Include="bin\SAS.Entity.pdb" />
-    <Content Include="bin\SAS.Logic.dll" />
-    <Content Include="bin\SAS.Logic.pdb" />
-    <Content Include="bin\SAS.ManageWeb.dll" />
-    <Content Include="bin\SAS.ManageWeb.pdb" />
-    <Content Include="bin\SAS.Plugin.dll" />
-    <Content Include="bin\SAS.Plugin.pdb" />
-    <Content Include="bin\SAS.Web.UI.dll" />
-    <Content Include="bin\SAS.Web.UI.pdb" />
     <Content Include="config\localupgradeini.config" />
     <Content Include="editor\cp_editor.htm" />
     <Content Include="editor\editor.css" />
@@ -686,9 +670,17 @@
     <Content Include="images\attachicons\common_new.gif" />
     <Content Include="images\attachicons\image.gif" />
     <Content Include="images\attachicons\rar.gif" />
+    <Content Include="images\common\advclose.gif" />
+    <Content Include="images\common\close.gif" />
+    <Content Include="images\common\editor.gif" />
+    <Content Include="images\common\loading.gif" />
+    <Content Include="images\common\loading_wide.gif" />
+    <Content Include="images\common\newwindow.gif" />
     <Content Include="images\common\noavatar_large.gif" />
     <Content Include="images\common\noavatar_medium.gif" />
     <Content Include="images\common\noavatar_small.gif" />
+    <Content Include="images\common\none.gif" />
+    <Content Include="images\common\resize.gif" />
     <Content Include="images\invalid.gif" />
     <Content Include="images\lock.gif" />
     <Content Include="images\posticons\0.gif" />
@@ -721,6 +713,7 @@
     <Content Include="ManagePage\forum\forum_editforums.aspx" />
     <Content Include="ManagePage\forum\forum_forumstree.aspx" />
     <Content Include="ManagePage\forum\forum_option.aspx" />
+    <Content Include="ManagePage\forum\forum_userrights.aspx" />
     <Content Include="ManagePage\framepage\top.aspx" />
     <Content Include="ManagePage\framepage\managerbody.aspx" />
     <Content Include="ManagePage\global\global_adduser.aspx" />
@@ -1044,6 +1037,8 @@
     <Content Include="ManagePage\styles\datagrid.css" />
     <Content Include="ManagePage\styles\default.css" />
     <Content Include="ManagePage\styles\dntmanager.css" />
+    <Content Include="ManagePage\styles\draglist.css" />
+    <Content Include="ManagePage\styles\editor.css" />
     <Content Include="ManagePage\styles\modelpopup.css" />
     <Content Include="ManagePage\styles\nav.css" />
     <Content Include="ManagePage\styles\tab.css" />
@@ -1064,6 +1059,7 @@
     <Content Include="templates\default\about.png" />
     <Content Include="templates\default\about.xml" />
     <Content Include="templates\default\album\usercpmanagealbum.htm" />
+    <Content Include="templates\default\album\usercpmanagephoto.htm" />
     <Content Include="templates\default\album\usercpphotoadd.htm" />
     <Content Include="templates\default\album\_albummenu.htm" />
     <Content Include="templates\default\float.css" />
@@ -1092,6 +1088,7 @@
     <Content Include="templates\default\studio\_studioheader.htm" />
     <Content Include="templates\default\studio\studioindex.htm" />
     <Content Include="templates\default\templatevariable.xml" />
+    <Content Include="templates\default\usercpprofile.htm" />
     <Content Include="templates\default\_ajaxquickreply.htm" />
     <Content Include="templates\default\_attachmentinfo.htm" />
     <Content Include="templates\default\_copyright.htm" />
