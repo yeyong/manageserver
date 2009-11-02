@@ -45,7 +45,7 @@ namespace SAS.ManageWeb
                     userInfo.Ps_name = Utils.HtmlEncode(LogicUtils.BanWordFilter(SASRequest.GetString("nickname")));
                     userInfo.Ps_gender = SASRequest.GetInt("gender", 0);
                     userInfo.Pd_name = SASRequest.GetString("realname");
-                    userInfo.pd_idcard = SASRequest.GetString("idcard");
+                    userInfo.Pd_idcard = SASRequest.GetString("idcard");
                     userInfo.Pd_mobile = SASRequest.GetString("mobile");
                     userInfo.Pd_phone = SASRequest.GetString("phone");
                     userInfo.Ps_email = SASRequest.GetString("email").Trim().ToLower();
@@ -63,7 +63,7 @@ namespace SAS.ManageWeb
                     userInfo.Pd_MSN = Utils.HtmlEncode(SASRequest.GetString("msn"));
                     userInfo.Pd_Skype = Utils.HtmlEncode(SASRequest.GetString("skype"));
                     userInfo.Pd_address_1 = Utils.HtmlEncode(SASRequest.GetString("location"));
-                    userInfo.pd_bio = Utils.HtmlEncode(LogicUtils.BanWordFilter(SASRequest.GetString("bio")));
+                    userInfo.Pd_bio = Utils.HtmlEncode(LogicUtils.BanWordFilter(SASRequest.GetString("bio")));
 
                     PostpramsInfo postPramsInfo = new PostpramsInfo();
                     postPramsInfo.Usergroupid = usergroupid;
@@ -74,9 +74,9 @@ namespace SAS.ManageWeb
                     //获取提交的内容并进行脏字和Html处理
                     postPramsInfo.Sdetail = Utils.HtmlEncode(LogicUtils.BanWordFilter(SASRequest.GetString("signature"))); ;
                     postPramsInfo.Smileyoff = 1;
-                    postPramsInfo.Bbcodeoff = 1 - usergroupinfo.Allowsigbbcode;
+                    //postPramsInfo.Bbcodeoff = 1 - usergroupinfo.Allowsigbbcode;
                     postPramsInfo.Parseurloff = 1;
-                    postPramsInfo.Showimages = usergroupinfo.Allowsigimgcode;
+                    //postPramsInfo.Showimages = usergroupinfo.Allowsigimgcode;
                     postPramsInfo.Allowhtml = 0;
                     postPramsInfo.Signature = 1;
                     postPramsInfo.Smiliesinfo = Smilies.GetSmiliesListWithInfo();
@@ -84,15 +84,15 @@ namespace SAS.ManageWeb
                     postPramsInfo.Smiliesmax = config.Smiliesmax;
                     postPramsInfo.Signature = 1;
 
-                    userInfo.Sightml = UBB.UBBToHTML(postPramsInfo);
-                    if (userInfo.Sightml.Length >= 1000)
+                    userInfo.Pd_sign = UBB.UBBToHTML(postPramsInfo);
+                    if (userInfo.Pd_sign.Length >= 1000)
                     {
                         AddErrLine("您的签名转换后超出系统最大长度， 请返回修改");
                         return;
                     }
 
-                    userInfo.Signature = postPramsInfo.Sdetail;
-                    userInfo.Sigstatus = SASRequest.GetInt("sigstatus", 0) != 0 ? 1 : 0;
+                    userInfo.Pd_sign = postPramsInfo.Sdetail;
+                    userInfo.Ps_issign = SASRequest.GetInt("sigstatus", 0) != 0 ? 1 : 0;
 
                     Users.UpdateUserProfile(userInfo);
                     OnlineUsers.DeleteUserByUid(userid);    //删除在线表中的信息，使之重建该用户在线表信息
@@ -105,9 +105,9 @@ namespace SAS.ManageWeb
             else
             {
                 UserInfo userInfo = Users.GetUserInfo(userid);//olid
-                avatarFlashParam = Utils.GetRootUrl(BaseConfigs.GetForumPath) + "images/common/camera.swf?nt=1&inajax=1&appid=" +
-                    Utils.MD5(userInfo.Username + userInfo.Password + userInfo.Uid + olid) + "&input=" +
-                    DES.Encode(userid + "," + olid, config.Passwordkey) + "&ucapi=" + Utils.UrlEncode(Utils.GetRootUrl(BaseConfigs.GetForumPath) +
+                avatarFlashParam = Utils.GetRootUrl(BaseConfigs.GetSitePath) + "images/common/camera.swf?nt=1&inajax=1&appid=" +
+                    Utils.MD5(userInfo.Ps_name + userInfo.Ps_password + userInfo.Ps_id + olid) + "&input=" +
+                    DES.Encode(userid + "," + olid, config.Passwordkey) + "&ucapi=" + Utils.UrlEncode(Utils.GetRootUrl(BaseConfigs.GetSitePath) +
                     "tools/ajax.aspx");
                 avatarImage = Avatars.GetAvatarUrl(userid);
             }
@@ -195,9 +195,9 @@ namespace SAS.ManageWeb
                 AddErrLine("昵称 \"" + SASRequest.GetString("nickname") + "\" 不允许在本论坛使用");
                 return;
             }
-            if (SASRequest.GetString("signature").Length > usergroupinfo.Maxsigsize)
+            if (SASRequest.GetString("signature").Length > usergroupinfo.ug_maxsigsize)
             {
-                AddErrLine(string.Format("您的签名长度超过 {0} 字符的限制，请返回修改。", usergroupinfo.Maxsigsize));
+                AddErrLine(string.Format("您的签名长度超过 {0} 字符的限制，请返回修改。", usergroupinfo.ug_maxsigsize));
                 return;
             }
         }

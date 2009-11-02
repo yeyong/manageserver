@@ -1,0 +1,31 @@
+﻿@charset "utf-8";
+
+/* CSS Document */
+body{ margin:0px; padding:0px; font-size:12px; background:#000 url(images/s-bg3.png) repeat-x;}
+div,span,p,ol,ul,li,form,input,dt,dl,dd,em,a,h1,h2,h3,h4,h5,h6,i{ margin:0px; padding:0px;}
+input,ul,li{list-style-type:none;}
+em{ font-style:normal;}
+img{ border:0px;}
+
+
+.line{ zoom:1; line-height:1px; overflow:hidden;}
+.col1{ color:#acacac;}
+.col2{ color:#f190a7;}
+.col3{ color:#beefe9;}
+
+/*链接*/
+.zt1:link, .zt1:visited{ text-decoration:none; color:#fff;}
+.zt1:hover{ color:#fff; text-decoration:none;}
+.zt2:link, .zt2:visited{ text-decoration:none; color:#bcefe8;}
+.zt2:hover{ color:#00c6ff; text-decoration:none;}
+.zt3:link, .zt3:visited{ text-decoration:none; color:#fff;}
+.zt3:hover{ color:#bcefe8; text-decoration:none;}
+.zt4:link, .zt4:visited{ text-decoration:none; color:#96b7ed;}
+.zt4:hover{ color:#bcefe8; text-decoration:none;}
+.zt5:link, .zt5:visited{ text-decoration:none; color:#beefe9;}
+.zt5:hover{ color:#f190a7; text-decoration:none;}
+
+/*输入框*/
+.text1{ border:1px solid #262626; height:20px; line-height:20px; padding:0 2px;}
+/*按钮*/
+input.an1{ width:auto; color:#fff; text-align:center; padding:0px 10px; letter-spacing:1px; line-height:25px; height:25px; background: transparent url(images/s-bg6.png) repeat; border:0px;}

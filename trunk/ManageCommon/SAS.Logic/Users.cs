@@ -240,6 +240,20 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 更新指定用户的个人资料
+        /// </summary>
+        /// <param name="__userinfo">用户信息</param>
+        /// <returns>如果用户不存在则为false, 否则为true</returns>
+        public static bool UpdateUserProfile(UserInfo userinfo)
+        {
+            if (SAS.Data.DataProvider.Users.GetShortUserInfo(userinfo.Ps_id) == null)
+                return false;
+
+            SAS.Data.DataProvider.Users.UpdateUserProfile(userinfo);
+            return true;
+        }
+
+        /// <summary>
         /// 获取当前页用户列表
         /// </summary>
         /// <param name="pageSize">每页记录数</param>

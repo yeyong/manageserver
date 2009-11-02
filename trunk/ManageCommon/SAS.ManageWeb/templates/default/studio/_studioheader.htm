@@ -2,15 +2,45 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
 {meta}
-<title>{pagetitle} {config.seotitle} - {config.spacename} - Powered by Discuz!NT</title>
-<link rel="icon" href="favicon.ico" type="image/x-icon" />
-<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" /> 
+<title>{pagetitle} - {config.sitetitle} {config.seotitle} - Powered by Sirius Studio</title>
+<meta name="generator" content="SAS 1.0.0" />
+<meta name="author" content="Studio after 80s Team and Studio sirius UI Team" />
+<meta name="copyright" content="2009-2009 Studio after 80s." />
+<meta http-equiv="x-ua-compatible" content="ie=7" />
+<link rel="icon" href="{forumurl}favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="{forumurl}favicon.ico" type="image/x-icon" />
+<!--公共样式-->
+<link href="{filerooturl}templates/{templatepath}/studio/comm.css" type="text/css" rel="stylesheet" media="all"/>
+<!--页面样式-->
+<link href="{filerooturl}templates/{templatepath}/studio/main.css" type="text/css" rel="stylesheet" media="all"/>
 {link}
 <script type="text/javascript">
 	var aspxrewrite = {config.aspxrewrite};
+	var IMGDIR = '{filerooturl}templates/{templatepath}/images';
+    var STUDIOIMGDIR = '{filerooturl}templates/{templatepath}/studio/images';
+    var allowfloatwin = {config.allowfloatwin};
+	var rooturl="{rooturl}";
 </script>
 {script}
 </head>
-
 <body>
+<div class="hdnr">
+<!--头部开始-->
+<div class="hd">
+<div class="hdcot">
+	<p class="hdlogo"><a href="#" title="天狼星"><img class="logo" alt="天狼星" title="天狼星" src="{filerooturl}templates/{templatepath}/studio/images/logo.png" /></a></p>
+	<ul class="hdmenu hdmenu1">
+		<li><a href="index.shtml" class="zt1">网站首页</a></li>
+		<li><a href="team.shtml" class="zt1">团队首页</a></li>
+		<li><a href="personal.shtml" class="zt1">个人首页</a></li>
+		<li><a href="activities.shtml" class="zt1">团队活动</a></li>
+		<li><a href="results.shtml" class="zt1">成果展示</a></li>
+		<li><a href="contact.shtml" class="zt1">联系方式</a></li>
+	</ul>
+</div>
+</div>
+<!--头部结束-->
+<!--内容开始-->
+<div class="main">

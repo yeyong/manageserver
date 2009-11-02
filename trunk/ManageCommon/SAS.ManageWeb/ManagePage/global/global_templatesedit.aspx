@@ -86,6 +86,7 @@
         }
     </script>
     <script type="text/javascript" src="../js/common.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
 </head>
 <body>
     <form id="Form1" method="post" runat="server">

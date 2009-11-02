@@ -135,12 +135,12 @@ namespace SAS.Data
         /// <param name="authFlag">验证标志</param>
         void UpdateAuthStr(int uid, string authStr, int authFlag);
 
-        ///// <summary>
-        ///// 更新指定用户的个人资料
-        ///// </summary>
-        ///// <param name="userInfo">用户信息</param>
-        ///// <returns>如果用户不存在则为false, 否则为true</returns>
-        //void UpdateUserProfile(UserInfo userInfo);
+        /// <summary>
+        /// 更新指定用户的个人资料
+        /// </summary>
+        /// <param name="userInfo">用户信息</param>
+        /// <returns>如果用户不存在则为false, 否则为true</returns>
+        void UpdateUserProfile(UserInfo userInfo);
 
         ///// <summary>
         ///// 更新用户论坛设置
@@ -1676,13 +1676,87 @@ namespace SAS.Data
         /// 获取表情
         /// </summary>
         /// <returns></returns>
+        IDataReader GetSmiliesList();
+
+        /// <summary>
+        /// 获取表情
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetSmilies();
+
+        /// <summary>
+        /// 获取表情
+        /// </summary>
+        /// <returns></returns>
         DataTable GetSmiliesListDataTable();
 
         /// <summary>
         /// 获取表情
         /// </summary>
         /// <returns></returns>
+        DataTable GetSmiliesListWithoutType();
+
+        /// <summary>
+        /// 获取表情
+        /// </summary>
+        /// <returns></returns>
         DataTable GetSmilieTypes();
+
+        /// <summary>
+        /// 获取指定type的smilies信息
+        /// </summary>
+        /// <param name="typeId">分类Id</param>
+        /// <returns></returns>
+        DataTable GetSmiliesInfoByType(int typeId);
+
+        /// <summary>
+        /// 删除表情
+        /// </summary>
+        /// <param name="idList">表情Id</param>
+        /// <returns></returns>
+        int DeleteSmilies(string idList);
+
+        /// <summary>
+        /// 添加表情
+        /// </summary>
+        /// <param name="id">表情Id</param>
+        /// <param name="displayOrder">显示顺序</param>
+        /// <param name="type">分类</param>
+        /// <param name="code">快捷编码</param>
+        /// <param name="url">图片地址</param>
+        void AddSmiles(int id, int displayOrder, int type, string code, string url);
+
+        /// <summary>
+        /// 获取最大表情Id
+        /// </summary>
+        /// <returns></returns>
+        int GetMaxSmiliesId();
+
+        /// <summary>
+        /// 更新表情
+        /// </summary>
+        /// <param name="id">表情ID</param>
+        /// <param name="displayOrder">排序</param>
+        /// <param name="type">类型</param>
+        /// <param name="code">代码</param>
+        /// <param name="url">地址</param>
+        /// <returns></returns>
+        int UpdateSmilies(int id, int displayOrder, int type, string code);
+
+        /// <summary>
+        /// 更新表情
+        /// </summary>
+        /// <param name="id">表情ID</param>
+        /// <param name="displayOrder">排序</param>
+        /// <param name="code">代码</param>
+        /// <returns></returns>
+        int UpdateSmiliesPart(string code, int displayOrder, int id);
+
+        /// <summary>
+        /// 按类型删除表情
+        /// </summary>
+        /// <param name="type">类型</param>
+        void DeleteSmilyByType(int type);
 
         #endregion
 

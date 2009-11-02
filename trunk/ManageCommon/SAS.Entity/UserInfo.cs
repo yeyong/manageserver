@@ -374,7 +374,7 @@ namespace SAS.Entity
         /// <summary>
         /// 安全提问码
         /// </summary>
-        public string ps_secques
+        public string Ps_secques
         {
             set { _ps_secques = value.Trim(); }
             get { return _ps_secques; }
@@ -383,7 +383,7 @@ namespace SAS.Entity
         /// <summary>
         /// 页面浏览量
         /// </summary>
-        public int ps_pageviews
+        public int Ps_pageviews
         {
             set { _ps_pageviews = value; }
             get { return _ps_pageviews; }
@@ -392,7 +392,7 @@ namespace SAS.Entity
         /// <summary>
         /// 是否启用个性签名
         /// </summary>
-        public int ps_issign
+        public int Ps_issign
         {
             set { _ps_issign = value; }
             get { return _ps_issign; }
@@ -401,7 +401,7 @@ namespace SAS.Entity
         /// <summary>
         /// 短消息接收类型
         /// </summary>
-        public ReceivePMSettingType ps_newsletter
+        public ReceivePMSettingType Ps_newsletter
         {
             set { _ps_newsletter = value; }
             get { return _ps_newsletter; }
@@ -410,7 +410,7 @@ namespace SAS.Entity
         /// <summary>
         /// 是否隐身
         /// </summary>
-        public int ps_invisible
+        public int Ps_invisible
         {
             set { _ps_invisible = value; }
             get { return _ps_invisible; }
@@ -419,7 +419,7 @@ namespace SAS.Entity
         /// <summary>
         /// 是否有新消息
         /// </summary>
-        public int ps_newpm
+        public int Ps_newpm
         {
             set { _ps_newpm = value; }
             get { return _ps_newpm; }
@@ -428,7 +428,7 @@ namespace SAS.Entity
         /// <summary>
         /// 二次MD5加密时用到的随机值
         /// </summary>
-        public string ps_salt
+        public string Ps_salt
         {
             set { _ps_salt = value; }
             get { return _ps_salt; }
@@ -652,7 +652,7 @@ namespace SAS.Entity
         /// <summary>
         /// 用户验证码
         /// </summary>
-        public string pd_authstr
+        public string Pd_authstr
         {
             set { _pd_authstr = value; }
             get { return _pd_authstr; }
@@ -661,7 +661,7 @@ namespace SAS.Entity
         /// <summary>
         /// 用户验证时间
         /// </summary>
-        public string pd_authtime
+        public string Pd_authtime
         {
             set { _pd_authtime = value; }
             get { return _pd_authtime; }
@@ -670,7 +670,7 @@ namespace SAS.Entity
         /// <summary>
         /// 使用标志(0,未使用;1 用户邮箱验证及用户信息激活, 2 用户密码找回)
         /// </summary>
-        public int pd_authflag
+        public int Pd_authflag
         {
             set { _pd_authflag = value; }
             get { return _pd_authflag; }
@@ -679,7 +679,7 @@ namespace SAS.Entity
         /// <summary>
         /// 身份证号码
         /// </summary>
-        public string pd_idcard
+        public string Pd_idcard
         {
             set { _pd_idcard = value; }
             get { return _pd_idcard; }
@@ -688,7 +688,7 @@ namespace SAS.Entity
         /// <summary>
         /// 用户简介
         /// </summary>
-        public string pd_bio
+        public string Pd_bio
         {
             set { _pd_bio = value; }
             get { return _pd_bio; }

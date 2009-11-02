@@ -63,7 +63,7 @@ namespace SAS.ManageWeb.ManagePage
                     return;
                 }
 
-                string secques = Users.GetUserInfo(oluserinfo.ol_ps_id).ps_secques;
+                string secques = Users.GetUserInfo(oluserinfo.ol_ps_id).Ps_secques;
                 // 管理员身份验?
                 if (Context.Request.Cookies["sasadmin"] == null || Context.Request.Cookies["sasadmin"]["key"] == null || LogicUtils.GetCookiePassword(Context.Request.Cookies["sasadmin"]["key"].ToString(), config.Passwordkey) != (oluserinfo.ol_password + secques + oluserinfo.ol_ps_id.ToString()))
                 {

@@ -130,6 +130,12 @@ namespace SAS.Logic
                         strTemplateid = Utils.GetCookie(Utils.GetTemplateCookieName());
                     }
 
+                    if (context.Request.Url.Host.Trim().Equals("www.sirius.org.cn"))
+                    {
+                        context.RewritePath(forumPath + "aspx/" + strTemplateid + "/studioindex.aspx");
+                        return;
+                    }
+
                     if (requestPath.EndsWith("/index.aspx"))
                     {
                         if (config.Indexpage == 0)

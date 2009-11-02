@@ -59,7 +59,7 @@ namespace SAS.Logic
             ////postPramsInfo.Onlinetimeout = config.Onlinetimeout;
 
             userInfo.Pd_sign = signature;
-            userInfo.pd_authstr = LogicUtils.CreateAuthStr(20);
+            userInfo.Pd_authstr = LogicUtils.CreateAuthStr(20);
             ////userInfo.Sightml = UBB.UBBToHTML(postPramsInfo);
             Users.UpdateUser(userInfo);
 
