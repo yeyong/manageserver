@@ -48,6 +48,7 @@
     <Compile Include="Album\AlbumCategoryInfo.cs" />
     <Compile Include="Album\AlbumInfo.cs" />
     <Compile Include="AttachmentInfo.cs" />
+    <Compile Include="CustomEditorButtonInfo.cs" />
     <Compile Include="ForumInfo.cs" />
     <Compile Include="ForumSpecialUserPower.cs" />
     <Compile Include="IpInfo.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Album\PhotoInfo.cs" />
     <Compile Include="Album\PhotoStatus.cs" />
     <Compile Include="PostInfo.cs" />
+    <Compile Include="PostpramsInfo.cs" />
     <Compile Include="PrivateMessageInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReceivePMSettingType.cs" />
@@ -73,6 +75,12 @@
     <Compile Include="UserGroupInfo.cs" />
     <Compile Include="UserInfo.cs" />
     <Compile Include="VerifyImageInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SAS.Common\SAS.Common.csproj">
+      <Project>{203EB763-E07B-4047-9473-D16F84B2E554}</Project>
+      <Name>SAS.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -57,6 +57,7 @@
     </Compile>
     <Compile Include="Caches.cs" />
     <Compile Include="Databases.cs" />
+    <Compile Include="Editors.cs" />
     <Compile Include="Emails.cs" />
     <Compile Include="Forums.cs" />
     <Compile Include="FTPs.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="ScheduledEvents\EventLogs.cs" />
     <Compile Include="ScheduledEvents\EventManager.cs" />
     <Compile Include="ScheduledEvents\IEvent.cs" />
+    <Compile Include="Smilies.cs" />
     <Compile Include="SoftInfo.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -89,6 +91,7 @@
     <Compile Include="Templates.cs" />
     <Compile Include="TopicStats.cs" />
     <Compile Include="TopicTypes.cs" />
+    <Compile Include="UBB.cs" />
     <Compile Include="Urls.cs" />
     <Compile Include="UserAuthority.cs" />
     <Compile Include="UserCredits.cs" />

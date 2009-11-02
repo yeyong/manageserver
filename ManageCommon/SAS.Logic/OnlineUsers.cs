@@ -279,7 +279,7 @@ namespace SAS.Logic
                     onlineuserinfo.ol_ug_id = short.Parse(ui.Ps_ug_id.ToString());
                     onlineuserinfo.ol_img = GetGroupImg(short.Parse(ui.Ps_ug_id.ToString()));
                     onlineuserinfo.ol_pg_id = short.Parse(ui.Ps_pg_id.ToString());
-                    onlineuserinfo.ol_invisible = short.Parse(ui.ps_invisible.ToString());
+                    onlineuserinfo.ol_invisible = short.Parse(ui.Ps_invisible.ToString());
                     onlineuserinfo.ol_ip = SASRequest.GetIP();
                     onlineuserinfo.ol_lastpostpmtime = "1900-1-1 00:00:00";
                     onlineuserinfo.ol_lastsearchtime = "1900-1-1 00:00:00";

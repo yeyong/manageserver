@@ -346,7 +346,7 @@ namespace SAS.Data.DataProvider
                     }
                 }
                 u.Ps_password = string.Empty;
-                u.ps_secques = string.Empty;
+                u.Ps_secques = string.Empty;
                 u.Ps_nickName = string.Empty;
 
                 list.Add(u);
@@ -370,7 +370,7 @@ namespace SAS.Data.DataProvider
                 u.Ps_id = Utils.StrToInt(reader["Ps_id"], 0);
                 u.Ps_onlinetime = Utils.StrToInt(reader[field], 0);
                 u.Ps_password = string.Empty;
-                u.ps_secques = string.Empty;
+                u.Ps_secques = string.Empty;
                 u.Ps_nickName = string.Empty;
 
                 list.Add(u);

@@ -188,12 +188,12 @@ namespace SAS.Logic
             cookie.Values["pmsound"] = userinfo.Ps_bdSound.ToString();
             if (invisible != 0 || invisible != 1)
             {
-                invisible = userinfo.ps_invisible;
+                invisible = userinfo.Ps_invisible;
             }
             cookie.Values["invisible"] = invisible.ToString();
 
             cookie.Values["referer"] = "index.aspx";
-            cookie.Values["sigstatus"] = userinfo.ps_issign.ToString();
+            cookie.Values["sigstatus"] = userinfo.Ps_issign.ToString();
             cookie.Values["expires"] = expires.ToString();
             if (expires > 0)
             {
@@ -857,6 +857,28 @@ namespace SAS.Logic
 
             Uri u = new Uri(urlReferrer);
             return u.Host != host;
+        }
+
+        /// <summary>
+        /// 是否是过滤的用户名
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="stringarray"></param>
+        /// <returns>bool</returns>
+        public static bool IsBanUsername(string str, string stringarray)
+        {
+            if (Utils.StrIsNullOrEmpty(stringarray))
+                return false;
+
+            stringarray = Regex.Escape(stringarray).Replace(@"\*", @"[\s\S]*");
+            Regex r;
+            foreach (string strarray in Utils.SplitString(stringarray, "\\n"))
+            {
+                r = new Regex(string.Format("^{0}$", strarray), RegexOptions.IgnoreCase);
+                if (r.IsMatch(str) && (!strarray.Trim().Equals("")))
+                    return true;
+            }
+            return false;
         }
 
         /// <summary>

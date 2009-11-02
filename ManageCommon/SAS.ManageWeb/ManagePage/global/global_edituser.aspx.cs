@@ -250,14 +250,14 @@ namespace SAS.ManageWeb.ManagePage
 
             ViewState["Groupid"] = userInfo.Ps_ug_id.ToString();
 
-            invisible.SelectedValue = userInfo.ps_invisible.ToString();
+            invisible.SelectedValue = userInfo.Ps_invisible.ToString();
             joindate.Text = userInfo.Ps_createDate.ToString();
             lastactivity.Text = userInfo.Ps_lastactivity.ToString();
             lastip.Text = userInfo.Ps_loginIP.Trim();
             lastpost.Text = userInfo.Ps_lastChangePass.ToString();
             lastvisit.Text = userInfo.Ps_lastLogin;
-            newpm.SelectedValue = userInfo.ps_newpm.ToString();
-            switch (userInfo.ps_newsletter)
+            newpm.SelectedValue = userInfo.Ps_newpm.ToString();
+            switch (userInfo.Ps_newsletter)
             {
                 case ReceivePMSettingType.ReceiveNone:
                     SetNewsLetter(false, false, false);
@@ -282,14 +282,14 @@ namespace SAS.ManageWeb.ManagePage
                     break;
             }
             oltime.Text = userInfo.Ps_onlinetime.ToString();
-            pageviews.Text = userInfo.ps_pageviews.ToString();
+            pageviews.Text = userInfo.Ps_pageviews.ToString();
             pmsound.Text = userInfo.Ps_bdSound.ToString();
             ////posts.Text = userInfo.Posts.ToString();
             ////ppp.Text = userInfo.Ppp.ToString();
             regip.Text = userInfo.Ps_regIP.Trim();
 
             showemail.SelectedValue = userInfo.Ps_isEmail.ToString();
-            sigstatus.SelectedValue = userInfo.ps_issign.ToString();
+            sigstatus.SelectedValue = userInfo.Ps_issign.ToString();
 
             if ((userInfo.Ps_tempID.ToString() != "") && (userInfo.Ps_tempID.ToString() != "0"))
             {
@@ -320,10 +320,10 @@ namespace SAS.ManageWeb.ManagePage
             //avatar.Text = userInfo.Avatar;
             //avatarheight.Text = userInfo.Avatarheight.ToString();
             //avatarwidth.Text = userInfo.Avatarwidth.ToString();
-            bio.Text = userInfo.pd_bio;
+            bio.Text = userInfo.Pd_bio;
             signature.Text = userInfo.Pd_sign;
             realname.Text = userInfo.Pd_name;
-            idcard.Text = userInfo.pd_idcard;
+            idcard.Text = userInfo.Pd_idcard;
             mobile.Text = userInfo.Pd_mobile;
             phone.Text = userInfo.Pd_phone;
 
@@ -670,26 +670,26 @@ namespace SAS.ManageWeb.ManagePage
                 }
 
                 userInfo.Ps_ug_id = Convert.ToInt32(groupid.SelectedValue);
-                userInfo.ps_invisible = Convert.ToInt32(invisible.SelectedValue);
+                userInfo.Ps_invisible = Convert.ToInt32(invisible.SelectedValue);
                 userInfo.Ps_createDate = joindate.Text;
                 userInfo.Ps_lastactivity = lastactivity.Text;
                 userInfo.Ps_loginIP = lastip.Text;
                 ////userInfo.Lastpost = lastpost.Text;
                 userInfo.Ps_lastLogin = lastvisit.Text;
-                userInfo.ps_newpm = Convert.ToInt32(newpm.SelectedValue);
-                userInfo.ps_newsletter = (ReceivePMSettingType)GetNewsLetter();
+                userInfo.Ps_newpm = Convert.ToInt32(newpm.SelectedValue);
+                userInfo.Ps_newsletter = (ReceivePMSettingType)GetNewsLetter();
                 userInfo.Ps_onlinetime = Convert.ToInt32(oltime.Text);
-                userInfo.ps_pageviews = Convert.ToInt32(pageviews.Text);
+                userInfo.Ps_pageviews = Convert.ToInt32(pageviews.Text);
                 userInfo.Ps_bdSound = Convert.ToInt32(pmsound.Text);
                 ////userInfo.Posts = Convert.ToInt32(posts.Text);
                 ////userInfo.Ppp = Convert.ToInt32(ppp.Text);
                 userInfo.Ps_regIP = regip.Text;
                 ////userInfo.Digestposts = Convert.ToInt32(digestposts.Text);
 
-                if (secques.SelectedValue == "1") userInfo.ps_secques = ""; //清空安全码
+                if (secques.SelectedValue == "1") userInfo.Ps_secques = ""; //清空安全码
 
                 userInfo.Ps_isEmail = Convert.ToInt32(showemail.SelectedValue);
-                userInfo.ps_issign = Convert.ToInt32(sigstatus.SelectedValue);
+                userInfo.Ps_issign = Convert.ToInt32(sigstatus.SelectedValue);
                 userInfo.Ps_tempID = Convert.ToInt32(templateid.SelectedValue);
                 ////userInfo.Tpp = Convert.ToInt32(tpp.Text);
 
@@ -787,7 +787,7 @@ namespace SAS.ManageWeb.ManagePage
                 //userInfo.Avatar = avatar.Text;
                 //userInfo.Avatarheight = Convert.ToInt32(avatarheight.Text);
                 //userInfo.Avatarwidth = Convert.ToInt32(avatarwidth.Text);
-                userInfo.pd_bio = bio.Text;
+                userInfo.Pd_bio = bio.Text;
                 if (signature.Text.Length > UserGroups.GetUserGroupInfo(userInfo.Ps_ug_id).ug_maxsigsize)
                 {
                     errorInfo = "更新的签名长度超过 " + UserGroups.GetUserGroupInfo(userInfo.Ps_ug_id).ug_maxsigsize + " 字符的限制，未能更新。";
@@ -803,7 +803,7 @@ namespace SAS.ManageWeb.ManagePage
                 }
 
                 userInfo.Pd_name = realname.Text;
-                userInfo.pd_idcard = idcard.Text;
+                userInfo.Pd_idcard = idcard.Text;
                 userInfo.Pd_mobile = mobile.Text;
                 userInfo.Pd_phone = phone.Text;
                 ////userInfo.Medals = SASRequest.GetString("medalid");

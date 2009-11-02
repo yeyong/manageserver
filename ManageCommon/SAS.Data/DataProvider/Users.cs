@@ -32,7 +32,7 @@ namespace SAS.Data.DataProvider
                 userinfo.Ps_password = reader["Ps_password"].ToString();
                 userinfo.Ps_pay_pass = reader["Ps_pay_pass"].ToString();
                 userinfo.Ps_init = reader["Ps_init"].ToString();
-                userinfo.ps_secques = reader["ps_secques"].ToString();
+                userinfo.Ps_secques = reader["ps_secques"].ToString();
                 userinfo.Ps_isLock = TypeConverter.StrToBool(reader["Ps_isLock"].ToString().Trim(), false);
                 userinfo.Ps_gender = TypeConverter.StrToInt(reader["Ps_gender"].ToString(), 0);
                 userinfo.Ps_pg_id = TypeConverter.StrToInt(reader["Ps_pg_id"].ToString(), 0);
@@ -46,20 +46,20 @@ namespace SAS.Data.DataProvider
                 userinfo.Ps_lastactivity = Utils.GetStandardDateTime(reader["Ps_lastactivity"].ToString());
                 userinfo.Ps_lastLogin = Utils.GetStandardDateTime(reader["Ps_lastLogin"].ToString());
                 userinfo.Ps_onlinetime = TypeConverter.StrToInt(reader["Ps_onlinetime"].ToString(), 0);
-                userinfo.ps_pageviews = TypeConverter.StrToInt(reader["ps_pageviews"].ToString(), 0);
+                userinfo.Ps_pageviews = TypeConverter.StrToInt(reader["ps_pageviews"].ToString(), 0);
                 userinfo.Ps_credits = TypeConverter.StrToInt(reader["Ps_credits"].ToString(), 0);
                 userinfo.Ps_star = TypeConverter.StrToInt(reader["Ps_star"].ToString(), 0);
                 userinfo.Ps_scores = TypeConverter.StrToInt(reader["Ps_scores"].ToString(), 0);
                 userinfo.Ps_email = reader["Ps_email"].ToString();
                 userinfo.Ps_prev_email = reader["Ps_prev_email"].ToString();
                 userinfo.Pd_birthday = reader["Pd_birthday"].ToString();
-                userinfo.ps_issign = TypeConverter.StrToInt(reader["ps_issign"].ToString(), 0);
+                userinfo.Ps_issign = TypeConverter.StrToInt(reader["ps_issign"].ToString(), 0);
                 userinfo.Ps_tempID = TypeConverter.StrToInt(reader["Ps_tempID"].ToString(), 0);
                 userinfo.Ps_bdSound = TypeConverter.StrToInt(reader["Ps_bdSound"].ToString(), 0);
                 userinfo.Ps_isEmail = TypeConverter.StrToInt(reader["Ps_isEmail"].ToString(), 0);
-                userinfo.ps_newsletter = (ReceivePMSettingType)TypeConverter.StrToInt(reader["ps_newsletter"].ToString(), 0);
-                userinfo.ps_invisible = TypeConverter.StrToInt(reader["ps_invisible"].ToString(), 0);
-                userinfo.ps_newpm = TypeConverter.StrToInt(reader["ps_newpm"].ToString(), 0);
+                userinfo.Ps_newsletter = (ReceivePMSettingType)TypeConverter.StrToInt(reader["ps_newsletter"].ToString(), 0);
+                userinfo.Ps_invisible = TypeConverter.StrToInt(reader["ps_invisible"].ToString(), 0);
+                userinfo.Ps_newpm = TypeConverter.StrToInt(reader["ps_newpm"].ToString(), 0);
                 userinfo.Ps_newMess = TypeConverter.StrToInt(reader["Ps_newMess"].ToString(), 0);
                 userinfo.Ps_status = TypeConverter.StrToInt(reader["Ps_status"].ToString(), 0);
                 userinfo.Ps_isDetail = TypeConverter.StrToBool(reader["Ps_isDetail"].ToString().Trim(), true);
@@ -71,20 +71,20 @@ namespace SAS.Data.DataProvider
                 userinfo.Pd_MSN = reader["Pd_MSN"].ToString();
                 userinfo.Pd_Yahoo = reader["Pd_Yahoo"].ToString();
                 userinfo.Pd_Skype = reader["Pd_Skype"].ToString();
-                userinfo.pd_bio = reader["pd_bio"].ToString();
+                userinfo.Pd_bio = reader["pd_bio"].ToString();
                 //userinfo.Avatar = reader["avatar"].ToString();
                 //userinfo.Avatarwidth = TypeConverter.StrToInt(reader["avatarwidth"].ToString(), 0);
                 //userinfo.Avatarheight = TypeConverter.StrToInt(reader["avatarheight"].ToString(), 0);
                 userinfo.Pd_sign = reader["Pd_sign"].ToString();
-                userinfo.pd_authstr = reader["pd_authstr"].ToString();
-                userinfo.pd_authtime = reader["pd_authtime"].ToString();
-                userinfo.pd_authflag = Byte.Parse(reader["pd_authflag"].ToString());
+                userinfo.Pd_authstr = reader["pd_authstr"].ToString();
+                userinfo.Pd_authtime = reader["pd_authtime"].ToString();
+                userinfo.Pd_authflag = Byte.Parse(reader["pd_authflag"].ToString());
                 userinfo.Pd_name = reader["Pd_name"].ToString();
-                userinfo.pd_idcard = reader["pd_idcard"].ToString();
+                userinfo.Pd_idcard = reader["pd_idcard"].ToString();
                 userinfo.Pd_mobile = reader["Pd_mobile"].ToString();
                 userinfo.Pd_phone = reader["Pd_phone"].ToString();
                 //userinfo.Ignorepm = reader["ignorepm"].ToString();
-                userinfo.ps_salt = reader["ps_salt"].ToString().Trim();
+                userinfo.Ps_salt = reader["ps_salt"].ToString().Trim();
                 userinfo.Pd_logo = TypeConverter.StrToInt(reader["pd_logo"].ToString().Trim(), 0);
                 userinfo.Pd_address_1 = reader["Pd_address_1"].ToString();
                 userinfo.Pd_address_2 = reader["Pd_address_2"].ToString();
@@ -112,7 +112,7 @@ namespace SAS.Data.DataProvider
                 userInfo.Ps_password = reader["Ps_password"].ToString();
                 userInfo.Ps_pay_pass = reader["Ps_pay_pass"].ToString();
                 userInfo.Ps_init = reader["Ps_init"].ToString();
-                userInfo.ps_secques = reader["ps_secques"].ToString();
+                userInfo.Ps_secques = reader["ps_secques"].ToString();
                 userInfo.Ps_isLock = TypeConverter.StrToBool(reader["Ps_isLock"].ToString().Trim(), false);
                 userInfo.Ps_gender = TypeConverter.StrToInt(reader["Ps_gender"].ToString(), 0);
                 userInfo.Ps_pg_id = TypeConverter.StrToInt(reader["Ps_pg_id"].ToString(), 0);
@@ -126,26 +126,26 @@ namespace SAS.Data.DataProvider
                 userInfo.Ps_lastactivity = Utils.GetStandardDateTime(reader["Ps_lastactivity"].ToString());
                 userInfo.Ps_lastLogin = Utils.GetStandardDateTime(reader["Ps_lastLogin"].ToString());
                 userInfo.Ps_onlinetime = TypeConverter.StrToInt(reader["Ps_onlinetime"].ToString(), 0);
-                userInfo.ps_pageviews = TypeConverter.StrToInt(reader["ps_pageviews"].ToString(), 0);
+                userInfo.Ps_pageviews = TypeConverter.StrToInt(reader["ps_pageviews"].ToString(), 0);
                 userInfo.Ps_credits = TypeConverter.StrToInt(reader["Ps_credits"].ToString(), 0);
                 userInfo.Ps_star = TypeConverter.StrToInt(reader["Ps_star"].ToString(), 0);
                 userInfo.Ps_scores = TypeConverter.StrToInt(reader["Ps_scores"].ToString(), 0);
                 userInfo.Ps_email = reader["Ps_email"].ToString();
                 userInfo.Ps_prev_email = reader["Ps_prev_email"].ToString();
                 //userInfo.Pd_birthday = reader["Pd_birthday"].ToString();
-                userInfo.ps_issign = TypeConverter.StrToInt(reader["ps_issign"].ToString(), 0);
+                userInfo.Ps_issign = TypeConverter.StrToInt(reader["ps_issign"].ToString(), 0);
                 userInfo.Ps_tempID = TypeConverter.StrToInt(reader["Ps_tempID"].ToString(), 0);
                 userInfo.Ps_bdSound = TypeConverter.StrToInt(reader["Ps_bdSound"].ToString(), 0);
                 userInfo.Ps_isEmail = TypeConverter.StrToInt(reader["Ps_isEmail"].ToString(), 0);
-                userInfo.ps_newsletter = (ReceivePMSettingType)TypeConverter.StrToInt(reader["ps_newsletter"].ToString(), 0);
-                userInfo.ps_invisible = TypeConverter.StrToInt(reader["ps_invisible"].ToString(), 0);
-                userInfo.ps_newpm = TypeConverter.StrToInt(reader["ps_newpm"].ToString(), 0);
+                userInfo.Ps_newsletter = (ReceivePMSettingType)TypeConverter.StrToInt(reader["ps_newsletter"].ToString(), 0);
+                userInfo.Ps_invisible = TypeConverter.StrToInt(reader["ps_invisible"].ToString(), 0);
+                userInfo.Ps_newpm = TypeConverter.StrToInt(reader["ps_newpm"].ToString(), 0);
                 userInfo.Ps_newMess = TypeConverter.StrToInt(reader["Ps_newMess"].ToString(), 0);
                 userInfo.Ps_status = TypeConverter.StrToInt(reader["Ps_status"].ToString(), 0);
                 userInfo.Ps_isDetail = TypeConverter.StrToBool(reader["Ps_isDetail"].ToString().Trim(), true);
                 userInfo.Ps_isCreater = TypeConverter.StrToBool(reader["Ps_isCreater"].ToString().Trim(), false);
                 userInfo.Ps_creater = TypeConverter.StrToInt(reader["Ps_creater"].ToString().Trim(),0);
-                userInfo.ps_salt = reader["ps_salt"].ToString().Trim();
+                userInfo.Ps_salt = reader["ps_salt"].ToString().Trim();
             }
             reader.Close();
             return userInfo;
@@ -359,15 +359,15 @@ namespace SAS.Data.DataProvider
         }
 
 
-        /////// <summary>
-        /////// 更新指定用户的个人资料
-        /////// </summary>
-        /////// <param name="__userinfo">用户信息</param>
-        /////// <returns>如果用户不存在则为false, 否则为true</returns>
-        ////public static void UpdateUserProfile(UserInfo userinfo)
-        ////{
-        ////    DatabaseProvider.GetInstance().UpdateUserProfile(userinfo);
-        ////}
+        /// <summary>
+        /// 更新指定用户的个人资料
+        /// </summary>
+        /// <param name="__userinfo">用户信息</param>
+        /// <returns>如果用户不存在则为false, 否则为true</returns>
+        public static void UpdateUserProfile(UserInfo userinfo)
+        {
+            DatabaseProvider.GetInstance().UpdateUserProfile(userinfo);
+        }
 
         /////// <summary>
         /////// 更新用户论坛设置

@@ -92,7 +92,7 @@ namespace SAS.ManageWeb.ManagePage
                 #region 显示相关页面登陆提交信息
                 if (Context.Request.Cookies["sasadmin"] == null || Context.Request.Cookies["sasadmin"]["key"] == null ||
                     LogicUtils.GetCookiePassword(Context.Request.Cookies["sasadmin"]["key"].ToString(), config.Passwordkey) !=
-                    (oluserinfo.ol_password + SAS.Logic.Users.GetUserInfo(oluserinfo.ol_ps_id).ps_secques + oluserinfo.ol_ps_id.ToString()))
+                    (oluserinfo.ol_password + SAS.Logic.Users.GetUserInfo(oluserinfo.ol_ps_id).Ps_secques + oluserinfo.ol_ps_id.ToString()))
                 {
                     Msg.Text = "<p class=\"adlrt1 zi1\" style=\" float:right; letter-spacing:1px;\" align=\"absMiddle\"><span class=\"adlrt1tu adbg\"></span>请重新进行管理员登录</p>";
                 }
@@ -166,7 +166,7 @@ namespace SAS.ManageWeb.ManagePage
                     UserGroupInfo userGroupInfo = AdminUserGroups.AdminGetUserGroupInfo(userInfo.Ps_ug_id);
 
                     HttpCookie cookie = new HttpCookie("sasadmin");
-                    cookie.Values["key"] = LogicUtils.SetCookiePassword(userInfo.Ps_password + userInfo.ps_secques + userInfo.Ps_id, config.Passwordkey);
+                    cookie.Values["key"] = LogicUtils.SetCookiePassword(userInfo.Ps_password + userInfo.Ps_secques + userInfo.Ps_id, config.Passwordkey);
                     cookie.Expires = DateTime.Now.AddMinutes(30);
                     HttpContext.Current.Response.AppendCookie(cookie);
 

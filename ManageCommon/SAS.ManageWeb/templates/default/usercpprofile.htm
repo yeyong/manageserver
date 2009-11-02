@@ -1,4 +1,4 @@
-﻿<%template _header%>
+<%template _header%>
 <script type="text/javascript">
 function updateavatar()
 {
@@ -42,20 +42,20 @@ function updateavatar()
 			</tr>
 			<tr>
 				<th><label for="realname">真实姓名</label></th>
-				<td><input name="realname" type="text" id="realname" value="{user.realname}" size="25" class="txt"/></td>
+				<td><input name="realname" type="text" id="realname" value="{user.pd_name}" size="25" class="txt"/></td>
 			</tr>
 			<tr>
 				<th><label for="gender">性别</label></th>
 				<td>
-					<input type="radio" name="gender" value="1"  <%if {user.gender}==1%>checked="checked"<%/if%> ID="Radio1"/>男
-					<input type="radio" name="gender" value="2"  <%if {user.gender}==2%>checked="checked"<%/if%> ID="Radio2"/>女
-					<input type="radio" name="gender" value="0"  <%if {user.gender}==0%>checked="checked"<%/if%> ID="Radio3"/>保密 
+					<input type="radio" name="gender" value="1"  <%if {user.ps_gender}==1%>checked="checked"<%/if%> ID="Radio1"/>男
+					<input type="radio" name="gender" value="2"  <%if {user.ps_gender}==2%>checked="checked"<%/if%> ID="Radio2"/>女
+					<input type="radio" name="gender" value="0"  <%if {user.ps_gender}==0%>checked="checked"<%/if%> ID="Radio3"/>保密 
 				</td>
 			</tr>
 			<tr>
 				<th><label for="bday">生日</label></th>
 				<td>
-					<input name="bday" type="text"  class="txt" id="bday" size="10" value="{user.bday}" style="cursor:default" onClick="showcalendar(event, 'bday', 'cal_startdate', 'cal_enddate', '1980-01-01');" readonly="readonly" />&nbsp;<button type="button" onclick="$('bday').value='';">清空</button>
+					<input name="bday" type="text"  class="txt" id="bday" size="10" value="{user.pd_birthday}" style="cursor:default" onClick="showcalendar(event, 'bday', 'cal_startdate', 'cal_enddate', '1980-01-01');" readonly="readonly" />&nbsp;<button type="button" onclick="$('bday').value='';">清空</button>
 					<input type="hidden" name="cal_startdate" id="cal_startdate" size="10"  value="1900-01-01" />
 					<input type="hidden" name="cal_enddate" id="cal_enddate" size="10"  value="{nowdatetime}" />
 				</td>
@@ -63,74 +63,74 @@ function updateavatar()
 			<tr>
 				<th><label for="location">来自</label></th>
 				<td>
-					<input name="location" type="text" class="txt" id="location" class="colorblue" value="{user.location}" size="25" />
+					<input name="location" type="text" class="txt" id="location" class="colorblue" value="{user.pd_address_1}" size="25" />
 				</td>
 			</tr>
 			<tr>
 				<th><label for="idcard">身份证号码</label></th>
 				<td>
-					<input name="idcard" type="text" id="idcard" value="{user.idcard}" size="25"  class="txt"/>
+					<input name="idcard" type="text" id="idcard" value="{user.pd_idcard}" size="25"  class="txt"/>
 				</td>
 			</tr>
 			<tr>
 				<th><label for="bio">自我介绍</label></th>
 				<td>
-					<textarea name="bio" cols="50" rows="4" id="bio" class="txtarea">{user.bio}</textarea>
+					<textarea name="bio" cols="50" rows="4" id="bio" class="txtarea">{user.pd_bio}</textarea>
 				</td>
 			</tr>
 			<tr>
 				<th><label for="signature">签名</label></th>
 				<td>
-					<textarea id="signature" rows="4" cols="50" name="signature" class="txtarea">{user.signature}</textarea>
+					<textarea id="signature" rows="4" cols="50" name="signature" class="txtarea">{user.pd_sign}</textarea>
 				</td>
 			</tr>
 			<tr>
 				<th></th>
-				<td><input name="sigstatus" type="checkbox" id="sigstatus" value="1" <%if {user.sigstatus}==1%> checked="checked"<%/if%>/>使用签名</td>
+				<td><input name="sigstatus" type="checkbox" id="sigstatus" value="1" <%if {user.ps_issign}==1%> checked="checked"<%/if%>/>使用签名</td>
 			</tr>
 			<tr class="sep_space"><th colspan="2"/></tr>
 			<tr>
 				<th><label for="nickname">昵称</label></th>
-				<td><input type="text" class="txt" size="25" id="nickname" name="nickname" value="{user.nickname}"/></td>
+				<td><input type="text" class="txt" size="25" id="nickname" name="nickname" value="{user.ps_nickName}"/></td>
 			</tr>
 			<tr>
 				<th><label for="mobile">移动电话号码</label></th>
-				<td><input name="mobile" type="text"  class="txt" id="mobile" value="{user.mobile}" size="25" /></td>
+				<td><input name="mobile" type="text"  class="txt" id="mobile" value="{user.pd_mobile}" size="25" /></td>
 			</tr>
 			<tr>
 				<th><label for="phone">固定电话号码</label></th>
-				<td><input name="phone" type="text" id="phone" value="{user.phone}" size="25" class="txt" /></td>
+				<td><input name="phone" type="text" id="phone" value="{user.pd_phone}" size="25" class="txt" /></td>
 			</tr>
 			<tr>
 				<th><label for="EMail">EMail</label></th>
-				<td><input name="email" type="text" id="email" value="{user.email}" size="25" class="txt"/> 
-					<input name="showemail" type="checkbox" id="showemail" value="0" <%if {user.showemail}==0%>checked="checked"<%/if%>/>Email保密
+				<td><input name="email" type="text" id="email" value="{user.ps_email}" size="25" class="txt"/> 
+					<input name="showemail" type="checkbox" id="showemail" value="0" <%if {user.ps_isEmail}==0%>checked="checked"<%/if%>/>Email保密
 				</td>
 			</tr>
 			<tr>
 				<th><label for="website">主页</label></th>
-				<td><input name="website" type="text" id="website" value="{user.website}" size="25" class="txt"/></td>
+				<td><input name="website" type="text" id="website" value="{user.pd_website}" size="25" class="txt"/></td>
 			</tr>
 			<tr class="sep_space"><th colspan="2"/></tr>
 			<tr>
 				<th><label for="msn">MSN Messenger</label></th>
-				<td><input name="msn" type="text" id="msn" value="{user.msn}" size="25"  class="txt"/></td>
+				<td><input name="msn" type="text" id="msn" value="{user.pd_MSN}" size="25"  class="txt"/></td>
 			</tr>
 			<tr>
 				<th><label for="qq">QQ</label></th>
-				<td><input name="qq" type="text" id="qq" value="{user.qq}" size="25"  class="txt"/></td>
+				<td><input name="qq" type="text" id="qq" value="{user.pd_QQ}" size="25"  class="txt"/></td>
 			</tr>
 			<tr>
 				<th><label for="Skype">Skype</label></th>
-				<td><input name="skype" type="text" id="skype" value="{user.skype}" size="25"  class="txt"/></td>
+				<td><input name="skype" type="text" id="skype" value="{user.pd_Skype}" size="25"  class="txt"/></td>
 			</tr>
 			<tr>
 				<th><label for="ICQ">ICQ</label></th>
-				<td><input name="icq" type="text" id="icq" value="{user.icq}" size="25"  class="txt"/></td>
+				<td><input name="icq" type="text" id="icq" value="" size="25"  class="txt"/></td>
 			</tr>
 			<tr>
 				<th><label for="yahoo">Yahoo Messenger</label></th>
-				<td><input name="yahoo" type="text" id="yahoo" value="{user.yahoo}" size="30"  class="txt"/></td>
+				<td><input name="yahoo" type="text" id="yahoo" value="{user.pd_Yahoo}" size="30"  class="txt"/></td>
 			</tr>
 			<tr>
 				<th> </th>

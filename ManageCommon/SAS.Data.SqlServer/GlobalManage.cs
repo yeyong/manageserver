@@ -1631,10 +1631,45 @@ namespace SAS.Data.SqlServer
         /// <summary>
         /// 得到表情符数据
         /// </summary>
+        /// <returns>表情符数据</returns>
+        public IDataReader GetSmiliesList()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}smilies] WHERE [smtype]=0 ORDER BY [displayorder] DESC,[id] ASC",
+                                                DbFields.SMILIES,
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(System.Data.CommandType.Text, commandText);
+        }
+
+        /// <summary>
+        /// 获取表情
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetSmilies()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}smilies] WHERE [smtype]=0", DbFields.SMILIES, BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 得到表情符数据
+        /// </summary>
         /// <returns>表情符表</returns>
         public DataTable GetSmiliesListDataTable()
         {
             string commandText = string.Format("SELECT {0} FROM [{1}smilies] ORDER BY [smtype],[displayorder],[id]",
+                                                DbFields.SMILIES,
+                                                BaseConfigs.GetTablePrefix);
+            DataSet ds = DbHelper.ExecuteDataset(System.Data.CommandType.Text, commandText);
+            return (ds != null && ds.Tables.Count > 0) ? ds.Tables[0] : new DataTable();
+        }
+
+        /// <summary>
+        /// 得到不带分类的表情符数据
+        /// </summary>
+        /// <returns>表情符表</returns>
+        public DataTable GetSmiliesListWithoutType()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}smilies] WHERE [smtype]<>0 ORDER BY [smtype],[displayorder],[id]",
                                                 DbFields.SMILIES,
                                                 BaseConfigs.GetTablePrefix);
             DataSet ds = DbHelper.ExecuteDataset(System.Data.CommandType.Text, commandText);
@@ -1652,6 +1687,115 @@ namespace SAS.Data.SqlServer
                                                 BaseConfigs.GetTablePrefix);
             DataSet ds = DbHelper.ExecuteDataset(System.Data.CommandType.Text, commandText);
             return (ds != null && ds.Tables.Count > 0) ? ds.Tables[0] : new DataTable();
+        }
+
+        /// <summary>
+        /// 获取指定type的smilies信息
+        /// </summary>
+        /// <param name="typeId">分类Id</param>
+        /// <returns></returns>
+        public DataTable GetSmiliesInfoByType(int type)
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}smilies] WHERE [smtype]={2}",
+                                                DbFields.SMILIES,
+                                                BaseConfigs.GetTablePrefix,
+                                                type);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 删除表情
+        /// </summary>
+        /// <param name="idList">表情Id</param>
+        /// <returns></returns>
+        public int DeleteSmilies(string idList)
+        {
+            string commandText = string.Format("DELETE FROM [{0}smilies]  WHERE [ID] IN({1})", BaseConfigs.GetTablePrefix, idList);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
+        }
+
+        /// <summary>
+        /// 添加表情
+        /// </summary>
+        /// <param name="id">表情Id</param>
+        /// <param name="displayOrder">显示顺序</param>
+        /// <param name="type">分类</param>
+        /// <param name="code">快捷编码</param>
+        /// <param name="url">图片地址</param>
+        public void AddSmiles(int id, int displayOrder, int type, string code, string url)
+        {
+            DbParameter[] parms = {
+                                        DbHelper.MakeInParam("@id", (DbType)SqlDbType.Int, 4, id),
+                                        DbHelper.MakeInParam("@displayorder", (DbType)SqlDbType.Int, 4, displayOrder),
+                                        DbHelper.MakeInParam("@type", (DbType)SqlDbType.Int, 4, type),
+                                        DbHelper.MakeInParam("@code", (DbType)SqlDbType.NVarChar, 30, code),
+                                        DbHelper.MakeInParam("@url", (DbType)SqlDbType.VarChar, 60, url)
+                                    };
+
+            string commandText = string.Format("INSERT INTO [{0}smilies] ([id],[displayorder],[smtype],[code],[url]) Values (@id,@displayorder,@type,@code,@url)",
+                                                BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
+        /// 获取最大表情Id
+        /// </summary>
+        /// <returns></returns>
+        public int GetMaxSmiliesId()
+        {
+            string commandText = string.Format("SELECT ISNULL(MAX(id), 0) FROM [{0}smilies]", BaseConfigs.GetTablePrefix);
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText)) + 1;
+        }
+
+        /// <summary>
+        /// 更新表情
+        /// </summary>
+        /// <param name="id">表情ID</param>
+        /// <param name="displayOrder">排序</param>
+        /// <param name="type">类型</param>
+        /// <param name="code">代码</param>
+        /// <param name="url">地址</param>
+        /// <returns></returns>
+        public int UpdateSmilies(int id, int displayOrder, int type, string code)
+        {
+            DbParameter[] parms = { 
+                                        DbHelper.MakeInParam("@id", (DbType)SqlDbType.Int, 4, id),
+                                        DbHelper.MakeInParam("@displayorder", (DbType)SqlDbType.Int, 4, displayOrder),
+                                        DbHelper.MakeInParam("@type", (DbType)SqlDbType.Int, 4, type),
+                                        DbHelper.MakeInParam("@code", (DbType)SqlDbType.NVarChar, 30, code)
+                                    };
+            string commandText = string.Format("UPDATE [{0}smilies] SET [displayorder]=@displayorder,[smtype]=@type,[code]=@code Where [id]=@id",
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
+        /// 更新表情
+        /// </summary>
+        /// <param name="id">表情ID</param>
+        /// <param name="displayOrder">排序</param>
+        /// <param name="code">代码</param>
+        /// <returns></returns>
+        public int UpdateSmiliesPart(string code, int displayOrder, int id)
+        {
+            DbParameter[] parms = { 
+                                        DbHelper.MakeInParam("@id", (DbType)SqlDbType.Int, 4, id),
+                                        DbHelper.MakeInParam("@displayorder", (DbType)SqlDbType.Int, 4, displayOrder),
+                                        DbHelper.MakeInParam("@code", (DbType)SqlDbType.NVarChar, 30, code)
+                                    };
+            string commandText = string.Format("UPDATE [{0}smilies] SET [code]=@code,[displayorder]=@displayorder WHERE [id]=@id",
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
+        /// 按类型删除表情
+        /// </summary>
+        /// <param name="type">类型</param>
+        public void DeleteSmilyByType(int type)
+        {
+            string commandText = string.Format("DELETE FROM [{0}smilies] WHERE [smtype]={1}", BaseConfigs.GetTablePrefix, type);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
         }
 
         #endregion

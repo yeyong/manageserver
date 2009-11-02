@@ -1,0 +1,140 @@
+﻿@charset "utf-8";
+html{ height:100%;}
+.hdnr{ width:100%; height:100%; float:left;}
+/*头部*/
+.hd{ max-width:1240px; height:180px; margin:0px auto; background:url(images/s-bg1.png) center top no-repeat;}
+.hdcot{ width:910px; height:180px; margin:0px auto;}
+.hdlogo{ width:auto; height:auto; float:left;}
+.hdmenu{ width:518px; height:40px; padding-left:20px; float:right; background: transparent url(images/s-bg4.png) no-repeat left bottom; margin-top:70px;}
+.hdmenu li{ width:auto; height:38px; line-height:38px; color:#fff; font-weight:bold; float:left;}
+.hdmenu1 a{ height:38px; line-height:38px; padding:0px 12px; float:left;}
+.hdmenu1 a:hover{ height:38px; line-height:38px; padding:0px 12px; width:auto; background: transparent url(images/s-bg5.png) no-repeat left bottom; float:left;}
+
+/*底部*/
+.ftnr{ width:100%; height:100%; float:left;*float:none; margin-top:30px; position:relative;}
+.ft{ max-width:1240px; height:104px; margin:0px auto; background:url(images/s-bg2.png) right no-repeat;}
+.ftcot{ width:910px; height:30px; margin:0px auto;}
+.ft1{ width:910px; margin:0px auto; height:30px; line-height:30px; color:#bcefe8; float:left;}
+.ft2{ max-width:1240px; margin:0px auto; height:1px; background:#bcefe8;}
+.ft3{ width:910px; margin:0px auto; height:30px; line-height:30px; color:#bcefe8; float:left;}
+
+/*内容*/
+.main{ width:100%; height:100%; float:left; position:relative;}
+.nr{ max-width:1240px; padding:10px 0px; height:370px; margin:0px auto; background:#000;}
+.maincot{ width:910px; height:370px; margin:0px auto;}
+.nr1{ width:620px; height:370px; float:left;}
+.nr1 img{ width:620px; height:370px; float:left;}
+.nr1cot{ width:910px; height:370px; float:left;}
+.nr1cot img{ width:910px; height:370px; float:left;}
+.nr2{ width:270px; height:350px; background:#000; padding:10px; float:right; position:relative;}
+.nr2zi1{ width:auto; height:35px; line-height:35px; text-align:left; color:#00c6ff; font:26px "Microsoft YaHei", Arial, Tahoma; font-weight:500; letter-spacing:1px; margin-bottom:8px;}
+.nr2zi2{ width:auto; height:auto; line-height:25px; text-align:left; color:#fff; font:12px; letter-spacing:1px; clear:left;}
+.nr2an{ width:auto; height:72px; float:left;}
+.nr2an li{ width:72px; height:72px; float:left;margin-right: -1em;}
+.prev_next{ position:absolute; bottom:10px;}
+.prev_next a { float: left; width:72px; height:72px; text-indent: -99999px; background: transparent url(images/s-prev.png) no-repeat left top;  cursor:pointer;}
+.prev_next .next a { background-image: url(images/s-next.png); margin-right: -0.7em;}
+.prev_next a:hover { background-position: left bottom;}
+
+/*团队活动*/
+.act{ max-width:1240px; padding:10px 0px; height:520px; margin:0px auto;}
+.acot{ width:910px; height:370px; margin:0px auto;}
+.actlt{ width:26px; height:50px; float:left; background: transparent url(images/s-left.png) no-repeat; margin-top:218px; cursor:pointer;}
+.actlt a{ width:26px; height:50px; float:left;}
+.actcot{ width:840px; height:504px; padding:8px 9px; background: transparent url(images/s-bg6.png) repeat; float:left; overflow:hidden;}
+#actnr{ width:840px; height:504px; float:left; overflow:hidden;}
+#actnr li{ width:279px; height:504px; float:left; margin:0px 0px 1px 1px; cursor:pointer;}
+#actnr .tu img{ width:279px; height:167px; float:left;}
+#actnr .zinr{ width:239px; height:127px; float:left; padding:20px; background:#000; filter:alpha(opacity=85);-moz-opacity:0.85; opacity: 0.85; position:relative; z-index:1; margin-top:-167px; overflow:hidden;}
+#actnr .zinr1{ width:auto; height:auto; line-height:20px; text-align:left; color:#fff; font:20px "Microsoft YaHei", Arial, Tahoma; font-weight:300;}
+#actnr .zinr2{ width:auto; height:auto; line-height:22px; text-align:left; color:#fff; font-size:12px; letter-spacing:1px;}
+.actrt{ width:26px; height:50px; float:left; background: transparent url(images/s-right.png) no-repeat; margin-top:218px; cursor:pointer;}
+.actrt a{ width:26px; height:50px; float:left;}
+.actbt{ max-width:1240px; height:auto; padding:10px 0px; margin:0px auto;}
+.actbtcot{ width:858px; height:auto; margin:0px auto;}
+.actbt1{ width:842px; height:auto; float:left;}
+.actbt1 li{ width:auto; height:28px; line-height:28px; color:#fff; font-size:12px; float:left; padding:0px 15px; margin-right:8px; background:url(images/s-bg6.png) repeat;}
+.actbt2{ width:300px; height:28px; line-height:28px; color:#fff; font-size:12px; float:left; clear:left; padding:0px 15px; margin-top:8px; background:url(images/s-bg6.png) repeat;}
+
+/*团队活动展示*/
+.actifo{ max-width:1240px; height:auto; padding:10px 0px; margin:0px auto;}
+.actifocot{ width:910px; height:auto; margin:0px auto;}
+.actifo1{ width:910px; height:auto; margin:0px auto; margin-top:20px;}
+.ifo1lt{ width:26px; height:50px; float:left; background: transparent url(images/s-left.png) no-repeat; margin-top:47px; cursor:pointer;}
+.ifo1lt a{ width:26px; height:50px; float:left;}
+.ifo1cot{ width:842px; height:125px; padding:8px; background: transparent url(images/s-bg6.png) repeat; float:left; overflow:hidden;}
+#ifo1nr{ width:842px; height:125px; float:left; overflow:hidden;}
+#ifo1nr li{ width:209px; height:125px; float:left; margin:0px 0px 1px 1px; cursor:pointer;}
+#ifo1nr li img{ width:209px; height:125px; float:left;}
+.ifo1rt{ width:26px; height:50px; float:left; background: transparent url(images/s-right.png) no-repeat; margin-top:47px; cursor:pointer;}
+.ifo1rt a{ width:26px; height:50px; float:left;}
+.actifo2{ width:910px; height:20px; margin:0px auto; clear:left;}
+.actifo3{ width:910px; height:auto; line-height:22px; letter-spacing:1px; color:#fff; font-size:12px; margin:0px auto; clear:left;}
+
+/*作品展示*/
+.reifo{ width:910px; height:auto; margin:0px auto;}
+.reifolt{ width:620px; height:auto; float:left; margin-top:10px; overflow:hidden;}
+.reifort{ width:270px; height:auto; float:right; margin-top:10px;}
+.reifort1{ width:auto; height:auto; float:left;}
+.reifort2{ width:auto; height:auto; float:left; margin-top:15px;}
+.rfrt2t{ width:270px; height:25px; line-height:25px; text-align:left; color:#beefe9; letter-spacing:1px; float:left;}
+.rfrt2nr{ width:270px; height:auto; float:left;}
+.rfrt2nr li{ width:270px; height:140px; float:left; margin-bottom:15px;}
+.rfrt2nrtu img{ width:100px; height:140px; float:left;}
+.rfrt2nrrt{ width:160px; height:140px; float:right;}
+.rfrt2nrrt1{ width:auto; height:25px; line-height:25px; text-align:left; color:#00c6ff; font:18px "Microsoft YaHei", Arial, Tahoma; font-weight:300; float:left;}
+.rfrt2nrrt2{ width:auto; height:auto; line-height:22px; text-align:left; color:#fff; font:12px; letter-spacing:1px; clear:left;}
+.rfrt2nrrt3 a{ width:auto; line-height:28px; padding:0px 5px 0px 18px; background: transparent url(images/s-ellipsis.png) no-repeat left; color:#fff; font-size:12px; letter-spacing:1px; float:left; margin-right:10px;}
+.rfrt2nrrt3 a span{ line-height:28px;}
+.rfrt2nrrt4 a{ width:auto; line-height:28px; padding:0px 5px 0px 18px; background: transparent url(images/s-pencil.png) no-repeat left; color:#fff; font-size:12px; letter-spacing:1px; float:left;}
+.rfrt2nrrt4 a span{ line-height:28px;}
+.rfrt2nrrt5{ width:auto; line-height:28px; padding:0px 5px 0px 18px; background: transparent url(images/s-open.png) no-repeat left; color:#fff; font-size:12px; letter-spacing:1px; float:left; margin-right:10px; position:absolute; bottom:10px;}
+.rfrt2nrrt5 span{ line-height:28px;}
+.rfrt2nrrt6{ width:auto; line-height:28px; padding:0px 5px 0px 18px; background: transparent url(images/s-balloon.png) no-repeat left; color:#fff; font-size:12px; letter-spacing:1px; float:left; position:absolute; bottom:10px; left:100px;}
+.rfrt2nrrt6 span{ line-height:28px;}
+.reifoltnr{ width:620px; height:auto; line-height:25px; letter-spacing:1px; float:left; overflow:hidden; color:#bdefe6;}
+
+/*个人介绍*/
+.perifo{ width:270px; height:143px; float:left; background: transparent url(images/s-bg8.png) repeat-x;}
+.perifo1{ height:143px; float:left;}
+.perifo1 li{ height:28px; line-height:28px; color:#fff; font-size:12px; float:left; text-align:center;}
+.per1{ width:30px; border-right:2px solid #000;}
+.per1 li{ width:30px;}
+.per2{ width:238px;}
+.per2 li{ width:238px;}
+
+/*留言*/
+.mest{ width:910px; height:30px; line-height:30px; border-bottom:1px solid #292629; text-align:left; font-size:18px; color:#beefe9; margin-top:20px;}
+.mesnr{ width:910px; height:auto; float:left;}
+.mesnr li{ width:908px; height:auto; float:left; border:1px solid #101010; margin-top:15px;}
+.mesnr1{ width:908px; height:30px; border-bottom:1px solid #292629;}
+.mesnr1lt a{ width:auto; line-height:30px; padding:0px 5px 0px 18px; background: transparent url(images/s-balloon.png) no-repeat left; color:#beefe9; font-size:12px; letter-spacing:1px; float:left; margin-left:10px;}
+.mesnr1rt{ width:auto; line-height:30px; color:#fff; font-size:12px; letter-spacing:1px; float:right; margin-right:10px;}
+.mesnr1rt2{ margin-left:20px;}
+.mesnr2{ width:888px; padding:10px; height:auto; line-height:25px; color:#fff; letter-spacing:1px; text-indent:2em;}
+.mescot{ width:908px; height:auto; float:left; border-top:1px solid #292629;}
+.mesnr1lt2 a{ width:auto; line-height:30px; padding:0px 5px 0px 18px; background: transparent url(images/s-ellipsis.png) no-repeat left; color:#beefe9; font-size:12px; letter-spacing:1px; float:left; margin-left:10px;}
+.mesbot{ width:auto; height:30px; line-height:30px; text-align:right; margin-top:20px; color:#fff; float:right;}
+.mesbot a{ margin:0px 8px;}
+.mesbot span{ margin:0px 8px;}
+.mes2{ width:910px; height:auto; float:left; margin-top:10px;}
+.mes2nr1{ width:auto; height:auto; float:left; clear:left; margin-top:10px;}
+
+/*联系方式*/
+.coact1{ width:auto; height:auto; line-height:20px; text-align:left; color:#beefe9; font:22px "Microsoft YaHei", Arial, Tahoma; font-weight:300; letter-spacing:3px;}
+.coact2{ width:auto; height:auto; position:absolute; bottom:10px;}
+.coact2zi{ width:auto; height:auto; line-height:25px; text-align:left; color:#beefe9; font-size:14px; letter-spacing:1px;}
+.coact3lt{ width:290px; height:auto; float:left;}
+.coact3lt1{ width:290px; height:auto; line-height:30px; color:#beefe9; font:22px "Microsoft YaHei", Arial, Tahoma; font-weight:300; letter-spacing:3px; float:left; margin-bottom:10px;}
+.coact3lt2{ width:290px; height:auto; line-height:25px; color:#beefe9; font-size:12px; letter-spacing:1px; float:left;}
+.coact3rt{ width:290px; height:auto; float:right;}
+
+/*评论*/
+.commt{ width:535px; height:410px; float:left; padding:10px;}
+.commt1{ width:100%; height:30px; line-height:30px; text-align:left; color:#00c6ff; font:26px "Microsoft YaHei", Arial, Tahoma; font-weight:300; letter-spacing:3px; float:left;}
+.commt2{ width:100%; height:30px; line-height:30px; text-align:left; color:#beefe9; font-size:12px; letter-spacing:1px; float:left; margin:10px 0px;}
+.commt3{ width:100%; height:auto; float:left;}
+.commt3 li{ width:107px; height:25px; text-align:left; float:left; color:#fff;}
+.commt3 li span{ line-height:20px; letter-spacing:1px; margin-left:2px;}
+
+
