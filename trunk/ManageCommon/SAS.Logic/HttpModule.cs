@@ -132,8 +132,11 @@ namespace SAS.Logic
 
                     if (context.Request.Url.Host.Trim().Equals("www.sirius.org.cn"))
                     {
-                        context.RewritePath(forumPath + "aspx/" + strTemplateid + "/studioindex.aspx");
-                        return;
+                        if (requestPath.EndsWith("/index.aspx"))
+                        {
+                            context.RewritePath(forumPath + "aspx/" + strTemplateid + "/studioindex.aspx");
+                            return;
+                        }
                     }
 
                     if (requestPath.EndsWith("/index.aspx"))
