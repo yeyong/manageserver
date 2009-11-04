@@ -9,7 +9,7 @@ html{ height:100%;}
 .hdmenu li{ width:auto; height:38px; line-height:38px; color:#fff; font-weight:bold; float:left;}
 .hdmenu1 a{ height:38px; line-height:38px; padding:0px 12px; float:left;}
 .hdmenu1 a:hover{ height:38px; line-height:38px; padding:0px 12px; width:auto; background: transparent url(images/s-bg5.png) no-repeat left bottom; float:left;}
-
+.hdmenu2{ height:38px; line-height:38px; width:auto; background: transparent url(images/s-bg5.png) no-repeat left bottom; float:left;}
 /*底部*/
 .ftnr{ width:100%; height:100%; float:left;*float:none; margin-top:30px; position:relative;}
 .ft{ max-width:1240px; height:104px; margin:0px auto; background:url(images/s-bg2.png) right no-repeat;}
@@ -29,11 +29,12 @@ html{ height:100%;}
 .nr2{ width:270px; height:350px; background:#000; padding:10px; float:right; position:relative;}
 .nr2zi1{ width:auto; height:35px; line-height:35px; text-align:left; color:#00c6ff; font:26px "Microsoft YaHei", Arial, Tahoma; font-weight:500; letter-spacing:1px; margin-bottom:8px;}
 .nr2zi2{ width:auto; height:auto; line-height:25px; text-align:left; color:#fff; font:12px; letter-spacing:1px; clear:left;}
-.nr2an{ width:auto; height:72px; float:left;}
+
+.nr2an{ width:144px; height:72px; float:right; text-align:left; z-index:1; margin-top:-72px; position:relative; margin-right:130px; display:inline;}
 .nr2an li{ width:72px; height:72px; float:left;margin-right: -1em;}
-.prev_next{ position:absolute; bottom:10px;}
-.prev_next a { float: left; width:72px; height:72px; text-indent: -99999px; background: transparent url(images/s-prev.png) no-repeat left top;  cursor:pointer;}
-.prev_next .next a { background-image: url(images/s-next.png); margin-right: -0.7em;}
+.prev_next{ bottom:10px;}
+.prev_next a { float: left; width:72px; height:72px; text-indent: -99999px; background: transparent url(images/s-prev.png) no-repeat left top; cursor:pointer;}
+.prev_next .next a { background-image: url(images/s-next.png); margin-right: -0.7em; float: left;}
 .prev_next a:hover { background-position: left bottom;}
 
 /*团队活动*/
@@ -92,7 +93,8 @@ html{ height:100%;}
 .rfrt2nrrt5 span{ line-height:28px;}
 .rfrt2nrrt6{ width:auto; line-height:28px; padding:0px 5px 0px 18px; background: transparent url(images/s-balloon.png) no-repeat left; color:#fff; font-size:12px; letter-spacing:1px; float:left; position:absolute; bottom:10px; left:100px;}
 .rfrt2nrrt6 span{ line-height:28px;}
-.reifoltnr{ width:620px; height:auto; line-height:25px; letter-spacing:1px; float:left; overflow:hidden; color:#bdefe6;}
+.reifoltnr{ width:620px; height:auto; line-height:25px; letter-spacing:1px; float:left; overflow:hidden; color:#bdefe6; padding:10px 0px;}
+.reifoltit{ width:620px; height:30px; line-height:30px; text-align:left; color:#fff; font-size:18px; border-bottom:1px solid #292629; float:left;}
 
 /*个人介绍*/
 .perifo{ width:270px; height:143px; float:left; background: transparent url(images/s-bg8.png) repeat-x;}
