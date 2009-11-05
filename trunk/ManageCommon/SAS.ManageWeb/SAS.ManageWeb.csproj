@@ -275,6 +275,13 @@
     <Compile Include="ManagePage\rapidset\systeminf.aspx.designer.cs">
       <DependentUpon>systeminf.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\sirius\sirius_addteam.aspx.cs">
+      <DependentUpon>sirius_addteam.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\sirius\sirius_addteam.aspx.designer.cs">
+      <DependentUpon>sirius_addteam.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\syslogin.aspx.cs">
       <DependentUpon>syslogin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1036,6 +1043,7 @@
     <Content Include="ManagePage\rapidset\managesubmenu.aspx" />
     <Content Include="ManagePage\rapidset\managesubmenuitem.aspx" />
     <Content Include="ManagePage\rapidset\systeminf.aspx" />
+    <Content Include="ManagePage\sirius\sirius_addteam.aspx" />
     <Content Include="ManagePage\styles\calendar.css" />
     <Content Include="ManagePage\styles\colorpicker.css" />
     <Content Include="ManagePage\styles\datagrid.css" />
@@ -1056,6 +1064,7 @@
     <Content Include="config\schedule.config" />
     <Content Include="config\album.config" />
     <Content Include="config\ftp.config" />
+    <Content Include="config\sirius.config" />
     <None Include="ManagePage\images\admin-gif\Thumbs.db" />
     <None Include="ManagePage\images\ad\Thumbs.db" />
     <None Include="ManagePage\images\Thumbs.db" />

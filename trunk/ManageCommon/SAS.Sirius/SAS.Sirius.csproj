@@ -37,6 +37,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\SiriusConfigFileManager.cs" />
+    <Compile Include="Config\SiriusConfigInfo.cs" />
+    <Compile Include="Config\SiriusConfigs.cs" />
+    <Compile Include="Data\DbProvider.cs" />
+    <Compile Include="Data\SqlDataProvider.cs" />
     <Compile Include="Pages\personindex.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -47,6 +52,8 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sirius.cs" />
+    <Compile Include="SiriusPlugin.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SAS.Cache\SAS.Cache.csproj">
@@ -61,6 +68,10 @@
       <Project>{5325F618-33FA-4B03-9A3E-96ED8C554F6C}</Project>
       <Name>SAS.Config</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SAS.Data\SAS.Data.csproj">
+      <Project>{E15BF13F-EC22-47A3-ACF4-AA79738FB7E8}</Project>
+      <Name>SAS.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SAS.Entity\SAS.Entity.csproj">
       <Project>{F6CFD248-E9E3-480A-B518-526298AAF81E}</Project>
       <Name>SAS.Entity</Name>
@@ -69,6 +80,13 @@
       <Project>{9145299A-21C2-4558-A956-2DBDCBF477DE}</Project>
       <Name>SAS.Logic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SAS.Plugin\SAS.Plugin.csproj">
+      <Project>{2EA29B20-569F-421C-B359-7E7F8C7045CD}</Project>
+      <Name>SAS.Plugin</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Admin\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
