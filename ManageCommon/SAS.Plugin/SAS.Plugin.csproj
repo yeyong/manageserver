@@ -54,6 +54,8 @@
     <Compile Include="Preview\PreviewHelper.cs" />
     <Compile Include="Preview\PreviewProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sirius\SiriusPluginBase.cs" />
+    <Compile Include="Sirius\SiriusPluginProvider.cs" />
     <Compile Include="VerifyImage\IVerifyImage.cs" />
     <Compile Include="VerifyImage\VerifyImage.cs" />
     <Compile Include="VerifyImage\VerifyImageProvider.cs" />

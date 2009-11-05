@@ -10,11 +10,12 @@ using System.Web.UI.WebControls;
 using SAS.Common;
 using SAS.Logic;
 using SAS.Entity;
+using SAS.Sirius.Config;
 
 namespace SAS.Sirius.Pages
 {
     /// <summary>
-    /// 团队站点基类
+    /// Sirius studio 站点基类
     /// </summary>
     public class StudioBasePage : BasePage
     {
@@ -30,7 +31,17 @@ namespace SAS.Sirius.Pages
         /// 页码
         /// </summary>
         public string pagenumbers = "";
+        /// <summary>
+        /// sirius配置信息
+        /// </summary>
+        public SiriusConfigInfo siriusconfig = new SiriusConfigInfo();
 
-        public string filerooturl = "http://www.sirius.com/";
+        public string filerooturl = "";
+
+        protected override void ShowPage()
+        {
+            siriusconfig = SiriusConfigs.GetConfig();
+            filerooturl = siriusconfig.FileUrlAddress;
+        }
     }
 }
