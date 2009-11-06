@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Page\AdminPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="admin\AdminForums.cs" />
     <Compile Include="admin\AdminForumStats.cs" />
     <Compile Include="admin\AdminGroups.cs" />
@@ -52,7 +55,7 @@
     <Compile Include="Advertisements.cs" />
     <Compile Include="Attachments.cs" />
     <Compile Include="Avatars.cs" />
-    <Compile Include="BasePage.cs">
+    <Compile Include="Page\BasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Caches.cs" />

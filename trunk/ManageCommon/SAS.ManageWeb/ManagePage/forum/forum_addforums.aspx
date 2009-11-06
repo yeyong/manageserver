@@ -17,7 +17,7 @@
 	    .td_alternating_item2{font-size: 12px;background-color: #F5F7F8;}
 	    </style>
 		<script type="text/javascript" src="../js/common.js"></script>
-		<link href="../styles/dntmanager.css" type="text/css" rel="stylesheet" />        
+		<link href="../styles/dntmanager.css" type="text/css" rel="stylesheet" />
         <link href="../styles/modelpopup.css" type="text/css" rel="stylesheet" />
         <script type="text/javascript" src="../js/modalpopup.js"></script>
         <meta http-equiv="X-UA-Compatible" content="IE=7" />
