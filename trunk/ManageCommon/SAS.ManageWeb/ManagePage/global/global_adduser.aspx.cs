@@ -12,7 +12,7 @@ using SAS.Plugin.PasswordMode;
 
 namespace SAS.ManageWeb.ManagePage
 {
-    public partial class global_adduser : SAS.Web.UI.AdminPage
+    public partial class global_adduser : AdminPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

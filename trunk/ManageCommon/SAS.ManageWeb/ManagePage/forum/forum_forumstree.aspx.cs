@@ -9,7 +9,7 @@ using SAS.Config;
 
 namespace SAS.ManageWeb.ManagePage
 {
-    public partial class forum_forumstree : SAS.Web.UI.AdminPage
+    public partial class forum_forumstree : AdminPage
     {
         #region 图标信息变量声明
 

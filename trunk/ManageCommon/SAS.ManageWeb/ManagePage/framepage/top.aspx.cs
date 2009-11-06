@@ -13,7 +13,7 @@ using SAS.Common.XML;
 
 namespace SAS.ManageWeb.ManagePage
 {
-    public partial class top : SAS.Web.UI.AdminPage
+    public partial class top : AdminPage
     {
         public StringBuilder sb = new StringBuilder();
 

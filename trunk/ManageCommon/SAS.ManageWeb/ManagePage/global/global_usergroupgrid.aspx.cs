@@ -12,7 +12,7 @@ namespace SAS.ManageWeb.ManagePage
     /// <summary>
     /// 用户组列表
     /// </summary>
-    public partial class global_usergroupgrid : SAS.Web.UI.AdminPage
+    public partial class global_usergroupgrid : AdminPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

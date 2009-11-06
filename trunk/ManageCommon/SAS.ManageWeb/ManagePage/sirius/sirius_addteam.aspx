@@ -9,7 +9,7 @@
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
     <meta name="keywords" content="天狼星,工作室" />
     <meta name="description" content="天狼星工作室综合管理后台" />
-    <title>天狼星工作室综合管理后台-add team</title>
+    <title>天狼星工作室综合管理后台-添加团队</title>
     <link href="../styles/datagrid.css" type="text/css" rel="stylesheet" />
     <link href="../styles/tab.css" type="text/css" rel="stylesheet" />
     <style type="text/css">
@@ -34,6 +34,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=7" />
 </head>
 <body>
+   <img id="img_hidden" style="position:absolute;top:-100000px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='image');width:400;height:300"></img>
    <form id="Form1" method="post" runat="server">
 	    <div class="Navbutton" style="width:98%;">
 	    <table width="100%">
@@ -46,78 +47,51 @@
                 <td class="panelbox" align="left">
                     <table width="100%">
                         <tr>
-						    <td style="width: 150px">论坛名称:</td>
+						    <td style="width: 150px">团队名称:</td>
 						    <td>
 							    <cc2:TextBox id="name" runat="server" CanBeNull="必填" IsReplaceInvertedComma="false" size="20"  MaxLength="49"></cc2:TextBox>
 							</td>
                         </tr>
                         <tr>
-						    <td>显示模式:</td>
+						    <td style="width: 90px">是否启用:</td>
 						    <td>
-						        <table>
-						            <tr>
-						                <td>
-						                    <cc2:RadioButtonList id="colcount" runat="server" AutoPostBack="false" RepeatColumns="1"  HintTitle="提示"
-						                     HintInfo="用来设置该论坛(或分类)的子论坛在列表中的显示方式">
-								                <asp:ListItem Value="1">传统模式[默认]</asp:ListItem>
-								                <asp:ListItem Value="2">子版块横排模式</asp:ListItem>
-							                </cc2:RadioButtonList>
-						                </td>
-					                    <td valign=bottom>
-			 		    	                <div id="showcolnum" runat="server">
-			 		    	                <cc2:TextBox id="colcountnumber" runat="server" Size="2" Text="4" MaxLength="1"></cc2:TextBox>
-			 		    	                </div>
-			 		                   </td>
-			 		               </tr>
-			 		           </table>
-			 	    	    </td>
-                        </tr>
-                        <tr>
-						    <td style="width: 90px">是否显示:</td>
-						    <td>
-						        <cc2:RadioButtonList id="status" runat="server" RepeatColumns="2"  HintInfo="设置本版块是否是隐藏版块" >
-						        <asp:ListItem Value="1" Selected="True">显示</asp:ListItem>
-						        <asp:ListItem Value="0" >不显示</asp:ListItem>
+						        <cc2:RadioButtonList id="status" runat="server" RepeatColumns="2"  HintInfo="设置该团队是否启用" >
+						        <asp:ListItem Value="1" Selected="True">启用</asp:ListItem>
+						        <asp:ListItem Value="0" >不启用</asp:ListItem>
 						        </cc2:RadioButtonList>
 						    </td>
                         </tr>
 					    <tr>
-						    <td>所属类别:</td>
+						    <td>成员列表:</td>
 						    <td>
-						        <table>
-						          <tr>
-						            <td>
-								        <cc2:RadioButtonList id="addtype" runat="server" RepeatColumns="2">
-								            <asp:ListItem Value="0" >论坛分类</asp:ListItem>
-								            <asp:ListItem Value="1" Selected="True">论坛版块</asp:ListItem>
-								        </cc2:RadioButtonList>
-							        </td>
-							      </tr>
-							      <tr>	
-							        <td>
-								        &nbsp;&nbsp;
-								        <div id="showtargetforum" runat="server">
-								            <cc2:DropDownTreeList id="targetforumid" runat="server" Visible="true"></cc2:DropDownTreeList>
-								        </div>
-								    </td>
-							      </tr>
-							     </table>
-					        </td>
-					    </tr>
-					    <tr>
-						    <td>版主列表:</td>
-						    <td>
-							    <uc1:TextareaResize id="moderators" runat="server" HintTitle="提示" HintInfo="当前版块版主列表，以&amp;quot;,&amp;quot;进行分割" 
+							    <uc1:TextareaResize id="moderators" runat="server" HintTitle="提示" HintInfo="当前团队成员列表，以&amp;quot;,&amp;quot;进行分割" 
 							    controlname="TabControl1:tabPage51:moderators" Cols="40" Rows="5"></uc1:TextareaResize>
 							    <br />以','进行分割,如:lisi,zhangsan
 							</td>
 					    </tr>
                         <tr>
-		                    <td>URL重写名称:</td>
+		                    <td>团队图片地址:</td>
 		                    <td>
-			                    <%=root%><cc2:textbox id="rewritename" runat="server" Width="250px" RequiredFieldType="暂无校验" IsReplaceInvertedComma="false"  MaxLength="20" HintInfo="设置版块URL重写,会以&amp;quot;http://nt.discuz.net/rewritename/&amp;quot;的形式显示,以字母开头,其后可以是字母或数字,但不可包含<br>&amp;quot;install,upgrade,admin,aspx,tools,archive,space&amp;quot;中任意一个字符串"></cc2:textbox>/<%if (config.Iisurlrewrite == 0){%>list.aspx<%}%>
-			                    <input type="hidden" id="oldrewritename" runat="server" />
-		                    </td>
+		                    <table id="tab1" cellspacing="0" cellpadding="0" width="450">
+		                    <tbody>
+		                        <tr>
+		                            <td>图片描述:</td>
+		                        </tr>
+		                        <tr>
+		                            <td><cc2:TextBox ID="imgDesc" runat="server" Width="300" Height="50" TextMode="MultiLine" IsReplaceInvertedComma="false"></cc2:TextBox></td>
+		                        </tr>
+                                <tr>
+                                    <td>选择图片:</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="file" id="photo{num}" onchange="PhotoView({num})" size="50" name="photo1">
+                                    </td>
+                                </tr>
+		                    </tbody>
+		                    </table>
+							    <cc2:TextBox id="imgs" runat="server" CanBeNull="必填" IsReplaceInvertedComma="false" size="20"  MaxLength="49"></cc2:TextBox>
+							</td>
                         </tr>
 	                    <tr>
 		                    <td >版块描述:</td>

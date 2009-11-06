@@ -11,7 +11,7 @@ using SAS.Config;
 
 namespace SAS.ManageWeb.ManagePage
 {
-    public partial class forum_option : SAS.Web.UI.AdminPage
+    public partial class forum_option : AdminPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

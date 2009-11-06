@@ -12,7 +12,7 @@ using SAS.Config;
 
 namespace SAS.ManageWeb.ManagePage
 {
-    public partial class managemenubackupfile : SAS.Web.UI.AdminPage
+    public partial class managemenubackupfile : AdminPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

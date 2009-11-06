@@ -13,7 +13,7 @@ using SAS.Plugin.Album;
 
 namespace SAS.ManageWeb.ManagePage
 {
-    public partial class global_editadminusergroup : SAS.Web.UI.AdminPage
+    public partial class global_editadminusergroup : AdminPage
     {
         public AdminGroupInfo adminGroupInfo = new AdminGroupInfo();
         public UserGroupInfo userGroupInfo = new UserGroupInfo();

@@ -15,7 +15,7 @@ namespace SAS.ManageWeb.ManagePage
     /// <summary>
     /// 模板列表
     /// </summary>
-    public partial class global_templatesgrid : SAS.Web.UI.AdminPage
+    public partial class global_templatesgrid : AdminPage
     {
         public string path = null;
 

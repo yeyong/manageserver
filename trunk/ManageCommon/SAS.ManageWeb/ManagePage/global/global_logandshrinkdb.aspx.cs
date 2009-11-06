@@ -14,7 +14,7 @@ namespace SAS.ManageWeb.ManagePage
     /// <summary>
     /// 日志管理
     /// </summary>
-    public partial class global_logandshrinkdb : SAS.Web.UI.AdminPage
+    public partial class global_logandshrinkdb : AdminPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

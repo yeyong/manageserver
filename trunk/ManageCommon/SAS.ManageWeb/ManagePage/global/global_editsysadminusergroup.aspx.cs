@@ -15,7 +15,7 @@ namespace SAS.ManageWeb.ManagePage
     /// <summary>
     /// 编辑系统管理组
     /// </summary>
-    public partial class global_editsysadminusergroup : SAS.Web.UI.AdminPage
+    public partial class global_editsysadminusergroup : AdminPage
     {
         public UserGroupInfo userGroupInfo = new UserGroupInfo();
         protected SAS.Control.CheckBoxList admingroupright;

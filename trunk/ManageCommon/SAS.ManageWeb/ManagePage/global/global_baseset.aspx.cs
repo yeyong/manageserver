@@ -12,7 +12,7 @@ namespace SAS.ManageWeb.ManagePage
     /// <summary>
     /// 基本设置
     /// </summary>
-    public partial class global_baseset : SAS.Web.UI.AdminPage
+    public partial class global_baseset : AdminPage
     {
         protected SAS.Control.RadioButtonList iisurlrewrite;
         protected bool haveAlbum;

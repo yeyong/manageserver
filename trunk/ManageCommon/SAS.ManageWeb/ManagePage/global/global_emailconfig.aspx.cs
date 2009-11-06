@@ -12,7 +12,7 @@ using SAS.Plugin.Mail;
 
 namespace SAS.ManageWeb.ManagePage
 {
-    public partial class global_emailconfig : SAS.Web.UI.AdminPage
+    public partial class global_emailconfig : AdminPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

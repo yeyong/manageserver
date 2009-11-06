@@ -7,7 +7,7 @@ using SAS.Logic;
 
 namespace SAS.ManageWeb.ManagePage
 {
-    public partial class systeminf : SAS.Web.UI.AdminPage
+    public partial class systeminf : AdminPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

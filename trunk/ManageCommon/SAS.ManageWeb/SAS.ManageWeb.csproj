@@ -275,13 +275,6 @@
     <Compile Include="ManagePage\rapidset\systeminf.aspx.designer.cs">
       <DependentUpon>systeminf.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ManagePage\sirius\sirius_addteam.aspx.cs">
-      <DependentUpon>sirius_addteam.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ManagePage\sirius\sirius_addteam.aspx.designer.cs">
-      <DependentUpon>sirius_addteam.aspx</DependentUpon>
-    </Compile>
     <Compile Include="ManagePage\syslogin.aspx.cs">
       <DependentUpon>syslogin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

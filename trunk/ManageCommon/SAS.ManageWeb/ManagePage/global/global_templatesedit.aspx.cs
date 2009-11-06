@@ -12,7 +12,7 @@ namespace SAS.ManageWeb.ManagePage
     /// <summary>
     /// 模板文件编辑
     /// </summary>
-    public partial class global_templatesedit : SAS.Web.UI.AdminPage
+    public partial class global_templatesedit : AdminPage
     {
         public string filenamefullpath;
         public string path;

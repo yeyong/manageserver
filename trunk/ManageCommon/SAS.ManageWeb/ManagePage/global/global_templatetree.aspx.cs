@@ -10,7 +10,7 @@ using SAS.Logic;
 
 namespace SAS.ManageWeb.ManagePage
 {
-    public partial class global_templatetree : SAS.Web.UI.AdminPage
+    public partial class global_templatetree : AdminPage
     {
         private string skinpath;
         private int templateCounter = 1;
