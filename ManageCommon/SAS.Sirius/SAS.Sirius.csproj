@@ -37,6 +37,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\addteam.cs" />
     <Compile Include="Config\SiriusConfigFileManager.cs" />
     <Compile Include="Config\SiriusConfigInfo.cs" />
     <Compile Include="Config\SiriusConfigs.cs" />
@@ -84,9 +85,6 @@
       <Project>{2EA29B20-569F-421C-B359-7E7F8C7045CD}</Project>
       <Name>SAS.Plugin</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Admin\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

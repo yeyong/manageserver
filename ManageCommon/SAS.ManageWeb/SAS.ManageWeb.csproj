@@ -347,6 +347,10 @@
       <Project>{2EA29B20-569F-421C-B359-7E7F8C7045CD}</Project>
       <Name>SAS.Plugin</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SAS.Sirius\SAS.Sirius.csproj">
+      <Project>{49354E14-7767-40D0-98C3-5FD8F46F304E}</Project>
+      <Name>SAS.Sirius</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SAS.Web.UI\SAS.Web.UI.csproj">
       <Project>{15188167-C7FB-4A1B-9AC0-480A26825AAF}</Project>
       <Name>SAS.Web.UI</Name>

@@ -45,9 +45,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Page\Globals.cs" />
-    <Compile Include="Page\AdminPage.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Page\VerifyImagePage.cs">
       <SubType>ASPXCodeBehind</SubType>
