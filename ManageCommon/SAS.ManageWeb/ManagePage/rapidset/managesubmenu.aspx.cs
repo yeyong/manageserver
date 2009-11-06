@@ -13,7 +13,7 @@ using SAS.Config;
 
 namespace SAS.ManageWeb.ManagePage
 {
-    public partial class managesubmenu : SAS.Web.UI.AdminPage
+    public partial class managesubmenu : AdminPage
     {
         private string configPath;
 

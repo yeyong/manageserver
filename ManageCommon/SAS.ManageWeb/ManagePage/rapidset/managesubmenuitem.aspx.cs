@@ -12,7 +12,7 @@ using SAS.Common.XML;
 
 namespace SAS.ManageWeb.ManagePage
 {
-    public partial class managesubmenuitem : SAS.Web.UI.AdminPage
+    public partial class managesubmenuitem : AdminPage
     {
         private string configPath;
         public string menuid;

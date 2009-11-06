@@ -13,7 +13,7 @@ using SAS.Entity;
 
 namespace SAS.ManageWeb.ManagePage
 {
-    public partial class forum_addforums : SAS.Web.UI.AdminPage
+    public partial class forum_addforums : AdminPage
     {
         public ForumInfo forumInfo = new ForumInfo();
         protected string root = Utils.GetRootUrl(BaseConfigs.GetBaseConfig().Sitepath);

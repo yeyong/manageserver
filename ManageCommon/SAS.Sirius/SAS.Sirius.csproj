@@ -37,7 +37,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\addteam.cs" />
+    <Compile Include="Admin\addteam.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Config\SiriusConfigFileManager.cs" />
     <Compile Include="Config\SiriusConfigInfo.cs" />
     <Compile Include="Config\SiriusConfigs.cs" />
@@ -68,6 +70,10 @@
     <ProjectReference Include="..\SAS.Config\SAS.Config.csproj">
       <Project>{5325F618-33FA-4B03-9A3E-96ED8C554F6C}</Project>
       <Name>SAS.Config</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SAS.Control\SAS.Control.csproj">
+      <Project>{B16EF345-37D9-43FE-B371-8627BC6F3E43}</Project>
+      <Name>SAS.Control</Name>
     </ProjectReference>
     <ProjectReference Include="..\SAS.Data\SAS.Data.csproj">
       <Project>{E15BF13F-EC22-47A3-ACF4-AA79738FB7E8}</Project>

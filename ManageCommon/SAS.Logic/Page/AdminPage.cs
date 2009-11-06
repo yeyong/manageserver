@@ -10,7 +10,7 @@ using SAS.Common;
 using SAS.Entity;
 using SAS.Logic;
 
-namespace SAS.Web.UI
+namespace SAS.Logic
 {
     /// <summary>
     /// AdminPage 的摘要说明。

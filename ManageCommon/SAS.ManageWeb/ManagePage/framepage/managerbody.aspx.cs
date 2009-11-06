@@ -13,7 +13,7 @@ using SAS.Common.XML;
 
 namespace SAS.ManageWeb.ManagePage
 {
-    public partial class managerbody : SAS.Web.UI.AdminPage
+    public partial class managerbody : AdminPage
     {
         public int olid;
         protected void Page_Load(object sender, EventArgs e)

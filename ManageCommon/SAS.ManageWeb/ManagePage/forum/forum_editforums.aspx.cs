@@ -13,7 +13,7 @@ using SAS.Entity;
 
 namespace SAS.ManageWeb.ManagePage
 {
-    public partial class forum_editforums : SAS.Web.UI.AdminPage
+    public partial class forum_editforums : AdminPage
     {
         public string runforumsstatic;
         public DataRow dr;

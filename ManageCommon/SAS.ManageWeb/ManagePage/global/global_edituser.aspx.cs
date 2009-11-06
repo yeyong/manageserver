@@ -12,7 +12,7 @@ using SAS.Entity;
 
 namespace SAS.ManageWeb.ManagePage
 {
-    public partial class global_edituser : SAS.Web.UI.AdminPage
+    public partial class global_edituser : AdminPage
     {
         public UserInfo userInfo = new UserInfo();
         protected void Page_Load(object sender, EventArgs e)

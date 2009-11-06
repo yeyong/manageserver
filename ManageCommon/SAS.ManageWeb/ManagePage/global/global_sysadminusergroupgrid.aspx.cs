@@ -9,7 +9,7 @@ using SAS.Common.Generic;
 
 namespace SAS.ManageWeb.ManagePage
 {
-    public partial class global_sysadminusergroupgrid : SAS.Web.UI.AdminPage
+    public partial class global_sysadminusergroupgrid : AdminPage
     {
         #region 控件声明
 

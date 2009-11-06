@@ -11,7 +11,7 @@ using SAS.Entity;
 
 namespace SAS.ManageWeb.ManagePage
 {
-    public partial class forum_userrights : SAS.Web.UI.AdminPage
+    public partial class forum_userrights : AdminPage
     {
         private GeneralConfigInfo configInfo = GeneralConfigs.GetConfig();
         protected void Page_Load(object sender, EventArgs e)

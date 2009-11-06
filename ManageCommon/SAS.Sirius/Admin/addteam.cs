@@ -13,7 +13,11 @@ using SAS.Entity;
 
 namespace SAS.Sirius.Admin
 {
-    public partial class addteam :
+    /// <summary>
+    /// add team
+    /// </summary>
+    public partial class addteam : AdminPage
     {
+        protected string root = Utils.GetRootUrl(BaseConfigs.GetBaseConfig().Sitepath);
     }
 }
