@@ -19,5 +19,8 @@ namespace SAS.Sirius.Admin
     public partial class addteam : AdminPage
     {
         protected string root = Utils.GetRootUrl(BaseConfigs.GetBaseConfig().Sitepath);
+
+
+        
     }
 }
