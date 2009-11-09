@@ -282,6 +282,13 @@
     <Compile Include="ManagePage\syslogin.aspx.designer.cs">
       <DependentUpon>syslogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\UserControls\onlineeditor.ascx.cs">
+      <DependentUpon>onlineeditor.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\UserControls\onlineeditor.ascx.designer.cs">
+      <DependentUpon>onlineeditor.ascx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\UserControls\PageInfo.ascx.cs">
       <DependentUpon>PageInfo.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -878,6 +885,7 @@
     <Content Include="ManagePage\images\icons\icon9.jpg" />
     <Content Include="ManagePage\images\icons\legendimg.jpg" />
     <Content Include="ManagePage\images\icons\true.jpg" />
+    <Content Include="ManagePage\images\invalid.gif" />
     <Content Include="ManagePage\images\invalidation.gif" />
     <Content Include="ManagePage\images\jiao.gif" />
     <Content Include="ManagePage\images\js.gif" />
@@ -940,6 +948,7 @@
     <Content Include="ManagePage\images\nav\useredit.gif" />
     <Content Include="ManagePage\images\next.gif" />
     <Content Include="ManagePage\images\nodelete.gif" />
+    <Content Include="ManagePage\images\none.gif" />
     <Content Include="ManagePage\images\off.gif" />
     <Content Include="ManagePage\images\OK.gif" />
     <Content Include="ManagePage\images\prev.gif" />
@@ -1053,6 +1062,7 @@
     <Content Include="ManagePage\styles\tab.css" />
     <Content Include="ManagePage\style\admin.css" />
     <Content Include="ManagePage\style\comm.css" />
+    <Content Include="ManagePage\UserControls\onlineeditor.ascx" />
     <Content Include="ManagePage\UserControls\PageInfo.ascx" />
     <Content Include="ManagePage\UserControls\TextareaResize.ascx" />
     <Content Include="ManagePage\UserControls\usergrouppowersetting.ascx" />

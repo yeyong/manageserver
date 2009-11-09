@@ -4,6 +4,7 @@
 <%@ Register TagPrefix="cc2" Namespace="SAS.Control" Assembly="SAS.Control" %>
 <%@ Register TagPrefix="cc3" Namespace="SAS.Control" Assembly="SAS.Control" %>
 <%@ Register TagPrefix="uc2" TagName="PageInfo" Src="../UserControls/PageInfo.ascx" %>
+<%@ Register TagPrefix="uc3" TagName="OnlineEditor" Src="../UserControls/onlineeditor.ascx" %>
 <html>
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
@@ -30,7 +31,7 @@
     <link href="../styles/modelpopup.css" type="text/css" rel="stylesheet" />
 
     <script type="text/javascript" src="../js/modalpopup.js"></script>
-
+    <script type="text/javascript" src="../js/ajaxhelper.js"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=7" />
 </head>
 <body>
@@ -42,6 +43,7 @@
         <td>	
 	    <cc3:TabControl id="TabControl1" SelectionMode="Client" runat="server" TabScriptPath="../js/tabstrip.js" height="100%">
 		    <cc3:TabPage Caption="基本信息" ID="tabPage51">
+		    <uc2:PageInfo id="info1" runat="server" Icon="Information" Text="根据不同的团队组信息，设置不同的组属性，以突出各团队特色。"></uc2:PageInfo>
 		    <table cellspacing="0" cellpadding="4" width="100%" align="center">
             <tr>
                 <td class="panelbox" align="left">
@@ -72,188 +74,120 @@
                         <tr>
 		                    <td>团队图片地址:</td>
 		                    <td>
-		                    <table id="tab1" cellspacing="0" cellpadding="0" width="450">
-		                    <tbody>
-		                        <tr>
-		                            <td>图片描述:</td>
-		                        </tr>
-		                        <tr>
-		                            <td><cc2:TextBox ID="imgDesc" runat="server" Width="300" Height="50" TextMode="MultiLine" IsReplaceInvertedComma="false"></cc2:TextBox></td>
-		                        </tr>
-                                <tr>
-                                    <td>选择图片:</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="file" id="photo{num}" onchange="PhotoView({num})" size="50" name="photo1">
-                                    </td>
-                                </tr>
-		                    </tbody>
-		                    </table>
-							    <cc2:TextBox id="imgs" runat="server" CanBeNull="必填" IsReplaceInvertedComma="false" size="20"  MaxLength="49"></cc2:TextBox>
+                                <table id="tab1" cellspacing="0" cellpadding="0" width="450">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <b>图片描述:</b>
+                                            </td>
+                                        </tr>                                        
+                                        <tr>
+                                            <td>
+                                                <cc2:TextBox ID="imgDesc" runat="server" Width="300" Height="50" TextMode="MultiLine"
+                                                    IsReplaceInvertedComma="false"></cc2:TextBox>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>图片预览:</b>
+                                            </td>
+                                        </tr>
+                                        <tr>                                            
+                                            <td>
+                                                <span id="td1">
+                                                    <img src="../images/invalid.gif" width="100" height="75" id="view1"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>选择图片:</b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="file" id="photo1" onchange="PhotoView(1)" size="50" name="photo1">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
 							</td>
                         </tr>
-	                    <tr>
-		                    <td >版块描述:</td>
+                        <tr>
+		                    <td>本团队SEO关键词:</td>
 		                    <td>
-		                        <cc2:textbox id="description" runat="server" width="450" height="100" TextMode="MultiLine" IsReplaceInvertedComma="false"></cc2:textbox>
+			                    <cc2:textbox id="seokeywords" runat="server" HintTitle="提示" HintInfo="设置本团队的SEO关键词,用于搜索引擎优化,放在meta的keyword标签中,多个关键字间请用半角逗号&amp;quot,&amp;quot隔开" RequiredFieldType="暂无校验" width="450" height="100" 
+			                    TextMode="MultiLine" IsReplaceInvertedComma="false"></cc2:textbox>
+		                    </td>
+                        </tr>
+                        <tr>
+		                    <td>本团队SEO描述:</td>
+		                    <td>
+			                    <cc2:textbox id="seodescription" runat="server" HintTitle="提示" HintInfo="设置本团队的SEO描述,用于搜索引擎优化,放在meta的description标签中,多个说明文字间请用半角逗号&amp;quot,&amp;quot隔开" RequiredFieldType="暂无校验" width="450" height="100" 
+			                    TextMode="MultiLine" IsReplaceInvertedComma="false"></cc2:textbox>
+		                    </td>
+                        </tr>
+                        <tr>
+		                    <td >团队简述:</td>
+		                    <td>
+		                       <cc2:textbox id="teamBio" runat="server" HintTitle="提示" HintInfo="设置本团队基本概述" RequiredFieldType="暂无校验" width="450" height="100" 
+			                    TextMode="MultiLine" IsReplaceInvertedComma="false"></cc2:textbox>
 		                    </td>
 	                    </tr>
                         <tr>
-		                    <td>本版块SEO关键词:</td>
+		                    <td>团队意义:</td>
 		                    <td>
-			                    <cc2:textbox id="seokeywords" runat="server" HintTitle="提示" HintInfo="设置本版块的SEO关键词,用于搜索引擎优化,放在meta的keyword标签中,多个关键字间请用半角逗号&amp;quot,&amp;quot隔开" RequiredFieldType="暂无校验" width="450" height="100" 
+			                    <cc2:textbox id="content1" runat="server" HintTitle="提示" HintInfo="设置本团队团队意义" RequiredFieldType="暂无校验" width="450" height="100" 
 			                    TextMode="MultiLine" IsReplaceInvertedComma="false"></cc2:textbox>
 		                    </td>
                         </tr>
                         <tr>
-		                    <td>本版块SEO描述:</td>
+		                    <td >团队工作方向和工作内容:</td>
 		                    <td>
-			                    <cc2:textbox id="seodescription" runat="server" HintTitle="提示" HintInfo="设置本版块的SEO描述,用于搜索引擎优化,放在meta的description标签中,多个说明文字间请用半角逗号&amp;quot,&amp;quot隔开" RequiredFieldType="暂无校验" width="450" height="100" 
+		                        <cc2:textbox id="content2" runat="server" HintTitle="提示" HintInfo="设置本团队团队意义" RequiredFieldType="暂无校验" width="450" height="100" 
 			                    TextMode="MultiLine" IsReplaceInvertedComma="false"></cc2:textbox>
 		                    </td>
-                        </tr>
+	                    </tr>
+	                    <tr>
+		                    <td >人员职责和基本构成:</td>
+		                    <td>
+		                        <uc3:OnlineEditor ID="content3" runat="server" controlname="content3" postminchars="0" postmaxchars="2000"></uc3:OnlineEditor>
+		                    </td>
+	                    </tr>
+                        
                     </table>
                 </td>
             </tr>
             </table>
 			</cc3:TabPage>
-			
-            <cc3:TabPage Caption="高级设置" ID="tabPage22">
-            <table cellspacing="0" cellpadding="4" width="100%" align="center">
-            <tr>
-                <td  class="panelbox" align="left" width="50%">
-                    <table width="100%">
-                        <tr>
-						    <td style="width: 100px">访问本论<br />坛的密码:</td>
-						    <td>
-							    <cc2:textbox id="password" runat="server" HintTitle="提示" HintInfo="设置本版块的密码,留空则本版块不使用密码" RequiredFieldType="暂无校验" 
-							    IsReplaceInvertedComma="false" MaxLength="16" Size="20"></cc2:textbox>
-							</td>
-                        </tr>
-                        <tr>
-						    <td>指向外部链<br />接的地址:</td>
-						    <td>
-							    <cc2:textbox id="redirect" runat="server" Width="250px" RequiredFieldType="暂无校验" IsReplaceInvertedComma="false"  MaxLength="253" HintInfo="设置版块为一个链接，当点击本版块是将跳转到指定的地址上"></cc2:textbox>
-							</td>
-                        </tr>
-                        <tr>
-						    <td>本版规则:</td>
-						    <td>
-							    <cc2:textbox id="rules" runat="server" HintTitle="提示" HintInfo="支持Html" RequiredFieldType="暂无校验" 
-							    width="250" height="100" TextMode="MultiLine" IsReplaceInvertedComma="false" ></cc2:textbox>
-							</td>
-                        </tr>
-                    </table>
-                </td>
-                <td  class="panelbox" align="right" width="50%">
-                    <table width="100%">
-					    <tr>
-						    <td style="width: 90px">论坛图标:</td>
-						    <td>
-							    <cc2:textbox id="icon" runat="server" HintTitle="提示" HintInfo="显示于首页论坛列表等" Width="250px" RequiredFieldType="暂无校验"
-							     IsReplaceInvertedComma="false"  MaxLength="253"></cc2:textbox>
-							</td>
-					    </tr>
-					    <tr>
-						    <td>允许的附<br />件类型:</td>
-						    <td>
-								    <cc2:CheckBoxList id="attachextensions" runat="server" HintTitle="提示" 
-								    HintInfo="允许在本论坛上传的附件类型,留空为使用用户组设置, 且版块设置优先于用户组设置" RepeatColumns="4"></cc2:CheckBoxList>
-						    </td>
-					    </tr>
-					    <tr>
-						    <td>定期自动<br />关闭主题:</td>
-						    <td>
-						        <table>
-						            <tr>
-						                <td>
-					                        <cc2:RadioButtonList id="autocloseoption" runat="server" RepeatColumns="1">
-                                            <asp:ListItem Value="0" Selected="True">不自动关闭</asp:ListItem>
-                                            <asp:ListItem Value="1">按发布时间</asp:ListItem>
-			 		                        </cc2:RadioButtonList>
-			 		                    </td>
-			 		                    <td valign=bottom>
-	 		                                <div id="showclose" runat="server">
-	 		    	                            <cc2:TextBox id="autocloseday" runat="server" RequiredFieldType="数据校验" Size="4" MaxLength="3"></cc2:TextBox>天自动关闭	
-	 		                                </div>
-			 		    	            </td>
-			 		    	        </tr>
-			 		    	    </table>
-		       			    </td>
-		       		    </tr>
-	       		        <tr>
-	       		            <td>只允许发布特<br />殊类型主题:</td>
-	       		            <td>
-	       		                <cc2:RadioButtonList id="allowspecialonly" runat="server" RepeatColumns="2" HintInfo="设置本版是否只允许发布特殊类型主题">
-						            <asp:ListItem Value="1">是</asp:ListItem>
-						            <asp:ListItem Value="0" Selected="True">否</asp:ListItem>
-						        </cc2:RadioButtonList>
-	       		            </td>
-	       		        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td class="panelbox" colspan="2">
-                    <table width="100%">
-                        <tr>
-						    <td style="width: 90px">设置:</td>
-						    <td>
-							    <cc2:CheckBoxList id="setting" runat="server" RepeatColumns="4" >
-								    <asp:ListItem Value="allowsmilies" selected="true">允许使用表情符</asp:ListItem>
-								    <asp:ListItem Value="allowrss" selected="true">允许RSS</asp:ListItem>
-								    <asp:ListItem Value="allowbbcode" selected="true">允许Discuz!NT代码</asp:ListItem>
-								    <asp:ListItem Value="allowimgcode" selected="true">允许[img]代码</asp:ListItem>
-								    <asp:ListItem Value="recyclebin">打开回收站</asp:ListItem>
-								    <asp:ListItem Value="modnewposts">发帖需要审核</asp:ListItem>
-								    <asp:ListItem Value="jammer">帖子中添加干扰码</asp:ListItem>
-								    <asp:ListItem Value="disablewatermark">禁止附件自动水印</asp:ListItem>
-								    <asp:ListItem Value="inheritedmod">继承上级论坛或分类的版主设定</asp:ListItem>
-								    <asp:ListItem Value="allowthumbnail">主题列表中显示缩略图</asp:ListItem>
-								    <asp:ListItem Value="allowtags" selected="true">允许标签</asp:ListItem>
-								    <asp:ListItem Value="allowpostpoll" selected="true">允许发投票</asp:ListItem>
-							        <asp:ListItem Value="allowdebate">允许辩论</asp:ListItem>
-							        <asp:ListItem Value="allowbonus">允许悬赏</asp:ListItem>
-							        <asp:ListItem Value="alloweditrules" selected="true">允许版主编辑版规</asp:ListItem>
-							    </cc2:CheckBoxList>
-							</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            </table>
-		    </cc3:TabPage>
-
-            <cc3:TabPage Caption="权限设定" ID="tabPage33">
-            <uc2:PageInfo id="info1" runat="server" Icon="Information" Text="每个组的权限项不选择时,权限为使用本版块用户的用户组权限设置,且版块权限设置优先于用户组权限设置."></uc2:PageInfo>    			
-                <table width="100%" id="powerset" align="center" class="table1" cellspacing="0" cellPadding="4"  bgcolor="#C3C7D1" runat="server">	
-				    <tr>
-					    <td class="td_alternating_item2">全选</td>
-					    <td class="td_alternating_item2"><input type="checkbox" id="c1" onclick="seleCol('viewperm',this.checked)"/><label for="c1">浏览论坛</label></td>
-					    <td class="td_alternating_item2"><input type="checkbox" id="c2" onclick="seleCol('postperm',this.checked)"/><label for="c2">发新话题</label></td>
-					    <td class="td_alternating_item2"><input type="checkbox" id="c3" onclick="seleCol('replyperm',this.checked)"/><label for="c3">发表回复</label></td>
-					    <td class="td_alternating_item2"><input type="checkbox" id="c4" onclick="seleCol('getattachperm',this.checked)"/><label for="c4">下载/查看附件</label></td>
-					    <td class="td_alternating_item2"><input type="checkbox" id="c5" onclick="seleCol('postattachperm',this.checked)"/><label for="c5">上传附件</label></td>
-				    </tr>
+			<cc3:TabPage Caption="样式设定" ID="tabPage22">
+                <table cellspacing="0" cellpadding="4" width="100%" align="center">
+                    <tr>
+                        <td class="panelbox" align="left">
+                            <table width="100%">
+                                <tr>
+                                    <td style="width: 150px">
+                                        链接地址:
+                                    </td>
+                                    <td>
+                                        <cc2:TextBox ID="teamurl" runat="server" CanBeNull="必填" RequiredFieldType="网页地址" HintInfo="展示平台地址"
+                                            IsReplaceInvertedComma="false" Size="20" MaxLength="49"></cc2:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        模板风格:
+                                    </td>
+                                    <td>
+                                        <cc2:DropDownList ID="templateid" runat="server">
+                                        </cc2:DropDownList>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
                 </table>
-		    </cc3:TabPage>
-		</cc3:TabControl>
-    		
-		      <div id="topictypes" style="display:none;width:100%;">
-		           <table>
-					    <tr>
-						    <td>主题分类:</td>
-						    <td>
-							    <cc2:textbox id="topictypes" runat="server" RequiredFieldType="暂无校验" width="370" height="50" TextMode="MultiLine"></cc2:textbox></td>
-					    </tr>
-					    <tr>
-						    <td>模板风格:</td>
-						    <td>
-							    <cc2:DropDownList id="templateid" runat="server"></cc2:DropDownList></td>
-					    </tr>
-				    </table>
-			       </div>
+			</cc3:TabPage>
+		</cc3:TabControl>		      
 		    <div class="Navbutton">
 		        <cc2:Button id="SubmitAdd" runat="server" Text=" 添 加 "></cc2:Button>&nbsp;&nbsp;
 			    <button onclick="window.location='forum_forumstree.aspx';" id="Button3" class="ManagerButton" type="button"><img src="../images/arrow_undo.gif"/> 返 回 </button>
@@ -266,4 +200,88 @@
 	    </form>
 	<%=footer%>	
 </body>
+<script>
+    function PhotoView(layer) {
+        var file = $("photo" + layer).value;
+        if (file != "") {
+            var patn = /\.jpg$|\.jpeg$|\.gif$|\.png$/i;
+            if (!patn.test(file)) {
+                clearFileInput($("photo" + layer));
+                alert("相册只允许jpg、jpeg、gif或png格式的图片!");
+                return;
+            }
+            if (document.all) //IE执行
+            {
+                insertImage(layer);
+            }
+        }
+        else {
+            $("view" + layer).src = "../images/invalid.gif";
+
+        }
+    }
+    
+    function insertImage(id) {
+        var localimgpreview = '';
+        var path = $('photo' + id).value;
+        var ext = path.lastIndexOf('.') == -1 ? '' : path.substr(path.lastIndexOf('.') + 1, path.length).toLowerCase();
+        var re = new RegExp("(^|\\s|,)" + ext + "($|\\s|,)", "ig");
+        var localfile = $('photo' + id).value.substr($('photo' + id).value.replace(/\\/g, '/').lastIndexOf('/') + 1);
+
+        if (path == '') {
+            return;
+        }
+
+        var err = false;
+        $('img_hidden').alt = id;
+        try {
+            $('img_hidden').filters.item("DXImageTransform.Microsoft.AlphaImageLoader").sizingMethod = 'image';
+        }
+        catch (e){ err = true; }
+        try {
+            $('img_hidden').filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = $('photo' + id).value;
+        }
+        catch (e) {
+            alert('无效的图片文件。');
+            delAttach(id);
+
+            err = true;
+
+            return;
+        }
+        var wh = { 'w': $('img_hidden').offsetWidth, 'h': $('img_hidden').offsetHeight };
+        if (wh['w'] > 100) {
+            wh['h'] *= 100 / wh['w'];
+            wh['w'] = 100;
+        }
+        if (wh['h'] > 100) {
+            wh['w'] *= 100 / wh['h'];
+            wh['h'] = 100;
+        }
+        $('img_hidden').style.width = wh['w'];
+        $('img_hidden').style.height = wh['h'];
+        try {
+            $('img_hidden').filters.item("DXImageTransform.Microsoft.AlphaImageLoader").sizingMethod = 'scale';
+        }
+        catch (e) {
+        }
+        if (err == true) {
+            $('img_hidden').src = $('photo' + id).value;
+        }
+        div = document.createElement('div');
+        $('td' + id).removeChild($('td' + id).children(0));
+        $('td' + id).appendChild(div);
+        div.innerHTML = '<img style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=\'scale\',src=\'' + $('photo' + id).value + '\');width:' + wh['w'] + ';height:' + wh['h'] + '" src=\'../images/none.gif\' border="0" id="view' + id + '" aid="view' + id + '" alt="" />';
+    }
+    
+    function clearFileInput(file) {
+        var form = document.createElement('form');
+        document.body.appendChild(form);
+        var pos = file.nextSibling;
+        form.appendChild(file);
+        form.reset();
+        pos.parentNode.insertBefore(file, pos);
+        document.body.removeChild(form);
+    }
+</script>
 </html>
