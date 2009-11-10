@@ -21,7 +21,7 @@ namespace SAS.Plugin.PasswordMode
         /// <returns>返回当前用户信息与提交密码的验证结果</returns>
         public bool CheckPassword(UserInfo userInfo, string postpassword)
         {
-            string doubleMd5 = Utils.MD5(Utils.MD5(postpassword) + userInfo.ps_salt); //两遍MD5
+            string doubleMd5 = Utils.MD5(Utils.MD5(postpassword) + userInfo.Ps_salt); //两遍MD5
 
             return doubleMd5 == userInfo.Ps_password;//比较
         }
@@ -33,8 +33,8 @@ namespace SAS.Plugin.PasswordMode
         /// <returns></returns>
         public int CreateUserInfo(UserInfo userInfo)
         {
-            userInfo.ps_salt = Logic.LogicUtils.CreateAuthStr(6, false);
-            userInfo.Ps_password = Utils.MD5(Utils.MD5(userInfo.Ps_password) + userInfo.ps_salt);
+            userInfo.Ps_salt = Logic.LogicUtils.CreateAuthStr(6, false);
+            userInfo.Ps_password = Utils.MD5(Utils.MD5(userInfo.Ps_password) + userInfo.Ps_salt);
             return SAS.Data.DataProvider.Users.CreateUser(userInfo);
         }
 
@@ -45,10 +45,10 @@ namespace SAS.Plugin.PasswordMode
         /// <returns>返回经过处理之后的实际用户信息</returns>
         public UserInfo SaveUserInfo(UserInfo userInfo)
         {
-            if (Utils.StrIsNullOrEmpty(userInfo.ps_salt))
-                userInfo.ps_salt = Logic.LogicUtils.CreateAuthStr(6, false);
+            if (Utils.StrIsNullOrEmpty(userInfo.Ps_salt))
+                userInfo.Ps_salt = Logic.LogicUtils.CreateAuthStr(6, false);
 
-            userInfo.Ps_password = Utils.MD5(Utils.MD5(userInfo.Ps_password) + userInfo.ps_salt); //两遍MD5
+            userInfo.Ps_password = Utils.MD5(Utils.MD5(userInfo.Ps_password) + userInfo.Ps_salt); //两遍MD5
 
             return SAS.Data.DataProvider.Users.UpdateUser(userInfo) ? userInfo : null;
         }
