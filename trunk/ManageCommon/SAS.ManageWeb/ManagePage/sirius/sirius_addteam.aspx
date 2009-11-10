@@ -86,13 +86,6 @@
                                                 <cc2:TextBox ID="imgDesc" runat="server" Width="300" Height="50" TextMode="MultiLine"
                                                     IsReplaceInvertedComma="false"></cc2:TextBox>
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <b>图片预览:</b>
-                                            </td>
-                                        </tr>
-                                        <tr>                                            
                                             <td>
                                                 <span id="td1">
                                                     <img src="../images/invalid.gif" width="100" height="75" id="view1"></span>
