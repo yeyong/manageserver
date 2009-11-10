@@ -40,6 +40,9 @@
     <Compile Include="Admin\addteam.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Admin\addteam.aspx.designer.cs">
+      <DependentUpon>addteam.aspx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Config\SiriusConfigFileManager.cs" />
     <Compile Include="Config\SiriusConfigInfo.cs" />
     <Compile Include="Config\SiriusConfigs.cs" />
@@ -86,6 +89,10 @@
     <ProjectReference Include="..\SAS.Logic\SAS.Logic.csproj">
       <Project>{9145299A-21C2-4558-A956-2DBDCBF477DE}</Project>
       <Name>SAS.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SAS.ManageWeb\ManagePage\SAS.ManageWeb.ManagePage.csproj">
+      <Project>{CBA8AECD-71A5-4562-9189-5E0E0B42964E}</Project>
+      <Name>SAS.ManageWeb.ManagePage</Name>
     </ProjectReference>
     <ProjectReference Include="..\SAS.Plugin\SAS.Plugin.csproj">
       <Project>{2EA29B20-569F-421C-B359-7E7F8C7045CD}</Project>

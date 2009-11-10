@@ -5,8 +5,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head runat="server">
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />    
     <meta name="keywords" content="天狼星,工作室" />
     <meta name="description" content="天狼星工作室综合管理后台" />
     <title>天狼星工作室综合管理后台</title>
@@ -22,6 +21,7 @@
             document.getElementById("preview").src = images[index];
         }
     </script>
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
 </head>
 <body>
     <div class="ManagerForm">
