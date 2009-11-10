@@ -1,0 +1,832 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CBA8AECD-71A5-4562-9189-5E0E0B42964E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SAS.ManageWeb.ManagePage</RootNamespace>
+    <AssemblyName>SAS.ManageWeb.ManagePage</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="forum\forum_addforums.aspx.cs">
+      <DependentUpon>forum_addforums.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forum\forum_addforums.aspx.designer.cs">
+      <DependentUpon>forum_addforums.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forum\forum_editforums.aspx.cs">
+      <DependentUpon>forum_editforums.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forum\forum_editforums.aspx.designer.cs">
+      <DependentUpon>forum_editforums.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forum\forum_forumstree.aspx.cs">
+      <DependentUpon>forum_forumstree.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forum\forum_forumstree.aspx.designer.cs">
+      <DependentUpon>forum_forumstree.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forum\forum_option.aspx.cs">
+      <DependentUpon>forum_option.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forum\forum_option.aspx.designer.cs">
+      <DependentUpon>forum_option.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="forum\forum_userrights.aspx.cs">
+      <DependentUpon>forum_userrights.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="forum\forum_userrights.aspx.designer.cs">
+      <DependentUpon>forum_userrights.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="framepage\managerbody.aspx.cs">
+      <DependentUpon>managerbody.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="framepage\managerbody.aspx.designer.cs">
+      <DependentUpon>managerbody.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="framepage\top.aspx.cs">
+      <DependentUpon>top.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="framepage\top.aspx.designer.cs">
+      <DependentUpon>top.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="global\global_adduser.aspx.cs">
+      <DependentUpon>global_adduser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="global\global_adduser.aspx.designer.cs">
+      <DependentUpon>global_adduser.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="global\global_adminusergroupgrid.aspx.cs">
+      <DependentUpon>global_adminusergroupgrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="global\global_adminusergroupgrid.aspx.designer.cs">
+      <DependentUpon>global_adminusergroupgrid.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="global\global_baseset.aspx.cs">
+      <DependentUpon>global_baseset.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="global\global_baseset.aspx.designer.cs">
+      <DependentUpon>global_baseset.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="global\global_editadminusergroup.aspx.cs">
+      <DependentUpon>global_editadminusergroup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="global\global_editadminusergroup.aspx.designer.cs">
+      <DependentUpon>global_editadminusergroup.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="global\global_editgroup.aspx.cs">
+      <DependentUpon>global_editgroup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="global\global_editgroup.aspx.designer.cs">
+      <DependentUpon>global_editgroup.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="global\global_editsysadminusergroup.aspx.cs">
+      <DependentUpon>global_editsysadminusergroup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="global\global_editsysadminusergroup.aspx.designer.cs">
+      <DependentUpon>global_editsysadminusergroup.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="global\global_edituser.aspx.cs">
+      <DependentUpon>global_edituser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="global\global_edituser.aspx.designer.cs">
+      <DependentUpon>global_edituser.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="global\global_emailconfig.aspx.cs">
+      <DependentUpon>global_emailconfig.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="global\global_emailconfig.aspx.designer.cs">
+      <DependentUpon>global_emailconfig.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="global\global_logandshrinkdb.aspx.cs">
+      <DependentUpon>global_logandshrinkdb.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="global\global_logandshrinkdb.aspx.designer.cs">
+      <DependentUpon>global_logandshrinkdb.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="global\global_sysadminusergroupgrid.aspx.cs">
+      <DependentUpon>global_sysadminusergroupgrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="global\global_sysadminusergroupgrid.aspx.designer.cs">
+      <DependentUpon>global_sysadminusergroupgrid.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="global\global_templatesedit.aspx.cs">
+      <DependentUpon>global_templatesedit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="global\global_templatesedit.aspx.designer.cs">
+      <DependentUpon>global_templatesedit.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="global\global_templatesgrid.aspx.cs">
+      <DependentUpon>global_templatesgrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="global\global_templatesgrid.aspx.designer.cs">
+      <DependentUpon>global_templatesgrid.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="global\global_templatetree.aspx.cs">
+      <DependentUpon>global_templatetree.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="global\global_templatetree.aspx.designer.cs">
+      <DependentUpon>global_templatetree.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="global\global_uiandshowstyle.aspx.cs">
+      <DependentUpon>global_uiandshowstyle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="global\global_uiandshowstyle.aspx.designer.cs">
+      <DependentUpon>global_uiandshowstyle.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="global\global_usergrid.aspx.cs">
+      <DependentUpon>global_usergrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="global\global_usergrid.aspx.designer.cs">
+      <DependentUpon>global_usergrid.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="global\global_usergroupgrid.aspx.cs">
+      <DependentUpon>global_usergroupgrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="global\global_usergroupgrid.aspx.designer.cs">
+      <DependentUpon>global_usergroupgrid.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.aspx.designer.cs">
+      <DependentUpon>index.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="rapidset\managemainmenu.aspx.cs">
+      <DependentUpon>managemainmenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="rapidset\managemainmenu.aspx.designer.cs">
+      <DependentUpon>managemainmenu.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rapidset\managemenubackupfile.aspx.cs">
+      <DependentUpon>managemenubackupfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="rapidset\managemenubackupfile.aspx.designer.cs">
+      <DependentUpon>managemenubackupfile.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rapidset\managesubmenu.aspx.cs">
+      <DependentUpon>managesubmenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="rapidset\managesubmenu.aspx.designer.cs">
+      <DependentUpon>managesubmenu.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rapidset\managesubmenuitem.aspx.cs">
+      <DependentUpon>managesubmenuitem.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="rapidset\managesubmenuitem.aspx.designer.cs">
+      <DependentUpon>managesubmenuitem.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rapidset\systeminf.aspx.cs">
+      <DependentUpon>systeminf.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="rapidset\systeminf.aspx.designer.cs">
+      <DependentUpon>systeminf.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="syslogin.aspx.cs">
+      <DependentUpon>syslogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="syslogin.aspx.designer.cs">
+      <DependentUpon>syslogin.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\onlineeditor.ascx.cs">
+      <DependentUpon>onlineeditor.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\onlineeditor.ascx.designer.cs">
+      <DependentUpon>onlineeditor.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PageInfo.ascx.cs">
+      <DependentUpon>PageInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\PageInfo.ascx.designer.cs">
+      <DependentUpon>PageInfo.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TextareaResize.ascx.cs">
+      <DependentUpon>TextareaResize.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\TextareaResize.ascx.designer.cs">
+      <DependentUpon>TextareaResize.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\usergrouppowersetting.ascx.cs">
+      <DependentUpon>usergrouppowersetting.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="forum\forum_addforums.aspx" />
+    <Content Include="forum\forum_editforums.aspx" />
+    <Content Include="forum\forum_forumstree.aspx" />
+    <Content Include="forum\forum_option.aspx" />
+    <Content Include="forum\forum_userrights.aspx" />
+    <Content Include="framepage\managerbody.aspx" />
+    <Content Include="framepage\top.aspx" />
+    <Content Include="global\global_adduser.aspx" />
+    <Content Include="global\global_adminusergroupgrid.aspx" />
+    <Content Include="global\global_baseset.aspx" />
+    <Content Include="global\global_editadminusergroup.aspx" />
+    <Content Include="global\global_editgroup.aspx" />
+    <Content Include="global\global_editsysadminusergroup.aspx" />
+    <Content Include="global\global_edituser.aspx" />
+    <Content Include="global\global_emailconfig.aspx" />
+    <Content Include="global\global_logandshrinkdb.aspx" />
+    <Content Include="global\global_sysadminusergroupgrid.aspx" />
+    <Content Include="global\global_templatesedit.aspx" />
+    <Content Include="global\global_templatesgrid.aspx" />
+    <Content Include="global\global_templatetree.aspx" />
+    <Content Include="global\global_uiandshowstyle.aspx" />
+    <Content Include="global\global_usergrid.aspx" />
+    <Content Include="global\global_usergroupgrid.aspx" />
+    <Content Include="images\add.gif" />
+    <Content Include="images\addmenu.gif" />
+    <Content Include="images\addremoveprograms.gif" />
+    <Content Include="images\admin-bg.png" />
+    <Content Include="images\admin-bg1.png" />
+    <Content Include="images\admin-bg2.png" />
+    <Content Include="images\admin-bg3.png" />
+    <Content Include="images\admin-bg4.png" />
+    <Content Include="images\admin-bg5.png" />
+    <Content Include="images\admin-gif\access-1.gif" />
+    <Content Include="images\admin-gif\access-10.gif" />
+    <Content Include="images\admin-gif\access-100.gif" />
+    <Content Include="images\admin-gif\access-101.gif" />
+    <Content Include="images\admin-gif\access-102.gif" />
+    <Content Include="images\admin-gif\access-103.gif" />
+    <Content Include="images\admin-gif\access-104.gif" />
+    <Content Include="images\admin-gif\access-105.gif" />
+    <Content Include="images\admin-gif\access-106.gif" />
+    <Content Include="images\admin-gif\access-107.gif" />
+    <Content Include="images\admin-gif\access-108.gif" />
+    <Content Include="images\admin-gif\access-109.gif" />
+    <Content Include="images\admin-gif\access-11.gif" />
+    <Content Include="images\admin-gif\access-110.gif" />
+    <Content Include="images\admin-gif\access-111.gif" />
+    <Content Include="images\admin-gif\access-112.gif" />
+    <Content Include="images\admin-gif\access-113.gif" />
+    <Content Include="images\admin-gif\access-114.gif" />
+    <Content Include="images\admin-gif\access-115.gif" />
+    <Content Include="images\admin-gif\access-116.gif" />
+    <Content Include="images\admin-gif\access-117.gif" />
+    <Content Include="images\admin-gif\access-118.gif" />
+    <Content Include="images\admin-gif\access-119.gif" />
+    <Content Include="images\admin-gif\access-12.gif" />
+    <Content Include="images\admin-gif\access-120.gif" />
+    <Content Include="images\admin-gif\access-121.gif" />
+    <Content Include="images\admin-gif\access-122.gif" />
+    <Content Include="images\admin-gif\access-123.gif" />
+    <Content Include="images\admin-gif\access-124.gif" />
+    <Content Include="images\admin-gif\access-125.gif" />
+    <Content Include="images\admin-gif\access-126.gif" />
+    <Content Include="images\admin-gif\access-127.gif" />
+    <Content Include="images\admin-gif\access-128.gif" />
+    <Content Include="images\admin-gif\access-129.gif" />
+    <Content Include="images\admin-gif\access-13.gif" />
+    <Content Include="images\admin-gif\access-130.gif" />
+    <Content Include="images\admin-gif\access-131.gif" />
+    <Content Include="images\admin-gif\access-132.gif" />
+    <Content Include="images\admin-gif\access-133.gif" />
+    <Content Include="images\admin-gif\access-134.gif" />
+    <Content Include="images\admin-gif\access-135.gif" />
+    <Content Include="images\admin-gif\access-136.gif" />
+    <Content Include="images\admin-gif\access-137.gif" />
+    <Content Include="images\admin-gif\access-138.gif" />
+    <Content Include="images\admin-gif\access-139.gif" />
+    <Content Include="images\admin-gif\access-14.gif" />
+    <Content Include="images\admin-gif\access-140.gif" />
+    <Content Include="images\admin-gif\access-141.gif" />
+    <Content Include="images\admin-gif\access-142.gif" />
+    <Content Include="images\admin-gif\access-143.gif" />
+    <Content Include="images\admin-gif\access-144.gif" />
+    <Content Include="images\admin-gif\access-145.gif" />
+    <Content Include="images\admin-gif\access-146.gif" />
+    <Content Include="images\admin-gif\access-15.gif" />
+    <Content Include="images\admin-gif\access-16.gif" />
+    <Content Include="images\admin-gif\access-17.gif" />
+    <Content Include="images\admin-gif\access-18.gif" />
+    <Content Include="images\admin-gif\access-19.gif" />
+    <Content Include="images\admin-gif\access-2.gif" />
+    <Content Include="images\admin-gif\access-24.gif" />
+    <Content Include="images\admin-gif\access-25.gif" />
+    <Content Include="images\admin-gif\access-26.gif" />
+    <Content Include="images\admin-gif\access-27.gif" />
+    <Content Include="images\admin-gif\access-3.gif" />
+    <Content Include="images\admin-gif\access-32.gif" />
+    <Content Include="images\admin-gif\access-33.gif" />
+    <Content Include="images\admin-gif\access-34.gif" />
+    <Content Include="images\admin-gif\access-35.gif" />
+    <Content Include="images\admin-gif\access-36.gif" />
+    <Content Include="images\admin-gif\access-37.gif" />
+    <Content Include="images\admin-gif\access-4.gif" />
+    <Content Include="images\admin-gif\access-40.gif" />
+    <Content Include="images\admin-gif\access-41.gif" />
+    <Content Include="images\admin-gif\access-42.gif" />
+    <Content Include="images\admin-gif\access-43.gif" />
+    <Content Include="images\admin-gif\access-44.gif" />
+    <Content Include="images\admin-gif\access-45.gif" />
+    <Content Include="images\admin-gif\access-46.gif" />
+    <Content Include="images\admin-gif\access-47.gif" />
+    <Content Include="images\admin-gif\access-48.gif" />
+    <Content Include="images\admin-gif\access-49.gif" />
+    <Content Include="images\admin-gif\access-5.gif" />
+    <Content Include="images\admin-gif\access-50.gif" />
+    <Content Include="images\admin-gif\access-51.gif" />
+    <Content Include="images\admin-gif\access-52.gif" />
+    <Content Include="images\admin-gif\access-53.gif" />
+    <Content Include="images\admin-gif\access-54.gif" />
+    <Content Include="images\admin-gif\access-55.gif" />
+    <Content Include="images\admin-gif\access-56.gif" />
+    <Content Include="images\admin-gif\access-57.gif" />
+    <Content Include="images\admin-gif\access-58.gif" />
+    <Content Include="images\admin-gif\access-59.gif" />
+    <Content Include="images\admin-gif\access-6.gif" />
+    <Content Include="images\admin-gif\access-60.gif" />
+    <Content Include="images\admin-gif\access-61.gif" />
+    <Content Include="images\admin-gif\access-62.gif" />
+    <Content Include="images\admin-gif\access-63.gif" />
+    <Content Include="images\admin-gif\access-64.gif" />
+    <Content Include="images\admin-gif\access-65.gif" />
+    <Content Include="images\admin-gif\access-66.gif" />
+    <Content Include="images\admin-gif\access-67.gif" />
+    <Content Include="images\admin-gif\access-68.gif" />
+    <Content Include="images\admin-gif\access-69.gif" />
+    <Content Include="images\admin-gif\access-7.gif" />
+    <Content Include="images\admin-gif\access-70.gif" />
+    <Content Include="images\admin-gif\access-71.gif" />
+    <Content Include="images\admin-gif\access-72.gif" />
+    <Content Include="images\admin-gif\access-73.gif" />
+    <Content Include="images\admin-gif\access-74.gif" />
+    <Content Include="images\admin-gif\access-75.gif" />
+    <Content Include="images\admin-gif\access-76.gif" />
+    <Content Include="images\admin-gif\access-77.gif" />
+    <Content Include="images\admin-gif\access-78.gif" />
+    <Content Include="images\admin-gif\access-79.gif" />
+    <Content Include="images\admin-gif\access-8.gif" />
+    <Content Include="images\admin-gif\access-80.gif" />
+    <Content Include="images\admin-gif\access-81.gif" />
+    <Content Include="images\admin-gif\access-82.gif" />
+    <Content Include="images\admin-gif\access-83.gif" />
+    <Content Include="images\admin-gif\access-84.gif" />
+    <Content Include="images\admin-gif\access-85.gif" />
+    <Content Include="images\admin-gif\access-86.gif" />
+    <Content Include="images\admin-gif\access-87.gif" />
+    <Content Include="images\admin-gif\access-88.gif" />
+    <Content Include="images\admin-gif\access-89.gif" />
+    <Content Include="images\admin-gif\access-9.gif" />
+    <Content Include="images\admin-gif\access-90.gif" />
+    <Content Include="images\admin-gif\access-91.gif" />
+    <Content Include="images\admin-gif\access-92.gif" />
+    <Content Include="images\admin-gif\access-93.gif" />
+    <Content Include="images\admin-gif\access-94.gif" />
+    <Content Include="images\admin-gif\access-95.gif" />
+    <Content Include="images\admin-gif\access-96.gif" />
+    <Content Include="images\admin-gif\access-97.gif" />
+    <Content Include="images\admin-gif\access-98.gif" />
+    <Content Include="images\admin-gif\access-99.gif" />
+    <Content Include="images\admin-win1.png" />
+    <Content Include="images\admin-win2.png" />
+    <Content Include="images\ad\ad-2.png" />
+    <Content Include="images\agree.gif" />
+    <Content Include="images\ajax_loading.gif" />
+    <Content Include="images\arrow1.gif" />
+    <Content Include="images\arrow1b.gif" />
+    <Content Include="images\arrow2.gif" />
+    <Content Include="images\arrow_black.gif" />
+    <Content Include="images\arrow_undo.gif" />
+    <Content Include="images\asc.gif" />
+    <Content Include="images\ascx.gif" />
+    <Content Include="images\aspx.gif" />
+    <Content Include="images\back.gif" />
+    <Content Include="images\bg.gif" />
+    <Content Include="images\bottom.gif" />
+    <Content Include="images\break.gif" />
+    <Content Include="images\btn_calendar.gif" />
+    <Content Include="images\busy.gif" />
+    <Content Include="images\button.gif" />
+    <Content Include="images\buttonbg.gif" />
+    <Content Include="images\buttonbg.jpg" />
+    <Content Include="images\cache_reset.gif" />
+    <Content Include="images\cache_resetall.gif" />
+    <Content Include="images\calendar.gif" />
+    <Content Include="images\cal_nextMonth.gif" />
+    <Content Include="images\cal_prevMonth.gif" />
+    <Content Include="images\cancel.gif" />
+    <Content Include="images\checkver.gif" />
+    <Content Include="images\close.gif" />
+    <Content Include="images\col.gif" />
+    <Content Include="images\collapse.gif" />
+    <Content Include="images\colorpicker.gif" />
+    <Content Include="images\commandbg.gif" />
+    <Content Include="images\commandbg2.gif" />
+    <Content Include="images\commandbg3.gif" />
+    <Content Include="images\commandbg4.gif" />
+    <Content Include="images\config.gif" />
+    <Content Include="images\cs.gif" />
+    <Content Include="images\css.gif" />
+    <Content Include="images\del.gif" />
+    <Content Include="images\deleted.gif" />
+    <Content Include="images\desc.gif" />
+    <Content Include="images\disagree.gif" />
+    <Content Include="images\dot.gif" />
+    <Content Include="images\downarrow.gif" />
+    <Content Include="images\dropdown.gif" />
+    <Content Include="images\droptop.gif" />
+    <Content Include="images\dropup.gif" />
+    <Content Include="images\editfile.gif" />
+    <Content Include="images\email.gif" />
+    <Content Include="images\existmenu.gif" />
+    <Content Include="images\exp.gif" />
+    <Content Include="images\expand.gif" />
+    <Content Include="images\eye.gif" />
+    <Content Include="images\fairy.png" />
+    <Content Include="images\false.gif" />
+    <Content Include="images\favorite.gif" />
+    <Content Include="images\flower.jpg" />
+    <Content Include="images\folder.gif" />
+    <Content Include="images\folders.gif" />
+    <Content Include="images\folder_open.gif" />
+    <Content Include="images\fullmenu.gif" />
+    <Content Include="images\grid_headerBg.gif" />
+    <Content Include="images\group_asc.gif" />
+    <Content Include="images\group_desc.gif" />
+    <Content Include="images\header.gif" />
+    <Content Include="images\header1stCell_bg.gif" />
+    <Content Include="images\header_activeBg.gif" />
+    <Content Include="images\header_bg.gif" />
+    <Content Include="images\header_hoverBg.gif" />
+    <Content Include="images\header_rowBg.gif" />
+    <Content Include="images\help.jpg" />
+    <Content Include="images\hint.gif" />
+    <Content Include="images\hover_tab_bg.gif" />
+    <Content Include="images\hover_tab_left_icon.gif" />
+    <Content Include="images\hover_tab_right_icon.gif" />
+    <Content Include="images\htm.gif" />
+    <Content Include="images\icons\false.jpg" />
+    <Content Include="images\icons\icon1.jpg" />
+    <Content Include="images\icons\icon10.jpg" />
+    <Content Include="images\icons\icon11.jpg" />
+    <Content Include="images\icons\icon12.jpg" />
+    <Content Include="images\icons\icon13.jpg" />
+    <Content Include="images\icons\icon14.jpg" />
+    <Content Include="images\icons\icon15.jpg" />
+    <Content Include="images\icons\icon16.jpg" />
+    <Content Include="images\icons\icon17.jpg" />
+    <Content Include="images\icons\icon18.jpg" />
+    <Content Include="images\icons\icon19.jpg" />
+    <Content Include="images\icons\icon2.jpg" />
+    <Content Include="images\icons\icon20.jpg" />
+    <Content Include="images\icons\icon21.jpg" />
+    <Content Include="images\icons\icon22.jpg" />
+    <Content Include="images\icons\icon23.jpg" />
+    <Content Include="images\icons\icon24.jpg" />
+    <Content Include="images\icons\icon25.jpg" />
+    <Content Include="images\icons\icon26.jpg" />
+    <Content Include="images\icons\icon27.jpg" />
+    <Content Include="images\icons\icon28.jpg" />
+    <Content Include="images\icons\icon29.jpg" />
+    <Content Include="images\icons\icon3.jpg" />
+    <Content Include="images\icons\icon30.jpg" />
+    <Content Include="images\icons\icon31.jpg" />
+    <Content Include="images\icons\icon32.jpg" />
+    <Content Include="images\icons\icon33.jpg" />
+    <Content Include="images\icons\icon34.jpg" />
+    <Content Include="images\icons\icon35.jpg" />
+    <Content Include="images\icons\icon36.jpg" />
+    <Content Include="images\icons\icon37.jpg" />
+    <Content Include="images\icons\icon38.jpg" />
+    <Content Include="images\icons\icon39.jpg" />
+    <Content Include="images\icons\icon4.jpg" />
+    <Content Include="images\icons\icon40.jpg" />
+    <Content Include="images\icons\icon41.jpg" />
+    <Content Include="images\icons\icon42.jpg" />
+    <Content Include="images\icons\icon43.jpg" />
+    <Content Include="images\icons\icon44.jpg" />
+    <Content Include="images\icons\icon45.jpg" />
+    <Content Include="images\icons\icon46.jpg" />
+    <Content Include="images\icons\icon47.jpg" />
+    <Content Include="images\icons\icon48.jpg" />
+    <Content Include="images\icons\icon49.jpg" />
+    <Content Include="images\icons\icon5.jpg" />
+    <Content Include="images\icons\icon50.jpg" />
+    <Content Include="images\icons\icon51.jpg" />
+    <Content Include="images\icons\icon52.jpg" />
+    <Content Include="images\icons\icon53.jpg" />
+    <Content Include="images\icons\icon54.jpg" />
+    <Content Include="images\icons\icon55.jpg" />
+    <Content Include="images\icons\icon56.jpg" />
+    <Content Include="images\icons\icon57.jpg" />
+    <Content Include="images\icons\icon58.jpg" />
+    <Content Include="images\icons\icon59.jpg" />
+    <Content Include="images\icons\icon6.jpg" />
+    <Content Include="images\icons\icon60.jpg" />
+    <Content Include="images\icons\icon7.jpg" />
+    <Content Include="images\icons\icon8.jpg" />
+    <Content Include="images\icons\icon9.jpg" />
+    <Content Include="images\icons\legendimg.jpg" />
+    <Content Include="images\icons\true.jpg" />
+    <Content Include="images\invalid.gif" />
+    <Content Include="images\invalidation.gif" />
+    <Content Include="images\jiao.gif" />
+    <Content Include="images\js.gif" />
+    <Content Include="images\key.gif" />
+    <Content Include="images\kj.gif" />
+    <Content Include="images\leftbg.jpg" />
+    <Content Include="images\legendimg.jpg" />
+    <Content Include="images\lines\dash.gif" />
+    <Content Include="images\lines\dashminus.gif" />
+    <Content Include="images\lines\dashplus.gif" />
+    <Content Include="images\lines\i.gif" />
+    <Content Include="images\lines\l.gif" />
+    <Content Include="images\lines\lminus.gif" />
+    <Content Include="images\lines\lplus.gif" />
+    <Content Include="images\lines\minus.gif" />
+    <Content Include="images\lines\noexpand.gif" />
+    <Content Include="images\lines\plus.gif" />
+    <Content Include="images\lines\r.gif" />
+    <Content Include="images\lines\rminus.gif" />
+    <Content Include="images\lines\rplus.gif" />
+    <Content Include="images\lines\t.gif" />
+    <Content Include="images\lines\tminus.gif" />
+    <Content Include="images\lines\tplus.gif" />
+    <Content Include="images\login-bottom.gif" />
+    <Content Include="images\login-center.gif" />
+    <Content Include="images\login-top.gif" />
+    <Content Include="images\login.png" />
+    <Content Include="images\logo1.png" />
+    <Content Include="images\logo2.png" />
+    <Content Include="images\mail.gif" />
+    <Content Include="images\Menudown.gif" />
+    <Content Include="images\Menuon.gif" />
+    <Content Include="images\Menutab.jpg" />
+    <Content Include="images\minus.gif" />
+    <Content Include="images\move.gif" />
+    <Content Include="images\mydocs.gif" />
+    <Content Include="images\mydocuments.gif" />
+    <Content Include="images\navigation.gif" />
+    <Content Include="images\nav\add.gif" />
+    <Content Include="images\nav\add2.gif" />
+    <Content Include="images\nav\advanced.gif" />
+    <Content Include="images\nav\back.gif" />
+    <Content Include="images\nav\combination.gif" />
+    <Content Include="images\nav\common.gif" />
+    <Content Include="images\nav\edit.gif" />
+    <Content Include="images\nav\edit2.gif" />
+    <Content Include="images\nav\email.gif" />
+    <Content Include="images\nav\exit.gif" />
+    <Content Include="images\nav\groupadd.gif" />
+    <Content Include="images\nav\groupadd2.gif" />
+    <Content Include="images\nav\groupadd3.gif" />
+    <Content Include="images\nav\groupedit.gif" />
+    <Content Include="images\nav\guide.gif" />
+    <Content Include="images\nav\home.gif" />
+    <Content Include="images\nav\log.gif" />
+    <Content Include="images\nav\move.gif" />
+    <Content Include="images\nav\sendemail.gif" />
+    <Content Include="images\nav\sendpm.gif" />
+    <Content Include="images\nav\shortcut.gif" />
+    <Content Include="images\nav\sysinfo.gif" />
+    <Content Include="images\nav\templates.gif" />
+    <Content Include="images\nav\useradd.gif" />
+    <Content Include="images\nav\useredit.gif" />
+    <Content Include="images\next.gif" />
+    <Content Include="images\nodelete.gif" />
+    <Content Include="images\none.gif" />
+    <Content Include="images\off.gif" />
+    <Content Include="images\OK.gif" />
+    <Content Include="images\plus.gif" />
+    <Content Include="images\prev.gif" />
+    <Content Include="images\priority_high.gif" />
+    <Content Include="images\priority_low.gif" />
+    <Content Include="images\reorder.gif" />
+    <Content Include="images\scroller\bottom.gif" />
+    <Content Include="images\scroller\down.gif" />
+    <Content Include="images\scroller\down_disabled.gif" />
+    <Content Include="images\scroller\scroller_bg.gif" />
+    <Content Include="images\scroller\scroll_gripBg.gif" />
+    <Content Include="images\scroller\top.gif" />
+    <Content Include="images\scroller\up.gif" />
+    <Content Include="images\scroller\up_disabled.gif" />
+    <Content Include="images\search.gif" />
+    <Content Include="images\searchbutton.jpg" />
+    <Content Include="images\selected_tab_bg.gif" />
+    <Content Include="images\selected_tab_left_icon.gif" />
+    <Content Include="images\selected_tab_right_icon.gif" />
+    <Content Include="images\selector.gif" />
+    <Content Include="images\selectTab_hover.gif" />
+    <Content Include="images\selectTab_hover2.gif" />
+    <Content Include="images\sentItems.gif" />
+    <Content Include="images\serchbutton.gif" />
+    <Content Include="images\serchbutton2.gif" />
+    <Content Include="images\shareddocuments.gif" />
+    <Content Include="images\sortBlank.gif" />
+    <Content Include="images\spacer.gif" />
+    <Content Include="images\spinner.gif" />
+    <Content Include="images\splitter_horBg.gif" />
+    <Content Include="images\splitter_horCol.gif" />
+    <Content Include="images\splitter_horColHover.gif" />
+    <Content Include="images\splitter_horExp.gif" />
+    <Content Include="images\splitter_horExpHover.gif" />
+    <Content Include="images\splitter_verBg.gif" />
+    <Content Include="images\splitter_verCol.gif" />
+    <Content Include="images\splitter_verColHover.gif" />
+    <Content Include="images\splitter_verExp.gif" />
+    <Content Include="images\splitter_verExpHover.gif" />
+    <Content Include="images\star.gif" />
+    <Content Include="images\state1.gif" />
+    <Content Include="images\state2.gif" />
+    <Content Include="images\state3.gif" />
+    <Content Include="images\submenubg.jpg" />
+    <Content Include="images\submenubg2.jpg" />
+    <Content Include="images\submenubg3.jpg" />
+    <Content Include="images\submenubg4.jpg" />
+    <Content Include="images\submenubg5.jpg" />
+    <Content Include="images\submenubg6.jpg" />
+    <Content Include="images\submenubg7.jpg" />
+    <Content Include="images\submit.gif" />
+    <Content Include="images\tab.active.gif" />
+    <Content Include="images\tab0leftbg.gif" />
+    <Content Include="images\tab1leftbg.gif" />
+    <Content Include="images\tab2leftbg.gif" />
+    <Content Include="images\tab3leftbg.gif" />
+    <Content Include="images\tab4leftbg.gif" />
+    <Content Include="images\tab5leftbg.gif" />
+    <Content Include="images\tab6leftbg.gif" />
+    <Content Include="images\Tabbg.gif" />
+    <Content Include="images\tableftbg.gif" />
+    <Content Include="images\tab_bg.gif" />
+    <Content Include="images\tab_left_icon.gif" />
+    <Content Include="images\tab_right_icon.gif" />
+    <Content Include="images\topbar.jpg" />
+    <Content Include="images\topbarbg.gif" />
+    <Content Include="images\topictype.gif" />
+    <Content Include="images\topItem_col.gif" />
+    <Content Include="images\topItem_exp.gif" />
+    <Content Include="images\top_level_bg.gif" />
+    <Content Include="images\top_level_ico1.gif" />
+    <Content Include="images\top_level_ico2.gif" />
+    <Content Include="images\true.gif" />
+    <Content Include="images\uparrow.gif" />
+    <Content Include="images\update.gif" />
+    <Content Include="images\uploadfile.gif" />
+    <Content Include="images\usergroup.gif" />
+    <Content Include="images\vb.gif" />
+    <Content Include="images\warning.gif" />
+    <Content Include="images\xml.gif" />
+    <Content Include="images\xpbuttonbg_l.gif" />
+    <Content Include="images\xpbuttonbg_r.gif" />
+    <Content Include="images\zip.gif" />
+    <Content Include="images\zoomin.gif" />
+    <Content Include="images\zoomout.gif" />
+    <Content Include="index.aspx" />
+    <Content Include="js\ajaxhelper.js" />
+    <Content Include="js\calendar.js" />
+    <Content Include="js\colorpicker.js" />
+    <Content Include="js\common.js" />
+    <Content Include="js\divcover.js" />
+    <Content Include="js\draglist.js" />
+    <Content Include="js\modalpopup.js" />
+    <Content Include="js\navbar.js" />
+    <Content Include="js\tabstrip.js" />
+    <Content Include="rapidset\managemainmenu.aspx" />
+    <Content Include="rapidset\managemenubackupfile.aspx" />
+    <Content Include="rapidset\managesubmenu.aspx" />
+    <Content Include="rapidset\managesubmenuitem.aspx" />
+    <Content Include="rapidset\systeminf.aspx" />
+    <Content Include="sirius\sirius_addteam.aspx" />
+    <Content Include="styles\calendar.css" />
+    <Content Include="styles\colorpicker.css" />
+    <Content Include="styles\datagrid.css" />
+    <Content Include="styles\default.css" />
+    <Content Include="styles\dntmanager.css" />
+    <Content Include="styles\draglist.css" />
+    <Content Include="styles\editor.css" />
+    <Content Include="styles\modelpopup.css" />
+    <Content Include="styles\nav.css" />
+    <Content Include="styles\tab.css" />
+    <Content Include="style\admin.css" />
+    <Content Include="style\comm.css" />
+    <Content Include="syslogin.aspx" />
+    <Content Include="UserControls\onlineeditor.ascx" />
+    <Content Include="UserControls\PageInfo.ascx" />
+    <Content Include="UserControls\TextareaResize.ascx" />
+    <Content Include="UserControls\usergrouppowersetting.ascx" />
+    <Content Include="xml\navmenu.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\admin-gif\Thumbs.db" />
+    <None Include="images\ad\Thumbs.db" />
+    <None Include="images\Thumbs.db" />
+    <None Include="xml\backup\2009-09-24 09_20_17.config" />
+    <None Include="xml\navmenu.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\SAS.Cache\SAS.Cache.csproj">
+      <Project>{7A65B383-BFA6-4B0D-AA97-2C24F5B2F613}</Project>
+      <Name>SAS.Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SAS.Common\SAS.Common.csproj">
+      <Project>{203EB763-E07B-4047-9473-D16F84B2E554}</Project>
+      <Name>SAS.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SAS.Config\SAS.Config.csproj">
+      <Project>{5325F618-33FA-4B03-9A3E-96ED8C554F6C}</Project>
+      <Name>SAS.Config</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SAS.Control\SAS.Control.csproj">
+      <Project>{B16EF345-37D9-43FE-B371-8627BC6F3E43}</Project>
+      <Name>SAS.Control</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SAS.Data.SqlServer\SAS.Data.SqlServer.csproj">
+      <Project>{7A7B0B03-0109-408C-BC7A-7FA36911C924}</Project>
+      <Name>SAS.Data.SqlServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SAS.Data\SAS.Data.csproj">
+      <Project>{E15BF13F-EC22-47A3-ACF4-AA79738FB7E8}</Project>
+      <Name>SAS.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SAS.Entity\SAS.Entity.csproj">
+      <Project>{F6CFD248-E9E3-480A-B518-526298AAF81E}</Project>
+      <Name>SAS.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SAS.Logic\SAS.Logic.csproj">
+      <Project>{9145299A-21C2-4558-A956-2DBDCBF477DE}</Project>
+      <Name>SAS.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SAS.Plugin\SAS.Plugin.csproj">
+      <Project>{2EA29B20-569F-421C-B359-7E7F8C7045CD}</Project>
+      <Name>SAS.Plugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SAS.Web.UI\SAS.Web.UI.csproj">
+      <Project>{15188167-C7FB-4A1B-9AC0-480A26825AAF}</Project>
+      <Name>SAS.Web.UI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
