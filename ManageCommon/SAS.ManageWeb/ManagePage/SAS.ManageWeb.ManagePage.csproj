@@ -766,7 +766,9 @@
     <Content Include="sirius\sirius_addteam.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="sirius\sirius_manageteam.aspx" />
+    <Content Include="sirius\sirius_manageteam.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="styles\calendar.css" />
     <Content Include="styles\colorpicker.css" />
     <Content Include="styles\datagrid.css" />
