@@ -27,6 +27,16 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 通过用户名获取用户信息
+        /// </summary>
+        /// <param name="userName">用户名</param>
+        /// <returns></returns>
+        public static UserInfo GetUserInfo(string userName)
+        {
+            return Data.DataProvider.Users.GetUserInfo(userName);
+        }
+
+        /// <summary>
         /// 返回指定用户的简短信息
         /// </summary>
         /// <param name="uid">用户id</param>

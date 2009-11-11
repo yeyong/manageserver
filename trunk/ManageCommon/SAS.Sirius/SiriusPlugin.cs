@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Data;
 
 using SAS.Plugin.Sirius;
 using SAS.Common;
@@ -16,6 +17,25 @@ namespace SAS.Sirius
     /// </summary>
     public class SiriusPlugin : SiriusPluginBase
     {
+        /// <summary>
+        /// 创建团队信息
+        /// </summary>
+        /// <param name="teaminfo">信息实体</param>
+        /// <param name="members">成员信息反馈</param>
+        /// <param name="adminUid">管理员ID</param>
+        /// <param name="adminUserName">管理员姓名</param>
+        /// <param name="adminUserGruopId">管理组</param>
+        /// <param name="adminUserGroupTitle">管理组名称</param>
+        /// <param name="adminIp">管理员IP</param>
+        /// <returns></returns>
+        public override int CreateTeamInfo(TeamInfo teaminfo, out string members)
+        {
+            return Sirius.CreateTeam(teaminfo, out  members);
+        }
 
+        public override SAS.Common.Generic.List<TeamInfo> GetAllTeamList()
+        {
+            return Sirius.GetAllTeamInfoList();
+        }
     }
 }

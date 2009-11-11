@@ -48,16 +48,48 @@ namespace SAS.Sirius.Admin
                     return;
                 }
 
+                TeamInfo teaminfo = CreateTeamInfo();
+                string results = "";
+                Sirius.CreateTeam(teaminfo,out results);
 
-
-
-
+                if (results == "")
+                {
+                    base.RegisterStartupScript("PAGE", "self.location.href='sirius_manageteam.aspx';");
+                }
+                else
+                {
+                    base.RegisterStartupScript("PAGE", "alert('用户:" + results + "不存在或不是指定用户组,因为无法设为团队成员');self.location.href='sirius_manageteam.aspx';");
+                }
+                AdminVistLogs.InsertLog(userid, username, usergroupid, grouptitle, ip, "添加团队信息", "添加新团队名为：" + teaminfo.Name);             
             }
+
             #endregion
         }
 
+        private TeamInfo CreateTeamInfo()
+        {
+            TeamInfo teaminfo = new TeamInfo();
+
+            teaminfo.Name = name.Text;
+            teaminfo.Teamdomain = teamurl.Text.Trim();
+            teaminfo.Templateid = Convert.ToInt32(templateid.SelectedValue);
+            teaminfo.Imgs = teamImg.Text.Trim();
+            teaminfo.Bio = teamBio.Text.Trim();
+            teaminfo.Content1 = content1.Text;
+            teaminfo.Content2 = content2.Text;
+            teaminfo.Content3 = content3.Text;
+            teaminfo.TeamMember = moderators.Text.Trim();
+            teaminfo.Stutas = Convert.ToInt16(status.SelectedValue);
+            teaminfo.Displayorder = 0;
+            teaminfo.Seodescription = seodescription.Text.Trim();
+            teaminfo.Seokeywords = seokeywords.Text.Trim();
+            teaminfo.Creater = username;
+
+            return teaminfo;
+        }
+
         private void SubmitAdd_Click(object sender, EventArgs e)
-        {            
+        {
             SubmitAddChild();
         }
 

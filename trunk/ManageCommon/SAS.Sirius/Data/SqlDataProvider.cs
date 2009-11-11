@@ -54,5 +54,44 @@ namespace SAS.Sirius.Data
             }
             return parms;
         }
+
+        public int CreateTeams(TeamInfo teaminfo)
+        {
+            DbParameter[] parms = 
+            {
+                DbHelper.MakeInParam("@name",(DbType)SqlDbType.NVarChar,255,teaminfo.Name),
+                DbHelper.MakeInParam("@teamdomain",(DbType)SqlDbType.NVarChar,255,teaminfo.Teamdomain),
+                DbHelper.MakeInParam("@templateid",(DbType)SqlDbType.Int,4,teaminfo.Templateid),
+                DbHelper.MakeInParam("@imgs",(DbType)SqlDbType.NVarChar,255,teaminfo.Imgs),
+                DbHelper.MakeInParam("@bio",(DbType)SqlDbType.NVarChar,255,teaminfo.Bio),
+                DbHelper.MakeInParam("@content1",(DbType)SqlDbType.NText,0,teaminfo.Content1),
+                DbHelper.MakeInParam("@content2",(DbType)SqlDbType.NText,0,teaminfo.Content2),
+                DbHelper.MakeInParam("@content3",(DbType)SqlDbType.NText,0,teaminfo.Content3),
+                DbHelper.MakeInParam("@content4",(DbType)SqlDbType.NText,0,teaminfo.Content4),
+                DbHelper.MakeInParam("@teammember",(DbType)SqlDbType.NText,0,teaminfo.TeamMember),
+                DbHelper.MakeInParam("@stutas",(DbType)SqlDbType.Int,4,teaminfo.Stutas),
+                DbHelper.MakeInParam("@displayorder",(DbType)SqlDbType.Int,4,teaminfo.Displayorder),
+                DbHelper.MakeInParam("@seokeywords",(DbType)SqlDbType.NText,0,teaminfo.Seokeywords),
+                DbHelper.MakeInParam("@seodescription",(DbType)SqlDbType.NText,0,teaminfo.Seodescription),
+                DbHelper.MakeInParam("@creater",(DbType)SqlDbType.VarChar,50,teaminfo.Creater)
+            };
+            string commandText = String.Format("INSERT INTO [{0}teamInfo] ([name],[teamdomain],[templateid],[imgs],[bio],[content1],[content2],[content3],[content4],[stutas],[displayorder],[teamMember],[seokeywords],[seodescription],[creater]) VALUES (@name,@teamdomain,@templateid,@imgs,@bio,@content1,@content2,@content3,@content4,@stutas,@displayorder,@teamMember,@seokeywords,@seodescription,@creater);SELECT SCOPE_IDENTITY()", BaseConfigs.GetTablePrefix);
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText, parms));
+        }
+
+        public SAS.Common.Generic.List<TeamInfo> GetAllTeamList()
+        {
+            string commandText = string.Format("SELECT * FROM [{0}teamInfo] ORDER BY [createdate]", BaseConfigs.GetTablePrefix);
+
+            IDataReader reader = DbHelper.ExecuteReader(CommandType.Text, commandText);
+            SAS.Common.Generic.List<TeamInfo> tlist = new SAS.Common.Generic.List<TeamInfo>();
+            while (reader.Read())
+            {
+                TeamInfo team = new TeamInfo();
+                team.TeamID = TypeConverter.ObjectToInt(reader["teamID"], 0);
+                team.Name = reader["name"].ToString();
+                team.Teamdomain = reader["teamdomain"].ToString();
+            }
+        }
     }
 }

@@ -275,7 +275,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="forum\forum_addforums.aspx" />
+    <Content Include="forum\forum_addforums.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="forum\forum_editforums.aspx" />
     <Content Include="forum\forum_forumstree.aspx" />
     <Content Include="forum\forum_option.aspx" />
@@ -301,7 +303,9 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="global\global_usergrid.aspx" />
-    <Content Include="global\global_usergroupgrid.aspx" />
+    <Content Include="global\global_usergroupgrid.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="images\add.gif" />
     <Content Include="images\addmenu.gif" />
     <Content Include="images\addremoveprograms.gif" />
@@ -758,9 +762,11 @@
     <Content Include="rapidset\systeminf.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <Content Include="sirius\photo.txt" />
     <Content Include="sirius\sirius_addteam.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <Content Include="sirius\sirius_manageteam.aspx" />
     <Content Include="styles\calendar.css" />
     <Content Include="styles\colorpicker.css" />
     <Content Include="styles\datagrid.css" />
@@ -777,7 +783,9 @@
     <Content Include="UserControls\onlineeditor.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="UserControls\PageInfo.ascx" />
+    <Content Include="UserControls\PageInfo.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="UserControls\TextareaResize.ascx" />
     <Content Include="UserControls\usergrouppowersetting.ascx" />
     <Content Include="xml\navmenu.js" />
