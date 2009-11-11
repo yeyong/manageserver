@@ -43,10 +43,17 @@
     <Compile Include="Admin\addteam.aspx.designer.cs">
       <DependentUpon>addteam.aspx.cs</DependentUpon>
     </Compile>
+    <Compile Include="Admin\manageteam.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\manageteam.aspx.designer.cs">
+      <DependentUpon>manageteam.aspx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Config\SiriusConfigFileManager.cs" />
     <Compile Include="Config\SiriusConfigInfo.cs" />
     <Compile Include="Config\SiriusConfigs.cs" />
     <Compile Include="Data\DbProvider.cs" />
+    <Compile Include="Data\DTOProvider.cs" />
     <Compile Include="Data\SqlDataProvider.cs" />
     <Compile Include="Pages\personindex.cs">
       <SubType>ASPXCodeBehind</SubType>

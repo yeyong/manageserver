@@ -28,6 +28,7 @@ namespace SAS.Entity
         private string _teammember;
         private string _seokeywords;
         private string _seodescription;
+        private string _creater;
         /// <summary>
         /// 团队ID
         /// </summary>
@@ -45,81 +46,81 @@ namespace SAS.Entity
             get { return _name; }
         }
         /// <summary>
-        /// 
+        /// 团队域名
         /// </summary>
-        public string teamdomain
+        public string Teamdomain
         {
             set { _teamdomain = value; }
             get { return _teamdomain; }
         }
         /// <summary>
-        /// 
+        /// 模板id
         /// </summary>
-        public int templateid
+        public int Templateid
         {
             set { _templateid = value; }
             get { return _templateid; }
         }
         /// <summary>
-        /// 
+        /// 成立时间
         /// </summary>
-        public DateTime buildDate
+        public string BuildDate
         {
             set { _builddate = value; }
             get { return _builddate; }
         }
         /// <summary>
-        /// 
+        /// 创建时间
         /// </summary>
-        public DateTime createDate
+        public string CreateDate
         {
             set { _createdate = value; }
             get { return _createdate; }
         }
         /// <summary>
-        /// 
+        /// 最后修改时间
         /// </summary>
-        public DateTime updateDate
+        public string UpdateDate
         {
             set { _updatedate = value; }
             get { return _updatedate; }
         }
         /// <summary>
-        /// 
+        /// 团队图片地址
         /// </summary>
-        public string imgs
+        public string Imgs
         {
             set { _imgs = value; }
             get { return _imgs; }
         }
         /// <summary>
-        /// 
+        /// 团队简述
         /// </summary>
-        public string bio
+        public string Bio
         {
             set { _bio = value; }
             get { return _bio; }
         }
         /// <summary>
-        /// 
+        /// 团队意义
         /// </summary>
-        public string content1
+        public string Content1
         {
             set { _content1 = value; }
             get { return _content1; }
         }
         /// <summary>
-        /// 
+        /// 团队工作方向和工作内容
         /// </summary>
-        public string content2
+        public string Content2
         {
             set { _content2 = value; }
             get { return _content2; }
         }
         /// <summary>
-        /// 
+        /// 人员职责和基本构成
         /// </summary>
-        public string content3
+        public string Content3
         {
             set { _content3 = value; }
             get { return _content3; }
@@ -127,58 +128,66 @@ namespace SAS.Entity
         /// <summary>
         /// 
         /// </summary>
-        public string content4
+        public string Content4
         {
             set { _content4 = value; }
             get { return _content4; }
         }
         /// <summary>
-        /// 
+        /// 团队状态（默认1，正常；0，停用）
         /// </summary>
-        public int stutas
+        public int Stutas
         {
             set { _stutas = value; }
             get { return _stutas; }
         }
         /// <summary>
-        /// 
+        /// 查看次数
         /// </summary>
-        public int pageviews
+        public int Pageviews
         {
             set { _pageviews = value; }
             get { return _pageviews; }
         }
         /// <summary>
-        /// 
+        /// 显示顺序
         /// </summary>
-        public int displayorder
+        public int Displayorder
         {
             set { _displayorder = value; }
             get { return _displayorder; }
         }
         /// <summary>
-        /// 
+        /// 成员名（逗号分割）
         /// </summary>
-        public string teamMember
+        public string TeamMember
         {
             set { _teammember = value; }
             get { return _teammember; }
         }
         /// <summary>
-        /// 
+        /// 搜索优化关键字
         /// </summary>
-        public string seokeywords
+        public string Seokeywords
         {
             set { _seokeywords = value; }
             get { return _seokeywords; }
         }
         /// <summary>
-        /// 
+        /// 搜索优化描述信息
         /// </summary>
-        public string seodescription
+        public string Seodescription
         {
             set { _seodescription = value; }
             get { return _seodescription; }
+        }
+        /// <summary>
+        /// 创建人（可以更改）拥有修改团队信息权限
+        /// </summary>
+        public string Creater
+        {
+            set { _creater = value; }
+            get { return _creater; }
         }
         #endregion Model
 

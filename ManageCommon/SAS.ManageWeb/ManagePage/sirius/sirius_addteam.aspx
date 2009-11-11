@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="True" Inherits="SAS.Sirius.Admin.addteam"  CodeBehind="sirius_addteam.aspx.cs"%>
+﻿<%@ Page Language="C#" AutoEventWireup="True" Inherits="SAS.Sirius.Admin.addteam"%>
 
 <%@ Register TagPrefix="uc1" TagName="TextareaResize" Src="../UserControls/TextareaResize.ascx" %>
 <%@ Register TagPrefix="cc2" Namespace="SAS.Control" Assembly="SAS.Control" %>
@@ -31,11 +31,10 @@
     <link href="../styles/modelpopup.css" type="text/css" rel="stylesheet" />
 
     <script type="text/javascript" src="../js/modalpopup.js"></script>
-    <script type="text/javascript" src="../js/ajaxhelper.js"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=7" />
 </head>
 <body>
-   <img id="img_hidden" style="position:absolute;top:-100000px;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='image');width:400;height:300"></img>
+   
    <form id="Form1" method="post" runat="server">
 	    <div class="Navbutton" style="width:98%;">
 	    <table width="100%">
@@ -44,6 +43,7 @@
 	    <cc3:TabControl id="TabControl1" SelectionMode="Client" runat="server" TabScriptPath="../js/tabstrip.js" height="100%">
 		    <cc3:TabPage Caption="基本信息" ID="tabPage51">
 		    <uc2:PageInfo id="info1" runat="server" Icon="Information" Text="根据不同的团队组信息，设置不同的组属性，以突出各团队特色。"></uc2:PageInfo>
+		    <uc2:PageInfo id="info2" runat="server" Icon="Warning" Text="团队队员设置时请注意，仅部分用户组成员可以成为团队成员。"></uc2:PageInfo>
 		    <table cellspacing="0" cellpadding="4" width="100%" align="center">
             <tr>
                 <td class="panelbox" align="left">
@@ -74,35 +74,8 @@
                         <tr>
 		                    <td>团队图片地址:</td>
 		                    <td>
-                                <table id="tab1" cellspacing="0" cellpadding="0" width="450">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <b>图片描述:</b>
-                                            </td>
-                                        </tr>                                        
-                                        <tr>
-                                            <td>
-                                                <cc2:TextBox ID="imgDesc" runat="server" Width="300" Height="50" TextMode="MultiLine"
-                                                    IsReplaceInvertedComma="false"></cc2:TextBox>
-                                            </td>
-                                            <td>
-                                                <span id="td1">
-                                                    <img src="../images/invalid.gif" width="100" height="75" id="view1"></span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <b>选择图片:</b>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="file" id="photo1" onchange="PhotoView(1)" size="50" name="photo1">
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                               <cc2:TextBox ID="teamImg" runat="server" RequiredFieldType="网页地址" HintInfo="团队展示类图片地址"
+                                            IsReplaceInvertedComma="true" Width="250px" MaxLength="250"></cc2:TextBox>
 							</td>
                         </tr>
                         <tr>
@@ -163,7 +136,7 @@
                                     </td>
                                     <td>
                                         <cc2:TextBox ID="teamurl" runat="server" CanBeNull="必填" RequiredFieldType="网页地址" HintInfo="展示平台地址"
-                                            IsReplaceInvertedComma="false" Size="20" MaxLength="49"></cc2:TextBox>
+                                            IsReplaceInvertedComma="false" Width="250px" MaxLength="250"></cc2:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -193,88 +166,4 @@
 	    </form>
 	<%=footer%>	
 </body>
-<script>
-    function PhotoView(layer) {
-        var file = $("photo" + layer).value;
-        if (file != "") {
-            var patn = /\.jpg$|\.jpeg$|\.gif$|\.png$/i;
-            if (!patn.test(file)) {
-                clearFileInput($("photo" + layer));
-                alert("相册只允许jpg、jpeg、gif或png格式的图片!");
-                return;
-            }
-            if (document.all) //IE执行
-            {
-                insertImage(layer);
-            }
-        }
-        else {
-            $("view" + layer).src = "../images/invalid.gif";
-
-        }
-    }
-    
-    function insertImage(id) {
-        var localimgpreview = '';
-        var path = $('photo' + id).value;
-        var ext = path.lastIndexOf('.') == -1 ? '' : path.substr(path.lastIndexOf('.') + 1, path.length).toLowerCase();
-        var re = new RegExp("(^|\\s|,)" + ext + "($|\\s|,)", "ig");
-        var localfile = $('photo' + id).value.substr($('photo' + id).value.replace(/\\/g, '/').lastIndexOf('/') + 1);
-
-        if (path == '') {
-            return;
-        }
-
-        var err = false;
-        $('img_hidden').alt = id;
-        try {
-            $('img_hidden').filters.item("DXImageTransform.Microsoft.AlphaImageLoader").sizingMethod = 'image';
-        }
-        catch (e){ err = true; }
-        try {
-            $('img_hidden').filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = $('photo' + id).value;
-        }
-        catch (e) {
-            alert('无效的图片文件。');
-            delAttach(id);
-
-            err = true;
-
-            return;
-        }
-        var wh = { 'w': $('img_hidden').offsetWidth, 'h': $('img_hidden').offsetHeight };
-        if (wh['w'] > 100) {
-            wh['h'] *= 100 / wh['w'];
-            wh['w'] = 100;
-        }
-        if (wh['h'] > 100) {
-            wh['w'] *= 100 / wh['h'];
-            wh['h'] = 100;
-        }
-        $('img_hidden').style.width = wh['w'];
-        $('img_hidden').style.height = wh['h'];
-        try {
-            $('img_hidden').filters.item("DXImageTransform.Microsoft.AlphaImageLoader").sizingMethod = 'scale';
-        }
-        catch (e) {
-        }
-        if (err == true) {
-            $('img_hidden').src = $('photo' + id).value;
-        }
-        div = document.createElement('div');
-        $('td' + id).removeChild($('td' + id).children(0));
-        $('td' + id).appendChild(div);
-        div.innerHTML = '<img style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=\'scale\',src=\'' + $('photo' + id).value + '\');width:' + wh['w'] + ';height:' + wh['h'] + '" src=\'../images/none.gif\' border="0" id="view' + id + '" aid="view' + id + '" alt="" />';
-    }
-    
-    function clearFileInput(file) {
-        var form = document.createElement('form');
-        document.body.appendChild(form);
-        var pos = file.nextSibling;
-        form.appendChild(file);
-        form.reset();
-        pos.parentNode.insertBefore(file, pos);
-        document.body.removeChild(form);
-    }
-</script>
 </html>
