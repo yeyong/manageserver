@@ -79,7 +79,7 @@ namespace SAS.Sirius
         /// <returns></returns>
         public static SAS.Common.Generic.List<TeamInfo> GetAllTeamInfoList()
         {
-            return DTOProvider
+            return DTOProvider.GetAllTeamInfoList();
         }
     }
 }

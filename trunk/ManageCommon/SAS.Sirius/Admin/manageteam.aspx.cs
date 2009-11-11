@@ -35,6 +35,16 @@ namespace SAS.Sirius.Admin
             #endregion
         }
 
+        protected void Sort_Grid(Object sender, DataGridSortCommandEventArgs e)
+        {
+            DataGrid1.Sort = e.SortExpression.ToString();
+        }
+
+        protected void DataGrid_PageIndexChanged(object source, DataGridPageChangedEventArgs e)
+        {
+            DataGrid1.LoadCurrentPageIndex(e.NewPageIndex);
+        }
+
         #region Web Form Designer generated code
 
         protected override void OnInit(EventArgs e)
@@ -48,5 +58,6 @@ namespace SAS.Sirius.Admin
             DataGrid1.DataKeyField = "teamID";
             DataGrid1.ColumnSpan = 12;
         }
+        #endregion
     }
 }

@@ -12,7 +12,11 @@ namespace SAS.Sirius.Data
 {
     public class DTOProvider
     {
-        public static SAS.Common.Generic.List<TeamInfo> GetAlbumCategory()
+        /// <summary>
+        /// 获取全部团队信息列表
+        /// </summary>
+        /// <returns></returns>
+        public static SAS.Common.Generic.List<TeamInfo> GetAllTeamInfoList()
         {
             SASCache cache = SASCache.GetCacheService();
             SAS.Common.Generic.List<TeamInfo> acic = cache.RetrieveObject("/Sirius/TeamInfoList") as SAS.Common.Generic.List<TeamInfo>;
