@@ -8,7 +8,7 @@
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />    
     <meta name="keywords" content="天狼星,工作室" />
     <meta name="description" content="天狼星工作室综合管理后台" />
-    <title>天狼星工作室综合管理后台-用户组列表</title>
+    <title>天狼星工作室综合管理后台-团队信息列表</title>
     <link href="../styles/datagrid.css" type="text/css" rel="stylesheet" />
     <link href="../styles/dntmanager.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript" src="../js/common.js"></script>
@@ -17,35 +17,32 @@
 <body>
      <form id="Form1" method="post" runat="server">
         <uc1:PageInfo ID="info1" runat="server" Icon="information" Text="增加用户组方法有两种:<br />方法1: 进入<a href=&quot;global_addusergroup.aspx&quot;>用户组添加</a>, 增加一个新的用户组,同时编辑该组的其他设置. <br />方法2: 点击下面的相关用户组记录上的 &quot;添加&quot; 链接,系统会用相关用户组的信息作为模板初始化&quot;添加表单&quot;,同时编辑该组的其他设置." />
-        <cc1:DataGrid ID="DataGrid1" runat="server" IsFixConlumnControls="true" OnPageIndexChanged="DataGrid_PageIndexChanged" 
-            OnSortCommand="Sort_Grid">
+        <cc1:DataGrid ID="DataGrid1" runat="server" IsFixConlumnControls="true" OnPageIndexChanged="DataGrid_PageIndexChanged" OnSortCommand="Sort_Grid">
             <Columns>
                 <asp:TemplateColumn HeaderText="">
                     <itemtemplate>
-						<a href="global_editusergroup.aspx?groupid=<%# DataBinder.Eval(Container, "DataItem.ug_id").ToString()%>">编辑</a>
-						<%# DataGrid1.LoadSelectedCheckBox(DataBinder.Eval(Container, "DataItem.groupid").ToString())%>
+						<a href="sirius_editteaminfo.aspx?teamID=<%# DataBinder.Eval(Container, "DataItem.teamID").ToString()%>">编辑</a>
+						<%# DataGrid1.LoadSelectedCheckBox(DataBinder.Eval(Container, "DataItem.teamID").ToString())%>
 					</itemtemplate>
                 </asp:TemplateColumn>
-                <asp:TemplateColumn HeaderText="">
-                    <itemtemplate>
-						<a href="global_addusergroup.aspx?groupid=<%# DataBinder.Eval(Container, "DataItem.ug_id").ToString()%>">添加</a>
-					</itemtemplate>
+                <asp:TemplateColumn HeaderText="团队图片">
+                    <ItemTemplate>
+                        
+                    </ItemTemplate>
                 </asp:TemplateColumn>
-                <asp:BoundColumn DataField="ug_id" SortExpression="ug_id" HeaderText="用户组ID" Visible="false"></asp:BoundColumn>
-                <asp:BoundColumn DataField="ug_name" SortExpression="ug_name" HeaderText="名称"></asp:BoundColumn>
-                <asp:BoundColumn DataField="creditshigher" SortExpression="creditshigher" HeaderText="积分下限"></asp:BoundColumn>
-                <asp:BoundColumn DataField="creditslower" SortExpression="creditslower" HeaderText="积分上限"></asp:BoundColumn>
-                <asp:BoundColumn DataField="stars" SortExpression="stars" HeaderText="星星数目" readonly="true"></asp:BoundColumn>
-                <asp:BoundColumn DataField="ug_readaccess" SortExpression="ug_readaccess" HeaderText="阅读权限" readonly="true"></asp:BoundColumn>
-                <asp:BoundColumn DataField="maxprice" SortExpression="maxprice" HeaderText="主题(附件)最高售价" readonly="true"></asp:BoundColumn>
-                <asp:BoundColumn DataField="maxpmnum" SortExpression="maxpmnum" HeaderText="短消息最多条数" readonly="true"></asp:BoundColumn>
-                <asp:BoundColumn DataField="maxsigsize" SortExpression="maxsigsize" HeaderText="签名最多字节" readonly="true"></asp:BoundColumn>
-                <asp:BoundColumn DataField="maxattachsize" SortExpression="maxattachsize" HeaderText="附件最大尺寸 [单位:字节]" readonly="true"></asp:BoundColumn>
+                <asp:BoundColumn DataField="teamID" SortExpression="teamID" HeaderText="团队ID" Visible="false"></asp:BoundColumn>
+                <asp:BoundColumn DataField="name" SortExpression="name" HeaderText="团队名称"></asp:BoundColumn>
+                <asp:BoundColumn DataField="teamdomain" SortExpression="teamdomain" HeaderText="团队域名" ItemStyle-Width="200px"></asp:BoundColumn>
+                <asp:BoundColumn DataField="displayorder" SortExpression="displayorder" HeaderText="显示顺序" ItemStyle-Width="65px"></asp:BoundColumn>
+                <asp:BoundColumn DataField="buildDate" SortExpression="buildDate" HeaderText="成立时间" readonly="true"></asp:BoundColumn>
+                <asp:BoundColumn DataField="createDate" SortExpression="createDate" HeaderText="创建时间" readonly="true"></asp:BoundColumn>
+                <asp:BoundColumn DataField="updateDate" SortExpression="updateDate" HeaderText="修改时间" readonly="true"></asp:BoundColumn>
+                <asp:BoundColumn DataField="pageviews" SortExpression="pageviews" HeaderText="查看次数" HeaderStyle-Width="65px" readonly="true"></asp:BoundColumn>                
+                <asp:BoundColumn DataField="creater" SortExpression="creater" HeaderText="创建人" readonly="true"></asp:BoundColumn>
             </Columns>
         </cc1:DataGrid>
         <p style="text-align:right;">
-            <cc1:Button ID="EditUserGroup" runat="server" Text=" 提交 " OnClick="EditUserGroup_Click"></cc1:Button>&nbsp;&nbsp;
-            <button type="button" class="ManagerButton" id="Button3" onclick="window.location='global_editgroup.aspx';"><img src="../images/arrow_undo.gif"/> 返 回 </button>           
+            <cc1:Button ID="EditUserGroup" runat="server" Text=" 提交 "></cc1:Button>&nbsp;&nbsp;         
         </p>
     </form>
     <%=footer%>
