@@ -43,6 +43,10 @@
     <Compile Include="Admin\addteam.aspx.designer.cs">
       <DependentUpon>addteam.aspx.cs</DependentUpon>
     </Compile>
+    <Compile Include="Admin\editteam.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\editteam.aspx.designer.cs" />
     <Compile Include="Admin\manageteam.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

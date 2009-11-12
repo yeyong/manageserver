@@ -33,9 +33,18 @@ namespace SAS.Sirius
             return Sirius.CreateTeam(teaminfo, out  members);
         }
 
+        /// <summary>
+        /// 获得所有团队信息
+        /// </summary>
+        /// <returns></returns>
         public override SAS.Common.Generic.List<TeamInfo> GetAllTeamList()
         {
             return Sirius.GetAllTeamInfoList();
+        }
+
+        public override TeamInfo GetTeamByTeamID(int teamID)
+        {
+            return Sirius.GetTeamInfoByTeamID(teamID);
         }
     }
 }

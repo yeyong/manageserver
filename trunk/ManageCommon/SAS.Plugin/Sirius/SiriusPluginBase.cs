@@ -27,5 +27,12 @@ namespace SAS.Plugin.Sirius
         /// </summary>
         /// <returns></returns>
         public abstract List<TeamInfo> GetAllTeamList();
+
+        /// <summary>
+        /// 根据团队ID获取团队信息
+        /// </summary>
+        /// <param name="teamID">团队ID</param>
+        /// <returns></returns>
+        public abstract TeamInfo GetTeamByTeamID(int teamID);
     }
 }

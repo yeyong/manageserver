@@ -113,5 +113,13 @@ namespace SAS.Sirius.Data
             reader.Close();
             return tlist;
         }
+
+        public IDataReader GetTeamInfoByID(int tid)
+        {
+            DbParameter[] parms = { DbHelper.MakeInParam("@teamID", (DbType)SqlDbType.Int, 4, tid) };
+
+            string commandText = String.Format("SELECT * FROM [{0}teamInfo] WHERE [teamID] = @teamID", BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="True" Inherits="SAS.Sirius.Admin.addteam"%>
-
+﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="SAS.Sirius.Admin.editteam" %>
 <%@ Register TagPrefix="uc1" TagName="TextareaResize" Src="../UserControls/TextareaResize.ascx" %>
 <%@ Register TagPrefix="cc2" Namespace="SAS.Control" Assembly="SAS.Control" %>
 <%@ Register TagPrefix="cc3" Namespace="SAS.Control" Assembly="SAS.Control" %>
@@ -10,7 +9,7 @@
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
     <meta name="keywords" content="天狼星,工作室" />
     <meta name="description" content="天狼星工作室综合管理后台" />
-    <title>天狼星工作室综合管理后台-添加团队</title>
+    <title>天狼星工作室综合管理后台-编辑团队</title>
     <link href="../styles/datagrid.css" type="text/css" rel="stylesheet" />
     <link href="../styles/tab.css" type="text/css" rel="stylesheet" />
     <style type="text/css">
@@ -34,12 +33,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=7" />
 </head>
 <body>
-   
-   <form id="Form1" method="post" runat="server">
+    <form id="Form1" method="post" runat="server">
 	    <div class="Navbutton" style="width:98%;">
 	    <table width="100%">
 	    <tr>
-        <td>	
+        <td>
 	    <cc3:TabControl id="TabControl1" SelectionMode="Client" runat="server" TabScriptPath="../js/tabstrip.js" height="100%">
 		    <cc3:TabPage Caption="基本信息" ID="tabPage51">
 		    <uc2:PageInfo id="info1" runat="server" Icon="Information" Text="根据不同的团队组信息，设置不同的组属性，以突出各团队特色。"></uc2:PageInfo>
@@ -154,10 +152,15 @@
                 </table>
 			</cc3:TabPage>
 		</cc3:TabControl>
-		    <div class="Navbutton">
-		        <cc2:Button id="SubmitAdd" runat="server" Text=" 添 加 "></cc2:Button>&nbsp;&nbsp;
-			    <button onclick="window.location='forum_forumstree.aspx';" id="Button3" class="ManagerButton" type="button"><img src="../images/arrow_undo.gif"/> 返 回 </button>
-			</div>
+            <div class="Navbutton">
+                <cc2:Button ID="UpdateUserGroupInf" runat="server" ValidateForm="true" Text=" 提 交 "></cc2:Button>&nbsp;&nbsp;
+                <cc2:Button ID="DeleteUserGroupInf" runat="server" Text=" 删 除 " ButtonImgUrl="../images/del.gif"
+                OnClientClick="if(!confirm('你确认要删除该用户组吗？\n删除后将不能恢复！')) return false;"></cc2:Button>&nbsp;&nbsp;
+                <button type="button" class="ManagerButton" id="Button1" onclick="window.location='sirius_manageteam.aspx';">
+                <img src="../images/arrow_undo.gif" />
+                返 回
+            </button>
+            </div>
 			</td>
 		    </tr>
 		    </table>    		
