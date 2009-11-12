@@ -736,7 +736,7 @@ namespace SAS.Common
 
         /// <summary>
         /// 返回标准时间 
-        /// </sumary>
+        /// </summary>
         public static string GetStandardDateTime(string fDateTime, string formatStr)
         {
             if (fDateTime == "0000-0-0 0:00:00")
@@ -747,7 +747,7 @@ namespace SAS.Common
 
         /// <summary>
         /// 返回标准时间 yyyy-MM-dd HH:mm:ss
-        /// </sumary>
+        /// </summary>
         public static string GetStandardDateTime(string fDateTime)
         {
             return GetStandardDateTime(fDateTime, "yyyy-MM-dd HH:mm:ss");
@@ -755,7 +755,7 @@ namespace SAS.Common
 
         /// <summary>
         /// 返回标准时间 yyyy-MM-dd
-        /// </sumary>
+        /// </summary>
         public static string GetStandardDate(string fDate)
         {
             return GetStandardDateTime(fDate, "yyyy-MM-dd");
