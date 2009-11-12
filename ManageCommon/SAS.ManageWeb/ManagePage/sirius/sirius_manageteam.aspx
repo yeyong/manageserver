@@ -21,7 +21,7 @@
             <Columns>
                 <asp:TemplateColumn HeaderText="">
                     <itemtemplate>
-						<a href="sirius_editteaminfo.aspx?teamID=<%# DataBinder.Eval(Container, "DataItem.teamID").ToString()%>">编辑</a>
+						<a href="sirius_editteam.aspx?teamID=<%# DataBinder.Eval(Container, "DataItem.teamID").ToString()%>">编辑</a>
 						<%# DataGrid1.LoadSelectedCheckBox(DataBinder.Eval(Container, "DataItem.teamID").ToString())%>
 					</itemtemplate>
                 </asp:TemplateColumn>
@@ -39,6 +39,11 @@
                 <asp:BoundColumn DataField="updateDate" SortExpression="updateDate" HeaderText="修改时间" readonly="true"></asp:BoundColumn>
                 <asp:BoundColumn DataField="pageviews" SortExpression="pageviews" HeaderText="查看次数" HeaderStyle-Width="65px" readonly="true"></asp:BoundColumn>                
                 <asp:BoundColumn DataField="creater" SortExpression="creater" HeaderText="创建人" readonly="true"></asp:BoundColumn>
+                <asp:TemplateColumn HeaderText="状态">
+                    <ItemTemplate>
+                        <%#DataBinder.Eval(Container, "DataItem.stutas").ToString() == "1" ? "启用" : "停用"%>
+                    </ItemTemplate>
+                </asp:TemplateColumn>
             </Columns>
         </cc1:DataGrid>
         <p style="text-align:right;">

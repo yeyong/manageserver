@@ -81,5 +81,15 @@ namespace SAS.Sirius
         {
             return DTOProvider.GetAllTeamInfoList();
         }
+
+        /// <summary>
+        /// 根据团队ID获取团队信息
+        /// </summary>
+        /// <param name="teamID">团队ID</param>
+        /// <returns></returns>
+        public static TeamInfo GetTeamInfoByTeamID(int teamID)
+        {
+            return DTOProvider.GetTeamInfoEntity(Data.DbProvider.GetInstance().GetTeamInfoByID(teamID));
+        }
     }
 }

@@ -287,9 +287,15 @@
     <Content Include="global\global_adduser.aspx" />
     <Content Include="global\global_adminusergroupgrid.aspx" />
     <Content Include="global\global_baseset.aspx" />
-    <Content Include="global\global_editadminusergroup.aspx" />
-    <Content Include="global\global_editgroup.aspx" />
-    <Content Include="global\global_editsysadminusergroup.aspx" />
+    <Content Include="global\global_editadminusergroup.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="global\global_editgroup.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="global\global_editsysadminusergroup.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="global\global_edituser.aspx" />
     <Content Include="global\global_emailconfig.aspx" />
     <Content Include="global\global_logandshrinkdb.aspx">
@@ -764,6 +770,9 @@
     </Content>
     <Content Include="sirius\photo.txt" />
     <Content Include="sirius\sirius_addteam.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="sirius\sirius_editteam.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="sirius\sirius_manageteam.aspx">
