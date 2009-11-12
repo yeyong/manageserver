@@ -8,8 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SAS.Sirius.Admin
-{
+namespace SAS.Sirius.Admin{
     
     
     public partial class editteam {
