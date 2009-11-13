@@ -239,22 +239,22 @@ namespace SAS.Logic
         {
             OnlineUserInfo onlineuserinfo = new OnlineUserInfo();
 
-            onlineuserinfo.ol_ps_id = -1;
-            onlineuserinfo.ol_name = "游客";
-            onlineuserinfo.ol_nickName = "游客";
-            onlineuserinfo.ol_password = "";
-            onlineuserinfo.ol_ug_id = 7;
-            onlineuserinfo.ol_img = GetGroupImg(7);
-            onlineuserinfo.ol_pg_id = 0;
-            onlineuserinfo.ol_invisible = 0;
-            onlineuserinfo.ol_ip = SASRequest.GetIP();
-            onlineuserinfo.ol_lastpostpmtime = "1900-1-1 00:00:00";
-            onlineuserinfo.ol_lastsearchtime = "1900-1-1 00:00:00";
-            onlineuserinfo.ol_lastupdatetime = "1900-1-1 00:00:00";
-            onlineuserinfo.ol_action = 0;
-            onlineuserinfo.ol_lastactivity = 0;
-            onlineuserinfo.ol_verifycode = LogicUtils.CreateAuthStr(5, false);
-            onlineuserinfo.ol_id = SAS.Data.DataProvider.OnlineUsers.CreateOnlineUserInfo(onlineuserinfo, timeout);
+            onlineuserinfo.Ol_ps_id = -1;
+            onlineuserinfo.Ol_name = "游客";
+            onlineuserinfo.Ol_nickName = "游客";
+            onlineuserinfo.Ol_password = "";
+            onlineuserinfo.Ol_ug_id = 7;
+            onlineuserinfo.Ol_img = GetGroupImg(7);
+            onlineuserinfo.Ol_pg_id = 0;
+            onlineuserinfo.Ol_invisible = 0;
+            onlineuserinfo.Ol_ip = SASRequest.GetIP();
+            onlineuserinfo.Ol_lastpostpmtime = "1900-1-1 00:00:00";
+            onlineuserinfo.Ol_lastsearchtime = "1900-1-1 00:00:00";
+            onlineuserinfo.Ol_lastupdatetime = "1900-1-1 00:00:00";
+            onlineuserinfo.Ol_action = 0;
+            onlineuserinfo.Ol_lastactivity = 0;
+            onlineuserinfo.Ol_verifycode = LogicUtils.CreateAuthStr(5, false);
+            onlineuserinfo.Ol_id = SAS.Data.DataProvider.OnlineUsers.CreateOnlineUserInfo(onlineuserinfo, timeout);
 
             return onlineuserinfo;
         }
@@ -272,24 +272,24 @@ namespace SAS.Logic
                 ShortUserInfo ui = Users.GetShortUserInfo(uid);
                 if (ui != null)
                 {
-                    onlineuserinfo.ol_ps_id = uid;
-                    onlineuserinfo.ol_name = ui.Ps_name.Trim();
-                    onlineuserinfo.ol_nickName = ui.Ps_nickName.Trim();
-                    onlineuserinfo.ol_password = ui.Ps_password.Trim();
-                    onlineuserinfo.ol_ug_id = short.Parse(ui.Ps_ug_id.ToString());
-                    onlineuserinfo.ol_img = GetGroupImg(short.Parse(ui.Ps_ug_id.ToString()));
-                    onlineuserinfo.ol_pg_id = short.Parse(ui.Ps_pg_id.ToString());
-                    onlineuserinfo.ol_invisible = short.Parse(ui.Ps_invisible.ToString());
-                    onlineuserinfo.ol_ip = SASRequest.GetIP();
-                    onlineuserinfo.ol_lastpostpmtime = "1900-1-1 00:00:00";
-                    onlineuserinfo.ol_lastsearchtime = "1900-1-1 00:00:00";
-                    onlineuserinfo.ol_lastupdatetime = "1900-1-1 00:00:00";
-                    onlineuserinfo.ol_action = 0;
-                    onlineuserinfo.ol_lastactivity = 0;
-                    onlineuserinfo.ol_verifycode = LogicUtils.CreateAuthStr(5, false);
-                    onlineuserinfo.ol_newpms = short.Parse(PrivateMessages.GetPrivateMessageCount(uid, 0, 1).ToString());
-                    onlineuserinfo.ol_newnotices = short.Parse(Notices.GetNewNoticeCountByUid(uid).ToString());
-                    onlineuserinfo.ol_id = SAS.Data.DataProvider.OnlineUsers.CreateOnlineUserInfo(onlineuserinfo, timeout);
+                    onlineuserinfo.Ol_ps_id = uid;
+                    onlineuserinfo.Ol_name = ui.Ps_name.Trim();
+                    onlineuserinfo.Ol_nickName = ui.Ps_nickName.Trim();
+                    onlineuserinfo.Ol_password = ui.Ps_password.Trim();
+                    onlineuserinfo.Ol_ug_id = short.Parse(ui.Ps_ug_id.ToString());
+                    onlineuserinfo.Ol_img = GetGroupImg(short.Parse(ui.Ps_ug_id.ToString()));
+                    onlineuserinfo.Ol_pg_id = short.Parse(ui.Ps_pg_id.ToString());
+                    onlineuserinfo.Ol_invisible = short.Parse(ui.Ps_invisible.ToString());
+                    onlineuserinfo.Ol_ip = SASRequest.GetIP();
+                    onlineuserinfo.Ol_lastpostpmtime = "1900-1-1 00:00:00";
+                    onlineuserinfo.Ol_lastsearchtime = "1900-1-1 00:00:00";
+                    onlineuserinfo.Ol_lastupdatetime = "1900-1-1 00:00:00";
+                    onlineuserinfo.Ol_action = 0;
+                    onlineuserinfo.Ol_lastactivity = 0;
+                    onlineuserinfo.Ol_verifycode = LogicUtils.CreateAuthStr(5, false);
+                    onlineuserinfo.Ol_newpms = short.Parse(PrivateMessages.GetPrivateMessageCount(uid, 0, 1).ToString());
+                    onlineuserinfo.Ol_newnotices = short.Parse(Notices.GetNewNoticeCountByUid(uid).ToString());
+                    onlineuserinfo.Ol_id = SAS.Data.DataProvider.OnlineUsers.CreateOnlineUserInfo(onlineuserinfo, timeout);
 
 
                     //给管理人员发送关注通知
@@ -373,10 +373,10 @@ namespace SAS.Logic
 
                     if (onlineuser != null)
                     {
-                        if (onlineuser.ol_ip != ip)
+                        if (onlineuser.Ol_ip != ip)
                         {
-                            UpdateIP(onlineuser.ol_id, ip);
-                            onlineuser.ol_ip = ip;
+                            UpdateIP(onlineuser.Ol_id, ip);
+                            onlineuser.Ol_ip = ip;
                             return onlineuser;
                         }
                     }
@@ -411,7 +411,7 @@ namespace SAS.Logic
                         return CreateGuestUser(timeout);
                 }
 
-                onlineuser.ol_lastupdatetime = Utils.GetDateTime();
+                onlineuser.Ol_lastupdatetime = Utils.GetDateTime();
                 return onlineuser;
             }
         }
@@ -652,10 +652,10 @@ namespace SAS.Logic
 
             foreach (OnlineUserInfo onlineUserInfo in coll)
             {
-                if (onlineUserInfo.ol_ps_id == -1)
+                if (onlineUserInfo.Ol_ps_id == -1)
                     guest++;
 
-                if (onlineUserInfo.ol_invisible == 1)
+                if (onlineUserInfo.Ol_invisible == 1)
                     invisibleuser++;
             }
 
@@ -687,10 +687,10 @@ namespace SAS.Logic
 
             foreach (OnlineUserInfo onlineUserInfo in coll)
             {
-                if (onlineUserInfo.ol_ps_id > 0)
+                if (onlineUserInfo.Ol_ps_id > 0)
                     user++;
 
-                if (onlineUserInfo.ol_invisible == 1)
+                if (onlineUserInfo.Ol_invisible == 1)
                     invisibleuser++;
             }
 

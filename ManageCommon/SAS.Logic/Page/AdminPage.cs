@@ -101,18 +101,18 @@ namespace SAS.Logic
 
             // 获取用户信息
             OnlineUserInfo oluserinfo = OnlineUsers.UpdateInfo(config.Passwordkey, config.Onlinetimeout);
-            UserGroupInfo usergroupinfo = AdminUserGroups.AdminGetUserGroupInfo(oluserinfo.ol_ug_id);
-            if (oluserinfo.ol_ps_id <= 0 || usergroupinfo.ug_pg_id != 1)
+            UserGroupInfo usergroupinfo = AdminUserGroups.AdminGetUserGroupInfo(oluserinfo.Ol_ug_id);
+            if (oluserinfo.Ol_ps_id <= 0 || usergroupinfo.ug_pg_id != 1)
             {
                 Context.Response.Redirect(BaseConfigs.GetSitePath + "ManagePage/syslogin.aspx");
                 return;
             }
 
-            string secques = Users.GetUserInfo(oluserinfo.ol_ps_id).Ps_secques;
+            string secques = Users.GetUserInfo(oluserinfo.Ol_ps_id).Ps_secques;
 
             // 管理员身份验证
             if (Context.Request.Cookies["sasadmin"] == null || Context.Request.Cookies["sasadmin"]["key"] == null ||
-                LogicUtils.GetCookiePassword(Context.Request.Cookies["sasadmin"]["key"].ToString(), config.Passwordkey) != (oluserinfo.ol_password + secques + oluserinfo.ol_ps_id.ToString()))
+                LogicUtils.GetCookiePassword(Context.Request.Cookies["sasadmin"]["key"].ToString(), config.Passwordkey) != (oluserinfo.Ol_password + secques + oluserinfo.Ol_ps_id.ToString()))
             {
                 Context.Response.Redirect(BaseConfigs.GetSitePath + "ManagePage/syslogin.aspx");
                 return;
@@ -120,16 +120,16 @@ namespace SAS.Logic
             else
             {
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["sasadmin"];
-                cookie.Values["key"] = LogicUtils.SetCookiePassword(oluserinfo.ol_password + secques + oluserinfo.ol_ps_id.ToString(), config.Passwordkey);
-                cookie.Values["userid"] = oluserinfo.ol_ps_id.ToString();
+                cookie.Values["key"] = LogicUtils.SetCookiePassword(oluserinfo.Ol_password + secques + oluserinfo.Ol_ps_id.ToString(), config.Passwordkey);
+                cookie.Values["userid"] = oluserinfo.Ol_ps_id.ToString();
                 cookie.Expires = DateTime.Now.AddMinutes(30);
                 HttpContext.Current.Response.AppendCookie(cookie);
 
             }
 
-            this.userid = oluserinfo.ol_ps_id;
-            this.username = oluserinfo.ol_name;
-            this.usergroupid = oluserinfo.ol_ug_id;
+            this.userid = oluserinfo.Ol_ps_id;
+            this.username = oluserinfo.Ol_name;
+            this.usergroupid = oluserinfo.Ol_ug_id;
             this.useradminid = (short)usergroupinfo.ug_pg_id;
             this.grouptitle = usergroupinfo.ug_name;
             this.ip = SASRequest.GetIP();
@@ -240,16 +240,16 @@ namespace SAS.Logic
             }
             // 获取用户信息
             OnlineUserInfo oluserinfo = OnlineUsers.UpdateInfo(config.Passwordkey, config.Onlinetimeout);
-            UserGroupInfo usergroupinfo = AdminUserGroups.AdminGetUserGroupInfo(oluserinfo.ol_pg_id);
-            if (oluserinfo.ol_ps_id <= 0 || usergroupinfo.ug_pg_id != 1)
+            UserGroupInfo usergroupinfo = AdminUserGroups.AdminGetUserGroupInfo(oluserinfo.Ol_pg_id);
+            if (oluserinfo.Ol_ps_id <= 0 || usergroupinfo.ug_pg_id != 1)
             {
                 Context.Response.Redirect(BaseConfigs.GetSitePath + "ManagePage/syslogin.aspx");
                 return false;
             }
 
-            string secques = Users.GetUserInfo(oluserinfo.ol_ps_id).Ps_secques;
+            string secques = Users.GetUserInfo(oluserinfo.Ol_ps_id).Ps_secques;
             // 管理员身份验证
-            if (Context.Request.Cookies["sasadmin"] == null || Context.Request.Cookies["sasadmin"]["key"] == null || LogicUtils.GetCookiePassword(Context.Request.Cookies["sasadmin"]["key"].ToString(), config.Passwordkey) != (oluserinfo.ol_password + secques + oluserinfo.ol_ps_id.ToString()))
+            if (Context.Request.Cookies["sasadmin"] == null || Context.Request.Cookies["sasadmin"]["key"] == null || LogicUtils.GetCookiePassword(Context.Request.Cookies["sasadmin"]["key"].ToString(), config.Passwordkey) != (oluserinfo.Ol_password + secques + oluserinfo.Ol_ps_id.ToString()))
             {
                 Context.Response.Redirect(BaseConfigs.GetSitePath + "ManagePage/syslogin.aspx");
                 return false;
@@ -257,7 +257,7 @@ namespace SAS.Logic
             else
             {
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["sasadmin"];
-                cookie.Values["key"] = LogicUtils.SetCookiePassword(oluserinfo.ol_password + secques + oluserinfo.ol_ps_id.ToString(), config.Passwordkey);
+                cookie.Values["key"] = LogicUtils.SetCookiePassword(oluserinfo.Ol_password + secques + oluserinfo.Ol_ps_id.ToString(), config.Passwordkey);
                 cookie.Expires = DateTime.Now.AddMinutes(30);
                 HttpContext.Current.Response.AppendCookie(cookie);
             }

@@ -60,7 +60,7 @@ namespace SAS.Sirius.Admin
                 {
                     base.RegisterStartupScript("PAGE", "alert('用户:" + results + "不存在或不是指定用户组,因为无法设为团队成员');self.location.href='sirius_manageteam.aspx';");
                 }
-                AdminVistLogs.InsertLog(userid, username, usergroupid, grouptitle, ip, "添加团队信息", "添加新团队名为：" + teaminfo.Name);             
+                AdminVistLogs.InsertLog(userid, username, usergroupid, grouptitle, ip, "添加团队信息", "添加新团队名为：" + teaminfo.Name);
             }
 
             #endregion

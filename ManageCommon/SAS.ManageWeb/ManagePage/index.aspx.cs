@@ -32,21 +32,21 @@ namespace SAS.ManageWeb.ManagePage
 
             //获取当前用户的在线信息
             OnlineUserInfo oluserinfo = OnlineUsers.UpdateInfo(config.Passwordkey, config.Onlinetimeout);
-            olid = oluserinfo.ol_id;
+            olid = oluserinfo.Ol_id;
 
 
             #region 进行权限判断
 
-            UserGroupInfo usergroupinfo = AdminUserGroups.AdminGetUserGroupInfo(oluserinfo.ol_ug_id);
-            if (oluserinfo.ol_ps_id <= 0 || usergroupinfo.ug_pg_id != 1)
+            UserGroupInfo usergroupinfo = AdminUserGroups.AdminGetUserGroupInfo(oluserinfo.Ol_ug_id);
+            if (oluserinfo.Ol_ps_id <= 0 || usergroupinfo.ug_pg_id != 1)
             {
                 Context.Response.Redirect(BaseConfigs.GetSitePath + "ManagePage/syslogin.aspx");
                 return;
             }
 
-            string secques = Users.GetUserInfo(oluserinfo.ol_ps_id).Ps_secques;
+            string secques = Users.GetUserInfo(oluserinfo.Ol_ps_id).Ps_secques;
             // 管理员身份验证
-            if (Context.Request.Cookies["sasadmin"] == null || Context.Request.Cookies["sasadmin"]["key"] == null || LogicUtils.GetCookiePassword(Context.Request.Cookies["sasadmin"]["key"].ToString(), config.Passwordkey) != (oluserinfo.ol_password + secques + oluserinfo.ol_ps_id))
+            if (Context.Request.Cookies["sasadmin"] == null || Context.Request.Cookies["sasadmin"]["key"] == null || LogicUtils.GetCookiePassword(Context.Request.Cookies["sasadmin"]["key"].ToString(), config.Passwordkey) != (oluserinfo.Ol_password + secques + oluserinfo.Ol_ps_id))
             {
                 Context.Response.Redirect(BaseConfigs.GetSitePath + "ManagePage/syslogin.aspx");
                 return;
@@ -54,7 +54,7 @@ namespace SAS.ManageWeb.ManagePage
             else
             {
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["sasadmin"];
-                cookie.Values["key"] = LogicUtils.SetCookiePassword(oluserinfo.ol_password + secques + oluserinfo.ol_ps_id.ToString(), config.Passwordkey);
+                cookie.Values["key"] = LogicUtils.SetCookiePassword(oluserinfo.Ol_password + secques + oluserinfo.Ol_ps_id.ToString(), config.Passwordkey);
                 cookie.Expires = DateTime.Now.AddMinutes(30);
                 HttpContext.Current.Response.AppendCookie(cookie);
             }

@@ -72,11 +72,33 @@
 							</td>
 					    </tr>
                         <tr>
-		                    <td>团队图片地址:</td>
-		                    <td>
-                               <cc2:TextBox ID="teamImg" runat="server" RequiredFieldType="网页地址" HintInfo="团队展示类图片地址"
-                                            IsReplaceInvertedComma="true" Width="250px" MaxLength="250"></cc2:TextBox>
-							</td>
+                            <td>
+                                团队图片地址:
+                            </td>
+                            <td>
+                                <cc2:TextBox ID="teamImg" runat="server" RequiredFieldType="网页地址" HintInfo="团队展示类图片地址"
+                                    IsReplaceInvertedComma="true" Width="250px" MaxLength="250">
+                                </cc2:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 150px">
+                                链接地址:
+                            </td>
+                            <td>
+                                <cc2:TextBox ID="teamurl" runat="server" CanBeNull="必填" RequiredFieldType="网页地址"
+                                    HintInfo="展示平台地址" IsReplaceInvertedComma="false" Width="250px" MaxLength="250">
+                                </cc2:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                模板风格:
+                            </td>
+                            <td>
+                                <cc2:DropDownList ID="templateid" runat="server">
+                                </cc2:DropDownList>
+                            </td>
                         </tr>
                         <tr>
 		                    <td>本团队SEO关键词:</td>
@@ -99,26 +121,7 @@
 			                    TextMode="MultiLine" IsReplaceInvertedComma="false"></cc2:textbox>
 		                    </td>
 	                    </tr>
-                        <tr>
-		                    <td>团队意义:</td>
-		                    <td>
-			                    <cc2:textbox id="content1" runat="server" HintTitle="提示" HintInfo="设置本团队团队意义" RequiredFieldType="暂无校验" width="450" height="100" 
-			                    TextMode="MultiLine" IsReplaceInvertedComma="false"></cc2:textbox>
-		                    </td>
-                        </tr>
-                        <tr>
-		                    <td >团队工作方向和工作内容:</td>
-		                    <td>
-		                        <cc2:textbox id="content2" runat="server" HintTitle="提示" HintInfo="设置本团队团队意义" RequiredFieldType="暂无校验" width="450" height="100" 
-			                    TextMode="MultiLine" IsReplaceInvertedComma="false"></cc2:textbox>
-		                    </td>
-	                    </tr>
-	                    <tr>
-		                    <td >人员职责和基本构成:</td>
-		                    <td>
-		                        <uc3:OnlineEditor ID="content3" runat="server" controlname="content3" postminchars="0" postmaxchars="2000"></uc3:OnlineEditor>
-		                    </td>
-	                    </tr>
+                        
                         
                     </table>
                 </td>
@@ -131,21 +134,33 @@
                         <td class="panelbox" align="left">
                             <table width="100%">
                                 <tr>
-                                    <td style="width: 150px">
-                                        链接地址:
+                                    <td>
+                                        团队意义:
                                     </td>
                                     <td>
-                                        <cc2:TextBox ID="teamurl" runat="server" CanBeNull="必填" RequiredFieldType="网页地址" HintInfo="展示平台地址"
-                                            IsReplaceInvertedComma="false" Width="250px" MaxLength="250"></cc2:TextBox>
+                                        <cc2:textbox id="content1" runat="server" HintTitle="提示" HintInfo="设置本团队团队意义" RequiredFieldType="暂无校验"
+                                            width="450" height="100" TextMode="MultiLine" IsReplaceInvertedComma="false">
+                                        </cc2:textbox>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        模板风格:
+                                        团队工作方向和工作内容:
                                     </td>
                                     <td>
-                                        <cc2:DropDownList ID="templateid" runat="server">
-                                        </cc2:DropDownList>
+                                        <cc2:textbox id="content2" runat="server" HintTitle="提示" HintInfo="设置本团队团队意义" RequiredFieldType="暂无校验"
+                                            width="450" height="100" TextMode="MultiLine" IsReplaceInvertedComma="false">
+                                        </cc2:textbox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        人员职责和基本构成:
+                                    </td>
+                                    <td>
+                                        <uc3:OnlineEditor ID="content3" runat="server" controlname="content3" postminchars="0"
+                                            postmaxchars="2000">
+                                        </uc3:OnlineEditor>
                                     </td>
                                 </tr>
                             </table>

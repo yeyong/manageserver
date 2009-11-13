@@ -40,110 +40,143 @@
         <td>
 	    <cc3:TabControl id="TabControl1" SelectionMode="Client" runat="server" TabScriptPath="../js/tabstrip.js" height="100%">
 		    <cc3:TabPage Caption="基本信息" ID="tabPage51">
-		    <uc2:PageInfo id="info1" runat="server" Icon="Information" Text="根据不同的团队组信息，设置不同的组属性，以突出各团队特色。"></uc2:PageInfo>
-		    <uc2:PageInfo id="info2" runat="server" Icon="Warning" Text="团队队员设置时请注意，仅部分用户组成员可以成为团队成员。"></uc2:PageInfo>
+		    <uc2:PageInfo id="info1" runat="server" Icon="Information" Text="根据不同的团队组信息，设置不同的组属性，以突出各团队特色。<br />团队队员设置时请注意，仅部分用户组成员可以成为团队成员。"/>
 		    <table cellspacing="0" cellpadding="4" width="100%" align="center">
             <tr>
                 <td class="panelbox" align="left">
                     <table width="100%">
                         <tr>
-						    <td style="width: 150px">团队名称:</td>
-						    <td>
-							    <cc2:TextBox id="name" runat="server" CanBeNull="必填" IsReplaceInvertedComma="false" size="20"  MaxLength="49"></cc2:TextBox>
-							</td>
+                            <td style="width: 150px">
+                                团队名称:
+                            </td>
+                            <td>
+                                <cc2:TextBox id="name" runat="server" CanBeNull="必填" IsReplaceInvertedComma="false"
+                                    size="20" MaxLength="49">
+                                </cc2:TextBox>
+                            </td>
                         </tr>
                         <tr>
-						    <td style="width: 90px">是否启用:</td>
-						    <td>
-						        <cc2:RadioButtonList id="status" runat="server" RepeatColumns="2"  HintInfo="设置该团队是否启用" >
-						        <asp:ListItem Value="1" Selected="True">启用</asp:ListItem>
-						        <asp:ListItem Value="0" >不启用</asp:ListItem>
-						        </cc2:RadioButtonList>
-						    </td>
-                        </tr>
-					    <tr>
-						    <td>成员列表:</td>
-						    <td>
-							    <uc1:TextareaResize id="moderators" runat="server" HintTitle="提示" HintInfo="当前团队成员列表，以&amp;quot;,&amp;quot;进行分割" 
-							    controlname="TabControl1:tabPage51:moderators" Cols="40" Rows="5"></uc1:TextareaResize>
-							    <br />以','进行分割,如:lisi,zhangsan
-							</td>
-					    </tr>
-                        <tr>
-		                    <td>团队图片地址:</td>
-		                    <td>
-                               <cc2:TextBox ID="teamImg" runat="server" RequiredFieldType="网页地址" HintInfo="团队展示类图片地址"
-                                            IsReplaceInvertedComma="true" Width="250px" MaxLength="250"></cc2:TextBox>
-							</td>
+                            <td style="width: 90px">
+                                是否启用:
+                            </td>
+                            <td>
+                                <cc2:RadioButtonList id="status" runat="server" RepeatColumns="2" HintInfo="设置该团队是否启用">
+                                    <asp:ListItem Value="1" Selected="True">启用</asp:ListItem>
+                                    <asp:ListItem Value="0">不启用</asp:ListItem>
+                                </cc2:RadioButtonList>
+                            </td>
                         </tr>
                         <tr>
-		                    <td>本团队SEO关键词:</td>
-		                    <td>
-			                    <cc2:textbox id="seokeywords" runat="server" HintTitle="提示" HintInfo="设置本团队的SEO关键词,用于搜索引擎优化,放在meta的keyword标签中,多个关键字间请用半角逗号&amp;quot,&amp;quot隔开" RequiredFieldType="暂无校验" width="450" height="100" 
-			                    TextMode="MultiLine" IsReplaceInvertedComma="false"></cc2:textbox>
-		                    </td>
+                            <td>
+                                成员列表:
+                            </td>
+                            <td>
+                                <uc1:TextareaResize id="moderators" runat="server" HintTitle="提示" HintInfo="当前团队成员列表，以&amp;quot;,&amp;quot;进行分割"
+                                    controlname="TabControl1:tabPage51:moderators" Cols="40" Rows="5">
+                                </uc1:TextareaResize>
+                                <br />
+                                以','进行分割,如:lisi,zhangsan
+                            </td>
                         </tr>
                         <tr>
-		                    <td>本团队SEO描述:</td>
-		                    <td>
-			                    <cc2:textbox id="seodescription" runat="server" HintTitle="提示" HintInfo="设置本团队的SEO描述,用于搜索引擎优化,放在meta的description标签中,多个说明文字间请用半角逗号&amp;quot,&amp;quot隔开" RequiredFieldType="暂无校验" width="450" height="100" 
-			                    TextMode="MultiLine" IsReplaceInvertedComma="false"></cc2:textbox>
-		                    </td>
+                            <td>
+                                团队图片地址:
+                            </td>
+                            <td>
+                                <cc2:TextBox ID="teamImg" runat="server" RequiredFieldType="网页地址" HintInfo="团队展示类图片地址"
+                                    IsReplaceInvertedComma="true" Width="250px" MaxLength="250">
+                                </cc2:TextBox>
+                            </td>
                         </tr>
                         <tr>
-		                    <td >团队简述:</td>
-		                    <td>
-		                       <cc2:textbox id="teamBio" runat="server" HintTitle="提示" HintInfo="设置本团队基本概述" RequiredFieldType="暂无校验" width="450" height="100" 
-			                    TextMode="MultiLine" IsReplaceInvertedComma="false"></cc2:textbox>
-		                    </td>
-	                    </tr>
-                        <tr>
-		                    <td>团队意义:</td>
-		                    <td>
-			                    <cc2:textbox id="content1" runat="server" HintTitle="提示" HintInfo="设置本团队团队意义" RequiredFieldType="暂无校验" width="450" height="100" 
-			                    TextMode="MultiLine" IsReplaceInvertedComma="false"></cc2:textbox>
-		                    </td>
+                            <td style="width: 150px">
+                                链接地址:
+                            </td>
+                            <td>
+                                <cc2:TextBox ID="teamurl" runat="server" CanBeNull="必填" RequiredFieldType="网页地址"
+                                    HintInfo="展示平台地址" IsReplaceInvertedComma="false" Width="250px" MaxLength="250">
+                                </cc2:TextBox>
+                            </td>
                         </tr>
                         <tr>
-		                    <td >团队工作方向和工作内容:</td>
-		                    <td>
-		                        <cc2:textbox id="content2" runat="server" HintTitle="提示" HintInfo="设置本团队团队意义" RequiredFieldType="暂无校验" width="450" height="100" 
-			                    TextMode="MultiLine" IsReplaceInvertedComma="false"></cc2:textbox>
-		                    </td>
-	                    </tr>
-	                    <tr>
-		                    <td >人员职责和基本构成:</td>
-		                    <td>
-		                        <uc3:OnlineEditor ID="content3" runat="server" controlname="content3" postminchars="0" postmaxchars="2000"></uc3:OnlineEditor>
-		                    </td>
-	                    </tr>
-                        
+                            <td>
+                                模板风格:
+                            </td>
+                            <td>
+                                <cc2:DropDownList ID="templateid" runat="server">
+                                </cc2:DropDownList>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                本团队SEO关键词:
+                            </td>
+                            <td>
+                                <cc2:textbox id="seokeywords" runat="server" HintTitle="提示" HintInfo="设置本团队的SEO关键词,用于搜索引擎优化,放在meta的keyword标签中,多个关键字间请用半角逗号&amp;quot,&amp;quot隔开"
+                                    RequiredFieldType="暂无校验" width="450" height="100" TextMode="MultiLine" IsReplaceInvertedComma="false">
+                                </cc2:textbox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                本团队SEO描述:
+                            </td>
+                            <td>
+                                <cc2:textbox id="seodescription" runat="server" HintTitle="提示" HintInfo="设置本团队的SEO描述,用于搜索引擎优化,放在meta的description标签中,多个说明文字间请用半角逗号&amp;quot,&amp;quot隔开"
+                                    RequiredFieldType="暂无校验" width="450" height="100" TextMode="MultiLine" IsReplaceInvertedComma="false">
+                                </cc2:textbox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                团队简述:
+                            </td>
+                            <td>
+                                <cc2:textbox id="teamBio" runat="server" HintTitle="提示" HintInfo="设置本团队基本概述" RequiredFieldType="暂无校验"
+                                    width="450" height="100" TextMode="MultiLine" IsReplaceInvertedComma="false">
+                                </cc2:textbox>
+                            </td>
+                        </tr>
                     </table>
                 </td>
             </tr>
             </table>
 			</cc3:TabPage>
-			<cc3:TabPage Caption="样式设定" ID="tabPage22">
+			<cc3:TabPage Caption="扩展信息" ID="tabPage22">
                 <table cellspacing="0" cellpadding="4" width="100%" align="center">
                     <tr>
                         <td class="panelbox" align="left">
                             <table width="100%">
                                 <tr>
-                                    <td style="width: 150px">
-                                        链接地址:
+                                    <td>
+                                        团队意义:
                                     </td>
                                     <td>
-                                        <cc2:TextBox ID="teamurl" runat="server" CanBeNull="必填" RequiredFieldType="网页地址" HintInfo="展示平台地址"
-                                            IsReplaceInvertedComma="false" Width="250px" MaxLength="250"></cc2:TextBox>
+                                        <cc2:textbox id="content1" runat="server" HintTitle="提示" HintInfo="设置本团队团队意义" RequiredFieldType="暂无校验"
+                                            width="450" height="100" TextMode="MultiLine" IsReplaceInvertedComma="false">
+                                        </cc2:textbox>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        模板风格:
+                                        团队工作方向和工作内容:
                                     </td>
                                     <td>
-                                        <cc2:DropDownList ID="templateid" runat="server">
-                                        </cc2:DropDownList>
+                                        <cc2:textbox id="content2" runat="server" HintTitle="提示" HintInfo="设置本团队团队意义" RequiredFieldType="暂无校验"
+                                            width="450" height="100" TextMode="MultiLine" IsReplaceInvertedComma="false">
+                                        </cc2:textbox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        人员职责和基本构成:
+                                    </td>
+                                    <td>
+                                    <div style="height:280px;overflow:hidden">
+                                        <uc3:OnlineEditor ID="content3" runat="server" controlname="content3" postminchars="0"
+                                            postmaxchars="2000">
+                                        </uc3:OnlineEditor>
+                                    </div>
                                     </td>
                                 </tr>
                             </table>
@@ -153,13 +186,15 @@
 			</cc3:TabPage>
 		</cc3:TabControl>
             <div class="Navbutton">
-                <cc2:Button ID="UpdateUserGroupInf" runat="server" ValidateForm="true" Text=" 提 交 "></cc2:Button>&nbsp;&nbsp;
+                <cc2:Button ID="UpdateUserGroupInf" runat="server" ValidateForm="true" Text=" 提 交 ">
+                </cc2:Button>&nbsp;&nbsp;
                 <cc2:Button ID="DeleteUserGroupInf" runat="server" Text=" 删 除 " ButtonImgUrl="../images/del.gif"
-                OnClientClick="if(!confirm('你确认要删除该用户组吗？\n删除后将不能恢复！')) return false;"></cc2:Button>&nbsp;&nbsp;
+                    OnClientClick="if(!confirm('你确认要删除该用户组吗？\n删除后将不能恢复！')) return false;">
+                </cc2:Button>&nbsp;&nbsp;
                 <button type="button" class="ManagerButton" id="Button1" onclick="window.location='sirius_manageteam.aspx';">
-                <img src="../images/arrow_undo.gif" />
-                返 回
-            </button>
+                    <img src="../images/arrow_undo.gif" />
+                    返 回
+                </button>
             </div>
 			</td>
 		    </tr>

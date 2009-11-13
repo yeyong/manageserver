@@ -34,5 +34,12 @@ namespace SAS.Plugin.Sirius
         /// <param name="teamID">团队ID</param>
         /// <returns></returns>
         public abstract TeamInfo GetTeamByTeamID(int teamID);
+
+        /// <summary>
+        /// 更新团队信息
+        /// </summary>
+        /// <param name="teaminfo"></param>
+        /// <returns></returns>
+        public abstract bool UpdateTeamInfo(TeamInfo teaminfo, out string members);
     }
 }

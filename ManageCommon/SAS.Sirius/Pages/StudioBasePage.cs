@@ -35,10 +35,14 @@ namespace SAS.Sirius.Pages
         /// sirius配置信息
         /// </summary>
         public SiriusConfigInfo siriusconfig = new SiriusConfigInfo();
+        /// <summary>
+        /// 团队信息
+        /// </summary>
+        public TeamInfo teaminfo = new TeamInfo();
 
         public string filerooturl = "";
 
-        protected override void ShowPage()
+        public StudioBasePage()
         {
             siriusconfig = SiriusConfigs.GetConfig();
             filerooturl = siriusconfig.FileUrlAddress;

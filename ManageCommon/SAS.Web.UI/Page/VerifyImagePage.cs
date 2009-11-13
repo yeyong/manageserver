@@ -35,7 +35,7 @@ namespace SAS.Web.UI
             else if (bgcolorArray.Length == 3 && Utils.IsNumericArray(bgcolorArray))
                 bg = Color.FromArgb(Utils.StrToInt(bgcolorArray[0], 255), Utils.StrToInt(bgcolorArray[1], 255), Utils.StrToInt(bgcolorArray[2], 255));
 
-            VerifyImageInfo verifyimg = VerifyImageProvider.GetInstance(config.VerifyImageAssemly).GenerateImage(OnlineUsers.UpdateInfo(config.Passwordkey, config.Onlinetimeout).ol_verifycode, 120, 60, bg, textcolor);
+            VerifyImageInfo verifyimg = VerifyImageProvider.GetInstance(config.VerifyImageAssemly).GenerateImage(OnlineUsers.UpdateInfo(config.Passwordkey, config.Onlinetimeout).Ol_verifycode, 120, 60, bg, textcolor);
             Bitmap image = verifyimg.Image;
 
             System.Web.HttpContext.Current.Response.ContentType = verifyimg.ContentType;

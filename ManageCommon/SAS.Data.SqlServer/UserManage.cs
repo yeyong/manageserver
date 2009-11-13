@@ -948,7 +948,7 @@ namespace SAS.Data.SqlServer
             // 如果timeout为负数则代表不需要精确更新用户是否在线的状态
             if (timeOut > 0)
             {
-                if (onlineUserInfo.ol_ps_id > 0)
+                if (onlineUserInfo.Ol_ps_id > 0)
                     onlinestate = 0;
             }
             else
@@ -959,25 +959,25 @@ namespace SAS.Data.SqlServer
 
             DbParameter[] parms = {
 									   DbHelper.MakeInParam("@onlinestate",(DbType)SqlDbType.Int,4,onlinestate),
-									   DbHelper.MakeInParam("@ol_ps_id",(DbType)SqlDbType.Int,4,onlineUserInfo.ol_ps_id),
-									   DbHelper.MakeInParam("@ol_ip",(DbType)SqlDbType.VarChar,50,onlineUserInfo.ol_ip),
-									   DbHelper.MakeInParam("@ol_name",(DbType)SqlDbType.VarChar,50,onlineUserInfo.ol_name),
-									   DbHelper.MakeInParam("@ol_nickName",(DbType)SqlDbType.VarChar,50,onlineUserInfo.ol_nickName),
-									   DbHelper.MakeInParam("@ol_password",(DbType)SqlDbType.VarChar,200,onlineUserInfo.ol_password),
-									   DbHelper.MakeInParam("@ol_ug_id",(DbType)SqlDbType.Int,4,onlineUserInfo.ol_ug_id),
-									   DbHelper.MakeInParam("@ol_img",(DbType)SqlDbType.VarChar,200,onlineUserInfo.ol_img),
-									   DbHelper.MakeInParam("@ol_pg_id",(DbType)SqlDbType.Int,4,onlineUserInfo.ol_pg_id),
-									   DbHelper.MakeInParam("@ol_invisible",(DbType)SqlDbType.SmallInt,2,onlineUserInfo.ol_invisible),
-									   DbHelper.MakeInParam("@ol_action",(DbType)SqlDbType.Int,4,onlineUserInfo.ol_action),
-									   DbHelper.MakeInParam("@ol_lastactivity",(DbType)SqlDbType.Int,4,onlineUserInfo.ol_lastactivity),
-									   DbHelper.MakeInParam("@ol_lastpostpmtime",(DbType)SqlDbType.DateTime,8,DateTime.Parse(onlineUserInfo.ol_lastpostpmtime)),
-									   DbHelper.MakeInParam("@ol_lastsearchtime",(DbType)SqlDbType.DateTime,8,DateTime.Parse(onlineUserInfo.ol_lastsearchtime)),
-									   DbHelper.MakeInParam("@ol_lastupdatetime",(DbType)SqlDbType.DateTime,8,DateTime.Parse(onlineUserInfo.ol_lastupdatetime)),
-									   DbHelper.MakeInParam("@ol_pm_id",(DbType)SqlDbType.Int,4,onlineUserInfo.ol_pm_id),
+									   DbHelper.MakeInParam("@ol_ps_id",(DbType)SqlDbType.Int,4,onlineUserInfo.Ol_ps_id),
+									   DbHelper.MakeInParam("@ol_ip",(DbType)SqlDbType.VarChar,50,onlineUserInfo.Ol_ip),
+									   DbHelper.MakeInParam("@ol_name",(DbType)SqlDbType.VarChar,50,onlineUserInfo.Ol_name),
+									   DbHelper.MakeInParam("@ol_nickName",(DbType)SqlDbType.VarChar,50,onlineUserInfo.Ol_nickName),
+									   DbHelper.MakeInParam("@ol_password",(DbType)SqlDbType.VarChar,200,onlineUserInfo.Ol_password),
+									   DbHelper.MakeInParam("@ol_ug_id",(DbType)SqlDbType.Int,4,onlineUserInfo.Ol_ug_id),
+									   DbHelper.MakeInParam("@ol_img",(DbType)SqlDbType.VarChar,200,onlineUserInfo.Ol_img),
+									   DbHelper.MakeInParam("@ol_pg_id",(DbType)SqlDbType.Int,4,onlineUserInfo.Ol_pg_id),
+									   DbHelper.MakeInParam("@ol_invisible",(DbType)SqlDbType.SmallInt,2,onlineUserInfo.Ol_invisible),
+									   DbHelper.MakeInParam("@ol_action",(DbType)SqlDbType.Int,4,onlineUserInfo.Ol_action),
+									   DbHelper.MakeInParam("@ol_lastactivity",(DbType)SqlDbType.Int,4,onlineUserInfo.Ol_lastactivity),
+									   DbHelper.MakeInParam("@ol_lastpostpmtime",(DbType)SqlDbType.DateTime,8,DateTime.Parse(onlineUserInfo.Ol_lastpostpmtime)),
+									   DbHelper.MakeInParam("@ol_lastsearchtime",(DbType)SqlDbType.DateTime,8,DateTime.Parse(onlineUserInfo.Ol_lastsearchtime)),
+									   DbHelper.MakeInParam("@ol_lastupdatetime",(DbType)SqlDbType.DateTime,8,DateTime.Parse(onlineUserInfo.Ol_lastupdatetime)),
+									   DbHelper.MakeInParam("@ol_pm_id",(DbType)SqlDbType.Int,4,onlineUserInfo.Ol_pm_id),
 									   DbHelper.MakeInParam("@ol_pm_name",(DbType)SqlDbType.VarChar,200,""),
-									   DbHelper.MakeInParam("@ol_verifycode",(DbType)SqlDbType.VarChar,50,onlineUserInfo.ol_verifycode),
-									   DbHelper.MakeInParam("@ol_newpms",(DbType)SqlDbType.Int,4,onlineUserInfo.ol_newpms),
-									   DbHelper.MakeInParam("@ol_newnotices",(DbType)SqlDbType.Int,4,onlineUserInfo.ol_newnotices)
+									   DbHelper.MakeInParam("@ol_verifycode",(DbType)SqlDbType.VarChar,50,onlineUserInfo.Ol_verifycode),
+									   DbHelper.MakeInParam("@ol_newpms",(DbType)SqlDbType.Int,4,onlineUserInfo.Ol_newpms),
+									   DbHelper.MakeInParam("@ol_newnotices",(DbType)SqlDbType.Int,4,onlineUserInfo.Ol_newnotices)
 								   };
             int olid = TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.StoredProcedure,
                                                                         string.Format("{0}createonlineuser", BaseConfigs.GetTablePrefix),

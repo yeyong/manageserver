@@ -73,7 +73,24 @@ namespace SAS.Sirius.Admin
                 teamin.Displayorder = 0;
                 teamin.Seodescription = seodescription.Text.Trim();
                 teamin.Seokeywords = seokeywords.Text.Trim();
-                teamin.Creater = username;
+
+                string message = "";
+                if (Sirius.UpdateTeamInfo(teamin, out message))
+                {
+                    if (message == "")
+                    {
+                        base.RegisterStartupScript("PAGE", "self.location.href='sirius_manageteam.aspx';");
+                    }
+                    else
+                    {
+                        base.RegisterStartupScript("PAGE", "alert('用户:" + message + "不存在或不是指定用户组,因为无法设为团队成员');self.location.href='sirius_manageteam.aspx';");
+                    }
+                    AdminVistLogs.InsertLog(userid, username, usergroupid, grouptitle, ip, "修改团队信息", "更新团队团队信息：" + teamin.Name);
+                }
+                else
+                {
+                    base.RegisterStartupScript("PAGE", "alert('更新团队信息失败!');self.location.href='sirius_manageteam.aspx';");
+                }
             }
 
             #endregion

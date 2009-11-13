@@ -1,10 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="SAS.Sirius.Admin.manageteam" %>
 <%@ Register TagPrefix="cc1" Namespace="SAS.Control" Assembly="SAS.Control" %>
 <%@ Register Src="../UserControls/PageInfo.ascx" TagName="PageInfo" TagPrefix="uc1" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" >
-<head runat="server">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<html>
+<head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />    
     <meta name="keywords" content="天狼星,工作室" />
     <meta name="description" content="天狼星工作室综合管理后台" />
@@ -12,6 +11,7 @@
     <link href="../styles/datagrid.css" type="text/css" rel="stylesheet" />
     <link href="../styles/dntmanager.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../../javascript/common.js"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=7" />
 </head>
 <body>
@@ -27,7 +27,12 @@
                 </asp:TemplateColumn>
                 <asp:TemplateColumn HeaderText="团队图片">
                     <ItemTemplate>
-                        
+                        &nbsp;<span id="<%# DataBinder.Eval(Container, "DataItem.name").ToString() %>" onmouseover="showMenu(this.id, 0, 0, 1, 0);" style="font-weight:bold">
+                            <img src="../images/eye.gif" style="vertical-align:middle" />
+                        </span>
+                        <div id="<%# DataBinder.Eval(Container, "DataItem.name").ToString() %>_menu" style="display:none">
+							    <img src="<%# DataBinder.Eval(Container, "DataItem.imgs").ToString() %>" onerror="this.src='../../images/common/none.gif'" />
+							</div>
                     </ItemTemplate>
                 </asp:TemplateColumn>
                 <asp:BoundColumn DataField="teamID" SortExpression="teamID" HeaderText="团队ID" Visible="false"></asp:BoundColumn>
