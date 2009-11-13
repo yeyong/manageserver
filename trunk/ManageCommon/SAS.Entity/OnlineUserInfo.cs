@@ -35,7 +35,7 @@ namespace SAS.Entity
         /// <summary>
         /// 在线临时ID
         /// </summary>
-        public int ol_id
+        public int Ol_id
         {
             set { _ol_id = value; }
             get { return _ol_id; }
@@ -44,7 +44,7 @@ namespace SAS.Entity
         /// <summary>
         /// 用户ID
         /// </summary>
-        public int ol_ps_id
+        public int Ol_ps_id
         {
             set { _ol_ps_id = value; }
             get { return _ol_ps_id; }
@@ -53,7 +53,7 @@ namespace SAS.Entity
         /// <summary>
         /// 在线IP
         /// </summary>
-        public string ol_ip
+        public string Ol_ip
         {
             set { _ol_ip = value; }
             get { return _ol_ip; }
@@ -62,7 +62,7 @@ namespace SAS.Entity
         /// <summary>
         /// 用户名
         /// </summary>
-        public string ol_name
+        public string Ol_name
         {
             set { _ol_name = value; }
             get { return _ol_name; }
@@ -71,7 +71,7 @@ namespace SAS.Entity
         /// <summary>
         /// 用户昵称
         /// </summary>
-        public string ol_nickName
+        public string Ol_nickName
         {
             set { _ol_nickname = value; }
             get { return _ol_nickname; }
@@ -80,7 +80,7 @@ namespace SAS.Entity
         /// <summary>
         /// 密码
         /// </summary>
-        public string ol_password
+        public string Ol_password
         {
             set { _ol_password = value; }
             get { return _ol_password; }
@@ -89,7 +89,7 @@ namespace SAS.Entity
         /// <summary>
         /// 管理组ID
         /// </summary>
-        public int ol_pg_id
+        public int Ol_pg_id
         {
             set { _ol_pg_id = value; }
             get { return _ol_pg_id; }
@@ -98,7 +98,7 @@ namespace SAS.Entity
         /// <summary>
         /// 用户组ID
         /// </summary>
-        public int ol_ug_id
+        public int Ol_ug_id
         {
             set { _ol_ug_id = value; }
             get { return _ol_ug_id; }
@@ -107,7 +107,7 @@ namespace SAS.Entity
         /// <summary>
         /// 在线用户图例
         /// </summary>
-        public string ol_img
+        public string Ol_img
         {
             set { _ol_img = value; }
             get { return _ol_img; }
@@ -116,7 +116,7 @@ namespace SAS.Entity
         /// <summary>
         /// 在线状态（是否隐身）
         /// </summary>
-        public short ol_invisible
+        public short Ol_invisible
         {
             set { _ol_invisible = value; }
             get { return _ol_invisible; }
@@ -125,7 +125,7 @@ namespace SAS.Entity
         /// <summary>
         /// 操作
         /// </summary>
-        public int ol_action
+        public int Ol_action
         {
             set { _ol_action = value; }
             get { return _ol_action; }
@@ -134,7 +134,7 @@ namespace SAS.Entity
         ///<summary>
         ///当前所在位置或所做的动作
         ///</summary>
-        public string ol_actionname
+        public string Ol_actionname
         {
             set { _ol_actionname = value; }
             get { return _ol_actionname; }
@@ -143,7 +143,7 @@ namespace SAS.Entity
         /// <summary>
         /// 上一次所做的操作
         /// </summary>
-        public int ol_lastactivity
+        public int Ol_lastactivity
         {
             set { _ol_lastactivity = value; }
             get { return _ol_lastactivity; }
@@ -152,7 +152,7 @@ namespace SAS.Entity
         /// <summary>
         /// 最后一次发送短消息时间
         /// </summary>
-        public string ol_lastpostpmtime
+        public string Ol_lastpostpmtime
         {
             set { _ol_lastpostpmtime = value; }
             get { return _ol_lastpostpmtime; }
@@ -161,7 +161,7 @@ namespace SAS.Entity
         /// <summary>
         /// 最后一次搜索时间
         /// </summary>
-        public string ol_lastsearchtime
+        public string Ol_lastsearchtime
         {
             set { _ol_lastsearchtime = value; }
             get { return _ol_lastsearchtime; }
@@ -170,7 +170,7 @@ namespace SAS.Entity
         /// <summary>
         /// 最后一次修改时间
         /// </summary>
-        public string ol_lastupdatetime
+        public string Ol_lastupdatetime
         {
             set { _ol_lastupdatetime = value; }
             get { return _ol_lastupdatetime; }
@@ -179,7 +179,7 @@ namespace SAS.Entity
         /// <summary>
         /// 最后一次所在栏目ID
         /// </summary>
-        public int ol_pm_id
+        public int Ol_pm_id
         {
             set { _ol_pm_id = value; }
             get { return _ol_pm_id; }
@@ -188,7 +188,7 @@ namespace SAS.Entity
         /// <summary>
         /// 栏目名称
         /// </summary>
-        public string ol_pm_name
+        public string Ol_pm_name
         {
             set { _ol_pm_name = value; }
             get { return _ol_pm_name; }
@@ -197,7 +197,7 @@ namespace SAS.Entity
         /// <summary>
         /// 验证码
         /// </summary>
-        public string ol_verifycode
+        public string Ol_verifycode
         {
             set { _ol_verifycode = value; }
             get { return _ol_verifycode; }
@@ -206,7 +206,7 @@ namespace SAS.Entity
         ///<summary>
         ///新短消息数
         ///</summary>
-        public int ol_newpms
+        public int Ol_newpms
         {
             get { return _ol_newpms; }
             set { _ol_newpms = value; }
@@ -214,7 +214,7 @@ namespace SAS.Entity
         ///<summary>
         ///新通知数
         ///</summary>
-        public int ol_newnotices
+        public int Ol_newnotices
         {
             get { return _ol_newnotices; }
             set { _ol_newnotices = value; }

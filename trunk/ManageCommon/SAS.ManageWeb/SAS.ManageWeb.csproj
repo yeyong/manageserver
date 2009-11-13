@@ -62,7 +62,7 @@
       <DependentUpon>test.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="aspx\usercpprofile.cs">
+    <Compile Include="aspx\1\usercpprofile.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Default.aspx.cs">
@@ -362,8 +362,13 @@
     <Content Include="templates\default\images\btn_post.gif" />
     <Content Include="templates\default\images\del.gif" />
     <Content Include="templates\default\images\del_hover.gif" />
+    <Content Include="templates\default\images\gather\titlebg.gif" />
     <Content Include="templates\default\images\hint.gif" />
+    <Content Include="templates\default\images\icon_announcement.gif" />
     <Content Include="templates\default\images\icon_drop.gif" />
+    <Content Include="templates\default\images\icon_subnav.gif" />
+    <Content Include="templates\default\images\menubg.gif" />
+    <Content Include="templates\default\images\navbg.gif" />
     <Content Include="templates\default\images\newarow.gif" />
     <Content Include="templates\default\images\newclose.gif" />
     <Content Include="templates\default\images\ratesrcorebg.gif" />

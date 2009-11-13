@@ -489,15 +489,15 @@ namespace SAS.Logic
                 }
             }
 
-            userid = oluserinfo.ol_ps_id;
-            usergroupid = oluserinfo.ol_ug_id;
-            username = oluserinfo.ol_name;
-            password = oluserinfo.ol_password;
+            userid = oluserinfo.Ol_ps_id;
+            usergroupid = oluserinfo.Ol_ug_id;
+            username = oluserinfo.Ol_name;
+            password = oluserinfo.Ol_password;
             userkey = password.Length > 16 ? password.Substring(4, 8).Trim() : "";
             //lastposttime = oluserinfo.Lastposttime;
-            lastpostpmtime = oluserinfo.ol_lastpostpmtime;
-            lastsearchtime = oluserinfo.ol_lastsearchtime;
-            olid = oluserinfo.ol_id;
+            lastpostpmtime = oluserinfo.Ol_lastpostpmtime;
+            lastsearchtime = oluserinfo.Ol_lastsearchtime;
+            olid = oluserinfo.Ol_id;
 
             //确保头像可以取到
             if (userid > 0)

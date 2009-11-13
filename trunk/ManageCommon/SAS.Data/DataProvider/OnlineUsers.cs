@@ -111,32 +111,32 @@ namespace SAS.Data.DataProvider
         private static OnlineUserInfo LoadSingleOnlineUser(IDataReader reader)
         {
             OnlineUserInfo info = new OnlineUserInfo();
-            info.ol_id = TypeConverter.ObjectToInt(reader["ol_id"]);
-            info.ol_ps_id = TypeConverter.ObjectToInt(reader["ol_ps_id"]);
-            info.ol_ip = reader["ol_ip"].ToString();
-            info.ol_name = reader["ol_name"].ToString();
-            info.ol_nickName = reader["ol_nickName"].ToString();
-            info.ol_password = reader["ol_password"].ToString();
-            info.ol_ug_id = Int16.Parse(reader["ol_ug_id"].ToString());
-            info.ol_img = reader["ol_img"].ToString();
-            info.ol_pg_id = Int16.Parse(reader["ol_pg_id"].ToString());
-            info.ol_invisible = Int16.Parse(reader["ol_invisible"].ToString());
-            info.ol_action = Int16.Parse(reader["ol_action"].ToString());
-            info.ol_actionname = "";
-            info.ol_lastactivity = Int16.Parse(reader["ol_lastactivity"].ToString());
-            info.ol_lastpostpmtime = reader["ol_lastpostpmtime"].ToString();
-            info.ol_lastsearchtime = reader["ol_lastsearchtime"].ToString();
-            info.ol_lastupdatetime = reader["ol_lastupdatetime"].ToString();
-            info.ol_pm_id = TypeConverter.ObjectToInt(reader["ol_pm_id"]);
+            info.Ol_id = TypeConverter.ObjectToInt(reader["ol_id"]);
+            info.Ol_ps_id = TypeConverter.ObjectToInt(reader["ol_ps_id"]);
+            info.Ol_ip = reader["ol_ip"].ToString();
+            info.Ol_name = reader["ol_name"].ToString();
+            info.Ol_nickName = reader["ol_nickName"].ToString();
+            info.Ol_password = reader["ol_password"].ToString();
+            info.Ol_ug_id = Int16.Parse(reader["ol_ug_id"].ToString());
+            info.Ol_img = reader["ol_img"].ToString();
+            info.Ol_pg_id = Int16.Parse(reader["ol_pg_id"].ToString());
+            info.Ol_invisible = Int16.Parse(reader["ol_invisible"].ToString());
+            info.Ol_action = Int16.Parse(reader["ol_action"].ToString());
+            info.Ol_actionname = "";
+            info.Ol_lastactivity = Int16.Parse(reader["ol_lastactivity"].ToString());
+            info.Ol_lastpostpmtime = reader["ol_lastpostpmtime"].ToString();
+            info.Ol_lastsearchtime = reader["ol_lastsearchtime"].ToString();
+            info.Ol_lastupdatetime = reader["ol_lastupdatetime"].ToString();
+            info.Ol_pm_id = TypeConverter.ObjectToInt(reader["ol_pm_id"]);
             if (reader["ol_pm_name"] != DBNull.Value)
-                info.ol_pm_name = reader["ol_pm_name"].ToString();
+                info.Ol_pm_name = reader["ol_pm_name"].ToString();
 
-            info.ol_verifycode = reader["ol_verifycode"].ToString();
+            info.Ol_verifycode = reader["ol_verifycode"].ToString();
             if (reader["ol_newpms"] != DBNull.Value)
-                info.ol_newpms = Int16.Parse(reader["ol_newpms"].ToString());
+                info.Ol_newpms = Int16.Parse(reader["ol_newpms"].ToString());
 
             if (reader["ol_newnotices"] != DBNull.Value)
-                info.ol_newnotices = Int16.Parse(reader["ol_newnotices"].ToString());
+                info.Ol_newnotices = Int16.Parse(reader["ol_newnotices"].ToString());
 
             return info;
         }
@@ -144,32 +144,32 @@ namespace SAS.Data.DataProvider
         private static OnlineUserInfo LoadSingleOnlineUser(DataRow dr)
         {
             OnlineUserInfo info = new OnlineUserInfo();
-            info.ol_id = TypeConverter.ObjectToInt(dr["ol_id"]);
-            info.ol_ps_id = TypeConverter.ObjectToInt(dr["ol_ps_id"]);
-            info.ol_ip = dr["ol_ip"].ToString();
-            info.ol_name = dr["ol_name"].ToString();
-            info.ol_nickName = dr["ol_nickName"].ToString();
-            info.ol_password = dr["ol_password"].ToString();
-            info.ol_ug_id = Int16.Parse(dr["ol_ug_id"].ToString());
-            info.ol_img = dr["ol_img"].ToString();
-            info.ol_pg_id = Int16.Parse(dr["ol_pg_id"].ToString());
-            info.ol_invisible = Int16.Parse(dr["ol_invisible"].ToString());
-            info.ol_action = Int16.Parse(dr["ol_action"].ToString());
-            info.ol_actionname = "";
-            info.ol_lastactivity = Int16.Parse(dr["ol_lastactivity"].ToString());
-            info.ol_lastpostpmtime = dr["ol_lastpostpmtime"].ToString();
-            info.ol_lastsearchtime = dr["ol_lastsearchtime"].ToString();
-            info.ol_lastupdatetime = dr["ol_lastupdatetime"].ToString();
-            info.ol_pm_id = TypeConverter.ObjectToInt(dr["ol_pm_id"]);
+            info.Ol_id = TypeConverter.ObjectToInt(dr["ol_id"]);
+            info.Ol_ps_id = TypeConverter.ObjectToInt(dr["ol_ps_id"]);
+            info.Ol_ip = dr["ol_ip"].ToString();
+            info.Ol_name = dr["ol_name"].ToString();
+            info.Ol_nickName = dr["ol_nickName"].ToString();
+            info.Ol_password = dr["ol_password"].ToString();
+            info.Ol_ug_id = Int16.Parse(dr["ol_ug_id"].ToString());
+            info.Ol_img = dr["ol_img"].ToString();
+            info.Ol_pg_id = Int16.Parse(dr["ol_pg_id"].ToString());
+            info.Ol_invisible = Int16.Parse(dr["ol_invisible"].ToString());
+            info.Ol_action = Int16.Parse(dr["ol_action"].ToString());
+            info.Ol_actionname = "";
+            info.Ol_lastactivity = Int16.Parse(dr["ol_lastactivity"].ToString());
+            info.Ol_lastpostpmtime = dr["ol_lastpostpmtime"].ToString();
+            info.Ol_lastsearchtime = dr["ol_lastsearchtime"].ToString();
+            info.Ol_lastupdatetime = dr["ol_lastupdatetime"].ToString();
+            info.Ol_pm_id = TypeConverter.ObjectToInt(dr["ol_pm_id"]);
             if (dr["ol_pm_name"] != DBNull.Value)
-                info.ol_pm_name = dr["ol_pm_name"].ToString();
+                info.Ol_pm_name = dr["ol_pm_name"].ToString();
 
-            info.ol_verifycode = dr["ol_verifycode"].ToString();
+            info.Ol_verifycode = dr["ol_verifycode"].ToString();
             if (dr["ol_newpms"] != DBNull.Value)
-                info.ol_newpms = Int16.Parse(dr["ol_newpms"].ToString());
+                info.Ol_newpms = Int16.Parse(dr["ol_newpms"].ToString());
 
             if (dr["ol_newnotices"] != DBNull.Value)
-                info.ol_newnotices = Int16.Parse(dr["ol_newnotices"].ToString());
+                info.Ol_newnotices = Int16.Parse(dr["ol_newnotices"].ToString());
 
             return info;
         }
@@ -369,9 +369,9 @@ namespace SAS.Data.DataProvider
             while (reader.Read())
             {
                 OnlineUserInfo onlineUserInfo = LoadSingleOnlineUser(reader);
-                if (onlineUserInfo.ol_ps_id > 0 || (onlineUserInfo.ol_ps_id == -1 && GeneralConfigs.GetConfig().Whosonlinecontract == 0))
+                if (onlineUserInfo.Ol_ps_id > 0 || (onlineUserInfo.Ol_ps_id == -1 && GeneralConfigs.GetConfig().Whosonlinecontract == 0))
                 {
-                    onlineUserInfo.ol_actionname = UserAction.GetActionDescriptionByID((int)(onlineUserInfo.ol_action));
+                    onlineUserInfo.Ol_actionname = UserAction.GetActionDescriptionByID((int)(onlineUserInfo.Ol_action));
                     coll.Add(onlineUserInfo);
                 }
             }

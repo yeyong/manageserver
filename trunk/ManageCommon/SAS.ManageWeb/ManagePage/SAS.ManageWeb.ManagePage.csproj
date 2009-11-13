@@ -761,7 +761,9 @@
     <Content Include="js\modalpopup.js" />
     <Content Include="js\navbar.js" />
     <Content Include="js\tabstrip.js" />
-    <Content Include="rapidset\managemainmenu.aspx" />
+    <Content Include="rapidset\managemainmenu.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="rapidset\managemenubackupfile.aspx" />
     <Content Include="rapidset\managesubmenu.aspx" />
     <Content Include="rapidset\managesubmenuitem.aspx" />
@@ -792,7 +794,6 @@
     <Content Include="style\comm.css" />
     <Content Include="syslogin.aspx" />
     <Content Include="UserControls\onlineeditor.ascx">
-      <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="UserControls\PageInfo.ascx">
       <SubType>ASPXCodeBehind</SubType>

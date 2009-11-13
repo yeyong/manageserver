@@ -54,7 +54,7 @@ namespace SAS.ManageWeb.ManagePage
 
             OnlineUserInfo oluserinfo = SAS.Logic.OnlineUsers.UpdateInfo(config.Passwordkey, config.Onlinetimeout);
 
-            olid = oluserinfo.ol_id;
+            olid = oluserinfo.Ol_id;
 
             if (!Page.IsPostBack)
             {
@@ -75,8 +75,8 @@ namespace SAS.ManageWeb.ManagePage
                 #endregion
 
                 #region 用户身份判断
-                UserGroupInfo usergroupinfo = AdminUserGroups.AdminGetUserGroupInfo(oluserinfo.ol_ug_id);
-                if (oluserinfo.ol_ps_id <= 0 || usergroupinfo.ug_pg_id != 1)
+                UserGroupInfo usergroupinfo = AdminUserGroups.AdminGetUserGroupInfo(oluserinfo.Ol_ug_id);
+                if (oluserinfo.Ol_ps_id <= 0 || usergroupinfo.ug_pg_id != 1)
                 {
                     string message = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">";
                     message += "<html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>无法确认您的身份</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">";
@@ -92,14 +92,14 @@ namespace SAS.ManageWeb.ManagePage
                 #region 显示相关页面登陆提交信息
                 if (Context.Request.Cookies["sasadmin"] == null || Context.Request.Cookies["sasadmin"]["key"] == null ||
                     LogicUtils.GetCookiePassword(Context.Request.Cookies["sasadmin"]["key"].ToString(), config.Passwordkey) !=
-                    (oluserinfo.ol_password + SAS.Logic.Users.GetUserInfo(oluserinfo.ol_ps_id).Ps_secques + oluserinfo.ol_ps_id.ToString()))
+                    (oluserinfo.Ol_password + SAS.Logic.Users.GetUserInfo(oluserinfo.Ol_ps_id).Ps_secques + oluserinfo.Ol_ps_id.ToString()))
                 {
                     Msg.Text = "<p class=\"adlrt1 zi1\" style=\" float:right; letter-spacing:1px;\" align=\"absMiddle\"><span class=\"adlrt1tu adbg\"></span>请重新进行管理员登录</p>";
                 }
 
-                if (oluserinfo.ol_ps_id > 0 && usergroupinfo.ug_pg_id == 1 && oluserinfo.ol_name.Trim() != "")
+                if (oluserinfo.Ol_ps_id > 0 && usergroupinfo.ug_pg_id == 1 && oluserinfo.Ol_name.Trim() != "")
                 {
-                    UserName.Text = oluserinfo.ol_name;
+                    UserName.Text = oluserinfo.Ol_name;
                     UserName.AddAttributes("readonly", "true");
                     UserName.CssClass = "nofocus";
                     UserName.Attributes.Add("onfocus", "this.className='nofocus';");

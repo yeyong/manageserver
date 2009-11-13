@@ -10,7 +10,7 @@ namespace SAS.ManageWeb.ManagePage
     {
         public string controlname;
         public int postminchars = 0;
-        public int postmaxchars = 200;
+        public int postmaxchars = 2000;
 
         public string Text
         {

@@ -91,5 +91,24 @@ namespace SAS.Sirius
         {
             return DTOProvider.GetTeamInfoEntity(Data.DbProvider.GetInstance().GetTeamInfoByID(teamID));
         }
+
+        /// <summary>
+        /// 更新团队信息
+        /// </summary>
+        /// <param name="team"></param>
+        /// <returns></returns>
+        public static bool UpdateTeamInfo(TeamInfo team, out string members)
+        {
+            string realmembers = "";
+            members = CheckMemberInfo(team.TeamMember, out realmembers);
+            team.TeamMember = realmembers;
+
+            if (!Data.DbProvider.GetInstance().UpdateTeamInfo(team))
+            {
+                return false;
+            }
+            SASCache.GetCacheService().RemoveObject("/Sirius/TeamInfoList");
+            return true;
+        }
     }
 }

@@ -42,9 +42,19 @@ namespace SAS.Sirius
             return Sirius.GetAllTeamInfoList();
         }
 
+        /// <summary>
+        /// 根据ID获取团队信息
+        /// </summary>
+        /// <param name="teamID"></param>
+        /// <returns></returns>
         public override TeamInfo GetTeamByTeamID(int teamID)
         {
             return Sirius.GetTeamInfoByTeamID(teamID);
+        }
+
+        public override bool UpdateTeamInfo(TeamInfo teaminfo, out string members)
+        {
+            return Sirius.UpdateTeamInfo(teaminfo, out members);
         }
     }
 }

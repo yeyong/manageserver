@@ -53,7 +53,10 @@ namespace SAS.Sirius.Admin
             foreach (object o in DataGrid1.GetKeyIDArray())
             {
                 int tID = int.Parse(o.ToString());
+                TeamInfo team = Sirius.GetTeamInfoByTeamID(tID);
+
                 string tName = DataGrid1.GetControlValue(row, "name");
+
                 if (tName.Trim() == "")
                 {
                     base.RegisterStartupScript("", "<script>alert('团队名称不可为空，请认真填写!');window.location.href='sirius_manageteam.aspx';</script>");
@@ -81,6 +84,14 @@ namespace SAS.Sirius.Admin
                     base.RegisterStartupScript("", "<script>alert('团队显示顺序应为数字，请认真填写!');window.location.href='sirius_manageteam.aspx';</script>");
                     return;
                 }
+
+                team.Name = tName;
+                team.Teamdomain = tUrl;
+                team.Displayorder = int.Parse(tOrder);
+
+                string members = "";
+                Sirius.UpdateTeamInfo(team,out members);
+                base.RegisterStartupScript("PAGE", "window.location.href='sirius_manageteam.aspx';");
             }
 
             #endregion

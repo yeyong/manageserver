@@ -136,7 +136,7 @@ namespace SAS.ManageWeb
 
         protected override void ShowPage()
         {
-            if (oluserinfo.ol_ug_id == 4)
+            if (oluserinfo.Ol_ug_id == 4)
             {
                 AddErrLine("你所在的用户组，为禁止发言"); return;
             }

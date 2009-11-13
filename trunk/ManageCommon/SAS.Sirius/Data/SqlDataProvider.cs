@@ -121,5 +121,40 @@ namespace SAS.Sirius.Data
             string commandText = String.Format("SELECT * FROM [{0}teamInfo] WHERE [teamID] = @teamID", BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
         }
+
+        public bool UpdateTeamInfo(TeamInfo teaminfo)
+        {
+            DbParameter[] parms = 
+            {
+                DbHelper.MakeInParam("@teamID",(DbType)SqlDbType.Int,4,teaminfo.TeamID),
+                DbHelper.MakeInParam("@name",(DbType)SqlDbType.NVarChar,255,teaminfo.Name),
+                DbHelper.MakeInParam("@teamdomain",(DbType)SqlDbType.NVarChar,255,teaminfo.Teamdomain),
+                DbHelper.MakeInParam("@templateid",(DbType)SqlDbType.Int,4,teaminfo.Templateid),
+                DbHelper.MakeInParam("@imgs",(DbType)SqlDbType.NVarChar,255,teaminfo.Imgs),
+                DbHelper.MakeInParam("@updateDate",(DbType)SqlDbType.DateTime,8,teaminfo.UpdateDate),
+                DbHelper.MakeInParam("@bio",(DbType)SqlDbType.NVarChar,255,teaminfo.Bio),
+                DbHelper.MakeInParam("@content1",(DbType)SqlDbType.NText,0,teaminfo.Content1),
+                DbHelper.MakeInParam("@content2",(DbType)SqlDbType.NText,0,teaminfo.Content2),
+                DbHelper.MakeInParam("@content3",(DbType)SqlDbType.NText,0,teaminfo.Content3),
+                DbHelper.MakeInParam("@content4",(DbType)SqlDbType.NText,0,teaminfo.Content4),
+                DbHelper.MakeInParam("@teammember",(DbType)SqlDbType.NText,0,teaminfo.TeamMember),
+                DbHelper.MakeInParam("@stutas",(DbType)SqlDbType.Int,4,teaminfo.Stutas),
+                DbHelper.MakeInParam("@displayorder",(DbType)SqlDbType.Int,4,teaminfo.Displayorder),
+                DbHelper.MakeInParam("@seokeywords",(DbType)SqlDbType.NText,0,teaminfo.Seokeywords),
+                DbHelper.MakeInParam("@seodescription",(DbType)SqlDbType.NText,0,teaminfo.Seodescription)
+            };
+
+            string commandText = String.Format("UPDATE [{0}teamInfo] SET [name] = @name,[teamdomain] = @teamdomain,[templateid] = @templateid,[updateDate] = @updateDate,[imgs] = @imgs,[bio] = @bio,[content1] = @content1,[content2] = @content2,[content3] = @content3,[content4] = @content4,[stutas] = @stutas,[displayorder] = @displayorder,[teamMember] = @teamMember,[seokeywords] = @seokeywords,[seodescription] = @seodescription	WHERE [teamID]=@teamID ",BaseConfigs.GetTablePrefix);
+
+            int result = DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+
+            if (result == 0)
+            {
+                return false;
+            }
+
+            return true;
+
+        }
     }
 }
