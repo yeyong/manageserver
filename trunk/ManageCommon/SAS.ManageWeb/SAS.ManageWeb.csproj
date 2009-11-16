@@ -374,6 +374,7 @@
     <Content Include="templates\default\images\ratesrcorebg.gif" />
     <Content Include="templates\default\images\re_unsolved.gif" />
     <Content Include="templates\default\images\sidebg.gif" />
+    <Content Include="templates\default\logout.htm" />
     <Content Include="templates\default\sas.css" />
     <Content Include="templates\default\editor.css" />
     <Content Include="templates\default\images\portalbox_bg.gif" />
