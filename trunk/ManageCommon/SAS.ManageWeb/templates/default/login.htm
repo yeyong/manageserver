@@ -1,4 +1,9 @@
 <%template _header%>
+<%if {infloat}!=1%>
+<div id="nav">
+	<div class="wrap s_clear"><a href="{config.siteurl}" class="title">{config.sitetitle}</a> &raquo; 用户登录</div>
+</div>
+<%/if%>
 <a href="http://www.sirius.com/ManagePage/index.aspx">管理页面</a>{infloat}
 <%template _copyright%>
 <%template _footer%>
