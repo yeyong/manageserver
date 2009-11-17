@@ -8,6 +8,7 @@ using SAS.Common;
 using SAS.Config;
 using SAS.Data;
 using SAS.Entity;
+using SAS.Plugin.PasswordMode;
 
 namespace SAS.Logic
 {
@@ -132,6 +133,43 @@ namespace SAS.Logic
             ShortUserInfo userInfo = SAS.Data.DataProvider.Users.CheckPassword(uid, password, originalpassword);
 
             return userInfo == null ? -1 : userInfo.Ps_id;
+        }
+
+        /// <summary>
+        /// 第三方用户密码检查
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="passWord"></param>
+        /// <param name="question"></param>
+        /// <param name="answer"></param>
+        /// <returns></returns>
+        public static UserInfo CheckThirdPartPassword(string userName, string passWord, int question, string answer)
+        {
+            UserInfo userInfo = Users.GetUserInfo(userName);
+
+            //当安全问题未通过时
+            if (userInfo != null && GeneralConfigs.GetConfig().Secques == 1 &&
+                userInfo.Ps_secques.Trim() != LogicUtils.GetUserSecques(question, answer))
+                return null;
+
+            if (PasswordModeProvider.GetInstance() != null && PasswordModeProvider.GetInstance().CheckPassword(userInfo, passWord))
+                return userInfo;
+
+            return null;
+        }
+
+        /// <summary>
+        /// 检测密码和安全项
+        /// </summary>
+        /// <param name="username">用户名</param>
+        /// <param name="password">密码</param>
+        /// <param name="originalpassword">是否非MD5密码</param>
+        /// <param name="questionid">问题id</param>
+        /// <param name="answer">答案</param>
+        /// <returns>如果正确则返回用户id, 否则返回-1</returns>
+        public static int CheckPasswordAndSecques(string username, string password, bool originalpassword, int questionid, string answer)
+        {
+            return SAS.Data.DataProvider.Users.CheckPasswordAndSecques(username, password, originalpassword, LogicUtils.GetUserSecques(questionid, answer));
         }
 
         /// <summary>
