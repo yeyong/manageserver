@@ -122,6 +122,13 @@ namespace SAS.Sirius.Data
             return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
         }
 
+        public IDataReader GetTeamInfoByDomain(string domain)
+        {
+            DbParameter[] parms = { DbHelper.MakeInParam("@domain", (DbType)SqlDbType.NVarChar, 255, domain) };
+            string commmandText = String.Format("SELECT TOP 1 * FROM [{0}teamInfo] WHERE [teamdomain] = @domain", BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commmandText, parms);
+        }
+
         public bool UpdateTeamInfo(TeamInfo teaminfo)
         {
             DbParameter[] parms = 

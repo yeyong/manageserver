@@ -46,7 +46,7 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Default.aspx" />
+    <Content Include="index.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -68,13 +68,6 @@
     </Compile>
     <Compile Include="aspx\1\usercpprofile.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Default.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -143,11 +136,11 @@
     <Content Include="SAS.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="aspx\1\login.aspx" />
     <Content Include="config\urls.config" />
     <Content Include="tools\VerifyImagePage.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="aspx\1\login.aspx" />
     <Content Include="aspx\1\test.aspx" />
     <Content Include="config\localupgradeini.config" />
     <Content Include="editor\cp_editor.htm" />
@@ -404,6 +397,7 @@
     <Content Include="templates\default\studio\main.css" />
     <Content Include="templates\default\studio\personindex.htm" />
     <Content Include="templates\default\studio\_studiobottom.htm" />
+    <Content Include="templates\default\studio\_studioerrmsgbox.htm" />
     <Content Include="templates\default\studio\_studioheader.htm" />
     <Content Include="templates\default\studio\studioindex.htm" />
     <Content Include="templates\default\templatevariable.xml" />
