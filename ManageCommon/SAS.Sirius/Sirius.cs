@@ -93,6 +93,16 @@ namespace SAS.Sirius
         }
 
         /// <summary>
+        /// 根据域名获取团队信息
+        /// </summary>
+        /// <param name="domain"></param>
+        /// <returns></returns>
+        public static TeamInfo GetTeamInfoByDomain(string domain)
+        {
+            return DTOProvider.GetTeamInfoEntity(Data.DbProvider.GetInstance().GetTeamInfoByDomain(domain));
+        }
+
+        /// <summary>
         /// 更新团队信息
         /// </summary>
         /// <param name="team"></param>

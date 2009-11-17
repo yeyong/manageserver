@@ -46,6 +46,11 @@ namespace SAS.Sirius.Pages
         {
             siriusconfig = SiriusConfigs.GetConfig();
             filerooturl = siriusconfig.FileUrlAddress;
+            teaminfo = Sirius.GetTeamInfoByDomain("http://" + SASRequest.GetServerString("Server_Name"));
+            if (teaminfo == null)
+            {
+                AddErrLine("用户组或域名无效");
+            }
         }
     }
 }

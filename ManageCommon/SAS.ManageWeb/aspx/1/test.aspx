@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-    
+    <%=SAS.Common.SASRequest.GetServerString("Server_Name")%>
     </div>
     </form>
 </body>
