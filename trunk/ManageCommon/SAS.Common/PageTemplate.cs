@@ -163,7 +163,7 @@ namespace SAS.Common
                     }
                     if ("\"".Equals(inherits))
                     {
-                        inherits = "SAS.Web.UI.PageBase";
+                        inherits = "SAS.Logic.BasePage";
                     }
 
                 }
