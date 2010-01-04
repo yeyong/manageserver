@@ -8,6 +8,8 @@ using SAS.Config;
 using SAS.Config.Provider;
 using SAS.Entity;
 using SAS.Logic;
+using SAS.Plugin;
+using SAS.Plugin.Album;
 
 namespace SAS.Logic
 {
@@ -293,20 +295,20 @@ namespace SAS.Logic
         }
 
         /// <summary>
-        /// 校验用户是否可以访问论坛
+        /// 校验用户是否可以访问站点
         /// </summary>
         /// <returns></returns>
         private bool ValidateUserPermission()
         {
             if (onlineusercount >= config.Maxonlines && useradminid != 1 && pagename != "login.aspx" && pagename != "logout.aspx")
             {
-                ShowMessage("抱歉,目前访问人数太多,你暂时无法访问论坛.", 0);
+                ShowMessage("抱歉,目前访问人数太多,你暂时无法访问站点.", 0);
                 return false;
             }
 
             if (usergroupinfo.ug_allowvisit != 1 && useradminid != 1 && pagename != "login.aspx" && pagename != "register.aspx" && pagename != "logout.aspx" && pagename != "activationuser.aspx")
             {
-                ShowMessage("抱歉, 您所在的用户组不允许访问论坛", 2);
+                ShowMessage("抱歉, 您所在的用户组不允许访问站点", 2);
                 return false;
             }
 
@@ -316,7 +318,7 @@ namespace SAS.Logic
                 string[] regctrl = Utils.SplitString(config.Ipaccess, "\n");
                 if (!Utils.InIPArray(SASRequest.GetIP(), regctrl))
                 {
-                    ShowMessage("抱歉, 系统设置了IP访问列表限制, 您无法访问本论坛", 0);
+                    ShowMessage("抱歉, 系统设置了IP访问列表限制, 您无法访问本站点", 0);
                     return false;
                 }
             }
@@ -451,8 +453,8 @@ namespace SAS.Logic
             config = GeneralConfigs.GetConfig();
             //if (SpacePluginProvider.GetInstance() == null)
             //    config.Enablespace = 0;
-            //if (AlbumPluginProvider.GetInstance() == null)
-            //    config.Enablealbum = 0;
+            if (AlbumPluginProvider.GetInstance() == null)
+                config.Enablealbum = 0;
             //if (MallPluginProvider.GetInstance() == null)
             //    config.Enablemall = 0;
             LoadUrlConfig();
@@ -531,7 +533,7 @@ namespace SAS.Logic
 
             onlineusercount = (userid != -1) ? OnlineUsers.GetOnlineAllUserCount() : OnlineUsers.GetCacheOnlineAllUserCount();
 
-            //校验用户是否可以访问论坛
+            //校验用户是否可以访问站点
             if (!ValidateUserPermission())
                 return;
 
