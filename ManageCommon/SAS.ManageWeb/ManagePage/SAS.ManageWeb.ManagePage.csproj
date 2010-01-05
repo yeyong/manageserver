@@ -86,12 +86,26 @@
     <Compile Include="framepage\top.aspx.designer.cs">
       <DependentUpon>top.aspx.cs</DependentUpon>
     </Compile>
+    <Compile Include="global\global_addgroup.aspx.cs">
+      <DependentUpon>global_addgroup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="global\global_addgroup.aspx.designer.cs">
+      <DependentUpon>global_addgroup.aspx.cs</DependentUpon>
+    </Compile>
     <Compile Include="global\global_adduser.aspx.cs">
       <DependentUpon>global_adduser.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="global\global_adduser.aspx.designer.cs">
       <DependentUpon>global_adduser.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="global\global_addusergroup.aspx.cs">
+      <DependentUpon>global_addusergroup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="global\global_addusergroup.aspx.designer.cs">
+      <DependentUpon>global_addusergroup.aspx.cs</DependentUpon>
     </Compile>
     <Compile Include="global\global_adminusergroupgrid.aspx.cs">
       <DependentUpon>global_adminusergroupgrid.aspx</DependentUpon>
@@ -284,8 +298,14 @@
     <Content Include="forum\forum_userrights.aspx" />
     <Content Include="framepage\managerbody.aspx" />
     <Content Include="framepage\top.aspx" />
+    <Content Include="global\global_addgroup.aspx" />
     <Content Include="global\global_adduser.aspx" />
-    <Content Include="global\global_adminusergroupgrid.aspx" />
+    <Content Include="global\global_addusergroup.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="global\global_adminusergroupgrid.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="global\global_baseset.aspx" />
     <Content Include="global\global_editadminusergroup.aspx">
       <SubType>ASPXCodeBehind</SubType>
@@ -296,14 +316,20 @@
     <Content Include="global\global_editsysadminusergroup.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="global\global_edituser.aspx" />
+    <Content Include="global\global_edituser.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="global\global_emailconfig.aspx" />
     <Content Include="global\global_logandshrinkdb.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="global\global_sysadminusergroupgrid.aspx" />
+    <Content Include="global\global_sysadminusergroupgrid.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="global\global_templatesedit.aspx" />
-    <Content Include="global\global_templatesgrid.aspx" />
+    <Content Include="global\global_templatesgrid.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="global\global_templatetree.aspx" />
     <Content Include="global\global_uiandshowstyle.aspx">
       <SubType>ASPXCodeBehind</SubType>
@@ -751,7 +777,9 @@
     <Content Include="images\zip.gif" />
     <Content Include="images\zoomin.gif" />
     <Content Include="images\zoomout.gif" />
-    <Content Include="index.aspx" />
+    <Content Include="index.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="js\ajaxhelper.js" />
     <Content Include="js\calendar.js" />
     <Content Include="js\colorpicker.js" />
@@ -772,13 +800,11 @@
     </Content>
     <Content Include="sirius\photo.txt" />
     <Content Include="sirius\sirius_addteam.aspx">
-      <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="sirius\sirius_editteam.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="sirius\sirius_manageteam.aspx">
-      <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="styles\calendar.css" />
     <Content Include="styles\colorpicker.css" />
@@ -792,14 +818,21 @@
     <Content Include="styles\tab.css" />
     <Content Include="style\admin.css" />
     <Content Include="style\comm.css" />
-    <Content Include="syslogin.aspx" />
+    <Content Include="syslogin.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="UserControls\onlineeditor.ascx">
+      <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="UserControls\PageInfo.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="UserControls\TextareaResize.ascx" />
-    <Content Include="UserControls\usergrouppowersetting.ascx" />
+    <Content Include="UserControls\TextareaResize.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="UserControls\usergrouppowersetting.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="xml\navmenu.js" />
   </ItemGroup>
   <ItemGroup>
