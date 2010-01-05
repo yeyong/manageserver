@@ -18,6 +18,39 @@ namespace SAS.Logic
         public static string opresult = ""; //存储操作结果或返回给用户的信息
 
         /// <summary>
+        /// 添加用户组信息
+        /// </summary>
+        /// <param name="userGroupInfo"></param>
+        /// <returns></returns>
+        public static bool AddUserGroupInfo(UserGroupInfo userGroupInfo)
+        {
+            try
+            {
+                int Creditshigher = userGroupInfo.ug_scorehight;
+                int Creditslower = userGroupInfo.ug_scorelow;
+                DataTable dt = SAS.Data.DataProvider.UserGroups.GetUserGroupByCreditsHigherAndLower(Creditshigher, Creditslower);
+                if (dt.Rows.Count > 0)
+                    return false;
+
+                if (userGroupInfo.ug_pg_id == 0 && !SystemCheckCredits("add", ref Creditshigher, ref Creditslower, 0))
+                    return false;
+
+                userGroupInfo.ug_scorehight = Creditshigher;
+                userGroupInfo.ug_scorelow = Creditslower;
+                Data.DataProvider.UserGroups.CreateUserGroup(userGroupInfo);
+                Data.DataProvider.OnlineUsers.AddOnlineList(userGroupInfo.ug_name);
+
+                Caches.ReSetAdminGroupList();
+                Caches.ReSetUserGroupList();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// 通过指定的用户组id得到相关的用户组信息
         /// </summary>
         /// <param name="groupid"></param>

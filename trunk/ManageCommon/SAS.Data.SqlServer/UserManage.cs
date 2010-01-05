@@ -1377,6 +1377,65 @@ namespace SAS.Data.SqlServer
 
         #region 用户组usergroup usergroup基本操作
 
+        public void AddUserGroup(UserGroupInfo userGroupInfo)
+        {
+            DbParameter[] parms = 
+					{
+						DbHelper.MakeInParam("@Radminid",(DbType)SqlDbType.Int,4,userGroupInfo.ug_pg_id),
+						DbHelper.MakeInParam("@Grouptitle",(DbType)SqlDbType.VarChar,200, Utils.RemoveFontTag(userGroupInfo.ug_name)),
+						DbHelper.MakeInParam("@Creditshigher",(DbType)SqlDbType.Int,4,userGroupInfo.ug_scorehight),
+						DbHelper.MakeInParam("@Creditslower",(DbType)SqlDbType.Int,4, userGroupInfo.ug_scorelow),
+						DbHelper.MakeInParam("@Stars",(DbType)SqlDbType.Int,4,userGroupInfo.Stars),
+						DbHelper.MakeInParam("@Color",(DbType)SqlDbType.Char,7,userGroupInfo.ug_color),
+						DbHelper.MakeInParam("@Groupavatar",(DbType)SqlDbType.NVarChar,60,userGroupInfo.ug_logo),
+						DbHelper.MakeInParam("@Readaccess",(DbType)SqlDbType.Int,4,userGroupInfo.ug_readaccess),
+                        DbHelper.MakeInParam("@Allowcommunity",(DbType)SqlDbType.Int,4,userGroupInfo.ug_allowcommunity),
+						DbHelper.MakeInParam("@Allowvisit",(DbType)SqlDbType.Int,4,userGroupInfo.ug_allowvisit),
+						DbHelper.MakeInParam("@Allowpost",(DbType)SqlDbType.Int,4,userGroupInfo.Allowpost),
+						DbHelper.MakeInParam("@Allowreply",(DbType)SqlDbType.Int,4,userGroupInfo.Allowreply),
+						DbHelper.MakeInParam("@Allowpostpoll",(DbType)SqlDbType.Int,4,userGroupInfo.Allowpostpoll),
+						DbHelper.MakeInParam("@Allowgetattach",(DbType)SqlDbType.Int,4,userGroupInfo.ug_allowdown),
+						DbHelper.MakeInParam("@Allowpostattach",(DbType)SqlDbType.Int,4,userGroupInfo.Allowpostattach),
+						DbHelper.MakeInParam("@Allowvote",(DbType)SqlDbType.Int,4,userGroupInfo.Allowvote),
+						DbHelper.MakeInParam("@Allowsearch",(DbType)SqlDbType.Int,4,userGroupInfo.ug_allowsearch),
+						DbHelper.MakeInParam("@Allowavatar",(DbType)SqlDbType.Int,4,userGroupInfo.ug_allowavatar),
+						DbHelper.MakeInParam("@Allowshop",(DbType)SqlDbType.Int,4,userGroupInfo.ug_allowshop),
+						DbHelper.MakeInParam("@Allowinvisible",(DbType)SqlDbType.Int,4,userGroupInfo.ug_allowinvisible),
+						DbHelper.MakeInParam("@Allowsetreadperm",(DbType)SqlDbType.Int,4,userGroupInfo.Allowsetreadperm),
+						DbHelper.MakeInParam("@Allowsetattachperm",(DbType)SqlDbType.Int,4,userGroupInfo.Allowsetattachperm),
+						DbHelper.MakeInParam("@Allowhidecode",(DbType)SqlDbType.Int,4,userGroupInfo.Ug_allowhidecode),
+						DbHelper.MakeInParam("@Allowhtml",(DbType)SqlDbType.Int,4,userGroupInfo.Ug_allowhtml),
+						DbHelper.MakeInParam("@Allowcusbbcode",(DbType)SqlDbType.Int,4,userGroupInfo.Ug_allowcusbbcode),
+						DbHelper.MakeInParam("@Allownickname",(DbType)SqlDbType.Int,4,userGroupInfo.Allownickname),
+						DbHelper.MakeInParam("@Allowviewpro",(DbType)SqlDbType.Int,4,userGroupInfo.Allowviewpro),
+						DbHelper.MakeInParam("@Allowviewstats",(DbType)SqlDbType.Int,4,userGroupInfo.Allowviewstats),
+						DbHelper.MakeInParam("@Disableperiodctrl",(DbType)SqlDbType.Int,4,userGroupInfo.Disableperiodctrl),
+						DbHelper.MakeInParam("@Reasonpm",(DbType)SqlDbType.Int,4,userGroupInfo.Reasonpm),		
+						DbHelper.MakeInParam("@Maxpmnum",(DbType)SqlDbType.SmallInt,2,userGroupInfo.Maxpmnum),
+						DbHelper.MakeInParam("@Maxsigsize",(DbType)SqlDbType.SmallInt,2,userGroupInfo.ug_maxsigsize),
+						DbHelper.MakeInParam("@Maxattachsize",(DbType)SqlDbType.Int,4,userGroupInfo.Ug_maxattachsize),
+						DbHelper.MakeInParam("@Maxsizeperday",(DbType)SqlDbType.Int,4,userGroupInfo.Ug_maxsizeperday),
+						DbHelper.MakeInParam("@Attachextensions",(DbType)SqlDbType.Char,100,userGroupInfo.ug_attachextensions),
+                        DbHelper.MakeInParam("@Maxspaceattachsize",(DbType)SqlDbType.Int,4,userGroupInfo.ug_maxspaceattachsize),
+                        DbHelper.MakeInParam("@Maxspacephotosize",(DbType)SqlDbType.Int,4,userGroupInfo.ug_maxspacephotosize)
+					};
+
+            string commandText = string.Format("INSERT INTO [{0}userGroup]  ([ug_pg_id],[ug_name],[ug_scorehight],[ug_scorelow],[stars] ,[ug_color],[ug_logo], " +
+                                                "[ug_readaccess],[ug_allowcommunity],[ug_allowvisit],[allowpost],[allowreply],[allowpostpoll], [ug_allowdown]," +
+                                                "[allowpostattach],[allowvote],[ug_allowsearch],[ug_allowavatar],[ug_allowshop],[ug_allowinvisible]," +
+                                                "[allowsetreadperm],[[allowsetattachperm],[Ug_allowhidecode],[Ug_allowhtml],[Ug_allowcusbbcode]," +
+                                                "[allownickname],[allowviewpro],[allowviewstats],[disableperiodctrl],[reasonpm],[maxpmnum],[ug_maxsigsize]," +
+                                                "[Ug_maxattachsize],[Ug_maxsizeperday],[ug_attachextensions],[ug_maxspaceattachsize],[ug_maxspacephotosize]) VALUES(" +
+                                                "@Radminid,@Grouptitle,@Creditshigher,@Creditslower,@Stars,@Color,@Groupavatar,@Readaccess,@Allowcommunity,@Allowvisit,@Allowpost," +
+                                                "@Allowreply,@Allowpostpoll,@Allowgetattach,@Allowpostattach,@Allowvote,@Allowsearch,@Allowavatar,@Allowshop," +
+                                                "@Allowinvisible,@Allowsetreadperm,@Allowsetattachperm,@Allowhidecode,@Allowhtml,@Allowcusbbcode,@Allownickname," +
+                                                "@Allowviewpro,@Allowviewstats,@Disableperiodctrl,@Reasonpm,@Maxpmnum,@Maxsigsize,@Maxattachsize," +
+                                                "@Maxsizeperday,@Attachextensions,@Maxspaceattachsize,@Maxspacephotosize)",
+                                                 BaseConfigs.GetTablePrefix);
+
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
         /// <summary>
         /// 获取用户组列表
         /// </summary>

@@ -12,6 +12,15 @@ namespace SAS.Data.DataProvider
     public class UserGroups
     {
         /// <summary>
+        /// 创建用户组信息
+        /// </summary>
+        /// <param name="userGroupInfo">用户组信息</param>
+        public static void CreateUserGroup(UserGroupInfo userGroupInfo)
+        {
+            DatabaseProvider.GetInstance().AddUserGroup(userGroupInfo);
+        }
+
+        /// <summary>
         /// 获得用户组数据
         /// </summary>
         /// <returns>用户组数据</returns>
