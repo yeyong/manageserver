@@ -481,6 +481,12 @@ namespace SAS.Data
         #region 用户组usergroup基本操作
 
         /// <summary>
+        /// 创建用户组信息
+        /// </summary>
+        /// <param name="userGroupInfo">用户组信息</param>
+        void AddUserGroup(UserGroupInfo userGroupInfo);
+
+        /// <summary>
         /// 获取用户组列表
         /// </summary>
         /// <returns></returns>
