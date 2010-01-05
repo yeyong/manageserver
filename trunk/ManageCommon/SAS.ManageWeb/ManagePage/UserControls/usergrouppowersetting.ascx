@@ -99,8 +99,8 @@
                     <td style="width: 110px">其它权限:</td>
                     <td>
                         <cc1:CheckBoxList ID="usergroupright" runat="server" RepeatColumns="3" Font-Size="12px">
-                            <asp:ListItem Value="allowvisit">是否允许访问论坛</asp:ListItem>
-                            <asp:ListItem Value="allowpost">是否允许发帖</asp:ListItem>
+                            <asp:ListItem Value="allowvisit">是否允许访问网站</asp:ListItem>
+                            <asp:ListItem Value="allowpost">是否允许发新主题</asp:ListItem>
                             <asp:ListItem Value="allowreply">是否允许回复</asp:ListItem>
                             <asp:ListItem Value="allowpostpoll">是否允许发起投票</asp:ListItem>
                             <asp:ListItem Value="allowvote">是否允许参与投票</asp:ListItem>
@@ -109,15 +109,10 @@
                             <asp:ListItem Value="allowsetreadperm">是否允许设置主题阅读积分权限</asp:ListItem>
                             <asp:ListItem Value="allowsetattachperm">是否允许设置附件阅读积分限制</asp:ListItem>
                             <asp:ListItem Value="allowhidecode">是否允许使用hide代码</asp:ListItem>
-                            <asp:ListItem Value="allowcusbbcode">是否允许使用Discuz!NT代码</asp:ListItem>
-                            <asp:ListItem Value="allowsigbbcode">签名是否支持Discuz!NT代码</asp:ListItem>
-                            <asp:ListItem Value="allowsigimgcode">签名是否支持图片代码</asp:ListItem>
+                            <asp:ListItem Value="allowcusbbcode">是否允许使用bbcode</asp:ListItem>
                             <asp:ListItem Value="allowviewpro">是否允许查看用户资料</asp:ListItem>
-                            <asp:ListItem Value="disableperiodctrl">是否不受时间段限制</asp:ListItem>
-                            <asp:ListItem Value="allowdebate">是否允许辩论</asp:ListItem>
-                            <asp:ListItem Value="allowbonus">是否允许悬赏</asp:ListItem>
-                            <asp:ListItem Value="allowviewstats">是否允许查看统计数据</asp:ListItem>
-                            <asp:ListItem Value="allowdiggs">是否允许辩论支持</asp:ListItem>
+                            <asp:ListItem Value="disableperiodctrl">是否不受时间段限制</asp:ListItem>                            
+                            <asp:ListItem Value="allowviewstats">是否允许查看统计数据</asp:ListItem>                            
                             <asp:ListItem Value="allowhtml">是否允许HTML</asp:ListItem>
                             <asp:ListItem Value="allowtrad">是否允许交易</asp:ListItem>
                         </cc1:CheckBoxList>
