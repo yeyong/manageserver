@@ -49,6 +49,7 @@ namespace SAS.Data.DataProvider
                 info.ug_allowshop = TypeConverter.StrToInt(dr["ug_allowshop"].ToString());
                 info.ug_allowinvisible = TypeConverter.StrToInt(dr["ug_allowinvisible"].ToString());
                 info.Ug_allowhidecode = TypeConverter.StrToInt(dr["ug_allowhidecode"].ToString());
+                info.Ug_allowhtml = TypeConverter.StrToInt(dr["ug_allowhtml"].ToString());
                 info.Ug_maxattachsize = TypeConverter.StrToInt(dr["ug_maxattachsize"].ToString());
                 info.Ug_maxsizeperday = TypeConverter.StrToInt(dr["ug_maxsizeperday"].ToString());
                 info.ug_attachextensions = dr["ug_attachextensions"].ToString();

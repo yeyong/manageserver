@@ -46,13 +46,14 @@ namespace SAS.ManageWeb.ManagePage
             if (usergroupinfo.Ug_allowcusbbcode == 1) usergroupright.Items[10].Selected = true; //是否允许使用Discuz!NT代码
             //if (usergroupinfo.Allowsigbbcode == 1) usergroupright.Items[11].Selected = true; //签名是否支持Discuz!NT代码
             //if (usergroupinfo.Allowsigimgcode == 1) usergroupright.Items[12].Selected = true; //签名是否支持图片代码
-            if (usergroupinfo.Allowviewpro == 1) usergroupright.Items[13].Selected = true; //是否允许查看用户资料
-            if (usergroupinfo.Disableperiodctrl == 1) usergroupright.Items[14].Selected = true; //是否不受时间段限制
+            if (usergroupinfo.Allowviewpro == 1) usergroupright.Items[11].Selected = true; //是否允许查看用户资料
+            if (usergroupinfo.Disableperiodctrl == 1) usergroupright.Items[12].Selected = true; //是否不受时间段限制
             //if (usergroupinfo.Allowdebate == 1) usergroupright.Items[15].Selected = true; //是否允许辩论
             //if (usergroupinfo.Allowbonus == 1) usergroupright.Items[16].Selected = true; //是否允许悬赏
-            if (usergroupinfo.Allowviewstats == 1) usergroupright.Items[17].Selected = true; //是否允许查看统计数据
+            if (usergroupinfo.Allowviewstats == 1) usergroupright.Items[13].Selected = true; //是否允许查看统计数据
             //if (usergroupinfo.Allowdiggs == 1) usergroupright.Items[18].Selected = true; //是否允许辩论支持
-            if (usergroupinfo.Ug_allowhtml == 1) usergroupright.Items[19].Selected = true; //是否允许html
+            if (usergroupinfo.Ug_allowhtml == 1) usergroupright.Items[14].Selected = true; //是否允许html
+            if (usergroupinfo.ug_allowshop == 1) usergroupright.Items[15].Selected = true; //是否允许交易
 
             //if (MallPluginProvider.GetInstance() != null && usergroupinfo.Allowtrade == 1) usergroupright.Items[usergroupright.Items.Count - 1].Selected = true; //是否允许交易
 
@@ -102,8 +103,8 @@ namespace SAS.ManageWeb.ManagePage
             usergroupinfo.Ug_allowcusbbcode = usergroupright.Items[10].Selected ? 1 : 0; //是否允许使用Discuz!NT代码
             //usergroupinfo.Allowsigbbcode = usergroupright.Items[11].Selected ? 1 : 0; //签名是否支持Discuz!NT代码
             //usergroupinfo.Allowsigimgcode = usergroupright.Items[12].Selected ? 1 : 0; //签名是否支持图片代码
-            usergroupinfo.Allowviewpro = usergroupright.Items[13].Selected ? 1 : 0; //是否允许查看用户资料
-            usergroupinfo.Disableperiodctrl = usergroupright.Items[14].Selected ? 1 : 0; //是否不受时间段限制
+            usergroupinfo.Allowviewpro = usergroupright.Items[11].Selected ? 1 : 0; //是否允许查看用户资料
+            usergroupinfo.Disableperiodctrl = usergroupright.Items[12].Selected ? 1 : 0; //是否不受时间段限制
 
             //usergroupinfo.Allowdebate = usergroupright.Items[15].Selected ? 1 : 0; //是否允许辩论
             //usergroupinfo.Allowbonus = usergroupright.Items[16].Selected ? 1 : 0; //是否允许悬赏
@@ -118,10 +119,10 @@ namespace SAS.ManageWeb.ManagePage
             //    usergroupinfo.Minbonusprice = 0;
             //    usergroupinfo.Maxbonusprice = 0;
             //}
-            usergroupinfo.Allowviewstats = usergroupright.Items[17].Selected ? 1 : 0; //是否允许查看统计数据
+            usergroupinfo.Allowviewstats = usergroupright.Items[13].Selected ? 1 : 0; //是否允许查看统计数据
             //usergroupinfo.Allowdiggs = usergroupright.Items[18].Selected ? 1 : 0;   //是否允许辩论支持
-            usergroupinfo.Ug_allowhtml = usergroupright.Items[19].Selected ? 1 : 0;    //是否允许html
-
+            usergroupinfo.Ug_allowhtml = usergroupright.Items[14].Selected ? 1 : 0;    //是否允许html
+            usergroupinfo.ug_allowshop = usergroupright.Items[15].Selected ? 1 : 0;    //是否允许交易
             //if (MallPluginProvider.GetInstance() != null)
             //{
             //    usergroupinfo.Allowtrade = usergroupright.Items[usergroupright.Items.Count - 1].Selected ? 1 : 0;   //是否允许交易

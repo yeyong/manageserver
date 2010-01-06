@@ -79,20 +79,20 @@ namespace SAS.ManageWeb.ManagePage
                 admingroupright.SelectedIndex = -1;
                 admingroupright.Items[0].Selected = adminGroupInfo.Alloweditpost == 1;
                 //admingroupright.Items[1].Selected = adminGroupInfo.Alloweditpoll == 1;
-                admingroupright.Items[2].Selected = adminGroupInfo.Allowdelpost == 1;
-                admingroupright.Items[3].Selected = adminGroupInfo.Allowmassprune == 1;
-                admingroupright.Items[4].Selected = adminGroupInfo.Allowviewip == 1;
-                admingroupright.Items[5].Selected = adminGroupInfo.Allowedituser == 1;
-                admingroupright.Items[6].Selected = adminGroupInfo.Allowviewlog == 1;
+                admingroupright.Items[1].Selected = adminGroupInfo.Allowdelpost == 1;
+                admingroupright.Items[2].Selected = adminGroupInfo.Allowmassprune == 1;
+                admingroupright.Items[3].Selected = adminGroupInfo.Allowviewip == 1;
+                admingroupright.Items[4].Selected = adminGroupInfo.Allowedituser == 1;
+                admingroupright.Items[5].Selected = adminGroupInfo.Allowviewlog == 1;
                 //admingroupright.Items[7].Selected = adminGroupInfo.Disablepostctrl == 1;
-                admingroupright.Items[8].Selected = adminGroupInfo.Allowviewrealname == 1;
-                admingroupright.Items[9].Selected = adminGroupInfo.Allowbanuser == 1;
-                admingroupright.Items[10].Selected = adminGroupInfo.Allowbanip == 1;
-                admingroupright.Items[11].Selected = adminGroupInfo.Allowmodpost == 1;
-                admingroupright.Items[12].Selected = adminGroupInfo.Allowpostannounce == 1;
-                GeneralConfigInfo configInfo = GeneralConfigs.GetConfig();
-                admingroupright.Items[13].Selected = ("," + configInfo.Reportusergroup + ",").IndexOf("," + groupid + ",") != -1; //是否允许接收举报信息
-                admingroupright.Items[admingroupright.Items.Count - 1].Selected = ("," + configInfo.Photomangegroups + ",").IndexOf("," + groupid + ",") != -1;//是否允许管理图片评论
+                admingroupright.Items[6].Selected = adminGroupInfo.Allowviewrealname == 1;
+                admingroupright.Items[7].Selected = adminGroupInfo.Allowbanuser == 1;
+                admingroupright.Items[8].Selected = adminGroupInfo.Allowbanip == 1;
+                admingroupright.Items[9].Selected = adminGroupInfo.Allowmodpost == 1;
+                admingroupright.Items[10].Selected = adminGroupInfo.Allowpostannounce == 1;
+                //GeneralConfigInfo configInfo = GeneralConfigs.GetConfig();
+                //admingroupright.Items[11].Selected = ("," + configInfo.Reportusergroup + ",").IndexOf("," + groupid + ",") != -1; //是否允许接收举报信息
+                //admingroupright.Items[admingroupright.Items.Count - 1].Selected = ("," + configInfo.Photomangegroups + ",").IndexOf("," + groupid + ",") != -1;//是否允许管理图片评论
                 if (adminGroupInfo.Allowstickthread.ToString() != "") allowstickthread.SelectedValue = adminGroupInfo.Allowstickthread.ToString();
 
             }
@@ -206,23 +206,23 @@ namespace SAS.ManageWeb.ManagePage
                     //adminGroupInfo.Alloweditpoll = BoolToByte(admingroupright.Items[1].Selected);
                     adminGroupInfo.Allowstickthread = (byte)Convert.ToInt16(allowstickthread.SelectedValue);
                     adminGroupInfo.Allowmodpost = 0;
-                    adminGroupInfo.Allowdelpost = BoolToByte(admingroupright.Items[2].Selected);
-                    adminGroupInfo.Allowmassprune = BoolToByte(admingroupright.Items[3].Selected);
+                    adminGroupInfo.Allowdelpost = BoolToByte(admingroupright.Items[1].Selected);
+                    adminGroupInfo.Allowmassprune = BoolToByte(admingroupright.Items[2].Selected);
                     //adminGroupInfo.Allowrefund = 0;
                     adminGroupInfo.Allowcensorword = 0; ;
-                    adminGroupInfo.Allowviewip = BoolToByte(admingroupright.Items[4].Selected);
+                    adminGroupInfo.Allowviewip = BoolToByte(admingroupright.Items[3].Selected);
                     adminGroupInfo.Allowbanip = 0;
-                    adminGroupInfo.Allowedituser = BoolToByte(admingroupright.Items[5].Selected);
+                    adminGroupInfo.Allowedituser = BoolToByte(admingroupright.Items[4].Selected);
                     adminGroupInfo.Allowmoduser = 0;
                     adminGroupInfo.Allowbanuser = 0;
                     adminGroupInfo.Allowpostannounce = 0;
-                    adminGroupInfo.Allowviewlog = BoolToByte(admingroupright.Items[6].Selected);
+                    adminGroupInfo.Allowviewlog = BoolToByte(admingroupright.Items[5].Selected);
                     //adminGroupInfo.Disablepostctrl = BoolToByte(admingroupright.Items[7].Selected);
-                    adminGroupInfo.Allowviewrealname = BoolToByte(admingroupright.Items[8].Selected);
-                    adminGroupInfo.Allowbanuser = BoolToByte(admingroupright.Items[9].Selected);
-                    adminGroupInfo.Allowbanip = BoolToByte(admingroupright.Items[10].Selected);
-                    adminGroupInfo.Allowmodpost = BoolToByte(admingroupright.Items[11].Selected);
-                    adminGroupInfo.Allowpostannounce = BoolToByte(admingroupright.Items[12].Selected);
+                    adminGroupInfo.Allowviewrealname = BoolToByte(admingroupright.Items[6].Selected);
+                    adminGroupInfo.Allowbanuser = BoolToByte(admingroupright.Items[7].Selected);
+                    adminGroupInfo.Allowbanip = BoolToByte(admingroupright.Items[8].Selected);
+                    adminGroupInfo.Allowmodpost = BoolToByte(admingroupright.Items[9].Selected);
+                    adminGroupInfo.Allowpostannounce = BoolToByte(admingroupright.Items[10].Selected);
 
                     SAS.Logic.AdminGroups.SetAdminGroupInfo(adminGroupInfo, userGroupInfo.ug_id);
                     userGroupInfo.ug_pg_id = selectradminid;
@@ -254,78 +254,78 @@ namespace SAS.ManageWeb.ManagePage
                 {
                     #region 是否允许接收举报信息和管理图片评论
                     GeneralConfigInfo configInfo = GeneralConfigs.GetConfig();
-                    //是否允许接收举报信息
-                    int groupid = userGroupInfo.ug_id;
-                    if (admingroupright.Items[13].Selected)
-                    {
-                        if (("," + configInfo.Reportusergroup + ",").IndexOf("," + groupid + ",") == -1)
-                        {
-                            if (configInfo.Reportusergroup == "")
-                            {
-                                configInfo.Reportusergroup = groupid.ToString();
-                            }
-                            else
-                            {
-                                configInfo.Reportusergroup += "," + groupid.ToString();
-                            }
-                        }
-                    }
-                    else
-                    {
-                        string tempstr = "";
-                        foreach (string report in configInfo.Reportusergroup.Split(','))
-                        {
-                            if (report != groupid.ToString())
-                            {
-                                if (tempstr == "")
-                                {
-                                    tempstr = report;
-                                }
-                                else
-                                {
-                                    tempstr += "," + report;
-                                }
-                            }
-                        }
-                        configInfo.Reportusergroup = tempstr;
-                    }
-                    //是否允许管理图片评论
-                    if (AlbumPluginProvider.GetInstance() != null)
-                    {
-                        if (admingroupright.Items[admingroupright.Items.Count - 1].Selected)
-                        {
-                            if (("," + configInfo.Photomangegroups + ",").IndexOf("," + groupid + ",") == -1)
-                            {
-                                if (configInfo.Photomangegroups == "")
-                                {
-                                    configInfo.Photomangegroups = groupid.ToString();
-                                }
-                                else
-                                {
-                                    configInfo.Photomangegroups += "," + groupid.ToString();
-                                }
-                            }
-                        }
-                        else
-                        {
-                            string tempstr = "";
-                            foreach (string photomangegroup in configInfo.Photomangegroups.Split(','))
-                            {
-                                if (photomangegroup != groupid.ToString())
-                                {
-                                    if (tempstr == "")
-                                    {
-                                        tempstr = photomangegroup;
-                                    }
-                                    else
-                                    {
-                                        tempstr += "," + photomangegroup;
-                                    }
-                                }
-                            }
-                            configInfo.Photomangegroups = tempstr;
-                        }
-                    }
+                    ////是否允许接收举报信息
+                    //int groupid = userGroupInfo.ug_id;
+                    //if (admingroupright.Items[13].Selected)
+                    //{
+                    //    if (("," + configInfo.Reportusergroup + ",").IndexOf("," + groupid + ",") == -1)
+                    //    {
+                    //        if (configInfo.Reportusergroup == "")
+                    //        {
+                    //            configInfo.Reportusergroup = groupid.ToString();
+                    //        }
+                    //        else
+                    //        {
+                    //            configInfo.Reportusergroup += "," + groupid.ToString();
+                    //        }
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    string tempstr = "";
+                    //    foreach (string report in configInfo.Reportusergroup.Split(','))
+                    //    {
+                    //        if (report != groupid.ToString())
+                    //        {
+                    //            if (tempstr == "")
+                    //            {
+                    //                tempstr = report;
+                    //            }
+                    //            else
+                    //            {
+                    //                tempstr += "," + report;
+                    //            }
+                    //        }
+                    //    }
+                    //    configInfo.Reportusergroup = tempstr;
+                    //}
+                    ////是否允许管理图片评论
+                    //if (AlbumPluginProvider.GetInstance() != null)
+                    //{
+                    //    if (admingroupright.Items[admingroupright.Items.Count - 1].Selected)
+                    //    {
+                    //        if (("," + configInfo.Photomangegroups + ",").IndexOf("," + groupid + ",") == -1)
+                    //        {
+                    //            if (configInfo.Photomangegroups == "")
+                    //            {
+                    //                configInfo.Photomangegroups = groupid.ToString();
+                    //            }
+                    //            else
+                    //            {
+                    //                configInfo.Photomangegroups += "," + groupid.ToString();
+                    //            }
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //        string tempstr = "";
+                    //        foreach (string photomangegroup in configInfo.Photomangegroups.Split(','))
+                    //        {
+                    //            if (photomangegroup != groupid.ToString())
+                    //            {
+                    //                if (tempstr == "")
+                    //                {
+                    //                    tempstr = photomangegroup;
+                    //                }
+                    //                else
+                    //                {
+                    //                    tempstr += "," + photomangegroup;
+                    //                }
+                    //            }
+                    //        }
+                    //        configInfo.Photomangegroups = tempstr;
+                    //    }
+                    //}
 
                     GeneralConfigs.Serialiaze(configInfo, Server.MapPath("../../config/general.config"));
                     #endregion
@@ -376,13 +376,17 @@ namespace SAS.ManageWeb.ManagePage
                 admingroupright.SelectedIndex = -1;
                 admingroupright.Items[0].Selected = radminUserGroup.Alloweditpost == 1;
                 //admingroupright.Items[1].Selected = radminUserGroup.Alloweditpoll == 1;
-                admingroupright.Items[2].Selected = radminUserGroup.Allowdelpost == 1;
-                admingroupright.Items[3].Selected = radminUserGroup.Allowmassprune == 1;
-                admingroupright.Items[4].Selected = radminUserGroup.Allowviewip == 1;
-                admingroupright.Items[5].Selected = radminUserGroup.Allowedituser == 1;
-                admingroupright.Items[6].Selected = radminUserGroup.Allowviewlog == 1;
+                admingroupright.Items[1].Selected = radminUserGroup.Allowdelpost == 1;
+                admingroupright.Items[2].Selected = radminUserGroup.Allowmassprune == 1;
+                admingroupright.Items[3].Selected = radminUserGroup.Allowviewip == 1;
+                admingroupright.Items[4].Selected = radminUserGroup.Allowedituser == 1;
+                admingroupright.Items[5].Selected = radminUserGroup.Allowviewlog == 1;
                 //admingroupright.Items[7].Selected = radminUserGroup.Disablepostctrl == 1;
-                admingroupright.Items[8].Selected = radminUserGroup.Allowviewrealname == 1;
+                admingroupright.Items[6].Selected = radminUserGroup.Allowviewrealname == 1;
+                admingroupright.Items[7].Selected = radminUserGroup.Allowbanuser == 1;
+                admingroupright.Items[8].Selected = radminUserGroup.Allowbanip == 1;
+                admingroupright.Items[9].Selected = radminUserGroup.Allowmodpost == 1;
+                admingroupright.Items[10].Selected = radminUserGroup.Allowpostannounce == 1;
             }
 
             if (radminid.SelectedValue == "1")
