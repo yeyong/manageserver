@@ -302,20 +302,20 @@
                                                 <td>
                                                     <cc1:CheckBoxList ID="admingroupright" runat="server" Width="500px" Font-Size="12px">
                                                         <asp:ListItem Value="alloweditpost">允许编辑帖子</asp:ListItem>
-                                                        <asp:ListItem Value="alloweditpoll">允许编辑投票</asp:ListItem>
+                                                        <%--<asp:ListItem Value="alloweditpoll">允许编辑投票</asp:ListItem>--%>
                                                         <asp:ListItem Value="allowdelpost">允许删除帖子</asp:ListItem>
                                                         <asp:ListItem Value="allowmassprune">允许批量删除</asp:ListItem>
                                                         <asp:ListItem Value="allowviewip">允许查看IP</asp:ListItem>
                                                         <asp:ListItem Value="allowedituser">允许编辑用户</asp:ListItem>
                                                         <asp:ListItem Value="allowviewlog">允许查看论坛运行记录</asp:ListItem>
-                                                        <asp:ListItem Value="disablepostctrl">发帖不受审核、过滤、灌水等限制</asp:ListItem>
+                                                        <%--<asp:ListItem Value="disablepostctrl">发帖不受审核、过滤、灌水等限制</asp:ListItem>--%>
                                                         <asp:ListItem Value="allowviewrealname">允许查看用户实名</asp:ListItem>
                                                         <asp:ListItem Value="allowbanuser">允许禁止用户</asp:ListItem>
                                                         <asp:ListItem Value="allowbanip">允许禁止IP</asp:ListItem>
                                                         <asp:ListItem Value="allowmodpost">允许审核帖</asp:ListItem>
                                                         <asp:ListItem Value="allowpostannounce">允许发布公告</asp:ListItem>
-									                    <asp:ListItem Value="allowreportusergroup">是否允许接收举报信息</asp:ListItem>
-									                    <asp:ListItem Value="allowphotomangegroupsp">是否允许管理图片评论</asp:ListItem>
+									                    <%--<asp:ListItem Value="allowreportusergroup">是否允许接收举报信息</asp:ListItem>
+									                    <asp:ListItem Value="allowphotomangegroupsp">是否允许管理图片评论</asp:ListItem>--%>
                                                     </cc1:CheckBoxList>
                                                 </td>
                                             </tr>
