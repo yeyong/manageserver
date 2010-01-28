@@ -56,6 +56,8 @@ namespace SAS.Web.UI
                 case "smilies":
                     GetSmilies();
                     break;
+                case "getprovice":
+                    break;
             }
         }
 
