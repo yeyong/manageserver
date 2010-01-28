@@ -37,6 +37,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="company\global_addcompany.aspx.cs">
+      <DependentUpon>global_addcompany.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="company\global_addcompany.aspx.designer.cs">
+      <DependentUpon>global_addcompany.aspx.cs</DependentUpon>
+    </Compile>
     <Compile Include="forum\forum_addforums.aspx.cs">
       <DependentUpon>forum_addforums.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -289,6 +296,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="company\global_addcompany.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="forum\forum_addforums.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
@@ -802,7 +812,6 @@
     <Content Include="sirius\sirius_addteam.aspx">
     </Content>
     <Content Include="sirius\sirius_editteam.aspx">
-      <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="sirius\sirius_manageteam.aspx">
     </Content>
