@@ -1830,5 +1830,23 @@ namespace SAS.Data
         /// </summary>
         /// <returns></returns>
         IDataReader GetCustomEditButtonList();
+
+        /// <summary>
+        /// 获取省份信息集合
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetProvince();
+
+        /// <summary>
+        /// 获取城市信息集合
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetCity();
+
+        /// <summary>
+        /// 获取地区信息集合
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetDistrict();
     }
 }

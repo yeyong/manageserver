@@ -11,9 +11,10 @@
       
     function CreateEditor()
     {
-        dntEditor = new DNTeditor('<% = DataTextarea.ClientID%>', '80%', '250', document.getElementById('<% = DataTextarea.ClientID%>').value);
+        dntEditor = new DNTeditor('<% = DataTextarea.ClientID%>', '80%', '200', document.getElementById('<% = DataTextarea.ClientID%>').value);
         dntEditor.BasePath = '<%=SAS.Config.BaseConfigs.GetSitePath %>';
         dntEditor.ReplaceTextarea();
+        document.getElementById("<% = DataTextarea.ClientID%>___Frame").height = "150px";
     }
 
     function PrepareSave()

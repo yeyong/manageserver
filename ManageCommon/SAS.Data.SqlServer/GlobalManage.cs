@@ -1932,5 +1932,36 @@ namespace SAS.Data.SqlServer
             string commandText = string.Format("SELECT {0} FROM [{1}bbcodes] WHERE [available] = 1", DbFields.BBCODES, BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteReader(CommandType.Text, commandText);
         }
+
+        /// <summary>
+        /// 获取省份信息集合
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetProvince()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}Province]", DbFields.PROVINCE, BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 获取城市信息集合
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetCity()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}City]", DbFields.CITY, BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 获取地区信息集合
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetDistrict()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}District]", DbFields.DISTRICT, BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
     }
 }
