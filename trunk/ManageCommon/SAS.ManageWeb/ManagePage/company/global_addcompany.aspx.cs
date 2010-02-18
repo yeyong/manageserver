@@ -20,8 +20,8 @@ namespace SAS.ManageWeb.ManagePage
         private void InitializeComponent()
         {
             this.TabControl1.InitTabPage();
-            //this.SubmitAdd.Click += new EventHandler(this.SubmitAdd_Click);
-            
+            //provice.InnerText = areas.returnProvinces();
+            //this.SubmitAdd.Click += new EventHandler(this.SubmitAdd_Click);            
         }
 
         #endregion        

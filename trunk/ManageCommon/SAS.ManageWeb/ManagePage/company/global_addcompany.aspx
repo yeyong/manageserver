@@ -1,13 +1,12 @@
-﻿<%@ Page Language="C#" CodeBehind="global_addcompany.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.global_addcompany" %>
+﻿<%@ Page Language="C#" CodeBehind="global_addcompany.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.global_addcompany"%>
 <%@ Register TagPrefix="uc1" TagName="TextareaResize" Src="../UserControls/TextareaResize.ascx" %>
 <%@ Register TagPrefix="cc2" Namespace="SAS.Control" Assembly="SAS.Control" %>
 <%@ Register TagPrefix="cc3" Namespace="SAS.Control" Assembly="SAS.Control" %>
 <%@ Register TagPrefix="uc2" TagName="PageInfo" Src="../UserControls/PageInfo.ascx" %>
-<%@ Register TagPrefix="uc3" TagName="OnlineEditor" Src="../UserControls/onlineeditor.ascx" %>
-
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <html>
 <head>
-     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
     <title>天狼星工作室综合管理后台-添加商家</title>
     <link href="../styles/datagrid.css" type="text/css" rel="stylesheet" />
     <link href="../styles/tab.css" type="text/css" rel="stylesheet" />
@@ -24,9 +23,15 @@
             background-color: #F5F7F8;
         }
     </style>
-
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/jQueryFunc.js"></script>
     <script type="text/javascript" src="../js/common.js"></script>
     <script type="text/javascript" src="../js/modalpopup.js"></script>
+    <script type="text/javascript" language="javascript">
+        jQuery(document).ready(function() {
+            jQuery("#areas").ProvinceCity();
+        });
+    </script>
     <meta http-equiv="X-UA-Compatible" content="IE=7" />
 </head>
 <body>
@@ -52,34 +57,6 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>企业业务类型:</td>
-                            <td>
-                                <cc2:DropDownList runat="server" ID="enType">
-                                <asp:ListItem Selected="True" Text="生产商" Value="0"></asp:ListItem>
-                                <asp:ListItem Text="代理经销商" Value="1"></asp:ListItem>
-                                <asp:ListItem Text="个人经销商" Value="2"></asp:ListItem>
-                                <asp:ListItem Text="门店" Value="3"></asp:ListItem>
-                                <asp:ListItem Text="原料商" Value="4"></asp:ListItem>
-                                <asp:ListItem Text="分销商" Value="5"></asp:ListItem>
-                                <asp:ListItem Text="服务站" Value="6"></asp:ListItem>
-                                <asp:ListItem Text="其他" Value="7"></asp:ListItem>
-                                </cc2:DropDownList>
-                            </td>
-                        </tr>
-                         <tr>
-                            <td>企业经济类型:</td>
-                            <td>
-                                <cc2:DropDownList runat="server" ID="enco">
-                                <asp:ListItem Selected="True" Text="有限责任公司" Value="0"></asp:ListItem>
-                                <asp:ListItem Text="股份有限公司" Value="1"></asp:ListItem>
-                                <asp:ListItem Text="国营公司" Value="2"></asp:ListItem>
-                                <asp:ListItem Text="集团公司" Value="3"></asp:ListItem>
-                                <asp:ListItem Text="合资企业" Value="4"></asp:ListItem>
-                                <asp:ListItem Text="外企" Value="5"></asp:ListItem>
-                                </cc2:DropDownList>
-                            </td>
-                        </tr>
-                        <tr>
                             <td>
                                 是否启用:
                             </td>
@@ -91,11 +68,81 @@
                             </td>
                         </tr>
                         <tr>
+                            <td>
+                                企业法人:
+                            </td>
+                            <td>
+                                <cc2:TextBox id="encorp" runat="server" CanBeNull="可为空" RequiredFieldType="暂无校验" IsReplaceInvertedComma="false" Size="10" MaxLength="20">
+                                </cc2:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                主要联系人:
+                            </td>
+                            <td>
+                                <cc2:TextBox id="encontact" runat="server" CanBeNull="可为空" RequiredFieldType="暂无校验" IsReplaceInvertedComma="false" Size="10" MaxLength="20">
+                                </cc2:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                固定电话:
+                            </td>
+                            <td>
+                                <cc2:TextBox id="enphone" runat="server" CanBeNull="可为空" RequiredFieldType="固定电话" IsReplaceInvertedComma="false" Size="20">
+                                </cc2:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                移动电话:
+                            </td>
+                            <td>
+                                <cc2:TextBox id="enmobile" runat="server" CanBeNull="可为空" RequiredFieldType="移动手机" IsReplaceInvertedComma="false" Size="20">
+                                </cc2:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                传真:
+                            </td>
+                            <td>
+                                <cc2:TextBox id="enfax" runat="server" CanBeNull="可为空" RequiredFieldType="固定电话" IsReplaceInvertedComma="false" Size="20">
+                                </cc2:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                电子邮箱:
+                            </td>
+                            <td>
+                                <cc2:TextBox id="enemail" runat="server" CanBeNull="可为空" RequiredFieldType="电子邮箱" IsReplaceInvertedComma="false" Size="40">
+                                </cc2:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                企业网址:
+                            </td>
+                            <td>
+                                <cc2:TextBox id="enweb" runat="server" CanBeNull="可为空" RequiredFieldType="网页地址" IsReplaceInvertedComma="false" Size="40">
+                                </cc2:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
                             <td>所在城市:</td>
                             <td>
-                                <select id="country" name="country"><option value="1">中国</option></select>
-                                <select id="provice" name="country"><option value="1">中国</option></select>
-                                <select id="city" name="country"><option value="1">中国</option></select>
+                                <div id="areas"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                邮编:
+                            </td>
+                            <td>
+                                <cc2:TextBox id="enpost" runat="server" CanBeNull="可为空" RequiredFieldType="数据校验" IsReplaceInvertedComma="false" Size="10" MaxLength="6">
+                                </cc2:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -104,58 +151,17 @@
                             </td>
                             <td>
                                 <uc1:TextareaResize id="enaddress" runat="server" HintTitle="提示" HintInfo="企业详细地址"
-                                    controlname="TabControl1:tabPage51:moderators" Cols="40" Rows="5">
+                                    controlname="TabControl1:tabPage51:enaddress" Cols="40" Rows="5">
                                 </uc1:TextareaResize>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                团队图片地址:
+                                企业整体概述:
                             </td>
                             <td>
-                                <cc2:TextBox ID="teamImg" runat="server" RequiredFieldType="网页地址" HintInfo="团队展示类图片地址"
-                                    IsReplaceInvertedComma="true" Width="250px" MaxLength="250">
+                                <cc2:TextBox id="endesc" runat="server" CanBeNull="可为空" HintTitle="提示" HintInfo="支持简单HTML" RequiredFieldType="暂无校验" IsReplaceInvertedComma="false" TextMode="MultiLine" width="450px" height="100px">
                                 </cc2:TextBox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 150px">
-                                链接地址:
-                            </td>
-                            <td>
-                                <cc2:TextBox ID="teamurl" runat="server" CanBeNull="必填" RequiredFieldType="网页地址"
-                                    HintInfo="展示平台地址" IsReplaceInvertedComma="false" Width="250px" MaxLength="250">
-                                </cc2:TextBox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                本团队SEO关键词:
-                            </td>
-                            <td>
-                                <cc2:textbox id="seokeywords" runat="server" HintTitle="提示" HintInfo="设置本团队的SEO关键词,用于搜索引擎优化,放在meta的keyword标签中,多个关键字间请用半角逗号&amp;quot,&amp;quot隔开"
-                                    RequiredFieldType="暂无校验" width="450" height="100" TextMode="MultiLine" IsReplaceInvertedComma="false">
-                                </cc2:textbox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                本团队SEO描述:
-                            </td>
-                            <td>
-                                <cc2:textbox id="seodescription" runat="server" HintTitle="提示" HintInfo="设置本团队的SEO描述,用于搜索引擎优化,放在meta的description标签中,多个说明文字间请用半角逗号&amp;quot,&amp;quot隔开"
-                                    RequiredFieldType="暂无校验" width="450" height="100" TextMode="MultiLine" IsReplaceInvertedComma="false">
-                                </cc2:textbox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                团队简述:
-                            </td>
-                            <td>
-                                <cc2:textbox id="teamBio" runat="server" HintTitle="提示" HintInfo="设置本团队基本概述" RequiredFieldType="暂无校验"
-                                    width="450" height="100" TextMode="MultiLine" IsReplaceInvertedComma="false">
-                                </cc2:textbox>
                             </td>
                         </tr>
                     </table>
@@ -163,41 +169,150 @@
             </tr>
             </table>
 			</cc3:TabPage>
-			<cc3:TabPage Caption="扩展信息" ID="tabPage22">
+			<cc3:TabPage Caption="工商注册信息" ID="tabPage22">
+			<uc2:PageInfo id="PageInfo2" runat="server" Icon="Information" Text="请填写在营业执照上的准确注册信息"/>
                 <table cellspacing="0" cellpadding="4" width="100%" align="center">
                     <tr>
                         <td class="panelbox" align="left">
                             <table width="100%">
                                 <tr>
+                                    <td style="width:150px">公司成立时间:</td>
                                     <td>
-                                        团队意义:
-                                    </td>
-                                    <td>
-                                        <cc2:textbox id="content1" runat="server" HintTitle="提示" HintInfo="设置本团队团队意义" RequiredFieldType="暂无校验"
-                                            width="450" height="100" TextMode="MultiLine" IsReplaceInvertedComma="false">
+                                        <cc2:textbox id="enbuilddate" runat="server" RequiredFieldType="日期" IsReplaceInvertedComma="false" Size="20" Text="2009-1-1">
                                         </cc2:textbox>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        团队工作方向和工作内容:
+                                        企业业务类型:
                                     </td>
                                     <td>
-                                        <cc2:textbox id="content2" runat="server" HintTitle="提示" HintInfo="设置本团队团队意义" RequiredFieldType="暂无校验"
-                                            width="450" height="100" TextMode="MultiLine" IsReplaceInvertedComma="false">
-                                        </cc2:textbox>
+                                        <cc2:DropDownList runat="server" ID="enType">
+                                            <asp:ListItem Selected="True" Text="生产商" Value="0"></asp:ListItem>
+                                            <asp:ListItem Text="代理经销商" Value="1"></asp:ListItem>
+                                            <asp:ListItem Text="个人经销商" Value="2"></asp:ListItem>
+                                            <asp:ListItem Text="门店" Value="3"></asp:ListItem>
+                                            <asp:ListItem Text="原料商" Value="4"></asp:ListItem>
+                                            <asp:ListItem Text="分销商" Value="5"></asp:ListItem>
+                                            <asp:ListItem Text="服务站" Value="6"></asp:ListItem>
+                                            <asp:ListItem Text="其他" Value="7"></asp:ListItem>
+                                        </cc2:DropDownList>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        人员职责和基本构成:
+                                        企业经济类型:
                                     </td>
                                     <td>
-                                    <div style="height:280px;overflow:hidden">
-                                        <uc3:OnlineEditor ID="content3" runat="server" controlname="content3" postminchars="0"
-                                            postmaxchars="2000">
-                                        </uc3:OnlineEditor>
-                                    </div>
+                                        <cc2:DropDownList runat="server" ID="enco">
+                                            <asp:ListItem Selected="True" Text="有限责任公司" Value="0"></asp:ListItem>
+                                            <asp:ListItem Text="股份有限公司" Value="1"></asp:ListItem>
+                                            <asp:ListItem Text="国营公司" Value="2"></asp:ListItem>
+                                            <asp:ListItem Text="集团公司" Value="3"></asp:ListItem>
+                                            <asp:ListItem Text="合资企业" Value="4"></asp:ListItem>
+                                            <asp:ListItem Text="外企" Value="5"></asp:ListItem>
+                                        </cc2:DropDownList>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>注册资本:</td>
+                                    <td>
+                                        <cc2:textbox id="regcapital" runat="server" HintTitle="提示" HintInfo="请填写在营业执照上的准确注册资本" RequiredFieldType="金额" IsReplaceInvertedComma="false" Size="20">
+                                        </cc2:textbox>万元
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>注册号:</td>
+                                    <td>
+                                        <cc2:textbox id="regcode" runat="server" HintTitle="提示" HintInfo="请填写在营业执照上的准确注册号" RequiredFieldType="暂无校验" IsReplaceInvertedComma="false" MaxLength="20">
+                                        </cc2:textbox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>注册机关:</td>
+                                    <td>
+                                        <cc2:textbox id="regorgan" runat="server" HintTitle="提示" HintInfo="请填写在营业执照上的准确注册机关" RequiredFieldType="暂无校验" IsReplaceInvertedComma="false" Size="40" MaxLength="20">
+                                        </cc2:textbox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>最近年检时间:</td>
+                                    <td>
+                                        <cc2:textbox id="regyear" runat="server" RequiredFieldType="日期" IsReplaceInvertedComma="false" Size="20" Text="2009-1-1">
+                                        </cc2:textbox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>营业期限:</td>
+                                    <td>
+                                        <cc2:textbox id="Textbox1" runat="server" RequiredFieldType="暂无校验" IsReplaceInvertedComma="false" Size="40">
+                                        </cc2:textbox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>注册地址:</td>
+                                    <td>
+                                        <uc1:TextareaResize id="regaddress" runat="server" HintTitle="提示" HintInfo="请填写在营业执照上的准确注册地址" controlname="TabControl1:tabPage22:regaddress" Cols="40" Rows="5">
+                                        </uc1:TextareaResize>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>主营商品/经营范围:</td>
+                                    <td>
+                                        <uc1:TextareaResize id="enmain" runat="server" HintTitle="提示" HintInfo="请填写在营业执照上的准确注册地址" controlname="TabControl1:tabPage22:enmain" Cols="40" Rows="5">
+                                        </uc1:TextareaResize>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+			</cc3:TabPage>
+			<cc3:TabPage Caption="状态信息" ID="tabPage33">
+			    <uc2:PageInfo id="PageInfo1" runat="server" Icon="Information" Text="设置企业在网站上的相关状态"/>
+                <table cellspacing="0" cellpadding="4" width="100%" align="center">
+                    <tr>
+                        <td class="panelbox" align="left">
+                            <table width="100%">
+                                <tr>
+                                    <td style="width: 150px">
+                                        审批状态:
+                                    </td>
+                                    <td>
+                                        <cc2:RadioButtonList id="enstatus" runat="server" RepeatColumns="3" HintInfo="设置该企业是否通过审批">                                            
+                                            <asp:ListItem Value="1" Text="审批中" Selected="True" onclick="document.getElementById('thereason').style.display = 'none'"></asp:ListItem>
+                                            <asp:ListItem Value="2" Text="审批通过" onclick="document.getElementById('thereason').style.display = 'none'"></asp:ListItem>
+                                            <asp:ListItem Value="0" Text="审批未通过" onclick="document.getElementById('thereason').style.display = 'block'"></asp:ListItem>
+                                        </cc2:RadioButtonList>
+                                    </td>
+                                </tr>
+                                <tr style="display:none" id="thereason">
+                                    <td>未通过原因:</td>
+                                    <td>
+                                        <uc1:TextareaResize id="enreason" runat="server" HintTitle="提示" HintInfo="请详细填写企业为通过审核的原因" controlname="TabControl1:tabPage33:enreason" Cols="40" Rows="5">
+                                        </uc1:TextareaResize>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        企业级别:
+                                    </td>
+                                    <td>
+                                        <cc2:RadioButtonList id="enlevels" runat="server" RepeatColumns="4" HintInfo="设置该企业会员级别">
+                                            <asp:ListItem Value="0" Text="普通级别" Selected="True"></asp:ListItem>
+                                            <asp:ListItem Value="1" Text="会员级别"></asp:ListItem>
+                                            <asp:ListItem Value="2" Text="高级会员"></asp:ListItem>
+                                            <asp:ListItem Value="3" Text="贵宾会员"></asp:ListItem>
+                                        </cc2:RadioButtonList>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        企业信誉度:
+                                    </td>
+                                    <td>
+                                        <cc2:textbox id="encredit" runat="server" RequiredFieldType="数据校验" IsReplaceInvertedComma="false" Size="10">
+                                        </cc2:textbox>
                                     </td>
                                 </tr>
                             </table>
@@ -212,7 +327,7 @@
                 <cc2:Button ID="DeleteUserGroupInf" runat="server" Text=" 删 除 " ButtonImgUrl="../images/del.gif"
                     OnClientClick="if(!confirm('你确认要删除该用户组吗？\n删除后将不能恢复！')) return false;">
                 </cc2:Button>&nbsp;&nbsp;
-                <button type="button" class="ManagerButton" id="Button1" onclick="window.location='sirius_manageteam.aspx';">
+                <button type="button" class="ManagerButton" id="Button1" onclick="window.location='global_editcompany.aspx';">
                     <img src="../images/arrow_undo.gif" />
                     返 回
                 </button>
