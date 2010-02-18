@@ -107,8 +107,13 @@ namespace SAS.Control
                         }
                     case "移动手机":
                         {
-                            RequiredFieldTypeREV.ValidationExpression = (this.ValidationExpression != null) ? this.ValidationExpression : "\\d{11}";
+                            RequiredFieldTypeREV.ValidationExpression = (this.ValidationExpression != null) ? this.ValidationExpression : "^13[0-9]{1}[0-9]{8}|^15[9]{1}[0-9]{8}";
                             RequiredFieldTypeREV.ErrorMessage = "手机的位数应为11位!"; break;
+                        }
+                    case "固定电话":
+                        {
+                            RequiredFieldTypeREV.ValidationExpression = (this.ValidationExpression != null) ? this.ValidationExpression : "((\\(\\d{3}\\)|\\d{3}-)|(\\(\\d{4}\\)|\\d{4}-))?(\\d{8}|\\d{7})";
+                            RequiredFieldTypeREV.ErrorMessage = "请依 XXX-XXXX 格式或 XXXX-XXXX 输入电话号码！"; break;
                         }
                     case "家用电话":
                         {
@@ -620,6 +625,7 @@ namespace SAS.Control
             controlsArray.Add("数据校验");
             controlsArray.Add("电子邮箱");
             controlsArray.Add("移动手机");
+            controlsArray.Add("固定电话");
             controlsArray.Add("家用电话");
             controlsArray.Add("身份证号码");
             controlsArray.Add("网页地址");

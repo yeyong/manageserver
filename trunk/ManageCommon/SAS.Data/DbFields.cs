@@ -32,6 +32,16 @@ namespace SAS.Data
         public const string BANNED = "[bdid],[ip1],[ip2],[ip3],[ip4],[admin],[dateline],[expiration]";
 
         /// <summary>
+        /// 城市信息字段
+        /// </summary>
+        public const string CITY = "[CityID],[CityName],[ZipCode],[ProvinceID],[DateCreated],[DateUpdated]";
+
+        /// <summary>
+        /// 地区信息字段
+        /// </summary>
+        public const string DISTRICT = "[DistrictID],[DistrictName],[CityID],[DateCreated],[DateUpdated]";
+
+        /// <summary>
         /// 板块信息全字段
         /// </summary>
         public const string FORUMS_JOIN_FIELDS = "[f].[fid],[f].[parentid],[f].[layer],[f].[pathlist],[f].[parentidlist],[f].[subforumcount],[f].[name],[f].[status],[f].[displayorder],[f].[templateid],[f].[topics],[f].[curtopics],[f].[posts],[f].[todayposts],[f].[lasttid],[f].[lasttitle],[f].[lastpost],[f].[lastposterid],[f].[lastposter],[f].[allowsmilies],[f].[allowrss],[f].[allowhtml],[f].[allowbbcode],[f].[allowimgcode],[f].[alloweditrules],[f].[allowthumbnail],[f].[allowtag],[f].[recyclebin],[f].[modnewposts],[f].[jammer],[f].[disablewatermark],[f].[inheritedmod],[f].[autoclose],[ff].[password],[ff].[icon],[ff].[redirect],[ff].[attachextensions],[ff].[rules],[ff].[topictypes],[ff].[viewperm],[ff].[postperm],[ff].[replyperm],[ff].[getattachperm],[ff].[postattachperm],[ff].[moderators],[ff].[description],[ff].[applytopictype],[ff].[postbytopictype],[ff].[viewbytopictype],[ff].[topictypeprefix],[ff].[permuserlist],[ff].[seokeywords],[ff].[seodescription],[ff].[rewritename]";
@@ -50,6 +60,11 @@ namespace SAS.Data
         /// 在线用户表字段
         /// </summary>
         public const string ONLINE = "[ol_id],[ol_ps_id],[ol_ip],[ol_name],[ol_nickName],[ol_password],[ol_ug_id],[ol_img],[ol_pg_id],[ol_invisible],[ol_action],[ol_lastactivity],[ol_lastpostpmtime],[ol_lastsearchtime],[ol_lastupdatetime],[ol_pm_id],[ol_pm_name],[ol_verifycode],[ol_newpms],[ol_newnotices]";
+
+        /// <summary>
+        /// 省份字段
+        /// </summary>
+        public const string PROVINCE = "[ProvinceID],[ProvinceName],[DateCreated],[DateUpdated]";
 
         /// <summary>
         /// 短消息信息表字段

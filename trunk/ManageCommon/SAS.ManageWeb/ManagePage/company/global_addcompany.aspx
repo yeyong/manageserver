@@ -31,6 +31,19 @@
         jQuery(document).ready(function() {
             jQuery("#areas").ProvinceCity();
         });
+
+        function validate(theform) {
+            if (document.getElementById("district").value == "" || document.getElementById("district").value == "0") {
+                resetPage();
+                alert("请准确选择公司所在地区！");
+                return false;
+            }
+            return true;
+        }
+        function resetPage() {
+            document.getElementById('success').style.display = 'none'
+            document.getElementById("AddCompanyInfo").disabled = false;
+        }
     </script>
     <meta http-equiv="X-UA-Compatible" content="IE=7" />
 </head>
@@ -322,10 +335,7 @@
 			</cc3:TabPage>
 		</cc3:TabControl>
             <div class="Navbutton">
-                <cc2:Button ID="UpdateUserGroupInf" runat="server" ValidateForm="true" Text=" 提 交 ">
-                </cc2:Button>&nbsp;&nbsp;
-                <cc2:Button ID="DeleteUserGroupInf" runat="server" Text=" 删 除 " ButtonImgUrl="../images/del.gif"
-                    OnClientClick="if(!confirm('你确认要删除该用户组吗？\n删除后将不能恢复！')) return false;">
+                <cc2:Button ID="AddCompanyInfo" runat="server" ValidateForm="true" Text=" 提 交 ">
                 </cc2:Button>&nbsp;&nbsp;
                 <button type="button" class="ManagerButton" id="Button1" onclick="window.location='global_editcompany.aspx';">
                     <img src="../images/arrow_undo.gif" />

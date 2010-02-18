@@ -44,6 +44,10 @@
     <Compile Include="company\global_addcompany.aspx.designer.cs">
       <DependentUpon>global_addcompany.aspx.cs</DependentUpon>
     </Compile>
+    <Compile Include="company\global_ajaxcall.aspx.cs">
+      <DependentUpon>global_ajaxcall.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="forum\forum_addforums.aspx.cs">
       <DependentUpon>forum_addforums.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -296,20 +300,31 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="company\global_addcompany.aspx">
+    <Content Include="company\global_addcompany.aspx" />
+    <Content Include="company\global_ajaxcall.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="forum\forum_addforums.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="forum\forum_editforums.aspx" />
-    <Content Include="forum\forum_forumstree.aspx" />
-    <Content Include="forum\forum_option.aspx" />
-    <Content Include="forum\forum_userrights.aspx" />
+    <Content Include="forum\forum_editforums.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="forum\forum_forumstree.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="forum\forum_option.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="forum\forum_userrights.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="framepage\managerbody.aspx" />
     <Content Include="framepage\top.aspx" />
     <Content Include="global\global_addgroup.aspx" />
-    <Content Include="global\global_adduser.aspx" />
+    <Content Include="global\global_adduser.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="global\global_addusergroup.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
@@ -796,6 +811,8 @@
     <Content Include="js\common.js" />
     <Content Include="js\divcover.js" />
     <Content Include="js\draglist.js" />
+    <Content Include="js\jquery.js" />
+    <Content Include="js\jQueryFunc.js" />
     <Content Include="js\modalpopup.js" />
     <Content Include="js\navbar.js" />
     <Content Include="js\tabstrip.js" />

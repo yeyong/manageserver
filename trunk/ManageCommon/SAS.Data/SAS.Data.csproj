@@ -41,6 +41,7 @@
     <Compile Include="DataProvider\AdminVisitLogs.cs" />
     <Compile Include="DataProvider\Advertisenments.cs" />
     <Compile Include="DataProvider\Announcements.cs" />
+    <Compile Include="DataProvider\Areas.cs" />
     <Compile Include="DataProvider\Attachments.cs" />
     <Compile Include="DataProvider\Databases.cs" />
     <Compile Include="DataProvider\Editors.cs" />
