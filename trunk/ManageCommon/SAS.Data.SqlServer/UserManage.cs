@@ -2078,9 +2078,66 @@ namespace SAS.Data.SqlServer
         }
 
         #endregion
-
         
+        #region 企业信息操作
+        /// <summary>
+        /// 添加企业信息
+        /// </summary>
+        /// <returns></returns>
+        public int CreateCompany(Companys _companyInfo)
+        {
+            DbParameter[] parms = {
+					                DbHelper.MakeInParam("@en_name", (DbType)SqlDbType.NVarChar,100,_companyInfo.en_name),
+					                DbHelper.MakeInParam("@en_main", (DbType)SqlDbType.NVarChar,255,_companyInfo.en_main),
+					                DbHelper.MakeInParam("@en_type", (DbType)SqlDbType.Int,4,_companyInfo.en_type),
+					                DbHelper.MakeInParam("@en_enco", (DbType)SqlDbType.Int,4,_companyInfo.en_enco),
+					                DbHelper.MakeInParam("@en_sell", (DbType)SqlDbType.Int,4,_companyInfo.en_sell),
+					                DbHelper.MakeInParam("@en_address", (DbType)SqlDbType.VarChar,500,_companyInfo.en_address),
+					                DbHelper.MakeInParam("@en_areas", (DbType)SqlDbType.Int,4,_companyInfo.en_areas),
+					                DbHelper.MakeInParam("@en_desc", (DbType)SqlDbType.Text,16,_companyInfo.en_desc),
+					                DbHelper.MakeInParam("@en_post", (DbType)SqlDbType.VarChar,20,_companyInfo.en_post),
+					                DbHelper.MakeInParam("@en_mobile", (DbType)SqlDbType.VarChar,20,_companyInfo.en_mobile),
+					                DbHelper.MakeInParam("@en_phone", (DbType)SqlDbType.VarChar,20,_companyInfo.en_phone),
+					                DbHelper.MakeInParam("@en_fax", (DbType)SqlDbType.VarChar,20,_companyInfo.en_fax),
+					                DbHelper.MakeInParam("@en_mail", (DbType)SqlDbType.VarChar,50,_companyInfo.en_mail),
+					                DbHelper.MakeInParam("@en_web", (DbType)SqlDbType.VarChar,200,_companyInfo.en_web),
+					                DbHelper.MakeInParam("@en_corp", (DbType)SqlDbType.VarChar,20,_companyInfo.en_corp),
+					                DbHelper.MakeInParam("@en_contact", (DbType)SqlDbType.VarChar,20,_companyInfo.en_contact),
+					                DbHelper.MakeInParam("@en_status", (DbType)SqlDbType.Int,4,_companyInfo.en_status),
+					                DbHelper.MakeInParam("@en_reason", (DbType)SqlDbType.NVarChar,255,_companyInfo.en_reason),
+					                DbHelper.MakeInParam("@en_level", (DbType)SqlDbType.Int,4,_companyInfo.en_level),
+					                DbHelper.MakeInParam("@en_credits", (DbType)SqlDbType.Int,4,_companyInfo.en_credits),
+					                DbHelper.MakeInParam("@en_logo", (DbType)SqlDbType.VarChar,200,_companyInfo.en_logo),
+					                DbHelper.MakeInParam("@en_music", (DbType)SqlDbType.VarChar,200,_companyInfo.en_music),
+					                DbHelper.MakeInParam("@reg_capital", (DbType)SqlDbType.VarChar,20,_companyInfo.reg_capital),
+					                DbHelper.MakeInParam("@reg_address", (DbType)SqlDbType.NVarChar,200,_companyInfo.reg_address),
+					                DbHelper.MakeInParam("@reg_code", (DbType)SqlDbType.NVarChar,20,_companyInfo.reg_code),
+					                DbHelper.MakeInParam("@reg_organ", (DbType)SqlDbType.NVarChar,255,_companyInfo.reg_organ),
+					                DbHelper.MakeInParam("@reg_year", (DbType)SqlDbType.SmallDateTime,4,_companyInfo.reg_year),
+					                DbHelper.MakeInParam("@reg_date", (DbType)SqlDbType.NVarChar,255,_companyInfo.reg_date),
+					                DbHelper.MakeInParam("@en_builddate", (DbType)SqlDbType.SmallDateTime,4,_companyInfo.en_builddate),
+					                DbHelper.MakeInParam("@en_visble", (DbType)SqlDbType.SmallInt,2,_companyInfo.en_visble)
+                                  };
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.StoredProcedure, string.Format("{0}createcompany", BaseConfigs.GetTablePrefix), parms), 0);
+        }
 
+        /// <summary>
+        /// 根据企业名称获得企业实体信息
+        /// </summary>
+        /// <param name="enname"></param>
+        /// <returns></returns>
+        public IDataReader GetCompanyByName(string enname)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@enname",(DbType)SqlDbType.NVarChar,100,enname),
+			                      };
+            string commandText = string.Format("SELECT TOP 1 {0} FROM [{1}company] WHERE [{1}company].[en_name]=@enname",
+                                                DbFields.COMPANY,
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
+        }
+
+        #endregion
 
     }
 }

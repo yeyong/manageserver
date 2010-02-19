@@ -1812,6 +1812,21 @@ namespace SAS.Data
 
         #endregion
 
+        #region 企业信息操作
+        /// <summary>
+        /// 添加企业信息
+        /// </summary>
+        /// <returns></returns>
+        int CreateCompany(Companys _companyInfo);
+
+        /// <summary>
+        /// 根据企业名称获得企业实体信息
+        /// </summary>
+        /// <param name="enname"></param>
+        /// <returns></returns>
+        IDataReader GetCompanyByName(string enname);
+        #endregion
+
         /// <summary>
         /// 获取指定用户ID列表的邮件信息
         /// </summary>

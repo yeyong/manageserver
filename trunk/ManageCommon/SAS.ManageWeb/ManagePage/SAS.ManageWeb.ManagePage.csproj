@@ -300,7 +300,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="company\global_addcompany.aspx" />
+    <Content Include="company\global_addcompany.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="company\global_ajaxcall.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
@@ -359,7 +361,9 @@
     <Content Include="global\global_uiandshowstyle.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="global\global_usergrid.aspx" />
+    <Content Include="global\global_usergrid.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="global\global_usergroupgrid.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
