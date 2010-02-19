@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin\AdminCompanies.cs" />
     <Compile Include="areas.cs" />
+    <Compile Include="Companies.cs" />
     <Compile Include="Page\AdminPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

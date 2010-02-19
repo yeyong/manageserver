@@ -258,7 +258,7 @@
                                 <tr>
                                     <td>营业期限:</td>
                                     <td>
-                                        <cc2:textbox id="Textbox1" runat="server" RequiredFieldType="暂无校验" IsReplaceInvertedComma="false" Size="40">
+                                        <cc2:textbox id="regdate" runat="server" RequiredFieldType="暂无校验" IsReplaceInvertedComma="false" Size="40">
                                         </cc2:textbox>
                                     </td>
                                 </tr>
