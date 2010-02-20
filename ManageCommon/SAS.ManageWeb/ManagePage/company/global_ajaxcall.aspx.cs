@@ -5,7 +5,7 @@ using System.Data;
 using SAS.Logic;
 using SAS.Common;
 
-namespace SAS.ManageWeb.ManagePage.company
+namespace SAS.ManageWeb.ManagePage
 {
     /// <summary>
     /// ajax异步操作
@@ -14,21 +14,21 @@ namespace SAS.ManageWeb.ManagePage.company
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            int parentid = SASRequest.GetInt("parentcode", 0);
+
             if (!IsPostBack)
             {
                 string resultmessage = "";
                 switch (Request.Params["opname"])
                 {
                     case "area1":
-                        resultmessage = areas.returnProvinces();
+                        resultmessage = areas.returnProvinces(SASRequest.GetString("defvalue"));
                         break;
                     case "area2":
-                        int parentid = SASRequest.GetInt("parentcode",0);
-                        resultmessage = areas.returnCity(parentid);
+                        resultmessage = areas.returnCity(SASRequest.GetString("defvalue"), parentid);
                         break;
                     case "area3":
-                        int parentid1 = SASRequest.GetInt("parentcode", 0);
-                        resultmessage = areas.returnDistrict(parentid1);
+                        resultmessage = areas.returnDistrict(SASRequest.GetString("defvalue"), parentid);
                         break;
                 }
                 Response.Write(resultmessage);

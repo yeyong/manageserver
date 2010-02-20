@@ -34,5 +34,15 @@ namespace SAS.Logic
             Companys _companyInfo = SAS.Data.DataProvider.Companies.GetCompanyInfoByName(enname);
             return (_companyInfo != null) ? _companyInfo.en_id : 0;
         }
+
+        /// <summary>
+        /// 获取企业信息实体
+        /// </summary>
+        /// <param name="enid"></param>
+        /// <returns></returns>
+        public static Companys GetCompanyInfo(int enid)
+        {
+            return SAS.Data.DataProvider.Companies.GetCompanyInfoByID(enid);
+        }
     }
 }

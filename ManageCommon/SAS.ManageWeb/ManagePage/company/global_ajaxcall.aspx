@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" CodeBehind="global_ajaxcall.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.company.global_ajaxcall" %>
+﻿<%@ Page Language="C#" CodeBehind="global_ajaxcall.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.global_ajaxcall" %>
 
 <html>
 <head>

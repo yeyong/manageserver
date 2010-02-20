@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" CodeBehind="company_companygrid.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.company.company_companygrid" %>
+﻿<%@ Page Language="C#" CodeBehind="company_companygrid.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.company_companygrid" %>
 <%@ Register TagPrefix="sas" Namespace="SAS.Control" Assembly="SAS.Control" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
@@ -14,6 +14,12 @@
     <link href="../styles/dntmanager.css" type="text/css" rel="stylesheet" />
     <link href="../styles/modelpopup.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript" src="../js/modalpopup.js"></script>
+    <script type="text/javascript">
+        function Check(form, checked) {
+            CheckByName(form, 'enid', checked);
+            checkedEnabledButton(form, 'enid', 'ENStart', 'ENPause');
+        }
+    </script>
 </head>
 <body>
     <form id="Form1" method="post" runat="server">
@@ -69,6 +75,50 @@
                 <sas:Button ID="ResetSearchTable" runat="server" Text="重设搜索条件" Visible="False"></sas:Button>
             </fieldset>
         </div>
+        <table width="100%">
+            <tr>
+                <td>
+                    <sas:DataGrid ID="DataGrid1" runat="server" IsFixConlumnControls="true" OnPageIndexChanged="DataGrid_PageIndexChanged" OnSortCommand="Sort_Grid">
+                        <Columns>
+                            <asp:TemplateColumn HeaderText="<input title='选中/取消' onclick='Check(this.form,this.checked)' type='checkbox' name='chkall' id='chkall' />">
+                                <HeaderStyle Width="20px" />
+                                <ItemTemplate>
+						            <input id="enid" type="checkbox" onclick="checkedEnabledButton(form, 'enid', 'ENStart', 'ENPause')" value="<%# DataBinder.Eval(Container, "DataItem.en_id").ToString()%>"	name="enid">
+						        </ItemTemplate>
+                            </asp:TemplateColumn>
+                            <asp:TemplateColumn HeaderText="">
+                                <ItemTemplate>
+                                    <a href="company_companyedit.aspx?enid=<%# DataBinder.Eval(Container, "DataItem.en_id").ToString()%>">
+                                        编辑</a>
+                                    <%# DataGrid1.LoadSelectedCheckBox(DataBinder.Eval(Container, "DataItem.en_id").ToString())%>
+                                </ItemTemplate>
+                            </asp:TemplateColumn>
+                            <asp:BoundColumn DataField="en_name" SortExpression="en_name" HeaderText="名称" ReadOnly="true"></asp:BoundColumn>
+                            <asp:BoundColumn DataField="en_update" SortExpression="en_update" HeaderText="最近更新时间" ReadOnly="true"></asp:BoundColumn>
+                            <asp:BoundColumn DataField="en_createdate" SortExpression="en_createdate" HeaderText="信息创建时间" ReadOnly="true"></asp:BoundColumn>
+                            <asp:TemplateColumn HeaderText="开启状态" SortExpression="en_visble">
+                                <ItemTemplate>
+                                    <%# DataBinder.Eval(Container, "DataItem.en_visble").ToString() == "0" ? "暂停":"开启"%>
+                                </ItemTemplate>
+                            </asp:TemplateColumn>
+                            <asp:TemplateColumn HeaderText="开启状态" SortExpression="en_status">
+                                <ItemTemplate>
+                                    <%#GetStatusName(DataBinder.Eval(Container, "DataItem.en_status").ToString()) %>
+                                </ItemTemplate>
+                            </asp:TemplateColumn>
+                        </Columns>
+                    </sas:DataGrid>
+                </td>
+            </tr>
+        </table>
+        <p style="text-align:right;">
+            <table style="float:right">
+                <tr>
+                    <td><sas:Button ID="ENStart" runat="server" Text=" 开 启 " designtimedragdrop="247" Enabled="false"></sas:Button>&nbsp;&nbsp;</td>
+                    <td><sas:Button ID="ENPause" runat="server" Text=" 暂 停 " ButtonImgUrl="../images/del.gif" Enabled="false"></sas:Button>&nbsp;&nbsp;</td>
+                </tr>
+            </table>              
+        </p>
         <sas:Hint id="Hint1" runat="server" HintImageUrl="../images"></sas:Hint>
     </form>
     <%=footer%>	

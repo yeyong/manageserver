@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" CodeBehind="global_addcompany.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.global_addcompany"%>
+﻿<%@ Page Language="C#" CodeBehind="company_companyedit.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.company_companyedit" %>
 <%@ Register TagPrefix="uc1" TagName="TextareaResize" Src="../UserControls/TextareaResize.ascx" %>
 <%@ Register TagPrefix="cc2" Namespace="SAS.Control" Assembly="SAS.Control" %>
 <%@ Register TagPrefix="cc3" Namespace="SAS.Control" Assembly="SAS.Control" %>
@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-    <title>天狼星工作室综合管理后台-添加商家</title>
+    <title>天狼星工作室综合管理后台-修改商家</title>
     <link href="../styles/datagrid.css" type="text/css" rel="stylesheet" />
     <link href="../styles/tab.css" type="text/css" rel="stylesheet" />
     <link href="../styles/dntmanager.css" type="text/css" rel="stylesheet" />
@@ -29,7 +29,7 @@
     <script type="text/javascript" src="../js/modalpopup.js"></script>
     <script type="text/javascript" language="javascript">
         jQuery(document).ready(function() {
-            jQuery("#areas").ProvinceCity();
+            jQuery("#areas").ProvinceCity('<%=defaultarea%>');
         });
 
         function validate(theform) {
@@ -55,7 +55,7 @@
         <td>
 	    <cc3:TabControl id="TabControl1" SelectionMode="Client" runat="server" TabScriptPath="../js/tabstrip.js" height="100%">
 		    <cc3:TabPage Caption="基本信息" ID="tabPage51">
-		    <uc2:PageInfo id="info1" runat="server" Icon="Information" Text="添加企业信息，并设置信息相关资料。"/>
+		    <uc2:PageInfo id="info1" runat="server" Icon="Information" Text="修改企业信息，注意企业名称不得重复。"/>
 		    <table cellspacing="0" cellpadding="4" width="100%" align="center">
             <tr>
                 <td class="panelbox" align="left">
@@ -335,9 +335,9 @@
 			</cc3:TabPage>
 		</cc3:TabControl>
             <div class="Navbutton">
-                <cc2:Button ID="AddCompanyInfo" runat="server" ValidateForm="true" Text=" 提 交 ">
+                <cc2:Button ID="UpdateCompanyInfo" runat="server" ValidateForm="true" Text="确认修改">
                 </cc2:Button>&nbsp;&nbsp;
-                <button type="button" class="ManagerButton" id="Button1" onclick="window.location='company_companygrid.aspx';">
+                <button type="button" class="ManagerButton" id="Button1" onclick="window.location='global_editcompany.aspx';">
                     <img src="../images/arrow_undo.gif" />
                     返 回
                 </button>
@@ -348,6 +348,6 @@
 	    </div>
 	    <cc2:Hint id="Hint1" runat="server" HintImageUrl="../images"></cc2:Hint>
 	    </form>
-	<%=footer%>	
+	    <%=footer%>	
 </body>
 </html>

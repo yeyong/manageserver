@@ -2122,6 +2122,22 @@ namespace SAS.Data.SqlServer
         }
 
         /// <summary>
+        /// 根据企业ID获取企业实体
+        /// </summary>
+        /// <param name="enid"></param>
+        /// <returns></returns>
+        public IDataReader GetCompanyByID(int enid)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@enid",(DbType)SqlDbType.Int,4,enid),
+			                      };
+            string commandText = string.Format("SELECT TOP 1 {0} FROM [{1}company] WHERE [{1}company].[en_id]=@enid",
+                                                DbFields.COMPANY,
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
         /// 根据企业名称获得企业实体信息
         /// </summary>
         /// <param name="enname"></param>
@@ -2135,6 +2151,27 @@ namespace SAS.Data.SqlServer
                                                 DbFields.COMPANY,
                                                 BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
+        /// 获取企业信息集合
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetCompanyAllList()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}company] ORDER BY [en_id]", DbFields.COMPANY, BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 更新活动状态
+        /// </summary>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public bool UpdateCompanyStatus(string enidlist, int status)
+        {
+            string commandText = string.Format("UPDATE [{0}company] SET [en_visble] = {1} WHERE en_id in ({2})", BaseConfigs.GetTablePrefix, status, enidlist);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText) > 0;
         }
 
         #endregion
