@@ -1,0 +1,53 @@
+﻿<%template _compageheader%>
+<body onkeydown="if(event.keyCode==27) return false;">
+<div class="top">
+	<div class="cot">
+		<ul class="toplt">
+			<li><a title="设为首页" href="#" class="l_666"><img alt="设为首页" src="templates/{templatepath}/images/icon/home.gif" />设为首页</a></li>
+			<li><a title="收藏本站" href="#" class="l_666"><img alt="收藏本站" src="templates/{templatepath}/images/icon/favorites.gif" />收藏本站</a></li>
+		</ul>
+		<p class="toprt">
+		<a title="广告服务" href="#" class="l_666">广告服务</a> | <a title="帮助中心" href="#" class="l_666">帮助中心</a> | <a title="提交企业信息" href="#" class="l_e00101">提交企业信息</a>
+		</p>
+	</div>
+</div>
+<div class="cot">
+	<div class="top2">
+		<p class="logo"><a title="浙江黄页" href="#"><img alt="浙江黄页" src="templates/{templatepath}/images/logo.gif" /></a></p>
+		<div class="soso">
+			<p class="soso1"><input name="" type="text" class="input_soout" onfocus="this.className='input_soon'" onBlur="this.className='input_soout'" /></p>
+			<p class="soso2"><a title="企业搜索" href="#"></a></p>
+		</div>
+	</div>
+	<div class="top2">
+		<p class="navlt"></p>
+		<ul class="navce bg1">
+			<li class="navce2"><p class="navce2rt"><a title="商之源" href="#" class="l_fff">商之源</a></p></li>
+			<li class="navline"></li>
+			<li class="navce1"><a title="浙商黄页" href="#" class="l_fff">浙商黄页</a></li>
+			<li class="navline"></li>
+			<li class="navce1"><a title="浙商名片" href="#" class="l_fff">浙商名片</a></li>
+			<li class="navline"></li>
+			<li class="navce3"><p class="navce3rt"><a title="淘之购" href="#" class="l_805952">淘之购</a></p></li>
+			<li class="navline"></li>
+			<li class="navce1"><a title="商业街" href="#" class="l_fff">商业街</a></li>
+			<li class="navline"></li>
+			<li class="navce1"><a title="品牌路" href="#" class="l_fff">品牌路</a></li>
+			<li class="navline"></li>
+			<li class="navce1"><a title="雅之市" href="#" class="l_fff">雅之市</a></li>
+			<li class="navline"></li>
+			<li class="navce1"><a title="雅居" href="#" class="l_fff">雅居</a></li>
+			<span class="navcetu"><img alt="here" src="templates/{templatepath}/images/here.gif" /></span>
+		</ul>
+		<p class="navrt"></p>
+	</div>
+</div>
+<%else%>
+<%csharp%>
+Response.Clear();
+Response.ContentType = "Text/XML";
+Response.Expires = 0;
+Response.Cache.SetNoStore();
+<%/csharp%>
+<?xml version="1.0" encoding="utf-8"?><root><![CDATA[
+<%/if%>

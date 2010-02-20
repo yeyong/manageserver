@@ -1846,6 +1846,13 @@ namespace SAS.Data
         /// <param name="status"></param>
         /// <returns></returns>
         bool UpdateCompanyStatus(string enidlist, int status);
+
+        /// <summary>
+        /// 更新企业信息
+        /// </summary>
+        /// <param name="_company"></param>
+        /// <returns></returns>
+        bool UpdateCompany(Companys _company);
         #endregion
 
         /// <summary>
