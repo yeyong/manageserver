@@ -16,6 +16,43 @@ namespace SAS.Logic
     /// </summary>
     public class AdminCompanies : Companies
     {
-       
+        /// <summary>
+        /// 获取企业信息集合
+        /// </summary>
+        /// <param name="strWhere"></param>
+        /// <returns></returns>
+        public static DataTable GetCompanyList()
+        {
+            DataTable dt = SAS.Data.DataProvider.Companies.GetCompanyAllList();
+            return dt;
+        }
+
+        /// <summary>
+        /// 批量开启企业
+        /// </summary>
+        /// <param name="enidlist"></param>
+        public static void StartCompany(string enidlist)
+        {
+            UpdateCompanyListStatus(enidlist, 1);
+        }
+
+        /// <summary>
+        /// 批量暂停企业
+        /// </summary>
+        /// <param name="enidlist"></param>
+        public static void PauseCompany(string enidlist)
+        {
+            UpdateCompanyListStatus(enidlist, 0);
+        }
+
+        /// <summary>
+        /// 更新企业列表状态信息
+        /// </summary>
+        /// <param name="_status"></param>
+        /// <returns></returns>
+        public static bool UpdateCompanyListStatus(string enidlist, int _status)
+        {
+            return SAS.Data.DataProvider.Companies.UpdateCompanyStatus(enidlist, _status);
+        }
     }
 }

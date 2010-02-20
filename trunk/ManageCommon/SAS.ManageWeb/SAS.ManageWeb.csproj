@@ -66,8 +66,18 @@
       <DependentUpon>test.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="aspx\1\test.aspx.designer.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+    </Compile>
     <Compile Include="aspx\1\usercpprofile.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\company\company_companyedit.aspx.cs">
+      <DependentUpon>company_companyedit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\company\company_companyedit.aspx.designer.cs">
+      <DependentUpon>company_companyedit.aspx</DependentUpon>
     </Compile>
     <Compile Include="ManagePage\company\company_companygrid.aspx.cs">
       <DependentUpon>company_companygrid.aspx</DependentUpon>
@@ -349,6 +359,7 @@
     <Content Include="config\album.config" />
     <Content Include="config\ftp.config" />
     <Content Include="config\sirius.config" />
+    <Content Include="ManagePage\company\company_companyedit.aspx" />
     <Content Include="ManagePage\company\company_companygrid.aspx" />
     <Content Include="templates\default\about.png" />
     <Content Include="templates\default\about.xml" />

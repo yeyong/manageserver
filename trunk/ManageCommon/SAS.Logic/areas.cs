@@ -19,6 +19,85 @@ namespace SAS.Logic
     public class areas
     {
         /// <summary>
+        /// 获取全部区县信息
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetDistrictList()
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            DataTable ddata = cache.RetrieveObject("/SAS/Districts") as DataTable;
+
+            if (ddata == null)
+            {
+                ddata = SAS.Data.DataProvider.Areas.GetDistrict();
+                cache.AddObject("/SAS/Districts", ddata);
+            }
+
+            return ddata;
+        }
+
+        /// <summary>
+        /// 获取全部城市信息
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetCityList()
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            DataTable cdata = cache.RetrieveObject("/SAS/Citys") as DataTable;
+
+            if (cdata == null)
+            {
+                cdata = SAS.Data.DataProvider.Areas.GetCity();
+                cache.AddObject("/SAS/Citys", cdata);
+            }
+
+            return cdata;
+        }
+
+        /// <summary>
+        /// 获取全部省份信息
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetProvinceList()
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            DataTable pdata = cache.RetrieveObject("/SAS/Provinces") as DataTable;
+
+            if (pdata == null)
+            {
+                pdata = SAS.Data.DataProvider.Areas.GetProvince();
+                cache.AddObject("/SAS/Provinces", pdata);
+            }
+            return pdata;
+        }
+
+        /// <summary>
+        /// 获取级联字符串
+        /// </summary>
+        /// <param name="districtID">区县ID</param>
+        /// <returns></returns>
+        public static string GetCascadeString(int districtID)
+        {
+            int dID = districtID;
+            int cID = 0;
+            int pID = 0;
+            DataTable ddata = GetDistrictList();
+            DataTable cdate = GetCityList();
+
+            DataRow[] ddr = ddata.Select("DistrictID = " + districtID);
+            if (ddr.Length > 0) cID = TypeConverter.StrToInt(ddr[0]["CityID"].ToString(), 0);
+            else return "";
+
+            DataRow[] cdr = cdate.Select("CityID = " + cID);
+            if (cdr.Length > 0) pID = TypeConverter.StrToInt(cdr[0]["ProvinceID"].ToString(), 0);
+            else return "";
+
+            if (pID == 0) return "";
+
+            return dID + "," + cID + "," + pID;
+        }
+
+        /// <summary>
         /// 返回城市字符串
         /// </summary>
         /// <param name="parentid"></param>
@@ -38,14 +117,8 @@ namespace SAS.Logic
         {
             string returnMessage = "<option value=\"0\" selected>请选择城市...</option>";
             if (defaultvalue != "") returnMessage = "<option value=\"0\">请选择城市...</option>";
-            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
-            DataTable cdata = cache.RetrieveObject("/SAS/Citys") as DataTable;
 
-            if (cdata == null)
-            {
-                cdata = SAS.Data.DataProvider.Areas.GetCity();
-                cache.AddObject("/SAS/Citys", cdata);
-            }
+            DataTable cdata = GetCityList();
 
             foreach (DataRow dr in cdata.Select("[ProvinceID] = " + parentid))
             {
@@ -70,14 +143,7 @@ namespace SAS.Logic
         {
             string returnMessage = "<option value=\"0\" selected>请选择地区...</option>";
             if (defaultvalue != "") returnMessage = "<option value=\"0\">请选择地区...</option>";
-            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
-            DataTable ddata = cache.RetrieveObject("/SAS/Districts") as DataTable;
-
-            if (ddata == null)
-            {
-                ddata = SAS.Data.DataProvider.Areas.GetDistrict();
-                cache.AddObject("/SAS/Districts", ddata);
-            }
+            DataTable ddata = GetDistrictList();
 
             foreach (DataRow dr in ddata.Select("[CityID] = " + parentid))
             {
@@ -106,14 +172,7 @@ namespace SAS.Logic
         {
             string returnMessage = "<option value=\"0\" selected>请选择省份...</option>";
             if (defaultvalue != "") returnMessage = "<option value=\"0\">请选择省份...</option>";
-            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
-            DataTable pdata = cache.RetrieveObject("/SAS/Provinces") as DataTable;
-
-            if (pdata == null)
-            {
-                pdata = SAS.Data.DataProvider.Areas.GetProvince();
-                cache.AddObject("/SAS/Provinces", pdata);
-            }
+            DataTable pdata = GetProvinceList();
 
             foreach(DataRow dr in pdata.Rows)
             {

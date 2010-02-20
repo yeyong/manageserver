@@ -75,6 +75,16 @@ namespace SAS.Data.DataProvider
         }
 
         /// <summary>
+        /// 根据ID获取企业信息实体
+        /// </summary>
+        /// <param name="enid"></param>
+        /// <returns></returns>
+        public static Companys GetCompanyInfoByID(int enid)
+        {
+            return LoadSingleCompanyInfo(DatabaseProvider.GetInstance().GetCompanyByID(enid));
+        }
+
+        /// <summary>
         /// 根据企业名称获得企业信息实体
         /// </summary>
         /// <param name="enname"></param>
@@ -82,6 +92,25 @@ namespace SAS.Data.DataProvider
         public static Companys GetCompanyInfoByName(string enname)
         {
             return LoadSingleCompanyInfo(DatabaseProvider.GetInstance().GetCompanyByName(enname));
+        }
+
+        /// <summary>
+        /// 获取企业信息集合
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetCompanyAllList()
+        {
+            return DatabaseProvider.GetInstance().GetCompanyAllList();
+        }
+
+        /// <summary>
+        /// 更新活动状态
+        /// </summary>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public static bool UpdateCompanyStatus(string enidlist, int status)
+        {
+            return DatabaseProvider.GetInstance().UpdateCompanyStatus(enidlist, status);
         }
     }
 }

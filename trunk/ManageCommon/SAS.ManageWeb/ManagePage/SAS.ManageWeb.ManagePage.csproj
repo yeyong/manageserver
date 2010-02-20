@@ -323,7 +323,9 @@
     </Content>
     <Content Include="framepage\managerbody.aspx" />
     <Content Include="framepage\top.aspx" />
-    <Content Include="global\global_addgroup.aspx" />
+    <Content Include="global\global_addgroup.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="global\global_adduser.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>

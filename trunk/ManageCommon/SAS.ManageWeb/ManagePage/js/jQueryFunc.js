@@ -18,12 +18,20 @@ $.fn.ProvinceCity = function(defaultvalue) {
     var $sel3 = _self.find("select").eq(2);
     //默认省级下拉
     var pageurl = "../company/global_ajaxcall.aspx?";
-    var result = getReturn(pageurl + "opname=area1");
-    $sel2.attr("style", "display:none");
-    $sel3.attr("style", "display:none");
-    $sel1.append(result);
+
     if (defaultvalue != "" && typeof defaultvalue != "undefined") {
-        alert(defaultvalue);
+        var strArray = defaultvalue.split(',');
+        var result1 = getReturn(pageurl + "opname=area1&defvalue=" + strArray[2]);
+        $sel1.append(result1);
+        var result2 = getReturn(pageurl + "opname=area2&parentcode=" + strArray[2] + "&defvalue=" + strArray[1]);
+        $sel2.append(result2);
+        var result3 = getReturn(pageurl + "opname=area3&parentcode=" + strArray[1] + "&defvalue=" + strArray[0]);
+        $sel3.append(result3);
+    } else {
+        var result = getReturn(pageurl + "opname=area1");
+        $sel2.attr("style", "display:none");
+        $sel3.attr("style", "display:none");
+        $sel1.append(result);
     }
 
     //省级联动 控制
@@ -45,7 +53,7 @@ $.fn.ProvinceCity = function(defaultvalue) {
             $sel2.attr("style", "display:block");
             $sel3.attr("style", "display:none");
         }
-    }).change();
+    });
     //1级城市联动 控制
     var index2 = "";
     $sel2.change(function() {

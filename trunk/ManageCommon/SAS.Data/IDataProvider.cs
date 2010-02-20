@@ -1820,11 +1820,32 @@ namespace SAS.Data
         int CreateCompany(Companys _companyInfo);
 
         /// <summary>
+        /// 根据企业ID获取企业实体
+        /// </summary>
+        /// <param name="enid"></param>
+        /// <returns></returns>
+        IDataReader GetCompanyByID(int enid);
+
+        /// <summary>
         /// 根据企业名称获得企业实体信息
         /// </summary>
         /// <param name="enname"></param>
         /// <returns></returns>
         IDataReader GetCompanyByName(string enname);
+
+        /// <summary>
+        /// 获取企业信息集合
+        /// </summary>
+        /// <param name="strWhere"></param>
+        /// <returns></returns>
+        DataTable GetCompanyAllList();
+
+        /// <summary>
+        /// 更新活动状态
+        /// </summary>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        bool UpdateCompanyStatus(string enidlist, int status);
         #endregion
 
         /// <summary>

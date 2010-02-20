@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SAS.ManageWeb.ManagePage.company {
+namespace SAS.ManageWeb.ManagePage {
     
     
     public partial class company_companygrid {
@@ -102,6 +102,33 @@ namespace SAS.ManageWeb.ManagePage.company {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::SAS.Control.Button ResetSearchTable;
+        
+        /// <summary>
+        /// DataGrid1 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::SAS.Control.DataGrid DataGrid1;
+        
+        /// <summary>
+        /// ENStart 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::SAS.Control.Button ENStart;
+        
+        /// <summary>
+        /// ENPause 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::SAS.Control.Button ENPause;
         
         /// <summary>
         /// Hint1 控件。
