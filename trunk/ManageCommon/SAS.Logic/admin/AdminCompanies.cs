@@ -54,5 +54,15 @@ namespace SAS.Logic
         {
             return SAS.Data.DataProvider.Companies.UpdateCompanyStatus(enidlist, _status);
         }
+
+        /// <summary>
+        /// 更新企业信息
+        /// </summary>
+        /// <param name="_companyInfo"></param>
+        /// <returns></returns>
+        public static bool UpdateCompanyInfo(Companys _companyInfo)
+        {
+            return SAS.Data.DataProvider.Companies.UpdateCompany(_companyInfo);
+        }
     }
 }

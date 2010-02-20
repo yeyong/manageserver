@@ -145,9 +145,9 @@ namespace SAS.Logic
                         {
                             if (config.BrowseCreateTemplate == 1)
                             {
-                                CreateTemplate(forumPath, Templates.GetTemplateItem(int.Parse(strTemplateid)).Directory, "forumindex.aspx", int.Parse(strTemplateid));
+                                CreateTemplate(forumPath, Templates.GetTemplateItem(int.Parse(strTemplateid)).Directory, "index.aspx", int.Parse(strTemplateid));
                             }
-                            context.RewritePath(forumPath + "aspx/" + strTemplateid + "/forumindex.aspx");
+                            context.RewritePath(forumPath + "aspx/" + strTemplateid + "/index.aspx");
                         }
                         else
                         {

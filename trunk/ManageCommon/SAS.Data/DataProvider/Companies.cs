@@ -112,5 +112,15 @@ namespace SAS.Data.DataProvider
         {
             return DatabaseProvider.GetInstance().UpdateCompanyStatus(enidlist, status);
         }
+
+        /// <summary>
+        /// 更新企业信息
+        /// </summary>
+        /// <param name="_company"></param>
+        /// <returns></returns>
+        public static bool UpdateCompany(Companys _company)
+        {
+            return DatabaseProvider.GetInstance().UpdateCompany(_company);
+        }
     }
 }

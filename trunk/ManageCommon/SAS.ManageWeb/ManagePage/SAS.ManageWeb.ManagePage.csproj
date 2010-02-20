@@ -37,6 +37,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="company\company_companyedit.aspx.cs">
+      <DependentUpon>company_companyedit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="company\company_companyedit.aspx.designer.cs">
+      <DependentUpon>company_companyedit.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="company\company_companygrid.aspx.cs">
+      <DependentUpon>company_companygrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="company\company_companygrid.aspx.designer.cs">
+      <DependentUpon>company_companygrid.aspx.cs</DependentUpon>
+    </Compile>
     <Compile Include="company\global_addcompany.aspx.cs">
       <DependentUpon>global_addcompany.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -300,6 +314,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="company\company_companyedit.aspx" />
+    <Content Include="company\company_companygrid.aspx" />
     <Content Include="company\global_addcompany.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>

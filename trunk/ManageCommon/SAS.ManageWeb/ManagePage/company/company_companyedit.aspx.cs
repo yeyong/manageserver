@@ -67,39 +67,70 @@ namespace SAS.ManageWeb.ManagePage
 
         private void UpdateCompanyInfo_Click(object sender, EventArgs e)
         {
-            #region 添加企业信息
+            #region 修改企业信息
             if (this.CheckCookie())
             {
                 if (qyname.Text.Trim() == "")
                 {
-                    base.RegisterStartupScript("", "<script>alert('企业名称为空,因此无法提交!');window.location.href='company_companyedit.aspx';</script>");
+                    base.RegisterStartupScript("", "<script>alert('企业名称为空,因此无法提交!');window.location.href='company_companyedit.aspx?enid=" + SASRequest.GetInt("enid", 0) + "';</script>");
                     return;
                 }
 
                 if (SASRequest.GetInt("district", 0) == 0)
                 {
-                    base.RegisterStartupScript("", "<script>alert('请准确选择公司所在地区!');window.location.href='company_companyedit.aspx';</script>");
+                    base.RegisterStartupScript("", "<script>alert('请准确选择公司所在地区!');window.location.href='company_companyedit.aspx?enid=" + SASRequest.GetInt("enid", 0) + "';</script>");
                     return;
                 }
+                int renid = AdminCompanies.ExistCompanyName(qyname.Text.Trim());
+                if (renid != 0 && renid != SASRequest.GetInt("enid", 0))
+                {
+                    base.RegisterStartupScript("", "<script>alert('您填写的公司名称重复，请重新填写!');window.location.href='company_companyedit.aspx?enid=" + SASRequest.GetInt("enid", 0) + "';</script>");
+                    return;
+                }
+
                 Companys _companyInfo = AdminCompanies.GetCompanyInfo(SASRequest.GetInt("enid", 0));
 
-                if (AdminCompanies.ExistCompanyName(qyname.Text.Trim()) != 0)
+                _companyInfo.en_name = qyname.Text.Trim();
+                _companyInfo.en_visble = Convert.ToInt32(status.SelectedValue);
+                _companyInfo.en_corp = encorp.Text.Trim();
+                _companyInfo.en_contact = encontact.Text.Trim();
+                _companyInfo.en_phone = enphone.Text;
+                _companyInfo.en_mobile = enmobile.Text;
+                _companyInfo.en_fax = enfax.Text;
+                _companyInfo.en_mail = enemail.Text;
+                _companyInfo.en_web = enweb.Text;
+                _companyInfo.en_areas = SASRequest.GetInt("district", 0);
+                _companyInfo.en_post = enpost.Text;
+                _companyInfo.en_address = enaddress.Text.Trim();
+                _companyInfo.en_desc = endesc.Text;
+                _companyInfo.en_builddate = enbuilddate.Text;
+                _companyInfo.en_type = Convert.ToInt32(enType.SelectedValue);
+                _companyInfo.en_enco = Convert.ToInt32(enco.SelectedValue);
+                _companyInfo.reg_capital = regcapital.Text;
+                _companyInfo.reg_code = regcode.Text.Trim();
+                _companyInfo.reg_organ = regorgan.Text.Trim();
+                _companyInfo.reg_year = regyear.Text;
+                _companyInfo.reg_date = regdate.Text.Trim();
+                _companyInfo.reg_address = regaddress.Text.Trim();
+                _companyInfo.en_mail = enmain.Text.Trim();
+                _companyInfo.en_status = Convert.ToInt32(enstatus.SelectedValue);
+                _companyInfo.en_reason = enreason.Text.Trim();
+                _companyInfo.en_level = Convert.ToInt32(enlevels.SelectedValue);
+                _companyInfo.en_credits = TypeConverter.StrToInt(encredit.Text, 0);
+
+                _companyInfo.en_sell = 0;
+                _companyInfo.en_logo = "";
+                _companyInfo.en_music = "";
+
+                if (!AdminCompanies.UpdateCompanyInfo(_companyInfo))
                 {
-                    base.RegisterStartupScript("", "<script>alert('您填写的公司名称重复，请重新填写!');window.location.href='company_companyedit.aspx';</script>");
+                    base.RegisterStartupScript("", "<script>alert('修改操作失败，请与管理员联系!');window.location.href='company_companyedit.aspx?enid=" + SASRequest.GetInt("enid", 0) + "';</script>");
                     return;
                 }
 
-                //int enid = AdminCompanies.CreateCompanyInfo(_companyInfo);
+                AdminVistLogs.InsertLog(this.userid, this.username, this.usergroupid, this.grouptitle, this.ip, "后台修改企业信息", "企业名:" + qyname.Text.Trim());
 
-                //if (enid == 0)
-                //{
-                //    base.RegisterStartupScript("", "<script>alert('添加操作失败，请与管理员联系!');window.location.href='company_companyedit.aspx';</script>");
-                //    return;
-                //}
-
-                //AdminVistLogs.InsertLog(this.userid, this.username, this.usergroupid, this.grouptitle, this.ip, "后台添加企业信息", "企业名:" + qyname.Text.Trim());
-
-                //base.RegisterStartupScript("PAGE", "window.location.href='company_companygrid.aspx';");
+                base.RegisterStartupScript("PAGE", "window.location.href='company_companygrid.aspx';");
             }
             #endregion
         }
