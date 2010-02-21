@@ -1855,6 +1855,14 @@ namespace SAS.Data
         bool UpdateCompany(Companys _company);
         #endregion
 
+        #region 行业类别操作
+        /// <summary>
+        /// 获取全部类别信息
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetAllCatalog();
+        #endregion
+
         /// <summary>
         /// 获取指定用户ID列表的邮件信息
         /// </summary>

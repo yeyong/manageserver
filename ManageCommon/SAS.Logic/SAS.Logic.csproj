@@ -41,8 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin\AdminCatalogies.cs" />
     <Compile Include="admin\AdminCompanies.cs" />
     <Compile Include="areas.cs" />
+    <Compile Include="Catalogs.cs" />
     <Compile Include="Companies.cs" />
     <Compile Include="Page\AdminPage.cs">
       <SubType>ASPXCodeBehind</SubType>

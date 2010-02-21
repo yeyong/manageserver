@@ -48,6 +48,7 @@
     <Compile Include="Album\AlbumCategoryInfo.cs" />
     <Compile Include="Album\AlbumInfo.cs" />
     <Compile Include="AttachmentInfo.cs" />
+    <Compile Include="CatalogInfo.cs" />
     <Compile Include="Companys.cs" />
     <Compile Include="CustomEditorButtonInfo.cs" />
     <Compile Include="ForumInfo.cs" />
