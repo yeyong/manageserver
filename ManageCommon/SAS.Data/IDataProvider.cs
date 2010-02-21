@@ -1857,10 +1857,31 @@ namespace SAS.Data
 
         #region 行业类别操作
         /// <summary>
+        /// 创建行业类目
+        /// </summary>
+        /// <returns></returns>
+        int CreateCatalog(CatalogInfo _cataloginfo);
+        /// <summary>
+        /// 获取类别信息实体
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        IDataReader GetCatalogInfo(int id);
+        /// <summary>
         /// 获取全部类别信息
         /// </summary>
         /// <returns></returns>
         DataTable GetAllCatalog();
+        /// <summary>
+        /// 获取行业类别信息赋予json
+        /// </summary>
+        DataTable GetCategoriesTableToJson();
+        /// <summary>
+        /// 更新行业类别信息
+        /// </summary>
+        /// <param name="_catalog"></param>
+        /// <returns></returns>
+        bool UpdateCatalogInfo(CatalogInfo _catalog);
         #endregion
 
         /// <summary>
