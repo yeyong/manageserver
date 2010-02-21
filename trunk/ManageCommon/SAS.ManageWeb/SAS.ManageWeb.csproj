@@ -69,6 +69,13 @@
     <Compile Include="aspx\1\usercpprofile.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ManagePage\company\company_cataloggrid.aspx.cs">
+      <DependentUpon>company_cataloggrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\company\company_cataloggrid.aspx.designer.cs">
+      <DependentUpon>company_cataloggrid.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -343,6 +350,7 @@
     <Content Include="config\album.config" />
     <Content Include="config\ftp.config" />
     <Content Include="config\sirius.config" />
+    <Content Include="ManagePage\company\company_cataloggrid.aspx" />
     <Content Include="templates\default\about.png" />
     <Content Include="templates\default\about.xml" />
     <Content Include="templates\default\album\usercpmanagealbum.htm" />

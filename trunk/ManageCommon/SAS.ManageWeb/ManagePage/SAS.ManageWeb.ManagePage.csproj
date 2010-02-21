@@ -375,7 +375,9 @@
     <Content Include="global\global_templatesgrid.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="global\global_templatetree.aspx" />
+    <Content Include="global\global_templatetree.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="global\global_uiandshowstyle.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>

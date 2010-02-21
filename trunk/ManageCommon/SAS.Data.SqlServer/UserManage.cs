@@ -2218,5 +2218,17 @@ namespace SAS.Data.SqlServer
         }
         #endregion
 
+        #region 行业信息操作
+        /// <summary>
+        /// 获取全部类别信息
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetAllCatalog()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}catalog] ORDER BY [id]", DbFields.CATALOG, BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+        #endregion
+
     }
 }

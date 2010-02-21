@@ -115,7 +115,7 @@ namespace SAS.ManageWeb.ManagePage
             otherfilelist.Columns.Add("filedescription", Type.GetType("System.String"));
 
             string path = SASRequest.GetString("path");
-            DirectoryInfo dirinfo = new DirectoryInfo(Server.MapPath("../../templates/" + path));
+            DirectoryInfo dirinfo = new DirectoryInfo(Server.MapPath("..\\..\\templates\\" + path));
             int i = 1;
             string extname;
             foreach (FileSystemInfo file in dirinfo.GetFileSystemInfos())
