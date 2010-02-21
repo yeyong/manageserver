@@ -228,10 +228,10 @@
 				     if(treeNodes[i].subforumcount == '0')
 				     {
 				        str += "<a class=\"TopicButton\" type=\"button\" onclick=\"javascript:if(confirm('您要删除该项吗?'))";
-				        str += "{success.style.display = 'block';HideOverSels('success');window.location.href='mall_goodscategoriesmanage.aspx?method=del&id=";
+				        str += "{success.style.display = 'block';HideOverSels('success');window.location.href='company_cataloggrid.aspx?method=del&id=";
 				        str += treeNodes[i].fid + "';}\"><img src=\"../images/del.gif\" />删除</a>";
                      }
-                     str += "<a class=\"TopicButton\" onclick=\"javascript:success.style.display = 'block';HideOverSels('success');window.location='mall_goodscategoriesmanage.aspx?method=update&id=";
+                     str += "<a class=\"TopicButton\" onclick=\"javascript:success.style.display = 'block';HideOverSels('success');window.location='company_cataloggrid.aspx?method=update&id=";
                      str += treeNodes[i].fid + "';\" type=\"button\"><img src=\"../images/cache_resetall.gif\"/> 更新分类商品数 </a>"
 				     str += "</div>";
 				     document.write(str);
@@ -248,10 +248,10 @@
 				     if(treeNodes[i].subforumcount == '0')
 				     {
 				        str += "<a class=\"TopicButton\" type=\"button\" onclick=\"javascript:if(confirm('您要删除该项吗?'))";
-				        str += "{success.style.display = 'block';HideOverSels('success');window.location.href='mall_goodscategoriesmanage.aspx?method=del&id=";
+				        str += "{success.style.display = 'block';HideOverSels('success');window.location.href='company_cataloggrid.aspx?method=del&id=";
 				        str += treeNodes[i].fid + "';}\"><img src=\"../images/del.gif\" />删除</a>";
 				     }
-                     str += "<a class=\"TopicButton\" onclick=\"javascript:success.style.display = 'block';HideOverSels('success');window.location='mall_goodscategoriesmanage.aspx?method=update&id=";
+				     str += "<a class=\"TopicButton\" onclick=\"javascript:success.style.display = 'block';HideOverSels('success');window.location='company_cataloggrid.aspx?method=update&id=";
                      str += treeNodes[i].fid + "';\" type=\"button\"><img src=\"../images/cache_resetall.gif\"/> 更新分类商品数 </a>"
 				     str += "</div>";
 				     document.write(str);
@@ -369,7 +369,7 @@
 		             HideOverSels('success');
 //		             alert('mall_goodscategoriesmanage.aspx?currentfid=' + objO.fid + '&targetfid=' + objN.fid + '&isaschildnode=' + treetype);
 //		             return;
-		             window.location.href='mall_goodscategoriesmanage.aspx?currentfid=' + objO.fid + '&targetfid=' + objN.fid + '&isaschildnode=' + treetype;
+		             window.location.href = 'company_cataloggrid.aspx?currentfid=' + objO.fid + '&targetfid=' + objN.fid + '&isaschildnode=' + treetype;
 	              }
 	              else
 	              {
@@ -508,7 +508,7 @@
             <div style="clear:both;position:relative">
                 <uc1:PageInfo id="info1" runat="server" Icon="Information" Text="<li>支持鼠标拖拽更改行业分类</li>"></uc1:PageInfo>
                 <a class="TopicButton" onclick="javascript:newRootNode(event);" type="button"><img src="../images/add.gif"/> 添加顶级分类 </a>&nbsp;&nbsp;
-                <a class="TopicButton" onclick="javascript:sethighlevel();" type="button"><img src="../images/del.gif"/> 取消版块绑定 </a>&nbsp;&nbsp;
+                <a class="TopicButton" onclick="javascript:sethighlevel();" type="button"><img src="../images/del.gif"/> 取消绑定 </a>&nbsp;&nbsp;
                 <a class="TopicButton" onclick="javascript:window.location='company_cataloggrid.aspx?method=updateall';" type="button"><img src="../images/cache_resetall.gif"/> 更新所有分类商品数 </a>
                 <input type="hidden" name="highlevel" id="highlevel" />
                 <div class="Navbutton" style=" margin:0 auto; text-align:center;">

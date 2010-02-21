@@ -2220,6 +2220,36 @@ namespace SAS.Data.SqlServer
 
         #region 行业信息操作
         /// <summary>
+        /// 创建行业类目
+        /// </summary>
+        /// <returns></returns>
+        public int CreateCatalog(CatalogInfo _cataloginfo)
+        {
+            DbParameter[] parms = 
+				{
+						DbHelper.MakeInParam("@parentid", (DbType)SqlDbType.Int, 4,_cataloginfo.parentid),
+						DbHelper.MakeInParam("@sort", (DbType)SqlDbType.Int, 4,_cataloginfo.sort),
+						DbHelper.MakeInParam("@parentlist", (DbType)SqlDbType.NVarChar, 50,_cataloginfo.parentlist),
+                        DbHelper.MakeInParam("@displayorder", (DbType)SqlDbType.Int, 4,_cataloginfo.displayorder),
+						DbHelper.MakeInParam("@name", (DbType)SqlDbType.NVarChar, 50,_cataloginfo.name),
+						DbHelper.MakeInParam("@haschild", (DbType)SqlDbType.Bit, 1,_cataloginfo.haschild),
+						DbHelper.MakeInParam("@cllogo", (DbType)SqlDbType.VarChar, 100,_cataloginfo.cllogo),
+						DbHelper.MakeInParam("@companycount", (DbType)SqlDbType.Int, 4,_cataloginfo.companycount)
+				};
+            string commandText = String.Format("INSERT INTO [{0}catalog] ([parentid], [sort], [parentlist], [displayorder], [name], [haschild], [cllogo], [companycount]) VALUES (@parentid, @sort, @parentlist, @displayorder, @name, @haschild, @cllogo, @companycount);SELECT SCOPE_IDENTITY()  AS id", BaseConfigs.GetTablePrefix);
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText, parms), -1);
+        }
+        /// <summary>
+        /// 获取类别信息实体
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IDataReader GetCatalogInfo(int categoryId)
+        {
+            DbParameter parm = DbHelper.MakeInParam("@categoryid", (DbType)SqlDbType.Int, 4, categoryId);
+            return DbHelper.ExecuteReader(CommandType.Text, string.Format("SELECT TOP 1 * FROM [{0}catalog] WHERE [id] = @categoryid", BaseConfigs.GetTablePrefix), parm);
+        }
+        /// <summary>
         /// 获取全部类别信息
         /// </summary>
         /// <returns></returns>
@@ -2227,6 +2257,40 @@ namespace SAS.Data.SqlServer
         {
             string commandText = string.Format("SELECT {0} FROM [{1}catalog] ORDER BY [id]", DbFields.CATALOG, BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+        /// <summary>
+        /// 获取行业类别信息赋予json
+        /// </summary>
+        public DataTable GetCategoriesTableToJson()
+        {
+            string commandText = string.Format("SELECT [id] AS [id],[parentid] AS [pid],[sort] AS [sort],[parentlist] AS [pidlist],[name] AS [name],[haschild] AS [child],[cllogo] AS [logo] FROM [{0}catalog] ORDER BY [id]", BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 更新行业类别信息
+        /// </summary>
+        /// <param name="_catalog"></param>
+        /// <returns></returns>
+        public bool UpdateCatalogInfo(CatalogInfo _cataloginfo)
+        {
+            DbParameter[] parms = 
+				{
+						DbHelper.MakeInParam("@parentid", (DbType)SqlDbType.Int, 4,_cataloginfo.parentid),
+						DbHelper.MakeInParam("@sort", (DbType)SqlDbType.Int, 4,_cataloginfo.sort),
+						DbHelper.MakeInParam("@parentlist", (DbType)SqlDbType.NVarChar, 50,_cataloginfo.parentlist),
+                        DbHelper.MakeInParam("@displayorder", (DbType)SqlDbType.Int, 4,_cataloginfo.displayorder),
+						DbHelper.MakeInParam("@name", (DbType)SqlDbType.NVarChar, 50,_cataloginfo.name),
+						DbHelper.MakeInParam("@haschild", (DbType)SqlDbType.Bit, 1,_cataloginfo.haschild),
+						DbHelper.MakeInParam("@cllogo", (DbType)SqlDbType.VarChar, 100,_cataloginfo.cllogo),
+						DbHelper.MakeInParam("@companycount", (DbType)SqlDbType.Int, 4,_cataloginfo.companycount),
+                        DbHelper.MakeInParam("@categoryid", (DbType)SqlDbType.Int, 4,_cataloginfo.id)
+				};
+            string commandText = String.Format("Update [{0}catalog]  Set [parentid] = @parentid, [sort] = @sort, [parentlist] = @parentlist, [displayorder] = @displayorder, [name] = @name, [haschild] = @haschild, [cllogo] = @cllogo, [companycount] = @companycount WHERE [id] = @categoryid", BaseConfigs.GetTablePrefix);
+
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+
+            return true;
         }
         #endregion
 

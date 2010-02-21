@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="admin\AdminCatalogies.cs" />
     <Compile Include="admin\AdminCompanies.cs" />
     <Compile Include="areas.cs" />
     <Compile Include="Catalogs.cs" />
@@ -108,6 +107,7 @@
     <Compile Include="UserCredits.cs" />
     <Compile Include="UserGroups.cs" />
     <Compile Include="Users.cs" />
+    <Compile Include="WriteFile.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SAS.Cache\SAS.Cache.csproj">

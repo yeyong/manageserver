@@ -31,8 +31,8 @@ namespace SAS.ManageWeb.ManagePage
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (SASRequest.GetString("currentfid") != "")
-            //    MoveCategory();
+            if (SASRequest.GetString("currentfid") != "")
+                MoveCategory();
 
             if (SASRequest.GetString("method") == "new")
                 NewChildCategory();
@@ -51,13 +51,13 @@ namespace SAS.ManageWeb.ManagePage
 
             //if (SASRequest.GetString("method") == "update")
             //    UpdateCategoryGoodsCount();
-
+            
             LoadCategoryTree();
         }
 
         private void LoadCategoryTree()
         {
-            DataTable dt = AdminCatalogies.GetAllCatalog();
+            DataTable dt = Catalogs.GetAllCatalogNoCache();
             ViewState["dt"] = dt;
 
             if (dt.Rows.Count == 0)
@@ -113,19 +113,16 @@ namespace SAS.ManageWeb.ManagePage
                     }
 
                     str += "{fid:" + drs[n]["id"] + ",name:\"" +
-                           Utils.HtmlEncode(drs[n]["categoryname"].ToString().Trim().Replace("\\", "\\\\\\\\").Replace("'", "\\\\'")) + "\",subject:\" " +
+                           Utils.HtmlEncode(drs[n]["name"].ToString().Trim().Replace("\\", "\\\\\\\\").Replace("'", "\\\\'")) + "\",subject:\" " +
                            mystr + " <img src=../images/folders.gif align=\\\"absmiddle\\\" >";
-                    if (drs[n]["fid"].ToString() != "0" && int.Parse(drs[n]["sort"].ToString()) < 2)
-                        str += "<input type=\\\"checkbox\\\" name=\\\"ishighlevel\\\" value=\\\"" + drs[n]["id"] + "\\\">";
+                    if (int.Parse(drs[n]["sort"].ToString()) < 2) str += "<input type=\\\"checkbox\\\" name=\\\"ishighlevel\\\" value=\\\"" + drs[n]["id"] + "\\\">";
                     str += Utils.HtmlEncode(drs[n]["name"].ToString().Trim().Replace("\\", "\\\\ ")) + "\",linetitle:\"" +
-                           mystr + "\",parentidlist:0,layer:" + drs[n]["layer"] + ",subforumcount:" +
-                           (Convert.ToBoolean(drs[n]["haschild"].ToString()) ? 1 : 0) + ",addfid:" + drs[n]["fid"] +
-                           ",editfid:" + (drs[n]["fid"].ToString() == "0" ? GetParentFid(drs[n]["parentid"].ToString(), dt) : drs[n]["fid"].ToString()) +
-                           ",cfid:" + drs[n]["fid"] + "},\r\n";
+                           mystr + "\",parentidlist:0,layer:" + drs[n]["sort"] + ",subforumcount:" +
+                           (Convert.ToBoolean(drs[n]["haschild"].ToString()) ? 1 : 0) + "},\r\n";
                     if (Convert.ToBoolean(drs[n]["haschild"].ToString()))
                     {
                         int mylayer = Convert.ToInt32(drs[n]["sort"].ToString());
-                        string selectstr = "sort=" + (++mylayer) + " AND parentid=" + drs[n]["id"];
+                        string selectstr = "[sort]=" + (++mylayer) + " AND [parentid]=" + drs[n]["id"];
                         AddTree(mylayer, dt.Select(selectstr), currentnodestr);
                     }
                 }
@@ -157,18 +154,16 @@ namespace SAS.ManageWeb.ManagePage
                     str += "{fid:" + drs[n]["id"] + ",name:\"" +
                           Utils.HtmlEncode(drs[n]["name"].ToString().Trim().Replace("\\", "\\\\\\\\").Replace("'", "\\\\'")) + "\",subject:\" " +
                           mystr + " <img src=../images/folder.gif align=\\\"absmiddle\\\" >";
-                    if (drs[n]["fid"].ToString() != "0" && int.Parse(drs[n]["sort"].ToString()) < 2)
-                        str += "<input type=\\\"checkbox\\\" name=\\\"ishighlevel\\\" value=\\\"" + drs[n]["categoryid"] + "\\\">";
-                    str += Utils.HtmlEncode(drs[n]["categoryname"].ToString().Trim().Replace("\\", "\\\\ ")) + "\",linetitle:\"" +
-                          mystr + "\",parentidlist:\"" + drs[n]["parentidlist"].ToString().Trim() + "\",layer:" +
+                    if (int.Parse(drs[n]["sort"].ToString()) < 2)
+                        str += "<input type=\\\"checkbox\\\" name=\\\"ishighlevel\\\" value=\\\"" + drs[n]["id"] + "\\\">";
+                    str += Utils.HtmlEncode(drs[n]["name"].ToString().Trim().Replace("\\", "\\\\ ")) + "\",linetitle:\"" +
+                          mystr + "\",parentidlist:\"" + drs[n]["parentlist"].ToString().Trim() + "\",layer:" +
                           drs[n]["sort"] + ",subforumcount:" +
-                          (Convert.ToBoolean(drs[n]["haschild"].ToString()) ? 1 : 0) + ",addfid:" + drs[n]["fid"] +
-                          ",editfid:" + (drs[n]["sort"].ToString() == "1" ? GetParentFid(drs[n]["parentid"].ToString(), dt) : drs[n]["fid"].ToString()) +
-                          ",cfid:" + drs[n]["fid"] + "},\r\n";
+                          (Convert.ToBoolean(drs[n]["haschild"].ToString()) ? 1 : 0) + "},\r\n";
                     if (Convert.ToBoolean(drs[n]["haschild"].ToString()))
                     {
                         int mylayer = Convert.ToInt32(drs[n]["sort"].ToString());
-                        string selectstr = "[sort]=" + (++mylayer) + " AND parentid=" + drs[n]["id"];
+                        string selectstr = "[sort]=" + (++mylayer) + " AND [parentid]=" + drs[n]["id"];
                         AddTree(mylayer, dt.Select(selectstr), temp);
                     }
                 }
@@ -186,25 +181,82 @@ namespace SAS.ManageWeb.ManagePage
             gc.parentlist = "0";
             gc.companycount = 0;
             gc.haschild = 0;
-            int newcategoryid = GoodsCategories.CreateGoodsCategory(gc);
-            gc.Categoryid = newcategoryid;
-            gc.Pathlist = string.Format("<a href=\"showgoodslist-{0}.aspx\">{1}</a>", newcategoryid, gc.Categoryname);
-            GoodsCategories.UpdateGoodsCategory(gc);
-            SetForumsTrade(gc.Fid);
-            OpenMall(fid);
+            int newcategoryid = Catalogs.CreateCatalogInfo(gc);
+            gc.id = newcategoryid;
             ResetStatus();
-            this.RegisterStartupScript("PAGE", "window.location='mall_goodscategoriesmanage.aspx';");
+            this.RegisterStartupScript("PAGE", "window.location='company_cataloggrid.aspx';");
         }
 
-        private string GetParentFid(string parentid, DataTable dt)
+        private void NewChildCategory()
         {
-            string fid = "0";
-            foreach (DataRow dr in dt.Rows)
+            int parentid = SASRequest.GetInt("parentcategoryid", 0);
+            CatalogInfo parentgc = Catalogs.GetCatalogInfo(parentid);
+            CatalogInfo gc = new CatalogInfo();
+            gc.name = Utils.HtmlEncode(SASRequest.GetString("categoryname").Trim());
+            gc.parentid = parentid;
+            gc.sort = parentgc.sort + 1;
+            if (parentgc.parentlist.Trim() == "0")
             {
-                if (dr["id"].ToString() == parentid)
-                    fid = dr["fid"].ToString();
+                gc.parentlist = parentgc.id.ToString();
             }
-            return fid;
+            else
+            {
+                gc.parentlist = parentgc.parentlist + "," + parentgc.id;
+            }
+            gc.companycount = 0;
+            gc.haschild = 0;
+            int newcategoryid = Catalogs.CreateCatalogInfo(gc);
+            gc.id = newcategoryid;
+            parentgc.haschild = 1;
+            Catalogs.UpdateCatalogInfo(parentgc);
+            ResetStatus();
+            this.RegisterStartupScript("PAGE", "window.location='company_cataloggrid.aspx';");
+        }
+
+        private void MoveCategory()
+        {
+            int currentfid = SASRequest.GetInt("currentfid", 0);
+            int targetfid = SASRequest.GetInt("targetfid", 0);
+            string isaschildnode = SASRequest.GetString("isaschildnode");
+            CatalogInfo gc = Catalogs.GetCatalogInfo(currentfid);
+            int oldparentid = gc.parentid;
+            CatalogInfo parentgc = Catalogs.GetCatalogInfo(targetfid);
+            gc.parentid = targetfid;
+            gc.parentlist = parentgc.parentlist + "," + parentgc.id;
+            gc.sort = parentgc.sort + 1;
+            Catalogs.UpdateCatalogInfo(gc);
+            parentgc.haschild = 1;
+            Catalogs.UpdateCatalogInfo(parentgc);
+            if (gc.haschild == 0)
+                return;
+            DataTable dt = Catalogs.GetAllCatalogNoCache();
+            MoveSubCategory(gc, dt);
+            CatalogInfo oldparentgc = Catalogs.GetCatalogInfo(oldparentid);
+            oldparentgc.haschild = (dt.Select("parentid=" + oldparentid) == null ? 0 : 1);
+            Catalogs.UpdateCatalogInfo(oldparentgc);
+            ResetStatus();
+            this.RegisterStartupScript("PAGE", "window.location='company_cataloggrid.aspx';");
+        }
+
+        private void MoveSubCategory(CatalogInfo parentgc, DataTable dt)
+        {
+            DataRow[] datarow = dt.Select("parentid=" + parentgc.id.ToString());
+            if (datarow.Length == 0)
+                return;
+            foreach (DataRow dr in datarow)
+            {
+                CatalogInfo gc = Catalogs.GetCatalogInfo(int.Parse(dr["id"].ToString()));
+                gc.parentlist = parentgc.parentlist + "," + parentgc.id;
+                gc.sort = parentgc.sort + 1;
+                Catalogs.UpdateCatalogInfo(gc);
+                MoveSubCategory(gc, dt);
+            }
+        }
+
+        private void ResetStatus()
+        {
+            Catalogs.GetInstance.WriteJsonFile();
+            SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/CompanyCategories");
         }
 
         #region 把VIEWSTATE写入容器
