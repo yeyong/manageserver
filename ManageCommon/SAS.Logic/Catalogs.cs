@@ -96,6 +96,24 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 返回Ajax字符串
+        /// </summary>
+        /// <param name="parentid"></param>
+        /// <returns></returns>
+        public static string ReturnCalalogList(int parentid)
+        {
+            string returnmessage = "";
+            DataTable dt = GetAllCatalog();
+
+            foreach (DataRow dr in dt.Select("[parentid] = " + parentid))
+            {
+                returnmessage += "<option value=\"" + dr["id"] + "\">" + dr["name"] + "</option>";
+            }
+
+            return returnmessage;
+        }
+
+        /// <summary>
         /// 更新行业类别信息
         /// </summary>
         /// <param name="_catalog"></param>

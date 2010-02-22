@@ -2116,7 +2116,8 @@ namespace SAS.Data.SqlServer
 					                DbHelper.MakeInParam("@reg_year", (DbType)SqlDbType.SmallDateTime,4,_companyInfo.reg_year),
 					                DbHelper.MakeInParam("@reg_date", (DbType)SqlDbType.NVarChar,255,_companyInfo.reg_date),
 					                DbHelper.MakeInParam("@en_builddate", (DbType)SqlDbType.SmallDateTime,4,_companyInfo.en_builddate),
-					                DbHelper.MakeInParam("@en_visble", (DbType)SqlDbType.SmallInt,2,_companyInfo.en_visble)
+					                DbHelper.MakeInParam("@en_visble", (DbType)SqlDbType.SmallInt,2,_companyInfo.en_visble),
+                                    DbHelper.MakeInParam("@en_cataloglist",(DbType)SqlDbType.NVarChar,255,_companyInfo.en_cataloglist)
                                   };
             return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.StoredProcedure, string.Format("{0}createcompany", BaseConfigs.GetTablePrefix), parms), 0);
         }
@@ -2212,7 +2213,8 @@ namespace SAS.Data.SqlServer
 					                DbHelper.MakeInParam("@reg_year", (DbType)SqlDbType.SmallDateTime,4,_companyInfo.reg_year),
 					                DbHelper.MakeInParam("@reg_date", (DbType)SqlDbType.NVarChar,255,_companyInfo.reg_date),
 					                DbHelper.MakeInParam("@en_builddate", (DbType)SqlDbType.SmallDateTime,4,_companyInfo.en_builddate),
-					                DbHelper.MakeInParam("@en_visble", (DbType)SqlDbType.SmallInt,2,_companyInfo.en_visble)
+					                DbHelper.MakeInParam("@en_visble", (DbType)SqlDbType.SmallInt,2,_companyInfo.en_visble),
+                                    DbHelper.MakeInParam("@en_cataloglist",(DbType)SqlDbType.NVarChar,255,_companyInfo.en_cataloglist)
                                   };
             return DbHelper.ExecuteNonQuery(CommandType.StoredProcedure, string.Format("{0}updatecompany", BaseConfigs.GetTablePrefix), parms) > 0;
         }
