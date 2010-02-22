@@ -98,6 +98,7 @@ namespace SAS.ManageWeb.ManagePage
             comps.en_reason = enreason.Text.Trim();
             comps.en_level = Convert.ToInt32(enlevels.SelectedValue);
             comps.en_credits = TypeConverter.StrToInt(encredit.Text, 0);
+            comps.en_cataloglist = Utils.ChkSQL(SASRequest.GetString("hyidlist"));
 
             comps.en_sell = 0;
             comps.en_logo = "";

@@ -89,10 +89,11 @@ $.fn.CatalogList = function() {
     $sel1.append(result);
 
     _self.find("select").each(function(index) {
-        this.change(function() {
-            var curindex = index;
+        if (index > 3) return false;
+        $(this).click(function() {
+            var curindex = index + 1;
             while (curindex < 4) {
-                _self.find("select").eq(curindex).options.length = 0;
+                _self.find("select").eq(curindex)[0].options.length = 0;
                 curindex++;
             }
             var results = getReturn(pageurl + "opname=catalog&parentid=" + this.value);
@@ -100,4 +101,40 @@ $.fn.CatalogList = function() {
         });
     });
 
+    return _self;
+};
+
+$.fn.CatalogMoveUp = function(fromid, toid) {
+    var fromobj = jQuery("#" + fromid);
+    var toobj = jQuery("#" + toid);
+    var showstr = "";
+    var showid = 0;
+    fromobj.find("select").each(function() {
+        if ($(this)[0].options.length > 0 && $(this)[0].selectedIndex == -1) {
+            alert("请选择完整的行业类别！");
+            showstr = "";
+            return false;
+        }
+        if ($(this)[0].selectedIndex == -1) return true;
+        showstr += $(this)[0].options[$(this)[0].selectedIndex].text + "/";
+        showid = this.value;
+    });
+
+    if (toobj[0].options.length < 4 && showstr != "") {
+        for (var i = 0; i < toobj[0].options.length; i++) {
+            if (toobj[0].options[i].value == showid) {
+                alert("该行业类别已添加！");
+                return;
+            }
+        }
+        var newitem = new Option(showstr, showid);
+        toobj[0].options.add(newitem);
+    }
+    return this;
+};
+
+$.fn.CatalogMoveDown = function(objid) {
+    var _obj = jQuery("#" + objid);
+    var sindex = _obj[0].selectedIndex;
+    if (sindex != -1) _obj[0].options.remove(sindex);
 };
