@@ -48,6 +48,7 @@
     <Compile Include="DropDownList.cs" />
     <Compile Include="DropDownTreeList.cs" />
     <Compile Include="Hint.cs" />
+    <Compile Include="ListBox.cs" />
     <Compile Include="RadioButtonList.cs" />
     <Compile Include="tab\TabEditor.cs" />
     <Compile Include="tab\TabControlDesigner.cs" />

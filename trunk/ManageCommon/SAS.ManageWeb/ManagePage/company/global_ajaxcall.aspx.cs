@@ -30,6 +30,9 @@ namespace SAS.ManageWeb.ManagePage
                     case "area3":
                         resultmessage = areas.returnDistrict(SASRequest.GetString("defvalue"), parentid);
                         break;
+                    case "catalog":
+                        resultmessage = Catalogs.ReturnCalalogList(SASRequest.GetInt("parentid", 0));
+                        break;
                 }
                 Response.Write(resultmessage);
                 Response.ExpiresAbsolute = DateTime.Now.AddSeconds(-1);

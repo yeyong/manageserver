@@ -76,6 +76,13 @@
     <Compile Include="ManagePage\company\company_cataloggrid.aspx.designer.cs">
       <DependentUpon>company_cataloggrid.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\company\global_addcompany.aspx.cs">
+      <DependentUpon>global_addcompany.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\company\global_addcompany.aspx.designer.cs">
+      <DependentUpon>global_addcompany.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -351,6 +358,7 @@
     <Content Include="config\ftp.config" />
     <Content Include="config\sirius.config" />
     <Content Include="ManagePage\company\company_cataloggrid.aspx" />
+    <Content Include="ManagePage\company\global_addcompany.aspx" />
     <Content Include="templates\default\about.png" />
     <Content Include="templates\default\about.xml" />
     <Content Include="templates\default\album\usercpmanagealbum.htm" />

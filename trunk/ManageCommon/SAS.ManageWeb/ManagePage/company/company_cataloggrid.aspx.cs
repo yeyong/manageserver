@@ -37,8 +37,8 @@ namespace SAS.ManageWeb.ManagePage
             if (SASRequest.GetString("method") == "new")
                 NewChildCategory();
 
-            //if (SASRequest.GetString("method") == "edit")
-            //    EditCategory();
+            if (SASRequest.GetString("method") == "edit")
+                EditCategory();
 
             if (SASRequest.GetString("method") == "newrootnode")
                 NewRootCategory();
@@ -251,6 +251,19 @@ namespace SAS.ManageWeb.ManagePage
                 Catalogs.UpdateCatalogInfo(gc);
                 MoveSubCategory(gc, dt);
             }
+        }
+
+        private void EditCategory()
+        {
+            int categoryid = SASRequest.GetInt("categoryid", 0);
+            string categoryname = SASRequest.GetString("categoryname").Trim();
+            DataTable dt = Catalogs.GetAllCatalogNoCache();
+            CatalogInfo gc = Catalogs.GetCatalogInfo(categoryid);
+            CatalogInfo parentgc = Catalogs.GetCatalogInfo(gc.parentid);
+            gc.name = categoryname;
+            Catalogs.UpdateCatalogInfo(gc);
+            ResetStatus();
+            this.RegisterStartupScript("PAGE", "window.location='company_cataloggrid.aspx';");
         }
 
         private void ResetStatus()

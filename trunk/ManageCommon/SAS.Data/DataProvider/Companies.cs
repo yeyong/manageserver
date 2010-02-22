@@ -69,6 +69,7 @@ namespace SAS.Data.DataProvider
                 _companyInfo.en_builddate = Utils.GetStandardDate(reader["en_builddate"].ToString());
                 _companyInfo.en_visble = TypeConverter.StrToInt(reader["en_visble"].ToString(), 0);
                 _companyInfo.en_createdate = Utils.GetStandardDateTime(reader["en_createdate"].ToString());
+                _companyInfo.en_cataloglist = reader["en_cataloglist"].ToString();
             }
             reader.Close();
             return _companyInfo;

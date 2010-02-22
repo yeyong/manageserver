@@ -51,13 +51,6 @@
     <Compile Include="company\company_companygrid.aspx.designer.cs">
       <DependentUpon>company_companygrid.aspx.cs</DependentUpon>
     </Compile>
-    <Compile Include="company\global_addcompany.aspx.cs">
-      <DependentUpon>global_addcompany.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="company\global_addcompany.aspx.designer.cs">
-      <DependentUpon>global_addcompany.aspx.cs</DependentUpon>
-    </Compile>
     <Compile Include="company\global_ajaxcall.aspx.cs">
       <DependentUpon>global_ajaxcall.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -316,9 +309,6 @@
   <ItemGroup>
     <Content Include="company\company_companyedit.aspx" />
     <Content Include="company\company_companygrid.aspx" />
-    <Content Include="company\global_addcompany.aspx">
-      <SubType>ASPXCodeBehind</SubType>
-    </Content>
     <Content Include="company\global_ajaxcall.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
@@ -376,7 +366,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="global\global_templatetree.aspx">
-      <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="global\global_uiandshowstyle.aspx">
       <SubType>ASPXCodeBehind</SubType>

@@ -15,8 +15,13 @@ namespace SAS.ManageWeb.ManagePage
         {
             if (!Page.IsPostBack)
             {
-                
+                BindCatalogData();
             }
+        }
+
+        private void BindCatalogData()
+        {
+
         }
 
         private void AddCompanyInfo_Click(object sender, EventArgs e)

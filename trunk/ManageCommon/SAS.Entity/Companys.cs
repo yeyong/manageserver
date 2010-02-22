@@ -43,6 +43,7 @@ namespace SAS.Entity
         private string _en_builddate;
         private int _en_visble;
         private string _en_createdate;
+        private string _en_cataloglist;
         /// <summary>
         /// 企业ID
         /// </summary>
@@ -314,6 +315,14 @@ namespace SAS.Entity
         {
             set { _en_createdate = value; }
             get { return _en_createdate; }
+        }
+        /// <summary>
+        /// 行业类别列表
+        /// </summary>
+        public string en_cataloglist
+        {
+            set { _en_cataloglist = value; }
+            get { return _en_cataloglist; }
         }
         #endregion Model
     }

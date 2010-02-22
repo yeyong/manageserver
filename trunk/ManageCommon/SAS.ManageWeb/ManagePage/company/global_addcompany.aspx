@@ -30,6 +30,7 @@
     <script type="text/javascript" language="javascript">
         jQuery(document).ready(function() {
             jQuery("#areas").ProvinceCity();
+            jQuery("#zyhy").CatalogList();
         });
 
         function validate(theform) {
@@ -67,6 +68,35 @@
                             <td>
                                 <cc2:TextBox id="qyname" runat="server" CanBeNull="必填" IsReplaceInvertedComma="false" size="40" MaxLength="120">
                                 </cc2:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                主营行业类别:
+                            </td>
+                            <td>
+                                <table width="100%">
+                                <tr>
+                                    <td><uc2:PageInfo id="info2" runat="server" Icon="Warning" Text="添加行业类别信息，每企业最多添加4类"/></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div id="zyhy"></div>
+                                    </td>
+                                </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="button" name="Submit222" value="添加↓"/>
+                                            <input type="button" name="Submit2222" value="×删除"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            以下是您已选择的主营行业：<br />
+                                            <SELECT NAME="right_category_id" Size="8" style="width: 480px;">
+                                        </td>
+                                    </tr>
+                                </table>                                
                             </td>
                         </tr>
                         <tr>
