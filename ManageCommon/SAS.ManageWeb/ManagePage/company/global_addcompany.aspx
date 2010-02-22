@@ -31,14 +31,30 @@
         jQuery(document).ready(function() {
             jQuery("#areas").ProvinceCity();
             jQuery("#zyhy").CatalogList();
+            jQuery("#moveup").click(function() { $(this).CatalogMoveUp("zyhy", "selecthy"); });
+            jQuery("#movedown").click(function() { $(this).CatalogMoveDown("selecthy"); });
         });
 
         function validate(theform) {
+            if (Form1.selecthy.options.length == 0) {
+                resetPage();
+                alert("请选择公司主营行业类别！");
+                return false;
+            }
             if (document.getElementById("district").value == "" || document.getElementById("district").value == "0") {
                 resetPage();
                 alert("请准确选择公司所在地区！");
                 return false;
             }
+            var hylist = "";
+            for (var i = 0; i < Form1.selecthy.options.length; i++) {
+                if (i == 0) {
+                    hylist = Form1.selecthy.options[i].value;
+                } else {
+                    hylist += "," + Form1.selecthy.options[i].value;
+                }
+            }
+            document.getElementById("hyidlist").value = hylist;            
             return true;
         }
         function resetPage() {
@@ -86,14 +102,15 @@
                                 </tr>
                                     <tr>
                                         <td>
-                                            <input type="button" name="Submit222" value="添加↓"/>
-                                            <input type="button" name="Submit2222" value="×删除"/>
+                                            <input type="button" name="moveup" value="添加↓" id="moveup"/>
+                                            <input type="button" name="movedown" value="×删除" id="movedown"/>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             以下是您已选择的主营行业：<br />
-                                            <SELECT NAME="right_category_id" Size="8" style="width: 480px;">
+                                            <select name="selecthy" size="8" style="width: 480px;" id="selecthy"></select>
+                                            <input type="hidden" name="hyidlist" id="hyidlist" />
                                         </td>
                                     </tr>
                                 </table>                                
