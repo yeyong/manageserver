@@ -27,12 +27,14 @@
     <script type="text/javascript" src="../js/jQueryFunc.js"></script>
     <script type="text/javascript" src="../js/common.js"></script>
     <script type="text/javascript" src="../js/modalpopup.js"></script>
+    <script type="text/javascript" language="javascript" src="../../javascript/companycategories.js"></script>
+    <script type="text/javascript" language="javascript" src="../../javascript/template_catalogadmin.js"></script>
     <script type="text/javascript" language="javascript">
         jQuery(document).ready(function() {
             jQuery("#areas").ProvinceCity();
-            jQuery("#zyhy").CatalogList();
             jQuery("#moveup").click(function() { $(this).CatalogMoveUp("zyhy", "selecthy"); });
             jQuery("#movedown").click(function() { $(this).CatalogMoveDown("selecthy"); });
+            initCategory("zyhy");
         });
 
         function validate(theform) {
@@ -97,7 +99,12 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <div id="zyhy"></div>
+                                        <div id="zyhy">
+                                            <select id="cata1" name="cata1" size="8" style="width:120px" onchange="loadCategory('zyhy',1);"></select>
+                                            <select id="cata2" name="cata2" size="8" style="width:120px" onchange="loadCategory('zyhy',2);"></select>
+                                            <select id="cata3" name="cata3" size="8" style="width:120px" onchange="loadCategory('zyhy',3);"></select>
+                                            <select id="cata4" name="cata4" size="8" style="width:120px"></select>
+                                        </div>
                                     </td>
                                 </tr>
                                     <tr>

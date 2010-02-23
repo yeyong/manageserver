@@ -351,6 +351,7 @@
     <Content Include="javascript\post_editor.js" />
     <Content Include="javascript\template_album.js" />
     <Content Include="javascript\template_attach.js" />
+    <Content Include="javascript\template_catalogadmin.js" />
     <Content Include="javascript\template_utils.js" />
     <Content Include="config\email.config" />
     <Content Include="config\schedule.config" />
