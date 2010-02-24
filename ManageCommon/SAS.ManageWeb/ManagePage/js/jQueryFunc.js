@@ -104,3 +104,37 @@ $.fn.CatalogMoveDown = function(objid) {
     var sindex = _obj[0].selectedIndex;
     if (sindex != -1) _obj[0].options.remove(sindex);
 };
+
+$.fn.InitOption = function(defvalue) {
+    if (defvalue == "" && defvalue == null) return;
+    this.value = "";
+    $(this)[0].options.length = 0;
+    var cidarray = defvalue.split(",");
+    var strarray = new Array();
+    for (var index in cidarray) {
+        var definfo = "";
+        for (var newi in cats) {
+            if (cidarray[index] == cats[newi].id) {
+                definfo = cats[newi];
+            }
+        }
+        if (definfo != "") strarray[index] = Loadcatadata(definfo.pid, definfo.name);
+    }
+    alert(strarray[0]);
+//    for (var index in strarray) {
+//        var newoption = new Option(strarray[index].toString(), cidarray[index]);
+//        $(this)[0].options.add(newoption);
+//    }
+};
+
+function Loadcatadata(parentid, allstr) {
+    var definfos = "";
+    if (parentid != 0) {
+        for (var i in cats) {
+            if (cats[i].id == parentid) definfos = cats[i];
+        }
+        Loadcatadata(definfos.pid, definfos.name + "/" + allstr);
+    }
+    if (parentid == 0) return allstr;
+    
+}

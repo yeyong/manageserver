@@ -14,6 +14,7 @@ namespace SAS.ManageWeb.ManagePage
         protected Companys _companyInfos = new Companys();
 
         protected string defaultarea = "";
+        protected string defaultcata = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -63,6 +64,7 @@ namespace SAS.ManageWeb.ManagePage
             enreason.Text = _companyInfos.en_reason;
             enlevels.SelectedValue = _companyInfos.en_level.ToString();
             encredit.Text = _companyInfos.en_credits.ToString();
+            defaultcata = _companyInfos.en_cataloglist;
         }
 
         private void UpdateCompanyInfo_Click(object sender, EventArgs e)
@@ -112,7 +114,7 @@ namespace SAS.ManageWeb.ManagePage
                 _companyInfo.reg_year = regyear.Text;
                 _companyInfo.reg_date = regdate.Text.Trim();
                 _companyInfo.reg_address = regaddress.Text.Trim();
-                _companyInfo.en_mail = enmain.Text.Trim();
+                _companyInfo.en_main = enmain.Text.Trim();
                 _companyInfo.en_status = Convert.ToInt32(enstatus.SelectedValue);
                 _companyInfo.en_reason = enreason.Text.Trim();
                 _companyInfo.en_level = Convert.ToInt32(enlevels.SelectedValue);
