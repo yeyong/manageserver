@@ -41,6 +41,12 @@ namespace SAS.ManageWeb.ManagePage
                     return;
                 }
 
+                if (SASRequest.GetString("hyidlist") == "")
+                {
+                    base.RegisterStartupScript("", "<script>alert('请准确选择公司主营行业!');window.location.href='global_addcompany.aspx';</script>");
+                    return;
+                }
+
                 Companys _companyInfo = CreateCompanyInfo();
 
                 if (AdminCompanies.ExistCompanyName(_companyInfo.en_name) != 0)
@@ -93,7 +99,7 @@ namespace SAS.ManageWeb.ManagePage
             comps.reg_year = regyear.Text;
             comps.reg_date = regdate.Text.Trim();
             comps.reg_address = regaddress.Text.Trim();
-            comps.en_mail = enmain.Text.Trim();
+            comps.en_main = enmain.Text.Trim();
             comps.en_status = Convert.ToInt32(enstatus.SelectedValue);
             comps.en_reason = enreason.Text.Trim();
             comps.en_level = Convert.ToInt32(enlevels.SelectedValue);

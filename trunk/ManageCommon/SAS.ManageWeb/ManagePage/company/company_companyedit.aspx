@@ -27,17 +27,37 @@
     <script type="text/javascript" src="../js/jQueryFunc.js"></script>
     <script type="text/javascript" src="../js/common.js"></script>
     <script type="text/javascript" src="../js/modalpopup.js"></script>
+    <script type="text/javascript" language="javascript" src="../../javascript/companycategories.js"></script>
+    <script type="text/javascript" language="javascript" src="../../javascript/template_catalogadmin.js"></script>
     <script type="text/javascript" language="javascript">
         jQuery(document).ready(function() {
             jQuery("#areas").ProvinceCity('<%=defaultarea%>');
+            jQuery("#moveup").click(function() { $(this).CatalogMoveUp("zyhy", "selecthy"); });
+            jQuery("#movedown").click(function() { $(this).CatalogMoveDown("selecthy"); });
+            jQuery("#selecthy").InitOption('<%=defaultcata%>');
+            initCategory("zyhy");
         });
 
         function validate(theform) {
+            if (Form1.selecthy.options.length == 0) {
+                resetPage();
+                alert("请选择公司主营行业类别！");
+                return false;
+            }
             if (document.getElementById("district").value == "" || document.getElementById("district").value == "0") {
                 resetPage();
                 alert("请准确选择公司所在地区！");
                 return false;
             }
+            var hylist = "";
+            for (var i = 0; i < Form1.selecthy.options.length; i++) {
+                if (i == 0) {
+                    hylist = Form1.selecthy.options[i].value;
+                } else {
+                    hylist += "," + Form1.selecthy.options[i].value;
+                }
+            }
+            document.getElementById("hyidlist").value = hylist;
             return true;
         }
         function resetPage() {
@@ -78,6 +98,41 @@
                                     <asp:ListItem Value="1" Selected="True">启用</asp:ListItem>
                                     <asp:ListItem Value="0">不启用</asp:ListItem>
                                 </cc2:RadioButtonList>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                主营行业类别:
+                            </td>
+                            <td>
+                                <table width="100%">
+                                <tr>
+                                    <td><uc2:PageInfo id="info2" runat="server" Icon="Warning" Text="添加行业类别信息，每企业最多添加4类"/></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div id="zyhy">
+                                            <select id="cata1" name="cata1" size="8" style="width:120px" onchange="loadCategory('zyhy',1);"></select>
+                                            <select id="cata2" name="cata2" size="8" style="width:120px" onchange="loadCategory('zyhy',2);"></select>
+                                            <select id="cata3" name="cata3" size="8" style="width:120px" onchange="loadCategory('zyhy',3);"></select>
+                                            <select id="cata4" name="cata4" size="8" style="width:120px"></select>
+                                        </div>
+                                    </td>
+                                </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="button" name="moveup" value="添加↓" id="moveup"/>
+                                            <input type="button" name="movedown" value="×删除" id="movedown"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            以下是您已选择的主营行业：<br />
+                                            <select name="selecthy" size="8" style="width: 480px;" id="selecthy"></select>
+                                            <input type="hidden" name="hyidlist" id="hyidlist"/>
+                                        </td>
+                                    </tr>
+                                </table>                                
                             </td>
                         </tr>
                         <tr>
