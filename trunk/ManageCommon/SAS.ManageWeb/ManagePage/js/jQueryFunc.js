@@ -119,12 +119,9 @@ $.fn.InitOption = function(defvalue) {
             }
         }
         if (definfo != "") strarray[index] = Loadcatadata(definfo.pid, definfo.name);
+        var newoption = new Option(strarray[index], cidarray[index]);
+        $(this)[0].options.add(newoption);
     }
-    alert(strarray[0]);
-//    for (var index in strarray) {
-//        var newoption = new Option(strarray[index].toString(), cidarray[index]);
-//        $(this)[0].options.add(newoption);
-//    }
 };
 
 function Loadcatadata(parentid, allstr) {
@@ -133,8 +130,7 @@ function Loadcatadata(parentid, allstr) {
         for (var i in cats) {
             if (cats[i].id == parentid) definfos = cats[i];
         }
-        Loadcatadata(definfos.pid, definfos.name + "/" + allstr);
+        allstr = Loadcatadata(definfos.pid, definfos.name) + "/" + allstr;
     }
-    if (parentid == 0) return allstr;
-    
+    return allstr;
 }

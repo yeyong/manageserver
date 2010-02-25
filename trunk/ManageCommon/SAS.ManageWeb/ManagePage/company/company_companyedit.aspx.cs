@@ -83,6 +83,13 @@ namespace SAS.ManageWeb.ManagePage
                     base.RegisterStartupScript("", "<script>alert('请准确选择公司所在地区!');window.location.href='company_companyedit.aspx?enid=" + SASRequest.GetInt("enid", 0) + "';</script>");
                     return;
                 }
+
+                if (SASRequest.GetString("hyidlist") == "")
+                {
+                    base.RegisterStartupScript("", "<script>alert('请准确选择公司主营行业!');window.location.href='company_companyedit.aspx?enid=" + SASRequest.GetInt("enid", 0) + "';</script>");
+                    return;
+                }
+
                 int renid = AdminCompanies.ExistCompanyName(qyname.Text.Trim());
                 if (renid != 0 && renid != SASRequest.GetInt("enid", 0))
                 {
@@ -119,6 +126,7 @@ namespace SAS.ManageWeb.ManagePage
                 _companyInfo.en_reason = enreason.Text.Trim();
                 _companyInfo.en_level = Convert.ToInt32(enlevels.SelectedValue);
                 _companyInfo.en_credits = TypeConverter.StrToInt(encredit.Text, 0);
+                _companyInfo.en_cataloglist = Utils.ChkSQL(SASRequest.GetString("hyidlist"));
 
                 _companyInfo.en_sell = 0;
                 _companyInfo.en_logo = "";
