@@ -44,6 +44,9 @@
     <Compile Include="BaseConfigInfo.cs" />
     <Compile Include="BaseConfigInfoCollection.cs" />
     <Compile Include="BaseConfigs.cs" />
+    <Compile Include="DbSnapConfigFileManager.cs" />
+    <Compile Include="DbSnapConfigs.cs" />
+    <Compile Include="DbSnapInfo.cs" />
     <Compile Include="DefaultConfigFileManager.cs" />
     <Compile Include="EmailConfigFileManager.cs" />
     <Compile Include="EmailConfigInfo.cs" />

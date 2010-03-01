@@ -90,6 +90,27 @@
     <Compile Include="ManagePage\company\global_addcompany.aspx.designer.cs">
       <DependentUpon>global_addcompany.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\global\global_addannounce.aspx.cs">
+      <DependentUpon>global_addannounce.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_addannounce.aspx.designer.cs">
+      <DependentUpon>global_addannounce.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\global\global_announcegrid.aspx.cs">
+      <DependentUpon>global_announcegrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_announcegrid.aspx.designer.cs">
+      <DependentUpon>global_announcegrid.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\global\global_editannounce.aspx.cs">
+      <DependentUpon>global_editannounce.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_editannounce.aspx.designer.cs">
+      <DependentUpon>global_editannounce.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -368,6 +389,9 @@
     <Content Include="ManagePage\company\company_cataloggrid.aspx" />
     <Content Include="ManagePage\company\company_companyedit.aspx" />
     <Content Include="ManagePage\company\global_addcompany.aspx" />
+    <Content Include="ManagePage\global\global_addannounce.aspx" />
+    <Content Include="ManagePage\global\global_announcegrid.aspx" />
+    <Content Include="ManagePage\global\global_editannounce.aspx" />
     <Content Include="templates\default\about.png" />
     <Content Include="templates\default\about.xml" />
     <Content Include="templates\default\album\usercpmanagealbum.htm" />

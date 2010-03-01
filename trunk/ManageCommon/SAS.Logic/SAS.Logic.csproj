@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="admin\AdminCompanies.cs" />
+    <Compile Include="Announcements.cs" />
     <Compile Include="areas.cs" />
     <Compile Include="Catalogs.cs" />
     <Compile Include="Companies.cs" />

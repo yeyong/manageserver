@@ -4,7 +4,7 @@ using System.Collections;
 namespace SAS.Config
 {
     /// <summary>
-    /// Class1 的摘要说明。
+    /// BaseConfigInfo 集合类
     /// </summary>
     [Serializable]
     public class BaseConfigInfoCollection : CollectionBase
