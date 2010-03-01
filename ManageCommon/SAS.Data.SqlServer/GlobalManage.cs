@@ -422,7 +422,78 @@ namespace SAS.Data.SqlServer
         #endregion
 
         #region 公告处理announcements表基本操作
+        /// <summary>
+        /// 添加公告
+        /// </summary>
+        /// <param name="announcementInfo">公告对象</param>
+        public int CreateAnnouncement(AnnouncementInfo announcementInfo)
+        {
+            DbParameter[] parms = {
+                                        DbHelper.MakeInParam("@poster", (DbType)SqlDbType.NVarChar, 20, announcementInfo.Poster),
+                                        DbHelper.MakeInParam("@posterid", (DbType)SqlDbType.Int, 4, announcementInfo.Posterid),
+                                        DbHelper.MakeInParam("@title", (DbType)SqlDbType.NVarChar, 250, announcementInfo.Title),
+                                        DbHelper.MakeInParam("@displayorder", (DbType)SqlDbType.Int, 4, announcementInfo.Displayorder),
+                                        DbHelper.MakeInParam("@starttime", (DbType)SqlDbType.DateTime, 8, announcementInfo.Starttime),
+                                        DbHelper.MakeInParam("@endtime", (DbType)SqlDbType.DateTime, 8, announcementInfo.Endtime),
+                                        DbHelper.MakeInParam("@message", (DbType)SqlDbType.NText, 0, announcementInfo.Message)
+                                    };
+            string commandText = string.Format("INSERT INTO [{0}announcements] ([poster],[posterid],[title],[displayorder],[starttime],[endtime],[message]) VALUES(@poster, @posterid, @title, @displayorder, @starttime, @endtime, @message)", BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+        /// <summary>
+        /// 获取通告
+        /// </summary>
+        public IDataReader GetAnnouncement(int id)
+        {
+            DbParameter param = DbHelper.MakeInParam("@id", (DbType)SqlDbType.Int, 4, id);
+            string commandText = string.Format("SELECT {0} FROM [{1}announcements] WHERE [id]=@id",
+                                                DbFields.ANNOUNCEMENTS,
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText, param);
+        }
+        /// <summary>
+        /// 获取通告
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetAnnouncements()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}announcements] ORDER BY [displayorder] DESC,[id] DESC",
+                                                DbFields.ANNOUNCEMENTS,
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDatasetInMasterDB(CommandType.Text, commandText).Tables[0];
+        }
+        /// <summary>
+        /// 删除通告
+        /// </summary>
+        /// <param name="idList">逗号分隔的id列表字符串</param>
+        public int DeleteAnnouncements(string idList)
+        {
+            if (!Utils.IsNumericList(idList))
+                return 0;
 
+            string commandText = string.Format("DELETE FROM [{0}announcements] WHERE [id] IN ({1})",
+                                                BaseConfigs.GetTablePrefix,
+                                                idList);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
+        }
+        /// <summary>
+        /// 更新通告
+        /// </summary>
+        public int UpdateAnnouncement(AnnouncementInfo announcementInfo)
+        {
+            DbParameter[] parms = {
+                                        DbHelper.MakeInParam("@id", (DbType)SqlDbType.Int, 4, announcementInfo.Id),
+                                        DbHelper.MakeInParam("@poster", (DbType)SqlDbType.NVarChar, 20, announcementInfo.Poster),
+                                        DbHelper.MakeInParam("@title", (DbType)SqlDbType.NVarChar, 250, announcementInfo.Title),
+                                        DbHelper.MakeInParam("@displayorder", (DbType)SqlDbType.Int, 4, announcementInfo.Displayorder),
+                                        DbHelper.MakeInParam("@starttime", (DbType)SqlDbType.DateTime, 8, announcementInfo.Starttime),
+                                        DbHelper.MakeInParam("@endtime", (DbType)SqlDbType.DateTime, 8, announcementInfo.Endtime),
+                                        DbHelper.MakeInParam("@message", (DbType)SqlDbType.NText, 0, announcementInfo.Message)
+                                    };
+            string commandText = string.Format("UPDATE [{0}announcements] SET [displayorder]=@displayorder,[title]=@title, [poster]=@poster,[starttime]=@starttime,[endtime]=@endtime,[message]=@message WHERE [id]=@id",
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
         /// <summary>
         /// 更新公告的创建者用户名
         /// </summary>

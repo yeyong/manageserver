@@ -7,10 +7,7 @@ namespace SAS.Config
     /// </summary>
     public class BaseConfigs
     {
-
-        private static object lockHelper = new object();
-
-        private static System.Timers.Timer baseConfigTimer = new System.Timers.Timer(15000);
+        private static System.Timers.Timer baseConfigTimer = new System.Timers.Timer(60000);
 
         private static BaseConfigInfo m_configinfo;
 
@@ -36,6 +33,14 @@ namespace SAS.Config
         /// 重设配置类实例
         /// </summary>
         public static void ResetConfig()
+        {
+            m_configinfo = BaseConfigFileManager.LoadConfig();
+        }
+
+        /// <summary>
+        /// 重设配置类实例
+        /// </summary>
+        public static void ResetRealConfig()
         {
             m_configinfo = BaseConfigFileManager.LoadRealConfig();
         }

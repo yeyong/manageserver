@@ -5,13 +5,15 @@ using System.Data.Common;
 using System.Collections;
 
 using SAS.Config;
+using SAS.Common;
+using SAS.Common.Generic;
 
 namespace SAS.Data
 {
     /// <summary>
     /// 数据访问助手类
     /// </summary>
-    public class DbHelper
+    public partial class DbHelper
     {
         #region 私有变量
 
@@ -19,17 +21,14 @@ namespace SAS.Data
         /// 数据库连接字符串
         /// </summary>
         protected static string m_connectionstring = null;
-
         /// <summary>
         /// DbProviderFactory实例
         /// </summary>
         private static DbProviderFactory m_factory = null;
-
         /// <summary>
-        /// NTW数据接口
+        /// Discuz!NT数据接口
         /// </summary>
         private static IDbProvider m_provider = null;
-
         /// <summary>
         /// 查询次数统计
         /// </summary>
@@ -41,6 +40,39 @@ namespace SAS.Data
         private static object lockHelper = new object();
 
         #endregion
+
+#if DEBUG
+        private static string m_querydetail = "";
+        public static string QueryDetail
+        {
+            get { return m_querydetail; }
+            set { m_querydetail = value; }
+        }
+        private static string GetQueryDetail(string commandText, DateTime dtStart, DateTime dtEnd, DbParameter[] cmdParams)
+        {
+            string tr = "<tr style=\"background: rgb(255, 255, 255) none repeat scroll 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;\">";
+            string colums = "";
+            string dbtypes = "";
+            string values = "";
+            string paramdetails = "";
+            if (cmdParams != null && cmdParams.Length > 0)
+            {
+                foreach (DbParameter param in cmdParams)
+                {
+                    if (param == null)
+                    {
+                        continue;
+                    }
+
+                    colums += "<td>" + param.ParameterName + "</td>";
+                    dbtypes += "<td>" + param.DbType.ToString() + "</td>";
+                    values += "<td>" + param.Value.ToString() + "</td>";
+                }
+                paramdetails = string.Format("<table width=\"100%\" cellspacing=\"1\" cellpadding=\"0\" style=\"background: rgb(255, 255, 255) none repeat scroll 0%; margin-top: 5px; font-size: 12px; display: block; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;\">{0}{1}</tr>{0}{2}</tr>{0}{3}</tr></table>", tr, colums, dbtypes, values);
+            }
+            return string.Format("<center><div style=\"border: 1px solid black; background:#FFF; margin: 2px; padding: 1em; text-align: left; width: 96%; clear: both;\"><div style=\"font-size: 12px; float: right; width: 100px; margin-bottom: 5px;\"><b>TIME:</b> {0}</div><span style=\"font-size: 12px;\">{1}{2}</span></div><br /></center>", dtEnd.Subtract(dtStart).TotalMilliseconds / 1000, commandText, paramdetails);
+        }
+#endif
 
         #region 属性
 
@@ -93,13 +125,8 @@ namespace SAS.Data
                             {
                                 throw new Exception("请检查SAS.config中Dbtype节点数据库类型是否正确，例如：SqlServer、Access、MySql");
                             }
-
                         }
                     }
-
-                    //m_provider = new DbProviderFinder().GetDbProvider("accesss");
-
-
                 }
                 return m_provider;
             }
@@ -125,7 +152,7 @@ namespace SAS.Data
         /// </summary>
         public static void ResetDbProvider()
         {
-            BaseConfigs.ResetConfig();
+            BaseConfigs.ResetRealConfig();
             DatabaseProvider.ResetDbProvider();
             m_connectionstring = null;
             m_factory = null;
@@ -172,9 +199,7 @@ namespace SAS.Data
         private static void AssignParameterValues(DbParameter[] commandParameters, DataRow dataRow)
         {
             if ((commandParameters == null) || (dataRow == null))
-            {
                 return;
-            }
 
             int i = 0;
             // 设置参数值
@@ -201,15 +226,11 @@ namespace SAS.Data
         private static void AssignParameterValues(DbParameter[] commandParameters, object[] parameterValues)
         {
             if ((commandParameters == null) || (parameterValues == null))
-            {
                 return;
-            }
 
             // 确保对象数组个数与参数个数匹配,如果不匹配,抛出一个异常.
             if (commandParameters.Length != parameterValues.Length)
-            {
                 throw new ArgumentException("参数值个数与参数不匹配.");
-            }
 
             // 给参数赋值
             for (int i = 0, j = commandParameters.Length; i < j; i++)
@@ -219,22 +240,14 @@ namespace SAS.Data
                 {
                     IDbDataParameter paramInstance = (IDbDataParameter)parameterValues[i];
                     if (paramInstance.Value == null)
-                    {
                         commandParameters[i].Value = DBNull.Value;
-                    }
                     else
-                    {
                         commandParameters[i].Value = paramInstance.Value;
-                    }
                 }
                 else if (parameterValues[i] == null)
-                {
                     commandParameters[i].Value = DBNull.Value;
-                }
                 else
-                {
                     commandParameters[i].Value = parameterValues[i];
-                }
             }
         }
 
@@ -266,7 +279,6 @@ namespace SAS.Data
 
             // 给命令分配一个数据库连接.
             command.Connection = connection;
-
             // 设置命令文本(存储过程名或SQL语句)
             command.CommandText = commandText;
 
@@ -282,9 +294,8 @@ namespace SAS.Data
 
             // 分配命令参数
             if (commandParameters != null)
-            {
                 AttachParameters(command, commandParameters);
-            }
+
             return;
         }
 
@@ -301,19 +312,22 @@ namespace SAS.Data
             if (connection == null) throw new ArgumentNullException("connection");
             if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
 
+            if (connection.State == ConnectionState.Open)
+                connection.Close();
+
+            connection.ConnectionString = GetRealConnectionString(spName);
+            connection.Open();
+
             DbCommand cmd = connection.CreateCommand();
             cmd.CommandText = spName;
             cmd.CommandType = CommandType.StoredProcedure;
 
-            connection.Open();
             // 检索cmd指定的存储过程的参数信息,并填充到cmd的Parameters参数集中.
             Provider.DeriveParameters(cmd);
             connection.Close();
             // 如果不包含返回值参数,将参数集中的每一个参数删除.
             if (!includeReturnValueParameter)
-            {
                 cmd.Parameters.RemoveAt(0);
-            }
 
             // 创建参数数组
             DbParameter[] discoveredParameters = new DbParameter[cmd.Parameters.Count];
@@ -427,12 +441,13 @@ namespace SAS.Data
 
             using (DbConnection connection = Factory.CreateConnection())
             {
-                connection.ConnectionString = ConnectionString;
-                connection.Open();
+                connection.ConnectionString = GetRealConnectionString(commandText);//ConnectionString;
+                //connection.Open();
 
                 return ExecuteNonQuery(connection, commandType, commandText, commandParameters);
             }
         }
+
 
         /// <summary>
         /// 执行指定连接字符串并返回刚插入的自增ID,类型的DbCommand.如果没有提供参数,不返回结果.
@@ -443,13 +458,12 @@ namespace SAS.Data
         /// <returns>返回命令影响的行数</returns>
         public static int ExecuteNonQuery(out int id, CommandType commandType, string commandText, params DbParameter[] commandParameters)
         {
-
             if (ConnectionString == null || ConnectionString.Length == 0) throw new ArgumentNullException("ConnectionString");
 
             using (DbConnection connection = Factory.CreateConnection())
             {
-                connection.ConnectionString = ConnectionString;
-                connection.Open();
+                connection.ConnectionString = GetRealConnectionString(commandText);//ConnectionString;
+                //connection.Open();
 
                 return ExecuteNonQuery(out id, connection, commandType, commandText, commandParameters);
             }
@@ -508,8 +522,16 @@ namespace SAS.Data
             bool mustCloseConnection = false;
             PrepareCommand(cmd, connection, (DbTransaction)null, commandType, commandText, commandParameters, out mustCloseConnection);
 
-            // Finally, execute the command
+#if DEBUG
+            DateTime dt1 = DateTime.Now;
+#endif
+            // 执行DbCommand命令,并返回结果.
             int retval = cmd.ExecuteNonQuery();
+#if DEBUG
+            DateTime dt2 = DateTime.Now;
+            m_querydetail += GetQueryDetail(cmd.CommandText, dt1, dt2, commandParameters);
+            m_querycount++;
+#endif
 
             // 清除参数,以便再次使用.
             cmd.Parameters.Clear();
@@ -547,8 +569,15 @@ namespace SAS.Data
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = Provider.GetLastIdSql();
 
-            id = int.Parse(cmd.ExecuteScalar().ToString());
+#if DEBUG
+            DateTime dt1 = DateTime.Now;
+#endif
+            id = TypeConverter.ObjectToInt(cmd.ExecuteScalar());
+#if DEBUG
+            DateTime dt2 = DateTime.Now;
 
+            m_querydetail += GetQueryDetail(cmd.CommandText, dt1, dt2, commandParameters);
+#endif
             m_querycount++;
 
 
@@ -650,7 +679,16 @@ namespace SAS.Data
             PrepareCommand(cmd, transaction.Connection, transaction, commandType, commandText, commandParameters, out mustCloseConnection);
 
             // 执行
+#if DEBUG
+            DateTime dt1 = DateTime.Now;
+#endif
+            // 执行DbCommand命令,并返回结果.
             int retval = cmd.ExecuteNonQuery();
+#if DEBUG
+            DateTime dt2 = DateTime.Now;
+            m_querydetail += GetQueryDetail(cmd.CommandText, dt1, dt2, commandParameters);
+            m_querycount++;
+#endif
 
             // 清除参数集,以便再次使用.
             cmd.Parameters.Clear();
@@ -685,7 +723,7 @@ namespace SAS.Data
             cmd.Parameters.Clear();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = Provider.GetLastIdSql();
-            id = int.Parse(cmd.ExecuteScalar().ToString());
+            id = TypeConverter.ObjectToInt(cmd.ExecuteScalar().ToString());
             return retval;
         }
 
@@ -746,7 +784,11 @@ namespace SAS.Data
 
                 if (query.Trim().Length > 0)
                 {
-                    ExecuteNonQuery(CommandType.Text, query);
+                    try
+                    {
+                        ExecuteNonQuery(CommandType.Text, query);
+                    }
+                    catch { ;}
                 }
 
                 if (lastPos == -1)
@@ -819,49 +861,15 @@ namespace SAS.Data
 
             // 创建并打开数据库连接对象,操作完成释放对象.
 
-            //using (DbConnection connection = (DbConnection)new System.Data.SqlClient.SqlConnection(ConnectionString))
             using (DbConnection connection = Factory.CreateConnection())
             {
                 connection.ConnectionString = ConnectionString;
-                connection.Open();
+                // connection.Open();
 
                 // 调用指定数据库连接字符串重载方法.
                 return ExecuteDataset(connection, commandType, commandText, commandParameters);
             }
         }
-
-        ///// <summary>
-        ///// 执行指定数据库连接字符串的命令,直接提供参数值,返回DataSet.
-        ///// </summary>
-        ///// <remarks>
-        ///// 此方法不提供访问存储过程输出参数和返回值.
-        ///// 示例: 
-        /////  DataSet ds = ExecuteDataset(connString, "GetOrders", 24, 36);
-        ///// </remarks>
-        ///// <param name="ConnectionString">一个有效的数据库连接字符串</param>
-        ///// <param name="spName">存储过程名</param>
-        ///// <param name="parameterValues">分配给存储过程输入参数的对象数组</param>
-        ///// <returns>返回一个包含结果集的DataSet</returns>
-        //public static DataSet ExecuteDataset(string spName, params object[] parameterValues)
-        //{
-        //    if (ConnectionString == null || ConnectionString.Length == 0) throw new ArgumentNullException("ConnectionString");
-        //    if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
-
-        //    if ((parameterValues != null) && (parameterValues.Length > 0))
-        //    {
-        //        // 从缓存中检索存储过程参数
-        //        DbParameter[] commandParameters = GetSpParameterSet(spName);
-
-        //        // 给存储过程参数分配值
-        //        AssignParameterValues(commandParameters, parameterValues);
-
-        //        return ExecuteDataset(ConnectionString, CommandType.StoredProcedure, spName, commandParameters);
-        //    }
-        //    else
-        //    {
-        //        return ExecuteDataset(ConnectionString, CommandType.StoredProcedure, spName);
-        //    }
-        //}
 
         /// <summary>
         /// 执行指定数据库连接对象的命令,返回DataSet.
@@ -879,6 +887,7 @@ namespace SAS.Data
             return ExecuteDataset(connection, commandType, commandText, (DbParameter[])null);
         }
 
+
         /// <summary>
         /// 执行指定数据库连接对象的命令,指定存储过程参数,返回DataSet.
         /// </summary>
@@ -894,7 +903,10 @@ namespace SAS.Data
         public static DataSet ExecuteDataset(DbConnection connection, CommandType commandType, string commandText, params DbParameter[] commandParameters)
         {
             if (connection == null) throw new ArgumentNullException("connection");
+            // connection.Close();
 
+            connection.ConnectionString = GetRealConnectionString(commandText);
+            connection.Open();
             // 预处理
             DbCommand cmd = Factory.CreateCommand();
             bool mustCloseConnection = false;
@@ -906,16 +918,19 @@ namespace SAS.Data
                 da.SelectCommand = cmd;
                 DataSet ds = new DataSet();
 
-
-
-
+#if DEBUG
+                DateTime dt1 = DateTime.Now;
+#endif
                 // 填充DataSet.
                 da.Fill(ds);
+#if DEBUG
+                DateTime dt2 = DateTime.Now;
 
+                m_querydetail += GetQueryDetail(cmd.CommandText, dt1, dt2, commandParameters);
+#endif
                 m_querycount++;
 
                 cmd.Parameters.Clear();
-
 
                 if (mustCloseConnection)
                     connection.Close();
@@ -923,6 +938,7 @@ namespace SAS.Data
                 return ds;
             }
         }
+
 
         /// <summary>
         /// 执行指定数据库连接对象的命令,指定参数值,返回DataSet.
@@ -1073,6 +1089,10 @@ namespace SAS.Data
         {
             if (connection == null) throw new ArgumentNullException("connection");
 
+            //connection.Close();
+            connection.ConnectionString = GetRealConnectionString(commandText);
+            connection.Open();
+
             bool mustCloseConnection = false;
             // 创建命令
             DbCommand cmd = Factory.CreateCommand();
@@ -1083,6 +1103,9 @@ namespace SAS.Data
                 // 创建数据阅读器
                 DbDataReader dataReader;
 
+#if DEBUG
+                DateTime dt1 = DateTime.Now;
+#endif
                 if (connectionOwnership == DbConnectionOwnership.External)
                 {
                     dataReader = cmd.ExecuteReader();
@@ -1091,13 +1114,13 @@ namespace SAS.Data
                 {
                     dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 }
+#if DEBUG
+                DateTime dt2 = DateTime.Now;
 
+                m_querydetail += GetQueryDetail(cmd.CommandText, dt1, dt2, commandParameters);
+#endif
                 m_querycount++;
                 // 清除参数,以便再次使用..
-                // HACK: There is a problem here, the output parameter values are fletched 
-                // when the reader is closed, so if the parameters are detached from the command
-                // then the SqlReader can磘 set its values. 
-                // When this happen, the parameters can磘 be used again in other command.
                 bool canClear = true;
                 foreach (DbParameter commandParameter in cmd.Parameters)
                 {
@@ -1111,7 +1134,6 @@ namespace SAS.Data
                     cmd.Parameters.Clear();
                 }
 
-
                 return dataReader;
             }
             catch
@@ -1121,6 +1143,8 @@ namespace SAS.Data
                 throw;
             }
         }
+
+
 
         /// <summary>
         /// 执行指定数据库连接字符串的数据阅读器.
@@ -1158,7 +1182,7 @@ namespace SAS.Data
             {
                 connection = Factory.CreateConnection();
                 connection.ConnectionString = ConnectionString;
-                connection.Open();
+                //connection.Open();
 
                 return ExecuteReader(connection, null, commandType, commandText, commandParameters, DbConnectionOwnership.Internal);
             }
@@ -1168,7 +1192,6 @@ namespace SAS.Data
                 if (connection != null) connection.Close();
                 throw;
             }
-
         }
 
         /// <summary>
@@ -1377,49 +1400,13 @@ namespace SAS.Data
             using (DbConnection connection = Factory.CreateConnection())
             {
                 connection.ConnectionString = ConnectionString;
-                connection.Open();
+                // connection.Open();
 
                 // 调用指定数据库连接字符串重载方法.
                 return ExecuteScalar(connection, commandType, commandText, commandParameters);
             }
         }
 
-        /// <summary>
-        /// 执行指定数据库连接字符串的命令,指定参数值,返回结果集中的第一行第一列.
-        /// </summary>
-        /// <remarks>
-        /// 此方法不提供访问存储过程输出参数和返回值参数.
-        /// 
-        /// 示例:  
-        ///  int orderCount = (int)ExecuteScalar(connString, "GetOrderCount", 24, 36);
-        /// </remarks>
-        /// <param name="ConnectionString">一个有效的数据库连接字符串</param>
-        /// <param name="spName">存储过程名称</param>
-        /// <param name="parameterValues">分配给存储过程输入参数的对象数组</param>
-        /// <returns>返回结果集中的第一行第一列</returns>
-        //public static object ExecuteScalar(string spName, params object[] parameterValues)
-        //{
-        //    //if (connectionString == null || connectionString.Length == 0) throw new ArgumentNullException("ConnectionString");
-        //    if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
-
-        //    // 如果有参数值
-        //    if ((parameterValues != null) && (parameterValues.Length > 0))
-        //    {
-        //        // 从缓存中加载存储过程参数,如果缓存中不存在则从数据库中检索参数信息并加载到缓存中. ()
-        //        DbParameter[] commandParameters = GetSpParameterSet(spName);
-
-        //        // 给存储过程参数赋值
-        //        AssignParameterValues(commandParameters, parameterValues);
-
-        //        // 调用重载方法
-        //        return ExecuteScalar(CommandType.StoredProcedure, spName, commandParameters);
-        //    }
-        //    else
-        //    {
-        //        // 没有参数值
-        //        return ExecuteScalar(CommandType.StoredProcedure, spName);
-        //    }
-        //}
 
         /// <summary>
         /// 执行指定数据库连接对象的命令,返回结果集中的第一行第一列.
@@ -1454,6 +1441,10 @@ namespace SAS.Data
         {
             if (connection == null) throw new ArgumentNullException("connection");
 
+            //connection.Close();
+            connection.ConnectionString = GetRealConnectionString(commandText);
+            connection.Open();
+
             // 创建DbCommand命令,并进行预处理
             DbCommand cmd = Factory.CreateCommand();
 
@@ -1471,6 +1462,7 @@ namespace SAS.Data
 
             return retval;
         }
+
 
         /// <summary>
         /// 执行指定数据库连接对象的命令,指定参数值,返回结果集中的第一行第一列.
@@ -1548,9 +1540,15 @@ namespace SAS.Data
             bool mustCloseConnection = false;
             PrepareCommand(cmd, transaction.Connection, transaction, commandType, commandText, commandParameters, out mustCloseConnection);
 
+#if DEBUG
+            DateTime dt1 = DateTime.Now;
+#endif
             // 执行DbCommand命令,并返回结果.
             object retval = cmd.ExecuteScalar();
-
+#if DEBUG
+            DateTime dt2 = DateTime.Now;
+            m_querydetail += GetQueryDetail(cmd.CommandText, dt1, dt2, commandParameters);
+#endif
             m_querycount++;
             // 清除参数,以便再次使用.
             cmd.Parameters.Clear();
@@ -1611,21 +1609,21 @@ namespace SAS.Data
         /// <param name="dataSet">要填充结果集的DataSet实例</param>
         /// <param name="tableNames">表映射的数据表数组
         /// 用户定义的表名 (可有是实际的表名.)</param>
-        public static void FillDataset(CommandType commandType, string commandText, DataSet dataSet, string[] tableNames)
-        {
-            if (ConnectionString == null || ConnectionString.Length == 0) throw new ArgumentNullException("ConnectionString");
-            if (dataSet == null) throw new ArgumentNullException("dataSet");
+        //public static void FillDataset(CommandType commandType, string commandText, DataSet dataSet, string[] tableNames)
+        //{
+        //    if (ConnectionString == null || ConnectionString.Length == 0) throw new ArgumentNullException("ConnectionString");
+        //    if (dataSet == null) throw new ArgumentNullException("dataSet");
 
-            // 创建并打开数据库连接对象,操作完成释放对象.
-            using (DbConnection connection = Factory.CreateConnection())
-            {
-                connection.ConnectionString = ConnectionString;
-                connection.Open();
+        //    // 创建并打开数据库连接对象,操作完成释放对象.
+        //    using (DbConnection connection = Factory.CreateConnection())
+        //    {
+        //        connection.ConnectionString = ConnectionString;
+        //        connection.Open();
 
-                // 调用指定数据库连接字符串重载方法.
-                FillDataset(connection, commandType, commandText, dataSet, tableNames);
-            }
-        }
+        //        // 调用指定数据库连接字符串重载方法.
+        //        FillDataset(connection, commandType, commandText, dataSet, tableNames);
+        //    }
+        //}
 
         /// <summary>
         /// 执行指定数据库连接字符串的命令,映射数据表并填充数据集.指定命令参数.
@@ -1642,22 +1640,20 @@ namespace SAS.Data
         /// <param name="tableNames">表映射的数据表数组
         /// 用户定义的表名 (可有是实际的表名.)
         /// </param>
-        public static void FillDataset(CommandType commandType,
-            string commandText, DataSet dataSet, string[] tableNames,
-            params DbParameter[] commandParameters)
-        {
-            if (ConnectionString == null || ConnectionString.Length == 0) throw new ArgumentNullException("ConnectionString");
-            if (dataSet == null) throw new ArgumentNullException("dataSet");
-            // 创建并打开数据库连接对象,操作完成释放对象.
-            using (DbConnection connection = Factory.CreateConnection())
-            {
-                connection.ConnectionString = ConnectionString;
-                connection.Open();
+        //public static void FillDataset(CommandType commandType, string commandText, DataSet dataSet, string[] tableNames, params DbParameter[] commandParameters)
+        //{
+        //    if (ConnectionString == null || ConnectionString.Length == 0) throw new ArgumentNullException("ConnectionString");
+        //    if (dataSet == null) throw new ArgumentNullException("dataSet");
+        //    // 创建并打开数据库连接对象,操作完成释放对象.
+        //    using (DbConnection connection = Factory.CreateConnection())
+        //    {
+        //        connection.ConnectionString = ConnectionString;
+        //        connection.Open();
 
-                // 调用指定数据库连接字符串重载方法.
-                FillDataset(connection, commandType, commandText, dataSet, tableNames, commandParameters);
-            }
-        }
+        //        // 调用指定数据库连接字符串重载方法.
+        //        FillDataset(connection, commandType, commandText, dataSet, tableNames, commandParameters);
+        //    }
+        //}
 
         /// <summary>
         /// 执行指定数据库连接字符串的命令,映射数据表并填充数据集,指定存储过程参数值.
@@ -1675,22 +1671,20 @@ namespace SAS.Data
         /// 用户定义的表名 (可有是实际的表名.)
         /// </param>    
         /// <param name="parameterValues">分配给存储过程输入参数的对象数组</param>
-        public static void FillDataset(string spName,
-            DataSet dataSet, string[] tableNames,
-            params object[] parameterValues)
-        {
-            if (ConnectionString == null || ConnectionString.Length == 0) throw new ArgumentNullException("ConnectionString");
-            if (dataSet == null) throw new ArgumentNullException("dataSet");
-            // 创建并打开数据库连接对象,操作完成释放对象.
-            using (DbConnection connection = Factory.CreateConnection())
-            {
-                connection.ConnectionString = ConnectionString;
-                connection.Open();
+        //public static void FillDataset(string spName, DataSet dataSet, string[] tableNames, params object[] parameterValues)
+        //{
+        //    if (ConnectionString == null || ConnectionString.Length == 0) throw new ArgumentNullException("ConnectionString");
+        //    if (dataSet == null) throw new ArgumentNullException("dataSet");
+        //    // 创建并打开数据库连接对象,操作完成释放对象.
+        //    using (DbConnection connection = Factory.CreateConnection())
+        //    {
+        //        connection.ConnectionString = ConnectionString;
+        //        connection.Open();
 
-                // 调用指定数据库连接字符串重载方法.
-                FillDataset(connection, spName, dataSet, tableNames, parameterValues);
-            }
-        }
+        //        // 调用指定数据库连接字符串重载方法.
+        //        FillDataset(connection, spName, dataSet, tableNames, parameterValues);
+        //    }
+        //}
 
         /// <summary>
         /// 执行指定数据库连接对象的命令,映射数据表并填充数据集.
@@ -1706,8 +1700,7 @@ namespace SAS.Data
         /// <param name="tableNames">表映射的数据表数组
         /// 用户定义的表名 (可有是实际的表名.)
         /// </param>    
-        public static void FillDataset(DbConnection connection, CommandType commandType,
-            string commandText, DataSet dataSet, string[] tableNames)
+        public static void FillDataset(DbConnection connection, CommandType commandType, string commandText, DataSet dataSet, string[] tableNames)
         {
             FillDataset(connection, commandType, commandText, dataSet, tableNames, null);
         }
@@ -1727,9 +1720,7 @@ namespace SAS.Data
         /// 用户定义的表名 (可有是实际的表名.)
         /// </param>
         /// <param name="commandParameters">分配给命令的SqlParamter参数数组</param>
-        public static void FillDataset(DbConnection connection, CommandType commandType,
-            string commandText, DataSet dataSet, string[] tableNames,
-            params DbParameter[] commandParameters)
+        public static void FillDataset(DbConnection connection, CommandType commandType, string commandText, DataSet dataSet, string[] tableNames, params DbParameter[] commandParameters)
         {
             FillDataset(connection, null, commandType, commandText, dataSet, tableNames, commandParameters);
         }
@@ -1750,32 +1741,30 @@ namespace SAS.Data
         /// 用户定义的表名 (可有是实际的表名.)
         /// </param>
         /// <param name="parameterValues">分配给存储过程输入参数的对象数组</param>
-        public static void FillDataset(DbConnection connection, string spName,
-            DataSet dataSet, string[] tableNames,
-            params object[] parameterValues)
-        {
-            if (connection == null) throw new ArgumentNullException("connection");
-            if (dataSet == null) throw new ArgumentNullException("dataSet");
-            if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
+        //public static void FillDataset(DbConnection connection, string spName, DataSet dataSet, string[] tableNames, params object[] parameterValues)
+        //{
+        //    if (connection == null) throw new ArgumentNullException("connection");
+        //    if (dataSet == null) throw new ArgumentNullException("dataSet");
+        //    if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
 
-            // 如果有参数值
-            if ((parameterValues != null) && (parameterValues.Length > 0))
-            {
-                // 从缓存中加载存储过程参数,如果缓存中不存在则从数据库中检索参数信息并加载到缓存中. ()
-                DbParameter[] commandParameters = GetSpParameterSet(connection, spName);
+        //    // 如果有参数值
+        //    if ((parameterValues != null) && (parameterValues.Length > 0))
+        //    {
+        //        // 从缓存中加载存储过程参数,如果缓存中不存在则从数据库中检索参数信息并加载到缓存中. ()
+        //        DbParameter[] commandParameters = GetSpParameterSet(connection, spName);
 
-                // 给存储过程参数赋值
-                AssignParameterValues(commandParameters, parameterValues);
+        //        // 给存储过程参数赋值
+        //        AssignParameterValues(commandParameters, parameterValues);
 
-                // 调用重载方法
-                FillDataset(connection, CommandType.StoredProcedure, spName, dataSet, tableNames, commandParameters);
-            }
-            else
-            {
-                // 没有参数值
-                FillDataset(connection, CommandType.StoredProcedure, spName, dataSet, tableNames);
-            }
-        }
+        //        // 调用重载方法
+        //        FillDataset(connection, CommandType.StoredProcedure, spName, dataSet, tableNames, commandParameters);
+        //    }
+        //    else
+        //    {
+        //        // 没有参数值
+        //        FillDataset(connection, CommandType.StoredProcedure, spName, dataSet, tableNames);
+        //    }
+        //}
 
         /// <summary>
         /// 执行指定数据库事务的命令,映射数据表并填充数据集.
@@ -1791,12 +1780,10 @@ namespace SAS.Data
         /// <param name="tableNames">表映射的数据表数组
         /// 用户定义的表名 (可有是实际的表名.)
         /// </param>
-        public static void FillDataset(DbTransaction transaction, CommandType commandType,
-            string commandText,
-            DataSet dataSet, string[] tableNames)
-        {
-            FillDataset(transaction, commandType, commandText, dataSet, tableNames, null);
-        }
+        //public static void FillDataset(DbTransaction transaction, CommandType commandType, string commandText, DataSet dataSet, string[] tableNames)
+        //{
+        //    FillDataset(transaction, commandType, commandText, dataSet, tableNames, null);
+        //}
 
         /// <summary>
         /// 执行指定数据库事务的命令,映射数据表并填充数据集,指定参数.
@@ -1813,9 +1800,7 @@ namespace SAS.Data
         /// 用户定义的表名 (可有是实际的表名.)
         /// </param>
         /// <param name="commandParameters">分配给命令的SqlParamter参数数组</param>
-        public static void FillDataset(DbTransaction transaction, CommandType commandType,
-            string commandText, DataSet dataSet, string[] tableNames,
-            params DbParameter[] commandParameters)
+        public static void FillDataset(DbTransaction transaction, CommandType commandType, string commandText, DataSet dataSet, string[] tableNames, params DbParameter[] commandParameters)
         {
             FillDataset(transaction.Connection, transaction, commandType, commandText, dataSet, tableNames, commandParameters);
         }
@@ -1836,33 +1821,31 @@ namespace SAS.Data
         /// 用户定义的表名 (可有是实际的表名.)
         /// </param>
         /// <param name="parameterValues">分配给存储过程输入参数的对象数组</param>
-        public static void FillDataset(DbTransaction transaction, string spName,
-            DataSet dataSet, string[] tableNames,
-            params object[] parameterValues)
-        {
-            if (transaction == null) throw new ArgumentNullException("transaction");
-            if (transaction != null && transaction.Connection == null) throw new ArgumentException("The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
-            if (dataSet == null) throw new ArgumentNullException("dataSet");
-            if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
+        //public static void FillDataset(DbTransaction transaction, string spName, DataSet dataSet, string[] tableNames, params object[] parameterValues)
+        //{
+        //    if (transaction == null) throw new ArgumentNullException("transaction");
+        //    if (transaction != null && transaction.Connection == null) throw new ArgumentException("The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
+        //    if (dataSet == null) throw new ArgumentNullException("dataSet");
+        //    if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
 
-            // 如果有参数值
-            if ((parameterValues != null) && (parameterValues.Length > 0))
-            {
-                // 从缓存中加载存储过程参数,如果缓存中不存在则从数据库中检索参数信息并加载到缓存中. ()
-                DbParameter[] commandParameters = GetSpParameterSet(transaction.Connection, spName);
+        //    // 如果有参数值
+        //    if ((parameterValues != null) && (parameterValues.Length > 0))
+        //    {
+        //        // 从缓存中加载存储过程参数,如果缓存中不存在则从数据库中检索参数信息并加载到缓存中. ()
+        //        DbParameter[] commandParameters = GetSpParameterSet(transaction.Connection, spName);
 
-                // 给存储过程参数赋值
-                AssignParameterValues(commandParameters, parameterValues);
+        //        // 给存储过程参数赋值
+        //        AssignParameterValues(commandParameters, parameterValues);
 
-                // 调用重载方法
-                FillDataset(transaction, CommandType.StoredProcedure, spName, dataSet, tableNames, commandParameters);
-            }
-            else
-            {
-                // 没有参数值
-                FillDataset(transaction, CommandType.StoredProcedure, spName, dataSet, tableNames);
-            }
-        }
+        //        // 调用重载方法
+        //        FillDataset(transaction, CommandType.StoredProcedure, spName, dataSet, tableNames, commandParameters);
+        //    }
+        //    else
+        //    {
+        //        // 没有参数值
+        //        FillDataset(transaction, CommandType.StoredProcedure, spName, dataSet, tableNames);
+        //    }
+        //}
 
         /// <summary>
         /// [私有方法][内部调用]执行指定数据库连接对象/事务的命令,映射数据表并填充数据集,DataSet/TableNames/DbParameters.
@@ -1880,9 +1863,7 @@ namespace SAS.Data
         /// 用户定义的表名 (可有是实际的表名.)
         /// </param>
         /// <param name="commandParameters">分配给命令的SqlParamter参数数组</param>
-        private static void FillDataset(DbConnection connection, DbTransaction transaction, CommandType commandType,
-            string commandText, DataSet dataSet, string[] tableNames,
-            params DbParameter[] commandParameters)
+        private static void FillDataset(DbConnection connection, DbTransaction transaction, CommandType commandType, string commandText, DataSet dataSet, string[] tableNames, params DbParameter[] commandParameters)
         {
             if (connection == null) throw new ArgumentNullException("connection");
             if (dataSet == null) throw new ArgumentNullException("dataSet");
@@ -1920,490 +1901,6 @@ namespace SAS.Data
         }
         #endregion
 
-        #region UpdateDataset 更新数据集
-        /// <summary>
-        /// 执行数据集更新到数据库,指定inserted, updated, or deleted命令.
-        /// </summary>
-        /// <remarks>
-        /// 示例:  
-        ///  UpdateDataset(conn, insertCommand, deleteCommand, updateCommand, dataSet, "Order");
-        /// </remarks>
-        /// <param name="insertCommand">[追加记录]一个有效的SQL语句或存储过程</param>
-        /// <param name="deleteCommand">[删除记录]一个有效的SQL语句或存储过程</param>
-        /// <param name="updateCommand">[更新记录]一个有效的SQL语句或存储过程</param>
-        /// <param name="dataSet">要更新到数据库的DataSet</param>
-        /// <param name="tableName">要更新到数据库的DataTable</param>
-        public static void UpdateDataset(DbCommand insertCommand, DbCommand deleteCommand, DbCommand updateCommand, DataSet dataSet, string tableName)
-        {
-            if (insertCommand == null) throw new ArgumentNullException("insertCommand");
-            if (deleteCommand == null) throw new ArgumentNullException("deleteCommand");
-            if (updateCommand == null) throw new ArgumentNullException("updateCommand");
-            if (tableName == null || tableName.Length == 0) throw new ArgumentNullException("tableName");
-
-            // 创建DbDataAdapter,当操作完成后释放.
-            using (DbDataAdapter dataAdapter = Factory.CreateDataAdapter())
-            {
-                // 设置数据适配器命令
-                dataAdapter.UpdateCommand = updateCommand;
-                dataAdapter.InsertCommand = insertCommand;
-                dataAdapter.DeleteCommand = deleteCommand;
-
-                // 更新数据集改变到数据库
-                dataAdapter.Update(dataSet, tableName);
-
-                // 提交所有改变到数据集.
-                dataSet.AcceptChanges();
-            }
-        }
-        #endregion
-
-        #region CreateCommand 创建一条DbCommand命令
-        /// <summary>
-        /// 创建DbCommand命令,指定数据库连接对象,存储过程名和参数.
-        /// </summary>
-        /// <remarks>
-        /// 示例:  
-        ///  DbCommand command = CreateCommand(conn, "AddCustomer", "CustomerID", "CustomerName");
-        /// </remarks>
-        /// <param name="connection">一个有效的数据库连接对象</param>
-        /// <param name="spName">存储过程名称</param>
-        /// <param name="sourceColumns">源表的列名称数组</param>
-        /// <returns>返回DbCommand命令</returns>
-        public static DbCommand CreateCommand(DbConnection connection, string spName, params string[] sourceColumns)
-        {
-            if (connection == null) throw new ArgumentNullException("connection");
-            if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
-
-            // 创建命令
-            DbCommand cmd = Factory.CreateCommand();
-            cmd.CommandText = spName;
-            cmd.Connection = connection;
-            cmd.CommandType = CommandType.StoredProcedure;
-
-            // 如果有参数值
-            if ((sourceColumns != null) && (sourceColumns.Length > 0))
-            {
-                // 从缓存中加载存储过程参数,如果缓存中不存在则从数据库中检索参数信息并加载到缓存中. ()
-                DbParameter[] commandParameters = GetSpParameterSet(connection, spName);
-
-                // 将源表的列到映射到DataSet命令中.
-                for (int index = 0; index < sourceColumns.Length; index++)
-                    commandParameters[index].SourceColumn = sourceColumns[index];
-
-                // Attach the discovered parameters to the DbCommand object
-                AttachParameters(cmd, commandParameters);
-            }
-
-            return cmd;
-        }
-        #endregion
-
-        #region ExecuteNonQueryTypedParams 类型化参数(DataRow)
-        /// <summary>
-        /// 执行指定连接数据库连接字符串的存储过程,使用DataRow做为参数值,返回受影响的行数.
-        /// </summary>
-        /// <param name="ConnectionString">一个有效的数据库连接字符串</param>
-        /// <param name="spName">存储过程名称</param>
-        /// <param name="dataRow">使用DataRow作为参数值</param>
-        /// <returns>返回影响的行数</returns>
-        public static int ExecuteNonQueryTypedParams(String spName, DataRow dataRow)
-        {
-            if (ConnectionString == null || ConnectionString.Length == 0) throw new ArgumentNullException("ConnectionString");
-            if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
-
-            // 如果row有值,存储过程必须初始化.
-            if (dataRow != null && dataRow.ItemArray.Length > 0)
-            {
-                // 从缓存中加载存储过程参数,如果缓存中不存在则从数据库中检索参数信息并加载到缓存中. ()
-                DbParameter[] commandParameters = GetSpParameterSet(spName);
-
-                // 分配参数值
-                AssignParameterValues(commandParameters, dataRow);
-
-                return DbHelper.ExecuteNonQuery(CommandType.StoredProcedure, spName, commandParameters);
-            }
-            else
-            {
-                return DbHelper.ExecuteNonQuery(CommandType.StoredProcedure, spName);
-            }
-        }
-
-        /// <summary>
-        /// 执行指定连接数据库连接对象的存储过程,使用DataRow做为参数值,返回受影响的行数.
-        /// </summary>
-        /// <param name="connection">一个有效的数据库连接对象</param>
-        /// <param name="spName">存储过程名称</param>
-        /// <param name="dataRow">使用DataRow作为参数值</param>
-        /// <returns>返回影响的行数</returns>
-        public static int ExecuteNonQueryTypedParams(DbConnection connection, String spName, DataRow dataRow)
-        {
-            if (connection == null) throw new ArgumentNullException("connection");
-            if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
-
-            // 如果row有值,存储过程必须初始化.
-            if (dataRow != null && dataRow.ItemArray.Length > 0)
-            {
-                // 从缓存中加载存储过程参数,如果缓存中不存在则从数据库中检索参数信息并加载到缓存中. ()
-                DbParameter[] commandParameters = GetSpParameterSet(connection, spName);
-
-                // 分配参数值
-                AssignParameterValues(commandParameters, dataRow);
-
-                return DbHelper.ExecuteNonQuery(connection, CommandType.StoredProcedure, spName, commandParameters);
-            }
-            else
-            {
-                return DbHelper.ExecuteNonQuery(connection, CommandType.StoredProcedure, spName);
-            }
-        }
-
-        /// <summary>
-        /// 执行指定连接数据库事物的存储过程,使用DataRow做为参数值,返回受影响的行数.
-        /// </summary>
-        /// <param name="transaction">一个有效的连接事务 object</param>
-        /// <param name="spName">存储过程名称</param>
-        /// <param name="dataRow">使用DataRow作为参数值</param>
-        /// <returns>返回影响的行数</returns>
-        public static int ExecuteNonQueryTypedParams(DbTransaction transaction, String spName, DataRow dataRow)
-        {
-            if (transaction == null) throw new ArgumentNullException("transaction");
-            if (transaction != null && transaction.Connection == null) throw new ArgumentException("The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
-            if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
-
-            // Sf the row has values, the store procedure parameters must be initialized
-            if (dataRow != null && dataRow.ItemArray.Length > 0)
-            {
-                // 从缓存中加载存储过程参数,如果缓存中不存在则从数据库中检索参数信息并加载到缓存中. ()
-                DbParameter[] commandParameters = GetSpParameterSet(transaction.Connection, spName);
-
-                // 分配参数值
-                AssignParameterValues(commandParameters, dataRow);
-
-                return DbHelper.ExecuteNonQuery(transaction, CommandType.StoredProcedure, spName, commandParameters);
-            }
-            else
-            {
-                return DbHelper.ExecuteNonQuery(transaction, CommandType.StoredProcedure, spName);
-            }
-        }
-        #endregion
-
-        #region ExecuteDatasetTypedParams 类型化参数(DataRow)
-        /// <summary>
-        /// 执行指定连接数据库连接字符串的存储过程,使用DataRow做为参数值,返回DataSet.
-        /// </summary>
-        /// <param name="ConnectionString">一个有效的数据库连接字符串</param>
-        /// <param name="spName">存储过程名称</param>
-        /// <param name="dataRow">使用DataRow作为参数值</param>
-        /// <returns>返回一个包含结果集的DataSet.</returns>
-        public static DataSet ExecuteDatasetTypedParams(String spName, DataRow dataRow)
-        {
-            if (ConnectionString == null || ConnectionString.Length == 0) throw new ArgumentNullException("ConnectionString");
-            if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
-
-            //如果row有值,存储过程必须初始化.
-            if (dataRow != null && dataRow.ItemArray.Length > 0)
-            {
-                // 从缓存中加载存储过程参数,如果缓存中不存在则从数据库中检索参数信息并加载到缓存中. ()
-                DbParameter[] commandParameters = GetSpParameterSet(spName);
-
-                // 分配参数值
-                AssignParameterValues(commandParameters, dataRow);
-
-                return DbHelper.ExecuteDataset(CommandType.StoredProcedure, spName, commandParameters);
-            }
-            else
-            {
-                return DbHelper.ExecuteDataset(CommandType.StoredProcedure, spName);
-            }
-        }
-
-        /// <summary>
-        /// 执行指定连接数据库连接对象的存储过程,使用DataRow做为参数值,返回DataSet.
-        /// </summary>
-        /// <param name="connection">一个有效的数据库连接对象</param>
-        /// <param name="spName">存储过程名称</param>
-        /// <param name="dataRow">使用DataRow作为参数值</param>
-        /// <returns>返回一个包含结果集的DataSet.</returns>
-        /// 
-        public static DataSet ExecuteDatasetTypedParams(DbConnection connection, String spName, DataRow dataRow)
-        {
-            if (connection == null) throw new ArgumentNullException("connection");
-            if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
-
-            // 如果row有值,存储过程必须初始化.
-            if (dataRow != null && dataRow.ItemArray.Length > 0)
-            {
-                // 从缓存中加载存储过程参数,如果缓存中不存在则从数据库中检索参数信息并加载到缓存中. ()
-                DbParameter[] commandParameters = GetSpParameterSet(connection, spName);
-
-                // 分配参数值
-                AssignParameterValues(commandParameters, dataRow);
-
-                return DbHelper.ExecuteDataset(connection, CommandType.StoredProcedure, spName, commandParameters);
-            }
-            else
-            {
-                return DbHelper.ExecuteDataset(connection, CommandType.StoredProcedure, spName);
-            }
-        }
-
-        /// <summary>
-        /// 执行指定连接数据库事务的存储过程,使用DataRow做为参数值,返回DataSet.
-        /// </summary>
-        /// <param name="transaction">一个有效的连接事务 object</param>
-        /// <param name="spName">存储过程名称</param>
-        /// <param name="dataRow">使用DataRow作为参数值</param>
-        /// <returns>返回一个包含结果集的DataSet.</returns>
-        public static DataSet ExecuteDatasetTypedParams(DbTransaction transaction, String spName, DataRow dataRow)
-        {
-            if (transaction == null) throw new ArgumentNullException("transaction");
-            if (transaction != null && transaction.Connection == null) throw new ArgumentException("The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
-            if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
-
-            // 如果row有值,存储过程必须初始化.
-            if (dataRow != null && dataRow.ItemArray.Length > 0)
-            {
-                // 从缓存中加载存储过程参数,如果缓存中不存在则从数据库中检索参数信息并加载到缓存中. ()
-                DbParameter[] commandParameters = GetSpParameterSet(transaction.Connection, spName);
-
-                // 分配参数值
-                AssignParameterValues(commandParameters, dataRow);
-
-                return DbHelper.ExecuteDataset(transaction, CommandType.StoredProcedure, spName, commandParameters);
-            }
-            else
-            {
-                return DbHelper.ExecuteDataset(transaction, CommandType.StoredProcedure, spName);
-            }
-        }
-
-        #endregion
-
-        #region ExecuteReaderTypedParams 类型化参数(DataRow)
-        /// <summary>
-        /// 执行指定连接数据库连接字符串的存储过程,使用DataRow做为参数值,返回DataReader.
-        /// </summary>
-        /// <param name="ConnectionString">一个有效的数据库连接字符串</param>
-        /// <param name="spName">存储过程名称</param>
-        /// <param name="dataRow">使用DataRow作为参数值</param>
-        /// <returns>返回包含结果集的DbDataReader</returns>
-        public static DbDataReader ExecuteReaderTypedParams(String spName, DataRow dataRow)
-        {
-            if (ConnectionString == null || ConnectionString.Length == 0) throw new ArgumentNullException("ConnectionString");
-            if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
-
-            // 如果row有值,存储过程必须初始化.
-            if (dataRow != null && dataRow.ItemArray.Length > 0)
-            {
-                // 从缓存中加载存储过程参数,如果缓存中不存在则从数据库中检索参数信息并加载到缓存中. ()
-                DbParameter[] commandParameters = GetSpParameterSet(spName);
-
-                // 分配参数值
-                AssignParameterValues(commandParameters, dataRow);
-
-                return DbHelper.ExecuteReader(ConnectionString, CommandType.StoredProcedure, spName, commandParameters);
-            }
-            else
-            {
-                return DbHelper.ExecuteReader(ConnectionString, CommandType.StoredProcedure, spName);
-            }
-        }
-
-
-        /// <summary>
-        /// 执行指定连接数据库连接对象的存储过程,使用DataRow做为参数值,返回DataReader.
-        /// </summary>
-        /// <param name="connection">一个有效的数据库连接对象</param>
-        /// <param name="spName">存储过程名称</param>
-        /// <param name="dataRow">使用DataRow作为参数值</param>
-        /// <returns>返回包含结果集的DbDataReader</returns>
-        public static DbDataReader ExecuteReaderTypedParams(DbConnection connection, String spName, DataRow dataRow)
-        {
-            if (connection == null) throw new ArgumentNullException("connection");
-            if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
-
-            // 如果row有值,存储过程必须初始化.
-            if (dataRow != null && dataRow.ItemArray.Length > 0)
-            {
-                // 从缓存中加载存储过程参数,如果缓存中不存在则从数据库中检索参数信息并加载到缓存中. ()
-                DbParameter[] commandParameters = GetSpParameterSet(connection, spName);
-
-                // 分配参数值
-                AssignParameterValues(commandParameters, dataRow);
-
-                return DbHelper.ExecuteReader(connection, CommandType.StoredProcedure, spName, commandParameters);
-            }
-            else
-            {
-                return DbHelper.ExecuteReader(connection, CommandType.StoredProcedure, spName);
-            }
-        }
-
-        /// <summary>
-        /// 执行指定连接数据库事物的存储过程,使用DataRow做为参数值,返回DataReader.
-        /// </summary>
-        /// <param name="transaction">一个有效的连接事务 object</param>
-        /// <param name="spName">存储过程名称</param>
-        /// <param name="dataRow">使用DataRow作为参数值</param>
-        /// <returns>返回包含结果集的DbDataReader</returns>
-        public static DbDataReader ExecuteReaderTypedParams(DbTransaction transaction, String spName, DataRow dataRow)
-        {
-            if (transaction == null) throw new ArgumentNullException("transaction");
-            if (transaction != null && transaction.Connection == null) throw new ArgumentException("The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
-            if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
-
-            // 如果row有值,存储过程必须初始化.
-            if (dataRow != null && dataRow.ItemArray.Length > 0)
-            {
-                // 从缓存中加载存储过程参数,如果缓存中不存在则从数据库中检索参数信息并加载到缓存中. ()
-                DbParameter[] commandParameters = GetSpParameterSet(transaction.Connection, spName);
-
-                // 分配参数值
-                AssignParameterValues(commandParameters, dataRow);
-
-                return DbHelper.ExecuteReader(transaction, CommandType.StoredProcedure, spName, commandParameters);
-            }
-            else
-            {
-                return DbHelper.ExecuteReader(transaction, CommandType.StoredProcedure, spName);
-            }
-        }
-        #endregion
-
-        #region ExecuteScalarTypedParams 类型化参数(DataRow)
-        /// <summary>
-        /// 执行指定连接数据库连接字符串的存储过程,使用DataRow做为参数值,返回结果集中的第一行第一列.
-        /// </summary>
-        /// <param name="ConnectionString">一个有效的数据库连接字符串</param>
-        /// <param name="spName">存储过程名称</param>
-        /// <param name="dataRow">使用DataRow作为参数值</param>
-        /// <returns>返回结果集中的第一行第一列</returns>
-        public static object ExecuteScalarTypedParams(String spName, DataRow dataRow)
-        {
-            if (ConnectionString == null || ConnectionString.Length == 0) throw new ArgumentNullException("ConnectionString");
-            if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
-
-            // 如果row有值,存储过程必须初始化.
-            if (dataRow != null && dataRow.ItemArray.Length > 0)
-            {
-                // 从缓存中加载存储过程参数,如果缓存中不存在则从数据库中检索参数信息并加载到缓存中. ()
-                DbParameter[] commandParameters = GetSpParameterSet(spName);
-
-                // 分配参数值
-                AssignParameterValues(commandParameters, dataRow);
-
-                return DbHelper.ExecuteScalar(CommandType.StoredProcedure, spName, commandParameters);
-            }
-            else
-            {
-                return DbHelper.ExecuteScalar(CommandType.StoredProcedure, spName);
-            }
-        }
-
-        /// <summary>
-        /// 执行指定连接数据库连接对象的存储过程,使用DataRow做为参数值,返回结果集中的第一行第一列.
-        /// </summary>
-        /// <param name="connection">一个有效的数据库连接对象</param>
-        /// <param name="spName">存储过程名称</param>
-        /// <param name="dataRow">使用DataRow作为参数值</param>
-        /// <returns>返回结果集中的第一行第一列</returns>
-        public static object ExecuteScalarTypedParams(DbConnection connection, String spName, DataRow dataRow)
-        {
-            if (connection == null) throw new ArgumentNullException("connection");
-            if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
-
-            // 如果row有值,存储过程必须初始化.
-            if (dataRow != null && dataRow.ItemArray.Length > 0)
-            {
-                // 从缓存中加载存储过程参数,如果缓存中不存在则从数据库中检索参数信息并加载到缓存中. ()
-                DbParameter[] commandParameters = GetSpParameterSet(connection, spName);
-
-                // 分配参数值
-                AssignParameterValues(commandParameters, dataRow);
-
-                return DbHelper.ExecuteScalar(connection, CommandType.StoredProcedure, spName, commandParameters);
-            }
-            else
-            {
-                return DbHelper.ExecuteScalar(connection, CommandType.StoredProcedure, spName);
-            }
-        }
-
-        /// <summary>
-        /// 执行指定连接数据库事务的存储过程,使用DataRow做为参数值,返回结果集中的第一行第一列.
-        /// </summary>
-        /// <param name="transaction">一个有效的连接事务 object</param>
-        /// <param name="spName">存储过程名称</param>
-        /// <param name="dataRow">使用DataRow作为参数值</param>
-        /// <returns>返回结果集中的第一行第一列</returns>
-        public static object ExecuteScalarTypedParams(DbTransaction transaction, String spName, DataRow dataRow)
-        {
-            if (transaction == null) throw new ArgumentNullException("transaction");
-            if (transaction != null && transaction.Connection == null) throw new ArgumentException("The transaction was rollbacked or commited, please provide an open transaction.", "transaction");
-            if (spName == null || spName.Length == 0) throw new ArgumentNullException("spName");
-
-            // 如果row有值,存储过程必须初始化.
-            if (dataRow != null && dataRow.ItemArray.Length > 0)
-            {
-                // 从缓存中加载存储过程参数,如果缓存中不存在则从数据库中检索参数信息并加载到缓存中. ()
-                DbParameter[] commandParameters = GetSpParameterSet(transaction.Connection, spName);
-
-                // 分配参数值
-                AssignParameterValues(commandParameters, dataRow);
-
-                return DbHelper.ExecuteScalar(transaction, CommandType.StoredProcedure, spName, commandParameters);
-            }
-            else
-            {
-                return DbHelper.ExecuteScalar(transaction, CommandType.StoredProcedure, spName);
-            }
-        }
-        #endregion
-
-        #region 缓存方法
-
-        /// <summary>
-        /// 追加参数数组到缓存.
-        /// </summary>
-        /// <param name="ConnectionString">一个有效的数据库连接字符串</param>
-        /// <param name="commandText">存储过程名或SQL语句</param>
-        /// <param name="commandParameters">要缓存的参数数组</param>
-        public static void CacheParameterSet(string commandText, params DbParameter[] commandParameters)
-        {
-            if (ConnectionString == null || ConnectionString.Length == 0) throw new ArgumentNullException("ConnectionString");
-            if (commandText == null || commandText.Length == 0) throw new ArgumentNullException("commandText");
-
-            string hashKey = ConnectionString + ":" + commandText;
-
-            m_paramcache[hashKey] = commandParameters;
-        }
-
-        /// <summary>
-        /// 从缓存中获取参数数组.
-        /// </summary>
-        /// <param name="ConnectionString">一个有效的数据库连接字符</param>
-        /// <param name="commandText">存储过程名或SQL语句</param>
-        /// <returns>参数数组</returns>
-        public static DbParameter[] GetCachedParameterSet(string commandText)
-        {
-            if (ConnectionString == null || ConnectionString.Length == 0) throw new ArgumentNullException("ConnectionString");
-            if (commandText == null || commandText.Length == 0) throw new ArgumentNullException("commandText");
-
-            string hashKey = ConnectionString + ":" + commandText;
-
-            DbParameter[] cachedParameters = m_paramcache[hashKey] as DbParameter[];
-            if (cachedParameters == null)
-            {
-                return null;
-            }
-            else
-            {
-                return CloneParameters(cachedParameters);
-            }
-        }
-
-        #endregion 缓存方法结束
 
         #region 检索指定的存储过程的参数集
 
@@ -2556,8 +2053,377 @@ namespace SAS.Data
             }
             return ec.ToString();
         }
+        #endregion
 
 
+        #region 下面的区域方法主要用于读写分离环境下使用
+        /// <summary>
+        /// 在主数据库中执行指定连接字符串,类型的DbCommand.如果没有提供参数,不返回结果.
+        /// (注:主数据库链接即为DNT.config文件中Dbconnectstring的链接地址)
+        /// </summary>
+        /// <remarks>
+        /// 示例:  
+        ///  int result = ExecuteNonQueryInMasterDB(CommandType.StoredProcedure, "PublishOrders");
+        /// </remarks>
+        /// <param name="commandType">命令类型 (存储过程,命令文本, 其它.)</param>
+        /// <param name="commandText">存储过程名称或SQL语句</param>
+        /// <returns>返回命令影响的行数</returns>
+        public static int ExecuteNonQueryInMasterDB(CommandType commandType, string commandText)
+        {
+            return ExecuteNonQueryInMasterDB(commandType, commandText, null);
+        }
+
+        /// <summary>
+        /// 在主数据库中执行指定连接字符串,类型的DbCommand.如果没有提供参数,不返回结果.
+        /// (注:主数据库链接即为DNT.config文件中Dbconnectstring的链接地址)
+        /// </summary>
+        /// <remarks>
+        /// 示例:  
+        ///  int result = ExecuteNonQuery(CommandType.StoredProcedure, "PublishOrders", new DbParameter("@prodid", 24));
+        /// </remarks>
+        /// <param name="commandType">命令类型 (存储过程,命令文本, 其它.)</param>
+        /// <param name="commandText">存储过程名称或SQL语句</param>
+        /// <param name="commandParameters">DbParameter参数数组</param>
+        /// <returns>返回命令影响的行数</returns>
+        public static int ExecuteNonQueryInMasterDB(CommandType commandType, string commandText, params DbParameter[] commandParameters)
+        {
+            if (ConnectionString == null || ConnectionString.Length == 0) throw new ArgumentNullException("ConnectionString");
+
+            using (DbConnection connection = Factory.CreateConnection())
+            {
+                connection.ConnectionString = ConnectionString;
+                //connection.Open();
+
+                return ExecuteNonQuery(connection, commandType, commandText, commandParameters);
+            }
+        }
+
+        /// <summary>
+        /// 在主数据库中执行指定数据库连接对象的命令,指定存储过程参数,返回DataSet.
+        /// (注:主数据库链接即为DNT.config文件中Dbconnectstring的链接地址)
+        /// </summary>
+        /// <remarks>
+        /// 示例:  
+        ///  DataSet ds = ExecuteDataset(CommandType.StoredProcedure, "GetOrders");
+        /// </remarks>
+        /// <param name="commandType">命令类型 (存储过程,命令文本或其它)</param>
+        /// <param name="commandText">存储过程名或SQL语句</param>
+        /// <returns>返回一个包含结果集的DataSet</returns>
+        public static DataSet ExecuteDatasetInMasterDB(CommandType commandType, string commandText)
+        {
+            return ExecuteDatasetInMasterDB(commandType, commandText, null);
+        }
+
+        /// <summary>
+        /// 在主数据库中执行指定数据库连接对象的命令,指定存储过程参数,返回DataSet.
+        /// (注:主数据库链接即为DNT.config文件中Dbconnectstring的链接地址)
+        /// </summary>
+        /// <remarks>
+        /// 示例:  
+        ///  DataSet ds = ExecuteDataset(CommandType.StoredProcedure, "GetOrders", new DbParameter("@prodid", 24));
+        /// </remarks>
+        /// <param name="commandType">命令类型 (存储过程,命令文本或其它)</param>
+        /// <param name="commandText">存储过程名或SQL语句</param>
+        /// <param name="commandParameters">SqlParamter参数数组</param>
+        /// <returns>返回一个包含结果集的DataSet</returns>
+        public static DataSet ExecuteDatasetInMasterDB(CommandType commandType, string commandText, params DbParameter[] commandParameters)
+        {
+            if (ConnectionString == null || ConnectionString.Length == 0) throw new ArgumentNullException("ConnectionString");
+
+            // 创建并打开数据库连接对象,操作完成释放对象.
+            using (DbConnection connection = Factory.CreateConnection())
+            {
+                if (connection == null) throw new ArgumentNullException("connection");
+
+                connection.ConnectionString = ConnectionString;
+                connection.Open();
+
+                // 预处理
+                DbCommand cmd = Factory.CreateCommand();
+                bool mustCloseConnection = false;
+                PrepareCommand(cmd, connection, (DbTransaction)null, commandType, commandText, commandParameters, out mustCloseConnection);
+
+                // 创建DbDataAdapter和DataSet.
+                using (DbDataAdapter da = Factory.CreateDataAdapter())
+                {
+                    da.SelectCommand = cmd;
+                    DataSet ds = new DataSet();
+
+#if DEBUG
+                    DateTime dt1 = DateTime.Now;
+#endif
+                    // 填充DataSet.
+                    da.Fill(ds);
+#if DEBUG
+                    DateTime dt2 = DateTime.Now;
+
+                    m_querydetail += GetQueryDetail(cmd.CommandText, dt1, dt2, commandParameters);
+#endif
+                    m_querycount++;
+
+                    cmd.Parameters.Clear();
+
+                    if (mustCloseConnection)
+                        connection.Close();
+
+                    return ds;
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// 在主数据库中执行指定数据库连接对象的数据阅读器.(注:主数据库链接即为DNT.config文件中Dbconnectstring的链接地址)
+        /// </summary>
+        /// <remarks>
+        /// 如果是BaseDbHelper打开连接,当连接关闭DataReader也将关闭.
+        /// 如果是调用都打开连接,DataReader由调用都管理.
+        /// </remarks>
+        /// <param name="commandType">命令类型 (存储过程,命令文本或其它)</param>
+        /// <param name="commandText">存储过程名或SQL语句</param>
+        /// <returns>返回包含结果集的DbDataReader</returns>
+        public static DbDataReader ExecuteReaderInMasterDB(CommandType commandType, string commandText)
+        {
+            return ExecuteReaderInMasterDB(commandType, commandText, null);
+        }
+
+        /// <summary>
+        /// 在主数据库中执行指定数据库连接对象的数据阅读器.(注:主数据库链接即为DNT.config文件中Dbconnectstring的链接地址)
+        /// </summary>
+        /// <remarks>
+        /// 如果是BaseDbHelper打开连接,当连接关闭DataReader也将关闭.
+        /// 如果是调用都打开连接,DataReader由调用都管理.
+        /// </remarks>
+        /// <param name="commandType">命令类型 (存储过程,命令文本或其它)</param>
+        /// <param name="commandText">存储过程名或SQL语句</param>
+        /// <param name="commandParameters">DbParameters参数数组,如果没有参数则为'null'</param>
+        /// <returns>返回包含结果集的DbDataReader</returns>
+        public static DbDataReader ExecuteReaderInMasterDB(CommandType commandType, string commandText, DbParameter[] commandParameters)
+        {
+            if (ConnectionString == null || ConnectionString.Length == 0) throw new ArgumentNullException("ConnectionString");
+            DbConnection connection = null;
+            try
+            {
+                connection = Factory.CreateConnection();
+
+                if (connection == null) throw new ArgumentNullException("connection");
+
+                connection.ConnectionString = ConnectionString;
+                connection.Open();
+
+                bool mustCloseConnection = false;
+                // 创建命令
+                DbCommand cmd = Factory.CreateCommand();
+                try
+                {
+                    PrepareCommand(cmd, connection, null, commandType, commandText, commandParameters, out mustCloseConnection);
+
+                    // 创建数据阅读器
+                    DbDataReader dataReader;
+
+#if DEBUG
+                    DateTime dt1 = DateTime.Now;
+#endif
+                    dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+#if DEBUG
+                    DateTime dt2 = DateTime.Now;
+
+                    m_querydetail += GetQueryDetail(cmd.CommandText, dt1, dt2, commandParameters);
+#endif
+                    m_querycount++;
+                    // 清除参数,以便再次使用..
+                    bool canClear = true;
+                    foreach (DbParameter commandParameter in cmd.Parameters)
+                    {
+                        if (commandParameter.Direction != ParameterDirection.Input)
+                            canClear = false;
+                    }
+
+                    if (canClear)
+                    {
+                        //cmd.Dispose();
+                        cmd.Parameters.Clear();
+                    }
+
+                    return dataReader;
+                }
+                catch
+                {
+                    if (mustCloseConnection)
+                        connection.Close();
+                    throw;
+                }
+            }
+            catch
+            {
+                // If we fail to return the SqlDatReader, we need to close the connection ourselves
+                if (connection != null) connection.Close();
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// 在主数据库中执行指定数据库连接对象的命令,指定参数,返回结果集中的第一行第一列.
+        /// (注:主数据库链接即为DNT.config文件中Dbconnectstring的链接地址)
+        /// </summary>
+        /// <remarks>
+        /// 示例:  
+        ///  int orderCount = (int)ExecuteScalar(conn, CommandType.StoredProcedure, "GetOrderCount", new DbParameter("@prodid", 24));
+        /// </remarks>
+        /// <param name="commandType">命令类型 (存储过程,命令文本或其它)</param>
+        /// <param name="commandText">存储过程名称或SQL语句</param>
+        /// <returns>返回结果集中的第一行第一列</returns>
+        public static object ExecuteScalarInMasterDB(CommandType commandType, string commandText)
+        {
+            return ExecuteScalarInMasterDB(commandType, commandText, null);
+        }
+
+        /// <summary>
+        /// 在主数据库中执行指定数据库连接对象的命令,指定参数,返回结果集中的第一行第一列.
+        /// </summary>
+        /// <remarks>
+        /// 示例:  
+        ///  int orderCount = (int)ExecuteScalar(conn, CommandType.StoredProcedure, "GetOrderCount", new DbParameter("@prodid", 24));
+        /// </remarks>
+        /// <param name="commandType">命令类型 (存储过程,命令文本或其它)</param>
+        /// <param name="commandText">存储过程名称或SQL语句</param>
+        /// <param name="commandParameters">分配给命令的SqlParamter参数数组</param>
+        /// <returns>返回结果集中的第一行第一列</returns>
+        public static object ExecuteScalarInMasterDB(CommandType commandType, string commandText, params DbParameter[] commandParameters)
+        {
+            if (ConnectionString == null || ConnectionString.Length == 0) throw new ArgumentNullException("ConnectionString");
+            // 创建并打开数据库连接对象,操作完成释放对象.
+            using (DbConnection connection = Factory.CreateConnection())
+            {
+                if (connection == null) throw new ArgumentNullException("connection");
+
+                connection.ConnectionString = ConnectionString;
+                connection.Open();
+
+                // 创建DbCommand命令,并进行预处理
+                DbCommand cmd = Factory.CreateCommand();
+
+                bool mustCloseConnection = false;
+                PrepareCommand(cmd, connection, (DbTransaction)null, commandType, commandText, commandParameters, out mustCloseConnection);
+
+                // 执行DbCommand命令,并返回结果.
+                object retval = cmd.ExecuteScalar();
+
+                // 清除参数,以便再次使用.
+                cmd.Parameters.Clear();
+
+                if (mustCloseConnection)
+                    connection.Close();
+
+                return retval;
+            }
+        }
+
+        /// <summary>
+        /// 是否使用快照数据库
+        /// </summary>
+        /// <param name="commandText">查询</param>
+        /// <returns></returns>
+        private static bool UserSnapDatabase(string commandText)
+        {
+            // 如果上次刷新cookie间隔小于5分钟, 则不刷新数据库最后活动时间
+            if (commandText.StartsWith(BaseConfigs.GetTablePrefix + "create"))
+            {
+                Utils.WriteCookie("JumpAfterWrite", Environment.TickCount.ToString());
+                return false;
+            }
+            else if (!String.IsNullOrEmpty(Utils.GetCookie("JumpAfterWrite")) && (Environment.TickCount - TypeConverter.StrToInt(Utils.GetCookie("JumpAfterWrite"), Environment.TickCount)) < DbSnapConfigs.GetConfig().WriteWaitTime * 1000)
+                return false;
+            else if (!commandText.StartsWith(BaseConfigs.GetTablePrefix + "get"))
+                return false;
+
+            return true;
+        }
+
+
+        /// <summary>
+        /// 获取使用的数据库(或快照)链接串
+        /// </summary>
+        /// <param name="commandText">存储过程名或都SQL命令文本</param>
+        /// <returns></returns>
+        public static string GetRealConnectionString(string commandText)
+        {
+            if (DbSnapConfigs.GetConfig() != null && DbSnapConfigs.GetConfig().AppDbSnap)
+            {
+                commandText = commandText.Trim().ToLower();
+                if (commandText.StartsWith("select") || ((commandText.StartsWith(BaseConfigs.GetTablePrefix) && UserSnapDatabase(commandText))))
+                {
+                    DbSnapInfo dbSnapInfo = GetLoadBalanceScheduling.GetConnectDbSnap();
+
+                    if (DbSnapConfigs.GetConfig().RecordeLog && snapLogList.Capacity > snapLogList.Count)
+                        snapLogList.Add(string.Format("{{'SouceID' : {0}, 'DbconnectString' : '{1}', 'CommandText' : '{2}', 'PostDateTime' : '{3}'}},",
+                                         dbSnapInfo.SouceID,
+                                         dbSnapInfo.DbconnectString,
+                                         commandText.Replace("'", ""),
+                                         SAS.Common.Utils.GetDateTime()));
+
+                    return dbSnapInfo.DbconnectString;
+                }
+            }
+
+            return ConnectionString;
+        }
+
+        /// <summary>
+        /// 快照日志数据
+        /// </summary>
+        private static List<string> snapLogList = new List<string>(400);
+
+        /// <summary>
+        /// 获取数据快照JSON数据
+        /// </summary>
+        /// <returns></returns>
+        public static string GetSnapLogJson()
+        {
+            string snapLogJson = "";
+            foreach (string snapLog in snapLogList)
+            {
+                snapLogJson += snapLog;
+            }
+
+            return "[" + snapLogJson.Trim(',') + "]";
+        }
+
+        /// <summary>
+        /// 清空数据快照JSON数据
+        /// </summary>
+        public static void ClearSnapLogJson()
+        {
+            snapLogList = new List<string>(400);
+        }
+
+        /// <summary>
+        /// 负载均衡调度接口
+        /// </summary>
+        private static ILoadBalanceScheduling m_loadBalanceSche;
+        /// <summary>
+        /// 初始化负载均衡调度接口实例
+        /// </summary>
+        private static ILoadBalanceScheduling GetLoadBalanceScheduling
+        {
+            get
+            {
+                if (m_loadBalanceSche == null)
+                {
+                    try
+                    {
+                        m_loadBalanceSche = (ILoadBalanceScheduling)Activator.CreateInstance(Type.GetType(string.Format("SAS.EntLib.{0}, SAS.EntLib", DbSnapConfigs.GetConfig().LoadBalanceScheduling), false, true));
+                    }
+                    catch
+                    {
+                        throw new Exception("请检查config/dbsnap.config中配置是否正确");
+                    }
+                }
+                return m_loadBalanceSche;
+            }
+        }
         #endregion
 
     }

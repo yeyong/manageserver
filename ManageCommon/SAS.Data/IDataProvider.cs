@@ -1013,7 +1013,34 @@ namespace SAS.Data
         #endregion
 
         #region 公告处理announcements表基本操作
-
+        /// <summary>
+        /// 添加公告
+        /// </summary>
+        /// <param name="announcementInfo">公告对象</param>
+        /// <returns></returns>
+        int CreateAnnouncement(AnnouncementInfo announcementInfo);
+        /// <summary>
+        /// 获取通告
+        /// </summary>
+        /// <param name="id">公告id</param>
+        /// <returns></returns>
+        IDataReader GetAnnouncement(int id);
+        /// <summary>
+        /// 获取通告
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetAnnouncements();
+        /// <summary>
+        /// 删除通告
+        /// </summary>
+        /// <param name="idList">逗号分隔的id列表字符串</param>
+        int DeleteAnnouncements(string idList);
+        /// <summary>
+        /// 更新通告
+        /// </summary>
+        /// <param name="announcementInfo">公告对象</param>
+        /// <returns></returns>
+        int UpdateAnnouncement(AnnouncementInfo announcementInfo);
         /// <summary>
         /// 更新公告的创建者用户名
         /// </summary>
