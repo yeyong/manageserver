@@ -46,6 +46,7 @@
     <Compile Include="areas.cs" />
     <Compile Include="Catalogs.cs" />
     <Compile Include="Companies.cs" />
+    <Compile Include="Helps.cs" />
     <Compile Include="Page\AdminPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

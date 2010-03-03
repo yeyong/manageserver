@@ -55,6 +55,10 @@ namespace SAS.Data
         /// </summary>
         public const string FORUMS = "[fid],[parentid],[layer],[pathlist],[parentidlist],[subforumcount],[name],[status],[displayorder],[templateid],[topics],[curtopics],[posts],[todayposts],[lasttid],[lasttitle],[lastpost],[lastposterid],[lastposter],[allowsmilies],[allowrss],[allowhtml],[allowbbcode],[allowimgcode],[alloweditrules],[allowthumbnail],[allowtag],[recyclebin],[modnewposts],[jammer],[disablewatermark],[inheritedmod],[autoclose]";
         /// <summary>
+        /// 帮助信息字段
+        /// </summary>
+        public const string HELP = "[id],[title],[message],[pid],[orderby]";
+        /// <summary>
         /// 菜单列表字段
         /// </summary>
         public const string NAVS = "[id],[parentid],[name],[title],[url],[target],[navstype],[available],[displayorder],[lightstyle],[level]";

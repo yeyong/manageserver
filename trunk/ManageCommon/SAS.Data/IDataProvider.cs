@@ -1911,6 +1911,58 @@ namespace SAS.Data
         bool UpdateCatalogInfo(CatalogInfo _catalog);
         #endregion
 
+        #region 帮助文档操作 help
+        /// <summary>
+        /// 添加帮助信息
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="message"></param>
+        /// <param name="pid"></param>
+        /// <param name="orderBy"></param>
+        void AddHelp(string title, string message, int pid, int orderBy);
+        /// <summary>
+        /// 删除帮助信息
+        /// </summary>
+        /// <param name="idList"></param>
+        void DelHelp(string idList);
+        /// <summary>
+        /// 获取帮助信息条数
+        /// </summary>
+        /// <returns></returns>
+        int HelpCount();
+        /// <summary>
+        /// 获取帮助列表
+        /// </summary>
+        /// <returns></returns>
+        IDataReader GetHelpList();
+        /// <summary>
+        /// 获取帮助信息类型
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetHelpTypes();
+        /// <summary>
+        /// 获取指定ID的帮助信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        IDataReader ShowHelp(int id);
+        /// <summary>
+        /// 更新帮助信息
+        /// </summary>
+        /// <param name="id">帮助ID</param>
+        /// <param name="title">帮助标题</param>
+        /// <param name="message">帮助内容</param>
+        /// <param name="pid">帮助</param>
+        /// <param name="ordeorderByrby">排序方式</param>
+        void UpdateHelp(int id, string title, string message, int pid, int orderBy);
+        /// <summary>
+        /// 更新帮助信息
+        /// </summary>
+        /// <param name="orderBy"></param>
+        /// <param name="id"></param>
+        void UpdateOrder(string orderBy, string id);
+        #endregion
+
         /// <summary>
         /// 获取指定用户ID列表的邮件信息
         /// </summary>

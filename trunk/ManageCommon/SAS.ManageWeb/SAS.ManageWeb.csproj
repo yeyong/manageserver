@@ -97,6 +97,20 @@
     <Compile Include="ManagePage\global\global_addannounce.aspx.designer.cs">
       <DependentUpon>global_addannounce.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\global\global_addhelp.aspx.cs">
+      <DependentUpon>global_addhelp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_addhelp.aspx.designer.cs">
+      <DependentUpon>global_addhelp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\global\global_addhelpclass.aspx.cs">
+      <DependentUpon>global_addhelpclass.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_addhelpclass.aspx.designer.cs">
+      <DependentUpon>global_addhelpclass.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\global\global_announcegrid.aspx.cs">
       <DependentUpon>global_announcegrid.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -110,6 +124,27 @@
     </Compile>
     <Compile Include="ManagePage\global\global_editannounce.aspx.designer.cs">
       <DependentUpon>global_editannounce.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\global\global_edithelp.aspx.cs">
+      <DependentUpon>global_edithelp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_edithelp.aspx.designer.cs">
+      <DependentUpon>global_edithelp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\global\global_edithelpclass.aspx.cs">
+      <DependentUpon>global_edithelpclass.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_edithelpclass.aspx.designer.cs">
+      <DependentUpon>global_edithelpclass.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\global\global_helplist.aspx.cs">
+      <DependentUpon>global_helplist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_helplist.aspx.designer.cs">
+      <DependentUpon>global_helplist.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -390,8 +425,13 @@
     <Content Include="ManagePage\company\company_companyedit.aspx" />
     <Content Include="ManagePage\company\global_addcompany.aspx" />
     <Content Include="ManagePage\global\global_addannounce.aspx" />
+    <Content Include="ManagePage\global\global_addhelp.aspx" />
+    <Content Include="ManagePage\global\global_addhelpclass.aspx" />
     <Content Include="ManagePage\global\global_announcegrid.aspx" />
     <Content Include="ManagePage\global\global_editannounce.aspx" />
+    <Content Include="ManagePage\global\global_edithelp.aspx" />
+    <Content Include="ManagePage\global\global_edithelpclass.aspx" />
+    <Content Include="ManagePage\global\global_helplist.aspx" />
     <Content Include="templates\default\about.png" />
     <Content Include="templates\default\about.xml" />
     <Content Include="templates\default\album\usercpmanagealbum.htm" />
