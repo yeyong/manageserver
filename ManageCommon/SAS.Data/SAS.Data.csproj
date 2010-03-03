@@ -49,6 +49,7 @@
     <Compile Include="DataProvider\Editors.cs" />
     <Compile Include="DataProvider\Event.cs" />
     <Compile Include="DataProvider\Forums.cs" />
+    <Compile Include="DataProvider\Help.cs" />
     <Compile Include="DataProvider\Ips.cs" />
     <Compile Include="DataProvider\LoginLogs.cs" />
     <Compile Include="DataProvider\Navs.cs" />
