@@ -377,31 +377,31 @@ namespace SAS.Logic
                     control.RaisePostDataChangedEvent();
             }
             base.OnLoad(e);
-            //string headerStr = "<script type=\"text/javascript\" src=\"../js/AjaxHelper.js\"></script><script type='text/javascript'>\nfunction ResetShortcutMenu(){window.parent.LoadShortcutMenu();}\nfunction FavoriteFunction(url){\nAjaxHelper.Updater('../UserControls/favoritefunction','resultmessage','url='+url,ResetShortcutMenu);\n}\n</script>\n";
-            //headerStr += "<div align='right' style=''>";
-            ////获取当前页面在收藏夹中的状态
-            //FavoriteStatus status = GetFavoriteStatus();
-            ////根据当前页面收藏夹状态生成收藏快捷操作的链接
-            //if (status != FavoriteStatus.Hidden)
-            //{
-            //    if (status == FavoriteStatus.Exist)
-            //    {
-            //        headerStr += headerStr += "<span id='resultmessage' title='已经将该页面加入到快捷操作菜单中'><img src='../images/existmenu.gif' style='vertical-align:middle' /> 已经收藏</span>";
-            //    }
-            //    else if (status == FavoriteStatus.Full)
-            //    {
-            //        headerStr += headerStr += "<span id='resultmessage' title='快捷操作菜单最大收藏数为" + MaxShortcutMenuCount + "项'><img src='../images/fullmenu.gif' style='vertical-align:middle' /> 收藏已满</span>\n</b>";
-            //    }
-            //    else if (status == FavoriteStatus.Show)
-            //    {
-            //        headerStr += "<span align='right' id='resultmessage'>\n<a href='javascript:void(0);' title='将该页面加入快捷操作菜单' onclick='FavoriteFunction(window.location.pathname.toLowerCase().replace(\"" + BaseConfigs.GetForumPath + "admin/\",\"\") + window.location.search.toLowerCase());' style='text-decoration:none;color:#333;' onfocus=\"this.blur();\"><img src='../images/addmenu.gif' align='absmiddle' /> 加入收藏</a>\n</span>";
-            //    }
-            //}
-            //headerStr += "<span><a href='javascript:void(0);' onclick='window.parent.showNavigation()' title='按ESC键或点击链接显示导航菜单' style='text-decoration:none;color:#333;'><img src='../images/navigation.gif' style='vertical-align:middle'> 管理导航</a></span>";
-            //headerStr += "</div>";
+            string headerStr = "<script type=\"text/javascript\" src=\"../js/AjaxHelper.js\"></script><script type='text/javascript'>\nfunction ResetShortcutMenu(){window.parent.LoadShortcutMenu();}\nfunction FavoriteFunction(url){\nAjaxHelper.Updater('../UserControls/favoritefunction','resultmessage','url='+url,ResetShortcutMenu);\n}\n</script>\n";
+            headerStr += "<div align='right' style=''>";
+            //获取当前页面在收藏夹中的状态
+            FavoriteStatus status = GetFavoriteStatus();
+            //根据当前页面收藏夹状态生成收藏快捷操作的链接
+            if (status != FavoriteStatus.Hidden)
+            {
+                if (status == FavoriteStatus.Exist)
+                {
+                    headerStr += headerStr += "<span id='resultmessage' title='已经将该页面加入到快捷操作菜单中'><img src='../images/existmenu.gif' style='vertical-align:middle' /> 已经收藏</span>";
+                }
+                else if (status == FavoriteStatus.Full)
+                {
+                    headerStr += headerStr += "<span id='resultmessage' title='快捷操作菜单最大收藏数为" + MaxShortcutMenuCount + "项'><img src='../images/fullmenu.gif' style='vertical-align:middle' /> 收藏已满</span>\n</b>";
+                }
+                else if (status == FavoriteStatus.Show)
+                {
+                    headerStr += "<span align='right' id='resultmessage'>\n<a href='javascript:void(0);' title='将该页面加入快捷操作菜单' onclick='FavoriteFunction(window.location.pathname.toLowerCase().replace(\"" + BaseConfigs.GetSitePath + "ManagePage/\",\"\") + window.location.search.toLowerCase());' style='text-decoration:none;color:#333;' onfocus=\"this.blur();\"><img src='../images/addmenu.gif' align='absmiddle' /> 加入收藏</a>\n</span>";
+                }
+            }
+            headerStr += "<span><a href='javascript:void(0);' onclick='window.parent.showNavigation()' title='按ESC键或点击链接显示导航菜单' style='text-decoration:none;color:#333;'><img src='../images/navigation.gif' style='vertical-align:middle'> 管理导航</a></span>";
+            headerStr += "</div>";
 
-            //this.ClientScript.RegisterClientScriptBlock(this.GetType(), "Form1", headerStr);
-            //this.ClientScript.RegisterClientScriptBlock(this.GetType(), "Navigation", "<script type='text/javascript'>if(document.documentElement.addEventListener){document.documentElement.addEventListener('keydown', window.parent.resetEscAndF5, false);}else if(document.documentElement.attachEvent){document.documentElement.attachEvent('onkeydown', window.parent.resetEscAndF5);}</script>");
+            this.ClientScript.RegisterClientScriptBlock(this.GetType(), "Form1", headerStr);
+            this.ClientScript.RegisterClientScriptBlock(this.GetType(), "Navigation", "<script type='text/javascript'>if(document.documentElement.addEventListener){document.documentElement.addEventListener('keydown', window.parent.resetEscAndF5, false);}else if(document.documentElement.attachEvent){document.documentElement.attachEvent('onkeydown', window.parent.resetEscAndF5);}</script>");
 
         }
 
