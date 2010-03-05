@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAS.Sirius", "SAS.Sirius\SA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAS.ManageWeb.ManagePage", "SAS.ManageWeb\ManagePage\SAS.ManageWeb.ManagePage.csproj", "{CBA8AECD-71A5-4562-9189-5E0E0B42964E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAS.Web.Services", "SAS.Web.Services\SAS.Web.Services.csproj", "{9EC20563-4EB0-404F-B0B9-C229A79F95B2}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -101,6 +103,10 @@ Global
 		{CBA8AECD-71A5-4562-9189-5E0E0B42964E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBA8AECD-71A5-4562-9189-5E0E0B42964E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBA8AECD-71A5-4562-9189-5E0E0B42964E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EC20563-4EB0-404F-B0B9-C229A79F95B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EC20563-4EB0-404F-B0B9-C229A79F95B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EC20563-4EB0-404F-B0B9-C229A79F95B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EC20563-4EB0-404F-B0B9-C229A79F95B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
