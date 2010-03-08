@@ -54,6 +54,7 @@ namespace SAS.Data
         /// 板块字段
         /// </summary>
         public const string FORUMS = "[fid],[parentid],[layer],[pathlist],[parentidlist],[subforumcount],[name],[status],[displayorder],[templateid],[topics],[curtopics],[posts],[todayposts],[lasttid],[lasttitle],[lastpost],[lastposterid],[lastposter],[allowsmilies],[allowrss],[allowhtml],[allowbbcode],[allowimgcode],[alloweditrules],[allowthumbnail],[allowtag],[recyclebin],[modnewposts],[jammer],[disablewatermark],[inheritedmod],[autoclose]";
+        public const string FRIENDLINK = "[id],[displayorder],[name],[linkurl],[note],[logo]";
         /// <summary>
         /// 帮助信息字段
         /// </summary>

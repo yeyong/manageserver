@@ -492,5 +492,75 @@ namespace SAS.Data.SqlServer
             return DbHelper.ExecuteDataset(commandText).Tables[0];
         }
         #endregion
+
+        #region 友情链接frendlink操作
+        /// <summary>
+        /// 添加友情链接
+        /// </summary>
+        /// <param name="displayOrder">显示顺序</param>
+        /// <param name="name">名称</param>
+        /// <param name="url">链接地址</param>
+        /// <param name="note">备注</param>
+        /// <param name="logo">Logo地址</param>
+        /// <returns></returns>
+        public int AddSASLink(int displayOrder, string name, string url, string note, string logo)
+        {
+            DbParameter[] parms = {
+                                        DbHelper.MakeInParam("@displayorder", (DbType)SqlDbType.Int, 4, displayOrder),
+                                        DbHelper.MakeInParam("@name", (DbType)SqlDbType.NVarChar, 100, name),
+                                        DbHelper.MakeInParam("@url", (DbType)SqlDbType.NVarChar, 100, url),
+                                        DbHelper.MakeInParam("@note", (DbType)SqlDbType.NVarChar, 200, note),
+                                        DbHelper.MakeInParam("@logo", (DbType)SqlDbType.NVarChar, 100, logo)
+                                    };
+            string commandText = string.Format("INSERT INTO [{0}frendlink] ([displayorder], [name],[linkurl],[note],[logo]) VALUES (@displayorder,@name,@url,@note,@logo)",
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+        /// <summary>
+        /// 获得所有友情链接
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetSASLinks()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}frendlink]", DbFields.FRIENDLINK, BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 删除指定友情链接
+        /// </summary>
+        /// <param name="forumlinkid"></param>
+        /// <returns></returns>
+        public int DeleteSASLink(string forumLinkIdList)
+        {
+            string commandText = string.Format("DELETE FROM [{0}frendlink] WHERE [id] IN ({1})", BaseConfigs.GetTablePrefix, forumLinkIdList);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
+        }
+
+        /// <summary>
+        /// 更新指定友情链接
+        /// </summary>
+        /// <param name="id">友情链接Id</param>
+        /// <param name="displayOrder">显示顺序</param>
+        /// <param name="name">名称</param>
+        /// <param name="url">链接地址</param>
+        /// <param name="note">备注</param>
+        /// <param name="logo">Logo地址</param>
+        /// <returns></returns>
+        public int UpdateSASLink(int id, int displayOrder, string name, string url, string note, string logo)
+        {
+            DbParameter[] parms = {
+                                        DbHelper.MakeInParam("@id", (DbType)SqlDbType.Int, 4, id),
+                                        DbHelper.MakeInParam("@displayorder", (DbType)SqlDbType.Int, 4, displayOrder),
+                                        DbHelper.MakeInParam("@name", (DbType)SqlDbType.NVarChar, 100, name),
+                                        DbHelper.MakeInParam("@url", (DbType)SqlDbType.NVarChar, 100, url),
+                                        DbHelper.MakeInParam("@note", (DbType)SqlDbType.NVarChar, 200, note),
+                                        DbHelper.MakeInParam("@logo", (DbType)SqlDbType.NVarChar, 100, logo)
+                                    };
+            string commandText = string.Format("UPDATE [{0}frendlink] SET [displayorder]=@displayorder,[name]=@name,[linkurl]=@url,[note]=@note,[logo]=@logo WHERE [id]=@id",
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+        #endregion
     }
 }

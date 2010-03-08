@@ -139,12 +139,26 @@
     <Compile Include="ManagePage\global\global_edithelpclass.aspx.designer.cs">
       <DependentUpon>global_edithelpclass.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\global\global_forumlinksgrid.aspx.cs">
+      <DependentUpon>global_forumlinksgrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_forumlinksgrid.aspx.designer.cs">
+      <DependentUpon>global_forumlinksgrid.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\global\global_helplist.aspx.cs">
       <DependentUpon>global_helplist.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManagePage\global\global_helplist.aspx.designer.cs">
       <DependentUpon>global_helplist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\global\global_navigationmanage.aspx.cs">
+      <DependentUpon>global_navigationmanage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_navigationmanage.aspx.designer.cs">
+      <DependentUpon>global_navigationmanage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -431,7 +445,9 @@
     <Content Include="ManagePage\global\global_editannounce.aspx" />
     <Content Include="ManagePage\global\global_edithelp.aspx" />
     <Content Include="ManagePage\global\global_edithelpclass.aspx" />
+    <Content Include="ManagePage\global\global_forumlinksgrid.aspx" />
     <Content Include="ManagePage\global\global_helplist.aspx" />
+    <Content Include="ManagePage\global\global_navigationmanage.aspx" />
     <Content Include="templates\default\about.png" />
     <Content Include="templates\default\about.xml" />
     <Content Include="templates\default\album\usercpmanagealbum.htm" />

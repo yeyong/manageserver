@@ -1123,7 +1123,7 @@ namespace SAS.Data.SqlServer
         /// 得到自定义菜单
         /// </summary>
         /// <returns></returns>
-        public IDataReader GetNavigation(bool getAllNavigation)
+        public IDataReader GetNavigationData(bool getAllNavigation)
         {
             string commandText = string.Format("SELECT {0} FROM [{1}navs] {2} ORDER BY [parentid],[displayorder],[id]",
                                                 DbFields.NAVS,

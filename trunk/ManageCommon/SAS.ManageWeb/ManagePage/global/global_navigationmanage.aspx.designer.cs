@@ -11,16 +11,16 @@
 namespace SAS.ManageWeb.ManagePage {
     
     
-    public partial class company_cataloggrid {
+    public partial class global_navigationmanage {
         
         /// <summary>
-        /// Form1 控件。
+        /// form1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm Form1;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
         /// info1 控件。
@@ -29,24 +29,33 @@ namespace SAS.ManageWeb.ManagePage {
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.UserControl info1;
+        protected global::SAS.ManageWeb.ManagePage.PageInfo info1;
         
         /// <summary>
-        /// ShowTreeLabel 控件。
+        /// DataGrid1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ShowTreeLabel;
+        protected global::SAS.Control.DataGrid DataGrid1;
         
         /// <summary>
-        /// ForumsTreeLabel 控件。
+        /// saveNav 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ForumsTreeLabel;
+        protected global::SAS.Control.Button saveNav;
+        
+        /// <summary>
+        /// returnbutton 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton returnbutton;
     }
 }
