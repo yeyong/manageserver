@@ -56,6 +56,7 @@
     <Compile Include="DataProvider\Notices.cs" />
     <Compile Include="DataProvider\OnlineUsers.cs" />
     <Compile Include="DataProvider\PrivateMessages.cs" />
+    <Compile Include="DataProvider\SASLinks.cs" />
     <Compile Include="DataProvider\Smilies.cs" />
     <Compile Include="DataProvider\Statistics.cs" />
     <Compile Include="DataProvider\Stats.cs" />

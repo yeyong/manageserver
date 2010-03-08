@@ -89,6 +89,7 @@
     <Compile Include="admin\SASControlContainer.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="SASLinks.cs" />
     <Compile Include="ScheduledEvents\Event.cs" />
     <Compile Include="ScheduledEvents\EventLogs.cs" />
     <Compile Include="ScheduledEvents\EventManager.cs" />

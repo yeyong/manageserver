@@ -283,12 +283,12 @@ namespace SAS.Logic
             navmenu.Columns.Add("title", System.Type.GetType("System.String"));
             navmenu.Columns.Add("url", System.Type.GetType("System.String"));
             navmenu.Columns.Add("target", System.Type.GetType("System.Int16"));
-            navmenu.Columns.Add("type", System.Type.GetType("System.Int16"));
+            navmenu.Columns.Add("navstype", System.Type.GetType("System.Int16"));
             navmenu.Columns.Add("available", System.Type.GetType("System.Int16"));
             navmenu.Columns.Add("displayorder", System.Type.GetType("System.Int32"));
-            navmenu.Columns.Add("highlight", System.Type.GetType("System.Int16"));
+            navmenu.Columns.Add("lightstyle", System.Type.GetType("System.Int16"));
             navmenu.Columns.Add("level", System.Type.GetType("System.Int32"));
-            IDataReader reader = SAS.Data.DataProvider.Navs.GetNavigation(true);
+            IDataReader reader = SAS.Data.DataProvider.Navs.GetNavigationData(true);
             while (reader.Read())
             {
                 DataRow dr = navmenu.NewRow();
@@ -298,14 +298,29 @@ namespace SAS.Logic
                 dr["title"] = reader["title"].ToString().Trim();
                 dr["url"] = reader["url"].ToString().Trim();
                 dr["target"] = Utils.StrToInt(reader["target"], 0);
-                dr["type"] = Utils.StrToInt(reader["navstype"], 0);
+                dr["navstype"] = Utils.StrToInt(reader["navstype"], 0);
                 dr["available"] = Utils.StrToInt(reader["available"], 0);
                 dr["displayorder"] = Utils.StrToInt(reader["displayorder"], 0);
-                dr["highlight"] = Utils.StrToInt(reader["highlight"], 0);
+                dr["lightstyle"] = Utils.StrToInt(reader["lightstyle"], 0);
                 dr["level"] = Utils.StrToInt(reader["level"], 0);
                 navmenu.Rows.Add(dr);
             }
             return navmenu;
+        }
+
+        /// <summary>
+        /// 获取菜单项
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static NavInfo GetNavigation(int id)
+        {
+            foreach (NavInfo nav in SAS.Data.DataProvider.Navs.GetNavigation(true))
+            {
+                if (nav.Id == id)
+                    return nav;
+            }
+            return null;
         }
     }
 }

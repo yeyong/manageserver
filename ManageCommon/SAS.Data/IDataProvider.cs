@@ -1434,13 +1434,11 @@ namespace SAS.Data
         #endregion
 
         #region 菜单表navs操作
-
         /// <summary>
         /// 得到自定义菜单
         /// </summary>
         /// <returns></returns>
-        IDataReader GetNavigation(bool getAllNavigation);
-
+        IDataReader GetNavigationData(bool getAllNavigation);
         /// <summary>
         /// 得到拥有子菜单的主菜单ID
         /// </summary>
@@ -1909,6 +1907,41 @@ namespace SAS.Data
         /// <param name="_catalog"></param>
         /// <returns></returns>
         bool UpdateCatalogInfo(CatalogInfo _catalog);
+        #endregion
+
+        #region 友情链接操作
+        /// <summary>
+        /// 添加友情链接
+        /// </summary>
+        /// <param name="displayOrder">序号</param>
+        /// <param name="name">链接名称</param>
+        /// <param name="url">链接地址</param>
+        /// <param name="note">注释</param>
+        /// <param name="logo">图片地址</param>
+        /// <returns></returns>
+        int AddSASLink(int displayOrder, string name, string url, string note, string logo);
+        /// <summary>
+        /// 删除友情链接
+        /// </summary>
+        /// <param name="forumLinkIdList">链接ID列表</param>
+        /// <returns></returns>
+        int DeleteSASLink(string forumLinkIdList);
+        /// <summary>
+        /// 获取友情链接
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetSASLinks();
+        /// <summary>
+        /// 更新友情链接
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="displayOrder"></param>
+        /// <param name="name"></param>
+        /// <param name="url"></param>
+        /// <param name="note"></param>
+        /// <param name="logo"></param>
+        /// <returns></returns>
+        int UpdateSASLink(int id, int displayOrder, string name, string url, string note, string logo);
         #endregion
 
         #region 帮助文档操作 help

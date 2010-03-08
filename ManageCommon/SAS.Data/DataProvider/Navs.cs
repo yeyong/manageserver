@@ -13,22 +13,23 @@ namespace SAS.Data.DataProvider
         /// <summary>
         /// 得到自定义菜单信息
         /// </summary>
+        /// <param name="getAll">是否获取全部导航菜单</param>
         /// <returns></returns>
-        public static List<NavInfo> GetNavigation()
+        public static List<NavInfo> GetNavigation(bool getAll)
         {
             List<NavInfo> info = new List<NavInfo>();
-            IDataReader reader = GetNavigation(false);
+            IDataReader reader = GetNavigationData(getAll);
             while (reader.Read())
             {
                 NavInfo m = new NavInfo();
                 m.Id = TypeConverter.ObjectToInt(reader["id"], 0);
                 m.Level = TypeConverter.ObjectToInt(reader["level"], 0);
-                m.Name = reader["name"].ToString();
+                m.Name = reader["name"].ToString().Trim();
                 m.Parentid = TypeConverter.ObjectToInt(reader["parentid"], 0);
                 m.Target = TypeConverter.ObjectToInt(reader["target"], 0);
-                m.Title = reader["title"].ToString();
+                m.Title = reader["title"].ToString().Trim();
                 m.Type = TypeConverter.ObjectToInt(reader["navstype"], 0);
-                m.Url = reader["url"].ToString();
+                m.Url = reader["url"].ToString().Trim();
                 m.Available = TypeConverter.ObjectToInt(reader["available"], 0);
                 m.Displayorder = TypeConverter.ObjectToInt(reader["displayorder"], 0);
                 info.Add(m);
@@ -38,12 +39,22 @@ namespace SAS.Data.DataProvider
         }
 
         /// <summary>
-        /// 得到自定义菜单
+        /// 获取可用导航菜单
         /// </summary>
         /// <returns></returns>
-        public static IDataReader GetNavigation(bool getAll)
+        public static List<NavInfo> GetNavigation()
         {
-            return DatabaseProvider.GetInstance().GetNavigation(getAll);
+            return GetNavigation(false);
+        }
+
+        /// <summary>
+        /// 得到自定义菜单信息数据
+        /// </summary>
+        /// <param name="getAll">是否获取全部导航菜单</param>
+        /// <returns></returns>
+        public static IDataReader GetNavigationData(bool getAll)
+        {
+            return DatabaseProvider.GetInstance().GetNavigationData(getAll);
         }
 
         /// <summary>

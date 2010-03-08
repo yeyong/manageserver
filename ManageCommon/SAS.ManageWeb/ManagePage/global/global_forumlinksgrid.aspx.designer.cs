@@ -11,7 +11,7 @@
 namespace SAS.ManageWeb.ManagePage {
     
     
-    public partial class company_cataloggrid {
+    public partial class global_forumlinksgrid {
         
         /// <summary>
         /// Form1 控件。
@@ -23,30 +23,39 @@ namespace SAS.ManageWeb.ManagePage {
         protected global::System.Web.UI.HtmlControls.HtmlForm Form1;
         
         /// <summary>
-        /// info1 控件。
+        /// DataGrid1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.UserControl info1;
+        protected global::SAS.Control.DataGrid DataGrid1;
         
         /// <summary>
-        /// ShowTreeLabel 控件。
+        /// SaveFriend 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ShowTreeLabel;
+        protected global::SAS.Control.Button SaveFriend;
         
         /// <summary>
-        /// ForumsTreeLabel 控件。
+        /// DelRec 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ForumsTreeLabel;
+        protected global::SAS.Control.Button DelRec;
+        
+        /// <summary>
+        /// Hint1 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::SAS.Control.Hint Hint1;
     }
 }
