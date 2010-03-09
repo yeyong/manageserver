@@ -377,10 +377,7 @@ namespace SAS.Logic
         {
             AdShowInfo[] adshowArray = GetAdsTable(GetSelectStr(pagename, forumid, AdType.MediaAd));
 
-            if (adshowArray.Length > 0)
-                return string.Format(adshowArray[0].Code, templatepath, pagename, forumid);
-
-            return "";
+            return (adshowArray.Length > 0) ? string.Format(adshowArray[0].Code, templatepath, pagename, forumid) : "";
         }
 
         /// <summary>

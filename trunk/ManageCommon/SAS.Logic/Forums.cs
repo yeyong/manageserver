@@ -49,6 +49,25 @@ namespace SAS.Logic
             return fid >= 0 ? GetSubForumListTable(fid) : new DataTable();
         }
 
+        /// <summary>
+        /// 获取指定FID的板块信息列表
+        /// </summary>
+        /// <param name="fidList">板块FID列表</param>
+        /// <returns></returns>
+        public static List<ForumInfo> GetForumList(string fidList)
+        {
+            List<ForumInfo> forumList = new List<ForumInfo>();
+            foreach (ForumInfo info in GetForumList())
+            {
+                foreach (string fid in fidList.Split(','))
+                {
+                    if (fid == info.Fid.ToString())
+                        forumList.Add(info);
+                }
+            }
+            return forumList;
+        }
+
         public static DataTable GetSubForumListTable(int fid)
         {
             DataTable dt = SAS.Data.DataProvider.Forums.GetSubForumTable(fid);
