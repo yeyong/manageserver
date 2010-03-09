@@ -24,7 +24,7 @@ namespace SAS.Entity
         PageWordAd = 0x02,
 
         /// <summary>
-        /// 帖内广告
+        /// 信息页内广告
         /// </summary>
         InPostAd = 0x03,
 
@@ -44,7 +44,7 @@ namespace SAS.Entity
         MediaAd = 0x06,
 
         /// <summary>
-        /// 帖间通栏广告
+        /// 信息页内通栏广告
         /// </summary>
         PostLeaderboardAd = 0x07,
 
@@ -61,7 +61,42 @@ namespace SAS.Entity
         /// <summary>
         /// 快速编辑器背景广告
         /// </summary>
-        QuickEditorBgAd = 0x0a
+        QuickEditorBgAd = 0x0a,
+
+        /// <summary>
+        /// 聚合首页头部广告
+        /// </summary>
+        WebSiteHeaderAd = 0x0b,
+
+        /// <summary>
+        /// 聚合首页热贴下方广告
+        /// </summary>
+        WebSiteHotTopicAd = 0x0c,
+
+        /// <summary>
+        /// 聚合首页发帖排行上方广告
+        /// </summary>
+        WebSiteUserPostTopAd = 0x0d,
+
+        /// <summary>
+        /// 聚合首页推荐版块上方广告
+        /// </summary>
+        WebSiteRecForumTopAd = 0x0e,
+
+        /// <summary>
+        /// 聚合首页推荐版块下方广告
+        /// </summary>
+        WebSiteRecForumBottomAd = 0x0f,
+
+        /// <summary>
+        /// 聚合首页推荐相册下方广告
+        /// </summary>
+        WebSiteRecAlbumAd = 0x10,
+
+        /// <summary>
+        /// 聚合首页底部广告
+        /// </summary>
+        WebSiteBottomAd = 0x11
 
     }
 }

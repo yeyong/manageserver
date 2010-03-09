@@ -273,6 +273,13 @@
     <Compile Include="syslogin.aspx.designer.cs">
       <DependentUpon>syslogin.aspx.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\forumstree.ascx.cs">
+      <DependentUpon>forumstree.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\forumstree.ascx.designer.cs">
+      <DependentUpon>forumstree.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\onlineeditor.ascx.cs">
       <DependentUpon>onlineeditor.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -849,6 +856,9 @@
     <Content Include="style\admin.css" />
     <Content Include="style\comm.css" />
     <Content Include="syslogin.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="UserControls\forumstree.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="UserControls\onlineeditor.ascx">
