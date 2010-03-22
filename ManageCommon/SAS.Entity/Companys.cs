@@ -44,6 +44,7 @@ namespace SAS.Entity
         private int _en_visble;
         private string _en_createdate;
         private string _en_cataloglist;
+        private int _configid;
         /// <summary>
         /// 企业ID
         /// </summary>
@@ -323,6 +324,14 @@ namespace SAS.Entity
         {
             set { _en_cataloglist = value; }
             get { return _en_cataloglist; }
+        }
+        /// <summary>
+        /// 企业名片配置ID
+        /// </summary>
+        public int configid
+        {
+            set { configid = value; }
+            get { return configid; }
         }
         #endregion Model
     }
