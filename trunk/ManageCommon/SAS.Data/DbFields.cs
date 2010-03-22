@@ -41,7 +41,7 @@ namespace SAS.Data
         /// <summary>
         /// 企业信息字段
         /// </summary>
-        public const string COMPANY = "[en_id],[en_name],[en_main],[en_type],[en_enco],[en_sell],[en_address],[en_areas],[en_desc],[en_post],[en_mobile],[en_phone],[en_fax],[en_mail],[en_web],[en_corp],[en_contact],[en_update],[en_status],[en_reason],[en_level],[en_accesses],[en_credits],[en_logo],[en_music],[reg_capital],[reg_address],[reg_code],[reg_organ],[reg_year],[reg_date],[en_builddate],[en_visble],[en_createdate],[en_cataloglist]";
+        public const string COMPANY = "[en_id],[en_name],[en_main],[en_type],[en_enco],[en_sell],[en_address],[en_areas],[en_desc],[en_post],[en_mobile],[en_phone],[en_fax],[en_mail],[en_web],[en_corp],[en_contact],[en_update],[en_status],[en_reason],[en_level],[en_accesses],[en_credits],[en_logo],[en_music],[reg_capital],[reg_address],[reg_code],[reg_organ],[reg_year],[reg_date],[en_builddate],[en_visble],[en_createdate],[en_cataloglist],[configid]";
         /// <summary>
         /// 地区信息字段
         /// </summary>
@@ -54,6 +54,9 @@ namespace SAS.Data
         /// 板块字段
         /// </summary>
         public const string FORUMS = "[fid],[parentid],[layer],[pathlist],[parentidlist],[subforumcount],[name],[status],[displayorder],[templateid],[topics],[curtopics],[posts],[todayposts],[lasttid],[lasttitle],[lastpost],[lastposterid],[lastposter],[allowsmilies],[allowrss],[allowhtml],[allowbbcode],[allowimgcode],[alloweditrules],[allowthumbnail],[allowtag],[recyclebin],[modnewposts],[jammer],[disablewatermark],[inheritedmod],[autoclose]";
+        /// <summary>
+        /// 友情链接字段
+        /// </summary>
         public const string FRIENDLINK = "[id],[displayorder],[name],[linkurl],[note],[logo]";
         /// <summary>
         /// 帮助信息字段
