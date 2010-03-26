@@ -24,6 +24,15 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 删除指定的名片模板项列表,
+        /// </summary>
+        /// <param name="templateidlist">格式为： 1,2,3</param>
+        public static void DeleteCardTemplateItem(string templateidlist)
+        {
+            SAS.Data.DataProvider.CardTemplate.DeleteCardTemplateItem(templateidlist);
+        }
+
+        /// <summary>
         /// 获得所有在模板目录下的模板列表(即:子目录名称)
         /// </summary>
         /// <param name="templatePath">模板所在路径</param>
@@ -80,6 +89,59 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 获得所有在名片模板目录下的模板列表(即:子目录名称)
+        /// </summary>
+        /// <param name="cardtemplatePath"></param>
+        /// <returns></returns>
+        public static DataTable GetAllCardTemplateList(string cardtemplatePath)
+        {
+            DataTable dt = SAS.Data.DataProvider.CardTemplate.GetAllCardTemplateList();
+            dt.Columns.Add("valid", Type.GetType("System.Int16"));
+            foreach (DataRow dr in dt.Rows)
+            {
+                dr["valid"] = 1;
+            }
+            DirectoryInfo dirInfo = new DirectoryInfo(cardtemplatePath);
+            int count = TypeConverter.ObjectToInt(Data.DataProvider.CardTemplate.GetAllCardTemplateList().Compute("Max(id)", "")) + 1;
+            foreach (DirectoryInfo dir in dirInfo.GetDirectories())
+            {
+                if (dir != null && !dir.Attributes.ToString().Contains(System.IO.FileAttributes.Hidden.ToString()))
+                {
+                    bool itemexist = false;
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        if (dr["directory"].ToString() == dir.Name)
+                        {
+                            itemexist = true;
+                            break;
+                        }
+                    }
+                    if (!itemexist)
+                    {
+                        DataRow dr = dt.NewRow();
+
+                        dr["id"] = count.ToString();
+                        dr["directory"] = dir.Name;// 子目录名
+                        dr["valid"] = 0;// 是否是前台有效模板
+
+                        CardTemplateAboutInfo aboutInfo = GetCardTemplateAboutInfo(dir.FullName);
+                        dr["name"] = aboutInfo.name;// 模板名称
+                        dr["author"] = aboutInfo.author;// 作者
+                        dr["createdate"] = aboutInfo.createdate;// 创建日期
+                        dr["ver"] = aboutInfo.ver;// 模板版本
+                        dr["copyright"] = aboutInfo.copyright;// 版权
+                        dr["currentfile"] = aboutInfo.currentfile;// 当前文件参数
+                        dt.Rows.Add(dr);
+                        count++;
+                    }
+                }
+            }
+            dt.AcceptChanges();
+
+            return dt;
+        }
+
+        /// <summary>
         /// 将模板从数据库中移除
         /// </summary>
         /// <param name="templateIdList">要移除的模板Id列表</param>
@@ -109,6 +171,36 @@ namespace SAS.Logic
             #endregion
         }
 
+        /// <summary>
+        /// 将名片模板从数据库中移除
+        /// </summary>
+        /// <param name="templateIdList">要移除的模板Id列表</param>
+        /// <param name="uid">操作者的Uid</param>
+        /// <param name="userName">操作者的用户名</param>
+        /// <param name="groupId">操作者的组Id</param>
+        /// <param name="groupTitle">操作者的组名称</param>
+        /// <param name="ip">操作者的Ip</param>
+        public static void RemoveCardTemplateInDB(string templateIdList, int uid, string userName, int groupId, string groupTitle, string ip)
+        {
+            #region 移除模板
+            GeneralConfigInfo configInfo = GeneralConfigs.GetConfig();
+            if (("," + templateIdList + ",").IndexOf("," + configInfo.CardTemplateid + ",") >= 0) //当要删除的模板是系统的默认模板时
+            {
+                configInfo.CardTemplateid = 1;
+            }
+
+            GeneralConfigs.Serialiaze(configInfo, Utils.GetMapPath("../../config/general.config"));
+
+            Data.DataProvider.CardConfigs.UpdateCardConfigTemplateID(templateIdList);
+            Data.DataProvider.CardTemplate.DeleteCardTemplateItem(templateIdList);
+
+            SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/CardTemplateList");
+            SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/CardTemplateIDList");
+            SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/UI/CardTemplateListBoxOptions");
+            AdminVistLogs.InsertLog(uid, userName, groupId, groupTitle, ip, "从数据库中删除名片模板文件", "ID为:" + templateIdList);
+            #endregion
+        }
+
         public static void DeleteTemplate(string templateIdList, int uid, string userName, int groupId, string groupTitle, string ip)
         {
             RemoveTemplateInDB(templateIdList, uid, userName, groupId, groupTitle, ip);
@@ -122,6 +214,27 @@ namespace SAS.Logic
                     Directory.Delete(folderpath, true);
                 }
                 string folderaspx = Utils.GetMapPath(@"..\..\aspx\" + templateid);
+                if (Directory.Exists(folderaspx))
+                {
+                    Directory.Delete(folderaspx, true);
+                }
+            }
+            AdminVistLogs.InsertLog(uid, userName, groupId, groupTitle, ip, "从模板库中删除模板文件", "ID为:" + templateIdList);
+        }
+
+        public static void DeleteCardTemplate(string templateIdList, int uid, string userName, int groupId, string groupTitle, string ip)
+        {
+            RemoveCardTemplateInDB(templateIdList, uid, userName, groupId, groupTitle, ip);
+            foreach (string templateid in templateIdList.Split(','))
+            {
+                string foldername = SASRequest.GetString("temp" + templateid);
+                if (foldername == "") continue;
+                string folderpath = Utils.GetMapPath(@"..\..\cardtemplate\" + foldername);
+                if (Directory.Exists(folderpath))
+                {
+                    Directory.Delete(folderpath, true);
+                }
+                string folderaspx = Utils.GetMapPath(@"..\..\cardfiles\" + templateid);
                 if (Directory.Exists(folderaspx))
                 {
                     Directory.Delete(folderaspx, true);

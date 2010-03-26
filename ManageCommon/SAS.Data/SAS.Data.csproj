@@ -43,6 +43,8 @@
     <Compile Include="DataProvider\Announcements.cs" />
     <Compile Include="DataProvider\Areas.cs" />
     <Compile Include="DataProvider\Attachments.cs" />
+    <Compile Include="DataProvider\CardConfigs.cs" />
+    <Compile Include="DataProvider\CardTemplate.cs" />
     <Compile Include="DataProvider\Catalogies.cs" />
     <Compile Include="DataProvider\Companies.cs" />
     <Compile Include="DataProvider\Databases.cs" />

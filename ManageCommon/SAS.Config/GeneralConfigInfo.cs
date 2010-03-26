@@ -212,6 +212,8 @@ namespace SAS.Config
         private int m_avatarmethod = 1;//头像显示方式，0使用动态地址调用头像，1使用静态地址调用头像
         private string m_msgforwardlist = "";//不需要提示信息的页面
         private int m_quickforward = 0;//是否开启跳转
+
+        private int m_cardtemplateid = 1;//默认名片模板ID
         #endregion
 
         #region 属性
@@ -1785,6 +1787,15 @@ namespace SAS.Config
         {
             get { return m_quickforward; }
             set { m_quickforward = value; }
+        }
+
+        /// <summary>
+        /// 默认名片模板ID
+        /// </summary>
+        public int CardTemplateid
+        {
+            get { return m_cardtemplateid; }
+            set { m_cardtemplateid = value; }
         }
         #endregion
     }

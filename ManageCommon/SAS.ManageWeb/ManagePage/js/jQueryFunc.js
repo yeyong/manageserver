@@ -50,7 +50,7 @@ $.fn.ProvinceCity = function(defaultvalue) {
             var result2 = getReturn(pageurl + "opname=area2&parentcode=" + index1);
             $sel2.append(result2);
             $sel3[0].options.length = 0;
-            $sel2.attr("style", "display:block");
+            $sel2.attr("style", "display:inline");
             $sel3.attr("style", "display:none");
         }
     });
@@ -65,7 +65,7 @@ $.fn.ProvinceCity = function(defaultvalue) {
         } else {
             var result3 = getReturn(pageurl + "opname=area3&parentcode=" + index2);
             $sel3.append(result3);
-            $sel3.attr("style", "display:block");
+            $sel3.attr("style", "display:inline");
         }
     });
     return _self;
