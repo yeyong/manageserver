@@ -916,6 +916,47 @@ namespace SAS.Data
 
         #endregion
 
+        #region 名片模板cardtemplate表基本操作
+        /// <summary>
+        /// 添加名片模板
+        /// </summary>
+        /// <param name="name">模版名称</param>
+        /// <param name="directory">模版目录</param>
+        /// <param name="copyright">版权信息</param>
+        /// <param name="author">作者</param>
+        /// <param name="createdate">创建日期</param>
+        /// <param name="ver">版本</param>
+        /// <param name="currentfile">当前参数</param>
+        void AddCardTemplate(string name, string directory, string copyRight, string author, string createDate, string ver, string currentfile);
+        /// <summary>
+        /// 获取可用名片模板列表
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetValidCardTemplateList();
+        /// <summary>
+        /// 获取可用名片模板Id列表
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetValidCardTemplateIDList();
+        /// <summary>
+        /// 获取名片模板列表
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetAllCardTemplateList();
+        /// <summary>
+        /// 删除名片模板项
+        /// </summary>
+        /// <param name="templateIdList">格式为： 1,2,3</param>
+        void DeleteCardTemplateItem(string templateIdList);
+        #endregion
+
+        #region 名片配置文件表cardconfig操作
+        /// <summary>
+        /// 名片配置文件模板ID更新操作
+        /// </summary>
+        void UpdateCardConfigTemplateID(string templateIdList);
+        #endregion
+
         #region 短消息pms处理操作
 
         /// <summary>

@@ -99,6 +99,47 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 从名片模板说明文件中获得模板说明信息
+        /// </summary>
+        /// <param name="xmlPath">模板路径(不包含文件名)</param>
+        /// <returns>模板说明信息</returns>
+        public static CardTemplateAboutInfo GetCardTemplateAboutInfo(string xmlPath)
+        {
+            CardTemplateAboutInfo aboutInfo = new CardTemplateAboutInfo();
+
+            ///存放关于信息的文件 about.xml是否存在,不存在返回空串
+            if (!System.IO.File.Exists(xmlPath + @"\about.xml"))
+                return aboutInfo;
+
+            XmlDocument xml = new XmlDocument();
+
+            xml.Load(xmlPath + @"\about.xml");
+
+            try
+            {
+                XmlNode root = xml.SelectSingleNode("about");
+                foreach (XmlNode n in root.ChildNodes)
+                {
+                    if (n.NodeType != XmlNodeType.Comment && n.Name.ToLower() == "template")
+                    {
+                        aboutInfo.name = n.Attributes["name"] != null ? n.Attributes["name"].Value.ToString() : "";
+                        aboutInfo.author = n.Attributes["author"] != null ? n.Attributes["author"].Value.ToString() : "";
+                        aboutInfo.createdate = n.Attributes["createdate"] != null ? n.Attributes["createdate"].Value.ToString() : "";
+                        aboutInfo.ver = n.Attributes["ver"] != null ? n.Attributes["ver"].Value.ToString() : "";
+                        aboutInfo.currentfile = n.Attributes["currentfile"] != null ? n.Attributes["currentfile"].Value.ToString() : "";
+                        aboutInfo.copyright = n.Attributes["copyright"] != null ? n.Attributes["copyright"].Value.ToString() : "";
+                        aboutInfo.width = n.Attributes["width"] != null ? n.Attributes["width"].Value.ToString() : "600";
+                    }
+                }
+            }
+            catch
+            {
+                aboutInfo = new CardTemplateAboutInfo();
+            }
+            return aboutInfo;
+        }
+
+        /// <summary>
         /// 获得前台有效的模板列表
         /// </summary>
         /// <returns>模板列表</returns>
@@ -117,6 +158,24 @@ namespace SAS.Logic
             }
         }
 
+        /// <summary>
+        /// 获得前台有效的模板列表
+        /// </summary>
+        /// <returns>模板列表</returns>
+        public static DataTable GetValidCardTemplateList()
+        {
+            lock (SynObject)
+            {
+                SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+                DataTable dt = cache.RetrieveObject("/SAS/CardTemplateList") as DataTable;
+                if (dt == null)
+                {
+                    dt = SAS.Data.DataProvider.CardTemplate.GetValidCardTemplateList();
+                    cache.AddObject("/SAS/CardTemplateList", dt);
+                }
+                return dt;
+            }
+        }
 
         /// <summary>
         /// 获得前台有效的模板ID列表
@@ -137,6 +196,30 @@ namespace SAS.Logic
                         templateidlist = templateidlist.Substring(1);
 
                     cache.AddObject("/SAS/TemplateIDList", templateidlist);
+                }
+                return templateidlist;
+            }
+        }
+
+        /// <summary>
+        /// 获得前台有效的模板ID列表
+        /// </summary>
+        /// <returns>模板ID列表</returns>
+        public static string GetValidCardTemplateIDList()
+        {
+            lock (SynObject)
+            {
+                SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+                string templateidlist = cache.RetrieveObject("/SAS/CardTemplateIDList") as string;
+
+                if (templateidlist == null)
+                {
+                    templateidlist = SAS.Data.DataProvider.CardTemplate.GetValidCardTemplateIDList();
+
+                    if (!Utils.StrIsNullOrEmpty(templateidlist))
+                        templateidlist = templateidlist.Substring(1);
+
+                    cache.AddObject("/SAS/CardTemplateIDList", templateidlist);
                 }
                 return templateidlist;
             }
@@ -193,6 +276,21 @@ namespace SAS.Logic
         public static void CreateTemplate(string name, string directory, string copyright, string author, string createdate, string ver, string fordntver)
         {
             Data.DataProvider.Templates.CreateTemplate(name, directory, copyright, author, createdate, ver, fordntver);
+        }
+
+        /// <summary>
+        /// 添加名片模板
+        /// </summary>
+        /// <param name="name">模版名称</param>
+        /// <param name="directory">模版目录</param>
+        /// <param name="copyright">版权信息</param>
+        /// <param name="author">作者</param>
+        /// <param name="createdate">创建日期</param>
+        /// <param name="ver">版本</param>
+        /// <param name="currentfile">当前参数</param>
+        public static void CreateCardTemplate(string name, string directory, string copyright, string author, string createdate, string ver, string currentfile)
+        {
+            Data.DataProvider.CardTemplate.CreateCardTemplate(name, directory, copyright, author, createdate, ver, currentfile);
         }
     }
 }

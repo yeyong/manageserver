@@ -162,7 +162,98 @@ namespace SAS.Data.SqlServer
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
         }
 
-        #endregion        
+        #endregion
+
+        #region 名片模板cardtemplate基本操作
+
+        /// <summary>
+        /// 添加名片模板
+        /// </summary>
+        /// <param name="name">模版名称</param>
+        /// <param name="directory">模版目录</param>
+        /// <param name="copyright">版权信息</param>
+        /// <param name="author">作者</param>
+        /// <param name="createdate">创建日期</param>
+        /// <param name="ver">版本</param>
+        /// <param name="currentfile">当前参数</param>
+        public void AddCardTemplate(string name, string directory, string copyRight, string author, string createDate, string ver, string currentfile)
+        {
+            DbParameter[] parms = { 
+                                        DbHelper.MakeInParam("@name", (DbType)SqlDbType.NVarChar, 50, name),
+                                        DbHelper.MakeInParam("@directory", (DbType)SqlDbType.NVarChar, 100, directory),
+                                        DbHelper.MakeInParam("@copyright", (DbType)SqlDbType.NVarChar, 100, copyRight),
+                                        DbHelper.MakeInParam("@author", (DbType)SqlDbType.NVarChar, 100, author),
+                                        DbHelper.MakeInParam("@createdate", (DbType)SqlDbType.NVarChar, 50, createDate),
+                                        DbHelper.MakeInParam("@ver", (DbType)SqlDbType.NVarChar, 100, ver),
+                                        DbHelper.MakeInParam("@currentfile", (DbType)SqlDbType.NVarChar, 1000, currentfile)
+                                    };
+            string commandText = string.Format("INSERT INTO [{0}cardtemplate] ([name],[directory],[copyright],[author],[createdate],[ver],[currentfile]) VALUES(@name,@directory,@copyright,@author,@createdate,@ver,@currentfile)",
+                                                BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        /// <summary>
+        /// 获得前台有效的名片模板列表
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetValidCardTemplateList()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}cardtemplate] ORDER BY [id]",
+                                                DbFields.CARDTEMPLATES,
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 获得前台有效的名片模板ID列表
+        /// </summary>
+        /// <returns>模板ID列表</returns>
+        public DataTable GetValidCardTemplateIDList()
+        {
+            string commandText = string.Format("SELECT [id] FROM [{0}cardtemplate] ORDER BY [id]", BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 获得所有在名片模板目录下的模板列表(即:子目录名称)
+        /// </summary>
+        /// <param name="templatePath">模板所在路径</param>
+        /// <example>GetAllTemplateList(Utils.GetMapPath(@"..\..\cardtemplate\"))</example>
+        /// <returns>模板列表</returns>
+        public DataTable GetAllCardTemplateList()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}cardtemplate] ORDER BY [id]",
+                                                DbFields.CARDTEMPLATES,
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
+        /// <summary>
+        /// 删除指定的名片模板项列表,
+        /// </summary>
+        /// <param name="templateidlist">格式为： 1,2,3</param>
+        public void DeleteCardTemplateItem(string templateIdList)
+        {
+            string commandText = string.Format("DELETE FROM [{0}cardtemplate] WHERE [id] IN ({1})",
+                                                BaseConfigs.GetTablePrefix,
+                                                templateIdList);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
+        }
+
+        #endregion
+
+        #region 名片模板配置文件 cardconfig 表操作
+        /// <summary>
+        /// 名片配置文件模板ID更新操作
+        /// </summary>
+        public void UpdateCardConfigTemplateID(string templateIdList)
+        {
+            string commandText = string.Format("UPDATE [{0}cardconfig] SET [tid]=0 WHERE [tid] IN ({1})",
+                                                BaseConfigs.GetTablePrefix,
+                                                templateIdList);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText);            
+        }
+        #endregion
 
         #region 通知notice基本操作
 

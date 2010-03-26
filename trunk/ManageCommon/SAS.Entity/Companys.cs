@@ -330,8 +330,8 @@ namespace SAS.Entity
         /// </summary>
         public int configid
         {
-            set { configid = value; }
-            get { return configid; }
+            set { _configid = value; }
+            get { return _configid; }
         }
         #endregion Model
     }

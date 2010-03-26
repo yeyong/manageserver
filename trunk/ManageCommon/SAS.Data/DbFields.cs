@@ -31,6 +31,10 @@ namespace SAS.Data
         /// </summary>
         public const string BANNED = "[bdid],[ip1],[ip2],[ip3],[ip4],[admin],[dateline],[expiration]";
         /// <summary>
+        /// 名片模板信息表字段
+        /// </summary>
+        public const string CARDTEMPLATES = "[id],[directory],[name],[author],[createdate],[ver],[copyright],[currentfile]";
+        /// <summary>
         /// 行业类别字段
         /// </summary>
         public const string CATALOG = "[id],[name],[parentid],[parentlist],[sort],[cllogo],[displayorder],[haschild],[companycount]";
