@@ -185,7 +185,7 @@ namespace SAS.ManageWeb.ManagePage
 
         public string CreateStr(string name, string path, string templateid)
         {
-            string result = "<a href=global_templatetree.aspx?path=" + path.Trim().Replace(" ", "%20") + "&templateid=" + templateid.Trim() + "&templatename=" + name.Trim().Replace(" ", "%20") + ">管理</a>&nbsp;&nbsp;";
+            string result = "<a href=company_cardtemplatetree.aspx?path=" + path.Trim().Replace(" ", "%20") + "&templateid=" + templateid.Trim() + "&templatename=" + name.Trim().Replace(" ", "%20") + ">管理</a>&nbsp;&nbsp;";
             result += "<a href=\"javascript:CreateTemplate('" + name + "')\">生成</a>";
             return result;
         }

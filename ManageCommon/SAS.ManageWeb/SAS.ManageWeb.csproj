@@ -76,6 +76,13 @@
     <Compile Include="ManagePage\company\company_cardtemplategrid.aspx.designer.cs">
       <DependentUpon>company_cardtemplategrid.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\company\company_cardtemplatetree.aspx.cs">
+      <DependentUpon>company_cardtemplatetree.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\company\company_cardtemplatetree.aspx.designer.cs">
+      <DependentUpon>company_cardtemplatetree.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\company\company_cataloggrid.aspx.cs">
       <DependentUpon>company_cataloggrid.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -457,6 +464,7 @@
     <Content Include="config\ftp.config" />
     <Content Include="config\sirius.config" />
     <Content Include="ManagePage\company\company_cardtemplategrid.aspx" />
+    <Content Include="ManagePage\company\company_cardtemplatetree.aspx" />
     <Content Include="ManagePage\company\company_cataloggrid.aspx" />
     <Content Include="ManagePage\company\company_companyedit.aspx" />
     <Content Include="ManagePage\company\global_addcompany.aspx" />
