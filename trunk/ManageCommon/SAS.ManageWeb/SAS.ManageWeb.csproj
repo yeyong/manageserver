@@ -69,6 +69,13 @@
     <Compile Include="aspx\1\usercpprofile.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ManagePage\company\company_cardtemplateedit.aspx.cs">
+      <DependentUpon>company_cardtemplateedit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\company\company_cardtemplateedit.aspx.designer.cs">
+      <DependentUpon>company_cardtemplateedit.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\company\company_cardtemplategrid.aspx.cs">
       <DependentUpon>company_cardtemplategrid.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -463,6 +470,7 @@
     <Content Include="config\album.config" />
     <Content Include="config\ftp.config" />
     <Content Include="config\sirius.config" />
+    <Content Include="ManagePage\company\company_cardtemplateedit.aspx" />
     <Content Include="ManagePage\company\company_cardtemplategrid.aspx" />
     <Content Include="ManagePage\company\company_cardtemplatetree.aspx" />
     <Content Include="ManagePage\company\company_cataloggrid.aspx" />
