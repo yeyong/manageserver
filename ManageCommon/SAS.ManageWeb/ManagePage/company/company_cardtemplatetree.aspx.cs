@@ -162,7 +162,7 @@ namespace SAS.ManageWeb.ManagePage
                 //if (dr["extension"].ToString().IndexOf("aspx") > 0) imgstr = "../images/aspx.gif";
                 //if (dr["extension"].ToString().IndexOf("ascx") > 0) imgstr = "../images/ascx.gif";
                 string ext = dr["extension"].ToString().Substring(1);
-                dr["filename"] = "<img src=\"../images/" + ext + ".gif\" border=\"0\"> <a href=\"global_templatesedit.aspx?path=" + dr["filepath"].ToString().Replace(" ", "%20") + "&filename=" + dr["filename"] + dr["extension"] + "&templateid=" + SASRequest.GetString("templateid") + "&templatename=" + SASRequest.GetString("templatename").Replace(" ", "%20") + "\" title=\"" + ext + "文件\">" + dr["filename"].ToString().Trim() + "</a>";
+                dr["filename"] = "<img src=\"../images/" + ext + ".gif\" border=\"0\"> <a href=\"company_cardtemplateedit.aspx?path=" + dr["filepath"].ToString().Replace(" ", "%20") + "&filename=" + dr["filename"] + dr["extension"] + "&templateid=" + SASRequest.GetString("templateid") + "&templatename=" + SASRequest.GetString("templatename").Replace(" ", "%20") + "\" title=\"" + ext + "文件\">" + dr["filename"].ToString().Trim() + "</a>";
             }
 
             return otherfilelist;
@@ -329,7 +329,7 @@ namespace SAS.ManageWeb.ManagePage
             {
                 string ext = dr["extension"].ToString().Substring(1);
                 dr["filename"] = String.Format("<img src=../images/{0}.gif border=\"0\"  style=\"position:relative;top:5 px;height:16 px\"> {1} "
-                + "<a href=\"global_templatesedit.aspx?path={2}&filename={1}{3}&templateid={4}&templatename={5}\" title=\"编辑{1}.{0}模板文件\"><img src='../images/editfile.gif' border='0'/></a>",
+                + "<a href=\"company_cardtemplateedit.aspx?path={2}&filename={1}{3}&templateid={4}&templatename={5}\" title=\"编辑{1}.{0}模板文件\"><img src='../images/editfile.gif' border='0'/></a>",
                     ext, dr["filename"].ToString().Trim(), dr["filepath"].ToString().Replace(" ", "%20"), dr["extension"].ToString().Trim(),
                     templateid, templatename);
             }
