@@ -1,0 +1,33 @@
+@charset "utf-8";
+/*企业信息提交*/
+body{ background:#f7f7eb;}
+.xxtj{ width:100%; background:url(../images/hycard/bg.jpg) top center no-repeat; float:left;}
+.xxtj .cot{ width:788px; height:auto; margin:0 auto;}
+.xhd{ width:788px; height:66px; margin:45px 0 0 0; display:inline; float:left;}
+.xhdlt{ width:auto; height:66px; float:left;}
+.xhdlt img, .xhdlt span{ float:left;}
+.xhdlt span{ margin:20px 0 0 20px; display:inline;}
+.xhdrt{ width:auto; height:25px; line-height:25px; margin:40px 0 0 0; display:inline; float:right;}
+.tijiao{ width:788px; height:auto; float:left;}
+.tijiao1, .tijiao3{ width:788px; height:9px; float:left;}
+.tijiao1{ filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="images/kuang-1.png"); background:url(../images/kuang-1.png) no-repeat;*background:none;}
+.tijiao3{ filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="images/kuang-2.png"); background:url(../images/kuang-2.png) no-repeat;*background:none;}
+.tijiao2{ width:728px; height:auto; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="images/kuang-bg.png"); background:url(../images/kuang-bg.png) repeat-y;*background:none; padding:25px 30px; float:left;}
+.tijiao2nr{ width:728px; height:28px; float:left;}
+.tjp1, .tjp2{ width:200px; height:28px; line-height:28px; font-size:16px; font-weight:bold; float:left;}
+.tjp1{ color:#ffa800;}
+.tjp2{ color:#b0b0b0;}
+.tjp1 span{ width:28px; height:28px; line-height:28px; text-align:center; color:#fff; font-size:16px; font-weight:bold; background:url(../images/quan-1.gif) no-repeat; margin:0 7px 0 0; display:inline; float:left;}
+.tjp2 span{ width:28px; height:28px; line-height:28px; text-align:center; color:#b0b0b0; font-size:16px; font-weight:bold; background:url(../images/quan-2.gif) no-repeat; margin:0 7px 0 0; display:inline; float:left;}
+.tijiao2nr1{ width:708px; height:30px; line-height:30px; font-size:14px; padding:0 10px; margin:20px 0 0 0; text-align:center; display:inline; float:left;}
+.tj2nrbg{ text-align:left; background:#f8f6f6; border-top:1px solid #ccc;}
+.tdtj{ width:100%; float:left;}
+.tdtj td{ color:#666; padding:10px 5px; line-height:20px; vertical-align:top;}
+.tdtj1{ text-align:right;}
+.tdtj2{ text-align:left;}
+.tdtjnr{ width:340px; float:left;}
+.tdtjnr1{ line-height:20px; margin:42px 0 0 0!important;margin:50px 0 0 0; display:inline; float:left;}
+.tdtjnr2{ width:500px; float:left;}
+/*footer*/
+.foot{ width:788px; height:auto; float:left;}
+.footnr{ width:785px; height:20px; line-height:20px; text-align:center; float:left;}
