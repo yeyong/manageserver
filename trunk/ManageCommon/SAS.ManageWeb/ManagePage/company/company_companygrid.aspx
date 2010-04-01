@@ -67,7 +67,7 @@
                     </tr>                    
                     <tr>
                         <td align="center" colspan="2">
-                            <sas:Button ID="Search" runat="server" Text="开始搜索"></sas:Button>
+                            <sas:Button ID="Search" runat="server" Text="开始搜索"></sas:Button><sas:Button ID="LocationSet" runat="server" Text="区域JSON数据生成"></sas:Button>
                         </td>
                     </tr>
                 </table>
