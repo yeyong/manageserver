@@ -59,6 +59,11 @@ namespace SAS.ManageWeb.ManagePage
 
             return statusname;
         }
+
+        private void LocationSet_Click(object sender, EventArgs e)
+        {
+            areas.GetInstance.WriteJsonFile();
+        }
        
         private void ENStart_Click(object sender, EventArgs e)
         {
@@ -112,6 +117,7 @@ namespace SAS.ManageWeb.ManagePage
             DataGrid1.ColumnSpan = 12;
             ENStart.Click += new EventHandler(ENStart_Click);
             ENPause.Click += new EventHandler(ENPause_Click);
+            LocationSet.Click += new EventHandler(LocationSet_Click);
         }
 
         #endregion

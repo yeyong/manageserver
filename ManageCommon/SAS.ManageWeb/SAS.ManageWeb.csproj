@@ -50,6 +50,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="aspx\1\companypost.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="aspx\1\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -103,6 +106,13 @@
     </Compile>
     <Compile Include="ManagePage\company\company_companyedit.aspx.designer.cs">
       <DependentUpon>company_companyedit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\company\company_companygrid.aspx.cs">
+      <DependentUpon>company_companygrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\company\company_companygrid.aspx.designer.cs">
+      <DependentUpon>company_companygrid.aspx</DependentUpon>
     </Compile>
     <Compile Include="ManagePage\company\global_addcompany.aspx.cs">
       <DependentUpon>global_addcompany.aspx</DependentUpon>
@@ -477,6 +487,7 @@
     <Content Include="ManagePage\company\company_cardtemplatetree.aspx" />
     <Content Include="ManagePage\company\company_cataloggrid.aspx" />
     <Content Include="ManagePage\company\company_companyedit.aspx" />
+    <Content Include="ManagePage\company\company_companygrid.aspx" />
     <Content Include="ManagePage\company\global_addcompany.aspx" />
     <Content Include="ManagePage\global\global_addadvs.aspx" />
     <Content Include="ManagePage\global\global_addannounce.aspx" />
@@ -496,6 +507,7 @@
     <Content Include="templates\default\album\usercpmanagephoto.htm" />
     <Content Include="templates\default\album\usercpphotoadd.htm" />
     <Content Include="templates\default\album\_albummenu.htm" />
+    <Content Include="templates\default\companypost.htm" />
     <Content Include="templates\default\css\channels.css" />
     <Content Include="templates\default\css\comm.css" />
     <Content Include="templates\default\css\head-foot.css" />
@@ -646,6 +658,8 @@
     <Content Include="templates\default\_comfooter.htm" />
     <Content Include="templates\default\_comheader.htm" />
     <Content Include="templates\default\_compageheader.htm" />
+    <Content Include="templates\default\_companypostfooter.htm" />
+    <Content Include="templates\default\_compostheader.htm" />
     <Content Include="templates\default\_copyright.htm" />
     <Content Include="templates\default\_editor.htm" />
     <Content Include="templates\default\_errmsgbox.htm" />

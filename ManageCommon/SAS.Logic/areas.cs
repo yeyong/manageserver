@@ -10,14 +10,45 @@ using System.Data;
 using SAS.Common;
 using SAS.Data;
 using SAS.Common.Generic;
+using SAS.Config;
 
 namespace SAS.Logic
 {
     /// <summary>
     /// 地区操作
     /// </summary>
-    public class areas
+    public class areas : WriteFile
     {
+        #region 私有变量
+        private static volatile areas instance = null;
+        private static object lockHelper = new object();
+        private static string jsonPath = "";
+        #endregion
+
+        #region 返回唯一实例
+        private areas()
+        {
+            jsonPath = Utils.GetMapPath(BaseConfigs.GetSitePath + "\\javascript\\locations.js");
+        }
+
+        public static areas GetInstance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    lock (lockHelper)
+                    {
+                        if (instance == null)
+                        {
+                            instance = new areas();
+                        }
+                    }
+                }
+                return instance;
+            }
+        }
+        #endregion
         /// <summary>
         /// 获取全部区县信息
         /// </summary>
@@ -181,6 +212,27 @@ namespace SAS.Logic
             }
 
             return returnMessage;
+        }
+
+        /// <summary>
+        /// 生成商品分类表的JSON文件
+        /// </summary>
+        /// <returns>是否写入成功</returns>
+        public override bool WriteJsonFile()
+        {
+            StringBuilder sb_areas = new StringBuilder("var provinces = ");
+
+            sb_areas.Append(Utils.DataTableToJSON(GetProvinceList()));
+
+            sb_areas.Append("var citys = ");
+
+            sb_areas.Append(Utils.DataTableToJSON(GetCityList()));
+
+            sb_areas.Append("var districts = ");
+
+            sb_areas.Append(Utils.DataTableToJSON(GetDistrictList()));
+
+            return base.WriteJsonFile(jsonPath, sb_areas);
         }
     }
 }
