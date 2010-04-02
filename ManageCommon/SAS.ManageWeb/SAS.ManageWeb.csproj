@@ -50,7 +50,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="aspx\1\companypost.cs">
+    <Compile Include="aspx\1\companypost.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="aspx\1\index.aspx.cs">
