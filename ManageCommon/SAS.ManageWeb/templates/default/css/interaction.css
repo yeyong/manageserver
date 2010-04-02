@@ -10,9 +10,9 @@ body{ background:#f7f7eb;}
 .xhdrt{ width:auto; height:25px; line-height:25px; margin:40px 0 0 0; display:inline; float:right;}
 .tijiao{ width:788px; height:auto; float:left;}
 .tijiao1, .tijiao3{ width:788px; height:9px; float:left;}
-.tijiao1{ filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="images/kuang-1.png"); background:url(../images/kuang-1.png) no-repeat;*background:none;}
-.tijiao3{ filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="images/kuang-2.png"); background:url(../images/kuang-2.png) no-repeat;*background:none;}
-.tijiao2{ width:728px; height:auto; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="images/kuang-bg.png"); background:url(../images/kuang-bg.png) repeat-y;*background:none; padding:25px 30px; float:left;}
+.tijiao1{ filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="templates/default/images/kuang-1.png"); background:url(../images/kuang-1.png) no-repeat!important;background:none;}
+.tijiao3{ filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="templates/default/images/kuang-2.png"); background:url(../images/kuang-2.png) no-repeat!important;background:none;}
+.tijiao2{ width:728px; height:auto; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src="templates/default/images/kuang-bg.png"); background:url(../images/kuang-bg.png) repeat-y!important;background:none; padding:25px 30px; float:left;}
 .tijiao2nr{ width:728px; height:28px; float:left;}
 .tjp1, .tjp2{ width:200px; height:28px; line-height:28px; font-size:16px; font-weight:bold; float:left;}
 .tjp1{ color:#ffa800;}

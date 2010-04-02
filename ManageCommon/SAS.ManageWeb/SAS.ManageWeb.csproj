@@ -464,7 +464,6 @@
     <Content Include="javascript\dnteditor.js" />
     <Content Include="javascript\editor.js" />
     <Content Include="javascript\jquer.easing.1.3.js" />
-    <Content Include="javascript\jquery-1.3.2.min.js" />
     <Content Include="javascript\jquery-exchange.js" />
     <Content Include="javascript\jquery.capSlide.js" />
     <Content Include="javascript\jquery.js" />
@@ -660,6 +659,7 @@
     <Content Include="templates\default\_compageheader.htm" />
     <Content Include="templates\default\_companypostfooter.htm" />
     <Content Include="templates\default\_compostheader.htm" />
+    <Content Include="templates\default\_comsearch.htm" />
     <Content Include="templates\default\_copyright.htm" />
     <Content Include="templates\default\_editor.htm" />
     <Content Include="templates\default\_errmsgbox.htm" />

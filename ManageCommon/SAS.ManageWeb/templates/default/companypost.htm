@@ -17,15 +17,15 @@
 					<td class="tdtj1">选择主营行业：<span class="f_e00101">*</span></td>
 					<td class="tdtj2" colspan="3">
 					<span class="f_b5b5b5">请选择完整的行业大类和子类，并添加为主营行业，最多可添加 6 个！</span>
-					<span class="tdtjnr2">
-					<select size="8" style="width:110px"></select>
-					<select size="8" style="width:110px"></select>
-					<select size="8" style="width:110px"></select>
-					<select size="8" style="width:110px"></select>
+					<span class="tdtjnr2" id="zyhy">
+					    <select id="cata1" name="cata1" size="8" style="width:110px" onchange="loadCategory('zyhy',1);"></select>
+					    <select id="cata2" name="cata2" size="8" style="width:110px" onchange="loadCategory('zyhy',2);"></select>
+					    <select id="cata3" name="cata3" size="8" style="width:110px" onchange="loadCategory('zyhy',3);"></select>
+					    <select id="cata4" name="cata4" size="8" style="width:110px"></select>
 					</span>
 					<span class="tdtjnr mar_top_3">
-						<input type="button" name="moveup" value="添加↓"/>
-						<input type="button" name="movedown" value="×删除"/>
+						<input type="button" name="moveup" id="moveup" value="添加↓"/>
+						<input type="button" name="movedown" id="movedown" value="×删除"/>
 					</span>
 					<span class="tdtjnr f_b5b5b5">以下是您已选的主营行业</span>
 					<span class="tdtjnr mar_top_3">
@@ -89,6 +89,7 @@
 				  <tr>
 					<td class="tdtj1">联系地址：<span class="f_e00101">*</span></td>
 					<td class="tdtj2" colspan="3">
+					<span id="thelocation">
 					<select name="">
 						<option>浙江省</option>
 					</select>
@@ -98,6 +99,7 @@
 					<select name="">
 						<option>拱墅区</option>
 					</select>
+					</span>
 					</td>
 				  </tr>
 				  <tr>
