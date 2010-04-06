@@ -20,7 +20,10 @@
 				<span><input name="" type="text" class="input4_soout" onfocus="this.className='input4_soon'" onBlur="this.className='input4_soout'" style="width:300px;" /></span>
 				<span class="soso6nr1">
 				<select name="" class="select_type2">
-					<option>IT/计算机</option>
+				    <option>请选择行业类别</option>
+				<%loop (DataRow) searchcata firstcata%>
+					<option value="{searchcata[id]}">{searchcata[name]}</option>
+				<%/loop%>
 				</select>
 				</span>
 				<span class="soso6nr2"><a title="企业搜索" href="#"></a></span>
