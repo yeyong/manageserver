@@ -193,106 +193,32 @@
 		<p class="type1 type1w1">
 			<em></em><strong>行业市场</strong><span><a class="l_f00_u" title="" href="#">免费发布企业信息</a></span>
 		</p>
+		<%loop (DataRow) cataloginfo cataloglist1%>
 		<div class="type2">
-			<strong class="type2t">工业区</strong>
+			<strong class="type2t">{cataloginfo[name]}</strong>
 			<ul class="type2nr">
+			<%loop (DataRow) subcata cataloglist2%>
+			<%if {subcata[parentid]}=={cataloginfo[id]}%>
 				<li>
-					<strong><a class="l_e00101" title="" href="#">农、林、牧、渔服务业</a></strong>
-					<p><a title="" href="#">农、林、牧、渔业</a> | <a title="" href="#">采矿业</a> | <a title="" href="#" style="color:#ff7e00;">制造业</a> | <a title="" href="#">水暖五金业</a> | <a title="" href="#">电力、燃气及水的生产和供应业</a> | <a title="" href="#">电动机</a> | <a class="l_f00" title="" href="#">更多&gt;&gt;</a></p>
+					<strong><a class="l_e00101" title="{subcata[name]}" href="{subcata[id]}">{subcata[name]}</a></strong>
+					<p>
+					<%set (int){catastrlength} = 0%>
+					<%loop (DataRow) subsubcata cataloglist3%>
+					<%if {subsubcata[parentid]}=={subcata[id]}%>
+					<%set {catastrlength}={catastrlength}+{subsubcata[name]}.Length%>
+					<%if {catastrlength}>40%>
+					    <%break%>
+					<%/if%>
+					<a title="{subsubcata[name]}" href="{subsubcata[id]}">{subsubcata[name]}</a> | 
+					<%/if%>
+					<%/loop%>
+					<a class="l_f00" title="" href="#">更多&gt;&gt;</a></p>
 				</li>
-				<li>
-					<strong><a class="l_e00101" title="" href="#">石油和天然气开采业</a></strong>
-					<p><a title="" href="#">农、林、牧、渔业</a> | <a title="" href="#">采矿业</a> | <a title="" href="#" style="color:#ff7e00;">制造业</a> | <a title="" href="#">水暖五金</a> | <a title="" href="#">电力、燃气及水的生产和供应业</a> | <a title="" href="#">电动机</a> | <a class="l_f00" title="" href="#">更多&gt;&gt;</a></p>
-				</li>
-				<li class="tpbg">
-					<strong><a class="l_e00101" title="" href="#">农副食品加工业</a></strong>
-					<p><a title="" href="#">农、林、牧、渔业</a> | <a title="" href="#">采矿业</a> | <a title="" href="#" style="color:#ff7e00;">制造业</a> | <a title="" href="#">水暖五金</a> | <a title="" href="#">电力、燃气及水的生产和供应业</a> | <a title="" href="#">电动机</a> | <a class="l_f00" title="" href="#">更多&gt;&gt;</a></p>
-				</li>
-				<li class="tpbg">
-					<strong><a class="l_e00101" title="" href="#">皮革、毛皮、羽毛(绒)及其制品业</a></strong>
-					<p><a title="" href="#">农、林、牧、渔业</a> | <a title="" href="#">采矿业</a> | <a title="" href="#" style="color:#ff7e00;">制造业</a> | <a title="" href="#">水暖五金</a> | <a title="" href="#">电力、燃气及水的生产和供应业</a> | <a title="" href="#">电动机</a> | <a class="l_f00" title="" href="#">更多&gt;&gt;</a></p>
-				</li>
-				<li>
-					<strong><a class="l_e00101" title="" href="#">农、林、牧、渔服务业</a></strong>
-					<p><a title="" href="#">农、林、牧、渔业</a> | <a title="" href="#">采矿业</a> | <a title="" href="#" style="color:#ff7e00;">制造业</a> | <a title="" href="#">水暖五金</a> | <a title="" href="#">电力、燃气及水的生产和供应业</a> | <a title="" href="#">电动机</a> | <a class="l_f00" title="" href="#">更多&gt;&gt;</a></p>
-				</li>
-				<li>
-					<strong><a class="l_e00101" title="" href="#">石油和天然气开采业</a></strong>
-					<p><a title="" href="#">农、林、牧、渔业</a> | <a title="" href="#">采矿业</a> | <a title="" href="#" style="color:#ff7e00;">制造业</a> | <a title="" href="#">水暖五金</a> | <a title="" href="#">电力、燃气及水的生产和供应业</a> | <a title="" href="#">电动机</a> | <a class="l_f00" title="" href="#">更多&gt;&gt;</a></p>
-				</li>
+			<%/if%>
+			<%/loop%>
 			</ul>
 		</div>
-		<div class="type2">
-			<strong class="type2t">消费品</strong>
-			<ul class="type2nr">
-				<li>
-					<strong><a class="l_e00101" title="" href="#">农、林、牧、渔服务业</a></strong>
-					<p><a title="" href="#">农、林、牧、渔业</a> | <a title="" href="#">采矿业</a> | <a title="" href="#" style="color:#ff7e00;">制造业</a> | <a title="" href="#">水暖五金</a> | <a title="" href="#">电力、燃气及水的生产和供应业</a> | <a title="" href="#">电动机</a> | <a class="l_f00" title="" href="#">更多&gt;&gt;</a></p>
-				</li>
-				<li>
-					<strong><a class="l_e00101" title="" href="#">石油和天然气开采业</a></strong>
-					<p><a title="" href="#">农、林、牧、渔业</a> | <a title="" href="#">采矿业</a> | <a title="" href="#" style="color:#ff7e00;">制造业</a> | <a title="" href="#">水暖五金</a> | <a title="" href="#">电力、燃气及水的生产和供应业</a> | <a title="" href="#">电动机</a> | <a class="l_f00" title="" href="#">更多&gt;&gt;</a></p>
-				</li>
-				<li class="tpbg">
-					<strong><a class="l_e00101" title="" href="#">农副食品加工业</a></strong>
-					<p><a title="" href="#">农、林、牧、渔业</a> | <a title="" href="#">采矿业</a> | <a title="" href="#" style="color:#ff7e00;">制造业</a> | <a title="" href="#">水暖五金</a> | <a title="" href="#">电力、燃气及水的生产和供应业</a> | <a title="" href="#">电动机</a> | <a class="l_f00" title="" href="#">更多&gt;&gt;</a></p>
-				</li>
-				<li class="tpbg">
-					<strong><a class="l_e00101" title="" href="#">皮革、毛皮、羽毛(绒)及其制品业</a></strong>
-					<p><a title="" href="#">农、林、牧、渔业</a> | <a title="" href="#">采矿业</a> | <a title="" href="#" style="color:#ff7e00;">制造业</a> | <a title="" href="#">水暖五金</a> | <a title="" href="#">电力、燃气及水的生产和供应业</a> | <a title="" href="#">电动机</a> | <a class="l_f00" title="" href="#">更多&gt;&gt;</a></p>
-				</li>
-			</ul>
-		</div>
-		<div class="type2">
-			<strong class="type2t">原材料</strong>
-			<ul class="type2nr">
-				<li>
-					<strong><a class="l_e00101" title="" href="#">农、林、牧、渔服务业</a></strong>
-					<p><a title="" href="#">农、林、牧、渔业</a> | <a title="" href="#">采矿业</a> | <a title="" href="#" style="color:#ff7e00;">制造业</a> | <a title="" href="#">水暖五金</a> | <a title="" href="#">电力、燃气及水的生产和供应业</a> | <a title="" href="#">电动机</a> | <a class="l_f00" title="" href="#">更多&gt;&gt;</a></p>
-				</li>
-				<li>
-					<strong><a class="l_e00101" title="" href="#">石油和天然气开采业</a></strong>
-					<p><a title="" href="#">农、林、牧、渔业</a> | <a title="" href="#">采矿业</a> | <a title="" href="#" style="color:#ff7e00;">制造业</a> | <a title="" href="#">水暖五金</a> | <a title="" href="#">电力、燃气及水的生产和供应业</a> | <a title="" href="#">电动机</a> | <a class="l_f00" title="" href="#">更多&gt;&gt;</a></p>
-				</li>
-				<li class="tpbg">
-					<strong><a class="l_e00101" title="" href="#">农副食品加工业</a></strong>
-					<p><a title="" href="#">农、林、牧、渔业</a> | <a title="" href="#">采矿业</a> | <a title="" href="#" style="color:#ff7e00;">制造业</a> | <a title="" href="#">水暖五金</a> | <a title="" href="#">电力、燃气及水的生产和供应业</a> | <a title="" href="#">电动机</a> | <a class="l_f00" title="" href="#">更多&gt;&gt;</a></p>
-				</li>
-				<li class="tpbg">
-					<strong><a class="l_e00101" title="" href="#">皮革、毛皮、羽毛(绒)及其制品业</a></strong>
-					<p><a title="" href="#">农、林、牧、渔业</a> | <a title="" href="#">采矿业</a> | <a title="" href="#" style="color:#ff7e00;">制造业</a> | <a title="" href="#">水暖五金</a> | <a title="" href="#">电力、燃气及水的生产和供应业</a> | <a title="" href="#">电动机</a> | <a class="l_f00" title="" href="#">更多&gt;&gt;</a></p>
-				</li>
-			</ul>
-		</div>
-		<div class="type2">
-			<strong class="type2t">商业服务</strong>
-			<ul class="type2nr">
-				<li>
-					<strong><a class="l_e00101" title="" href="#">农、林、牧、渔服务业</a></strong>
-					<p><a title="" href="#">农、林、牧、渔业</a> | <a title="" href="#">采矿业</a> | <a title="" href="#" style="color:#ff7e00;">制造业</a> | <a title="" href="#">水暖五金</a> | <a title="" href="#">电力、燃气及水的生产和供应业</a> | <a title="" href="#">电动机</a> | <a class="l_f00" title="" href="#">更多&gt;&gt;</a></p>
-				</li>
-				<li>
-					<strong><a class="l_e00101" title="" href="#">石油和天然气开采业</a></strong>
-					<p><a title="" href="#">农、林、牧、渔业</a> | <a title="" href="#">采矿业</a> | <a title="" href="#" style="color:#ff7e00;">制造业</a> | <a title="" href="#">水暖五金</a> | <a title="" href="#">电力、燃气及水的生产和供应业</a> | <a title="" href="#">电动机</a> | <a class="l_f00" title="" href="#">更多&gt;&gt;</a></p>
-				</li>
-				<li class="tpbg">
-					<strong><a class="l_e00101" title="" href="#">农副食品加工业</a></strong>
-					<p><a title="" href="#">农、林、牧、渔业</a> | <a title="" href="#">采矿业</a> | <a title="" href="#" style="color:#ff7e00;">制造业</a> | <a title="" href="#">水暖五金</a> | <a title="" href="#">电力、燃气及水的生产和供应业</a> | <a title="" href="#">电动机</a> | <a class="l_f00" title="" href="#">更多&gt;&gt;</a></p>
-				</li>
-				<li class="tpbg">
-					<strong><a class="l_e00101" title="" href="#">皮革、毛皮、羽毛(绒)及其制品业</a></strong>
-					<p><a title="" href="#">农、林、牧、渔业</a> | <a title="" href="#">采矿业</a> | <a title="" href="#" style="color:#ff7e00;">制造业</a> | <a title="" href="#">水暖五金</a> | <a title="" href="#">电力、燃气及水的生产和供应业</a> | <a title="" href="#">电动机</a> | <a class="l_f00" title="" href="#">更多&gt;&gt;</a></p>
-				</li>
-				<li>
-					<strong><a class="l_e00101" title="" href="#">农、林、牧、渔服务业</a></strong>
-					<p><a title="" href="#">农、林、牧、渔业</a> | <a title="" href="#">采矿业</a> | <a title="" href="#" style="color:#ff7e00;">制造业</a> | <a title="" href="#">水暖五金</a> | <a title="" href="#">电力、燃气及水的生产和供应业</a> | <a title="" href="#">电动机</a> | <a class="l_f00" title="" href="#">更多&gt;&gt;</a></p>
-				</li>
-				<li>
-					<strong><a class="l_e00101" title="" href="#">石油和天然气开采业</a></strong>
-					<p><a title="" href="#">农、林、牧、渔业</a> | <a title="" href="#">采矿业</a> | <a title="" href="#" style="color:#ff7e00;">制造业</a> | <a title="" href="#">水暖五金</a> | <a title="" href="#">电力、燃气及水的生产和供应业</a> | <a title="" href="#">电动机</a> | <a class="l_f00" title="" href="#">更多&gt;&gt;</a></p>
-				</li>
-			</ul>
-		</div>
+		<%/loop%>
 	</div>
 	<div class="tprt">
 		<div class="card card1 mar_top_8">
@@ -450,7 +376,11 @@
 <div class="cot">
 	<div class="link mar_top_8">
 		<b>友情链接</b><span></span>
-		<p><a title="" href="#">CCTV指南</a>　　<a title="" href="#">CCTV广告</a>　　<a title="" href="#">中国爱乐乐团</a>　　<a title="" href="#">中国国际电视总公司</a>　　<a title="" href="#">中视购物</a>　　<a title="" href="#">中国电视网</a>　　<a title="" href="#">中央新闻纪录电影制片厂</a></p>
+		<p>
+		<%loop friendlink friendlinklist%>
+		{friendlink[note]}
+		<%/loop%>
+		</p>
 	</div>
 </div>
 <%template _comcopyright%>

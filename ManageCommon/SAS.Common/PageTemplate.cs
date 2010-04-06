@@ -330,7 +330,7 @@ namespace SAS.Common
             foreach (Match m in r[24].Matches(strTemplate))
             {
                 IsCodeLine = true;
-                strTemplate = strTemplate.Replace(m.Groups[0].ToString(), "\break;\r\n");
+                strTemplate = strTemplate.Replace(m.Groups[0].ToString(), "\tbreak;\r\n");
             }
 
             foreach (Match m in r[8].Matches(strTemplate))

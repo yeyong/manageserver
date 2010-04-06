@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Web;
+using System.Data;
 using System.Text.RegularExpressions;
 
 using SAS.Common;
@@ -22,6 +23,11 @@ namespace SAS.Logic
         /// 底部脚本
         /// </summary>
         protected internal string footscript;
+        /// <summary>
+        /// 类别列表
+        /// </summary>
+        public DataTable cataloglist = Catalogs.GetAllCatalog();
+        protected DataRow[] firstcata = Catalogs.GetAllCatalog().Select("[sort]=1");
 
         /// <summary>
         /// 插入脚本内容到页面head中

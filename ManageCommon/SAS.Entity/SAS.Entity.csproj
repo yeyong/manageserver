@@ -55,6 +55,7 @@
     <Compile Include="CatalogInfo.cs" />
     <Compile Include="Companys.cs" />
     <Compile Include="CustomEditorButtonInfo.cs" />
+    <Compile Include="EnTypeEnum.cs" />
     <Compile Include="ForumInfo.cs" />
     <Compile Include="ForumSpecialUserPower.cs" />
     <Compile Include="HelpInfo.cs" />

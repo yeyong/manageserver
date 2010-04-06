@@ -209,6 +209,64 @@ namespace SAS.Logic
             return str;
         }
 
+        /// <summary>
+        /// 获得友情链接列表
+        /// </summary>
+        /// <returns>友情链接列表</returns>
+        public static DataTable GetSASLinkList()
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            DataTable dt = cache.RetrieveObject("/SAS/SASLinkList") as DataTable;
+            if (dt == null)
+            {
+                dt = DatabaseProvider.GetInstance().GetSASLinks();
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    StringBuilder linkBuilder = new StringBuilder();
+                    StringBuilder logoLinkBuilder = new StringBuilder();
+                    StringBuilder textLinkBuilder = new StringBuilder();
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        if (Utils.StrIsNullOrEmpty(dr["note"].ToString()))
+                        {
+                            if (Utils.StrIsNullOrEmpty(dr["name"].ToString()))
+                                dr["name"] = "未知";
+
+                            if (Utils.StrIsNullOrEmpty(dr["logo"].ToString()))
+                                textLinkBuilder.AppendFormat("<a title=\"{0}\" href=\"{1}\" target=\"_blank\">{0}</a>\r\n", dr["name"], dr["linkurl"]);
+                            else
+                            {
+                                logoLinkBuilder.AppendFormat("<a title=\"{0}\" href=\"{1}\" target=\"_blank\"><img alt=\"{0}\" class=\"friendlinkimg\" src=\"{2}\" /></a>\r\n",
+                                                             dr["name"], dr["linkurl"], dr["logo"]);
+                            }
+                            dr.Delete();
+                        }
+                    }
+                    if (logoLinkBuilder.Length > 0)
+                    {
+                        DataRow dr = dt.NewRow();
+                        dr["name"] = "$$otherlink$$";
+                        dr["linkurl"] = "forumimglink";
+                        dr["note"] = logoLinkBuilder.ToString();
+                        dr["logo"] = "";
+                        dt.Rows.Add(dr);
+                    }
+                    if (textLinkBuilder.Length > 0)
+                    {
+                        DataRow dr = dt.NewRow();
+                        dr["name"] = "$$otherlink$$";
+                        dr["linkurl"] = "forumtxtlink";
+                        dr["note"] = textLinkBuilder.ToString();
+                        dr["logo"] = "";
+                        dt.Rows.Add(dr);
+                    }
+                    dt.AcceptChanges();
+                }
+                cache.AddObject("/SAS/SASLinkList", dt);
+            }
+            return dt;
+        }
+
         #region 后台管理重设缓存
 
         private static void RemoveObject(string key)

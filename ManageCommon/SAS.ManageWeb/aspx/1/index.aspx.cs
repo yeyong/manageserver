@@ -12,6 +12,17 @@ namespace SAS.ManageWeb
 {
     public class index : CompanyPage
     {
+        /// <summary>
+        /// 行业类别列表
+        /// </summary>
+        protected DataRow[] cataloglist1;
+        protected DataRow[] cataloglist2;
+        protected DataRow[] cataloglist3;
+        /// <summary>
+        /// 友情链接列表
+        /// </summary>
+        protected DataTable friendlinklist = Caches.GetSASLinkList();
+
         protected override void ShowPage()
         {
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/main.css");
@@ -38,6 +49,9 @@ namespace SAS.ManageWeb
                     + "\r\n " + "scrollup.Start();"
                     + "\r\n " + "});";
             AddfootScript(loadscript);
+            cataloglist1 = cataloglist.Select("[sort] = 0");
+            cataloglist2 = cataloglist.Select("[sort] = 1");
+            cataloglist3 = cataloglist.Select("[sort] = 2");
         }
     }
 }
