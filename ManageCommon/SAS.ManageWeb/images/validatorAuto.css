@@ -1,0 +1,79 @@
+.onShow{
+	background:url(../images/validator/onShow.gif) no-repeat; 
+	padding-left:25px; 
+	position:absolute;
+	top:-4px;
+	font-size: 12px;
+	line-height:22px; 
+	vertical-align:middle;
+}
+.onFocus{
+	background:url(../images/validator/onFocus.gif) no-repeat; 
+	padding-left:25px; 
+	position:absolute;
+	top:-4px;
+	font-size: 12px;
+	line-height:22px; 
+	vertical-align:middle;
+}
+.onError
+{
+	background:url(../images/validator/onError.gif) no-repeat; 
+	padding-left:25px; 
+	position:absolute;
+	top:-4px;
+	font-size: 12px;
+	line-height:22px; 
+	vertical-align:middle;
+}
+.onCorrect
+{   
+	background:url(../images/validator/onSuccess.gif) no-repeat; 
+	padding-left:25px; 
+	position:absolute;
+	top:-4px;
+	font-size: 12px;
+	line-height:22px; 
+	vertical-align:middle;
+}
+.onSuccess
+{
+	background:url(../images/validator/onSuccess.gif) no-repeat; 
+	padding-left:25px; 
+	position:absolute;
+	top:-4px;
+	font-size: 12px;
+	line-height:22px; 
+	vertical-align:middle;
+}
+.onLoad
+{
+	background:url(../images/validator/onLoad.gif) no-repeat 3px 3px; 
+	padding-left:25px; 
+	position:absolute;
+	top:-4px;
+	font-size: 12px;
+	line-height:22px; 
+	vertical-align:middle;
+} 
+
+.formValidateTip
+{
+	word-wrap:break-word;
+    position:absolute;
+    width:250px;
+    padding:10px;
+    /*display:none; *//*我们先不要让它显示*/
+	background:transparent;
+}
+
+.formValidateTip1
+{
+	word-wrap:break-word; 
+    position:absolute;
+    width:250px;
+    border:1px solid #a00;
+    padding:10px;
+    /*display:none; *//*我们先不要让它显示*/
+	background:transparent;
+}
