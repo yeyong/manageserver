@@ -7,10 +7,11 @@
 					<p class="tjp2"><span>2</span>提交企业注册信息</p>
 				</div>
 				<b class="tijiao2nr1 tj2nrbg">企业基本信息</b>
+				<form id="form1" name="form1" method="post">
 				<table border="0" cellspacing="0" cellpadding="0" class="tdtj mar_top_8">
 				  <tr>
 					<td width="20%" class="tdtj1">企业名称：<span class="f_e00101">*</span></td>
-					<td class="tdtj2" colspan="3"><input name="" type="text" class="input2_soout" onfocus="this.className='input2_soon'" onBlur="this.className='input2_soout'" style="width:320px;" /></td>
+					<td class="tdtj2" colspan="3"><input name="qyname" id="qyname" type="text" class="v2_nonull input2_soout" onfocus="this.className='v2_nonull input2_soon'" onblur="this.className='v2_nonull input2_soout'" style="width:320px;" maxlength="200"/></td>
 				  </tr>
 				   <tr>
 					</tr><tr>
@@ -28,9 +29,9 @@
 						<input type="button" name="movedown" id="movedown" value="×删除"/>
 					</span>
 					<span class="tdtjnr f_b5b5b5">以下是您已选的主营行业</span>
-					<span class="tdtjnr mar_top_3">
-						<select name="selecthy" size="6" style="width: 460px;" id="selecthy"></select>
-						<input type="hidden" name="hyidlist" id="hyidlist"/>
+					<span class="tdtjnr f_b5b5b5"><input type="hidden" name="hyidlist" id="hyidlist" class="v2_nonull"/></span>
+					<span class="tdtjnr mar_top_3">					    
+						<select name="selecthy" size="6" style="width: 460px;" id="selecthy"></select>						
 					</span>
 					</td>
 				  </tr>
@@ -38,7 +39,7 @@
 					</tr><tr>
 					<td class="tdtj1">企业法人：<span class="f_e00101">*</span></td>
 					<td class="tdtj2" colspan="3">
-					<input name="" type="text" class="input2_soout" onfocus="this.className='input2_soon'" onBlur="this.className='input2_soout'" style="width:170px;" />
+					<input name="" type="text" class="input2_soout" onfocus="this.className='input2_soon'" onblur="this.className='input2_soout'" style="width:170px;" />
 					<span class="f_b5b5b5">（请填写企业法人）</span>
 					</td>
 				  </tr>
@@ -46,44 +47,44 @@
 					</tr><tr>
 					<td class="tdtj1">主要联系人：<span class="f_e00101">*</span></td>
 					<td class="tdtj2" colspan="3">
-					<input name="" type="text" class="input2_soout" onfocus="this.className='input2_soon'" onBlur="this.className='input2_soout'" style="width:170px;" />
+					<input name="" type="text" class="input2_soout" onfocus="this.className='input2_soon'" onblur="this.className='input2_soout'" style="width:170px;" />
 					<span class="f_b5b5b5">（请填写企业联系人）</span>
 					</td>
 				  </tr>
 				  <tr>
 					<td class="tdtj1">固定电话：<span class="f_e00101">*</span></td>
 					<td class="tdtj2" colspan="3">
-					<input name="" type="text" class="input2_soout" onfocus="this.className='input2_soon'" onBlur="this.className='input2_soout'" style="width:40px;" />
-					<input name="" type="text" class="input2_soout" onfocus="this.className='input2_soon'" onBlur="this.className='input2_soout'" style="width:118px;" />
+					<input name="" type="text" class="input2_soout" onfocus="this.className='input2_soon'" onblur="this.className='input2_soout'" style="width:40px;" />
+					<input name="" type="text" class="input2_soout" onfocus="this.className='input2_soon'" onblur="this.className='input2_soout'" style="width:118px;" />
 					<span class="f_b5b5b5">（请填写企业固定电话）</span>
 					</td>
 				  </tr>
 				  <tr>
 					<td class="tdtj1">移动电话：<span class="f_e00101"></span></td>
 					<td class="tdtj2" colspan="3">
-					<input name="" type="text" class="input2_soout" onfocus="this.className='input2_soon'" onBlur="this.className='input2_soout'" style="width:170px;" />
+					<input name="" type="text" class="input2_soout" onfocus="this.className='input2_soon'" onblur="this.className='input2_soout'" style="width:170px;" />
 					<span class="f_b5b5b5">（请填写主要联系人移动电话）</span>
 					</td>
 				  </tr>
 				  <tr>
 					<td class="tdtj1">传  真：<span class="f_e00101"></span></td>
 					<td class="tdtj2" colspan="3">
-					<input name="" type="text" class="input2_soout" onfocus="this.className='input2_soon'" onBlur="this.className='input2_soout'" style="width:40px;" />
-					<input name="" type="text" class="input2_soout" onfocus="this.className='input2_soon'" onBlur="this.className='input2_soout'" style="width:118px;" />
+					<input name="" type="text" class="input2_soout" onfocus="this.className='input2_soon'" onblur="this.className='input2_soout'" style="width:40px;" />
+					<input name="" type="text" class="input2_soout" onfocus="this.className='input2_soon'" onblur="this.className='input2_soout'" style="width:118px;" />
 					<span class="f_b5b5b5">（请填写企业传真）</span>
 					</td>
 				  </tr>
 				  <tr>
 					<td class="tdtj1">电子邮箱：<span class="f_e00101"></span></td>
 					<td wclass="tdtj2" colspan="3">
-					<input name="" type="text" class="input2_soout" onfocus="this.className='input2_soon'" onBlur="this.className='input2_soout'" style="width:170px;" />
+					<input name="" type="text" class="input2_soout" onfocus="this.className='input2_soon'" onblur="this.className='input2_soout'" style="width:170px;" />
 					<span class="f_b5b5b5">（请填写电子邮箱）</span>
 					</td>
 				  </tr>
 				  <tr>
 					<td class="tdtj1">公司网址：<span class="f_e00101"></span></td>
 					<td class="tdtj2" colspan="3">
-					<input name="" type="text" class="input2_soout" onfocus="this.className='input2_soon'" onBlur="this.className='input2_soout'" style="width:300px;" />
+					<input name="" type="text" class="input2_soout" onfocus="this.className='input2_soon'" onblur="this.className='input2_soout'" style="width:300px;" />
 					</td>
 				  </tr>
 				  <tr>
@@ -105,23 +106,24 @@
 				  <tr>
 					<td class="tdtj1">企业联系地址：<span class="f_e00101">*</span></td>
 					<td class="tdtj2" colspan="3">
-					<input name="" type="text" class="input2_soout" onfocus="this.className='input2_soon'" onBlur="this.className='input2_soout'" style="width:300px;" />
+					<input name="" type="text" class="input2_soout" onfocus="this.className='input2_soon'" onblur="this.className='input2_soout'" style="width:300px;" />
 					<span class="f_b5b5b5">（请准确填写企业联系地址）</span></td>
 				  </tr>
 				  <tr>
 					<td class="tdtj1">邮  编：<span class="f_e00101">*</span></td>
 					<td class="tdtj2" colspan="3">
-					<input name="" type="text" class="input2_soout" onfocus="this.className='input2_soon'" onBlur="this.className='input2_soout'" style="width:40px;" /></td>
+					<input name="" type="text" class="input2_soout" onfocus="this.className='input2_soon'" onblur="this.className='input2_soout'" style="width:40px;" /></td>
 				  </tr>
 				  <tr>
 					<td class="tdtj1">公司整体概述：<span class="f_e00101">*</span></td>
 					<td class="tdtj2" colspan="3">
 					<span class="f_b5b5b5">请用中文详细说明贵公司的成立历史、主营产品、品牌、服务等权势；<br/>
 					如果内容过于简单或仅填写单纯的产品介绍，将有可能无法通过审核。</span>
-					<textarea class="input2_soout" onfocus="this.className='input2_soon'" onBlur="this.className='input2_soout'" style="width:450px; height:90px;"></textarea>
+					<textarea class="input2_soout" onfocus="this.className='input2_soon'" onblur="this.className='input2_soout'" style="width:450px; height:90px;"></textarea>
 					</td>
 				  </tr>
 				</table>
+				</form>
 				<p class="tijiao2nr1">
 				<input name="" type="button" class="tijiaoan2" value="下一步" />
 				</p>

@@ -256,14 +256,6 @@
                                     </td>
                                     <td>
                                         <cc2:DropDownList runat="server" ID="enType">
-                                            <asp:ListItem Selected="True" Text="生产商" Value="0"></asp:ListItem>
-                                            <asp:ListItem Text="代理经销商" Value="1"></asp:ListItem>
-                                            <asp:ListItem Text="个人经销商" Value="2"></asp:ListItem>
-                                            <asp:ListItem Text="门店" Value="3"></asp:ListItem>
-                                            <asp:ListItem Text="原料商" Value="4"></asp:ListItem>
-                                            <asp:ListItem Text="分销商" Value="5"></asp:ListItem>
-                                            <asp:ListItem Text="服务站" Value="6"></asp:ListItem>
-                                            <asp:ListItem Text="其他" Value="7"></asp:ListItem>
                                         </cc2:DropDownList>
                                     </td>
                                 </tr>
@@ -273,12 +265,6 @@
                                     </td>
                                     <td>
                                         <cc2:DropDownList runat="server" ID="enco">
-                                            <asp:ListItem Selected="True" Text="有限责任公司" Value="0"></asp:ListItem>
-                                            <asp:ListItem Text="股份有限公司" Value="1"></asp:ListItem>
-                                            <asp:ListItem Text="国营公司" Value="2"></asp:ListItem>
-                                            <asp:ListItem Text="集团公司" Value="3"></asp:ListItem>
-                                            <asp:ListItem Text="合资企业" Value="4"></asp:ListItem>
-                                            <asp:ListItem Text="外企" Value="5"></asp:ListItem>
                                         </cc2:DropDownList>
                                     </td>
                                 </tr>

@@ -197,9 +197,14 @@
 		<div class="type2">
 			<strong class="type2t">{cataloginfo[name]}</strong>
 			<ul class="type2nr">
+			<%set (int) {computenum}=0%>
+			<%set (int) {computetimes}=0%>
 			<%loop (DataRow) subcata cataloglist2%>
 			<%if {subcata[parentid]}=={cataloginfo[id]}%>
-				<li>
+				<li <%if {computetimes}%2==1%>class="tpbg"<%/if%>>
+				<%if {computenum}%2==1%>
+			        <%set {computetimes}={computetimes}+1%>
+			    <%/if%>
 					<strong><a class="l_e00101" title="{subcata[name]}" href="{subcata[id]}">{subcata[name]}</a></strong>
 					<p>
 					<%set (int){catastrlength} = 0%>
@@ -214,6 +219,7 @@
 					<%/loop%>
 					<a class="l_f00" title="" href="#">更多&gt;&gt;</a></p>
 				</li>
+				<%set {computenum}={computenum}+1%>
 			<%/if%>
 			<%/loop%>
 			</ul>

@@ -20,6 +20,7 @@ namespace SAS.ManageWeb.ManagePage
         {
             if (!IsPostBack)
             {
+                SourDataBind();
                 if (SASRequest.GetInt("enid", 0) == 0)
                 {
                     Response.Redirect("company_companygrid.aspx");
@@ -27,6 +28,27 @@ namespace SAS.ManageWeb.ManagePage
                 }
 
                 LoadCompanyInfo(SASRequest.GetInt("enid", 0));
+            }
+        }
+
+        private void SourDataBind()
+        {
+            EnTypeEnum ete = new EnTypeEnum();
+            enType.Items.Clear();
+            foreach (string cname in Enum.GetNames(ete.GetType()))
+            {
+                int s_value = Convert.ToInt16(Enum.Parse(ete.GetType(), cname));
+                string s_text = EnumCatch.GetCompanyType(s_value);
+                enType.Items.Add(new ListItem(s_text, s_value.ToString()));
+            }
+
+            CommTypeEnum cte = new CommTypeEnum();
+            enco.Items.Clear();
+            foreach (string ecname in Enum.GetNames(cte.GetType()))
+            {
+                int s_value = Convert.ToInt16(Enum.Parse(cte.GetType(), ecname));
+                string s_text = EnumCatch.GetEnCommType(s_value);
+                enco.Items.Add(new ListItem(s_text, s_value.ToString()));
             }
         }
 

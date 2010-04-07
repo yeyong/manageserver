@@ -28,6 +28,10 @@ namespace SAS.Logic
         /// </summary>
         public DataTable cataloglist = Catalogs.GetAllCatalog();
         protected DataRow[] firstcata = Catalogs.GetAllCatalog().Select("[sort]=1");
+        /// <summary>
+        /// 企业类型枚举
+        /// </summary>
+        protected EnTypeEnum entype_enum = new EnTypeEnum();
 
         /// <summary>
         /// 插入脚本内容到页面head中
