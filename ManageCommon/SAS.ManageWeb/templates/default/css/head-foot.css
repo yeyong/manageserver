@@ -8,6 +8,7 @@
 .toplt li img{ width:16px; height:16px; margin:5px 5px 0 0; float:left;}
 .toprt{ width:auto; height:26px; line-height:28px; float:right;}
 .top2{ width:960px; height:63px; float:left; position:relative;}
+.top3{ width:960px; height:auto; float:left;}
 .logo{ width:auto; height:60px; float:left; position:absolute; z-index:100; left:0;}
 .topban{ width:960px; height:63px; position:absolute; right:0;}
 .hdhelp{ width:auto; height:40px; line-height:40px; color:#403635; font:30px "Microsoft YaHei", Arial, Tahoma; font-weight:bold; margin:20px 5px 0 0; float:right;}

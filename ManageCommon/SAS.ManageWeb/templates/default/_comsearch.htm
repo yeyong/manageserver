@@ -6,20 +6,25 @@
 		<p class="soso4">
 			<strong class="soso4nr1">浙江</strong>
 			<span class="soso4nr2">
-				<a href="#" class="l_e00101"><em>其他地区</em> <em><img alt="其他地区" src="templates/{templatepath}/images/icon/arrow4.gif"></em></a>
+				<a href="#" class="l_e00101"><em>其他地区</em> <em><img alt="其他地区" src="templates/{templatepath}/images/icon/arrow4.gif"/></em></a>
 			</span>
 		</p>
 		<p class="soso5"></p>
 		<div class="soso6">
 			<p class="soso6nr">
 				<span class="soso6nr1">
-				<select name="" class="select_type">
-					<option>代理经销商</option>
+				<select name="searchtype" class="select_type">
+					<option>请选择类型</option>
+				<%loop (string) searchtypestr Enum.GetNames(entype_enum.GetType())%>
+				<%set (int) {searchtypevalue}=Convert.ToInt16(Enum.Parse(entype_enum.GetType(), searchtypestr))%>
+				<%set (string) {searchtypetext}=EnumCatch.GetCompanyType({searchtypevalue})%>
+				    <option value="{searchtypevalue}">{searchtypetext}</option>
+				<%/loop%>
 				</select>
 				</span>
-				<span><input name="" type="text" class="input4_soout" onfocus="this.className='input4_soon'" onBlur="this.className='input4_soout'" style="width:300px;" /></span>
+				<span><input name="" type="text" class="input4_soout" onfocus="this.className='input4_soon'" onblur="this.className='input4_soout'" style="width:300px;" /></span>
 				<span class="soso6nr1">
-				<select name="" class="select_type2">
+				<select name="searchclass" class="select_type2">
 				    <option>请选择行业类别</option>
 				<%loop (DataRow) searchcata firstcata%>
 					<option value="{searchcata[id]}">{searchcata[name]}</option>
