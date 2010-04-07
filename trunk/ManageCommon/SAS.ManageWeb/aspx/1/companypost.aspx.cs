@@ -24,6 +24,9 @@ namespace SAS.ManageWeb
                     + "\r\n " + "jQuery(\"#thelocation\").InitLocation();"
                     + "\r\n " + "var theprifix = \"v2_\";"
                     + "\r\n " + "jQuery(\"#form1\").FormValidFunc(theprifix);"
+                    + "\r\n " + "jQuery(\"input[type=text],textarea\").each("
+                    + "\r\n " + "  function(){jQuery(this).blur(function(){jQuery(this).attr(\"class\",\"input2_soout\");});jQuery(this).focus(function(){jQuery(this).attr(\"class\",\"input2_soon\");});"
+                    + "\r\n " + "});"
                     + "\r\n " + "});";
             AddfootScript(loadscript);
         }

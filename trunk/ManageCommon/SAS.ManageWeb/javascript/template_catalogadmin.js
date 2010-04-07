@@ -72,7 +72,7 @@ function initCategory(objid) {
         $(this)[0].options.length = 0;
     });
     for (var i in cats) {
-        if (cats[i].pid == 0) {
+        if (cats[i].sort == 1) {
             var newopt = new Option(cats[i].name, cats[i].id);
             $sel1[0].options.add(newopt);
         }
