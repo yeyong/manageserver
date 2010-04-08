@@ -60,7 +60,7 @@
             return true;
         }
         function resetPage() {
-            document.getElementById('success').style.display = 'none'
+            document.getElementById('success').style.display = 'none';
             document.getElementById("AddCompanyInfo").disabled = false;
         }
     </script>

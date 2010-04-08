@@ -1,0 +1,146 @@
+﻿<%template _compostheader%>
+<div class="tijiao">
+    <p class="tijiao1">
+    </p>
+    <div class="tijiao2">
+        <div class="tijiao2nr">
+            <p class="tjp2">
+                <span>1</span>提交企业基本信息</p>
+            <p class="tjp1">
+                <span>2</span>提交企业注册信息</p>
+        </div>
+        <b class="tijiao2nr1 tj2nrbg">企业注册信息</b>
+        <table border="0" cellspacing="0" cellpadding="0" class="tdtj mar_top_8">
+            <tr>
+                <td width="20%" class="tdtj1">
+                    公司注册时间：<span class="f_e00101">*</span>
+                </td>
+                <td class="tdtj2" colspan="3">
+                    <input name="" type="text" class="input2_soout" style="width: 40px;" />
+                    年
+                </td>
+            </tr>
+            <tr>
+                <td width="20%" class="tdtj1">
+                    经营模式：<span class="f_e00101">*</span>
+                </td>
+                <td width="30%" class="tdtj2">
+                    <select name="postentype">
+                    <%loop (string) posttypestr Enum.GetNames(entype_enum.GetType())%>
+				    <%set (int) {posttypevalue}=Convert.ToInt16(Enum.Parse(entype_enum.GetType(), posttypestr))%>
+				    <%set (string) {posttypetext}=EnumCatch.GetCompanyType({posttypevalue})%>
+				        <option value="{posttypevalue}">{posttypetext}</option>
+				    <%/loop%>
+                    </select>
+                </td>
+                <td class="tdtj1">
+                    企业经济类型：<span class="f_e00101">*</span>
+                </td>
+                <td class="tdtj2">
+                    <select name="postcommtype">
+                    <%loop (string) postcommtypestr Enum.GetNames(commtype_enum.GetType())%>
+                    <%set (int) {postcommvalue}=Convert.ToInt16(Enum.Parse(commtype_enum.GetType(),postcommtypestr))%>
+                    <%set (string) {postcommtext}=EnumCatch.GetEnCommType({postcommvalue})%>
+                        <option value="{postcommvalue}">{postcommtext}</option>
+                    <%/loop%>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdtj1">
+                    注册资本：<span class="f_e00101">*</span>
+                </td>
+                <td class="tdtj2" colspan="3">
+                    <input name="" type="text" class="input2_soout" style="width: 40px;" />
+                    万元
+                </td>
+            </tr>
+            <tr>
+                <td class="tdtj1">
+                    注册号：<span class="f_e00101">*</span>
+                </td>
+                <td class="tdtj2" colspan="3">
+                    <input name="" type="text" class="input2_soout" style="width: 118px;" />
+                    <span class="f_b5b5b5">（请填写企业注册号）</span>
+                </td>
+            </tr>
+            <tr>
+                <tr>
+                    <td class="tdtj1">
+                        注册机关：<span class="f_e00101">*</span>
+                    </td>
+                    <td class="tdtj2" colspan="3">
+                        <input name="" type="text" class="input2_soout" style="width: 170px;" />
+                        <span class="f_b5b5b5">（请填写企业注册机关）</span>
+                    </td>
+                </tr>
+                <tr>
+                    <tr>
+                        <td class="tdtj1">
+                            最近年检时间：<span class="f_e00101">*</span>
+                        </td>
+                        <td class="tdtj2" colspan="3">
+                            <input name="" type="text" class="input2_soout" style="width: 170px;" />
+                            <span class="f_b5b5b5">（请填写最近年检时间）</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <tr>
+                            <td class="tdtj1">
+                                营业期限：<span class="f_e00101">*</span>
+                            </td>
+                            <td class="tdtj2" colspan="3">
+                                <input name="" type="text" class="input2_soout" style="width: 170px;" />
+                                <span class="f_b5b5b5">（请填写营业期限）</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tdtj1">
+                                注册地址：<span class="f_e00101">*</span>
+                            </td>
+                            <td class="tdtj2" colspan="3">
+                                <input name="" type="text" class="input2_soout" style="width: 300px;" />
+                                <span class="f_b5b5b5">（请填写注册地址）</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tdtj1">
+                                主营行业类型：<span class="f_e00101">*</span>
+                            </td>
+                            <td class="tdtj2" colspan="3">
+                                <span class="tdtjnr f_b5b5b5">每空限填１种产品名称，建议10个字以下，如：钮扣</span> <span class="tdtjnr">
+                                    <input name="" type="text" class="input2_soout" style="width: 70px;" />
+                                    <input name="" type="text" class="input2_soout" style="width: 70px;" />
+                                    <input name="" type="text" class="input2_soout" style="width: 70px;" />
+                                    <input name="" type="text" class="input2_soout" style="width: 70px;" />
+                                    <input name="" type="text" class="input2_soout" style="width: 70px;" />
+                                    <input name="" type="text" class="input2_soout" style="width: 70px;" />
+                                    <input name="" type="text" class="input2_soout" style="width: 70px;" />
+                                    <input name="" type="text" class="input2_soout" style="width: 70px;" />
+                                    <input name="" type="text" class="input2_soout" style="width: 70px;" />
+                                    <input name="" type="text" class="input2_soout" style="width: 70px;" />
+                                    <input name="" type="text" class="input2_soout" style="width: 70px;" />
+                                    <input name="" type="text" class="input2_soout" style="width: 70px;" />
+                                </span><em class="tdtjnr1" style="cursor: pointer;" onclick="javascript:document.getElementById('over').style.display=(document.getElementById('over').style.display=='none'?'block':'none')">
+                                    <img alt="更多" src="templates/{templatepath}/images/icon/arrow-icon1.gif" />
+                                    更多</em> <span class="tdtjnr" style="display: none;" id="over">
+                                        <input name="" type="text" class="input2_soout" style="width: 70px;" />
+                                        <input name="" type="text" class="input2_soout" style="width: 70px;" />
+                                        <input name="" type="text" class="input2_soout" style="width: 70px;" />
+                                        <input name="" type="text" class="input2_soout" style="width: 70px;" />
+                                        <input name="" type="text" class="input2_soout" style="width: 70px;" />
+                                        <input name="" type="text" class="input2_soout" style="width: 70px;" />
+                                        <input name="" type="text" class="input2_soout" style="width: 70px;" />
+                                        <input name="" type="text" class="input2_soout" style="width: 70px;" />
+                                    </span>
+                            </td>
+                        </tr>
+        </table>
+        <p class="tijiao2nr1">
+            <input name="" type="button" class="tijiaoan2" value="确 定" />
+        </p>
+    </div>
+    <p class="tijiao3">
+    </p>
+</div>
+<%template _companypostfooter%>

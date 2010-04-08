@@ -32,6 +32,10 @@ namespace SAS.Logic
         /// 企业类型枚举
         /// </summary>
         protected EnTypeEnum entype_enum = new EnTypeEnum();
+        /// <summary>
+        /// 企业经济类型枚举
+        /// </summary>
+        protected CommTypeEnum commtype_enum = new CommTypeEnum();
 
         /// <summary>
         /// 插入脚本内容到页面head中
