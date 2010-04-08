@@ -68,6 +68,7 @@ function Loadcatadata(parentid, allstr) {
 function initCategory(objid) {
     var _objselect = $("#" + objid);
     var $sel1 = _objselect.find("select").eq(0);
+    if (typeof $sel1[0] == "undefined" || $sel1[0] == null) return;
     _objselect.find("select").each(function() {
         $(this)[0].options.length = 0;
     });
