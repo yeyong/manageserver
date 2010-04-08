@@ -684,6 +684,7 @@
     <Content Include="templates\default\_footer.htm" />
     <Content Include="templates\default\_header.htm" />
     <Content Include="templates\default\_menu.htm" />
+    <Content Include="templates\default\_commsgbox.htm" />
     <Content Include="templates\default\_pageheader.htm" />
     <Content Include="templates\default\_permenu.htm" />
     <Content Include="templates\default\_post.htm" />

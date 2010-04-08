@@ -55,6 +55,7 @@ namespace SAS.ManageWeb
             if (ispost)
             {
                 string qyname = SASRequest.GetString("qyname");                 //企业名称
+                string builddate = SASRequest.GetString("builddate");           //企业成立时间
                 string hycata = SASRequest.GetString("hyidlist");               //行业类别
                 string corper = SASRequest.GetString("corpname");               //企业法人
                 string contor = SASRequest.GetString("contactor");              //主要联系人
@@ -67,6 +68,15 @@ namespace SAS.ManageWeb
                 string address = SASRequest.GetString("address");               //地址
                 string zipcode = SASRequest.GetString("zipcode");               //邮编
                 string desc = Utils.HtmlEncode(SASRequest.GetString("desc"));   //企业描述
+
+                Companys companyinfo = new Companys();
+                companyinfo.en_name = qyname;
+                companyinfo.en_builddate = builddate;
+                companyinfo.en_cataloglist = hycata;
+                companyinfo.en_corp = corper;
+                companyinfo.en_contact = contor;
+                SetUrl("companypostreg.aspx");
+                SetMetaRefresh(0);
             }
         }
     }

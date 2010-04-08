@@ -12,6 +12,7 @@ namespace SAS.ManageWeb
 {
     public class companypostreg : CompanyPage
     {
+        protected string testdate = Utils.GetTime();
         protected override void ShowPage()
         {
             string loadscript = "\r\n " + "jQuery(document).ready(function() {"

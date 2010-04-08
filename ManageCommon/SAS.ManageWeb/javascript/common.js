@@ -987,12 +987,6 @@ function ajaxmenu(e, ctrlid, timeout, func, cache, duration, ismenu, divclass, o
 		doane(e);
 	}
 }
-
-
-
-
-
-
 //得到一个定长的hash值， 依赖于 stringxor()
 function hash(string, length) {
 	var length = length ? length : 32;
