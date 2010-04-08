@@ -1,17 +1,16 @@
 ﻿<%template _compostheader%>
 		<div class="tijiao">
 			<p class="tijiao1"></p>
-			<div class="tijiao2">
+			<form id="form1" name="form1" method="post" class="tijiao2" action="">
 				<div class="tijiao2nr">
 					<p class="tjp1"><span>1</span>提交企业基本信息</p>
 					<p class="tjp2"><span>2</span>提交企业注册信息</p>
 				</div>
 				<b class="tijiao2nr1 tj2nrbg">企业基本信息</b>
-				<form id="form1" name="form1" method="post">
 				<table border="0" cellspacing="0" cellpadding="0" class="tdtj mar_top_8">
 				  <tr>
 					<td width="20%" class="tdtj1">企业名称：<span class="f_e00101">*</span></td>
-					<td class="tdtj2" colspan="3"><input name="qyname" id="qyname" type="text" class="v2_nonull input2_soout" style="width:320px;" maxlength="200"/></td>
+					<td class="tdtj2" colspan="3"><input name="qyname" id="qyname" type="text" class="v2_ennamecheck input2_soout" style="width:320px;" maxlength="200"/></td>
 				  </tr>
 				   <tr>
 					</tr><tr>
@@ -76,7 +75,7 @@
 				  <tr>
 					<td class="tdtj1">公司网址：<span class="f_e00101"></span></td>
 					<td class="tdtj2" colspan="3">
-					<input name="" type="text" class="input2_soout" style="width:300px;" />
+					<input name="enweb" id="enweb" type="text" class="v2_enweb input2_soout" style="width:300px;" />
 					</td>
 				  </tr>
 				  <tr>
@@ -89,7 +88,7 @@
 					<select name="">
 						<option>杭州市</option>
 					</select>
-					<select name="">
+					<select name="district" id="district">
 						<option>拱墅区</option>
 					</select>
 					</span>
@@ -98,28 +97,26 @@
 				  <tr>
 					<td class="tdtj1">企业联系地址：<span class="f_e00101">*</span></td>
 					<td class="tdtj2" colspan="3">
-					<input name="" type="text" class="input2_soout" style="width:300px;" />
-					<span class="f_b5b5b5">（请准确填写企业联系地址）</span></td>
+					<input name="address" id="address" type="text" class="v2_noemptyhtml input2_soout" style="width:300px;" maxlength="300"/>
 				  </tr>
 				  <tr>
 					<td class="tdtj1">邮  编：<span class="f_e00101">*</span></td>
 					<td class="tdtj2" colspan="3">
-					<input name="" type="text" class="input2_soout" style="width:40px;" /></td>
+					<input name="zipcode" id="zipcode" type="text" class="v2_zipcode input2_soout" style="width:50px;" maxlength="6"/></td>
 				  </tr>
 				  <tr>
 					<td class="tdtj1">公司整体概述：<span class="f_e00101">*</span></td>
 					<td class="tdtj2" colspan="3">
 					<span class="f_b5b5b5">请用中文详细说明贵公司的成立历史、主营产品、品牌、服务等权势；<br/>
 					如果内容过于简单或仅填写单纯的产品介绍，将有可能无法通过审核。</span>
-					<textarea class="input2_soout" style="width:450px; height:90px;"></textarea>
+					<textarea name="desc" id="desc" class="v2_nonull input2_soout" style="width:450px; height:90px;"></textarea>
 					</td>
 				  </tr>
 				</table>
-				</form>
 				<p class="tijiao2nr1">
-				<input name="" type="button" class="tijiaoan2" value="下一步" />
+				<input name="nextsub" id="nextsub" type="submit" class="tijiaoan2" value="下一步" onclick="return validate(this.form);"/>
 				</p>
-			</div>
+			</form>
 			<p class="tijiao3"></p>
 		</div>
 <%template _companypostfooter%>

@@ -14,6 +14,7 @@ using SAS.Logic;
 using SAS.Entity;
 using SAS.Cache;
 using SAS.Config;
+using Newtonsoft.Json;
 
 namespace SAS.Web.UI
 {
@@ -56,7 +57,8 @@ namespace SAS.Web.UI
                 case "smilies":
                     GetSmilies();
                     break;
-                case "getprovice":
+                case "checkenname":
+                    CheckCompanyName();
                     break;
             }
         }
@@ -87,5 +89,62 @@ namespace SAS.Web.UI
             HttpContext.Current.Response.Write("{" + Caches.GetSmiliesCache() + "}");
             HttpContext.Current.Response.End();
         }
+        /// <summary>
+        /// 检查企业申请名称
+        /// </summary>
+        private void CheckCompanyName()
+        {
+            if (SASRequest.GetString("qyname").Trim() == "") return;
+            string result = "0";
+            string tmpUsername = SASRequest.GetString("qyname").Trim();
+            if (Companies.ExistCompanyName(tmpUsername) == 0) result = "1";
+            ResponseJSON(result);
+        }
+
+        #region Helper
+        private void ResponseText(string text)
+        {
+            HttpContext.Current.Response.Clear();
+            HttpContext.Current.Response.Write(text);
+            HttpContext.Current.Response.End();
+        }
+
+        private void ResponseText(StringBuilder builder)
+        {
+            ResponseText(builder.ToString());
+        }
+        /// <summary>
+        /// 向页面输出xml内容
+        /// </summary>
+        /// <param name="xmlnode">xml内容</param>
+        private void ResponseXML(System.Text.StringBuilder xmlnode)
+        {
+            System.Web.HttpContext.Current.Response.Clear();
+            System.Web.HttpContext.Current.Response.ContentType = "Text/XML";
+            System.Web.HttpContext.Current.Response.Expires = 0;
+            System.Web.HttpContext.Current.Response.Cache.SetNoStore();
+            System.Web.HttpContext.Current.Response.Write(xmlnode.ToString());
+            System.Web.HttpContext.Current.Response.End();
+        }
+
+        /// <summary>
+        /// 输出json内容
+        /// </summary>
+        /// <param name="json"></param>
+        private void ResponseJSON(string json)
+        {
+            System.Web.HttpContext.Current.Response.Clear();
+            System.Web.HttpContext.Current.Response.ContentType = "application/json";
+            System.Web.HttpContext.Current.Response.Expires = 0;
+            System.Web.HttpContext.Current.Response.Cache.SetNoStore();
+            System.Web.HttpContext.Current.Response.Write(json);
+            System.Web.HttpContext.Current.Response.End();
+        }
+
+        private void ResponseJSON<T>(T jsonobj)
+        {
+            ResponseJSON(JavaScriptConvert.SerializeObject(jsonobj));
+        }
+        #endregion
     }
 }

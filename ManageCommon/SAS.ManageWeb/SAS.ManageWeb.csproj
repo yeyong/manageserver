@@ -31,7 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Web.Extensions">
@@ -51,6 +51,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="aspx\1\companypost.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="aspx\1\companypostreg.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="aspx\1\index.aspx.cs">
@@ -518,6 +521,7 @@
     <Content Include="templates\default\album\usercpphotoadd.htm" />
     <Content Include="templates\default\album\_albummenu.htm" />
     <Content Include="templates\default\companypost.htm" />
+    <Content Include="templates\default\companypostreg.htm" />
     <Content Include="templates\default\css\channels.css" />
     <Content Include="templates\default\css\comm.css" />
     <Content Include="templates\default\css\head-foot.css" />

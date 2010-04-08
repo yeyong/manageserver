@@ -10,11 +10,11 @@ namespace SAS.Entity
     {
         #region Model
         private int _en_id;
-        private string _en_name;
+        private string _en_name = "";
         private string _en_main;
-        private int _en_type;
-        private int _en_enco;
-        private int _en_sell;
+        private int _en_type = 0;
+        private int _en_enco = 0;
+        private int _en_sell = 0;
         private string _en_address;
         private int _en_areas;
         private string _en_desc;
@@ -26,25 +26,25 @@ namespace SAS.Entity
         private string _en_web;
         private string _en_corp;
         private string _en_contact;
-        private string _en_update;
+        private string _en_update = "";
         private int _en_status;
-        private string _en_reason;
-        private int _en_level;
-        private int _en_accesses;
-        private int _en_credits;
-        private string _en_logo;
-        private string _en_music;
-        private string _reg_capital;
-        private string _reg_address;
-        private string _reg_code;
-        private string _reg_organ;
-        private string _reg_year;
-        private string _reg_date;
-        private string _en_builddate;
+        private string _en_reason = "";
+        private int _en_level = 0;
+        private int _en_accesses = 0;
+        private int _en_credits = 0;
+        private string _en_logo = "";
+        private string _en_music = "";
+        private string _reg_capital = "";
+        private string _reg_address = "";
+        private string _reg_code = "";
+        private string _reg_organ = "";
+        private string _reg_year = "";
+        private string _reg_date = "";
+        private string _en_builddate = "";
         private int _en_visble;
-        private string _en_createdate;
-        private string _en_cataloglist;
-        private int _configid;
+        private string _en_createdate = "";
+        private string _en_cataloglist = "";
+        private int _configid = 0;
         /// <summary>
         /// 企业ID
         /// </summary>

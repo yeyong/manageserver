@@ -61,8 +61,8 @@
             return true;
         }
         function resetPage() {
-            document.getElementById('success').style.display = 'none'
-            document.getElementById("AddCompanyInfo").disabled = false;
+            document.getElementById('success').style.display = 'none';
+            document.getElementById("UpdateCompanyInfo").disabled = false;
         }
     </script>
     <meta http-equiv="X-UA-Compatible" content="IE=7" />

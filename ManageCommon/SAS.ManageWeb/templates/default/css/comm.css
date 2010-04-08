@@ -25,9 +25,7 @@ img{ border:0px;}
 .f_e00101_14{ color:#e00101; font-size:14px;}
 .f_294100_18{ color:#294100; font:18px  Verdana, Arial, '宋体'; font-weight:bold;}
 .f_805952_14{ color:#805952; font-size:14px;}
-
 .line{ line-height:1px; word-break:break-all; overflow:hidden; display:inline;}
-
 .mar_top_8{ margin-top:8px;}
 .mar_top_5{ margin-top:5px;}
 .mar_top_3{ margin-top:3px;}
@@ -122,3 +120,9 @@ input.tijiaoan2{ width:93px; height:30px; line-height:30px; text-align:center; b
 .soso6line{ width:0px; height:10px; margin:6px 20px 0; border-left:1px solid #c5b7b4; border-right:1px solid #82605b; display:inline; float:left;}
 .soso7{ width:38px; height:68px; background:url(../images/soso-bg1.gif) -12px 0 no-repeat; position:absolute; right:0; float:left;}
 
+/*提示*/
+.tishi{ width:400px; height:auto; margin:0 auto;}
+.tstu{ width:48px; height:48px; margin:152px 10px 0 0; padding:0 0 150px 0; display:inline; float:left;}
+.tszi{ width:342px; height:auto; margin:150px 0 0 0; padding:0 0 150px 0; display:inline; float:left;}
+.tszi strong{ font-size:22px; color:#be002f; line-height:25px; margin:12px 0; display:block;}
+.tszi span{ font-size:14px; line-height:30px; display:block;}
