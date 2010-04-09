@@ -12,13 +12,16 @@
     noemptyhtml: { onshow_str: "*", onfocus_str: "此信息不可为空", oncorrect_str: "您的输入正确", regexp_str: "notempty", datatype_str: "enum", onerror_str: "信息中不能包含空格", empty_str: "", min_str: "2", max_str: "", inputonerror_str: "此信息内容不能为空！", tipid_str: "", fun_str: "nohtml" },
     zipcode: { onshow_str: "请输入您的邮编", onfocus_str: "请输入您的邮编", oncorrect_str: "您的输入正确", regexp_str: "zipcode", datatype_str: "enum", onerror_str: "请输入您的邮编", empty_str: "", min_str: "", max_str: "", inputonerror_str: "", tipid_str: "" },
     ennamecheck: { onshow_str: "请输入企业名称", onfocus_str: "企业名称不可为空", oncorrect_str: "您的输入正确", regexp_str: "notemptyoftd", datatype_str: "enum", onerror_str: "输入内容中不能包含符号和空格", empty_str: "", min_str: "2", max_str: "", inputonerror_str: "此信息内容不能为空！", tipid_str: "", ajax_type: "get", ajax_datatype: "json", ajax_button: "nextsub", ajax_url: "../tools/ajax.aspx?t=checkenname", ajax_onerror: "该企业已在申请当中", ajax_wait: "正在对企业名称进行校验，请耐心等待..." },
-    builddate: { onshow_str: "请输入日期", onfocus_str: "正确格式xxxx-xx-xx", oncorrect_str: "您的输入正确", regexp_str: "date", datatype_str: "enum", onerror_str: "正确格式xxxx-xx-xx", fun_str: "isdate" }
+    builddate: { onshow_str: "请输入日期", onfocus_str: "正确格式xxxx-xx-xx", oncorrect_str: "您的输入正确", regexp_str: "date", datatype_str: "enum", onerror_str: "正确格式xxxx-xx-xx", fun_str: "isdate" },
+    money: { onshow_str: "请输入整数", onfocus_str: "请输入整数", oncorrect_str: "您的输入正确", regexp_str: "intege1", datatype_str: "enum", onerror_str: "请输入整数" }
 }
 //设置form验证
-jQuery.fn.FormValidFunc = function(theprifix, groupnum) {
+jQuery.fn.FormValidFunc = function(theprifix, groupnum, tipauto) {
     var _this = jQuery(this);
     if (groupnum == "") groupnum = 1;
-    jQuery.formValidator.initConfig({ formid: _this.id, autotip: true, automodify: true });
+    if (tipauto == "" || tipauto == null) tipauto = true;
+    else tipauto = false;
+    jQuery.formValidator.initConfig({ formid: _this.id, autotip: tipauto });
     _this.find("input,select,textarea").each(function() {
         jQuery(this).setValidValue(theprifix);
     });

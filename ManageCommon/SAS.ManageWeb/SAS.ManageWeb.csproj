@@ -50,6 +50,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="aspx\1\cardimg.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="aspx\1\companypost.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -461,6 +464,7 @@
     <Content Include="images\posticons\7.gif" />
     <Content Include="images\posticons\8.gif" />
     <Content Include="images\posticons\9.gif" />
+    <Content Include="images\validator.css" />
     <Content Include="images\validatorAuto.css" />
     <Content Include="images\validator\bt.gif" />
     <Content Include="images\validator\onCorrect.gif" />
@@ -520,6 +524,7 @@
     <Content Include="templates\default\album\usercpmanagephoto.htm" />
     <Content Include="templates\default\album\usercpphotoadd.htm" />
     <Content Include="templates\default\album\_albummenu.htm" />
+    <Content Include="templates\default\cardimg.htm" />
     <Content Include="templates\default\companypost.htm" />
     <Content Include="templates\default\companypostreg.htm" />
     <Content Include="templates\default\css\channels.css" />
