@@ -1,4 +1,5 @@
 ﻿<%template _compostheader%>
+<%if {page_err}==0%>
 <div class="tijiao">
     <p class="tijiao1">
     </p>
@@ -16,8 +17,7 @@
                     公司注册时间：<span class="f_e00101">*</span>
                 </td>
                 <td class="tdtj2" colspan="3">
-                    <input name="" type="text" class="input2_soout" style="width: 40px;" maxlength="4"/>
-                    年
+                    <input name="regdate" id="regdate" type="text" class="v2_builddate input2_soout" style="width: 118px;" maxlength="20"/>
                 </td>
             </tr>
             <tr>
@@ -51,8 +51,9 @@
                     注册资本：<span class="f_e00101">*</span>
                 </td>
                 <td class="tdtj2" colspan="3">
-                    <input name="" type="text" class="input2_soout" style="width: 40px;" maxlength="6"/>
+                    <input name="regcapital" id="regcapital" type="text" class="v2_money input2_soout" style="width: 40px;" maxlength="6"/>
                     万元
+                    <span id="regcapitalTip" class="f_b5b5b5"></span>
                 </td>
             </tr>
             <tr>
@@ -60,8 +61,8 @@
                     注册号：<span class="f_e00101">*</span>
                 </td>
                 <td class="tdtj2" colspan="3">
-                    <input name="" type="text" class="input2_soout" style="width: 118px;" maxlength="50"/>
-                    <span class="f_b5b5b5">（请填写企业注册号）</span>
+                    <input name="regsign" id="regsign" type="text" class="v2_noemptyhtml input2_soout" style="width: 118px;" maxlength="50"/>
+                    <span id="regsignTip" class="f_b5b5b5"></span>
                 </td>
             </tr>
             <tr>
@@ -70,6 +71,7 @@
                 </td>
                 <td class="tdtj2" colspan="3">
                     <input name="regorgan" id="regorgan" type="text" class="v2_noemptyhtml input2_soout" style="width: 170px;" maxlength="200"/>
+                    <span id="regorganTip" class="f_b5b5b5"></span>
                 </td>
             </tr>
             <tr>
@@ -77,7 +79,8 @@
                     最近年检时间：<span class="f_e00101">*</span>
                 </td>
                 <td class="tdtj2" colspan="3">
-                    <input name="lastdate" id="lastdate" type="text" class="v2_builddate input2_soout" style="width: 170px;" />
+                    <input name="lastdate" id="lastdate" type="text" class="v2_builddate input2_soout" style="width: 118px;" maxlength="20"/>
+                    <span id="lastdateTip" class="f_b5b5b5"></span>
                 </td>
             </tr>
             <tr>
@@ -85,8 +88,8 @@
                     营业期限：<span class="f_e00101">*</span>
                 </td>
                 <td class="tdtj2" colspan="3">
-                    <input name="" type="text" class="input2_soout" style="width: 170px;" />
-                    <span class="f_b5b5b5">（请填写营业期限）</span>
+                    <input name="limitdate" id="limitdate" type="text" class="v2_noemptyhtml input2_soout" style="width: 170px;" />
+                    <span id="limitdateTip" class="f_b5b5b5"></span>
                 </td>
             </tr>
             <tr>
@@ -95,48 +98,53 @@
                 </td>
                 <td class="tdtj2" colspan="3">
                     <input name="regaddress" id="regaddress" type="text" class="v2_noemptyhtml input2_soout" style="width: 300px;" />
+                    <span id="regaddressTip" class="f_b5b5b5"></span>
                 </td>
             </tr>
             <tr>
                 <td class="tdtj1">
-                    主营行业类型：<span class="f_e00101">*</span>
+                    主营商品范围：
                 </td>
                 <td class="tdtj2" colspan="3">
-                    <span class="tdtjnr f_b5b5b5">每空限填1种产品名称，建议10个字以下，如：钮扣</span> <span class="tdtjnr">
-                        <input name="" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
-                        <input name="" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
-                        <input name="" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
-                        <input name="" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
-                        <input name="" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
-                        <input name="" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
-                        <input name="" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
-                        <input name="" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
-                        <input name="" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
-                        <input name="" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
-                        <input name="" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
-                        <input name="" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
+                    <span class="tdtjnr f_b5b5b5">每空限填1种产品名称，建议10个字以下，如：钮扣</span> 
+                    <span class="tdtjnr">
+                        <input name="regmain" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
+                        <input name="regmain" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
+                        <input name="regmain" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
+                        <input name="regmain" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
+                        <input name="regmain" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
+                        <input name="regmain" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
+                        <input name="regmain" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
+                        <input name="regmain" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
+                        <input name="regmain" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
+                        <input name="regmain" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
+                        <input name="regmain" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
+                        <input name="regmain" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
                     </span>
                     <em class="tdtjnr1" style="cursor: pointer;" onclick="javascript:document.getElementById('over').style.display=(document.getElementById('over').style.display=='none'?'block':'none')">
                         <img alt="更多" src="templates/{templatepath}/images/icon/arrow-icon1.gif" />
                         更多</em> 
                         <span class="tdtjnr" style="display: none;" id="over">
-                            <input name="" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
-                            <input name="" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
-                            <input name="" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
-                            <input name="" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
-                            <input name="" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
-                            <input name="" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
-                            <input name="" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
-                            <input name="" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
+                        <input name="regmain" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
+                        <input name="regmain" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
+                        <input name="regmain" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
+                        <input name="regmain" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
+                        <input name="regmain" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
+                        <input name="regmain" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
+                        <input name="regmain" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
+                        <input name="regmain" type="text" class="input2_soout" style="width: 70px;" maxlength="20"/>
                         </span>
                 </td>
             </tr>
         </table>
         <p class="tijiao2nr1">
-            <input name="" type="button" class="tijiaoan2" value="确 定" />
+            <input name="submit" type="submit" class="tijiaoan2" value="确 定" />
         </p>
     </form>
     <p class="tijiao3">
     </p>
 </div>
+<%else%>
+<%template _commsgbox%>
+<%/if%>
 <%template _companypostfooter%>

@@ -14,6 +14,7 @@ namespace SAS.ManageWeb
     {
         protected override void ShowPage()
         {
+            AddLinkCss(forumpath + "images/validatorAuto.css");
             script += "\r\n<script src=\"" + forumpath + "javascript/companycategories.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/locations.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/template_catalogadmin.js\" type=\"text/javascript\"></script>";
@@ -75,7 +76,23 @@ namespace SAS.ManageWeb
                 companyinfo.en_cataloglist = hycata;
                 companyinfo.en_corp = corper;
                 companyinfo.en_contact = contor;
-                SetUrl("companypostreg.aspx");
+                companyinfo.en_phone = phone;
+                companyinfo.en_mobile = mobile;
+                companyinfo.en_fax = fax;
+                companyinfo.en_mail = email;
+                companyinfo.en_web = enweb;
+                companyinfo.en_areas = district;
+                companyinfo.en_address = address;
+                companyinfo.en_post = zipcode;
+                companyinfo.en_desc = desc;
+                companyinfo.en_visble = 0;
+                companyinfo.en_status = 0;
+
+                companyinfo.en_reason = "信息尚未完成，请完成企业注册信息后才能进入申请状态！";
+
+                int companyid = Companies.CreateCompanyInfo(companyinfo);
+
+                SetUrl("companypostreg.aspx?companyid=" + companyid);
                 SetMetaRefresh(0);
             }
         }
