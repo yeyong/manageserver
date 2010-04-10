@@ -22,7 +22,7 @@ namespace SAS.Logic
         /// <summary>
         /// 底部脚本
         /// </summary>
-        protected internal string footscript;
+        protected internal string footscript = "";
         /// <summary>
         /// 类别列表
         /// </summary>

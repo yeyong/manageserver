@@ -226,6 +226,45 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 获得指定的名片模板信息
+        /// </summary>
+        /// <param name="templateid">皮肤id</param>
+        /// <returns></returns>
+        public static CardTemplateInfo GetCardTemplateItem(int cardtemplateid)
+        {
+            if (cardtemplateid <= 0)
+                return null;
+            CardTemplateInfo cardtemplateinfo = null;
+            DataRow[] dr = GetValidCardTemplateList().Select("id = " + cardtemplateid.ToString());
+
+            if (dr.Length > 0)
+            {
+                cardtemplateinfo = new CardTemplateInfo();
+                cardtemplateinfo.id = Int16.Parse(dr[0]["id"].ToString());
+                cardtemplateinfo.name = dr[0]["name"].ToString();
+                cardtemplateinfo.directory = dr[0]["directory"].ToString();
+                cardtemplateinfo.copyright = dr[0]["copyright"].ToString();
+                cardtemplateinfo.currentfile = dr[0]["currentfile"].ToString();
+            }
+
+            if (cardtemplateinfo == null)
+            {
+                dr = GetValidCardTemplateList().Select("id = 1");
+
+                if (dr.Length > 0)
+                {
+                    cardtemplateinfo = new CardTemplateInfo();
+                    cardtemplateinfo.id = Int16.Parse(dr[0]["id"].ToString());
+                    cardtemplateinfo.name = dr[0]["name"].ToString();
+                    cardtemplateinfo.directory = dr[0]["directory"].ToString();
+                    cardtemplateinfo.copyright = dr[0]["copyright"].ToString();
+                    cardtemplateinfo.currentfile = dr[0]["currentfile"].ToString();
+                }
+            }
+            return cardtemplateinfo;
+        }
+
+        /// <summary>
         /// 获得指定的模板信息
         /// </summary>
         /// <param name="templateid">皮肤id</param>

@@ -211,6 +211,13 @@
     <Compile Include="ManagePage\global\global_navigationmanage.aspx.designer.cs">
       <DependentUpon>global_navigationmanage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\rapidset\shortcut.aspx.cs">
+      <DependentUpon>shortcut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\rapidset\shortcut.aspx.designer.cs">
+      <DependentUpon>shortcut.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -518,6 +525,7 @@
     <Content Include="ManagePage\global\global_forumlinksgrid.aspx" />
     <Content Include="ManagePage\global\global_helplist.aspx" />
     <Content Include="ManagePage\global\global_navigationmanage.aspx" />
+    <Content Include="ManagePage\rapidset\shortcut.aspx" />
     <Content Include="templates\default\about.png" />
     <Content Include="templates\default\about.xml" />
     <Content Include="templates\default\album\usercpmanagealbum.htm" />
