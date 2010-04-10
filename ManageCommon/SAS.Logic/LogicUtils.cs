@@ -687,6 +687,7 @@ namespace SAS.Logic
         public static void AddImageSignText(Image img, string filename, string watermarkText, int watermarkStatus, int quality, string fontname, int fontsize)
         {
             Graphics g = Graphics.FromImage(img);
+            
             Font drawFont = new Font(fontname, fontsize, FontStyle.Regular, GraphicsUnit.Pixel);
             SizeF crSize;
             crSize = g.MeasureString(watermarkText, drawFont);

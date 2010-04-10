@@ -1,11 +1,14 @@
 ﻿using System;
+using System.IO;
 using System.Text;
 using System.Data;
+using System.Drawing;
 
 using SAS.Logic;
 using SAS.Common;
 using SAS.Config;
 using SAS.Entity;
+
 namespace SAS.ManageWeb
 {
     /// <summary>
@@ -18,7 +21,16 @@ namespace SAS.ManageWeb
         /// 企业名片id
         /// </summary>
         public int qycardid = SASRequest.GetInt("qycardid", -1);
+        /// <summary>
+        /// 企业信息
+        /// </summary>
+        protected Companys companyinfo;
+        /// <summary>
+        /// 名片模板ID
+        /// </summary>
+        protected int cardtempid = 0;
         #endregion
+
         protected override void ShowPage()
         {
             pagetitle = "企业图片式名片";
@@ -27,6 +39,67 @@ namespace SAS.ManageWeb
                 AddErrLine("无效的企业名片ID");
                 return;
             }
+
+            companyinfo = Companies.GetCompanyInfo(qycardid);
+            if (companyinfo == null)
+            {
+                AddErrLine("不存在的企业名片");
+                return;
+            }
+
+            if (companyinfo.configid == 0) cardtempid = 1;
+
+            CardTemplateInfo cti = Templates.GetCardTemplateItem(cardtempid);
+            if (cti == null)
+            {
+                AddErrLine("名片信息不存在");
+                return;
+            }
+            string[] curparm = cti.currentfile.Split('|');
+            if (curparm.Length == 0) AddErrLine("参数传递错误！");
+            if (!Utils.IsImgFilename(curparm[0])) AddErrLine("参数传递错误！");
+            if (IsErr()) return;
+            //当请求文件不存则创建新名片
+            string fullfilename = string.Format(@"{0}/cardimg/{1}/{2}", BaseConfigs.GetSitePath, cardtempid, qycardid.ToString() + curparm[0]);
+            string backfilename = string.Format(@"{0}/cardtemplate/{1}/{2}", BaseConfigs.GetSitePath, cti.directory, curparm[0]);
+            if (!File.Exists(Utils.GetMapPath(fullfilename)))
+            {
+                if (!File.Exists(Utils.GetMapPath(backfilename)))
+                {
+                    AddErrLine("名片模板文件不存在");
+                    return;
+                }
+                Image bimage = null;
+                MemoryStream m_ms = null;
+                try
+                {
+                    FileStream b_fs = new FileStream(Utils.GetMapPath(backfilename), FileMode.Open);
+                    byte[] b_bt = new byte[int.Parse(b_fs.Length.ToString())];
+                    b_fs.Read(b_bt, 0, int.Parse(b_fs.Length.ToString()));
+                    b_fs.Close();
+                    b_fs.Dispose();
+                    m_ms = new MemoryStream(b_bt);                    
+                    bimage = Image.FromStream(m_ms);
+                    LogicUtils.AddImageSignText(bimage, Utils.GetMapPath(fullfilename), "试试水印", 1, 80, "Tahoma", 12);
+                }
+                catch (Exception ex)
+                {
+                    AddErrLine("名片生成出问题");
+                }
+                finally
+                {
+                    if (m_ms != null)
+                    {
+                        m_ms.Close();
+                        m_ms.Dispose();
+                    }
+                    if (bimage != null)
+                        bimage.Dispose();
+                }
+
+            }
+            
+            Utils.ResponseFile(Utils.GetMapPath(fullfilename), fullfilename, Utils.GetFileExtName(fullfilename));
         }
     }
 }

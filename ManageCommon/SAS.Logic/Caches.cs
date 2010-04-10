@@ -275,6 +275,14 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 重新设置论坛统计信息
+        ///</summary>
+        public static void ReSetStatistics()
+        {
+            RemoveObject(CacheKeys.FORUM_STATISTICS);
+        }
+
+        /// <summary>
         /// 重新设置论坛基本设置
         ///</summary>
         public static void ReSetConfig()
@@ -296,6 +304,16 @@ namespace SAS.Logic
         public static void ReSetUserGroupList()
         {
             RemoveObject(CacheKeys.FORUM_USER_GROUP_LIST);
+        }
+
+        /// <summary>
+        /// 更新所有缓存
+        /// </summary>
+        public static void ReSetAllCache()
+        {
+            ReSetConfig();
+            ReSetAdminGroupList();
+            ReSetUserGroupList();
         }
 
         #endregion
