@@ -259,6 +259,7 @@ namespace SAS.Data.SqlServer
         public void InsertCardConfig(CardConfigInfo cci)
         {
             DbParameter[] param = {
+                                         DbHelper.MakeInParam("@ccname",(DbType)SqlDbType.NVarChar,50,cci.ccname),
                                          DbHelper.MakeInParam("@tid",(DbType)SqlDbType.Int,4,cci.tid),
                                          DbHelper.MakeInParam("@hasflash",(DbType)SqlDbType.TinyInt, 1, cci.hasflash),
                                          DbHelper.MakeInParam("@hasimage",(DbType)SqlDbType.TinyInt, 1, cci.hasimage),
@@ -267,7 +268,7 @@ namespace SAS.Data.SqlServer
                                          DbHelper.MakeInParam("@showparams",(DbType)SqlDbType.NText,1,cci.showparams),
                                          DbHelper.MakeInParam("@vailddate",(DbType)SqlDbType.DateTime,8,cci.vailddate)
                                        };
-            string commandText = String.Format("INSERT INTO [{0}cardconfig] ([tid],[hasflash],[hasimage],[hasjs],[hassilverlight],[showparams],[vailddate]) VALUES(@tid,@hasflash,@hasimage,@hasjs,@hassilverlight,@showparams,@vailddate)",
+            string commandText = String.Format("INSERT INTO [{0}cardconfig] ([tid],[ccname],[hasflash],[hasimage],[hasjs],[hassilverlight],[showparams],[vailddate]) VALUES(@tid,@ccname,@hasflash,@hasimage,@hasjs,@hassilverlight,@showparams,@vailddate)",
                                     BaseConfigs.GetTablePrefix);
             DbHelper.ExecuteNonQuery(CommandType.Text, commandText, param);
         }
@@ -277,6 +278,26 @@ namespace SAS.Data.SqlServer
         public IDataReader GetCardConfigData()
         {
             return DbHelper.ExecuteReader(CommandType.StoredProcedure, string.Format("{0}getcardconfigs", BaseConfigs.GetTablePrefix));
+        }
+        /// <summary>
+        /// 修改名片配置信息
+        /// </summary>
+        public void UpdateCardConfig(CardConfigInfo cci)
+        {
+            DbParameter[] param = {
+                                         DbHelper.MakeInParam("@id",(DbType)SqlDbType.Int,4,cci.id),
+                                         DbHelper.MakeInParam("@ccname",(DbType)SqlDbType.NVarChar,50,cci.ccname),
+                                         DbHelper.MakeInParam("@tid",(DbType)SqlDbType.Int,4,cci.tid),
+                                         DbHelper.MakeInParam("@hasflash",(DbType)SqlDbType.TinyInt, 1, cci.hasflash),
+                                         DbHelper.MakeInParam("@hasimage",(DbType)SqlDbType.TinyInt, 1, cci.hasimage),
+                                         DbHelper.MakeInParam("@hasjs",(DbType)SqlDbType.TinyInt, 1, cci.hasjs),
+                                         DbHelper.MakeInParam("@hassilverlight",(DbType)SqlDbType.TinyInt, 1, cci.hassilverlight),
+                                         DbHelper.MakeInParam("@showparams",(DbType)SqlDbType.NText,1,cci.showparams),
+                                         DbHelper.MakeInParam("@vailddate",(DbType)SqlDbType.DateTime,8,cci.vailddate)
+                                       };
+            string commandText = String.Format("UPDATE [{0}cardconfig] SET [tid] = @tid,[ccname] = @ccname,[hasflash] = @hasflash,[hasimage] = @hasimage,[hasjs] = @hasjs,[hassilverlight] = @hassilverlight,[showparams] = @showparams,[vailddate] = @vailddate WHERE [id] = @id",
+                                    BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, param);
         }
         /// <summary>
         /// 名片配置文件模板ID更新操作

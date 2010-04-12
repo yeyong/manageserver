@@ -967,6 +967,10 @@ namespace SAS.Data
         /// <returns></returns>
         IDataReader GetCardConfigData();
         /// <summary>
+        /// 修改名片配置信息
+        /// </summary>
+        void UpdateCardConfig(CardConfigInfo cci);
+        /// <summary>
         /// 名片配置文件模板ID更新操作
         /// </summary>
         void UpdateCardConfigTemplateID(string templateIdList);

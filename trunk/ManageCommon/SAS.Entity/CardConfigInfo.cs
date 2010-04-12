@@ -10,6 +10,7 @@ namespace SAS.Entity
     {
         #region Model
         private int _id;
+        private string _ccname;
         private int _tid;
         private int _hasflash;
         private int _hasimage;
@@ -28,6 +29,14 @@ namespace SAS.Entity
         {
             set { _id = value; }
             get { return _id; }
+        }
+        /// <summary>
+        /// 配置文件名
+        /// </summary>
+        public string ccname
+        {
+            set { _ccname = value; }
+            get { return _ccname; }
         }
         /// <summary>
         /// 模板ID
