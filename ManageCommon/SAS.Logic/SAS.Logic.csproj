@@ -44,6 +44,7 @@
     <Compile Include="admin\AdminCompanies.cs" />
     <Compile Include="Announcements.cs" />
     <Compile Include="areas.cs" />
+    <Compile Include="CardConfigs.cs" />
     <Compile Include="Catalogs.cs" />
     <Compile Include="Companies.cs" />
     <Compile Include="Helps.cs" />

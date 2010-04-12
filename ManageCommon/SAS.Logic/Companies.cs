@@ -17,6 +17,11 @@ namespace SAS.Logic
     /// </summary>
     public class Companies
     {
+        /// <summary>
+        /// 创建企业信息
+        /// </summary>
+        /// <param name="_companyInfo"></param>
+        /// <returns></returns>
         public static int CreateCompanyInfo(Companys _companyInfo)
         {
             if (ExistCompanyName(_companyInfo.en_name) > 0) return 0;
@@ -43,6 +48,27 @@ namespace SAS.Logic
         public static Companys GetCompanyInfo(int enid)
         {
             return SAS.Data.DataProvider.Companies.GetCompanyInfoByID(enid);
+        }
+
+        /// <summary>
+        /// 获取全部企业信息（带缓存）
+        /// </summary>
+        /// <returns></returns>
+        public static List<Companys> GetCompanyList()
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            List<Companys> companylist = cache.RetrieveObject("/SAS/CompanyList") as List<Companys>;
+
+            if (companylist == null)
+            {
+                companylist = SAS.Data.DataProvider.Companies.GetCompanyList();
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 300;
+                cache.LoadCacheStrategy(ica);
+                cache.AddObject("/SAS/CompanyList", companylist);
+                cache.LoadDefaultCacheStrategy();
+            }
+            return companylist;
         }
     }
 }

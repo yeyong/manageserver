@@ -23,6 +23,60 @@ namespace SAS.Data.DataProvider
         {
             return DatabaseProvider.GetInstance().CreateCompany(_companyInfo);
         }
+        /// <summary>
+        /// 获取企业信息集合
+        /// </summary>
+        /// <returns></returns>
+        public static List<Companys> GetCompanyList()
+        {
+            List<Companys> companylist = new List<Companys>();
+            DataTable dt = GetCompanyAllList();
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    Companys _companyInfo = new Companys();
+                    _companyInfo.en_id = TypeConverter.StrToInt(dr["en_id"].ToString(), 0);
+                    _companyInfo.en_name = dr["en_name"].ToString();
+                    _companyInfo.en_main = dr["en_main"].ToString();
+                    _companyInfo.en_type = TypeConverter.StrToInt(dr["en_type"].ToString(), 0);
+                    _companyInfo.en_enco = TypeConverter.StrToInt(dr["en_enco"].ToString(), 0);
+                    _companyInfo.en_sell = TypeConverter.StrToInt(dr["en_sell"].ToString(), 0);
+                    _companyInfo.en_address = dr["en_address"].ToString();
+                    _companyInfo.en_areas = TypeConverter.StrToInt(dr["en_areas"].ToString(), 0);
+                    _companyInfo.en_desc = dr["en_desc"].ToString();
+                    _companyInfo.en_post = dr["en_post"].ToString();
+                    _companyInfo.en_mobile = dr["en_mobile"].ToString();
+                    _companyInfo.en_phone = dr["en_phone"].ToString();
+                    _companyInfo.en_fax = dr["en_fax"].ToString();
+                    _companyInfo.en_mail = dr["en_mail"].ToString();
+                    _companyInfo.en_web = dr["en_web"].ToString();
+                    _companyInfo.en_corp = dr["en_corp"].ToString();
+                    _companyInfo.en_contact = dr["en_contact"].ToString();
+                    _companyInfo.en_update = Utils.GetStandardDateTime(dr["en_update"].ToString());
+                    _companyInfo.en_status = TypeConverter.StrToInt(dr["en_status"].ToString());
+                    _companyInfo.en_reason = dr["en_reason"].ToString();
+                    _companyInfo.en_level = TypeConverter.StrToInt(dr["en_level"].ToString(), 0);
+                    _companyInfo.en_accesses = TypeConverter.StrToInt(dr["en_accesses"].ToString(), 0);
+                    _companyInfo.en_credits = TypeConverter.StrToInt(dr["en_credits"].ToString(), 0);
+                    _companyInfo.en_logo = dr["en_logo"].ToString();
+                    _companyInfo.en_music = dr["en_music"].ToString();
+                    _companyInfo.reg_capital = dr["reg_capital"].ToString();
+                    _companyInfo.reg_address = dr["reg_address"].ToString();
+                    _companyInfo.reg_code = dr["reg_code"].ToString();
+                    _companyInfo.reg_organ = dr["reg_organ"].ToString();
+                    _companyInfo.reg_year = Utils.GetStandardDate(dr["reg_year"].ToString());
+                    _companyInfo.reg_date = dr["reg_date"].ToString();
+                    _companyInfo.en_builddate = Utils.GetStandardDate(dr["en_builddate"].ToString());
+                    _companyInfo.en_visble = TypeConverter.StrToInt(dr["en_visble"].ToString(), 0);
+                    _companyInfo.en_createdate = Utils.GetStandardDateTime(dr["en_createdate"].ToString());
+                    _companyInfo.en_cataloglist = dr["en_cataloglist"].ToString();
+                    _companyInfo.configid = TypeConverter.StrToInt(dr["configid"].ToString());
+                    companylist.Add(_companyInfo);
+                }
+            }
+            return companylist;
+        }
 
         /// <summary>
         /// 企业信息实体化

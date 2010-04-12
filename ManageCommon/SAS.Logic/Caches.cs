@@ -307,13 +307,23 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 重置企业信息
+        /// </summary>
+        public static void ReSetCompanyList()
+        {
+            RemoveObject(CacheKeys.SAS_COMPANY_LIST);
+        }
+
+        /// <summary>
         /// 更新所有缓存
         /// </summary>
         public static void ReSetAllCache()
         {
+            ReSetStatistics();
             ReSetConfig();
             ReSetAdminGroupList();
             ReSetUserGroupList();
+            ReSetCompanyList();
         }
 
         #endregion
