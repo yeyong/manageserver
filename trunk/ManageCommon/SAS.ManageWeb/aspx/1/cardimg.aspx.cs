@@ -69,6 +69,12 @@ namespace SAS.ManageWeb
                     AddErrLine("名片模板文件不存在");
                     return;
                 }
+
+                if (!Directory.Exists(Utils.GetMapPath(BaseConfigs.GetSitePath + "cardimg/" + cardtempid)))
+                {
+                    Directory.CreateDirectory(Utils.GetMapPath(BaseConfigs.GetSitePath + "cardimg/" + cardtempid));
+                }
+
                 Image bimage = null;
                 MemoryStream m_ms = null;
                 try
@@ -78,9 +84,9 @@ namespace SAS.ManageWeb
                     b_fs.Read(b_bt, 0, int.Parse(b_fs.Length.ToString()));
                     b_fs.Close();
                     b_fs.Dispose();
-                    m_ms = new MemoryStream(b_bt);                    
+                    m_ms = new MemoryStream(b_bt);
                     bimage = Image.FromStream(m_ms);
-                    LogicUtils.AddImageSignText(bimage, Utils.GetMapPath(fullfilename), "试试水印", 1, 80, "Tahoma", 12);
+                    LogicUtils.AddImageSignText(bimage, Utils.GetMapPath(fullfilename), "试试水印", 4, 80, "经典超圆简", 20);
                 }
                 catch (Exception ex)
                 {

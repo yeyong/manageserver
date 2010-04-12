@@ -11,5 +11,6 @@ namespace SAS.Cache
         public const string FORUM_ADMIN_GROUP_LIST = "/SAS/AdminGroupList";
         public const string FORUM_USER_GROUP_LIST = "/SAS/UserGroupList";
         public const string FORUM_STATISTICS = "/SAS/Statistics";
+        public const string SAS_COMPANY_LIST = "/SAS/CompanyList";
     }
 }

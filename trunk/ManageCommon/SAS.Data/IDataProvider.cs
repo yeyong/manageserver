@@ -952,6 +952,21 @@ namespace SAS.Data
 
         #region 名片配置文件表cardconfig操作
         /// <summary>
+        /// 删除名片配置信息
+        /// </summary>
+        /// <param name="cardconfigid"></param>
+        void DeleteCardConfig(int cardconfigid);
+        /// <summary>
+        /// 增加企业名片配置信息
+        /// </summary>
+        /// <param name="cci"></param>
+        void InsertCardConfig(CardConfigInfo cci);
+        /// <summary>
+        /// 名片配置文件读取
+        /// </summary>
+        /// <returns></returns>
+        IDataReader GetCardConfigData();
+        /// <summary>
         /// 名片配置文件模板ID更新操作
         /// </summary>
         void UpdateCardConfigTemplateID(string templateIdList);

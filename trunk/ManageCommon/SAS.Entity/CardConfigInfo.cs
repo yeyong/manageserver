@@ -18,6 +18,9 @@ namespace SAS.Entity
         private string _showparams;
         private string _createdate;
         private string _vailddate;
+        private string t_name = "default";
+        private string t_directory = "default";
+        private string t_currentfile = "";
         /// <summary>
         /// 配置ID
         /// </summary>
@@ -89,6 +92,30 @@ namespace SAS.Entity
         {
             set { _vailddate = value; }
             get { return _vailddate; }
+        }
+        /// <summary>
+        /// 模板名
+        /// </summary>
+        public string name
+        {
+            set { t_name = value; }
+            get { return t_name; }
+        }
+        /// <summary>
+        /// 模板路径
+        /// </summary>
+        public string directory
+        {
+            set { t_directory = value; }
+            get { return t_directory; }
+        }
+        /// <summary>
+        /// 当前文件参数
+        /// </summary>
+        public string currentfile
+        {
+            set { t_currentfile = value; }
+            get { return t_currentfile; }
         }
         #endregion Model
     }

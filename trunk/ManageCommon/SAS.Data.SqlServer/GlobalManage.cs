@@ -244,6 +244,41 @@ namespace SAS.Data.SqlServer
 
         #region 名片模板配置文件 cardconfig 表操作
         /// <summary>
+        /// 删除名片配置信息
+        /// </summary>
+        /// <param name="cardconfigid"></param>
+        public void DeleteCardConfig(int cardconfigid)
+        {
+            string commandText = String.Format("DELETE FROM [{0}cardconfig] WHERE [id] = {1}", BaseConfigs.GetTablePrefix, cardconfigid);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
+        }
+        /// <summary>
+        /// 增加企业名片配置信息
+        /// </summary>
+        /// <param name="cci"></param>
+        public void InsertCardConfig(CardConfigInfo cci)
+        {
+            DbParameter[] param = {
+                                         DbHelper.MakeInParam("@tid",(DbType)SqlDbType.Int,4,cci.tid),
+                                         DbHelper.MakeInParam("@hasflash",(DbType)SqlDbType.TinyInt, 1, cci.hasflash),
+                                         DbHelper.MakeInParam("@hasimage",(DbType)SqlDbType.TinyInt, 1, cci.hasimage),
+                                         DbHelper.MakeInParam("@hasjs",(DbType)SqlDbType.TinyInt, 1, cci.hasjs),
+                                         DbHelper.MakeInParam("@hassilverlight",(DbType)SqlDbType.TinyInt, 1, cci.hassilverlight),
+                                         DbHelper.MakeInParam("@showparams",(DbType)SqlDbType.NText,1,cci.showparams),
+                                         DbHelper.MakeInParam("@vailddate",(DbType)SqlDbType.DateTime,8,cci.vailddate)
+                                       };
+            string commandText = String.Format("INSERT INTO [{0}cardconfig] ([tid],[hasflash],[hasimage],[hasjs],[hassilverlight],[showparams],[vailddate]) VALUES(@tid,@hasflash,@hasimage,@hasjs,@hassilverlight,@showparams,@vailddate)",
+                                    BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, param);
+        }
+        /// <summary>
+        /// 名片配置文件模板ID更新操作
+        /// </summary>
+        public IDataReader GetCardConfigData()
+        {
+            return DbHelper.ExecuteReader(CommandType.StoredProcedure, string.Format("{0}getcardconfigs", BaseConfigs.GetTablePrefix));
+        }
+        /// <summary>
         /// 名片配置文件模板ID更新操作
         /// </summary>
         public void UpdateCardConfigTemplateID(string templateIdList)
