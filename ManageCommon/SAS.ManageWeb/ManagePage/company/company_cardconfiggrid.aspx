@@ -12,72 +12,41 @@
     <script type="text/javascript" src="../js/common.js"></script>
     <script type="text/javascript">
         function newMenu() {
-            $("opt").innerHTML = "新建导航菜单";
-            $("menuid").value = "0";
+            $("opt").innerHTML = "新建名片配置";
+            $("id").value = "0";
             $("mode").value = "new";
-            $("name").value = "";
-            $("title").value = "";
-            $("url").value = "";
-            $("target").options[0].selected = true;
-            $("menutype").value = "0";
-            $("available").options[1].selected = true;
-            $("displayorder").value = "";
-            $("level").options[0].selected = true;
+            $("ccname").value = "";
+            $("tid").options[0].selected = true;
+            $("hasflash").checked = false;
+            $("hasimage").checked = false;
+            $("hasjs").checked = false;
+            $("hassilverlight").checked = false;
+            $("showparams").value = "";
             BOX_show('neworeditmainmenu');
         }
         function editMenu(menuid) {
-            $("opt").innerHTML = "编辑导航菜单";
+            $("opt").innerHTML = "编辑名片配置";
             for (var i = 0; i < nav.length; i++) {
                 if (nav[i]["id"] == menuid) {
-                    $("menuid").value = nav[i]["id"];
+                    $("id").value = nav[i]["id"];
                     $("mode").value = "edit";
-                    $("name").value = nav[i]["name"];
-                    $("title").value = nav[i]["title"];
-                    $("url").value = nav[i]["url"];
-                    $("target").options[nav[i]["target"]].selected = true;
-                    $("menutype").value = nav[i]["type"];
-                    $("available").options[nav[i]["available"]].selected = true;
-                    $("displayorder").value = nav[i]["displayorder"];
-                    $("level").options[nav[i]["level"]].selected = true;
+                    $("ccname").value = nav[i]["ccname"];
+                    $("tid").value = nav[i]["tid"];
+                    if (nav[i]["hasflash"] == "1") $("hasflash").checked = true;
+                    if (nav[i]["hasimage"] == "1") $("hasimage").checked = true;
+                    if (nav[i]["hasjs"] == "1") $("hasjs").checked = true;
+                    if (nav[i]["hassilverlight"] == "1") $("hassilverlight").checked = true;
+                    $("showparams").value = nav[i]["showparams"];
                     BOX_show('neworeditmainmenu');
                     return;
                 }
             }
-            alert("菜单不存在！");
+            alert("名片配置不存在！");
         }
         function chkSubmit() {
-            if ($("name").value == "") {
-                alert("菜单名称不能为空！");
-                $("name").focus();
-                return false;
-            }
-            var url = $("url").value.toLowerCase();
-            if (url == "") {
-                if (!confirm("您确认要将链接地址置空吗？")) {
-                    $("url").focus();
-                    return false;
-                }
-                else {
-                    $("url").value = "#";
-                }
-            }
-            else {
-                if ($("menutype").value != "0" && url.indexOf("://") == -1) {
-                    if (url.indexOf("javascript:") == -1 && url != "#") {
-                        if (!confirm("您的链接地址不包含“http://”，您确认要保持这样的链接吗？")) {
-                            $("url").focus();
-                            return false;
-                        }
-                    }
-                }
-            }
-            if ($("displayorder").value == "") {
-                $("displayorder").value = "0";
-            }
-            else if (!/^\d+$/.test($("displayorder").value)) {
-                alert("序号必须是数字！");
-                $("displayorder").value = "";
-                $("displayorder").focus();
+            if ($("ccname").value == "") {
+                alert("名片配置名称不能为空！");
+                $("ccname").focus();
                 return false;
             }
             $("form1").submit();
@@ -89,41 +58,37 @@
 <body>
     <form id="form1" runat="server">
 	<yy1:PageInfo ID="info1" runat="server" Icon="information" Text="<li>主菜单项必须在其下没有子菜单时才可删除!</li>" />
-	<yy:datagrid id="DataGrid1" runat="server" IsFixConlumnControls="true" OnItemDataBound="DataGrid1_ItemDataBound">
+	<yy:datagrid id="DataGrid1" runat="server" IsFixConlumnControls="true" TableHeaderName="配置文件管理">
 	   <Columns>
-		<asp:BoundColumn DataField="displayorder" HeaderText="显示序号"></asp:BoundColumn>
-		<asp:TemplateColumn HeaderText="菜单名称">
+		<asp:BoundColumn DataField="ccname" HeaderText="配置名"><ItemStyle HorizontalAlign="Center" /></asp:BoundColumn>
+		<asp:BoundColumn DataField="name" HeaderText="模板名称" ReadOnly="true"><ItemStyle HorizontalAlign="Center" /></asp:BoundColumn>
+		<asp:TemplateColumn HeaderText="是否支持flash">
 			<ItemTemplate>
-			    <input id="keyid" type="hidden" value="<%# DataBinder.Eval(Container, "DataItem.id").ToString() %>" name="keyid"/>
-				<a href="<%# GetLink(DataBinder.Eval(Container, "DataItem.url").ToString()) %>" target="_blank" title="<%# DataBinder.Eval(Container, "DataItem.title").ToString() %>"><%# DataBinder.Eval(Container, "DataItem.name").ToString() %></a>
+				<%# DataBinder.Eval(Container, "DataItem.hasflash").ToString() == "0" ? "不支持" : "支持"%>
 			</ItemTemplate>
 		</asp:TemplateColumn>
-		<asp:BoundColumn DataField="url" HeaderText="页面地址"><ItemStyle HorizontalAlign="left" /></asp:BoundColumn>
-		<asp:TemplateColumn HeaderText="系统菜单">
+		<asp:TemplateColumn HeaderText="是否支持图片">
 			<ItemTemplate>
-				<%# DataBinder.Eval(Container, "DataItem.navstype").ToString() == "0" ? "系统" : "自定义"%>
+				<%# DataBinder.Eval(Container, "DataItem.hasimage").ToString() == "0" ? "不支持" : "支持"%>
 			</ItemTemplate>
 		</asp:TemplateColumn>
-		<asp:TemplateColumn HeaderText="展开目标">
+		<asp:TemplateColumn HeaderText="是否支持js">
 			<ItemTemplate>
-				<%# DataBinder.Eval(Container, "DataItem.target").ToString() == "0" ? "本窗口" : "新窗口"%>
+				<%# DataBinder.Eval(Container, "DataItem.hasjs").ToString() == "0" ? "不支持" : "支持"%>
 			</ItemTemplate>
 		</asp:TemplateColumn>
-		<asp:TemplateColumn HeaderText="是否可用">
+		<asp:TemplateColumn HeaderText="是否支持silverlight">
 			<ItemTemplate>
-				<%# DataBinder.Eval(Container, "DataItem.available").ToString() == "0" ? "不可用" : "可用"%>
+				<%# DataBinder.Eval(Container, "DataItem.hassilverlight").ToString() == "0" ? "不支持" : "支持"%>
 			</ItemTemplate>
 		</asp:TemplateColumn>
-		<asp:TemplateColumn HeaderText="可见度">
-			<ItemTemplate>
-				<%# GetLevel(DataBinder.Eval(Container, "DataItem.level").ToString())%>
-			</ItemTemplate>
-		</asp:TemplateColumn>
+		<asp:BoundColumn DataField="createdate" HeaderText="创建时间" ReadOnly="true"><ItemStyle HorizontalAlign="Center" /></asp:BoundColumn>
+		<asp:BoundColumn DataField="vailddate" HeaderText="有效时间"><ItemStyle HorizontalAlign="Center" /></asp:BoundColumn>
 		<asp:TemplateColumn HeaderText="操作">
 			<ItemTemplate>
+			    <input id="keyid" type="hidden" value="<%# DataBinder.Eval(Container, "DataItem.id").ToString() %>" name="keyid"/>
 				<a href="javascript:;" onclick="editMenu('<%# DataBinder.Eval(Container, "DataItem.id").ToString() %>');">编辑</a>&nbsp;
-				<%# GetSubNavMenuManage(DataBinder.Eval(Container, "DataItem.id").ToString(), DataBinder.Eval(Container, "DataItem.navstype").ToString())%>&nbsp;
-				<%# GetDeleteLink(DataBinder.Eval(Container, "DataItem.id").ToString(), DataBinder.Eval(Container, "DataItem.navstype").ToString())%>
+				<a href="?mode=del&id=<%# DataBinder.Eval(Container, "DataItem.id").ToString() %>" onclick="return confirm('确认要将该菜单项删除吗?');">删除</a>
 			</ItemTemplate>
 		</asp:TemplateColumn>
 	  </Columns>
@@ -136,57 +101,51 @@
 	<div id="neworeditmainmenu" style="display: none; background :#fff; padding:10px; border:1px solid #999; width:400px;">
 		<div class="ManagerForm">
 			<fieldset>
-			<legend id="opt" style="background:url(../images/icons/icon53.jpg) no-repeat 6px 50%;">新建导航菜单</legend>
+			<legend id="opt" style="background:url(../images/icons/icon53.jpg) no-repeat 6px 50%;">新建名片配置</legend>
 			<table cellspacing="0" cellPadding="4" class="tabledatagrid" width="80%">
 				<tr>
 					<td width="30%" height="30px">
-						菜单名称:
-						<input type="hidden" id="menuid" name="menuid" value="0" />
+						配置名称:
+						<input type="hidden" id="id" name="id" value="0" />
 						<input type="hidden" id="mode" name="mode" value="" />
-						<input type="hidden" id="menutype" name="menutype" value="" />
 					</td>
-					<td width="70%"><input id="name"  name="name" type="text" maxlength="50" size="30"class="FormBase" onfocus="this.className='FormFocus';" onblur="this.className='FormBase';" /></td>
+					<td width="70%"><input id="ccname"  name="ccname" type="text" maxlength="50" size="30"class="FormBase" onfocus="this.className='FormFocus';" onblur="this.className='FormBase';" /></td>
 				</tr>
 				<tr>
-					<td height="30px">菜单提示:</td>
-					<td><input id="title"  name="title" type="text" maxlength="255" size="30"class="FormBase" onfocus="this.className='FormFocus';" onblur="this.className='FormBase';" /></td>
-				</tr>
-				<tr>
-					<td height="30px">链接地址:</td>
-					<td><input id="url" name="url" type="text" maxlength="255" size="30" class="FormBase" onfocus="this.className='FormFocus';" onblur="this.className='FormBase';" /></td>
-				</tr>
-				<tr>
-					<td height="30px">展开目标:</td>
+					<td height="30px">模板选择:</td>
 					<td>
-						<select name="target" id="target">
-							<option value="0">本窗口</option>
-							<option value="1">新窗口</option>
+						<select name="tid" id="tid">
+						    <%
+                                foreach (System.Data.DataRow dr in cardtemplist.Rows)
+                                {
+                            %>
+                            <option value="<%=dr["id"]%>"><%=dr["name"]%></option>
+                            <%
+                                }
+                            %>
 						</select>
 					</td>
 				</tr>
 				<tr>
-					<td height="30px">是否可用:</td>
-					<td>
-						<select name="available" id="available">
-							<option value="0">不可用</option>
-							<option value="1" selected="selected">可用</option>
-						</select>
-					</td>
+					<td height="30px">支持模式:</td>
+                    <td>
+                        <input type="checkbox" name="hasflash" id="hasflash" value="1"/>支持flash
+                        <input type="checkbox" name="hasimage" id="hasimage" value="1"/>支持图片<br />
+                        <input type="checkbox" name="hasjs" id="hasjs" value="1"/>支持js
+                        <input type="checkbox" name="hassilverlight" id="hassilverlight" value="1"/>支持silverlight
+                    </td>
 				</tr>
 				<tr>
-					<td height="30px">显示序号:</td>
-					<td><input id="displayorder" name="displayorder" type="text" maxlength="6" size="6"class="FormBase" onfocus="this.className='FormFocus';" onblur="this.className='FormBase';" /></td>
+				    <td height="30px">参数设置:</td>
+				    <td>
+				        <input type="text" name="showparams" id="showparams" />
+				    </td>
 				</tr>
 				<tr>
-					<td height="30px">可见度:</td>
-					<td>
-						<select name="level" id="level">
-							<option value="0" selected="selected">游客</option>
-							<option value="1">会员</option>
-							<option value="2">版主</option>
-							<option value="3">管理员</option>
-						</select>
-					</td>
+				    <td height="30px">有效时间:</td>
+				    <td>
+				        <input type="text" name="vailddate" id="vailddate" value="2010-12-30"/>
+				    </td>
 				</tr>
 				<tr>
 					<td colspan="2" height="30px" align="center">

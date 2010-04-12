@@ -3,6 +3,8 @@ using System.Data;
 using System.Text;
 
 using SAS.Entity;
+using SAS.Common;
+using SAS.Common.Generic;
 
 namespace SAS.Data.DataProvider
 {
@@ -36,6 +38,41 @@ namespace SAS.Data.DataProvider
         public static IDataReader GetCardConfigData()
         {
             return DatabaseProvider.GetInstance().GetCardConfigData();
+        }
+
+        /// <summary>
+        /// 获取名片配置列表
+        /// </summary>
+        /// <returns></returns>
+        public static List<CardConfigInfo> GetCardConfigList()
+        {
+            List<CardConfigInfo> info = new List<CardConfigInfo>();
+            IDataReader reader = GetCardConfigData();
+            while (reader.Read())
+            {
+                CardConfigInfo cci = new CardConfigInfo();
+                cci.id = TypeConverter.ObjectToInt(reader["id"], 0);
+                cci.ccname = reader["ccname"].ToString().Trim();
+                cci.tid = TypeConverter.ObjectToInt(reader["tid"], 1);
+                cci.hasflash = TypeConverter.ObjectToInt(reader["hasflash"], 0);
+                cci.hasimage = TypeConverter.ObjectToInt(reader["hasimage"], 0);
+                cci.hasjs = TypeConverter.ObjectToInt(reader["hasjs"], 0);
+                cci.hassilverlight = TypeConverter.ObjectToInt(reader["hassilverlight"], 0);
+                cci.showparams = reader["showparams"].ToString().Trim();
+                cci.createdate = reader["createdate"].ToString();
+                cci.vailddate = reader["vailddate"].ToString();
+                info.Add(cci);
+            }
+            reader.Close();
+            return info;
+        }
+
+        /// <summary>
+        /// 修改名片配置信息
+        /// </summary>
+        public static void UpdateCardConfig(CardConfigInfo cci)
+        {
+            DatabaseProvider.GetInstance().UpdateCardConfig(cci);
         }
 
         /// <summary>

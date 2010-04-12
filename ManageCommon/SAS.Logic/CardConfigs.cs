@@ -34,6 +34,7 @@ namespace SAS.Logic
         {
             DataTable cardconfiginfo = new DataTable();
             cardconfiginfo.Columns.Add("id", System.Type.GetType("System.Int32"));
+            cardconfiginfo.Columns.Add("ccname", System.Type.GetType("System.String"));
             cardconfiginfo.Columns.Add("tid", System.Type.GetType("System.Int32"));
             cardconfiginfo.Columns.Add("hasflash", System.Type.GetType("System.Int16"));
             cardconfiginfo.Columns.Add("hasimage", System.Type.GetType("System.Int16"));
@@ -50,6 +51,7 @@ namespace SAS.Logic
             {
                 DataRow dr = cardconfiginfo.NewRow();
                 dr["id"] = Utils.StrToInt(reader["id"], 0);
+                dr["ccname"] = reader["ccname"].ToString();
                 dr["tid"] = Utils.StrToInt(reader["tid"], 0);
                 dr["hasflash"] = Utils.StrToInt(reader["hasflash"], 0);
                 dr["hasimage"] = Utils.StrToInt(reader["hasimage"], 0);
@@ -57,7 +59,7 @@ namespace SAS.Logic
                 dr["hassilverlight"] = Utils.StrToInt(reader["hassilverlight"], 0);
                 dr["showparams"] = reader["showparams"].ToString();
                 dr["createdate"] = reader["createdate"].ToString();
-                dr["vailddate"] = reader["vailddate"].ToString();
+                dr["vailddate"] = Utils.GetStandardDate(reader["vailddate"].ToString());
                 dr["directory"] = reader["directory"].ToString();
                 dr["name"] = reader["name"].ToString();
                 dr["currentfile"] = reader["currentfile"].ToString();
@@ -68,12 +70,34 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 获取名片实体
+        /// </summary>
+        /// <returns></returns>
+        public static CardConfigInfo GetCardConfigInfo(int ccid)
+        {
+            foreach (CardConfigInfo cci in SAS.Data.DataProvider.CardConfigs.GetCardConfigList())
+            {
+                if (cci.id == ccid) return cci;
+            }
+            return null;
+        }
+
+        /// <summary>
         /// 删除名片配置信息
         /// </summary>
         /// <param name="cardconfigid"></param>
         public static void DeleteCardConfig(int cardconfigid)
         {
             SAS.Data.DataProvider.CardConfigs.DeleteCardConfig(cardconfigid);
+        }
+
+        /// <summary>
+        /// 修改名片配置信息
+        /// </summary>
+        /// <param name="cci"></param>
+        public static void UpdateCardConfig(CardConfigInfo cci)
+        {
+            SAS.Data.DataProvider.CardConfigs.UpdateCardConfig(cci);
         }
     }
 }
