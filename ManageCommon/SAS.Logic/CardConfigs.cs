@@ -70,12 +70,46 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 获取缓存名片配置信息
+        /// </summary>
+        /// <returns></returns>
+        public static List<CardConfigInfo> GetCardConfigCacheList()
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            List<CardConfigInfo> cardconfiglist = cache.RetrieveObject("/SAS/CardConfigList") as List<CardConfigInfo>;
+
+            if (cardconfiglist == null)
+            {
+                cardconfiglist = SAS.Data.DataProvider.CardConfigs.GetCardConfigList();
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 300;
+                cache.LoadCacheStrategy(ica);
+                cache.AddObject("/SAS/CardConfigList", cardconfiglist);
+                cache.LoadDefaultCacheStrategy();
+            }
+            return cardconfiglist;
+        }
+
+        /// <summary>
         /// 获取名片实体
         /// </summary>
         /// <returns></returns>
         public static CardConfigInfo GetCardConfigInfo(int ccid)
         {
             foreach (CardConfigInfo cci in SAS.Data.DataProvider.CardConfigs.GetCardConfigList())
+            {
+                if (cci.id == ccid) return cci;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 获取名片实体
+        /// </summary>
+        /// <returns></returns>
+        public static CardConfigInfo GetCardConfigCacheInfo(int ccid)
+        {
+            foreach (CardConfigInfo cci in GetCardConfigCacheList())
             {
                 if (cci.id == ccid) return cci;
             }

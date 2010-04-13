@@ -29,6 +29,10 @@ namespace SAS.ManageWeb
         /// 名片模板ID
         /// </summary>
         protected int cardtempid = 0;
+        /// <summary>
+        /// 配置文件id
+        /// </summary>
+        protected int cardconfigid = 0;
         #endregion
 
         protected override void ShowPage()
@@ -40,14 +44,19 @@ namespace SAS.ManageWeb
                 return;
             }
 
-            companyinfo = Companies.GetCompanyInfo(qycardid);
+            companyinfo = Companies.GetCompanyCacheInfo(qycardid);
             if (companyinfo == null)
             {
                 AddErrLine("不存在的企业名片");
                 return;
             }
 
-            if (companyinfo.configid == 0) cardtempid = 1;
+            if (companyinfo.configid == 0) cardconfigid = 1;
+
+            CardConfigInfo cci = CardConfigs.GetCardConfigCacheInfo(cardconfigid);
+            if (cci == null) cci = CardConfigs.GetCardConfigCacheInfo(1);
+
+            cardtempid = cci.tid;
 
             CardTemplateInfo cti = Templates.GetCardTemplateItem(cardtempid);
             if (cti == null)
@@ -91,6 +100,7 @@ namespace SAS.ManageWeb
                 catch (Exception ex)
                 {
                     AddErrLine("名片生成出问题");
+                    return;
                 }
                 finally
                 {
