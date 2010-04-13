@@ -71,24 +71,24 @@ namespace SAS.ManageWeb
                 string desc = Utils.HtmlEncode(SASRequest.GetString("desc"));   //企业描述
 
                 Companys companyinfo = new Companys();
-                companyinfo.en_name = qyname;
-                companyinfo.en_builddate = builddate;
-                companyinfo.en_cataloglist = hycata;
-                companyinfo.en_corp = corper;
-                companyinfo.en_contact = contor;
-                companyinfo.en_phone = phone;
-                companyinfo.en_mobile = mobile;
-                companyinfo.en_fax = fax;
-                companyinfo.en_mail = email;
-                companyinfo.en_web = enweb;
-                companyinfo.en_areas = district;
-                companyinfo.en_address = address;
-                companyinfo.en_post = zipcode;
-                companyinfo.en_desc = desc;
-                companyinfo.en_visble = 0;
-                companyinfo.en_status = 0;
+                companyinfo.En_name = qyname;
+                companyinfo.En_builddate = builddate;
+                companyinfo.En_cataloglist = hycata;
+                companyinfo.En_corp = corper;
+                companyinfo.En_contact = contor;
+                companyinfo.En_phone = phone;
+                companyinfo.En_mobile = mobile;
+                companyinfo.En_fax = fax;
+                companyinfo.En_mail = email;
+                companyinfo.En_web = enweb;
+                companyinfo.En_areas = district;
+                companyinfo.En_address = address;
+                companyinfo.En_post = zipcode;
+                companyinfo.En_desc = desc;
+                companyinfo.En_visble = 0;
+                companyinfo.En_status = 0;
 
-                companyinfo.en_reason = "信息尚未完成，请完成企业注册信息后才能进入申请状态！";
+                companyinfo.En_reason = "信息尚未完成，请完成企业注册信息后才能进入申请状态！";
 
                 int companyid = Companies.CreateCompanyInfo(companyinfo);
 

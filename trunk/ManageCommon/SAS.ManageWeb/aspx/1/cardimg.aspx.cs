@@ -51,7 +51,7 @@ namespace SAS.ManageWeb
                 return;
             }
 
-            if (companyinfo.configid == 0) cardconfigid = 1;
+            if (companyinfo.Configid == 0) cardconfigid = 1;
 
             CardConfigInfo cci = CardConfigs.GetCardConfigCacheInfo(cardconfigid);
             if (cci == null) cci = CardConfigs.GetCardConfigCacheInfo(1);

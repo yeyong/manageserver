@@ -22,6 +22,14 @@ namespace SAS.ManageWeb
         /// 友情链接列表
         /// </summary>
         protected DataTable friendlinklist = Caches.GetSASLinkList();
+        /// <summary>
+        /// 公告列表
+        /// </summary>
+        public DataTable announcementlist = new DataTable();
+        /// <summary>
+        /// 新加入企业集合
+        /// </summary>
+        protected SAS.Common.Generic.List<Companys> newcompanylist = Companies.GetNewCompanyList();
 
         protected override void ShowPage()
         {
@@ -49,9 +57,20 @@ namespace SAS.ManageWeb
                     + "\r\n " + "scrollup.Start();"
                     + "\r\n " + "});";
             AddfootScript(loadscript);
+
             cataloglist1 = cataloglist.Select("[sort] = 0");
             cataloglist2 = cataloglist.Select("[sort] = 1");
             cataloglist3 = cataloglist.Select("[sort] = 2");
+
+            DataTable dt = Announcements.GetAnnouncementList(Utils.GetDateTime(), "2099-12-31 23:59:59");
+            announcementlist = dt.Clone();
+            int row = 0;
+            foreach (DataRow dr in dt.Rows)
+            {
+                if (row > 4) break;
+                announcementlist.ImportRow(dr);
+                row++;
+            }
         }
     }
 }

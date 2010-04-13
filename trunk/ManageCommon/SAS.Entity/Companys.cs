@@ -48,7 +48,7 @@ namespace SAS.Entity
         /// <summary>
         /// 企业ID
         /// </summary>
-        public int en_id
+        public int En_id
         {
             set { _en_id = value; }
             get { return _en_id; }
@@ -56,7 +56,7 @@ namespace SAS.Entity
         /// <summary>
         /// 企业名称
         /// </summary>
-        public string en_name
+        public string En_name
         {
             set { _en_name = value; }
             get { return _en_name; }
@@ -64,7 +64,7 @@ namespace SAS.Entity
         /// <summary>
         /// 主营商品(选择产品类别,可作多选)
         /// </summary>
-        public string en_main
+        public string En_main
         {
             set { _en_main = value; }
             get { return _en_main; }
@@ -72,7 +72,7 @@ namespace SAS.Entity
         /// <summary>
         /// 企业类别(0(默认),生产商;1,代理经销商;2,个人经销商;3,门店;4,原料商;5,分销商;6,服务站;7,其他)
         /// </summary>
-        public int en_type
+        public int En_type
         {
             set { _en_type = value; }
             get { return _en_type; }
@@ -80,7 +80,7 @@ namespace SAS.Entity
         /// <summary>
         /// 企业经济类型(0(默认),有限责任公司;1,股份有限公司;2,国营;3,集团公司)
         /// </summary>
-        public int en_enco
+        public int En_enco
         {
             set { _en_enco = value; }
             get { return _en_enco; }
@@ -88,7 +88,7 @@ namespace SAS.Entity
         /// <summary>
         /// 产销数量(吨)
         /// </summary>
-        public int en_sell
+        public int En_sell
         {
             set { _en_sell = value; }
             get { return _en_sell; }
@@ -96,7 +96,7 @@ namespace SAS.Entity
         /// <summary>
         /// 公司详细地址
         /// </summary>
-        public string en_address
+        public string En_address
         {
             set { _en_address = value; }
             get { return _en_address; }
@@ -104,7 +104,7 @@ namespace SAS.Entity
         /// <summary>
         /// 所在区域（省市等）
         /// </summary>
-        public int en_areas
+        public int En_areas
         {
             set { _en_areas = value; }
             get { return _en_areas; }
@@ -112,7 +112,7 @@ namespace SAS.Entity
         /// <summary>
         /// 企业概述
         /// </summary>
-        public string en_desc
+        public string En_desc
         {
             set { _en_desc = value; }
             get { return _en_desc; }
@@ -120,7 +120,7 @@ namespace SAS.Entity
         /// <summary>
         /// 邮编
         /// </summary>
-        public string en_post
+        public string En_post
         {
             set { _en_post = value; }
             get { return _en_post; }
@@ -128,7 +128,7 @@ namespace SAS.Entity
         /// <summary>
         /// 移动电话
         /// </summary>
-        public string en_mobile
+        public string En_mobile
         {
             set { _en_mobile = value; }
             get { return _en_mobile; }
@@ -136,7 +136,7 @@ namespace SAS.Entity
         /// <summary>
         /// 公司联系电话（固话）
         /// </summary>
-        public string en_phone
+        public string En_phone
         {
             set { _en_phone = value; }
             get { return _en_phone; }
@@ -144,7 +144,7 @@ namespace SAS.Entity
         /// <summary>
         /// 公司传真
         /// </summary>
-        public string en_fax
+        public string En_fax
         {
             set { _en_fax = value; }
             get { return _en_fax; }
@@ -152,7 +152,7 @@ namespace SAS.Entity
         /// <summary>
         /// 企业邮箱
         /// </summary>
-        public string en_mail
+        public string En_mail
         {
             set { _en_mail = value; }
             get { return _en_mail; }
@@ -160,7 +160,7 @@ namespace SAS.Entity
         /// <summary>
         /// 企业网址
         /// </summary>
-        public string en_web
+        public string En_web
         {
             set { _en_web = value; }
             get { return _en_web; }
@@ -168,7 +168,7 @@ namespace SAS.Entity
         /// <summary>
         /// 企业法人
         /// </summary>
-        public string en_corp
+        public string En_corp
         {
             set { _en_corp = value; }
             get { return _en_corp; }
@@ -176,7 +176,7 @@ namespace SAS.Entity
         /// <summary>
         /// 主要联系人
         /// </summary>
-        public string en_contact
+        public string En_contact
         {
             set { _en_contact = value; }
             get { return _en_contact; }
@@ -184,7 +184,7 @@ namespace SAS.Entity
         /// <summary>
         /// 最近信息更新时间
         /// </summary>
-        public string en_update
+        public string En_update
         {
             set { _en_update = value; }
             get { return _en_update; }
@@ -192,7 +192,7 @@ namespace SAS.Entity
         /// <summary>
         /// 企业状态((默认1),服务审批中;0,审批未通过;2,审批通过)
         /// </summary>
-        public int en_status
+        public int En_status
         {
             set { _en_status = value; }
             get { return _en_status; }
@@ -200,7 +200,7 @@ namespace SAS.Entity
         /// <summary>
         /// 审批未通过原因
         /// </summary>
-        public string en_reason
+        public string En_reason
         {
             set { _en_reason = value; }
             get { return _en_reason; }
@@ -208,7 +208,7 @@ namespace SAS.Entity
         /// <summary>
         /// 企业级别认定(0(默认),普通级别;1,会员级;2,高级会员级;3,贵宾会员级);权限设定时使用
         /// </summary>
-        public int en_level
+        public int En_level
         {
             set { _en_level = value; }
             get { return _en_level; }
@@ -216,7 +216,7 @@ namespace SAS.Entity
         /// <summary>
         /// 企业信息浏览量(站内统计备用)
         /// </summary>
-        public int en_accesses
+        public int En_accesses
         {
             set { _en_accesses = value; }
             get { return _en_accesses; }
@@ -224,7 +224,7 @@ namespace SAS.Entity
         /// <summary>
         /// 企业信誉度
         /// </summary>
-        public int en_credits
+        public int En_credits
         {
             set { _en_credits = value; }
             get { return _en_credits; }
@@ -232,7 +232,7 @@ namespace SAS.Entity
         /// <summary>
         /// 企业logo
         /// </summary>
-        public string en_logo
+        public string En_logo
         {
             set { _en_logo = value; }
             get { return _en_logo; }
@@ -240,7 +240,7 @@ namespace SAS.Entity
         /// <summary>
         /// 企业背景音乐
         /// </summary>
-        public string en_music
+        public string En_music
         {
             set { _en_music = value; }
             get { return _en_music; }
@@ -248,7 +248,7 @@ namespace SAS.Entity
         /// <summary>
         /// 注册资本
         /// </summary>
-        public string reg_capital
+        public string Reg_capital
         {
             set { _reg_capital = value; }
             get { return _reg_capital; }
@@ -256,7 +256,7 @@ namespace SAS.Entity
         /// <summary>
         /// 注册地址
         /// </summary>
-        public string reg_address
+        public string Reg_address
         {
             set { _reg_address = value; }
             get { return _reg_address; }
@@ -264,7 +264,7 @@ namespace SAS.Entity
         /// <summary>
         /// 注册号
         /// </summary>
-        public string reg_code
+        public string Reg_code
         {
             set { _reg_code = value; }
             get { return _reg_code; }
@@ -272,7 +272,7 @@ namespace SAS.Entity
         /// <summary>
         /// 注册机关
         /// </summary>
-        public string reg_organ
+        public string Reg_organ
         {
             set { _reg_organ = value; }
             get { return _reg_organ; }
@@ -280,7 +280,7 @@ namespace SAS.Entity
         /// <summary>
         /// 最近年检时间
         /// </summary>
-        public string reg_year
+        public string Reg_year
         {
             set { _reg_year = value; }
             get { return _reg_year; }
@@ -288,7 +288,7 @@ namespace SAS.Entity
         /// <summary>
         /// 营业期限
         /// </summary>
-        public string reg_date
+        public string Reg_date
         {
             set { _reg_date = value; }
             get { return _reg_date; }
@@ -296,7 +296,7 @@ namespace SAS.Entity
         /// <summary>
         /// 公司成立时间
         /// </summary>
-        public string en_builddate
+        public string En_builddate
         {
             set { _en_builddate = value; }
             get { return _en_builddate; }
@@ -304,7 +304,7 @@ namespace SAS.Entity
         /// <summary>
         /// 企业开启状态（默认0，关闭；1，开启）
         /// </summary>
-        public int en_visble
+        public int En_visble
         {
             set { _en_visble = value; }
             get { return _en_visble; }
@@ -312,7 +312,7 @@ namespace SAS.Entity
         /// <summary>
         /// 信息创建时间
         /// </summary>
-        public string en_createdate
+        public string En_createdate
         {
             set { _en_createdate = value; }
             get { return _en_createdate; }
@@ -320,7 +320,7 @@ namespace SAS.Entity
         /// <summary>
         /// 行业类别列表
         /// </summary>
-        public string en_cataloglist
+        public string En_cataloglist
         {
             set { _en_cataloglist = value; }
             get { return _en_cataloglist; }
@@ -328,7 +328,7 @@ namespace SAS.Entity
         /// <summary>
         /// 企业名片配置ID
         /// </summary>
-        public int configid
+        public int Configid
         {
             set { _configid = value; }
             get { return _configid; }

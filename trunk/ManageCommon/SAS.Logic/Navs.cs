@@ -58,14 +58,16 @@ namespace SAS.Logic
                 mainNavigation.Columns.Add("nav", System.Type.GetType("System.String"));
                 mainNavigation.Columns.Add("level", System.Type.GetType("System.Int32"));
                 mainNavigation.Columns.Add("url", System.Type.GetType("System.String"));
-
+                mainNavigation.Columns.Add("name", System.Type.GetType("System.String"));
+                int row = 0;
                 foreach (NavInfo m in SAS.Data.DataProvider.Navs.GetNavigation().FindAll(matchParent))
                 {
                     if (m.Parentid == 0)
                     {
                         DataRow navmaindr = mainNavigation.NewRow();
                         StringBuilder str = new StringBuilder();
-                        str.AppendFormat("<li id=\"menu_{0}\" onMouseOver=\"showMenu(this.id);\"><a href=\"", m.Id);
+                        if (row > 0) str.Append("<li class=\"navline\"></li>");
+                        str.AppendFormat("<li id=\"menu_{0}\" class=\"navce1\"><a href=\"", m.Id);
 
                         if (!m.Url.StartsWith("http://") && !m.Url.StartsWith("/"))
                             str.Append(BaseConfigs.GetSitePath);
@@ -74,7 +76,7 @@ namespace SAS.Logic
                         if (m.Target != 0)
                             str.Append(" target=\"_blank\"");
 
-                        str.Append(">");
+                        str.AppendFormat(" class=\"l_fff\" title=\"{0}\">", m.Title.Trim());
 
                         if (Utils.InArray(m.Id.ToString(), GetMainNavigationHasSub()))
                             navmaindr["nav"] = str.Append("<span class=\"dropmenu\">" + m.Name.Trim() + "</span></a></li>").ToString();
@@ -84,7 +86,9 @@ namespace SAS.Logic
                         navmaindr["id"] = m.Id;
                         navmaindr["url"] = m.Url.Trim();
                         navmaindr["level"] = m.Level;
+                        navmaindr["name"] = m.Name;
                         mainNavigation.Rows.Add(navmaindr);
+                        row++;
                     }
                 }
             }
@@ -234,9 +238,8 @@ namespace SAS.Logic
             //showtopic和showforum需要特别处理
             if (!Utils.StrIsNullOrEmpty(url) && System.Web.HttpContext.Current.Request.RawUrl.ToString().Contains(url))
             {
-                nav = nav.Replace("class=\"drop", "class=\"current drop");
-                if (nav.Length == nav.Length)
-                    nav = nav.Replace("<li id", "<li class=\"current\" id");
+                nav = nav.Replace("class=\"navce1\"><a", "class=\"navce2\"><p class=\"navce2rt\"><a");
+                nav = nav.Replace("</a></p></li>", "");
             }
             return nav;
         }
