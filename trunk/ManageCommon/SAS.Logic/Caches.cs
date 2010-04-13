@@ -291,6 +291,14 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 重置名片配置文件信息
+        /// </summary>
+        public static void ReSetCardConfig()
+        {
+            RemoveObject(CacheKeys.SAS_CARDCONFIG);
+        }
+
+        /// <summary>
         /// 重新设置管理组信息
         ///</summary>
         public static void ReSetAdminGroupList()
@@ -321,6 +329,7 @@ namespace SAS.Logic
         {
             ReSetStatistics();
             ReSetConfig();
+            ReSetCardConfig();
             ReSetAdminGroupList();
             ReSetUserGroupList();
             ReSetCompanyList();

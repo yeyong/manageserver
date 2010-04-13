@@ -51,6 +51,20 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 获取企业信息缓存实体
+        /// </summary>
+        /// <param name="enid"></param>
+        /// <returns></returns>
+        public static Companys GetCompanyCacheInfo(int enid)
+        {
+            foreach (Companys cps in GetCompanyList())
+            {
+                if (cps.en_id == enid) return cps;
+            }
+            return null;
+        }
+
+        /// <summary>
         /// 获取全部企业信息（带缓存）
         /// </summary>
         /// <returns></returns>
