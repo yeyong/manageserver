@@ -65,7 +65,7 @@ namespace SAS.ManageWeb.ManagePage
 
                 Companys _companyInfo = CreateCompanyInfo();
 
-                if (AdminCompanies.ExistCompanyName(_companyInfo.en_name) != 0)
+                if (AdminCompanies.ExistCompanyName(_companyInfo.En_name) != 0)
                 {
                     base.RegisterStartupScript("", "<script>alert('您填写的公司名称重复，请重新填写!');window.location.href='global_addcompany.aspx';</script>");
                     return;
@@ -78,7 +78,7 @@ namespace SAS.ManageWeb.ManagePage
                     base.RegisterStartupScript("", "<script>alert('添加操作失败，请与管理员联系!');window.location.href='global_addcompany.aspx';</script>");
                     return;
                 }
-
+                Caches.ReSetCompanyList();
                 AdminVistLogs.InsertLog(this.userid, this.username, this.usergroupid, this.grouptitle, this.ip, "后台添加企业信息", "企业名:" + qyname.Text.Trim());
 
                 base.RegisterStartupScript("PAGE", "window.location.href='company_companygrid.aspx';");
@@ -93,38 +93,38 @@ namespace SAS.ManageWeb.ManagePage
         private Companys CreateCompanyInfo()
         {
             Companys comps = new Companys();
-            comps.en_name = qyname.Text.Trim();
-            comps.en_visble = Convert.ToInt32(status.SelectedValue);
-            comps.en_corp = encorp.Text.Trim();
-            comps.en_contact = encontact.Text.Trim();
-            comps.en_phone = enphone.Text;
-            comps.en_mobile = enmobile.Text;
-            comps.en_fax = enfax.Text;
-            comps.en_mail = enemail.Text;
-            comps.en_web = enweb.Text;
-            comps.en_areas = SASRequest.GetInt("district", 0);
-            comps.en_post = enpost.Text;
-            comps.en_address = enaddress.Text.Trim();
-            comps.en_desc = endesc.Text;
-            comps.en_builddate = enbuilddate.Text;
-            comps.en_type = Convert.ToInt32(enType.SelectedValue);
-            comps.en_enco = Convert.ToInt32(enco.SelectedValue);
-            comps.reg_capital = regcapital.Text;
-            comps.reg_code = regcode.Text.Trim();
-            comps.reg_organ = regorgan.Text.Trim();
-            comps.reg_year = regyear.Text;
-            comps.reg_date = regdate.Text.Trim();
-            comps.reg_address = regaddress.Text.Trim();
-            comps.en_main = enmain.Text.Trim();
-            comps.en_status = Convert.ToInt32(enstatus.SelectedValue);
-            comps.en_reason = enreason.Text.Trim();
-            comps.en_level = Convert.ToInt32(enlevels.SelectedValue);
-            comps.en_credits = TypeConverter.StrToInt(encredit.Text, 0);
-            comps.en_cataloglist = Utils.ChkSQL(SASRequest.GetString("hyidlist"));
+            comps.En_name = qyname.Text.Trim();
+            comps.En_visble = Convert.ToInt32(status.SelectedValue);
+            comps.En_corp = encorp.Text.Trim();
+            comps.En_contact = encontact.Text.Trim();
+            comps.En_phone = enphone.Text;
+            comps.En_mobile = enmobile.Text;
+            comps.En_fax = enfax.Text;
+            comps.En_mail = enemail.Text;
+            comps.En_web = enweb.Text;
+            comps.En_areas = SASRequest.GetInt("district", 0);
+            comps.En_post = enpost.Text;
+            comps.En_address = enaddress.Text.Trim();
+            comps.En_desc = endesc.Text;
+            comps.En_builddate = enbuilddate.Text;
+            comps.En_type = Convert.ToInt32(enType.SelectedValue);
+            comps.En_enco = Convert.ToInt32(enco.SelectedValue);
+            comps.Reg_capital = regcapital.Text;
+            comps.Reg_code = regcode.Text.Trim();
+            comps.Reg_organ = regorgan.Text.Trim();
+            comps.Reg_year = regyear.Text;
+            comps.Reg_date = regdate.Text.Trim();
+            comps.Reg_address = regaddress.Text.Trim();
+            comps.En_main = enmain.Text.Trim();
+            comps.En_status = Convert.ToInt32(enstatus.SelectedValue);
+            comps.En_reason = enreason.Text.Trim();
+            comps.En_level = Convert.ToInt32(enlevels.SelectedValue);
+            comps.En_credits = TypeConverter.StrToInt(encredit.Text, 0);
+            comps.En_cataloglist = Utils.ChkSQL(SASRequest.GetString("hyidlist"));
 
-            comps.en_sell = 0;
-            comps.en_logo = "";
-            comps.en_music = "";
+            comps.En_sell = 0;
+            comps.En_logo = "";
+            comps.En_music = "";
             return comps;
         }
 

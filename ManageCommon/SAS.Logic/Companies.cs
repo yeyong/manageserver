@@ -17,6 +17,7 @@ namespace SAS.Logic
     /// </summary>
     public class Companies
     {
+        private static Predicate<Companys> marchPass = new Predicate<Companys>(delegate(Companys companyinfo) { return companyinfo.En_status == 2; });
         /// <summary>
         /// 创建企业信息
         /// </summary>
@@ -24,7 +25,7 @@ namespace SAS.Logic
         /// <returns></returns>
         public static int CreateCompanyInfo(Companys _companyInfo)
         {
-            if (ExistCompanyName(_companyInfo.en_name) > 0) return 0;
+            if (ExistCompanyName(_companyInfo.En_name) > 0) return 0;
             //缓存清理操作暂无
             return SAS.Data.DataProvider.Companies.CreateCompany(_companyInfo);
         }
@@ -37,7 +38,7 @@ namespace SAS.Logic
         public static int ExistCompanyName(string enname)
         {
             Companys _companyInfo = SAS.Data.DataProvider.Companies.GetCompanyInfoByName(enname);
-            return (_companyInfo != null) ? _companyInfo.en_id : 0;
+            return (_companyInfo != null) ? _companyInfo.En_id : 0;
         }
 
         /// <summary>
@@ -59,7 +60,7 @@ namespace SAS.Logic
         {
             foreach (Companys cps in GetCompanyList())
             {
-                if (cps.en_id == enid) return cps;
+                if (cps.En_id == enid) return cps;
             }
             return null;
         }
@@ -81,6 +82,23 @@ namespace SAS.Logic
                 cache.LoadCacheStrategy(ica);
                 cache.AddObject("/SAS/CompanyList", companylist);
                 cache.LoadDefaultCacheStrategy();
+            }
+            return companylist;
+        }
+
+        /// <summary>
+        /// 获取最新加入企业
+        /// </summary>
+        /// <returns></returns>
+        public static List<Companys> GetNewCompanyList()
+        {
+            List<Companys> companylist = new List<Companys>();
+            int row = 0;
+            foreach (Companys _compinfo in GetCompanyList().FindAll(marchPass))
+            {
+                if (row > 4) break;
+                companylist.Add(_compinfo);
+                row++;
             }
             return companylist;
         }
