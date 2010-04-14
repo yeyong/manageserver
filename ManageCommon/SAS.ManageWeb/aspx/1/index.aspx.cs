@@ -33,6 +33,8 @@ namespace SAS.ManageWeb
 
         protected override void ShowPage()
         {
+            pagetitle = "浙商黄页-商之源-首页";
+
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/main.css");
             script += "\r\n<script src=\"" + forumpath + "javascript/jquery-exchange.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/ScrollText.js\" type=\"text/javascript\"></script>";
@@ -46,7 +48,7 @@ namespace SAS.ManageWeb
                     + "\r\n " + "jQuery(\"#bulletin\").find(\"p:last\").mouseover(function() {"
                     + "\r\n " + "	jQuery(\"#bulletin\").find(\"ul:last\").show();"
                     + "\r\n " + "	jQuery(\"#bulletin\").find(\"ul:first\").hide();"
-                    + "\r\n " + "});		"
+                    + "\r\n " + "});"
                     + "\r\n " + "jQuery(\"#tao\").Exchange({ MIDS: \"onelt2tit\", CIDS: \"onelt2con\", count: 5, mousetype: 1 });"
                     + "\r\n " + "jQuery(\"#bill\").Exchange({ MIDS: \"onece1t\", CIDS: \"onece1con\", timer: 5000, count: 5, mousetype: 1 });"
                     + "\r\n " + "jQuery(\"#prod\").Exchange({ MIDS: \"onert3t\", CIDS: \"onert3con\", count: 5, mousetype: 1 });"

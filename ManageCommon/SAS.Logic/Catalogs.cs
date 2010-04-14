@@ -87,6 +87,36 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 根据级别获取行业类别集合（带缓存）
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetAllCatalogBySort(int sortnum)
+        {
+            DataTable dt = GetAllCatalog();
+            DataTable sortcatalist = dt.Clone();
+            foreach (DataRow dr in dt.Select("[sort] = " + sortnum))
+            {
+                sortcatalist.ImportRow(dr);
+            }
+            return sortcatalist;
+        }
+
+        /// <summary>
+        /// 根据父ID获取行业类别集合（带缓存）
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetAllCatalogByPid(int pid)
+        {
+            DataTable dt = GetAllCatalog();
+            DataTable sortcatalist = dt.Clone();
+            foreach (DataRow dr in dt.Select("[parentid] = " + pid))
+            {
+                sortcatalist.ImportRow(dr);
+            }
+            return sortcatalist;
+        }
+
+        /// <summary>
         /// 获取非缓存行业信息
         /// </summary>
         /// <returns></returns>

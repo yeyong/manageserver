@@ -76,3 +76,20 @@ jQuery.fn.setValidValue = function(theprifix) {
         }
     }
 };
+jQuery.fn.ExtendClick = function(fromobj, toobj, tagname) {
+    var thefromobj = jQuery("#" + fromobj);
+    var thetoobj = jQuery("#" + toobj);
+    thefromobj.hide();
+    jQuery(this).mouseover(function() {
+        thefromobj.show();
+    });
+    jQuery(this).mouseout(function() {
+        thefromobj.hide();
+    });
+    thefromobj.find(tagname).each(function() {
+        jQuery(this).click(function() {
+            thetoobj.html(jQuery(this).html());
+            thefromobj.hide();
+        });
+    });
+};
