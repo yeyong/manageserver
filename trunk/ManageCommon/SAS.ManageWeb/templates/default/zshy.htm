@@ -4,58 +4,29 @@
 	<div class="zshylt mar_top_8">
 		<p class="zshysite">
 			<i class="zslt"></i><i class="zsrt"></i>
-			<span class="zshysnr">您当前的位置：<a href="#" class="l_666">首页</a> &gt; 浙商黄页</span>
+			<span class="zshysnr">您当前的位置：<a href="/" class="l_666">首页</a>{pagenav}</span>
 		</p>
 		<dl class="zshy1 mar_top_8">
 			<dt><b>按主营范围选择：</b></dt>
 			<dd>
-				<span class="zshy1zt"><a href="#" class="l_666">休闲装</a></span>
-				<span class="zshy1zt"><a href="#" class="l_666">淑女装</a></span>
-				<span class="zshy1zt"><a href="#" class="l_666">日韩风格</a></span>
-				<span class="zshy1zt"><a href="#" class="l_666">欧美风格</a></span>
-				<span class="zshy1zt"><a href="#" class="l_666">瑞丽风格</a></span>
-				<span class="zshy1zt"><a href="#" class="l_666">牛仔服</a></span>
-				<span class="zshy1zt"><a href="#" class="l_666">针织服装</a></span>
-				<span class="zshy1zt"><a href="#" class="l_666">套装</a></span>
-				<span class="zshy1zt"><a href="#" class="l_666">内衣/睡衣</a></span>
-				<span class="zshy1zt"><a href="#" class="l_666">皮草服装</a></span>
-				<span class="zshy1zt"><a href="#" class="l_666">丝绸服装</a></span>
-				<span class="zshy1zt"><a href="#" class="l_666">羽绒服/棉服</a></span>
-				<span class="zshy1zt"><a href="#" class="l_666">旗袍/婚纱</a></span>
-				<span class="zshy1zt"><a href="#" class="l_666">泳装</a></span>
-				<span class="zshy1zt"><a href="#" class="l_666">孕妇装</a></span>
-				<span class="zshy1zt"><a href="#" class="l_666">外贸/库存</a></span>
-				<span class="zshy1zt"><a href="#" class="l_666">鞋子</a></span>
-				<span class="zshy1zt"><a href="#" class="l_666">包具</a></span>
-				<span class="zshy1zt"><a href="#" class="l_666">祙子</a></span>
-				<span class="zshy1zt"><a href="#" class="l_666">配饰</a></span>
-				<span class="zshy1zt"><a href="#" class="l_666">面料</a></span>
-				<span class="zshy1zt"><a href="#" class="l_666">辅料</a></span>
-				<span class="zshy1zt"><a href="#" class="l_666">服装设备</a></span>
-				<span class="zshy1zt"><a href="#" class="l_666">服装道具</a></span>
-				<span class="zshy1zt"><a href="#" class="l_666">相关行业</a></span>
+			    <%loop catainfo cataloglist%>
+				<span class="zshy1zt"><a href="?cid={catainfo[id]}" class="l_666" title="{catainfo[name]}"><%getsubstring({catainfo[name]},14,"")%>({catainfo[companycount]})</a></span>
+				<%/loop%>
 			</dd>
 		</dl>
 		<dl class="zshynr mar_top_5" id="put">
 			<dt class="zshynrtit">
-				<p class="zshynrt1">
+				<p class="zshynrt1" id="thelocation">
 					<em>
-					<select name="">
-						<option>所有省</option>
-						<option>浙江省</option>
+					<select name="province" style="width:88px">
 					</select>
 					</em>
 					<em>
-					<select name="">
-						<option>所有城市</option>
-						<option>杭州</option>
+					<select name="city" style="width:88px">
 					</select>
 					</em>
 					<em>
-					<select name="">
-						<option>县/市/区</option>
-						<option>拱墅区</option>
-						<option>西湖区</option>
+					<select name="areas" style="width:88px">
 					</select>
 					</em>
 					<em class="zshyline"></em>
