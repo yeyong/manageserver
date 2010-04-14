@@ -78,6 +78,9 @@
     <Compile Include="aspx\1\usercpprofile.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="aspx\1\zshy.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ManagePage\company\company_cardconfiggrid.aspx.cs">
       <DependentUpon>company_cardconfiggrid.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -461,6 +464,7 @@
     <Content Include="images\common\none.gif" />
     <Content Include="images\common\resize.gif" />
     <Content Include="images\invalid.gif" />
+    <Content Include="images\jquery.cluetip.css" />
     <Content Include="images\lock.gif" />
     <Content Include="images\posticons\0.gif" />
     <Content Include="images\posticons\1.gif" />
@@ -497,6 +501,7 @@
     <Content Include="javascript\jquer.easing.1.3.js" />
     <Content Include="javascript\jquery-exchange.js" />
     <Content Include="javascript\jquery.capSlide.js" />
+    <Content Include="javascript\jquery.cluetip-min.js" />
     <Content Include="javascript\jquery.js" />
     <Content Include="javascript\jquery.scrollTo-min.js" />
     <Content Include="javascript\jqueryFunc.js" />
@@ -547,7 +552,6 @@
     <Content Include="templates\default\css\comm.css" />
     <Content Include="templates\default\css\head-foot.css" />
     <Content Include="templates\default\css\interaction.css" />
-    <Content Include="templates\default\css\jquery.cluetip.css" />
     <Content Include="templates\default\css\main.css" />
     <Content Include="templates\default\float.css" />
     <Content Include="templates\default\images\aa\aa1.jpg" />
@@ -577,7 +581,7 @@
     <Content Include="templates\default\images\bigbtn.gif" />
     <Content Include="templates\default\images\btn_block.gif" />
     <Content Include="templates\default\images\btn_post.gif" />
-    <Content Include="templates\default\images\cross.png" />
+    <Content Include="images\cross.png" />
     <Content Include="templates\default\images\del.gif" />
     <Content Include="templates\default\images\del_hover.gif" />
     <Content Include="templates\default\images\diaocha.gif" />
@@ -690,6 +694,7 @@
     <Content Include="templates\default\studio\studioindex.htm" />
     <Content Include="templates\default\templatevariable.xml" />
     <Content Include="templates\default\usercpprofile.htm" />
+    <Content Include="templates\default\zshy.htm" />
     <Content Include="templates\default\_ajaxquickreply.htm" />
     <Content Include="templates\default\_attachmentinfo.htm" />
     <Content Include="templates\default\_comcopyright.htm" />
