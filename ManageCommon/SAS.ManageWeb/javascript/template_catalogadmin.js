@@ -112,6 +112,7 @@ jQuery.fn.InitLocation = function() {
     if (typeof _select1[0] == 'undefined' || _select1 == "") return;
 
     _select1[0].options.length = 0;
+    _select1[0].options.add(new Option("请选择省份", ""));
     for (var i in provinces) {
         var newopt = new Option(provinces[i].provincename, provinces[i].provinceid);
         _select1[0].options.add(newopt);
@@ -122,6 +123,7 @@ jQuery.fn.InitLocation = function() {
         _select3[0].options.length = 0;
         var svalue = _select1.val();
         _select2[0].options.add(new Option("请选择城市", ""));
+        _select3[0].options.add(new Option("请选择地区", ""));
         for (var i2 in citys) {
             if (citys[i2].provinceid == svalue) {
                 var cityopt = new Option(citys[i2].cityname, citys[i2].cityid);
@@ -140,5 +142,55 @@ jQuery.fn.InitLocation = function() {
             }
         }
     });
+    return _this;
+};
+
+//地区级联
+function LoadLocation(controlObj) {
+    var setting = {
+        objid: "thelocation",
+        provinceid: 0,
+        cityid: 0,
+        areaid: 0,
+        urlparms: ""
+    };
+    controlObj = controlObj || {};
+    jQuery.extend(setting, controlObj);
+    
+    var _this = jQuery("#" + setting.objid);
+    var _select1 = _this.find("select").eq(0);
+    var _select2 = _this.find("select").eq(1);
+    var _select3 = _this.find("select").eq(2);
+
+    _select1[0].options.length = 0;
+    _select2[0].options.length = 0;
+    _select3[0].options.length = 0;
+    _select1[0].options.add(new Option("请选择省份", "0"));
+    _select2[0].options.add(new Option("请选择城市", "0"));
+    _select3[0].options.add(new Option("请选择地区", "0"));
+    for (var i in provinces) {
+        var newopt = new Option(provinces[i].provincename, provinces[i].provinceid);
+        _select1[0].options.add(newopt);
+    }
+    _select1[0].value = setting.provinceid;
+
+    if (setting.provinceid > 0) {
+        for (var i2 in citys) {
+            if (citys[i2].provinceid == setting.provinceid) {
+                var cityopt = new Option(citys[i2].cityname, citys[i2].cityid);
+                _select2[0].options.add(cityopt);
+            }
+        }
+        if (setting.cityid > 0) {
+            for (var i3 in districts) {
+                if (districts[i3].cityid == setting.cityid) {
+                    var cityopt = new Option(districts[i3].districtname, districts[i3].districtid);
+                    _select3[0].options.add(cityopt);
+                }
+            }
+        }
+    }
+    if (setting.urlparms == "") window.location = "?provinceid=" + setting.provinceid + "&cityid=" + setting.cityid + "&areaid=" + setting.areaid;
+    else window.location = "?" + setting.urlparms + "&provinceid=" + setting.provinceid + "&cityid=" + setting.cityid + "&areaid=" + setting.areaid;
     return _this;
 }

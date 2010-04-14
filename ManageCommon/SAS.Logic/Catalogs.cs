@@ -71,6 +71,31 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 获取行业类别实体（缓存）
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static CatalogInfo GetCatalogCacheInfo(int id)
+        {
+            CatalogInfo cinfo = new CatalogInfo();
+            DataTable dt = GetAllCatalog();
+            foreach (DataRow dr in dt.Select("[id] = " + id))
+            {
+                cinfo.id = TypeConverter.StrToInt(dr["id"].ToString(), 0);
+                cinfo.name = dr["name"].ToString();
+                cinfo.parentid = TypeConverter.StrToInt(dr["parentid"].ToString(), 0);
+                cinfo.parentlist = dr["parentlist"].ToString();
+                cinfo.sort = TypeConverter.StrToInt(dr["sort"].ToString(), 0);
+                cinfo.cllogo = dr["cllogo"].ToString();
+                cinfo.displayorder = TypeConverter.StrToInt(dr["displayorder"].ToString(), 0);
+                cinfo.haschild = TypeConverter.StrToInt(dr["haschild"].ToString(), 0);
+                cinfo.companycount = TypeConverter.StrToInt(dr["companycount"].ToString(), 0);
+                return cinfo;
+            }
+            return null;
+        }
+
+        /// <summary>
         /// 获取全部行业类别信息
         /// </summary>
         /// <returns></returns>
@@ -87,7 +112,7 @@ namespace SAS.Logic
         }
 
         /// <summary>
-        /// 根据级别获取行业类别集合（带缓存）
+        /// 根据级别获取行业类别集合（缓存）
         /// </summary>
         /// <returns></returns>
         public static DataTable GetAllCatalogBySort(int sortnum)
