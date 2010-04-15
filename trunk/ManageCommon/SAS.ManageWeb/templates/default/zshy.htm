@@ -33,13 +33,11 @@
 					<em>
 					<select name="">
 						<option>所有业务类型</option>
-						<option>生产商</option>
-						<option>代理经销商</option>
-						<option>个人经销商</option>
-						<option>门店</option>
-						<option>原料商</option>
-						<option>分销商</option>
-						<option>服务站</option>
+						<%loop (string) zshytypestr Enum.GetNames(entype_enum.GetType())%>
+				        <%set (int) {zshytypevalue}=Convert.ToInt16(Enum.Parse(entype_enum.GetType(), zshytypestr))%>
+				        <%set (string) {zshytypetext}=EnumCatch.GetCompanyType({zshytypevalue})%>
+				        <option value="{zshytypevalue}">{zshytypetext}</option>
+				        <%/loop%>
 					</select>
 					</em>
 					<em>

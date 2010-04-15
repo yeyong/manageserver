@@ -146,21 +146,21 @@ jQuery.fn.InitLocation = function() {
 };
 
 //地区级联
-function LoadLocation(controlObj) {
+jQuery.fn.LoadLocation = function(controlObj) {
     var setting = {
-        objid: "thelocation",
         provinceid: 0,
         cityid: 0,
         areaid: 0,
-        urlparms: ""
+        urlparms: ""    //为空时不进行跳转
     };
     controlObj = controlObj || {};
     jQuery.extend(setting, controlObj);
-    
-    var _this = jQuery("#" + setting.objid);
+
+    var _this = jQuery(this);
     var _select1 = _this.find("select").eq(0);
     var _select2 = _this.find("select").eq(1);
     var _select3 = _this.find("select").eq(2);
+    var isjump = false;
 
     _select1[0].options.length = 0;
     _select2[0].options.length = 0;
@@ -181,16 +181,27 @@ function LoadLocation(controlObj) {
                 _select2[0].options.add(cityopt);
             }
         }
-        if (setting.cityid > 0) {
-            for (var i3 in districts) {
-                if (districts[i3].cityid == setting.cityid) {
-                    var cityopt = new Option(districts[i3].districtname, districts[i3].districtid);
-                    _select3[0].options.add(cityopt);
-                }
+        _select2[0].value = setting.cityid;
+    }
+
+    if (setting.cityid > 0) {
+        for (var i3 in districts) {
+            if (districts[i3].cityid == setting.cityid) {
+                var cityopt = new Option(districts[i3].districtname, districts[i3].districtid);
+                _select3[0].options.add(cityopt);
             }
         }
+        _select3[0].value = setting.areaid;
     }
-    if (setting.urlparms == "") window.location = "?provinceid=" + setting.provinceid + "&cityid=" + setting.cityid + "&areaid=" + setting.areaid;
-    else window.location = "?" + setting.urlparms + "&provinceid=" + setting.provinceid + "&cityid=" + setting.cityid + "&areaid=" + setting.areaid;
+
+    _select1.change(function() {
+        window.location = "?" + setting.urlparms + "&provinceid=" + _select1[0].value + "&cityid=0&areaid=0";
+    });
+    _select2.change(function() {
+        window.location = "?" + setting.urlparms + "&provinceid=" + setting.provinceid + "&cityid=" + _select2[0].value + "&areaid=0";
+    });
+    _select3.change(function() {
+        window.location = "?" + setting.urlparms + "&provinceid=" + setting.provinceid + "&cityid=" + setting.cityid + "&areaid=" + _select3[0].value;
+    });
     return _this;
 }
