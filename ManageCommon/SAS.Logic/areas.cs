@@ -103,6 +103,32 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 根据省份ID获取地区ID集合
+        /// </summary>
+        /// <param name="provinceid"></param>
+        /// <returns></returns>
+        public static string GetDistrictIDByProvince(int provinceid)
+        {
+            string cityidlist = "";
+            string districtlist = "";
+
+            foreach (DataRow dr in GetCityList().Select("ProvinceID = " + provinceid))
+            {
+                cityidlist += dr["CityID"].ToString() + ",";
+            }
+            if (cityidlist != "")
+            {
+                cityidlist = cityidlist.Trim(',');
+                foreach (DataRow ddr in GetDistrictList().Select("CityID IN (" + cityidlist + ")"))
+                {
+                    districtlist += ddr["DistrictID"].ToString();
+                }
+            }
+
+            return districtlist;
+        }
+
+        /// <summary>
         /// 获取级联字符串
         /// </summary>
         /// <param name="districtID">区县ID</param>
