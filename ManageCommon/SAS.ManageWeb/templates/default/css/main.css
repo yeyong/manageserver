@@ -53,7 +53,7 @@
 .onert2{ width:278px; height:30px; background:#f6f2f1; border:1px solid #e7e7e9; padding:0 5px; float:left;}
 .onert2 span{ width:90px; height:27px; line-height:27px; color:#f00; background:url(../images/icon/gb.gif) left center no-repeat; padding:3px 0 0 20px; float:left;}
 .onecomp{ width:168px; height:30px; overflow:hidden; float:left;}
-.onecomp li{ width:auto; height:27px; line-height:27px; padding:3px 0 0 0; float:left;}
+.onecomp li{ width:168px; height:27px; line-height:27px; padding:3px 0 0 0; float:left;}
 .onert3{ width:288px; height:266px; border:1px solid #e7e7e9; position:relative; float:left;}
 .onert3tit{ width:288px; height:28px; background:url(../images/line-bg2.jpg) repeat-x; position:relative; float:left;}
 #onert3t{ width:165px; height:28px; background:url(../images/line-bg2.jpg) repeat-x; position:relative; float:left;}
