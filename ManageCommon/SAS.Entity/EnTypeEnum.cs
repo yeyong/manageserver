@@ -26,28 +26,28 @@ namespace SAS.Entity
             string cname = "";
             switch (ete)
             {
-                case 0:
+                case 1:
                     cname = "生产商";
                     break;
-                case 1:
+                case 2:
                     cname = "代理经销商";
                     break;
-                case 2:
+                case 3:
                     cname = "个人经销商";
                     break;
-                case 3:
+                case 4:
                     cname = "门店";
                     break;
-                case 4:
+                case 5:
                     cname = "原料商";
                     break;
-                case 5:
+                case 6:
                     cname = "分销商";
                     break;
-                case 6:
+                case 7:
                     cname = "服务站";
                     break;
-                case 7:
+                case 8:
                     cname = "其他";
                     break;
             }
@@ -72,22 +72,22 @@ namespace SAS.Entity
             string ecname = "";
             switch (cte)
             {
-                case 0:
+                case 1:
                     ecname = "有限责任公司";
                     break;
-                case 1:
+                case 2:
                     ecname = "股份有限公司";
                     break;
-                case 2:
+                case 3:
                     ecname = "国营公司";
                     break;
-                case 3:
+                case 4:
                     ecname = "集团公司";
                     break;
-                case 4:
+                case 5:
                     ecname = "合资企业";
                     break;
-                case 5:
+                case 6:
                     ecname = "外企";
                     break;
             }
@@ -103,35 +103,35 @@ namespace SAS.Entity
         /// <summary>
         /// 生产商
         /// </summary>
-        Manufacturer = 0,
+        Manufacturer = 1,
         /// <summary>
         /// 代理经销商
         /// </summary>
-        Dealers = 1,
+        Dealers = 2,
         /// <summary>
         /// 个人经销商
         /// </summary>
-        IndividualDealer = 2,
+        IndividualDealer = 3,
         /// <summary>
         /// 门店
         /// </summary>
-        Store = 3,
+        Store = 4,
         /// <summary>
         /// 原料商
         /// </summary>
-        MaterialSupplier = 4,
+        MaterialSupplier = 5,
         /// <summary>
         /// 分销商
         /// </summary>
-        Distributor = 5,
+        Distributor = 6,
         /// <summary>
         /// 服务站
         /// </summary>
-        Workstation = 6,
+        Workstation = 7,
         /// <summary>
         /// 其他
         /// </summary>
-        Other = 7
+        Other = 8
     }
     /// <summary>
     /// 企业经济类型
@@ -141,26 +141,26 @@ namespace SAS.Entity
         /// <summary>
         /// 有限责任公司
         /// </summary>
-        CoLtd = 0,
+        CoLtd = 1,
         /// <summary>
         /// 股份有限公司
         /// </summary>
-        CoStock = 1,
+        CoStock = 2,
         /// <summary>
         /// 国营公司
         /// </summary>
-        CoState = 2,
+        CoState = 3,
         /// <summary>
         /// 集团公司
         /// </summary>
-        CoGroup = 3,
+        CoGroup = 4,
         /// <summary>
         /// 合资企业
         /// </summary>
-        CoJoint = 4,
+        CoJoint = 5,
         /// <summary>
         /// 外企
         /// </summary>
-        CoForeign = 5
+        CoForeign = 6
     }
 }

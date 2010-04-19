@@ -10,7 +10,7 @@
 			<dt><b>按主营范围选择：</b></dt>
 			<dd>
 			    <%loop catainfo cataloglist%>
-				<span class="zshy1zt"><a href="?cid={catainfo[id]}" class="l_666" title="{catainfo[name]}"><%getsubstring({catainfo[name]},14,"")%>({catainfo[companycount]})</a></span>
+				<span class="zshy1zt"><a href="zshy-{catainfo[id]}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-{ordertype}.html" class="l_666" title="{catainfo[name]}"><%getsubstring({catainfo[name]},14,"")%>({catainfo[companycount]})</a></span>
 				<%/loop%>
 			</dd>
 		</dl>
@@ -31,31 +31,35 @@
 					</em>
 					<em class="zshyline"></em>
 					<em>
-					<select name="">
-						<option>所有业务类型</option>
+					<select name="" onchange="window.location='zshy-{catalogid}-{provinceid}-{cityid}-{areaid}-'+this.value+'-{regyear}-{ordertype}.html';">
+						<option value="0">所有业务类型</option>
 						<%loop (string) zshytypestr Enum.GetNames(entype_enum.GetType())%>
 				        <%set (int) {zshytypevalue}=Convert.ToInt16(Enum.Parse(entype_enum.GetType(), zshytypestr))%>
 				        <%set (string) {zshytypetext}=EnumCatch.GetCompanyType({zshytypevalue})%>
-				        <option value="{zshytypevalue}">{zshytypetext}</option>
+				        <%set (string) {zshyselectstatus}=""%>
+				        <%if {entypeid}=={zshytypevalue}%>
+				        <%set {zshyselectstatus}="selected"%>
+				        <%/if%>
+				        <option value="{zshytypevalue}" {zshyselectstatus}>{zshytypetext}</option>
 				        <%/loop%>
 					</select>
 					</em>
 					<em>
-					<select name="">
+					<select name="" onchange="window.location='zshy-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-'+this.value+'-{ordertype}.html';">
 						<option>所有注册年份</option>
-						<option>超过5年</option>
-						<option>超过3年</option>
-						<option>超过1年</option>
-						<option>不满1年</option>
+						<option value="1">超过5年</option>
+						<option value="2">超过3年</option>
+						<option value="3">超过1年</option>
+						<option value="4">不满1年</option>
 					</select>
 					</em>
 					<em class="zshyline"></em>
 					<span class="zshynrt3" id="views">
 						<em id="viewsnr"><img alt="浏览量从高到低" src="templates/{templatepath}/images/icon/icon-up-down.gif" />默认排序</em>
 						<em class="zshynrt3nr" id="views1">
-							<i><img alt="浏览量从低到高" src="templates/{templatepath}/images/icon/icon-up.gif" />浏览量从低到高</i>
-							<i><img alt="浏览量从高到低" src="templates/{templatepath}/images/icon/icon-down.gif" />浏览量从高到低</i>
-							<i><img alt="浏览量从高到低" src="templates/{templatepath}/images/icon/icon-up-down.gif" />默认排序</i>
+							<i onclick="window.location='zshy-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-0.html';"><img alt="浏览量从低到高" src="templates/{templatepath}/images/icon/icon-up.gif" />浏览量从低到高</i>
+							<i onclick="window.location='zshy-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-1.html';"><img alt="浏览量从高到低" src="templates/{templatepath}/images/icon/icon-down.gif" />浏览量从高到低</i>
+							<i onclick="window.location='zshy-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-2.html';"><img alt="浏览量从高到低" src="templates/{templatepath}/images/icon/icon-up-down.gif" />默认排序</i>
 						</em>
 					</span>
 					<span class="zshynrt2">共<i class="f_e00101">1000</i>条</span>
