@@ -194,14 +194,17 @@ jQuery.fn.LoadLocation = function(controlObj) {
         _select3[0].value = setting.areaid;
     }
 
-    _select1.change(function() {
-        window.location = "?" + setting.urlparms + "&provinceid=" + _select1[0].value + "&cityid=0&areaid=0";
-    });
-    _select2.change(function() {
-        window.location = "?" + setting.urlparms + "&provinceid=" + setting.provinceid + "&cityid=" + _select2[0].value + "&areaid=0";
-    });
-    _select3.change(function() {
-        window.location = "?" + setting.urlparms + "&provinceid=" + setting.provinceid + "&cityid=" + setting.cityid + "&areaid=" + _select3[0].value;
-    });
+    if (setting.urlparms != "") {
+
+        _select1.change(function() {
+            window.location = setting.urlparms.replace("{1}", _select1[0].value).replace("{2}", 0).replace("{3}", 0);
+        });
+        _select2.change(function() {
+            window.location = setting.urlparms.replace("{1}", setting.provinceid).replace("{2}", _select2[0].value).replace("{3}", 0);
+        });
+        _select3.change(function() {
+            window.location = setting.urlparms.replace("{1}", setting.provinceid).replace("{2}", setting.cityid).replace("{3}", _select3[0].value);
+        });
+    }
     return _this;
 }

@@ -331,7 +331,9 @@
     <Content Include="global\global_adminusergroupgrid.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
-    <Content Include="global\global_baseset.aspx" />
+    <Content Include="global\global_baseset.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="global\global_editadminusergroup.aspx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>

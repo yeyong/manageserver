@@ -37,6 +37,18 @@ namespace SAS.ManageWeb
         /// </summary>
         protected int areaid = SASRequest.GetInt("areaid", 0);
         /// <summary>
+        /// 企业类型
+        /// </summary>
+        protected int entypeid = SASRequest.GetInt("entypeid", 0);
+        /// <summary>
+        /// 注册年限
+        /// </summary>
+        protected int regyear = SASRequest.GetInt("regyear", 0);
+        /// <summary>
+        /// 排序
+        /// </summary>
+        protected int ordertype = SASRequest.GetInt("ordertype", 0);
+        /// <summary>
         /// 页面导航
         /// </summary>
         protected string pagenav = " &gt; 浙商黄页";
@@ -53,8 +65,8 @@ namespace SAS.ManageWeb
             script += "\r\n<script src=\"" + forumpath + "javascript/template_catalogadmin.js\" type=\"text/javascript\"></script>";
 
             string loadscript = "\r\n " + "jQuery(document).ready(function() {"
-                    + "\r\n " + "jQuery(\"#thelocation\").LoadLocation({provinceid:" + provinceid + ",cityid:" + cityid + ",areaid:" + areaid + ",urlparms:'cid=" + catalogid + "'});"
-                    + "\r\n " + "jQuery(\"#views\").ExtendClick(\"views1\",\"viewsnr\",\"i\");"
+                    + "\r\n " + "jQuery(\"#thelocation\").LoadLocation({provinceid:" + provinceid + ",cityid:" + cityid + ",areaid:" + areaid + ",urlparms:'zshy-" + catalogid + "-{1}-{2}-{3}-" + entypeid + "-" + regyear + "-" + ordertype + ".html'});"
+                    + "\r\n " + "jQuery(\"#views\").ExtendClick(\"views1\",\"viewsnr\",\"i\"," + ordertype + ");"
                     + "\r\n " + "jQuery('#put').find(\".zshynr1ce\").find(\"a\").cluetip({ activation: 'click', sticky: true, width: 350, positionBy: 'bottomTop', closePosition: 'title', closeText: '<img src=\"" + forumpath + "images/cross.png\" alt=\"close\" />',cursor: 'pointer', dropShadow: false});"
                     + "\r\n " + "});\r\n";
             AddfootScript(loadscript);
@@ -66,13 +78,13 @@ namespace SAS.ManageWeb
                 CatalogInfo _cli = Catalogs.GetCatalogCacheInfo(catalogid);
                 if (_cli != null)
                 {
-                    pagenav = " &gt; <a href=\"zshy.aspx\" title=\"浙商黄页\" class=\"l_666\">浙商黄页</a>";
+                    pagenav = " &gt; <a href=\"zshy.html\" title=\"浙商黄页\" class=\"l_666\">浙商黄页</a>";
                     foreach (string str in _cli.parentlist.Split(','))
                     {
                         CatalogInfo subcli = Catalogs.GetCatalogCacheInfo(TypeConverter.StrToInt(str, 0));
                         if (subcli == null) continue;
                         if (subcli.parentid == 0) continue;
-                        pagenav += String.Format(" &gt; <a href=\"?cid={0}\" title=\"{1}\" class=\"l_666\">{1}</a>", subcli.id, subcli.name);
+                        pagenav += String.Format(" &gt; <a href=\"zshy-{1}-{2}-{3}-{4}-{5}-{6}-{7}.html\" title=\"{0}\" class=\"l_666\">{0}</a>", subcli.name, subcli.id, provinceid, cityid, areaid, entypeid, regyear, ordertype);
                     }
                     pagenav += " &gt; " + _cli.name;
                     pagetitle = "浙商黄页-浙商黄页-" + _cli.name;
