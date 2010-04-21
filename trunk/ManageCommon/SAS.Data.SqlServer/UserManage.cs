@@ -2233,11 +2233,28 @@ namespace SAS.Data.SqlServer
         /// <returns></returns>
         public string GetCompanyCondition(int catalogid, string arealist, int typeid, int regyear, string keyword)
         {
-            StringBuilder commandText = new StringBuilder(" en_status = 2");
+            StringBuilder commandText = new StringBuilder(" [en_status] = 2");
             if (catalogid > 0)
             {
-                commandText.AppendFormat(" AND [en_cataloglist] IN ({0})", catalogid);
+                commandText.AppendFormat(" AND CHARINDEX(',' + RTRIM('{0}') + ',',',' + [en_cataloglist] + ',') <> 0", catalogid);
             }
+            if (arealist != "")
+            {
+                commandText.AppendFormat(" AND [en_areas] IN ({0})", arealist);
+            }
+            if (typeid > 0)
+            {
+                commandText.Append(" AND [en_type] = " + typeid);
+            }
+            if (regyear > 0)
+            {
+                commandText.Append(" AND DATEDIFF(year,reg_year,getdate()) >= " + regyear);
+            }
+            if (keyword != "")
+            {
+                commandText.AppendFormat(" AND [en_name] like '%{0}%'", RegEsc(keyword));
+            }
+            return commandText.ToString();
         }
         #endregion
 
