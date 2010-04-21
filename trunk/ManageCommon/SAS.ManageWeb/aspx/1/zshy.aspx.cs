@@ -49,6 +49,14 @@ namespace SAS.ManageWeb
         /// </summary>
         protected int ordertype = SASRequest.GetInt("ordertype", 0);
         /// <summary>
+        /// 地区列表
+        /// </summary>
+        private string arealist = "";
+        /// <summary>
+        /// 查询条件
+        /// </summary>
+        private string condition = "";
+        /// <summary>
         /// 页面导航
         /// </summary>
         protected string pagenav = " &gt; 浙商黄页";
@@ -90,6 +98,19 @@ namespace SAS.ManageWeb
                     pagetitle = "浙商黄页-浙商黄页-" + _cli.name;
                 }
             }
+        }
+
+        /// <summary>
+        /// 设置查询条件以及分页
+        /// </summary>
+        private void SetConditionAndPage()
+        {
+            if (areaid > 0) arealist = areaid.ToString();
+            else if (cityid > 0) arealist = areas.GetDistrictIDByCity(cityid);
+            else if (provinceid > 0) arealist = areas.GetDistrictIDByProvince(provinceid);
+
+            condition = "";
+
         }
     }
 }

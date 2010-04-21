@@ -2220,6 +2220,25 @@ namespace SAS.Data.SqlServer
                                   };
             return DbHelper.ExecuteNonQuery(CommandType.StoredProcedure, string.Format("{0}updatecompany", BaseConfigs.GetTablePrefix), parms) > 0;
         }
+
+
+        /// <summary>
+        /// 企业搜索条件
+        /// </summary>
+        /// <param name="catalogid">行业类别ID</param>
+        /// <param name="arealist">所在地区列表</param>
+        /// <param name="typeid">企业类型ID</param>
+        /// <param name="regyear">注册年限</param>
+        /// <param name="keyword">关键字</param>
+        /// <returns></returns>
+        public string GetCompanyCondition(int catalogid, string arealist, int typeid, int regyear, string keyword)
+        {
+            StringBuilder commandText = new StringBuilder(" en_status = 2");
+            if (catalogid > 0)
+            {
+                commandText.AppendFormat(" AND [en_cataloglist] IN ({0})", catalogid);
+            }
+        }
         #endregion
 
         #region 行业信息操作
