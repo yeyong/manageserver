@@ -178,5 +178,19 @@ namespace SAS.Data.DataProvider
         {
             return DatabaseProvider.GetInstance().UpdateCompany(_company);
         }
+
+        /// <summary>
+        /// 企业搜索条件
+        /// </summary>
+        /// <param name="catalogid">行业类别ID</param>
+        /// <param name="arealist">所在地区列表</param>
+        /// <param name="typeid">企业类型ID</param>
+        /// <param name="regyear">注册年限</param>
+        /// <param name="keyword">关键字</param>
+        /// <returns></returns>
+        public static string GetCompanyCondition(int catalogid, string arealist, int typeid, int regyear, string keyword)
+        {
+            return DatabaseProvider.GetInstance().GetCompanyCondition(catalogid, arealist, typeid, regyear, keyword);
+        }
     }
 }

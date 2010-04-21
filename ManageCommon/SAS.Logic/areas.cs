@@ -129,6 +129,21 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 根据市级ID获取地区ID集合
+        /// </summary>
+        /// <param name="cityid"></param>
+        /// <returns></returns>
+        public static string GetDistrictIDByCity(int cityid)
+        {
+            string districtlist = "";
+            foreach (DataRow dr in GetDistrictList().Select("CityID = " + cityid))
+            {
+                districtlist += dr["DistrictID"].ToString();
+            }
+            return districtlist;
+        }
+
+        /// <summary>
         /// 获取级联字符串
         /// </summary>
         /// <param name="districtID">区县ID</param>
