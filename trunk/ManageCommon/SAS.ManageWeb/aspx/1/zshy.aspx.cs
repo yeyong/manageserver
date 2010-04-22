@@ -49,6 +49,10 @@ namespace SAS.ManageWeb
         /// </summary>
         protected int ordertype = SASRequest.GetInt("ordertype", 0);
         /// <summary>
+        /// 搜索关键字
+        /// </summary>
+        protected string keyword = SASRequest.GetString("keyword");
+        /// <summary>
         /// 地区列表
         /// </summary>
         private string arealist = "";
@@ -109,7 +113,7 @@ namespace SAS.ManageWeb
             else if (cityid > 0) arealist = areas.GetDistrictIDByCity(cityid);
             else if (provinceid > 0) arealist = areas.GetDistrictIDByProvince(provinceid);
 
-            condition = "";
+            condition = Companies.GetCompanyCondition(catalogid, arealist, entypeid, regyear, keyword);
 
         }
     }
