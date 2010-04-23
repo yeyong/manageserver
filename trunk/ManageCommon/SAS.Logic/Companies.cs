@@ -104,7 +104,7 @@ namespace SAS.Logic
         }
 
         /// <summary>
-        /// 企业搜索条件
+        /// 企业搜索条件（审核通过状态下）
         /// </summary>
         /// <param name="catalogid">行业类别ID</param>
         /// <param name="arealist">所在地区列表</param>
@@ -112,7 +112,7 @@ namespace SAS.Logic
         /// <param name="regyear">注册年限</param>
         /// <param name="keyword">关键字</param>
         /// <returns></returns>
-        public static string GetCompanyCondition(int catalogid, string arealist, int typeid, int regyear,string keyword)
+        public static string GetCompanyCondition(int catalogid, string arealist, int typeid, int regyear, string keyword)
         {
             return SAS.Data.DataProvider.Companies.GetCompanyCondition(catalogid, arealist, typeid, regyear, keyword);
         }
