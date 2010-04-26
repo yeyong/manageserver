@@ -53,6 +53,10 @@ namespace SAS.ManageWeb
         /// </summary>
         protected string keyword = SASRequest.GetString("keyword");
         /// <summary>
+        /// 搜索关键字
+        /// </summary>
+        private string searchkey = "";
+        /// <summary>
         /// 地区列表
         /// </summary>
         private string arealist = "";
@@ -69,6 +73,8 @@ namespace SAS.ManageWeb
         protected override void ShowPage()
         {
             pagetitle = "浙商黄页-浙商黄页-企业首页";
+            searchkey = keyword;
+            keyword = Utils.UrlEncode(keyword).Replace("'", "%27");
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
             AddLinkCss(forumpath + "images/jquery.cluetip.css");
             script += "\r\n<script src=\"" + forumpath + "javascript/jqueryFunc.js\" type=\"text/javascript\"></script>";
@@ -77,7 +83,7 @@ namespace SAS.ManageWeb
             script += "\r\n<script src=\"" + forumpath + "javascript/template_catalogadmin.js\" type=\"text/javascript\"></script>";
 
             string loadscript = "\r\n " + "jQuery(document).ready(function() {"
-                    + "\r\n " + "jQuery(\"#thelocation\").LoadLocation({provinceid:" + provinceid + ",cityid:" + cityid + ",areaid:" + areaid + ",urlparms:'zshy-" + catalogid + "-{1}-{2}-{3}-" + entypeid + "-" + regyear + "-" + ordertype + ".html'});"
+                    + "\r\n " + "jQuery(\"#thelocation\").LoadLocation({provinceid:" + provinceid + ",cityid:" + cityid + ",areaid:" + areaid + ",urlparms:'zshy-" + catalogid + "-{1}-{2}-{3}-" + entypeid + "-" + regyear + "-" + ordertype + "-" + keyword + ".html'});"
                     + "\r\n " + "jQuery(\"#views\").ExtendClick(\"views1\",\"viewsnr\",\"i\"," + ordertype + ");"
                     + "\r\n " + "jQuery('#put').find(\".zshynr1ce\").find(\"a\").cluetip({ activation: 'click', sticky: true, width: 350, positionBy: 'bottomTop', closePosition: 'title', closeText: '<img src=\"" + forumpath + "images/cross.png\" alt=\"close\" />',cursor: 'pointer', dropShadow: false});"
                     + "\r\n " + "});\r\n";
@@ -96,7 +102,7 @@ namespace SAS.ManageWeb
                         CatalogInfo subcli = Catalogs.GetCatalogCacheInfo(TypeConverter.StrToInt(str, 0));
                         if (subcli == null) continue;
                         if (subcli.parentid == 0) continue;
-                        pagenav += String.Format(" &gt; <a href=\"zshy-{1}-{2}-{3}-{4}-{5}-{6}-{7}.html\" title=\"{0}\" class=\"l_666\">{0}</a>", subcli.name, subcli.id, provinceid, cityid, areaid, entypeid, regyear, ordertype);
+                        pagenav += String.Format(" &gt; <a href=\"zshy-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}.html\" title=\"{0}\" class=\"l_666\">{0}</a>", subcli.name, subcli.id, provinceid, cityid, areaid, entypeid, regyear, ordertype,keyword);
                     }
                     pagenav += " &gt; " + _cli.name;
                     pagetitle = "浙商黄页-浙商黄页-" + _cli.name;
@@ -113,7 +119,7 @@ namespace SAS.ManageWeb
             else if (cityid > 0) arealist = areas.GetDistrictIDByCity(cityid);
             else if (provinceid > 0) arealist = areas.GetDistrictIDByProvince(provinceid);
 
-            condition = Companies.GetCompanyCondition(catalogid, arealist, entypeid, regyear, keyword);
+            condition = Companies.GetCompanyCondition(catalogid, arealist, entypeid, regyear, searchkey);
 
         }
     }

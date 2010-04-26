@@ -201,7 +201,7 @@
 				<%if {computenum}%2==1%>
 			        <%set {computetimes}={computetimes}+1%>
 			    <%/if%>
-					<strong><a class="l_e00101" title="{subcata[name]}" href="{subcata[id]}">{subcata[name]}</a></strong>
+					<strong><a class="l_e00101" title="{subcata[name]}" href="zshy-{subcata[id]}.html">{subcata[name]}</a></strong>
 					<p>
 					<%set (int){catastrlength} = 0%>
 					<%loop (DataRow) subsubcata cataloglist3%>
@@ -210,10 +210,10 @@
 					<%if {catastrlength}>40%>
 					    <%break%>
 					<%/if%>
-					<a title="{subsubcata[name]}" href="{subsubcata[id]}">{subsubcata[name]}</a> | 
+					<a title="{subsubcata[name]}" href="zshy-{subsubcata[id]}.html">{subsubcata[name]}</a> | 
 					<%/if%>
 					<%/loop%>
-					<a class="l_f00" title="" href="#">更多&gt;&gt;</a></p>
+					<a class="l_f00" title="{subcata[name]}" href="zshy-{subcata[id]}.html">更多&gt;&gt;</a></p>
 				</li>
 				<%set {computenum}={computenum}+1%>
 			<%/if%>

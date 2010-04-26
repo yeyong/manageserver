@@ -494,6 +494,7 @@
     <Content Include="javascript\ajax.js" />
     <Content Include="javascript\bbcode.js" />
     <Content Include="javascript\common.js" />
+    <Content Include="javascript\company_utils.js" />
     <Content Include="javascript\dnteditor.js" />
     <Content Include="javascript\editor.js" />
     <Content Include="javascript\formValidator.js" />

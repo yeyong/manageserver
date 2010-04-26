@@ -236,10 +236,10 @@ namespace SAS.Logic
         private static string ChangeStyleForCurrentUrl(string nav, string url)
         {
             //showtopic和showforum需要特别处理
-            if (!Utils.StrIsNullOrEmpty(url) && System.Web.HttpContext.Current.Request.RawUrl.ToString().Contains(url))
+            if (!Utils.StrIsNullOrEmpty(url) && (System.Web.HttpContext.Current.Request.RawUrl.ToString().Contains(url) || System.Web.HttpContext.Current.Request.RawUrl.ToString().Contains(Utils.CutString(url, 0, url.Length - 4))))
             {
                 nav = nav.Replace("class=\"navce1\"><a", "class=\"navce2\"><p class=\"navce2rt\"><a");
-                nav = nav.Replace("</a></p></li>", "");
+                nav = nav.Replace("</a></li>", "</a></p></li>");
             }
             return nav;
         }
