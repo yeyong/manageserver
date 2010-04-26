@@ -10,11 +10,11 @@
 			</span>
 		</p>
 		<p class="soso5"></p>
-		<div class="soso6">
+		<form id="searchform" name="searchform" onsubmit="return search(this);" class="soso6">
 			<p class="soso6nr">
 				<span class="soso6nr1">
 				<select name="searchtype" class="select_type">
-					<option>请选择类型</option>
+					<option value="0">请选择类型</option>
 				<%loop (string) searchtypestr Enum.GetNames(entype_enum.GetType())%>
 				<%set (int) {searchtypevalue}=Convert.ToInt16(Enum.Parse(entype_enum.GetType(), searchtypestr))%>
 				<%set (string) {searchtypetext}=EnumCatch.GetCompanyType({searchtypevalue})%>
@@ -22,16 +22,16 @@
 				<%/loop%>
 				</select>
 				</span>
-				<span><input name="" type="text" class="input4_soout" onfocus="this.className='input4_soon'" onblur="this.className='input4_soout'" style="width:300px;" /></span>
+				<span><input name="searchcontent" type="text" class="input4_soout" onfocus="this.className='input4_soon'" onblur="this.className='input4_soout'" style="width:300px;" /></span>
 				<span class="soso6nr1">
 				<select name="searchclass" class="select_type2">
-				    <option>请选择行业类别</option>
+				    <option value="0">请选择行业类别</option>
 				<%loop (DataRow) searchcata firstcata%>
 					<option value="{searchcata[id]}">{searchcata[name]}</option>
 				<%/loop%>
 				</select>
 				</span>
-				<span class="soso6nr2"><a title="企业搜索" href="#"></a></span>
+				<input type="submit" onclick="return search(this.form);" value="搜 索"/>
 			</p>
 			<p class="soso6nr3"><img alt="line" src="templates/{templatepath}/images/soso-bg4.gif" /></p>
 			<p class="soso6nr4">
@@ -41,7 +41,7 @@
 				<span class="soso6line line"></span>
 				<span><a href="#" class="l_e00101">企业信息排行</a></span>
 			</p>
-		</div>
+		</form>
 		<p class="soso7"></p>
 	</div>
 </div>
