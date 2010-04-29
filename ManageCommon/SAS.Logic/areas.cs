@@ -102,7 +102,7 @@ namespace SAS.Logic
             return pdata;
         }
 
-        public static DataTable GetCity
+        //public static DataTable GetCity
 
         /// <summary>
         /// 根据省份ID获取地区ID集合
