@@ -105,6 +105,10 @@
       <Project>{CBA8AECD-71A5-4562-9189-5E0E0B42964E}</Project>
       <Name>SAS.ManageWeb.ManagePage</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SAS.ManageWeb\SAS.ManageWeb.csproj">
+      <Project>{766EFDCA-D4D9-461A-A07C-7A3A00893ED9}</Project>
+      <Name>SAS.ManageWeb</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SAS.Plugin\SAS.Plugin.csproj">
       <Project>{2EA29B20-569F-421C-B359-7E7F8C7045CD}</Project>
       <Name>SAS.Plugin</Name>
