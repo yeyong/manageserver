@@ -1487,6 +1487,9 @@
     <Content Include="ManagePage\UserControls\usergrouppowersetting.ascx" />
     <Content Include="ManagePage\xml\backup\2009-09-24 09_20_17.config" />
     <Content Include="ManagePage\xml\navmenu.config" />
+    <Content Include="templates\default\images\aa\tianqi.png" />
+    <Content Include="templates\default\images\aa\zhuti.png" />
+    <Content Include="templates\default\images\cross.png" />
     <None Include="ManagePage\images\admin-gif\Thumbs.db" />
     <None Include="ManagePage\images\ad\Thumbs.db" />
     <None Include="ManagePage\images\Thumbs.db" />

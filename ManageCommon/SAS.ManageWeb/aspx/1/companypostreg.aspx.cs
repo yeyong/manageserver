@@ -32,7 +32,14 @@ namespace SAS.ManageWeb
             if (companyinfo == null)
             {
                 AddErrLine("页面出现错误");
-                SetMetaRefresh(3);
+                SetMetaRefresh(3, "index.html");
+                return;
+            }
+
+            if (companyinfo.En_status == 1)
+            {
+                AddMsgLine("信息已经提交，请您耐心等待管理员的信息审核！");
+                SetMetaRefresh(3, "index.html");
                 return;
             }
 
@@ -66,7 +73,7 @@ namespace SAS.ManageWeb
                 if (!Companies.UpdateCompanyInfo(companyinfo))
                 {
                     AddErrLine("页面出现错误，请与管理员联系！");
-                    SetMetaRefresh(3);
+                    SetMetaRefresh(3, "index.html");
                     return;
                 }
                 else

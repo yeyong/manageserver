@@ -77,7 +77,14 @@
 		<div class="onece2 mar_top_8">
 			<p class="onece2t">
 				<em></em><strong>区域市场</strong>
-				<span class="onece2t1"><a title="" href="#">杭州</a>  <a title="" href="#">金华</a>  <a title="" href="#">温州</a>  <a title="" href="#">嘉兴</a></span>
+				<span class="onece2t1">
+				<%loop (DataRow) cityinfo indexcity%>
+				<%if {cityinfo__loop__id}>6%>
+				<%break%>
+				<%/if%>
+				    <a title="{cityinfo[CityName]}" href="zshy-{cityinfo[ProvinceID]}-{cityinfo[CityID]}-0.html">{cityinfo[CityName]}</a>
+				<%/loop%>
+				</span>
 			</p>
 			<ul class="onece2nr f_666">
 				<li>
@@ -129,7 +136,7 @@
 	<!--右边 begin-->
 	<div class="onert mar_top_8">
 		<div class="onert1">
-			<span class="onert1an1"><a title="提交企业信息" href="#"></a></span>
+			<span class="onert1an1"><a title="提交企业信息" href="companypost.aspx"></a></span>
 			<span class="onert1an2"><a title="提交企业信息" href="#"></a></span>
 			<i class="lt"></i><i class="rt"></i>
 		</div>

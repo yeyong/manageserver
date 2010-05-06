@@ -30,6 +30,10 @@ namespace SAS.ManageWeb
         /// 新加入企业集合
         /// </summary>
         protected SAS.Common.Generic.List<Companys> newcompanylist = Companies.GetNewCompanyList();
+        /// <summary>
+        /// 首页城市
+        /// </summary>
+        protected DataRow[] indexcity;
 
         protected override void ShowPage()
         {
@@ -73,6 +77,8 @@ namespace SAS.ManageWeb
                 announcementlist.ImportRow(dr);
                 row++;
             }
+
+            indexcity = areas.GetIndexCity();
         }
     }
 }
