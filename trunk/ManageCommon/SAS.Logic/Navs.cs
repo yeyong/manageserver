@@ -240,6 +240,7 @@ namespace SAS.Logic
             {
                 nav = nav.Replace("class=\"navce1\"><a", "class=\"navce2\"><p class=\"navce2rt\"><a");
                 nav = nav.Replace("</a></li>", "</a></p></li>");
+                nav = nav.Replace(" class=\"l_fff\"", " class=\"l_805952\"");
             }
             return nav;
         }

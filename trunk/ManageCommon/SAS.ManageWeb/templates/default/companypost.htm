@@ -1,9 +1,9 @@
 ﻿<%template _compostheader%>
-<%if {page_err}==0%>
 <div class="tijiao">
     <p class="tijiao1">
     </p>
     <form id="form1" name="form1" method="post" class="tijiao2" action="">
+    <%if {page_err}==0%>
     <div class="tijiao2nr">
         <p class="tjp1">
             <span>1</span>提交企业基本信息</p>
@@ -157,11 +157,11 @@
     <p class="tijiao2nr1">
         <input name="nextsub" id="nextsub" type="submit" class="tijiaoan2" value="下一步" onclick="return validate(this.form);" />
     </p>
+    <%else%>
+        <%template _commsgbox%>
+    <%/if%>
     </form>
     <p class="tijiao3">
     </p>
 </div>
-<%else%>
-<%template _commsgbox%>
-<%/if%>
 <%template _companypostfooter%>
