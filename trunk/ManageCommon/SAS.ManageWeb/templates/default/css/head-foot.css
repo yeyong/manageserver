@@ -10,22 +10,24 @@
 .top2{ width:960px; height:63px; float:left; position:relative;}
 .top3{ width:960px; height:auto; float:left;}
 .logo{ width:auto; height:60px; float:left; position:absolute; z-index:100; left:0;}
-.topban{ width:960px; height:63px; position:absolute; right:0;}
+.topban{ width:750px; height:63px; position:absolute; right:0;}
 .hdhelp{ width:auto; height:40px; line-height:40px; color:#403635; font:30px "Microsoft YaHei", Arial, Tahoma; font-weight:bold; margin:20px 5px 0 0; float:right;}
 .hdhelp1{ width:auto; line-height:22px; color:#fff; font-size:14px; float:left;}
 .hdhelp2{ width:53px; height:20px; margin:0 0 0 5px;*margin:1px 0 0 5px; float:left;}
 .hdhelp2 a{ width:53px; height:20px; background:url(../images/soso3.gif) no-repeat; float:left;}
 .hdhelp2 a:hover{ width:53px; height:20px; background:url(../images/soso3.gif) 0 -21px no-repeat; float:left;}
-.navlt, .navrt{ width:3px; height:38px; background:url(../images/bg1.jpg) no-repeat; float:left;}
-.navce{ width:924px; height:32px; padding:6px 15px 0; letter-spacing:1px; z-index:0; position:relative; float:left;}
-.navce1{ width:auto; height:21px; line-height:21px; color:#fff; padding:0 12px; float:left; display:inline; font-size:14px; font-weight:bold;}
-.navce2{ width:auto; height:21px; line-height:21px; padding-left:17px; font-size:14px; font-weight:bold; background:url(../images/nav1.gif) left no-repeat; display:inline; float:left;}
-.navce2rt{ padding:0 15px 0 0;  float:left; background:url(../images/nav1.gif) right no-repeat;}
-.navce3{ width:auto; height:21px; line-height:21px; padding-left:22px; font-size:14px; font-weight:bold; background:url(../images/nav2.gif) left no-repeat; display:inline; float:right;}
-.navce3rt{ padding:0 20px 0 0;  float:left; background:url(../images/nav2.gif) right no-repeat;}
-.navline{ width:0px; height:10px; margin:5px 10px 0; border-left:1px solid #b6a29f; border-right:1px solid #82605b; float:left;}
+.navlt, .navrt{ width:3px; height:36px; background:url(../images/bg1.jpg) no-repeat; float:left;}
+.navce{ width:924px; height:31px; padding:4px 15px 0; letter-spacing:1px; z-index:0; position:relative; float:left;}
+.navce1{ width:auto; height:31px; line-height:26px; color:#fff; padding:0 12px; float:left; display:inline; font-size:14px; font-weight:bold;}
+.navce1 a{ width:auto; height:31px;}
+
+.navce2{ width:auto; height:31px; line-height:26px; padding-left:17px; font-size:14px; font-weight:bold; background:url(../images/nav1.gif) left no-repeat; display:inline; float:left;}
+.navce2rt{ height:31px; padding:0 15px 0 0; background:url(../images/nav1.gif) top right no-repeat; float:left;}
+.navce3{ width:auto; height:21px; line-height:21px; padding-left:22px; margin:2px 0 0 0; font-size:14px; font-weight:bold; background:url(../images/nav2.gif) left no-repeat; display:inline; float:right;}
+.navce3rt{ padding:0 20px 0 0;  float:left; background:url(../images/nav2.gif) top right no-repeat;}
+.navline{ width:0px; height:10px; margin:8px 10px 0; border-left:1px solid #c5b7b4; border-right:1px solid #82605b; overflow:hidden; display:inline; float:left;}
 .navcetu{ width:37px; height:22px; z-index:1; position:absolute; left:300px; top:-12px; background:url(../images/here.gif) no-repeat; display:inline; float:left;}
 .navrt{ background-position:-3px 0;}
 /*footer*/
 .foot{ width:960px; height:auto; border-top:2px solid #eee; padding:5px 0 0 0; float:left;}
-.footnr{ width:960px; height:20px; line-height:20px; text-align:center; float:left;}
+.footnr{ width:957px; height:20px; line-height:20px; text-align:center; float:left;}
