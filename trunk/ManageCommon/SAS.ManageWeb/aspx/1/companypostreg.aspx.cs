@@ -27,7 +27,7 @@ namespace SAS.ManageWeb
             AddfootScript(loadscript);
 
             enid = SASRequest.GetInt("companyid", 0);
-            Companys companyinfo = Companies.GetCompanyCacheInfo(enid);
+            Companys companyinfo = Companies.GetCompanyInfo(enid);
 
             if (companyinfo == null)
             {
