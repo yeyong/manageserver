@@ -4,6 +4,9 @@
     </p>
     <form id="form1" name="form1" method="post" class="tijiao2" action="">
         <%if {page_err}==0%>
+            <%if {msgbox_text}!="" %>
+                <%template _commsgbox%>
+            <%else%>
         <div class="tijiao2nr">
             <p class="tjp2">
                 <span>1</span>提交企业基本信息</p>
@@ -141,6 +144,7 @@
         <p class="tijiao2nr1">
             <input name="submit" type="submit" class="tijiaoan2" value="确 定" />
         </p>
+            <%/if%>
         <%else%>
             <%template _commsgbox%>
         <%/if%>
