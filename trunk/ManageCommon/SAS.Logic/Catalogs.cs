@@ -121,6 +121,7 @@ namespace SAS.Logic
             DataTable sortcatalist = dt.Clone();
             foreach (DataRow dr in dt.Select("[sort] = " + sortnum))
             {
+                dr["companycount"] = ReturnCompanyCountById(TypeConverter.ObjectToInt(dr["id"], 0));
                 sortcatalist.ImportRow(dr);
             }
             return sortcatalist;
@@ -136,6 +137,7 @@ namespace SAS.Logic
             DataTable sortcatalist = dt.Clone();
             foreach (DataRow dr in dt.Select("[parentid] = " + pid))
             {
+                dr["companycount"] = ReturnCompanyCountById(TypeConverter.ObjectToInt(dr["id"], 0));
                 sortcatalist.ImportRow(dr);
             }
             return sortcatalist;
@@ -148,6 +150,22 @@ namespace SAS.Logic
         public static DataTable GetAllCatalogNoCache()
         {
             return SAS.Data.DataProvider.Catalogies.GetAllCatalogList();
+        }
+
+        /// <summary>
+        /// 取得相关类别下的企业数量
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static int ReturnCompanyCountById(int id)
+        {
+            int num = 0;
+            DataTable dt = GetAllCatalog();
+            foreach (DataRow dr in dt.Select("(','+[parentlist]+',' like '%," + id + ",%' AND [haschild] = 0) OR [id] = " + id))
+            {
+                num += TypeConverter.ObjectToInt(Companies.GetCompanyTableList().Compute("COUNT(en_id)", "','+[en_cataloglist]+',' like '%," + dr["id"].ToString() + ",%'"), 0);
+            }
+            return num;
         }
 
         /// <summary>

@@ -1489,7 +1489,11 @@
     <Content Include="ManagePage\xml\navmenu.config" />
     <Content Include="templates\default\images\aa\tianqi.png" />
     <Content Include="templates\default\images\aa\zhuti.png" />
+    <Content Include="templates\default\images\bg1.gif" />
     <Content Include="templates\default\images\cross.png" />
+    <Content Include="templates\default\images\inquiry-bg1.gif" />
+    <Content Include="templates\default\images\inquiry-bg2.gif" />
+    <Content Include="templates\default\images\soso5.gif" />
     <None Include="ManagePage\images\admin-gif\Thumbs.db" />
     <None Include="ManagePage\images\ad\Thumbs.db" />
     <None Include="ManagePage\images\Thumbs.db" />

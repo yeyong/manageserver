@@ -192,5 +192,19 @@ namespace SAS.Data.DataProvider
         {
             return DatabaseProvider.GetInstance().GetCompanyCondition(catalogid, arealist, typeid, regyear, keyword);
         }
+
+        /// <summary>
+        /// 企业数据分页操作
+        /// </summary>
+        /// <param name="pageindex">当前页</param>
+        /// <param name="pagesize">页面尺寸</param>
+        /// <param name="ordercolumn">排序列名</param>
+        /// <param name="ordertype">排序方式</param>
+        /// <param name="conditions">条件</param>
+        /// <returns></returns>
+        public static DataTable GetCompanyPageList(int pageindex, int pagesize, string ordercolumn, string ordertype, string conditions)
+        {
+            return DatabaseProvider.GetInstance().GetCompanyPageList(pageindex, pagesize, ordercolumn, ordertype, conditions);
+        }
     }
 }

@@ -53,6 +53,7 @@ namespace SAS.Logic
         public static bool UpdateCompanyListStatus(string enidlist, int _status)
         {
             Caches.ReSetCompanyList();
+            Caches.ReSetCompanyTableList();
             return SAS.Data.DataProvider.Companies.UpdateCompanyStatus(enidlist, _status);
         }
 
@@ -64,6 +65,7 @@ namespace SAS.Logic
         public static bool UpdateCompanyInfo(Companys _companyInfo)
         {
             Caches.ReSetCompanyList();
+            Caches.ReSetCompanyTableList();
             return SAS.Data.DataProvider.Companies.UpdateCompany(_companyInfo);
         }
     }

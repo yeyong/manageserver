@@ -101,10 +101,6 @@
       <Project>{9145299A-21C2-4558-A956-2DBDCBF477DE}</Project>
       <Name>SAS.Logic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SAS.ManageWeb\ManagePage\SAS.ManageWeb.ManagePage.csproj">
-      <Project>{CBA8AECD-71A5-4562-9189-5E0E0B42964E}</Project>
-      <Name>SAS.ManageWeb.ManagePage</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SAS.ManageWeb\SAS.ManageWeb.csproj">
       <Project>{766EFDCA-D4D9-461A-A07C-7A3A00893ED9}</Project>
       <Name>SAS.ManageWeb</Name>
