@@ -10,7 +10,7 @@
 			<dt><b>按主营范围选择：</b></dt>
 			<dd>
 			    <%loop catainfo cataloglist%>
-				<span class="zshy1zt"><a href="zshy-{catainfo[id]}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-{ordertype}-{keyword}.html" class="l_666" title="{catainfo[name]}"><%getsubstring({catainfo[name]},14,"")%>({catainfo[companycount]})</a></span>
+				<span class="zshy1zt"><a href="zshy-{catainfo[id]}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-{ordertype}-{keyword}.html" class="l_666" title="{catainfo[name]}"><%getsubstring({catainfo[name]},20,"")%>({catainfo[companycount]})</a></span>
 				<%/loop%>
 			</dd>
 		</dl>
@@ -61,6 +61,12 @@
 							<i onclick="window.location='zshy-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-1-{keyword}.html';"><img alt="浏览量从高到低" src="templates/{templatepath}/images/icon/icon-down.gif" />浏览量从高到低</i>
 							<i onclick="window.location='zshy-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-2-{keyword}.html';"><img alt="默认排序" src="templates/{templatepath}/images/icon/icon-up-down.gif" />默认排序</i>
 						</em>
+					</span>
+				</p>
+				<p class="zshynrt4">
+					<span class="zshynrt5">
+					<em><input type="text" name="text" class="input2_soout" style="width:220px;" /></em>
+					<em><input type="submit" name="Submit" class="so1" value="" /></em>
 					</span>
 					<span class="zshynrt2">共<i class="f_e00101">1000</i>条</span>
 				</p>

@@ -321,6 +321,13 @@ namespace SAS.Logic
         {
             RemoveObject(CacheKeys.SAS_COMPANY_LIST);
         }
+        /// <summary>
+        /// 重置企业表缓存信息
+        /// </summary>
+        public static void ReSetCompanyTableList()
+        {
+            RemoveObject(CacheKeys.SAS_COMPANY_Table_LIST);
+        }
 
         /// <summary>
         /// 更新所有缓存

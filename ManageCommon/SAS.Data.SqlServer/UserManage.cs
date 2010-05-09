@@ -421,7 +421,7 @@ namespace SAS.Data.SqlServer
 					DbHelper.MakeInParam("@pd_address_temp", (DbType)SqlDbType.VarChar,2000,userInfo.Pd_address_temp),
 					DbHelper.MakeInParam("@pd_authstr", (DbType)SqlDbType.VarChar,20,userInfo.Pd_authstr),
 					DbHelper.MakeInParam("@pd_idcard", (DbType)SqlDbType.VarChar,50,userInfo.Pd_idcard),
-					DbHelper.MakeInParam("@pd_bio", (DbType)SqlDbType.Text,16,userInfo.Pd_bio)
+					DbHelper.MakeInParam("@pd_bio", (DbType)SqlDbType.Text,0,userInfo.Pd_bio)
 		    };
 
             return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.StoredProcedure, string.Format("{0}createuser", BaseConfigs.GetTablePrefix), parms), -1);
@@ -499,7 +499,7 @@ namespace SAS.Data.SqlServer
                     DbHelper.MakeInParam("@pd_authtime", (DbType)SqlDbType.SmallDateTime,4,userInfo.Pd_authtime),
 					DbHelper.MakeInParam("@pd_authflag", (DbType)SqlDbType.TinyInt,1,userInfo.Pd_authflag),
 					DbHelper.MakeInParam("@pd_idcard", (DbType)SqlDbType.VarChar,50,userInfo.Pd_idcard),
-					DbHelper.MakeInParam("@pd_bio", (DbType)SqlDbType.Text,16,userInfo.Pd_bio),
+					DbHelper.MakeInParam("@pd_bio", (DbType)SqlDbType.Text,0,userInfo.Pd_bio),
                     DbHelper.MakeInParam("@ps_id", (DbType)SqlDbType.Int,4,userInfo.Ps_id)
                 };
 
@@ -558,7 +558,7 @@ namespace SAS.Data.SqlServer
 					                  DbHelper.MakeInParam("@pd_ai_id_temp", (DbType)SqlDbType.Int,4,userInfo.Pd_ai_id_temp),
 					                  DbHelper.MakeInParam("@pd_address_temp", (DbType)SqlDbType.VarChar,2000,userInfo.Pd_address_temp),
 					                  DbHelper.MakeInParam("@pd_idcard", (DbType)SqlDbType.VarChar,50,userInfo.Pd_idcard),
-					                  DbHelper.MakeInParam("@pd_bio", (DbType)SqlDbType.Text,16,userInfo.Pd_bio)
+					                  DbHelper.MakeInParam("@pd_bio", (DbType)SqlDbType.Text,0,userInfo.Pd_bio)
 								   };
 
             DbHelper.ExecuteNonQuery(CommandType.StoredProcedure, string.Format("{0}updateuserprofile", BaseConfigs.GetTablePrefix), parms);
@@ -1756,7 +1756,7 @@ namespace SAS.Data.SqlServer
                                        DbHelper.MakeInParam("@pg_name",(DbType)SqlDbType.NChar,50,adminGroupsInfo.AdminGroupName),
                                        DbHelper.MakeInParam("@pg_allowSelf",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Pg_allowSelf),
                                        DbHelper.MakeInParam("@pg_allowSys",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Pg_allowSys),
-                                       DbHelper.MakeInParam("@pg_ext1",(DbType)SqlDbType.Text,16,adminGroupsInfo.Pg_ext1),
+                                       DbHelper.MakeInParam("@pg_ext1",(DbType)SqlDbType.Text,0,adminGroupsInfo.Pg_ext1),
                                        DbHelper.MakeInParam("@pg_status",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Pg_status),
 									   DbHelper.MakeInParam("@alloweditpost",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Alloweditpost),
 									   //DbHelper.MakeInParam("@alloweditpoll",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Alloweditpoll),
@@ -1791,7 +1791,7 @@ namespace SAS.Data.SqlServer
                                        DbHelper.MakeInParam("@pg_name",(DbType)SqlDbType.NChar,50,adminGroupsInfo.AdminGroupName),
                                        DbHelper.MakeInParam("@pg_allowSelf",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Pg_allowSelf),
                                        DbHelper.MakeInParam("@pg_allowSys",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Pg_allowSys),
-                                       DbHelper.MakeInParam("@pg_ext1",(DbType)SqlDbType.Text,16,adminGroupsInfo.Pg_ext1),
+                                       DbHelper.MakeInParam("@pg_ext1",(DbType)SqlDbType.Text,0,adminGroupsInfo.Pg_ext1),
                                        DbHelper.MakeInParam("@pg_status",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Pg_status),
 									   DbHelper.MakeInParam("@alloweditpost",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Alloweditpost),
 									   DbHelper.MakeInParam("@allowstickthread",(DbType)SqlDbType.TinyInt,1,adminGroupsInfo.Allowstickthread),
@@ -2094,7 +2094,7 @@ namespace SAS.Data.SqlServer
 					                DbHelper.MakeInParam("@en_sell", (DbType)SqlDbType.Int,4,_companyInfo.En_sell),
 					                DbHelper.MakeInParam("@en_address", (DbType)SqlDbType.VarChar,500,_companyInfo.En_address),
 					                DbHelper.MakeInParam("@en_areas", (DbType)SqlDbType.Int,4,_companyInfo.En_areas),
-					                DbHelper.MakeInParam("@en_desc", (DbType)SqlDbType.Text,16,_companyInfo.En_desc),
+					                DbHelper.MakeInParam("@en_desc", (DbType)SqlDbType.Text,0,_companyInfo.En_desc),
 					                DbHelper.MakeInParam("@en_post", (DbType)SqlDbType.VarChar,20,_companyInfo.En_post),
 					                DbHelper.MakeInParam("@en_mobile", (DbType)SqlDbType.VarChar,20,_companyInfo.En_mobile),
 					                DbHelper.MakeInParam("@en_phone", (DbType)SqlDbType.VarChar,20,_companyInfo.En_phone),
@@ -2192,7 +2192,7 @@ namespace SAS.Data.SqlServer
 					                DbHelper.MakeInParam("@en_sell", (DbType)SqlDbType.Int,4,_companyInfo.En_sell),
 					                DbHelper.MakeInParam("@en_address", (DbType)SqlDbType.VarChar,500,_companyInfo.En_address),
 					                DbHelper.MakeInParam("@en_areas", (DbType)SqlDbType.Int,4,_companyInfo.En_areas),
-					                DbHelper.MakeInParam("@en_desc", (DbType)SqlDbType.Text,16,_companyInfo.En_desc),
+					                DbHelper.MakeInParam("@en_desc", (DbType)SqlDbType.Text,0,_companyInfo.En_desc),
 					                DbHelper.MakeInParam("@en_post", (DbType)SqlDbType.VarChar,20,_companyInfo.En_post),
 					                DbHelper.MakeInParam("@en_mobile", (DbType)SqlDbType.VarChar,20,_companyInfo.En_mobile),
 					                DbHelper.MakeInParam("@en_phone", (DbType)SqlDbType.VarChar,20,_companyInfo.En_phone),
@@ -2255,6 +2255,27 @@ namespace SAS.Data.SqlServer
                 commandText.AppendFormat(" AND [en_name] like '%{0}%'", RegEsc(keyword));
             }
             return commandText.ToString();
+        }
+
+        /// <summary>
+        /// 企业数据分页操作
+        /// </summary>
+        /// <param name="pageindex">当前页</param>
+        /// <param name="pagesize">页面尺寸</param>
+        /// <param name="ordercolumn">排序列名</param>
+        /// <param name="ordertype">排序方式</param>
+        /// <param name="conditions">条件</param>
+        /// <returns></returns>
+        public DataTable GetCompanyPageList(int pageindex, int pagesize, string ordercolumn, string ordertype, string conditions)
+        {
+            DbParameter[] parms = {
+                          DbHelper.MakeInParam("@pageindex",(DbType)SqlDbType.Int,4,pageindex),
+                          DbHelper.MakeInParam("@pagesize",(DbType)SqlDbType.Int,4,pagesize),
+                          DbHelper.MakeInParam("@column",(DbType)SqlDbType.VarChar,20,ordercolumn),
+                          DbHelper.MakeInParam("@ordertype",(DbType)SqlDbType.VarChar,5,ordertype),
+                          DbHelper.MakeInParam("@conditions",(DbType)SqlDbType.NVarChar,2000,conditions)
+            };
+            return DbHelper.ExecuteDataset(CommandType.StoredProcedure, string.Format("{0}getcompanylist", BaseConfigs.GetTablePrefix), parms).Tables[0];
         }
         #endregion
 

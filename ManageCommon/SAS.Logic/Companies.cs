@@ -97,6 +97,27 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 获取Table型企业信息集合（缓存）
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetCompanyTableList()
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            DataTable companylist = cache.RetrieveObject("/SAS/CompanyTableList") as DataTable;
+
+            if (companylist == null)
+            {
+                companylist = SAS.Data.DataProvider.Companies.GetCompanyAllList();
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 300;
+                cache.LoadCacheStrategy(ica);
+                cache.AddObject("/SAS/CompanyTableList", companylist);
+                cache.LoadDefaultCacheStrategy();
+            }
+            return companylist;
+        }
+
+        /// <summary>
         /// 获取最新加入企业
         /// </summary>
         /// <returns></returns>
