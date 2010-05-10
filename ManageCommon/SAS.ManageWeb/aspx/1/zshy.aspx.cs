@@ -53,6 +53,22 @@ namespace SAS.ManageWeb
         /// </summary>
         protected string keyword = SASRequest.GetString("keyword");
         /// <summary>
+        /// 当前页码
+        /// </summary>
+        public int pageid = SASRequest.GetInt("page", 1);
+        /// <summary>
+        /// 公司总数
+        /// </summary>
+        public int companycount = 0;
+        /// <summary>
+        /// 分页总数
+        /// </summary>
+        public int pagecount = 1;
+        /// <summary>
+        /// 页码链接
+        /// </summary>
+        public string pagenumbers = "";
+        /// <summary>
         /// 搜索关键字
         /// </summary>
         private string searchkey = "";
@@ -81,6 +97,7 @@ namespace SAS.ManageWeb
             script += "\r\n<script src=\"" + forumpath + "javascript/locations.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/jquery.cluetip-min.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/template_catalogadmin.js\" type=\"text/javascript\"></script>";
+            SetConditionAndPage();
 
             string loadscript = "\r\n " + "jQuery(document).ready(function() {"
                     + "\r\n " + "jQuery(\"#thelocation\").LoadLocation({provinceid:" + provinceid + ",cityid:" + cityid + ",areaid:" + areaid + ",urlparms:'zshy-" + catalogid + "-{1}-{2}-{3}-" + entypeid + "-" + regyear + "-" + ordertype + "-" + keyword + ".html'});"
@@ -91,7 +108,7 @@ namespace SAS.ManageWeb
 			        + "\r\n " + "  jQuery(this).focus(function(){jQuery(this).attr(\"class\",\"input2_soon\");});"
 		            + "\r\n " + "});"
                     + "\r\n " + "});\r\n";
-            AddfootScript(loadscript);
+            AddfootScript(loadscript);            
 
             if (catalogid == 0) cataloglist = Catalogs.GetAllCatalogBySort(1);
             else
@@ -112,6 +129,8 @@ namespace SAS.ManageWeb
                     pagetitle = "浙商黄页-浙商黄页-" + _cli.name;
                 }
             }
+
+            
         }
 
         /// <summary>
@@ -122,8 +141,8 @@ namespace SAS.ManageWeb
             if (areaid > 0) arealist = areaid.ToString();
             else if (cityid > 0) arealist = areas.GetDistrictIDByCity(cityid);
             else if (provinceid > 0) arealist = areas.GetDistrictIDByProvince(provinceid);
-
             condition = Companies.GetCompanyCondition(catalogid, arealist, entypeid, regyear, searchkey);
+            //companycount = Companies.get
 
         }
     }

@@ -1957,7 +1957,7 @@ namespace SAS.Data
         /// <param name="ordertype">排序方式</param>
         /// <param name="conditions">条件</param>
         /// <returns></returns>
-        DataTable GetCompanyPageList(int pageindex, int pagesize, string ordercolumn, string ordertype, string conditions);
+        IDataReader GetCompanyPageList(int pageindex, int pagesize, string ordercolumn, string ordertype, string conditions);
         #endregion
 
         #region 行业类别操作
