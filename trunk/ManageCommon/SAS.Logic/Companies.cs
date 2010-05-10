@@ -97,6 +97,20 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 企业数据分页操作
+        /// </summary>
+        /// <param name="pageindex">当前页</param>
+        /// <param name="pagesize">页面尺寸</param>
+        /// <param name="ordercolumn">排序列名</param>
+        /// <param name="ordertype">排序方式</param>
+        /// <param name="conditions">条件</param>
+        /// <returns></returns>
+        public static List<Companys> GetCompanyPageList(int pageindex, int pagesize, string ordercolumn, string ordertype, string conditions)
+        {
+            return SAS.Data.DataProvider.Companies.GetCompanyPageList(pageindex, pagesize, ordercolumn, ordertype, conditions);
+        }
+
+        /// <summary>
         /// 获取Table型企业信息集合（缓存）
         /// </summary>
         /// <returns></returns>

@@ -202,9 +202,16 @@ namespace SAS.Data.DataProvider
         /// <param name="ordertype">排序方式</param>
         /// <param name="conditions">条件</param>
         /// <returns></returns>
-        public static DataTable GetCompanyPageList(int pageindex, int pagesize, string ordercolumn, string ordertype, string conditions)
+        public static List<Companys> GetCompanyPageList(int pageindex, int pagesize, string ordercolumn, string ordertype, string conditions)
         {
-            return DatabaseProvider.GetInstance().GetCompanyPageList(pageindex, pagesize, ordercolumn, ordertype, conditions);
+            List<Companys> list = new List<Companys>();
+            IDataReader reader = DatabaseProvider.GetInstance().GetCompanyPageList(pageindex, pagesize, ordercolumn, ordertype, conditions);
+            while (reader.Read())
+            {
+                list.Add(LoadSingleCompanyInfo(reader));
+            }
+            reader.Close();
+            return list;
         }
     }
 }
