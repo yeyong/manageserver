@@ -1071,7 +1071,7 @@ namespace SAS.Common
 
             for (int i = startPage; i <= endPage; i++)
             {
-                if (i == countPage)
+                if (i == curPage)
                 {
                     s.Append("<span class=\"page2\">");
                     s.Append(i);
