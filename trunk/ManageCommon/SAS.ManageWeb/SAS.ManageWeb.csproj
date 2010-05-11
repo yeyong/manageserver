@@ -1491,6 +1491,7 @@
     <Content Include="templates\default\images\aa\zhuti.png" />
     <Content Include="templates\default\images\bg1.gif" />
     <Content Include="templates\default\images\cross.png" />
+    <Content Include="templates\default\images\icon\arrow6.gif" />
     <Content Include="templates\default\images\inquiry-bg1.gif" />
     <Content Include="templates\default\images\inquiry-bg2.gif" />
     <Content Include="templates\default\images\soso5.gif" />

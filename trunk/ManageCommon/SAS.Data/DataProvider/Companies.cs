@@ -213,5 +213,13 @@ namespace SAS.Data.DataProvider
             reader.Close();
             return list;
         }
+
+        /// <summary>
+        /// 获取符合条件的企业数
+        /// </summary>
+        public static int GetCompanyCountByConditions(string conditions)
+        {
+            return DatabaseProvider.GetInstance().GetCompanyCountByConditions(conditions);
+        }
     }
 }
