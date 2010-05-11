@@ -2233,7 +2233,7 @@ namespace SAS.Data.SqlServer
         /// <returns></returns>
         public string GetCompanyCondition(int catalogid, string arealist, int typeid, int regyear, string keyword)
         {
-            StringBuilder commandText = new StringBuilder(" [en_status] = 2");
+            StringBuilder commandText = new StringBuilder(" [en_visble] = 1");
             if (catalogid > 0)
             {
                 commandText.AppendFormat(" AND CHARINDEX(',' + RTRIM('{0}') + ',',',' + [en_cataloglist] + ',') <> 0", catalogid);
