@@ -1958,6 +1958,10 @@ namespace SAS.Data
         /// <param name="conditions">条件</param>
         /// <returns></returns>
         IDataReader GetCompanyPageList(int pageindex, int pagesize, string ordercolumn, string ordertype, string conditions);
+        /// <summary>
+        /// 获取符合条件的企业数
+        /// </summary>
+        int GetCompanyCountByConditions(string conditions);
         #endregion
 
         #region 行业类别操作

@@ -57,6 +57,10 @@ namespace SAS.ManageWeb
         /// </summary>
         public int pageid = SASRequest.GetInt("page", 1);
         /// <summary>
+        /// 页面尺寸
+        /// </summary>
+        public int pagesize = 0;
+        /// <summary>
         /// 公司总数
         /// </summary>
         public int companycount = 0;
@@ -64,6 +68,10 @@ namespace SAS.ManageWeb
         /// 分页总数
         /// </summary>
         public int pagecount = 1;
+        /// <summary>
+        /// 指定最大查询数
+        /// </summary>
+        private int maxseachnumber = 10000;
         /// <summary>
         /// 页码链接
         /// </summary>
@@ -96,8 +104,7 @@ namespace SAS.ManageWeb
             script += "\r\n<script src=\"" + forumpath + "javascript/jqueryFunc.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/locations.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/jquery.cluetip-min.js\" type=\"text/javascript\"></script>";
-            script += "\r\n<script src=\"" + forumpath + "javascript/template_catalogadmin.js\" type=\"text/javascript\"></script>";
-            SetConditionAndPage();
+            script += "\r\n<script src=\"" + forumpath + "javascript/template_catalogadmin.js\" type=\"text/javascript\"></script>";            
 
             string loadscript = "\r\n " + "jQuery(document).ready(function() {"
                     + "\r\n " + "jQuery(\"#thelocation\").LoadLocation({provinceid:" + provinceid + ",cityid:" + cityid + ",areaid:" + areaid + ",urlparms:'zshy-" + catalogid + "-{1}-{2}-{3}-" + entypeid + "-" + regyear + "-" + ordertype + "-" + keyword + ".html'});"
@@ -130,7 +137,7 @@ namespace SAS.ManageWeb
                 }
             }
 
-            
+            SetConditionAndPage();
         }
 
         /// <summary>
@@ -142,8 +149,16 @@ namespace SAS.ManageWeb
             else if (cityid > 0) arealist = areas.GetDistrictIDByCity(cityid);
             else if (provinceid > 0) arealist = areas.GetDistrictIDByProvince(provinceid);
             condition = Companies.GetCompanyCondition(catalogid, arealist, entypeid, regyear, searchkey);
-            //companycount = Companies.get
+            companycount = Companies.GetCompanyCount(condition);
+            pagesize = TypeConverter.ObjectToInt(config.Tpp, 0);
+            //获取总页数
+            pagecount = companycount % pagesize == 0 ? companycount / pagesize : companycount / pagesize + 1;
+            if (pagecount == 0) pagecount = 1;
+            pageid = pageid < 1 ? 1 : pageid;
+            pageid = pageid > pagecount ? pagecount : pageid;
+            if (pageid * pagesize > companycount) pagesize = pagesize - (pagesize * pageid - companycount);
 
+            pagenumbers = Utils.GetCompanyPageNumbers(pageid, pagecount, string.Format("zshy-{0}-{1}-{2}-{3}-{4}-{5}-{6}-{7}.html", catalogid, provinceid, cityid, areaid, entypeid, regyear, ordertype, keyword), 10);
         }
     }
 }

@@ -2277,6 +2277,17 @@ namespace SAS.Data.SqlServer
             };
             return DbHelper.ExecuteReader(CommandType.StoredProcedure, string.Format("{0}getcompanylist", BaseConfigs.GetTablePrefix), parms);
         }
+
+        /// <summary>
+        /// 获取符合条件的企业数
+        /// </summary>
+        /// <param name="conditions"></param>
+        /// <returns></returns>
+        public int GetCompanyCountByConditions(string conditions)
+        {
+            DbParameter[] parms = { DbHelper.MakeInParam("@conditions", (DbType)SqlDbType.VarChar, 2000, conditions) };
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.StoredProcedure, string.Format("{0}getcompanycountbycondition", BaseConfigs.GetTablePrefix), parms));
+        }
         #endregion
 
         #region 行业信息操作

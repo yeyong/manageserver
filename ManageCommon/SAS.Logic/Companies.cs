@@ -97,6 +97,16 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 根据条件取得公司总数
+        /// </summary>
+        /// <param name="conditions"></param>
+        /// <returns></returns>
+        public static int GetCompanyCount(string conditions)
+        {
+            return SAS.Data.DataProvider.Companies.GetCompanyCountByConditions(conditions);
+        }
+
+        /// <summary>
         /// 企业数据分页操作
         /// </summary>
         /// <param name="pageindex">当前页</param>

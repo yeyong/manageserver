@@ -16,22 +16,39 @@
 		</dl>
 		<dl class="zshynr mar_top_5" id="put">
 			<dt class="zshynrtit">
+			    <p class="zshynrt4">
+					<span class="zshynrt5">
+					<em>搜索：</em>
+					<em><input type="text" name="text" class="input2_soout" style="width:200px;" /></em>
+					<em><input type="submit" name="Submit" class="so1" value="" /></em>
+					</span>
+					<span class="zshynrt2">
+					<em class="zshynrt6">1/100</em>
+					<em class="zshynrt6">
+						<a title="上一页" href="#" class="l_666"><i><img src="templates/{templatepath}/images/icon/arrow6.gif" /></i></a>
+						<a title="下一页" href="#" class="l_666">
+						<i>下一页</i>
+						<i><img src="templates/{templatepath}/images/icon/arrow1.gif" /></i>
+						</a>
+					</em>
+					</span>
+				</p>
 				<p class="zshynrt1" id="thelocation">
 					<em>
-					<select name="province" style="width:88px">
+					<select name="province" style="width:100px;">
 					</select>
 					</em>
 					<em>
-					<select name="city" style="width:88px">
+					<select name="city" style="width:100px;">
 					</select>
 					</em>
 					<em>
-					<select name="areas" style="width:88px">
+					<select name="areas" style="width:100px;">
 					</select>
 					</em>
 					<em class="zshyline"></em>
 					<em>
-					<select name="" onchange="window.location='zshy-{catalogid}-{provinceid}-{cityid}-{areaid}-'+this.value+'-{regyear}-{ordertype}-{keyword}.html';">
+					<select name="" onchange="window.location='zshy-{catalogid}-{provinceid}-{cityid}-{areaid}-'+this.value+'-{regyear}-{ordertype}-{keyword}.html';" style="width:120px;">
 						<option value="0">所有业务类型</option>
 						<%loop (string) zshytypestr Enum.GetNames(entype_enum.GetType())%>
 				        <%set (int) {zshytypevalue}=Convert.ToInt16(Enum.Parse(entype_enum.GetType(), zshytypestr))%>
@@ -45,7 +62,7 @@
 					</select>
 					</em>
 					<em>
-					<select name="" onchange="window.location='zshy-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-'+this.value+'-{ordertype}-{keyword}.html';">
+					<select name="" onchange="window.location='zshy-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-'+this.value+'-{ordertype}-{keyword}.html';" style="width:100px;">
 						<option>所有注册年份</option>
 						<option value="5">超过5年</option>
 						<option value="3">超过3年</option>
@@ -63,13 +80,6 @@
 						</em>
 					</span>
 				</p>
-				<p class="zshynrt4">
-					<span class="zshynrt5">
-					<em><input type="text" name="text" class="input2_soout" style="width:220px;" /></em>
-					<em><input type="submit" name="Submit" class="so1" value="" /></em>
-					</span>
-					<span class="zshynrt2">共<i class="f_e00101">1000</i>条</span>
-				</p>
 			</dt>
 			<dd class="zshynrdd">
 				<p class="zshynr1">
@@ -80,7 +90,8 @@
 						</em>
 					</span>
 					<span class="zshynr1ce">[<a title="" href="#" class="l_252525">浙江台州</a>]</span>
-					<span class="zshynr1ce"><a title="联系方式" href="tooltip.html" rel="tooltip.html" class="l_252525">联系方式</a></span>
+					<span class="zshynr1ce2">浏览量 <b>150</b></span>
+					<span class="zshynr1ce"><a title="联系方式" href="tooltip.html" rel="tooltip.html" class="l_e00101">联系方式</a></span>
 				</p>
 				<p class="zshynr2">
 				<a title="" href="#" class="l_e00101">查看该公司资质证书</a>
@@ -98,7 +109,8 @@
 						</em>
 					</span>
 					<span class="zshynr1ce">[<a title="" href="#" class="l_252525">浙江台州</a>]</span>
-					<span class="zshynr1ce"><a title="联系方式" href="tooltip.html" rel="tooltip.html" class="l_252525">联系方式</a></span>
+					<span class="zshynr1ce2">浏览量 <b>150</b></span>
+					<span class="zshynr1ce"><a title="联系方式" href="tooltip.html" rel="tooltip.html" class="l_e00101">联系方式</a></span>
 				</p>
 				<p class="zshynr2">
 				<a title="" href="#" class="l_e00101">查看该公司资质证书</a>
@@ -116,7 +128,8 @@
 						</em>
 					</span>
 					<span class="zshynr1ce">[<a title="" href="#" class="l_252525">浙江台州</a>]</span>
-					<span class="zshynr1ce"><a title="联系方式" href="tooltip.html" rel="tooltip.html" class="l_252525">联系方式</a></span>
+					<span class="zshynr1ce2">浏览量 <b>150</b></span>
+					<span class="zshynr1ce"><a title="联系方式" href="tooltip.html" rel="tooltip.html" class="l_e00101">联系方式</a></span>
 				</p>
 				<p class="zshynr2">
 				<a title="" href="#" class="l_e00101">查看该公司资质证书</a>
@@ -134,7 +147,8 @@
 						</em>
 					</span>
 					<span class="zshynr1ce">[<a title="" href="#" class="l_252525">浙江台州</a>]</span>
-					<span class="zshynr1ce"><a title="联系方式" href="tooltip.html" rel="tooltip.html" class="l_252525">联系方式</a></span>
+					<span class="zshynr1ce2">浏览量 <b>150</b></span>
+					<span class="zshynr1ce"><a title="联系方式" href="tooltip.html" rel="tooltip.html" class="l_e00101">联系方式</a></span>
 				</p>
 				<p class="zshynr2">
 				<a title="" href="#" class="l_e00101">查看该公司资质证书</a>
@@ -152,25 +166,8 @@
 						</em>
 					</span>
 					<span class="zshynr1ce">[<a title="" href="#" class="l_252525">浙江台州</a>]</span>
-					<span class="zshynr1ce"><a title="联系方式" href="tooltip.html" rel="tooltip.html" class="l_252525">联系方式</a></span>
-				</p>
-				<p class="zshynr2">
-				<a title="" href="#" class="l_e00101">查看该公司资质证书</a>
-				</p>
-				<p class="zshynr2">
-				<b>经营模式：</b><a title="" href="#" class="l_252525">生产加工</a>        <b class="mar_left_30">主营：</b> <a title="" href="#" class="l_252525">瓶坯模具</a>;<a title="" href="#" class="l_252525">热流道瓶盖模具</a>;<a title="" href="#" class="l_252525">吹瓶模具</a>;<a title="" href="#" class="l_252525">油瓶提手模具</a>;<a title="" href="#" class="l_252525">五加仑模具</a>;<a title="" href="#" class="l_252525">五加仑水桶模具</a>
-				</p>
-			</dd>
-			<dd class="zshynrdd2">
-				<p class="zshynr1">
-					<span class="zshynr1lt">
-						<em class="zshynr1lt1"><strong class="f_805952_18"><a title="" href="#" class="l_805952">浙江台州市黄岩恒鑫模塑有限公司</a></strong> [已核实]</em>
-						<em class="zshynr1lt2 line">
-						浙江台州市黄岩恒鑫模塑有限公司是一家专业研制生产瓶坯模具，吹瓶模具，瓶盖模具的现代化民营企业，成立于1992年，生产基地坐落在浙江黄岩浙江台州市黄岩恒鑫模塑有限公司是一家专业研制生产瓶坯模具...
-						</em>
-					</span>
-					<span class="zshynr1ce">[<a title="" href="#" class="l_252525">浙江台州</a>]</span>
-					<span class="zshynr1ce"><a title="联系方式" href="tooltip.html" rel="tooltip.html" class="l_252525">联系方式</a></span>
+					<span class="zshynr1ce2">浏览量 <b>150</b></span>
+					<span class="zshynr1ce"><a title="联系方式" href="tooltip.html" rel="tooltip.html" class="l_e00101">联系方式</a></span>
 				</p>
 				<p class="zshynr2">
 				<a title="" href="#" class="l_e00101">查看该公司资质证书</a>
@@ -181,19 +178,8 @@
 			</dd>
 		</dl>
 		<div class="page f_666">
-			<span class="page1"><a title="上一页" href="#" class="l_666">上一页</a></span>
-			<span class="page1"><a title="1" href="#" class="l_666">1</a></span>
-			<span class="page2">2</span>
-			<span class="page1"><a title="3" href="#" class="l_666">3</a></span>
-			<span class="page1"><a title="4" href="#" class="l_666">4</a></span>
-			<span class="page1"><a title="5" href="#" class="l_666">5</a></span>
-			<span class="page1"><a title="6" href="#" class="l_666">6</a></span>
-			<span class="page1"><a title="7" href="#" class="l_666">7</a></span>
-			<span class="page1"><a title="5" href="#" class="l_666">8</a></span>
-			<span class="page1"><a title="6" href="#" class="l_666">9</a></span>
-			<span class="page1"><a title="7" href="#" class="l_666">10</a></span>
-			<span class="page1"><a title="下一页" href="#" class="l_666">下一页</a></span>
-			共100页　到第
+			{pagenumbers}
+			共{pagecount}页　到第
 			<input type="text" name="textfield" class="input3" style="width:25px;" />
 			页
 			<input type="button" name="button1" class="agree1" value="确 定" />
