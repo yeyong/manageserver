@@ -15,8 +15,8 @@
 .zshynr{ width:740px; height:auto; float:left; overflow:hidden;}
 .zshynrdd{ padding:10px 0 10px 0; color:#666; border-bottom:1px solid #eee; float:left;}
 .zshynrdd2{ padding:10px 0 10px 0; color:#666; background:#f8f7f7; border-bottom:1px solid #eee; float:left;}
-.zshynrtit{ width:720px; height:52px; background:url(../images/bg1.gif) repeat-x; padding:5px 10px 0; float:left;}
-.zshynrt1{ width:710px; height:28px; line-height:26px; float:left;}
+.zshynrtit{ width:740px; height:67px; float:left;}
+.zshynrt1{ width:718px; height:26px; line-height:20px; background:url(../images/bg1.gif) repeat-x; padding:5px 10px 0; border:1px solid #f9e0ab; float:left;}
 .zshynrt1 em{ margin-right:7px; float:left;}
 .zshyline{ width:1px; height:15px; margin:5px 0 0 0; background:#d0c3c0;}
 .zshynrt2{ height:28px; line-height:26px; text-align:left; float:right;}
@@ -28,16 +28,24 @@
 .zshynrt3 i:hover{ background:#eee;}
 .zshynrt3 i.hover{ background:#eee;}
 .zshynrt3 img{ margin:0 2px 0 0;}
-.zshynrt4{ width:710px; height:26px; line-height:20px; padding:1px 0 0 0; float:left;}
-.zshynrt5{ width:550px; height:26px; float:left;}
+.zshynrt4{ width:720px; height:28px; line-height:26px; background:url(../images/line-bg1.jpg) 0 -47px repeat-x; padding:10px 10px 0; float:left;}
+.zshynrt5{ width:350px; height:26px; float:left;}
+.zshynrt5 em{ margin:0 5px 0 0; display:inline; float:left;}
+.zshynrt6{ width:auto; height:26px; float:left;}
+.zshynrt6 a{ width:auto; height:17px; line-height:17px; text-align:center; background:#fff; border:1px solid #b4b4b4; margin:0 0 0 7px; padding:0 6px; float:left;}
+.zshynrt6 a:hover{ width:auto; height:17px; line-height:17px; border:1px solid #9c827d; padding:0 6px; float:left}
+.zshynrt6 i{ line-height:14px; margin:2px 0 0 0; float:left;}
+.zshynrt6 img{ margin:2px 0 0 0;}
 .zshypos{ width:120px; height:18px; line-height:18px; border:1px solid #7e9db9; background:#fff url(../images/icon/arrow3.gif) bottom right no-repeat; display:inline; padding:0 0 0 2px; float:left;}
 .zshynr1{ width:740px; height:90px; text-align:left; margin:0 0 5px 0; float:left;}
 .zshynr1lt{ width:425px; height:90px; text-align:left; margin:0 0 0 5px; float:left;}
 .zshynr1lt1{ width:425px; height:30px; line-height:30px; letter-spacing:1px; float:left;}
 .zshynr1lt2{ width:425px; height:60px; line-height:20px; float:left;}
-.zshynr1ce{ width:140px; height:90px; line-height:30px; text-align:right; margin-right:15px; float:left;}
+.zshynr1ce{ width:90px; height:90px; line-height:30px; text-align:right; margin-right:10px; float:left;}
+.zshynr1ce2{ width:50px; height:90px; line-height:30px; text-align:center; margin:0 10px 0 40px; float:left;}
+.zshynr1ce2 b{display:block; color:#f00;}
 .zshynr2{ width:735px; height:25px; line-height:25px; text-align:left; margin:0 0 0 5px; float:left;}
-.zscard{ width:330px; height:205px; margin:10px 20px; display:inline; position:relative; overflow:hidden; float:left;}
+.zscard{ width:330px; height:205px; margin:20px 20px 10px; display:inline; position:relative; overflow:hidden; float:left;}
 .zscard img{ width:330px; height:205px; float:left;}
 .zscard1{ width:305px; height:155px; padding:55px 10px 0; float:left;}
 .zscard1zt1{ width:300px; height:25px; line-height:25px; text-align:left; float:left;}
@@ -77,7 +85,10 @@
 .tbshow td{ color:#666; line-height:25px; text-align:left;}
 .tbshow td b{ color:#333;}
 .tbshow td a{ margin:0 15px 0 0;}
-.zsshowltnr{ width:678px; height:auto; line-height:25px; text-align:left; letter-spacing:1px; text-indent:2em; margin:20px 0; display:inline; float:left;}
+.zsshowltnr{ width:678px; height:auto; line-height:24px; letter-spacing:1px; margin:20px 0; display:inline; float:left;}
+.zsswinf{ width:330px; height:245px; clear:left; margin:8px 15px 0 0; display:inline; float:left;}
+.zsswinf p{ width:330px; height:auto; float:left;}
+.zsswinf b{ width:330px; height:40px; text-align:center; line-height:40px; float:left;}
 .zsshowltnr1{ width:678px; height:30px; float:left;}
 .zsshowltnr1 img{ width:678px; height:30px; float:left;}
 .tbhot{ width:100%; background:#e6e4e4; float:left;}
