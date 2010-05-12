@@ -76,8 +76,8 @@ a:hover{ color:#e00201; text-decoration:underline;}
 input.agree1{ width:39px; height:20px; line-height:20px; text-align:center; background:url(../images/agree1.gif) no-repeat; color:#fff; border:0px; cursor:pointer;}
 input.tijiaoan1{ width:93px; height:30px; line-height:30px; text-align:center; background:url(../images/tijiao-an1.gif) no-repeat; color:#fff; font-size:16px; font-weight:bold; border:0px; cursor:pointer;}
 input.tijiaoan2{ width:93px; height:30px; line-height:30px; text-align:center; background:url(../images/tijiao-an2.gif) no-repeat; color:#000; font-size:16px; font-weight:bold; border:0px; cursor:pointer;}
-input.so1{ width:53px; height:20px; text-align:center; background:url(../images/soso2.gif) bottom no-repeat; color:#fff; border:0px; cursor:pointer;}
-input.so1:hover{ width:53px; height:20px; line-height:20px; text-align:center; background:url(../images/soso2.gif) no-repeat; color:#fff; border:0px; cursor:pointer;}
+input.so1{ width:53px; height:21px; line-height:21px; text-align:center; background:url(../images/soso2.gif) bottom no-repeat; color:#fff; border:0px; cursor:pointer;}
+input.so1:hover{ width:53px; height:21px; line-height:21px; text-align:center; background:url(../images/soso2.gif) no-repeat; color:#fff; border:0px; cursor:pointer;}
 input.so2{ width:71px; height:25px; background:url(../images/soso5.gif) top no-repeat; border:0; float:left; cursor:pointer;}
 input.so2:hover{ width:71px; height:25px; background:url(../images/soso5.gif) bottom no-repeat; border:0; float:left; cursor:pointer;}
 /*select*/
