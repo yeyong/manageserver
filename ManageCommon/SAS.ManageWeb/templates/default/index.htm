@@ -93,12 +93,19 @@
 				<%/if%>
 				<li>
 					<b>{cityinfo1[CityName]}：</b>
-					<%set (DataRow[]){companylistbycity} = Companies.GetCompanyListByCity({cityinfo[CityID]})%>
+					<%set {companylistbycity}=Companies.GetCompanyListByCity({strtoint({cityinfo1[CityID]})})%>
+					<%set (int) {companyinfolength}=0%>
 					<%loop (DataRow) companyinfobycity companylistbycity%>
-					    <%if {companyinfobycity__loop__id}>4%>
+					    <%set {companyinfolength}={companyinfolength}+{companyinfobycity[en_name]}.Length%>
+					    <%set (string) {companyinfoname}={companyinfobycity[en_name]}%>
+					    <%if {companyinfolength}>28%>
+					    <%set {companyinfoname}=Utils.CutString({companyinfoname},0,28-{companyinfolength}+{companyinfobycity[en_name]}.Length)%>
+					    <a title="{companyinfobycity[en_name]}" href="#">{companyinfoname}</a>
 				        <%break%>
+				        <%else%>
+				        <a title="{companyinfobycity[en_name]}" href="#">{companyinfoname}</a>
 				        <%/if%>
-					<a title="{companyinfobycity[en_name]}" href="#">{companyinfobycity[en_name]}</a>
+					
 					<%/loop%>
 				</li>
 				<%/loop%>
