@@ -19,6 +19,10 @@ namespace SAS.ManageWeb
         protected DataRow[] cataloglist2;
         protected DataRow[] cataloglist3;
         /// <summary>
+        /// 城市企业信息
+        /// </summary>
+        protected DataRow[] companylistbycity;
+        /// <summary>
         /// 友情链接列表
         /// </summary>
         protected DataTable friendlinklist = Caches.GetSASLinkList();
