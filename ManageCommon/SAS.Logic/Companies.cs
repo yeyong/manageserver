@@ -18,6 +18,7 @@ namespace SAS.Logic
     public class Companies
     {
         private static Predicate<Companys> marchPass = new Predicate<Companys>(delegate(Companys companyinfo) { return companyinfo.En_status == 2 && companyinfo.En_visble == 1; });
+        private const string COMMSORT = "[en_credits] DESC,[en_accesses] DESC";
         
         /// <summary>
         /// 创建企业信息
@@ -167,7 +168,7 @@ namespace SAS.Logic
         public static DataRow[] GetCompanyListByCity(int cityid)
         {
             DataTable dt = GetCompanyTableList();
-            return dt.Select("[en_areas] IN (" + areas.GetDistrictIDByCity(cityid) + ")");
+            return dt.Select("[en_areas] IN (" + areas.GetDistrictIDByCity(cityid) + ")", COMMSORT);
         }
 
         /// <summary>
