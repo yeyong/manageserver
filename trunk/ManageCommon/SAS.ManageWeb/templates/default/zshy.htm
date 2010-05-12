@@ -19,11 +19,11 @@
 			    <p class="zshynrt4">
 					<span class="zshynrt5">
 						<em>搜索：</em>
-						<em class="zshymar_t"><input type="text" name="text" class="input2_soout" style="width:200px;" /></em>
-						<em><input type="submit" name="Submit" class="so1" value="" /></em>
+						<em class="zshymar_t"><input type="text" name="text" id="zshykeyword" class="input2_soout" style="width:200px;" /></em>
+						<em><input type="submit" name="Submit" class="so1" value="" onclick="window.location='zshy-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-{ordertype}-'+getsearchvalue(document.getElementById('zshykeyword').value)+'.html';"/></em>
 					</span>
 					<span class="zshynrt2">
-					    <em class="zshynrt6">共 <b class="f_e00101">12033</b> 条 1/100</em>
+					    <em class="zshynrt6">共 <b class="f_e00101">{companycount}</b> 条 {pageid}/{pagecount}</em>
 					    <em class="zshynrt6">
 						    <a title="上一页" href="#" class="l_666"><i><img src="templates/{templatepath}/images/icon/arrow6.gif" /></i></a>
 						    <a title="下一页" href="#" class="l_666">
@@ -62,12 +62,12 @@
 					</select>
 					</em>
 					<em>
-					<select name="" onchange="window.location='zshy-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-'+this.value+'-{ordertype}-{keyword}.html';" style="width:100px;">
+					<select name="regyear" onchange="window.location='zshy-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-'+this.value+'-{ordertype}-{keyword}.html';" style="width:100px;">
 						<option>所有注册年份</option>
-						<option value="5">超过5年</option>
-						<option value="3">超过3年</option>
-						<option value="2">超过2年</option>
-						<option value="1">1年以下</option>
+						<option value="5" <%if {regyear}==5%>selected<%/if%>>超过5年</option>
+						<option value="3" <%if {regyear}==3%>selected<%/if%>>超过3年</option>
+						<option value="2" <%if {regyear}==2%>selected<%/if%>>超过2年</option>
+						<option value="1" <%if {regyear}==1%>selected<%/if%>>1年以下</option>
 					</select>
 					</em>
 					<em class="zshyline"></em>
@@ -81,10 +81,21 @@
 					</span>
 				</p>
 			</dt>
-			<dd class="zshynrdd">
+			<%loop (Companys) zshycompanyinfo companylist%>
+			<%set (string) {zshyddcss}="zshynrdd"%>
+			<%if {zshycompanyinfo__loop__id}%2==0%>
+			    <%set {zshyddcss}="zshynrdd2"%>
+			<%/if%>
+			<%set (string) {zshycompanystatus}="未审核"%>
+			<%if {zshycompanyinfo.en_status}==1%>
+			<%set {zshycompanystatus}="审核中"%>
+			<%else if {zshycompanyinfo.en_status}==2%>
+			<%set {zshycompanystatus}="已审核"%>
+			<%/if%>
+			<dd class="{zshyddcss}">
 				<p class="zshynr1">
 					<span class="zshynr1lt">
-						<em class="zshynr1lt1"><strong class="f_805952_18"><a title="" href="#" class="l_805952">浙江台州市黄岩恒鑫模塑有限公司</a></strong> [已核实]</em>
+						<em class="zshynr1lt1"><strong class="f_805952_18"><a title="{zshycompanyinfo.en_name}" href="#" class="l_805952">{zshycompanyinfo.en_name}</a></strong> [{zshycompanystatus}]</em>
 						<em class="zshynr1lt2 line">
 						浙江台州市黄岩恒鑫模塑有限公司是一家专业研制生产瓶坯模具，吹瓶模具，瓶盖模具的现代化民营企业，成立于1992年，生产基地坐落在浙江黄岩浙江台州市黄岩恒鑫模塑有限公司是一家专业研制生产瓶坯模具...
 						</em>
@@ -100,82 +111,7 @@
 				<b>经营模式：</b><a title="" href="#" class="l_252525">生产加工</a>        <b class="mar_left_30">主营：</b> <a title="" href="#" class="l_252525">瓶坯模具</a>;<a title="" href="#" class="l_252525">热流道瓶盖模具</a>;<a title="" href="#" class="l_252525">吹瓶模具</a>;<a title="" href="#" class="l_252525">油瓶提手模具</a>;<a title="" href="#" class="l_252525">五加仑模具</a>;<a title="" href="#" class="l_252525">五加仑水桶模具</a>
 				</p>
 			</dd>
-			<dd class="zshynrdd2">
-				<p class="zshynr1">
-					<span class="zshynr1lt">
-						<em class="zshynr1lt1"><strong class="f_805952_18"><a title="" href="#" class="l_805952">浙江台州市黄岩恒鑫模塑有限公司</a></strong> [已核实]</em>
-						<em class="zshynr1lt2 line">
-						浙江台州市黄岩恒鑫模塑有限公司是一家专业研制生产瓶坯模具，吹瓶模具，瓶盖模具的现代化民营企业，成立于1992年，生产基地坐落在浙江黄岩浙江台州市黄岩恒鑫模塑有限公司是一家专业研制生产瓶坯模具...
-						</em>
-					</span>
-					<span class="zshynr1ce">[<a title="" href="#" class="l_252525">浙江台州</a>]</span>
-					<span class="zshynr1ce2">浏览量 <b>150</b></span>
-					<span class="zshynr1ce"><a title="联系方式" href="tooltip.html" rel="tooltip.html" class="l_e00101">联系方式</a></span>
-				</p>
-				<p class="zshynr2">
-				<a title="" href="#" class="l_e00101">查看该公司资质证书</a>
-				</p>
-				<p class="zshynr2">
-				<b>经营模式：</b><a title="" href="#" class="l_252525">生产加工</a>        <b class="mar_left_30">主营：</b> <a title="" href="#" class="l_252525">瓶坯模具</a>;<a title="" href="#" class="l_252525">热流道瓶盖模具</a>;<a title="" href="#" class="l_252525">吹瓶模具</a>;<a title="" href="#" class="l_252525">油瓶提手模具</a>;<a title="" href="#" class="l_252525">五加仑模具</a>;<a title="" href="#" class="l_252525">五加仑水桶模具</a>
-				</p>
-			</dd>
-			<dd class="zshynrdd">
-				<p class="zshynr1">
-					<span class="zshynr1lt">
-						<em class="zshynr1lt1"><strong class="f_805952_18"><a title="" href="#" class="l_805952">浙江台州市黄岩恒鑫模塑有限公司</a></strong> [已核实]</em>
-						<em class="zshynr1lt2 line">
-						浙江台州市黄岩恒鑫模塑有限公司是一家专业研制生产瓶坯模具，吹瓶模具，瓶盖模具的现代化民营企业，成立于1992年，生产基地坐落在浙江黄岩浙江台州市黄岩恒鑫模塑有限公司是一家专业研制生产瓶坯模具...
-						</em>
-					</span>
-					<span class="zshynr1ce">[<a title="" href="#" class="l_252525">浙江台州</a>]</span>
-					<span class="zshynr1ce2">浏览量 <b>150</b></span>
-					<span class="zshynr1ce"><a title="联系方式" href="tooltip.html" rel="tooltip.html" class="l_e00101">联系方式</a></span>
-				</p>
-				<p class="zshynr2">
-				<a title="" href="#" class="l_e00101">查看该公司资质证书</a>
-				</p>
-				<p class="zshynr2">
-				<b>经营模式：</b><a title="" href="#" class="l_252525">生产加工</a>        <b class="mar_left_30">主营：</b> <a title="" href="#" class="l_252525">瓶坯模具</a>;<a title="" href="#" class="l_252525">热流道瓶盖模具</a>;<a title="" href="#" class="l_252525">吹瓶模具</a>;<a title="" href="#" class="l_252525">油瓶提手模具</a>;<a title="" href="#" class="l_252525">五加仑模具</a>;<a title="" href="#" class="l_252525">五加仑水桶模具</a>
-				</p>
-			</dd>
-			<dd class="zshynrdd2">
-				<p class="zshynr1">
-					<span class="zshynr1lt">
-						<em class="zshynr1lt1"><strong class="f_805952_18"><a title="" href="#" class="l_805952">浙江台州市黄岩恒鑫模塑有限公司</a></strong> [已核实]</em>
-						<em class="zshynr1lt2 line">
-						浙江台州市黄岩恒鑫模塑有限公司是一家专业研制生产瓶坯模具，吹瓶模具，瓶盖模具的现代化民营企业，成立于1992年，生产基地坐落在浙江黄岩浙江台州市黄岩恒鑫模塑有限公司是一家专业研制生产瓶坯模具...
-						</em>
-					</span>
-					<span class="zshynr1ce">[<a title="" href="#" class="l_252525">浙江台州</a>]</span>
-					<span class="zshynr1ce2">浏览量 <b>150</b></span>
-					<span class="zshynr1ce"><a title="联系方式" href="tooltip.html" rel="tooltip.html" class="l_e00101">联系方式</a></span>
-				</p>
-				<p class="zshynr2">
-				<a title="" href="#" class="l_e00101">查看该公司资质证书</a>
-				</p>
-				<p class="zshynr2">
-				<b>经营模式：</b><a title="" href="#" class="l_252525">生产加工</a>        <b class="mar_left_30">主营：</b> <a title="" href="#" class="l_252525">瓶坯模具</a>;<a title="" href="#" class="l_252525">热流道瓶盖模具</a>;<a title="" href="#" class="l_252525">吹瓶模具</a>;<a title="" href="#" class="l_252525">油瓶提手模具</a>;<a title="" href="#" class="l_252525">五加仑模具</a>;<a title="" href="#" class="l_252525">五加仑水桶模具</a>
-				</p>
-			</dd>
-			<dd class="zshynrdd">
-				<p class="zshynr1">
-					<span class="zshynr1lt">
-						<em class="zshynr1lt1"><strong class="f_805952_18"><a title="" href="#" class="l_805952">浙江台州市黄岩恒鑫模塑有限公司</a></strong> [已核实]</em>
-						<em class="zshynr1lt2 line">
-						浙江台州市黄岩恒鑫模塑有限公司是一家专业研制生产瓶坯模具，吹瓶模具，瓶盖模具的现代化民营企业，成立于1992年，生产基地坐落在浙江黄岩浙江台州市黄岩恒鑫模塑有限公司是一家专业研制生产瓶坯模具...
-						</em>
-					</span>
-					<span class="zshynr1ce">[<a title="" href="#" class="l_252525">浙江台州</a>]</span>
-					<span class="zshynr1ce2">浏览量 <b>150</b></span>
-					<span class="zshynr1ce"><a title="联系方式" href="tooltip.html" rel="tooltip.html" class="l_e00101">联系方式</a></span>
-				</p>
-				<p class="zshynr2">
-				<a title="" href="#" class="l_e00101">查看该公司资质证书</a>
-				</p>
-				<p class="zshynr2">
-				<b>经营模式：</b><a title="" href="#" class="l_252525">生产加工</a>        <b class="mar_left_30">主营：</b> <a title="" href="#" class="l_252525">瓶坯模具</a>;<a title="" href="#" class="l_252525">热流道瓶盖模具</a>;<a title="" href="#" class="l_252525">吹瓶模具</a>;<a title="" href="#" class="l_252525">油瓶提手模具</a>;<a title="" href="#" class="l_252525">五加仑模具</a>;<a title="" href="#" class="l_252525">五加仑水桶模具</a>
-				</p>
-			</dd>
+			<%/loop%>
 		</dl>
 		<div class="page f_666">
 			{pagenumbers}
