@@ -14,3 +14,9 @@ function search(theform) {
     window.location = "zshy-" + stype2 + "-0-0-0-" + stype + "-0-0-" + encodeURIComponent(svalue).replace("'","%27") + ".html";
     return false;
 }
+
+function getsearchvalue(thevalue) {
+    var svalue = trim(thevalue);
+    svalue = svalue.replace("'", "%27");
+    return encodeURIComponent(svalue);
+}
