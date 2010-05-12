@@ -2236,7 +2236,7 @@ namespace SAS.Data.SqlServer
             StringBuilder commandText = new StringBuilder(" [en_visble] = 1");
             if (catalogid > 0)
             {
-                commandText.AppendFormat(" AND CHARINDEX(',' + RTRIM('{0}') + ',',',' + [en_cataloglist] + ',') <> 0", catalogid);
+                commandText.AppendFormat(" AND dbo.sas_catalogvaild({0},[en_cataloglist]) > 0", catalogid);
             }
             if (arealist != "")
             {

@@ -17,7 +17,8 @@ namespace SAS.Logic
     /// </summary>
     public class Companies
     {
-        private static Predicate<Companys> marchPass = new Predicate<Companys>(delegate(Companys companyinfo) { return companyinfo.En_status == 2; });
+        private static Predicate<Companys> marchPass = new Predicate<Companys>(delegate(Companys companyinfo) { return companyinfo.En_status == 2 && companyinfo.En_visble == 1; });
+        
         /// <summary>
         /// 创建企业信息
         /// </summary>
@@ -156,6 +157,17 @@ namespace SAS.Logic
                 row++;
             }
             return companylist;
+        }
+
+        /// <summary>
+        /// 根据市级信息获取企业信息
+        /// </summary>
+        /// <param name="cityid"></param>
+        /// <returns></returns>
+        public static DataRow[] GetCompanyListByCity(int cityid)
+        {
+            DataTable dt = GetCompanyTableList();
+            return dt.Select("[en_areas] IN (" + areas.GetDistrictIDByCity(cityid) + ")");
         }
 
         /// <summary>
