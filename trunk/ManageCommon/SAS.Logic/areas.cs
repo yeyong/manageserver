@@ -131,11 +131,11 @@ namespace SAS.Logic
                 cityidlist = cityidlist.Trim(',');
                 foreach (DataRow ddr in GetDistrictList().Select("CityID IN (" + cityidlist + ")"))
                 {
-                    districtlist += ddr["DistrictID"].ToString();
+                    districtlist += ddr["DistrictID"].ToString() + ",";
                 }
             }
 
-            return districtlist;
+            return districtlist.Trim(',');
         }
 
         /// <summary>
@@ -148,9 +148,9 @@ namespace SAS.Logic
             string districtlist = "";
             foreach (DataRow dr in GetDistrictList().Select("CityID = " + cityid))
             {
-                districtlist += dr["DistrictID"].ToString();
+                districtlist += dr["DistrictID"].ToString() + ",";
             }
-            return districtlist;
+            return districtlist.Trim(',');
         }
 
         /// <summary>

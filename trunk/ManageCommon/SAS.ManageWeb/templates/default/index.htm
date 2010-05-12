@@ -87,48 +87,21 @@
 				</span>
 			</p>
 			<ul class="onece2nr f_666">
+			    <%loop (DataRow) cityinfo1 indexcity%>
+			    <%if {cityinfo1__loop__id}>6%>
+				<%break%>
+				<%/if%>
 				<li>
-					<b>杭州：</b>
-					<a title="" href="#" style="color:#f00;">四季青服装</a>
-					<a title="" href="#">西湖龙井市场</a>
-					<a title="" href="#">四季青服装</a>
-					<a title="" href="#">西湖龙井市场</a>
+					<b>{cityinfo1[CityName]}：</b>
+					<%set (DataRow[]){companylistbycity} = Companies.GetCompanyListByCity({cityinfo[CityID]})%>
+					<%loop (DataRow) companyinfobycity companylistbycity%>
+					    <%if {companyinfobycity__loop__id}>4%>
+				        <%break%>
+				        <%/if%>
+					<a title="{companyinfobycity[en_name]}" href="#">{companyinfobycity[en_name]}</a>
+					<%/loop%>
 				</li>
-				<li>
-					<b>义乌：</b>
-					<a title="" href="#">义乌小商品</a>
-					<a title="" href="#">义乌小商品</a>
-					<a title="" href="#" style="color:#f00;">义乌小商品</a>
-					<a title="" href="#">义乌小商品</a>
-				</li>
-				<li>
-					<b>嘉兴：</b>
-					<a title="" href="#">海宁皮革城</a>
-					<a title="" href="#" style="color:#f00;">海宁皮革城</a>
-					<a title="" href="#">海宁皮革城</a>
-					<a title="" href="#">海宁皮革城</a>
-				</li>
-				<li>
-					<b>宁波：</b>
-					<a title="" href="#">临沂批发城</a>
-					<a title="" href="#">临沂批发城</a>
-					<a title="" href="#">临沂批发城</a>
-					<a title="" href="#">临沂批发城</a>
-				</li>
-				<li>
-					<b>金华：</b>
-					<a title="" href="#">金华大洋路市场</a>
-					<a title="" href="#" style="color:#f00;">金华大洋路市场</a>
-					<a title="" href="#">金华大洋路市场</a>
-					<a title="" href="#">金华大洋路市场</a>
-				</li>
-				<li>
-					<b>温州：</b>
-					<a title="" href="#">温州七浦路服装</a>
-					<a title="" href="#">西湖龙井市场</a>
-					<a title="" href="#">四季青服装</a>
-					<a title="" href="#">温州七浦路服装</a>
-				</li>
+				<%/loop%>
 			</ul>
 		</div>
 	</div>
@@ -154,7 +127,7 @@
 					<li>生产型企业</li>
 					<li>销售型企业</li>
 				</ul>
-				<p class="onert3tr"><a class="l_f00_u" title="" href="#">立即提交企业信息</a></p>
+				<p class="onert3tr"><a class="l_f00_u" title="" href="companypost.aspx">立即提交企业信息</a></p>
 			</div>
 			<div id="onert3con">
 				<div class="con f_333">
@@ -194,7 +167,7 @@
 <div class="cot">
 	<div class="type typew1 mar_top_8">
 		<p class="type1 type1w1">
-			<em></em><strong>行业市场</strong><span><a class="l_f00_u" title="" href="#">免费发布企业信息</a></span>
+			<em></em><strong>行业市场</strong><span><a class="l_f00_u" title="" href="companypost.aspx">免费发布企业信息</a></span>
 		</p>
 		<%loop (DataRow) cataloginfo cataloglist1%>
 		<div class="type2">

@@ -21,6 +21,10 @@ namespace SAS.ManageWeb
         /// </summary>
         protected DataTable cataloglist = new DataTable();
         /// <summary>
+        /// 企业信息列表
+        /// </summary>
+        protected SAS.Common.Generic.List<Companys> companylist;
+        /// <summary>
         /// 类别ID
         /// </summary>
         protected int catalogid = SASRequest.GetInt("cid", 0);
@@ -138,6 +142,8 @@ namespace SAS.ManageWeb
             }
 
             SetConditionAndPage();
+
+            companylist = Companies.GetCompanyPageList(pageid, pagesize, "en_accesses", ordertype == 0 ? "desc" : "", condition);
         }
 
         /// <summary>
