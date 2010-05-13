@@ -68,6 +68,7 @@ namespace SAS.ManageWeb
                 companyinfo.En_main = regmain;
 
                 companyinfo.En_status = 1;
+                companyinfo.En_visble = 1;
                 companyinfo.En_reason = "";
 
                 if (!Companies.UpdateCompanyInfo(companyinfo))

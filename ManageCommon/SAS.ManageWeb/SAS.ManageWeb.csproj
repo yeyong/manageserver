@@ -81,6 +81,9 @@
     <Compile Include="aspx\1\zshy.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="aspx\1\zsshow.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ManagePage\company\company_cardconfiggrid.aspx.cs">
       <DependentUpon>company_cardconfiggrid.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -720,7 +723,7 @@
     <Content Include="images\common\none.gif" />
     <Content Include="images\common\resize.gif" />
     <Content Include="images\invalid.gif" />
-    <Content Include="images\jquery.cluetip.css" />
+    <Content Include="templates\default\css\jquery.cluetip.css" />
     <Content Include="images\lock.gif" />
     <Content Include="images\posticons\0.gif" />
     <Content Include="images\posticons\1.gif" />
@@ -1495,6 +1498,7 @@
     <Content Include="templates\default\images\inquiry-bg1.gif" />
     <Content Include="templates\default\images\inquiry-bg2.gif" />
     <Content Include="templates\default\images\soso5.gif" />
+    <Content Include="templates\default\zsshow.htm" />
     <None Include="ManagePage\images\admin-gif\Thumbs.db" />
     <None Include="ManagePage\images\ad\Thumbs.db" />
     <None Include="ManagePage\images\Thumbs.db" />

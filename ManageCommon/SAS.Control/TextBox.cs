@@ -107,7 +107,7 @@ namespace SAS.Control
                         }
                     case "移动手机":
                         {
-                            RequiredFieldTypeREV.ValidationExpression = (this.ValidationExpression != null) ? this.ValidationExpression : "^13[0-9]{1}[0-9]{8}|^15[9]{1}[0-9]{8}";
+                            RequiredFieldTypeREV.ValidationExpression = (this.ValidationExpression != null) ? this.ValidationExpression : "^13[0-9]{1}[0-9]{8}|^15[9]{1}[0-9]{8}|^18[9]{1}[0-9]{8}";
                             RequiredFieldTypeREV.ErrorMessage = "手机的位数应为11位!"; break;
                         }
                     case "固定电话":
