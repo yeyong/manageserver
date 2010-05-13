@@ -45,6 +45,9 @@ namespace SAS.Entity
         private string _en_createdate = "";
         private string _en_cataloglist = "";
         private int _configid = 0;
+        private string _provinceName = "";
+        private string _cityName = "";
+        private string _districtName = "";
         /// <summary>
         /// 企业ID
         /// </summary>
@@ -332,6 +335,30 @@ namespace SAS.Entity
         {
             set { _configid = value; }
             get { return _configid; }
+        }
+        /// <summary>
+        /// 省
+        /// </summary>
+        public string ProvinceName
+        {
+            set { _provinceName = value; }
+            get { return _provinceName; }
+        }
+        /// <summary>
+        /// 市
+        /// </summary>
+        public string CityName
+        {
+            set { _cityName = value; }
+            get { return _cityName; }
+        }
+        /// <summary>
+        /// 地区
+        /// </summary>
+        public string DistrictName
+        {
+            set { _districtName = value; }
+            get { return _districtName; }
         }
         #endregion Model
     }
