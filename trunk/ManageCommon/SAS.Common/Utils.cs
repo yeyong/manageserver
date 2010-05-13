@@ -550,7 +550,7 @@ namespace SAS.Common
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < spacesCount; i++)
             {
-                sb.Append(" &nbsp;&nbsp;");
+                sb.Append("&nbsp;&nbsp;");
             }
             return sb.ToString();
         }

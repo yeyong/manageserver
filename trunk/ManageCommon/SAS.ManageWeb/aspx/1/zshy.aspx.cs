@@ -73,6 +73,14 @@ namespace SAS.ManageWeb
         /// </summary>
         public int pagecount = 1;
         /// <summary>
+        /// 上一页
+        /// </summary>
+        public int prevpage = 1;
+        /// <summary>
+        /// 下一页
+        /// </summary>
+        public int nextpage = 1;
+        /// <summary>
         /// 指定最大查询数
         /// </summary>
         private int maxseachnumber = 10000;
@@ -104,7 +112,7 @@ namespace SAS.ManageWeb
             searchkey = keyword;
             keyword = Utils.UrlEncode(keyword).Replace("'", "%27");
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
-            AddLinkCss(forumpath + "images/jquery.cluetip.css");
+            AddLinkCss(forumpath + "templates/" + templatepath + "/css/jquery.cluetip.css");
             script += "\r\n<script src=\"" + forumpath + "javascript/jqueryFunc.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/locations.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/jquery.cluetip-min.js\" type=\"text/javascript\"></script>";
@@ -165,6 +173,9 @@ namespace SAS.ManageWeb
             if (pageid * pagesize > companycount) pagesize = pagesize - (pagesize * pageid - companycount);
 
             pagenumbers = Utils.GetCompanyPageNumbers(pageid, pagecount, string.Format("zshy-{0}-{1}-{2}-{3}-{4}-{5}-{6}-{7}.html", catalogid, provinceid, cityid, areaid, entypeid, regyear, ordertype, keyword), 10);
+
+            prevpage = pageid - 1 > 0 ? pageid - 1 : pageid;
+            nextpage = pageid + 1 > pagecount ? pagecount : pageid + 1;
         }
     }
 }

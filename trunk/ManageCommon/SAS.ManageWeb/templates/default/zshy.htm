@@ -25,8 +25,8 @@
 					<span class="zshynrt2">
 					    <em class="zshynrt6">共 <b class="f_e00101">{companycount}</b> 条 {pageid}/{pagecount}</em>
 					    <em class="zshynrt6">
-						    <a title="上一页" href="#" class="l_666"><i><img src="templates/{templatepath}/images/icon/arrow6.gif" /></i></a>
-						    <a title="下一页" href="#" class="l_666">
+						    <a title="上一页" href="zshy-{prevpage}-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-{ordertype}-{keyword}.html" class="l_666"><i><img src="templates/{templatepath}/images/icon/arrow6.gif" /></i></a>
+						    <a title="下一页" href="zshy-{nextpage}-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-{ordertype}-{keyword}.html" class="l_666">
 						    <i>下一页</i>
 						    <i><img src="templates/{templatepath}/images/icon/arrow1.gif" /></i>
 						    </a>
@@ -97,19 +97,19 @@
 					<span class="zshynr1lt">
 						<em class="zshynr1lt1"><strong class="f_805952_18"><a title="{zshycompanyinfo.en_name}" href="#" class="l_805952">{zshycompanyinfo.en_name}</a></strong> [{zshycompanystatus}]</em>
 						<em class="zshynr1lt2 line">
-						<%set {zshycompanyinfo.en_desc}=Utils.CutString(Utils.GetTextFromHTML({zshycompanyinfo.en_desc}),0,200)%>
-						{zshycompanyinfo.en_desc}
+						<%set {zshycompanyinfo.En_desc}=Utils.GetSpacesString(2)+Utils.CutString(Utils.RemoveHtml({zshycompanyinfo.en_desc}),0,96).Trim()%>
+						{zshycompanyinfo.en_desc}&gt;&gt;<a title="查看详情" href="" class="l_e00101">查看详情</a>
 						</em>
 					</span>
-					<span class="zshynr1ce">[<a title="" href="#" class="l_252525">浙江台州</a>]</span>
-					<span class="zshynr1ce2">浏览量 <b>150</b></span>
-					<span class="zshynr1ce"><a title="联系方式" href="tooltip.html" rel="tooltip.html" class="l_e00101">联系方式</a></span>
+					<span class="zshynr1ce">[<a title="" href="" class="l_252525">{zshycompanyinfo.provinceName}{zshycompanyinfo.cityName}{zshycompanyinfo.districtName}</a>]</span>
+					<span class="zshynr1ce2">浏览量 <b>{zshycompanyinfo.en_accesses}</b></span>
+					<span class="zshynr1ce"><a title="联系方式" href="zsshow.aspx?infloat=1" rel="zsshow.aspx?infloat=1" class="l_e00101">联系方式</a></span>
 				</p>
 				<p class="zshynr2">
 				<a title="" href="#" class="l_e00101">查看该公司资质证书</a>
 				</p>
 				<p class="zshynr2">
-				<b>经营模式：</b><a title="" href="#" class="l_252525">生产加工</a>        <b class="mar_left_30">主营：</b> <a title="" href="#" class="l_252525">瓶坯模具</a>;<a title="" href="#" class="l_252525">热流道瓶盖模具</a>;<a title="" href="#" class="l_252525">吹瓶模具</a>;<a title="" href="#" class="l_252525">油瓶提手模具</a>;<a title="" href="#" class="l_252525">五加仑模具</a>;<a title="" href="#" class="l_252525">五加仑水桶模具</a>
+				<b>经营模式：</b><a title="" href="#" class="l_252525"><%set (string) {zshycompanyinfotype}=EnumCatch.GetCompanyType({zshycompanyinfo.en_type})%>{zshycompanyinfotype}</a>        <b class="mar_left_30">主营：</b> <%set {zshycompanyinfo.En_main}=Utils.CutString(Utils.ReplaceString({zshycompanyinfo.en_main},",,",",",false),0,45).Trim(',')%>{zshycompanyinfo.en_main}
 				</p>
 			</dd>
 			<%/loop%>
@@ -126,7 +126,7 @@
 	<!--右边 begin-->
 	<div class="zshyrt mar_top_8">
 		<p class="zshyrt1"><a title="" href="#"><img alt="企业名称" src="templates/{templatepath}/images/aa/aa2.jpg" /></a></p>
-		<p class="zshyrt2sub mar_top_8"><a title="" href="#"></a></p>
+		<p class="zshyrt2sub mar_top_8"><a title="提交企业信息" href="companypost.aspx"></a></p>
 		<div class="zsk mar_top_8">
 			<p class="zskt">
 				<em></em><strong>企业信息点击量排行</strong>
