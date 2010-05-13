@@ -97,7 +97,8 @@
 					<span class="zshynr1lt">
 						<em class="zshynr1lt1"><strong class="f_805952_18"><a title="{zshycompanyinfo.en_name}" href="#" class="l_805952">{zshycompanyinfo.en_name}</a></strong> [{zshycompanystatus}]</em>
 						<em class="zshynr1lt2 line">
-						浙江台州市黄岩恒鑫模塑有限公司是一家专业研制生产瓶坯模具，吹瓶模具，瓶盖模具的现代化民营企业，成立于1992年，生产基地坐落在浙江黄岩浙江台州市黄岩恒鑫模塑有限公司是一家专业研制生产瓶坯模具...
+						<%set {zshycompanyinfo.en_desc}=Utils.CutString(Utils.GetTextFromHTML({zshycompanyinfo.en_desc}),0,200)%>
+						{zshycompanyinfo.en_desc}
 						</em>
 					</span>
 					<span class="zshynr1ce">[<a title="" href="#" class="l_252525">浙江台州</a>]</span>

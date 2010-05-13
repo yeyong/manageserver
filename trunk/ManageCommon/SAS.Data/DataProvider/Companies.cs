@@ -255,7 +255,47 @@ namespace SAS.Data.DataProvider
             IDataReader reader = DatabaseProvider.GetInstance().GetCompanyPageList(pageindex, pagesize, ordercolumn, ordertype, conditions);
             while (reader.Read())
             {
-                list.Add(LoadCompanyInfo(reader));
+                Companys _companyInfo = new Companys();
+                _companyInfo.En_id = TypeConverter.StrToInt(reader["en_id"].ToString(), 0);
+                _companyInfo.En_name = reader["en_name"].ToString();
+                _companyInfo.En_main = reader["en_main"].ToString();
+                _companyInfo.En_type = TypeConverter.StrToInt(reader["en_type"].ToString(), 0);
+                _companyInfo.En_enco = TypeConverter.StrToInt(reader["en_enco"].ToString(), 0);
+                _companyInfo.En_sell = TypeConverter.StrToInt(reader["en_sell"].ToString(), 0);
+                _companyInfo.En_address = reader["en_address"].ToString();
+                _companyInfo.En_areas = TypeConverter.StrToInt(reader["en_areas"].ToString(), 0);
+                _companyInfo.En_desc = reader["en_desc"].ToString();
+                _companyInfo.En_post = reader["en_post"].ToString();
+                _companyInfo.En_mobile = reader["en_mobile"].ToString();
+                _companyInfo.En_phone = reader["en_phone"].ToString();
+                _companyInfo.En_fax = reader["en_fax"].ToString();
+                _companyInfo.En_mail = reader["en_mail"].ToString();
+                _companyInfo.En_web = reader["en_web"].ToString();
+                _companyInfo.En_corp = reader["en_corp"].ToString();
+                _companyInfo.En_contact = reader["en_contact"].ToString();
+                _companyInfo.En_update = Utils.GetStandardDateTime(reader["en_update"].ToString());
+                _companyInfo.En_status = TypeConverter.StrToInt(reader["en_status"].ToString());
+                _companyInfo.En_reason = reader["en_reason"].ToString();
+                _companyInfo.En_level = TypeConverter.StrToInt(reader["en_level"].ToString(), 0);
+                _companyInfo.En_accesses = TypeConverter.StrToInt(reader["en_accesses"].ToString(), 0);
+                _companyInfo.En_credits = TypeConverter.StrToInt(reader["en_credits"].ToString(), 0);
+                _companyInfo.En_logo = reader["en_logo"].ToString();
+                _companyInfo.En_music = reader["en_music"].ToString();
+                _companyInfo.Reg_capital = reader["reg_capital"].ToString();
+                _companyInfo.Reg_address = reader["reg_address"].ToString();
+                _companyInfo.Reg_code = reader["reg_code"].ToString();
+                _companyInfo.Reg_organ = reader["reg_organ"].ToString();
+                _companyInfo.Reg_year = Utils.GetStandardDate(reader["reg_year"].ToString());
+                _companyInfo.Reg_date = reader["reg_date"].ToString();
+                _companyInfo.En_builddate = Utils.GetStandardDate(reader["en_builddate"].ToString());
+                _companyInfo.En_visble = TypeConverter.StrToInt(reader["en_visble"].ToString(), 0);
+                _companyInfo.En_createdate = Utils.GetStandardDateTime(reader["en_createdate"].ToString());
+                _companyInfo.En_cataloglist = reader["en_cataloglist"].ToString();
+                _companyInfo.Configid = TypeConverter.StrToInt(reader["configid"].ToString());
+                _companyInfo.ProvinceName = reader["ProvinceName"].ToString();
+                _companyInfo.CityName = reader["CityName"].ToString();
+                _companyInfo.DistrictName = reader["DistrictName"].ToString();
+                list.Add(_companyInfo);
             }
             reader.Close();
             return list;
