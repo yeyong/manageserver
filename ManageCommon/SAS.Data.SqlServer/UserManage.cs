@@ -2248,8 +2248,8 @@ namespace SAS.Data.SqlServer
             }
             if (regyear > 0)
             {
-                if (regyear > 1) commandText.Append(" AND reg_year <= '" + (DateTime.Now.Year - regyear) + "'");
-                else commandText.Append(" AND reg_year >= '" + (DateTime.Now.Year - regyear) + "'");
+                if (regyear > 1) commandText.Append(" AND [reg_year] <= '" + DateTime.Now.AddYears(-regyear) + "'");
+                else commandText.Append(" AND [reg_year] >= '" + DateTime.Now.AddYears(-regyear) + "'");
                 //commandText.Append(" AND DATEDIFF(year,reg_year,getdate()) >= " + regyear);
             }
             if (keyword != "")

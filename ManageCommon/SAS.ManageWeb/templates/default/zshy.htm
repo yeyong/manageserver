@@ -63,7 +63,7 @@
 					</em>
 					<em>
 					<select name="regyear" onchange="window.location='zshy-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-'+this.value+'-{ordertype}-{keyword}.html';" style="width:100px;">
-						<option>所有注册年份</option>
+						<option value="0">所有注册年份</option>
 						<option value="5" <%if {regyear}==5%>selected<%/if%>>超过5年</option>
 						<option value="3" <%if {regyear}==3%>selected<%/if%>>超过3年</option>
 						<option value="2" <%if {regyear}==2%>selected<%/if%>>超过2年</option>
