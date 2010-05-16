@@ -74,7 +74,7 @@ namespace SAS.ManageWeb.ManagePage
                     }
                     else
                     {
-                        if (file.Name.ToLower().EndsWith(".htm") || file.Name.ToLower().EndsWith(".config") || file.Name.ToLower().EndsWith(".png"))
+                        if (file.Name.ToLower().EndsWith(".swf") || file.Name.ToLower().EndsWith(".config") || file.Name.ToLower().EndsWith(".jpg"))
                         {
                             if (resetList)
                             {
@@ -126,7 +126,7 @@ namespace SAS.ManageWeb.ManagePage
                 if (file != null)
                 {
                     extname = file.Extension.ToLower();
-                    if (extname.IndexOf("js") > 0 || extname.IndexOf("css") > 0 || extname.IndexOf("xml") > 0 || extname.IndexOf(".as") > 0 || extname.IndexOf(".html") > 0)
+                    if (extname.IndexOf("js") > 0 || extname.IndexOf("css") > 0 || extname.IndexOf("xml") > 0 || extname.IndexOf(".html") > 0)
                     {
                         DataRow dr = otherfilelist.NewRow();
 
@@ -162,7 +162,8 @@ namespace SAS.ManageWeb.ManagePage
                 //if (dr["extension"].ToString().IndexOf("aspx") > 0) imgstr = "../images/aspx.gif";
                 //if (dr["extension"].ToString().IndexOf("ascx") > 0) imgstr = "../images/ascx.gif";
                 string ext = dr["extension"].ToString().Substring(1);
-                dr["filename"] = "<img src=\"../images/" + ext + ".gif\" border=\"0\"> <a href=\"company_cardtemplateedit.aspx?path=" + dr["filepath"].ToString().Replace(" ", "%20") + "&filename=" + dr["filename"] + dr["extension"] + "&templateid=" + SASRequest.GetString("templateid") + "&templatename=" + SASRequest.GetString("templatename").Replace(" ", "%20") + "\" title=\"" + ext + "文件\">" + dr["filename"].ToString().Trim() + "</a>";
+                if (ext == "jpg") dr["filename"] = "<img src=\"" + "../../cardtemplate/" + path + "/" + dr["filename"].ToString() + dr["extension"].ToString() + "\"/>";
+                else dr["filename"] = "<img src=\"../images/" + ext + ".gif\" border=\"0\"> <a href=\"company_cardtemplateedit.aspx?path=" + dr["filepath"].ToString().Replace(" ", "%20") + "&filename=" + dr["filename"] + dr["extension"] + "&templateid=" + SASRequest.GetString("templateid") + "&templatename=" + SASRequest.GetString("templatename").Replace(" ", "%20") + "\" title=\"" + ext + "文件\">" + dr["filename"].ToString().Trim() + "</a>";
             }
 
             return otherfilelist;
@@ -193,7 +194,7 @@ namespace SAS.ManageWeb.ManagePage
                     RegisterStartupScript("", "<script>alert('您的目录设置了权限导致无法在此删除此文件');</script>");
                     return;
                 }
-                RegisterStartupScript("PAGE", "window.location.href='global_cardtemplatetree.aspx?templateid=" + Request.Params["templateid"] + "&path=" + Request.Params["path"] + "&templatename=" + Request.Params["templatename"] + "';");
+                RegisterStartupScript("PAGE", "window.location.href='company_cardtemplatetree.aspx?templateid=" + Request.Params["templateid"] + "&path=" + Request.Params["path"] + "&templatename=" + Request.Params["templatename"] + "';");
             }
             #endregion
         }
@@ -328,10 +329,18 @@ namespace SAS.ManageWeb.ManagePage
             foreach (DataRow dr in dt.Rows)
             {
                 string ext = dr["extension"].ToString().Substring(1);
-                dr["filename"] = String.Format("<img src=../images/{0}.gif border=\"0\"  style=\"position:relative;top:5 px;height:16 px\"> {1} "
-                + "<a href=\"company_cardtemplateedit.aspx?path={2}&filename={1}{3}&templateid={4}&templatename={5}\" title=\"编辑{1}.{0}模板文件\"><img src='../images/editfile.gif' border='0'/></a>",
-                    ext, dr["filename"].ToString().Trim(), dr["filepath"].ToString().Replace(" ", "%20"), dr["extension"].ToString().Trim(),
-                    templateid, templatename);
+                if (ext.Equals("jpg"))
+                {
+                    dr["filename"] = "<img src=\"" + "../../cardtemplate/" + SASRequest.GetString("path") + "/" + dr["filename"].ToString() + dr["extension"].ToString() + "\"/>";
+                }
+                else
+                {
+                    dr["filename"] = String.Format("<img src=../images/{0}.gif border=\"0\"  style=\"position:relative;top:5 px;height:16 px\"> {1} "
+                    + "<a href=\"company_cardtemplateedit.aspx?path={2}&filename={1}{3}&templateid={4}&templatename={5}\" title=\"编辑{1}.{0}模板文件\"><img src='../images/editfile.gif' border='0'/></a>",
+                        ext, dr["filename"].ToString().Trim(), dr["filepath"].ToString().Replace(" ", "%20"), dr["extension"].ToString().Trim(),
+                        templateid, templatename);
+                }
+                
             }
             TreeView1.AddTableData(dt);
             for (int i = 0; i < TreeView1.Items.Count; i++)
@@ -343,6 +352,7 @@ namespace SAS.ManageWeb.ManagePage
             TreeView2.DataSource = LoadOtherFileDT();
             TreeView2.DataBind();
 
+            fileurl.UpFilePath = "../../cardtemplate/" + SASRequest.GetString("path") + "/";
         }
 
         #endregion

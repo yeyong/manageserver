@@ -41,6 +41,15 @@ namespace SAS.ManageWeb.ManagePage {
         protected global::SAS.ManageWeb.ManagePage.PageInfo PageInfo1;
         
         /// <summary>
+        /// fileurl 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::SAS.Control.UpFile fileurl;
+        
+        /// <summary>
         /// TabControl1 控件。
         /// </summary>
         /// <remarks>
@@ -129,5 +138,14 @@ namespace SAS.ManageWeb.ManagePage {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblServerSideCheck;
+        
+        /// <summary>
+        /// hintinfo 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::SAS.Control.Hint hintinfo;
     }
 }

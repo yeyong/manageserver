@@ -81,6 +81,9 @@
     <Compile Include="aspx\1\usercpprofile.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="aspx\1\zscard.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="aspx\1\zshy.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -1419,6 +1422,7 @@
     <Content Include="ManagePage\images\submenubg6.jpg" />
     <Content Include="ManagePage\images\submenubg7.jpg" />
     <Content Include="ManagePage\images\submit.gif" />
+    <Content Include="ManagePage\images\swf.gif" />
     <Content Include="ManagePage\images\tab.active.gif" />
     <Content Include="ManagePage\images\tab0leftbg.gif" />
     <Content Include="ManagePage\images\tab1leftbg.gif" />
@@ -1502,6 +1506,7 @@
     <Content Include="templates\default\images\inquiry-bg2.gif" />
     <Content Include="templates\default\images\soso5.gif" />
     <Content Include="templates\default\tipmsg.htm" />
+    <Content Include="templates\default\zscard.htm" />
     <Content Include="templates\default\zsshow.htm" />
     <None Include="ManagePage\images\admin-gif\Thumbs.db" />
     <None Include="ManagePage\images\ad\Thumbs.db" />

@@ -79,7 +79,8 @@
 	<%}else{%>
 	<yy1:PageInfo ID="PageInfo1" runat="server" Icon="information" Text="点击相应的模板文件进行编辑" />
 	<%}%>
-	&nbsp;&nbsp; <b>当前模板: <%=Request.Params["templatename"]%></b><br /><br />
+	&nbsp;&nbsp; <b>当前模板: <%=Request.Params["templatename"]%></b>&nbsp;&nbsp;<yy:UpFile ID="fileurl" IsShowTextArea="false" runat="server" FileType=".jpg|.swf" HintInfo="上传所需文件" Height="20px"/><br />
+	
 	<table class="table1" cellspacing="0" cellpadding="4" width="100%" border="0">
 		<tr>
 			<td width="3"></td>
@@ -95,7 +96,6 @@
 							<input type="checkbox" id="chkall" name="chkall" onclick="Check(this.form);" />选择全部 &nbsp;&nbsp;
 							<yy:Button id="CreateTemplate" runat="server" Text=" 按选中的模板文件生成页面 " OnClick="CreateTemplate_Click"></yy:Button>&nbsp;&nbsp;
 							<yy:Button id="DeleteTemplateFile" runat="server" Text="删除指定的模板文件" ButtonImgUrl="../images/del.gif" OnClick="DeleteTemplateFile_Click" OnClientClick="if(!confirm('你确认要删除所选模板文件吗？\n删除后将不能恢复！')) return false;"></yy:Button>&nbsp;&nbsp;
-							<button type="button" class="ManagerButton" onclick="window.location.href='global_templatevariable.aspx?templateid=<%=Request.Params["templateid"]%>&templatename=<%=Request.Params["templatename"]%>&path=<%=Request.Params["path"]%>'">模板变量列表</button>&nbsp;&nbsp;
 							<button type="button" class="ManagerButton" id="Button3" onclick="window.location='global_templatesgrid.aspx';"><img src="../images/arrow_undo.gif"/> 返 回 </button>
 						</p>
 					</yy:TabPage>
@@ -121,6 +121,7 @@
 		  //document.getElementById("templatelist").innerHTML = getTemplateList();
 	</script>			
 	<br />
+	<yy:Hint runat="server" ID="hintinfo" />
 </form>
 <%=footer%>
 </body>

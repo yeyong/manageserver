@@ -1,0 +1,295 @@
+﻿<%template _comheader%>
+<div class="cot">
+	<!--左边 begin-->
+	<div class="zshylt mar_top_8">
+		<p class="zshysite">
+			<i class="zslt"></i><i class="zsrt"></i>
+			<span class="zshysnr">您当前的位置：<a href="/" class="l_666">首页</a>{pagenav}</span>	
+		</p>
+		<dl class="zshy1 mar_top_8">
+			<dt><b>按主营范围选择：</b></dt>
+			<dd>
+				<%loop catainfo cataloglist%>
+				<span class="zshy1zt"><a href="zsmp-{catainfo[id]}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-{ordertype}-{keyword}.html" class="l_666" title="{catainfo[name]}"><%getsubstring({catainfo[name]},16,"")%>({catainfo[companycount]})</a></span>
+				<%/loop%>
+			</dd>
+		</dl>
+		<dl class="zshynr mar_top_5" id="zscard">
+			<dt class="zshynrtit">
+				<p class="zshynrt4">
+					<span class="zshynrt5">
+						<em>搜索：</em>
+						<em class="zshymar_t"><input type="text" name="text" id="zsmpkeyword" class="input2_soout" style="width:200px;" /></em>
+						<em><input type="submit" name="Submit" class="so1" value="" onclick="window.location='zsmp-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-{ordertype}-'+getsearchvalue(document.getElementById('zsmpkeyword').value)+'.html';"/></em>
+					</span>
+					<span class="zshynrt2">
+						<em class="zshynrt6">共 <b class="f_e00101">{companycount}</b> 条 {pageid}/{pagecount}</em>
+						<em class="zshynrt6">
+							<a title="上一页" href="zsmp-{prevpage}-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-{ordertype}-{keyword}.html" class="l_666"><i><img src="templates/{templatepath}/images/icon/arrow6.gif" /></i></a>
+							<a title="下一页" href="zsmp-{nextpage}-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-{ordertype}-{keyword}.html" class="l_666">
+							<i>下一页</i>
+							<i><img src="templates/{templatepath}/images/icon/arrow1.gif" /></i>
+							</a>
+						</em>
+					</span>
+				</p>
+				<p class="zshynrt1" id="thelocation">
+					<em>
+					<select name="province" style="width:90px;">
+					</select>
+					</em>
+					<em>
+					<select name="city" style="width:90px;">
+					</select>
+					</em>
+					<em>
+					<select name="areas" style="width:90px;">
+					</select>
+					</em>
+					<em class="zshyline"></em>
+					<em>
+					<select name="" onchange="window.location='zsmp-{catalogid}-{provinceid}-{cityid}-{areaid}-'+this.value+'-{regyear}-{ordertype}-{keyword}.html';" style="width:120px;">
+						<option value="0">所有业务类型</option>
+						<%loop (string) zshytypestr Enum.GetNames(entype_enum.GetType())%>
+				        <%set (int) {zshytypevalue}=Convert.ToInt16(Enum.Parse(entype_enum.GetType(), zshytypestr))%>
+				        <%set (string) {zshytypetext}=EnumCatch.GetCompanyType({zshytypevalue})%>
+				        <%set (string) {zshyselectstatus}=""%>
+				        <%if {entypeid}=={zshytypevalue}%>
+				        <%set {zshyselectstatus}="selected"%>
+				        <%/if%>
+				        <option value="{zshytypevalue}" {zshyselectstatus}>{zshytypetext}</option>
+				        <%/loop%>
+					</select>
+					</em>
+					<em>
+					<select name="regyear" onchange="window.location='zsmp-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-'+this.value+'-{ordertype}-{keyword}.html';" style="width:100px;">
+						<option value="0">所有注册年份</option>
+						<option value="5" <%if {regyear}==5%>selected<%/if%>>超过5年</option>
+						<option value="3" <%if {regyear}==3%>selected<%/if%>>超过3年</option>
+						<option value="2" <%if {regyear}==2%>selected<%/if%>>超过2年</option>
+						<option value="1" <%if {regyear}==1%>selected<%/if%>>1年以下</option>
+					</select>
+					</em>
+					<em class="zshyline"></em>
+					<span class="zshynrt3" id="views">
+						<em id="viewsnr"><img alt="浏览量从高到低" src="templates/{templatepath}/images/icon/icon-up-down.gif" />默认排序</em>
+						<em class="zshynrt3nr" id="views1">
+							<i onclick="window.location='zsmp-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-0-{keyword}.html';"><img alt="浏览量从低到高" src="templates/{templatepath}/images/icon/icon-up.gif" />浏览量从低到高</i>
+							<i onclick="window.location='zsmp-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-1-{keyword}.html';"><img alt="浏览量从高到低" src="templates/{templatepath}/images/icon/icon-down.gif" />浏览量从高到低</i>
+							<i onclick="window.location='zsmp-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-2-{keyword}.html';"><img alt="默认排序" src="templates/{templatepath}/images/icon/icon-up-down.gif" />默认排序</i>
+						</em>
+					</span>
+				</p>
+			</dt>
+			<dd class="zscard">
+				<img alt="" src="templates/{templatepath}/images/hycard/hycard1.gif" />
+				<p class="overlay" style="display:none;"></p>
+				<p class="ic_caption">
+					<strong class="ic_category">杭州生活主题服装有限公司</strong>
+					<span class="ic_zi">联系人：某某某</span>
+					<span class="ic_zi">联系电话：0571-86081444</span>
+					<span class="ic_zi">详细地址：杭州市滨江区长河路滨康路口拓森科技园</span>
+					<span class="ic_text">网址：http://www.sirius.com/</span>
+					<span class="ic_text">经营模式：生产加工</span>
+					<span class="ic_text">
+						<em class="zscard2nr1"><a title="详细信息" href="#" class="l_000">详细信息</a></em>
+						<em class="zscard2nr2"><a title="我要推广" href="#" class="l_000">我要推广</a></em>
+					</span>
+				</p>
+			</dd>
+			<dd class="zscard">
+				<img alt="" src="images/hycard/hycard2.gif" />
+				<p class="overlay" style="display:none;"></p>
+				<p class="ic_caption">
+					<strong class="ic_category">杭州生活主题服装有限公司</strong>
+					<span class="ic_zi">联系人：某某某</span>
+					<span class="ic_zi">联系电话：0571-86081444</span>
+					<span class="ic_zi">详细地址：杭州市滨江区长河路滨康路口拓森科技园</span>
+					<span class="ic_text">网址：http://www.sirius.com/</span>
+					<span class="ic_text">经营模式：生产加工</span>
+					<span class="ic_text">
+						<em class="zscard2nr1"><a title="详细信息" href="#" class="l_000">详细信息</a></em>
+						<em class="zscard2nr2"><a title="我要推广" href="#" class="l_000">我要推广</a></em>
+					</span>
+				</p>
+			</dd>
+			<dd class="zscard">
+				<img alt="" src="images/hycard/hycard3.gif" />
+				<p class="overlay" style="display:none;"></p>
+				<p class="ic_caption">
+					<strong class="ic_category">杭州生活主题服装有限公司</strong>
+					<span class="ic_zi">联系人：某某某</span>
+					<span class="ic_zi">联系电话：0571-86081444</span>
+					<span class="ic_zi">详细地址：杭州市滨江区长河路滨康路口拓森科技园</span>
+					<span class="ic_text">网址：http://www.sirius.com/</span>
+					<span class="ic_text">经营模式：生产加工</span>
+					<span class="ic_text">
+						<em class="zscard2nr1"><a title="详细信息" href="#" class="l_000">详细信息</a></em>
+						<em class="zscard2nr2"><a title="我要推广" href="#" class="l_000">我要推广</a></em>
+					</span>
+				</p>
+			</dd>
+			<dd class="zscard">
+				<img alt="" src="images/hycard/hycard4.gif" />
+				<p class="overlay" style="display:none;"></p>
+				<p class="ic_caption">
+					<strong class="ic_category">杭州生活主题服装有限公司</strong>
+					<span class="ic_zi">联系人：某某某</span>
+					<span class="ic_zi">联系电话：0571-86081444</span>
+					<span class="ic_zi">详细地址：杭州市滨江区长河路滨康路口拓森科技园</span>
+					<span class="ic_text">网址：http://www.sirius.com/</span>
+					<span class="ic_text">经营模式：生产加工</span>
+					<span class="ic_text">
+						<em class="zscard2nr1"><a title="详细信息" href="#" class="l_000">详细信息</a></em>
+						<em class="zscard2nr2"><a title="我要推广" href="#" class="l_000">我要推广</a></em>
+					</span>
+				</p>
+			</dd>
+			<dd class="zscard">
+				<img alt="" src="images/hycard/hycard1.gif" />
+				<p class="overlay" style="display:none;"></p>
+				<p class="ic_caption">
+					<strong class="ic_category">杭州生活主题服装有限公司</strong>
+					<span class="ic_zi">联系人：某某某</span>
+					<span class="ic_zi">联系电话：0571-86081444</span>
+					<span class="ic_zi">详细地址：杭州市滨江区长河路滨康路口拓森科技园</span>
+					<span class="ic_text">网址：http://www.sirius.com/</span>
+					<span class="ic_text">经营模式：生产加工</span>
+					<span class="ic_text">
+						<em class="zscard2nr1"><a title="详细信息" href="#" class="l_000">详细信息</a></em>
+						<em class="zscard2nr2"><a title="我要推广" href="#" class="l_000">我要推广</a></em>
+					</span>
+				</p>
+			</dd>
+			<dd class="zscard">
+				<img alt="" src="images/hycard/hycard2.gif" />
+				<p class="overlay" style="display:none;"></p>
+				<p class="ic_caption">
+					<strong class="ic_category">杭州生活主题服装有限公司</strong>
+					<span class="ic_zi">联系人：某某某</span>
+					<span class="ic_zi">联系电话：0571-86081444</span>
+					<span class="ic_zi">详细地址：杭州市滨江区长河路滨康路口拓森科技园</span>
+					<span class="ic_text">网址：http://www.sirius.com/</span>
+					<span class="ic_text">经营模式：生产加工</span>
+					<span class="ic_text">
+						<em class="zscard2nr1"><a title="详细信息" href="#" class="l_000">详细信息</a></em>
+						<em class="zscard2nr2"><a title="我要推广" href="#" class="l_000">我要推广</a></em>
+					</span>
+				</p>
+			</dd>
+			<dd class="zscard">
+				<img alt="" src="images/hycard/hycard3.gif" />
+				<p class="overlay" style="display:none;"></p>
+				<p class="ic_caption">
+					<strong class="ic_category">杭州生活主题服装有限公司</strong>
+					<span class="ic_zi">联系人：某某某</span>
+					<span class="ic_zi">联系电话：0571-86081444</span>
+					<span class="ic_zi">详细地址：杭州市滨江区长河路滨康路口拓森科技园</span>
+					<span class="ic_text">网址：http://www.sirius.com/</span>
+					<span class="ic_text">经营模式：生产加工</span>
+					<span class="ic_text">
+						<em class="zscard2nr1"><a title="详细信息" href="#" class="l_000">详细信息</a></em>
+						<em class="zscard2nr2"><a title="我要推广" href="#" class="l_000">我要推广</a></em>
+					</span>
+				</p>
+			</dd>
+			<dd class="zscard">
+				<img alt="" src="images/hycard/hycard4.gif" />
+				<p class="overlay" style="display:none;"></p>
+				<p class="ic_caption">
+					<strong class="ic_category">杭州生活主题服装有限公司</strong>
+					<span class="ic_zi">联系人：某某某</span>
+					<span class="ic_zi">联系电话：0571-86081444</span>
+					<span class="ic_zi">详细地址：杭州市滨江区长河路滨康路口拓森科技园</span>
+					<span class="ic_text">网址：http://www.sirius.com/</span>
+					<span class="ic_text">经营模式：生产加工</span>
+					<span class="ic_text">
+						<em class="zscard2nr1"><a title="详细信息" href="#" class="l_000">详细信息</a></em>
+						<em class="zscard2nr2"><a title="我要推广" href="#" class="l_000">我要推广</a></em>
+					</span>
+				</p>
+			</dd>
+		</dl>
+		<div class="page f_666">
+			{pagenumbers}
+			共{pagecount}页　到第
+			<input type="text" name="textfield" class="input3" style="width:25px;" />
+			页
+			<input type="button" name="button1" class="agree1" value="确 定" />
+		</div>
+	</div>
+	<!--左边 end-->
+	<!--右边 begin-->
+	<div class="zshyrt mar_top_8">
+		<p class="zshyrt1"><a title="" href="#"><img alt="企业名称" src="templates/{templatepath}/images/aa/aa2.jpg" /></a></p>
+		<p class="zshyrt2sub mar_top_8"><a title="" href="#"></a></p>
+		<div class="zsk mar_top_8">
+			<p class="zskt">
+				<em></em><strong>企业信息点击量排行</strong>
+			</p>
+			<ul class="zstop2">
+				<li>
+					<em class="zstopem1">1</em>
+					<p><a title="成都金岚地服饰有限公司" href="#" class="l_666">成都金岚地服饰有限公司</a></p>
+				</li>
+				<li>
+					<em class="zstopem1">2</em>
+					<p><a title="杭州浪漫一身服饰有限公司" href="#" class="l_666">杭州浪漫一身服饰有限公司</a></p>
+				</li>
+				<li>
+					<em class="zstopem1">3</em>
+					<p><a title="杭州水之恋服饰有限公司" href="#" class="l_666">杭州水之恋服饰有限公司</a></p>
+				</li>
+				<li>
+					<em class="zstopem2">4</em>
+					<p><a title="香港普菲特服饰有限公司" href="#" class="l_666">香港普菲特服饰有限公司</a></p>
+				</li>
+				<li>
+					<em class="zstopem2">5</em>
+					<p><a title="杭州千百惠服饰有限公司" href="#" class="l_666">杭州千百惠服饰有限公司</a></p>
+				</li>
+				<li>
+					<em class="zstopem2">6</em>
+					<p><a title="成都金岚地服饰有限公司" href="#" class="l_666">成都金岚地服饰有限公司</a></p>
+				</li>
+				<li>
+					<em class="zstopem2">7</em>
+					<p><a title="广州市歌莉娅女性服饰有限公司" href="#" class="l_666">广州市歌莉娅女性服饰有限公司</a></p>
+				</li>
+				<li>
+					<em class="zstopem2">8</em>
+					<p><a title="杭州素非服饰有限公司" href="#" class="l_666">杭州素非服饰有限公司</a></p>
+				</li>
+				<li>
+					<em class="zstopem2">9</em>
+					<p><a title="杭州江南布衣服饰有限公司" href="#" class="l_666">杭州江南布衣服饰有限公司</a></p>
+				</li>
+				<li>
+					<em class="zstopem2">10</em>
+					<p><a title="成都金岚地服饰有限公司" href="#" class="l_666">成都金岚地服饰有限公司</a></p>
+				</li>
+			</ul>
+		</div>
+		<p class="zshyrtad mar_top_8"><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa5.jpg" /></a></p>
+		<div class="zsk mar_top_8">
+			<p class="zskt">
+				<em></em><strong>最新认证的企业信息</strong>
+			</p>
+			<ul class="zstop2">
+				<li>▪&nbsp;<a title="成都金岚地服饰有限公司" href="#" class="l_666">成都金岚地服饰有限公司</a></li>
+				<li>▪&nbsp;<a title="杭州浪漫一身服饰有限公司" href="#" class="l_666">杭州浪漫一身服饰有限公司</a></li>
+				<li>▪&nbsp;<a title="杭州水之恋服饰有限公司" href="#" class="l_666">杭州水之恋服饰有限公司</a></li>
+				<li>▪&nbsp;<a title="香港普菲特服饰有限公司" href="#" class="l_666">香港普菲特服饰有限公司</a></li>
+				<li>▪&nbsp;<a title="杭州千百惠服饰有限公司" href="#" class="l_666">杭州千百惠服饰有限公司</a></li>
+				<li>▪&nbsp;<a title="杭州千百惠服饰有限公司" href="#" class="l_666">杭州千百惠服饰有限公司</a></li>
+				<li>▪&nbsp;<a title="广州市歌莉娅女性服饰有限公司" href="#" class="l_666">广州市歌莉娅女性服饰有限公司</a></li>
+				<li>▪&nbsp;<a title="杭州素非服饰有限公司" href="#" class="l_666">杭州素非服饰有限公司</a></li>
+				<li>▪&nbsp;<a title="杭州江南布衣服饰有限公司" href="#" class="l_666">杭州江南布衣服饰有限公司</a></li>
+				<li>▪&nbsp;<a title="香港普菲特服饰有限公司" href="#" class="l_666">香港普菲特服饰有限公司</a></li>
+			</ul>
+		</div>
+	</div>
+	<!--右边 end-->
+</div>
+<%template _comcopyright%>
+<%template _comfooter%>

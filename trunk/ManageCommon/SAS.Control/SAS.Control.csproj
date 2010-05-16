@@ -59,6 +59,7 @@
     <Compile Include="tab\TabPage.cs" />
     <Compile Include="tab\TabPageCollection.cs" />
     <Compile Include="TextBox.cs" />
+    <Compile Include="UpMediaFile.cs" />
     <Compile Include="WebControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
