@@ -60,7 +60,7 @@ namespace SAS.Logic
         /// <returns></returns>
         public static Companys GetCompanyInfo(int enid)
         {
-            return SAS.Data.DataProvider.Companies.GetCompanyInfoByID(enid);
+            return SAS.Data.DataProvider.Companies.GetCompanyInfo(enid);
         }
 
         /// <summary>
@@ -70,11 +70,7 @@ namespace SAS.Logic
         /// <returns></returns>
         public static Companys GetCompanyCacheInfo(int enid)
         {
-            foreach (Companys cps in GetCompanyList())
-            {
-                if (cps.En_id == enid) return cps;
-            }
-            return null;
+            return GetCompanyList().Find(new Predicate<Companys>(delegate(Companys companyinfo) { return companyinfo.En_id == enid; }));
         }
 
         /// <summary>

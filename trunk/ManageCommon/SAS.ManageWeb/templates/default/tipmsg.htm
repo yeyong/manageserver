@@ -1,0 +1,21 @@
+﻿<%template _compageheader%>
+<body>
+<div id="copys">
+<%if {page_err}==0%>
+    <%if {msgtype}==0%>
+	<p>法人：<b class="f_805952_14">{tipmsgeninfo.en_corp}</b></p>
+	<p>联系人：{tipmsgeninfo.en_contact}</p>
+	<p>电&nbsp;&nbsp;&nbsp;&nbsp;话：{tipmsgeninfo.en_phone}</p>
+	<p>移动电话：{tipmsgeninfo.en_mobile}</p>
+	<p>传&nbsp;&nbsp;&nbsp;&nbsp;真：{tipmsgeninfo.en_fax}</p>
+	<p>地&nbsp;&nbsp;&nbsp;&nbsp;址：{tipmsgeninfo.provinceName} {tipmsgeninfo.cityName} {tipmsgeninfo.districtName} {tipmsgeninfo.en_address}</p>
+	<p>邮&nbsp;&nbsp;&nbsp;&nbsp;编：{tipmsgeninfo.en_post}</p>
+	<p>公司主页：<a href="#" class="l_333">{tipmsgeninfo.en_web}</a></p>
+	<%else%>
+	<%/if%>
+<%else%>
+<b class="f_805952_14">出现了{page_err}个错误</b>
+<p>{msgbox_text}</p>
+<%/if%>
+</div>
+<%template _comfooter%>

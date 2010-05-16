@@ -117,11 +117,20 @@ namespace SAS.Logic
         /// <returns></returns>
         public static DataTable GetAllCatalogBySort(int sortnum)
         {
+            return GetAllCatalogBySort(sortnum, "");
+        }
+        /// <summary>
+        /// 根据级别获取行业类别集合（缓存）
+        /// </summary>
+        /// <param name="sortnum">级别</param>
+        /// <param name="condition">条件</param>
+        public static DataTable GetAllCatalogBySort(int sortnum, string condition)
+        {
             DataTable dt = GetAllCatalog();
             DataTable sortcatalist = dt.Clone();
             foreach (DataRow dr in dt.Select("[sort] = " + sortnum))
             {
-                dr["companycount"] = ReturnCompanyCountById(TypeConverter.ObjectToInt(dr["id"], 0));
+                dr["companycount"] = ReturnCompanyCountById(TypeConverter.ObjectToInt(dr["id"], 0), condition);
                 sortcatalist.ImportRow(dr);
             }
             return sortcatalist;
@@ -133,11 +142,20 @@ namespace SAS.Logic
         /// <returns></returns>
         public static DataTable GetAllCatalogByPid(int pid)
         {
+            return GetAllCatalogByPid(pid, "");
+        }
+        /// <summary>
+        /// 根据父ID获取行业类别集合（带缓存）
+        /// </summary>
+        /// <param name="pid">父类ID</param>
+        /// <param name="condition">条件</param>
+        public static DataTable GetAllCatalogByPid(int pid, string condition)
+        {
             DataTable dt = GetAllCatalog();
             DataTable sortcatalist = dt.Clone();
             foreach (DataRow dr in dt.Select("[parentid] = " + pid))
             {
-                dr["companycount"] = ReturnCompanyCountById(TypeConverter.ObjectToInt(dr["id"], 0));
+                dr["companycount"] = ReturnCompanyCountById(TypeConverter.ObjectToInt(dr["id"], 0), condition);
                 sortcatalist.ImportRow(dr);
             }
             return sortcatalist;
@@ -157,13 +175,15 @@ namespace SAS.Logic
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static int ReturnCompanyCountById(int id)
+        public static int ReturnCompanyCountById(int id, string conditions)
         {
             int num = 0;
             DataTable dt = GetAllCatalog();
             foreach (DataRow dr in dt.Select("(','+[parentlist]+',' like '%," + id + ",%' AND [haschild] = 0) OR [id] = " + id))
             {
-                num += TypeConverter.ObjectToInt(Companies.GetCompanyTableList().Compute("COUNT(en_id)", "','+[en_cataloglist]+',' like '%," + dr["id"].ToString() + ",%'"), 0);
+                string querycondition = "','+[en_cataloglist]+',' like '%," + dr["id"].ToString() + ",%'";
+                if (conditions != "") querycondition = "','+[en_cataloglist]+',' like '%," + dr["id"].ToString() + ",%' AND " + conditions;
+                num += TypeConverter.ObjectToInt(Companies.GetCompanyTableList().Compute("COUNT(en_id)", querycondition), 0);
             }
             return num;
         }

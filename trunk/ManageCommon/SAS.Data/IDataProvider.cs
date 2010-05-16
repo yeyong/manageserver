@@ -1962,6 +1962,10 @@ namespace SAS.Data
         /// 获取符合条件的企业数
         /// </summary>
         int GetCompanyCountByConditions(string conditions);
+        /// <summary>
+        /// 获取企业实体信息（有省市区）
+        /// </summary>
+        IDataReader GetCompanyInfo(int enid);
         #endregion
 
         #region 行业类别操作
