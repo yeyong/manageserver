@@ -79,6 +79,14 @@ namespace SAS.Data.DataProvider
         }
 
         /// <summary>
+        /// 获取企业实体信息（有省市区）
+        /// </summary>
+        public static Companys GetCompanyInfo(int enid)
+        {
+            return LoadSingleCompanyInfo(DatabaseProvider.GetInstance().GetCompanyInfo(enid));
+        }
+
+        /// <summary>
         /// 企业信息实体化
         /// </summary>
         /// <param name="reader"></param>
@@ -125,6 +133,9 @@ namespace SAS.Data.DataProvider
                 _companyInfo.En_createdate = Utils.GetStandardDateTime(reader["en_createdate"].ToString());
                 _companyInfo.En_cataloglist = reader["en_cataloglist"].ToString();
                 _companyInfo.Configid = TypeConverter.StrToInt(reader["configid"].ToString());
+                _companyInfo.ProvinceName = reader["ProvinceName"].ToString();
+                _companyInfo.CityName = reader["CityName"].ToString();
+                _companyInfo.DistrictName = reader["DistrictName"].ToString();
             }
             reader.Close();
             return _companyInfo;

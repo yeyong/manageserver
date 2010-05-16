@@ -2248,7 +2248,9 @@ namespace SAS.Data.SqlServer
             }
             if (regyear > 0)
             {
-                commandText.Append(" AND DATEDIFF(year,reg_year,getdate()) >= " + regyear);
+                if (regyear > 1) commandText.Append(" AND reg_year <= '" + (DateTime.Now.Year - regyear) + "'");
+                else commandText.Append(" AND reg_year >= '" + (DateTime.Now.Year - regyear) + "'");
+                //commandText.Append(" AND DATEDIFF(year,reg_year,getdate()) >= " + regyear);
             }
             if (keyword != "")
             {
@@ -2287,6 +2289,14 @@ namespace SAS.Data.SqlServer
         {
             DbParameter[] parms = { DbHelper.MakeInParam("@conditions", (DbType)SqlDbType.VarChar, 2000, conditions) };
             return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.StoredProcedure, string.Format("{0}getcompanycountbycondition", BaseConfigs.GetTablePrefix), parms));
+        }
+        /// <summary>
+        /// 获取企业实体信息（有省市区）
+        /// </summary>
+        public IDataReader GetCompanyInfo(int enid)
+        {
+            DbParameter[] parms = { DbHelper.MakeInParam("@enid", (DbType)SqlDbType.Int, 4, enid) };
+            return DbHelper.ExecuteReader(CommandType.StoredProcedure, string.Format("{0}getcompanyinfo", BaseConfigs.GetTablePrefix), parms);
         }
         #endregion
 

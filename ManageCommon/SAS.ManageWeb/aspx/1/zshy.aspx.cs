@@ -128,11 +128,12 @@ namespace SAS.ManageWeb
 		            + "\r\n " + "});"
                     + "\r\n " + "});\r\n";
             AddfootScript(loadscript);            
+            SetConditionAndPage();
 
-            if (catalogid == 0) cataloglist = Catalogs.GetAllCatalogBySort(1);
+            if (catalogid == 0) cataloglist = Catalogs.GetAllCatalogBySort(1, Companies.GetCompanyCondition(0, arealist, entypeid, regyear, keyword));
             else
             {
-                cataloglist = Catalogs.GetAllCatalogByPid(catalogid);
+                cataloglist = Catalogs.GetAllCatalogByPid(catalogid, Companies.GetCompanyCondition(0, arealist, entypeid, regyear, keyword));
                 CatalogInfo _cli = Catalogs.GetCatalogCacheInfo(catalogid);
                 if (_cli != null)
                 {
@@ -142,14 +143,14 @@ namespace SAS.ManageWeb
                         CatalogInfo subcli = Catalogs.GetCatalogCacheInfo(TypeConverter.StrToInt(str, 0));
                         if (subcli == null) continue;
                         if (subcli.parentid == 0) continue;
-                        pagenav += String.Format(" &gt; <a href=\"zshy-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}.html\" title=\"{0}\" class=\"l_666\">{0}</a>", subcli.name, subcli.id, provinceid, cityid, areaid, entypeid, regyear, ordertype,keyword);
+                        pagenav += String.Format(" &gt; <a href=\"zshy-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}.html\" title=\"{0}\" class=\"l_666\">{0}</a>", subcli.name, subcli.id, provinceid, cityid, areaid, entypeid, regyear, ordertype, keyword);
                     }
                     pagenav += " &gt; " + _cli.name;
                     pagetitle = "浙商黄页-浙商黄页-" + _cli.name;
                 }
             }
 
-            SetConditionAndPage();
+            
 
             companylist = Companies.GetCompanyPageList(pageid, pagesize, "en_accesses", ordertype == 0 ? "desc" : "", condition);
         }

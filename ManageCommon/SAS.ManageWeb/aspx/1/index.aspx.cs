@@ -13,6 +13,10 @@ namespace SAS.ManageWeb
     public class index : CompanyPage
     {
         /// <summary>
+        /// 类别列表
+        /// </summary>
+        private DataTable cataloglist = Catalogs.GetAllCatalog();
+        /// <summary>
         /// 行业类别列表
         /// </summary>
         protected DataRow[] cataloglist1;

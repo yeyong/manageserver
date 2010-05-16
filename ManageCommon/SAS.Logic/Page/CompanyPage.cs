@@ -24,9 +24,8 @@ namespace SAS.Logic
         /// </summary>
         protected internal string footscript = "";
         /// <summary>
-        /// 类别列表
+        /// 搜索使用顶级类
         /// </summary>
-        public DataTable cataloglist = Catalogs.GetAllCatalog();
         protected DataRow[] firstcata = Catalogs.GetAllCatalog().Select("[sort]=1");
         /// <summary>
         /// 企业类型枚举

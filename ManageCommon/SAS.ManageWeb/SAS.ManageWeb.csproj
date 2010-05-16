@@ -75,6 +75,9 @@
       <DependentUpon>posttopic.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="aspx\1\tipmsg.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="aspx\1\usercpprofile.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -1498,6 +1501,7 @@
     <Content Include="templates\default\images\inquiry-bg1.gif" />
     <Content Include="templates\default\images\inquiry-bg2.gif" />
     <Content Include="templates\default\images\soso5.gif" />
+    <Content Include="templates\default\tipmsg.htm" />
     <Content Include="templates\default\zsshow.htm" />
     <None Include="ManagePage\images\admin-gif\Thumbs.db" />
     <None Include="ManagePage\images\ad\Thumbs.db" />
