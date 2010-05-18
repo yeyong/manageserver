@@ -235,6 +235,9 @@ namespace SAS.Logic
         /// 浮动窗体
         /// </summary>
         public int infloat = SASRequest.GetInt("infloat", 0);
+#if DEBUG
+        public string querydetail = "";
+#endif
 
         /// <summary>
         /// 获得游客缓存
@@ -460,6 +463,12 @@ namespace SAS.Logic
             LoadUrlConfig();
             userid = Utils.StrToInt(LogicUtils.GetCookie("userid"), -1);
 
+            //清空当前页面查询统计
+#if DEBUG
+            SAS.Data.DbHelper.QueryCount = 0;
+            SAS.Data.DbHelper.QueryDetail = "";
+#endif
+
             // 如果启用游客页面缓存，则对游客输出缓存页
             if (userid == -1 && config.Guestcachepagetimeout > 0 && GetUserCachePage(pagename))
                 return;
@@ -575,6 +584,11 @@ namespace SAS.Logic
 
             querycount = SAS.Data.DbHelper.QueryCount;
             SAS.Data.DbHelper.QueryCount = 0;
+
+#if DEBUG
+            querydetail = SAS.Data.DbHelper.QueryDetail;
+            SAS.Data.DbHelper.QueryDetail = "";
+#endif
         }
 
         #region 子方法
@@ -1007,7 +1021,14 @@ namespace SAS.Logic
                         break;
                 }
             }
-
+#if DEBUG
+            else
+            {
+                System.Web.HttpContext.Current.Response.Clear();
+                System.Web.HttpContext.Current.Response.Write(templateBuilder.Replace("</body>", "<div>注意: 以下为数据查询分析工具，正式站点使用请使用官方发布版本或自行Release编译。</div>" + querydetail + "</body>").ToString());
+                System.Web.HttpContext.Current.Response.End();
+            }
+#endif
             base.OnUnload(e);
         }
 

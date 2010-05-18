@@ -21,9 +21,9 @@ namespace SAS.ManageWeb.ManagePage
             if (!Page.IsPostBack)
             {
                 LoadTemplateData();
-                if (SASRequest.GetString("createtemplate") != "")
+                if (SASRequest.GetString("createtemplate") != "" && SASRequest.GetInt("cardtempid", 0) > 0)
                 {
-                    //CreateTemplateByDirectory(SASRequest.GetString("createtemplate"));
+                    ResetCardTemplate(SASRequest.GetString("createtemplate"), SASRequest.GetInt("cardtempid", 0));
                     base.RegisterStartupScript("PAGE", "window.location.href='company_cardtemplategrid.aspx';");
                 }
             }
@@ -70,18 +70,33 @@ namespace SAS.ManageWeb.ManagePage
             #endregion
         }
 
-        //private void CreateTemplateByDirectory(string directorypath)
-        //{
-        //    #region 生成模板
+        private void ResetCardTemplate(string directorypath,int templateid)
+        {
+            #region 更新名片文件
 
-        //    if (this.CheckCookie())
-        //    {
+            if (this.CheckCookie())
+            {
+                if (Directory.Exists(Server.MapPath("..\\..\\cardimg\\" + templateid)))
+                {
+                    try
+                    {
+                        Directory.Delete(Server.MapPath("..\\..\\cardimg\\" + templateid), true);
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                        RegisterStartupScript("", "<script>alert('您的目录设置了权限导致无法在此删除此文件夹');</script>");
+                        return;
+                    }
+                }
+                else
+                {
+                    RegisterStartupScript("", "<script>alert('文件夹" + Server.MapPath("..\\..\\cardimg\\" + templateid) + "不存在" + templateid + "！');</script>");
+                    return;
+                }
+            }
 
-        //        SAS.Web.UI.Globals.BuildTemplate(directorypath);
-        //    }
-
-        //    #endregion
-        //}
+            #endregion
+        }
 
         private void IntoDB_Click(object sender, EventArgs e)
         {
@@ -186,7 +201,7 @@ namespace SAS.ManageWeb.ManagePage
         public string CreateStr(string name, string path, string templateid)
         {
             string result = "<a href=company_cardtemplatetree.aspx?path=" + path.Trim().Replace(" ", "%20") + "&templateid=" + templateid.Trim() + "&templatename=" + name.Trim().Replace(" ", "%20") + ">管理</a>&nbsp;&nbsp;";
-            result += "<a href=\"javascript:CreateTemplate('" + name + "')\">生成</a>";
+            result += "<a href=\"javascript:CreateTemplate('" + name + "','" + templateid + "')\">生成</a>";
             return result;
         }
 
