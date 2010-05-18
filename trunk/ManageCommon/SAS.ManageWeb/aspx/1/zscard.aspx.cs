@@ -163,7 +163,7 @@ namespace SAS.ManageWeb
             else if (cityid > 0) arealist = areas.GetDistrictIDByCity(cityid);
             else if (provinceid > 0) arealist = areas.GetDistrictIDByProvince(provinceid);
             condition = Companies.GetCompanyCondition(catalogid, arealist, entypeid, regyear, searchkey);
-            companycount = Companies.GetCompanyCount(condition);
+            companycount = Companies.GetCompanyCount(catalogid, condition);
             pagesize = TypeConverter.ObjectToInt(config.Tpp, 0);
             //获取总页数
             pagecount = companycount % pagesize == 0 ? companycount / pagesize : companycount / pagesize + 1;

@@ -2298,6 +2298,22 @@ namespace SAS.Data.SqlServer
             DbParameter[] parms = { DbHelper.MakeInParam("@enid", (DbType)SqlDbType.Int, 4, enid) };
             return DbHelper.ExecuteReader(CommandType.StoredProcedure, string.Format("{0}getcompanyinfo", BaseConfigs.GetTablePrefix), parms);
         }
+        /// <summary>
+        /// 获取企业信息列表（有省市区）
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetCompanyList()
+        {
+            return DbHelper.ExecuteDataset(CommandType.StoredProcedure, string.Format("{0}getcompanylist", BaseConfigs.GetTablePrefix)).Tables[0];
+        }
+        /// <summary>
+        /// 根据类别获取企业信息列表（有省市区）
+        /// </summary>
+        public DataTable GetCompanyListByCatalogID(int catalogid)
+        {
+            DbParameter[] parms = { DbHelper.MakeInParam("@catalogid", (DbType)SqlDbType.Int, 4, catalogid) };
+            return DbHelper.ExecuteDataset(CommandType.StoredProcedure, string.Format("{0}getcompanylistbycatalog", BaseConfigs.GetTablePrefix), parms).Tables[0];
+        }
         #endregion
 
         #region 行业信息操作

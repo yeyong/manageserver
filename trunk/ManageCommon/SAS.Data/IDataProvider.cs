@@ -1972,6 +1972,15 @@ namespace SAS.Data
         /// 获取企业实体信息（有省市区）
         /// </summary>
         IDataReader GetCompanyInfo(int enid);
+        /// <summary>
+        /// 获取企业信息列表（有省市区）
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetCompanyList();
+        /// <summary>
+        /// 根据类别获取企业信息列表（有省市区）
+        /// </summary>
+        DataTable GetCompanyListByCatalogID(int catalogid);
         #endregion
 
         #region 行业类别操作

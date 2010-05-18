@@ -23,7 +23,8 @@ namespace SAS.ManageWeb
         /// <summary>
         /// 企业信息列表
         /// </summary>
-        protected SAS.Common.Generic.List<Companys> companylist;
+        //protected SAS.Common.Generic.List<Companys> companylist;
+        protected DataRow[] companylist;
         /// <summary>
         /// 类别ID
         /// </summary>
@@ -148,11 +149,10 @@ namespace SAS.ManageWeb
                     pagenav += " &gt; " + _cli.name;
                     pagetitle = "浙商黄页-浙商黄页-" + _cli.name;
                 }
-            }
+            }           
 
-            
-
-            companylist = Companies.GetCompanyPageList(pageid, pagesize, "en_accesses", ordertype == 0 ? "desc" : "", condition);
+            //companylist = Companies.GetCompanyPageList(pageid, pagesize, "en_accesses", ordertype == 0 ? "desc" : "", condition);
+            companylist = Companies.GetCompanyPageList(catalogid, pageid, pagesize, "en_accesses", ordertype == 0 ? "desc" : "", condition);
         }
 
         /// <summary>
@@ -163,15 +163,16 @@ namespace SAS.ManageWeb
             if (areaid > 0) arealist = areaid.ToString();
             else if (cityid > 0) arealist = areas.GetDistrictIDByCity(cityid);
             else if (provinceid > 0) arealist = areas.GetDistrictIDByProvince(provinceid);
-            condition = Companies.GetCompanyCondition(catalogid, arealist, entypeid, regyear, searchkey);
-            companycount = Companies.GetCompanyCount(condition);
+            //condition = Companies.GetCompanyCondition(catalogid, arealist, entypeid, regyear, searchkey);
+            condition = Companies.GetCompanyCondition(0, arealist, entypeid, regyear, searchkey);
+            companycount = Companies.GetCompanyCount(catalogid, condition);
             pagesize = TypeConverter.ObjectToInt(config.Tpp, 0);
             //获取总页数
             pagecount = companycount % pagesize == 0 ? companycount / pagesize : companycount / pagesize + 1;
             if (pagecount == 0) pagecount = 1;
             pageid = pageid < 1 ? 1 : pageid;
             pageid = pageid > pagecount ? pagecount : pageid;
-            if (pageid * pagesize > companycount) pagesize = pagesize - (pagesize * pageid - companycount);
+            //if (pageid * pagesize > companycount) pagesize = pagesize - (pagesize * pageid - companycount);
 
             pagenumbers = Utils.GetCompanyPageNumbers(pageid, pagecount, string.Format("zshy-{0}-{1}-{2}-{3}-{4}-{5}-{6}-{7}.html", catalogid, provinceid, cityid, areaid, entypeid, regyear, ordertype, keyword), 10);
 
