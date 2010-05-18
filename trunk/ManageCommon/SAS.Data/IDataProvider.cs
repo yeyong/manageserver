@@ -948,6 +948,12 @@ namespace SAS.Data
         /// </summary>
         /// <param name="templateIdList">格式为： 1,2,3</param>
         void DeleteCardTemplateItem(string templateIdList);
+        /// <summary>
+        /// 更改名片模板参数
+        /// </summary>
+        /// <param name="tid"></param>
+        /// <param name="parmstr"></param>
+        void UpdateCardTemplateParm(int tid, string parmstr);
         #endregion
 
         #region 名片配置文件表cardconfig操作
