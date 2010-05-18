@@ -67,5 +67,15 @@ namespace SAS.Data.DataProvider
         {
             return DatabaseProvider.GetInstance().GetAllCardTemplateList();
         }
+
+        /// <summary>
+        /// 更改名片模板参数
+        /// </summary>
+        /// <param name="tid"></param>
+        /// <param name="parmstr"></param>
+        public static void UpdateCardTemplateParms(int tid, string parmstr)
+        {
+            DatabaseProvider.GetInstance().UpdateCardTemplateParm(tid, parmstr);
+        }
     }
 }
