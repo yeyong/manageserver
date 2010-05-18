@@ -242,5 +242,20 @@ namespace SAS.Logic
             }
             AdminVistLogs.InsertLog(uid, userName, groupId, groupTitle, ip, "从模板库中删除模板文件", "ID为:" + templateIdList);
         }
+        /// <summary>
+        /// 更新名片模板参数
+        /// </summary>
+        /// <param name="tid"></param>
+        /// <param name="parmstr"></param>
+        /// <param name="uid">操作者的Uid</param>
+        /// <param name="userName">操作者的用户名</param>
+        /// <param name="groupId">操作者的组Id</param>
+        /// <param name="groupTitle">操作者的组名称</param>
+        /// <param name="ip">操作者的Ip</param>
+        public static void UpdateCardTemplate(int tid, string parmstr, int uid, string userName, int groupId, string groupTitle, string ip)
+        {
+            SAS.Data.DataProvider.CardTemplate.UpdateCardTemplateParms(tid, parmstr);
+            AdminVistLogs.InsertLog(uid, userName, groupId, groupTitle, ip, "从数据库中修改名片模板文件参数", "ID为:" + tid);
+        }
     }
 }

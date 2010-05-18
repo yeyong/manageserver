@@ -17,7 +17,7 @@ namespace SAS.ManageWeb
     {
         protected override void ShowPage()
         {
-            infloat = SASRequest.GetInt("infloat", 0);
+            
         }
     }
 }

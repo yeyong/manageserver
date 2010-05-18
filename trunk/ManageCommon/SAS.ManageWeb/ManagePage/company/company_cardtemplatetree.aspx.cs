@@ -170,6 +170,17 @@ namespace SAS.ManageWeb.ManagePage
             #endregion
         }
 
+        protected void AddTemplateFile_Click(object sender, EventArgs e)
+        {
+            #region 增加模板文件
+            if (CheckCookie())
+            {
+                fileurl.UpdateFile();
+                RegisterStartupScript("PAGE", "window.location.href='company_cardtemplatetree.aspx?templateid=" + Request.Params["templateid"] + "&path=" + Request.Params["path"] + "&templatename=" + Request.Params["templatename"] + "';");
+            }
+            #endregion
+        }
+
         protected void DeleteTemplateFile_Click(object sender, EventArgs e)
         {
             #region 删除模板文件
@@ -222,7 +233,7 @@ namespace SAS.ManageWeb.ManagePage
 
                 if (templatePathList == "")
                 {
-                    RegisterStartupScript("", "<script>alert('您未选中任何模板');</script>");
+                    RegisterStartupScript("", "<script>alert('您未选中任何文件');</script>");
                     return;
                 }
                 //if (SASRequest.GetString("chkall") == "" && templatePathList.Contains("_"))   //非全部生成
@@ -231,26 +242,26 @@ namespace SAS.ManageWeb.ManagePage
                 //}
                 int templateId = SASRequest.GetInt("templateid", 1);
                 int updateCount = 0;
-                string forumPath = BaseConfigs.GetSitePath;
+                string[] parmslist = new string[4];
                 //ForumPageTemplate forumPageTemplate = new ForumPageTemplate();
 
-                //foreach (string templatePath in templatePathList.Split(','))
-                //{
-                //    string templateFileName = Path.GetFileName(templatePath).ToLower();//tempstr[tempstr.Length - 1];
-                //    string tempplaeExtName = Path.GetExtension(templateFileName); //tempstr = templateName.Split('.');
-                //    if ((tempplaeExtName.Equals(".htm") || (tempplaeExtName.Equals(".config"))) && !templateFileName.Contains("_"))
-                //    {
-                //        string subTemplateDirectory = "";
-                //        if (templatePath.Split('\\').Length >= 3)
-                //        {
-                //            subTemplateDirectory = Path.GetDirectoryName(templatePath).Substring(Path.GetDirectoryName(templatePath).LastIndexOf("\\") + 1);
-                //        }
-                //        forumPageTemplate.GetTemplate(forumPath, skinpath, Path.GetFileNameWithoutExtension(templateFileName),
-                //           subTemplateDirectory, 1, templateId);
-                //        updateCount++;
-                //    }
-                //}
-                RegisterStartupScript("PAGETemplate", "共" + updateCount + " 个模板已更新");
+                foreach (string templatePath in templatePathList.Split(','))
+                {
+                    string templateFileName = Path.GetFileName(templatePath).ToLower();//tempstr[tempstr.Length - 1];
+                    string templateExtName = Path.GetExtension(templateFileName); //tempstr = templateName.Split('.');
+                    if (templateExtName.Equals(".jpg"))
+                    {
+                        parmslist[0] = templateFileName;
+                        updateCount++;
+                    }
+                    if (templateExtName.Equals(".swf"))
+                    {
+                        parmslist[1] = templateFileName;
+                        updateCount++;
+                    }
+                }
+                AdminTemplates.UpdateCardTemplate(templateId, string.Join("|", parmslist), userid, username, usergroupid, grouptitle, ip);
+                RegisterStartupScript("PAGETemplate", "共" + updateCount + " 组名片已更新");
             }
             #endregion
         }
@@ -323,6 +334,7 @@ namespace SAS.ManageWeb.ManagePage
 
         private void InitializeComponent()
         {
+            addtempfile.Click += new EventHandler(AddTemplateFile_Click);
             DataTable dt = LoadTemplateFileDT();
             string templateid = SASRequest.GetString("templateid");
             string templatename = SASRequest.GetString("templatename").Replace(" ", "%20");
@@ -352,7 +364,7 @@ namespace SAS.ManageWeb.ManagePage
             TreeView2.DataSource = LoadOtherFileDT();
             TreeView2.DataBind();
 
-            fileurl.UpFilePath = "../../cardtemplate/" + SASRequest.GetString("path") + "/";
+            fileurl.UpFilePath = Utils.GetMapPath("../../cardtemplate/" + SASRequest.GetString("path") + "/");
         }
 
         #endregion

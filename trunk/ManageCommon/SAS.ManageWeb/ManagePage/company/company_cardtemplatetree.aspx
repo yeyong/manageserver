@@ -79,7 +79,7 @@
 	<%}else{%>
 	<yy1:PageInfo ID="PageInfo1" runat="server" Icon="information" Text="点击相应的模板文件进行编辑" />
 	<%}%>
-	&nbsp;&nbsp; <b>当前模板: <%=Request.Params["templatename"]%></b>&nbsp;&nbsp;<yy:UpFile ID="fileurl" IsShowTextArea="false" runat="server" FileType=".jpg|.swf" HintInfo="上传所需文件" Height="20px"/><br />
+	&nbsp;&nbsp; <b>当前模板: <%=Request.Params["templatename"]%></b>&nbsp;&nbsp;<yy:UpFile ID="fileurl" IsShowTextArea="false" runat="server" FileType=".jpg|.swf" HintInfo="上传所需文件" Height="20px"/><yy:Button id="addtempfile" runat="server" Text="增加模板文件" OnClientClick="if(!confirm('你确认要所选所选模板文件吗？')) return false;"/><br />
 	
 	<table class="table1" cellspacing="0" cellpadding="4" width="100%" border="0">
 		<tr>

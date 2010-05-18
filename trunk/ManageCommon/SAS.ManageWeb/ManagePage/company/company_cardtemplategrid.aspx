@@ -37,12 +37,12 @@
             if (pathnamelist != "")
                 CreateTemplate(pathnamelist);
         }
-        function CreateTemplate(pathname) {
-            if (confirm("生成" + pathname + "下所有模板的操作非常耗时,确认要继续吗？")) {
+        function CreateTemplate(pathname,tempid) {
+            if (confirm("更新" + pathname + "下所有名片的操作非常耗时,确认要继续吗？")) {
                 document.getElementById('success').style.display = 'block';
                 //document.getElementById('Layer5').style.width='400px';
                 document.getElementById('Layer5').innerHTML = '<BR /><table><tr><td valign=top><img border=0 src=../images/ajax_loading.gif  /></td><td valign=middle style=font-size:14px;>正在生成' + pathname + '文件夹下的模板, <BR />请稍等...<BR /></td></tr></table><BR />';
-                window.location = "?createtemplate=" + pathname;
+                window.location = "?createtemplate=" + pathname + "&cardtempid=" + tempid;
             }
         }
 
