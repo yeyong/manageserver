@@ -239,7 +239,16 @@ namespace SAS.Data.SqlServer
                                                 templateIdList);
             DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
         }
-
+        /// <summary>
+        /// 更改名片模板参数
+        /// </summary>
+        /// <param name="tid"></param>
+        /// <param name="parmstr"></param>
+        public void UpdateCardTemplateParm(int tid, string parmstr)
+        {
+            string commandText = string.Format("UPDATE [{0}cardtemplate] SET [currentfile] = '{1}' WHERE [id] = {2}", BaseConfigs.GetTablePrefix, parmstr, tid);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
+        }
         #endregion
 
         #region 名片模板配置文件 cardconfig 表操作

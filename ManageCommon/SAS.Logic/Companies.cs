@@ -99,9 +99,10 @@ namespace SAS.Logic
         /// </summary>
         /// <param name="conditions"></param>
         /// <returns></returns>
-        public static int GetCompanyCount(string conditions)
+        public static int GetCompanyCount(int catalogid, string conditions)
         {
-            return SAS.Data.DataProvider.Companies.GetCompanyCountByConditions(conditions);
+            DataTable dt = GetCompanyTableListByCatalog(catalogid);
+            return dt.Select(conditions).Length;
         }
 
         /// <summary>
@@ -117,6 +118,34 @@ namespace SAS.Logic
         {
             return SAS.Data.DataProvider.Companies.GetCompanyPageList(pageindex, pagesize, ordercolumn, ordertype, conditions);
         }
+        /// <summary>
+        /// 企业数据分页操作
+        /// </summary>
+        /// <param name="catalogid">类别</param>
+        /// <param name="pageindex">当前页</param>
+        /// <param name="pagesize">页面尺寸</param>
+        /// <param name="ordercolumn">排序列名</param>
+        /// <param name="ordertype">排序方式</param>
+        /// <param name="conditions">条件</param>
+        public static DataRow[] GetCompanyPageList(int catalogid, int pageindex, int pagesize, string ordercolumn, string ordertype, string conditions)
+        {
+            DataTable companylist = new DataTable();
+            if (catalogid > 0) companylist = GetCompanyTableListByCatalog(catalogid);
+            else companylist = GetCompanyTableList();
+            DataRow[] redatarow = companylist.Select(conditions, ordercolumn + " " + ordertype);
+            if (redatarow.Length > 0)
+            {
+                if (pageindex * pagesize > redatarow.Length) pagesize = pagesize - (pagesize * pageindex - redatarow.Length);
+                DataRow[] newdatarow = new DataRow[pagesize];
+
+                for (int i = 0; i < pagesize; i++)
+                {
+                    newdatarow[i] = redatarow[pageindex * pagesize + i];
+                }
+                return newdatarow;
+            }
+            return redatarow;
+        }
 
         /// <summary>
         /// 获取Table型企业信息集合（缓存）
@@ -129,11 +158,31 @@ namespace SAS.Logic
 
             if (companylist == null)
             {
-                companylist = SAS.Data.DataProvider.Companies.GetCompanyAllList();
+                companylist = SAS.Data.DataProvider.Companies.GetCompanyALLList();
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 300;
                 cache.LoadCacheStrategy(ica);
                 cache.AddObject("/SAS/CompanyTableList", companylist);
+                cache.LoadDefaultCacheStrategy();
+            }
+            return companylist;
+        }
+        /// <summary>
+        /// 根据行业ID获取Table型企业信息集合（缓存）
+        /// </summary>
+        /// <param name="catalogid"></param>
+        /// <returns></returns>
+        public static DataTable GetCompanyTableListByCatalog(int catalogid)
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            DataTable companylist = cache.RetrieveObject("/SAS/CompanyTableList-" + catalogid) as DataTable;
+            if (companylist == null)
+            {
+                companylist = SAS.Data.DataProvider.Companies.GetCompanyListByCatalog(catalogid);
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 300;
+                cache.LoadCacheStrategy(ica);
+                cache.AddObject("/SAS/CompanyTableList-" + catalogid, companylist);
                 cache.LoadDefaultCacheStrategy();
             }
             return companylist;

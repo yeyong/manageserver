@@ -319,5 +319,20 @@ namespace SAS.Data.DataProvider
         {
             return DatabaseProvider.GetInstance().GetCompanyCountByConditions(conditions);
         }
+        /// <summary>
+        /// 获取企业信息列表（有省市区）
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetCompanyALLList()
+        {
+            return DatabaseProvider.GetInstance().GetCompanyList();
+        }
+        /// <summary>
+        /// 根据类别获取企业信息列表（有省市区）
+        /// </summary>
+        public static DataTable GetCompanyListByCatalog(int catalogid)
+        {
+            return DatabaseProvider.GetInstance().GetCompanyListByCatalogID(catalogid);
+        }
     }
 }
