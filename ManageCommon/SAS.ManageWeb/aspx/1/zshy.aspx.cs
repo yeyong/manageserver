@@ -23,7 +23,6 @@ namespace SAS.ManageWeb
         /// <summary>
         /// 企业信息列表
         /// </summary>
-        //protected SAS.Common.Generic.List<Companys> companylist;
         protected DataRow[] companylist;
         /// <summary>
         /// 类别ID
@@ -131,10 +130,10 @@ namespace SAS.ManageWeb
             AddfootScript(loadscript);            
             SetConditionAndPage();
 
-            if (catalogid == 0) cataloglist = Catalogs.GetAllCatalogBySort(1, Companies.GetCompanyCondition(0, arealist, entypeid, regyear, keyword));
+            if (catalogid == 0) cataloglist = Catalogs.GetAllCatalogBySort(1, Companies.GetCompanyCondition(arealist, entypeid, regyear, keyword));
             else
             {
-                cataloglist = Catalogs.GetAllCatalogByPid(catalogid, Companies.GetCompanyCondition(0, arealist, entypeid, regyear, keyword));
+                cataloglist = Catalogs.GetAllCatalogByPid(catalogid, Companies.GetCompanyCondition(arealist, entypeid, regyear, keyword));
                 CatalogInfo _cli = Catalogs.GetCatalogCacheInfo(catalogid);
                 if (_cli != null)
                 {
@@ -151,7 +150,6 @@ namespace SAS.ManageWeb
                 }
             }           
 
-            //companylist = Companies.GetCompanyPageList(pageid, pagesize, "en_accesses", ordertype == 0 ? "desc" : "", condition);
             companylist = Companies.GetCompanyPageList(catalogid, pageid, pagesize, "en_accesses", ordertype == 0 ? "desc" : "", condition);
         }
 
@@ -163,8 +161,7 @@ namespace SAS.ManageWeb
             if (areaid > 0) arealist = areaid.ToString();
             else if (cityid > 0) arealist = areas.GetDistrictIDByCity(cityid);
             else if (provinceid > 0) arealist = areas.GetDistrictIDByProvince(provinceid);
-            //condition = Companies.GetCompanyCondition(catalogid, arealist, entypeid, regyear, searchkey);
-            condition = Companies.GetCompanyCondition(0, arealist, entypeid, regyear, searchkey);
+            condition = Companies.GetCompanyCondition(arealist, entypeid, regyear, searchkey);
             companycount = Companies.GetCompanyCount(catalogid, condition);
             pagesize = TypeConverter.ObjectToInt(config.Tpp, 0);
             //获取总页数
@@ -172,7 +169,6 @@ namespace SAS.ManageWeb
             if (pagecount == 0) pagecount = 1;
             pageid = pageid < 1 ? 1 : pageid;
             pageid = pageid > pagecount ? pagecount : pageid;
-            //if (pageid * pagesize > companycount) pagesize = pagesize - (pagesize * pageid - companycount);
 
             pagenumbers = Utils.GetCompanyPageNumbers(pageid, pagecount, string.Format("zshy-{0}-{1}-{2}-{3}-{4}-{5}-{6}-{7}.html", catalogid, provinceid, cityid, areaid, entypeid, regyear, ordertype, keyword), 10);
 

@@ -27,7 +27,6 @@ namespace SAS.Logic
         {
             OnlineUsers.ResetOnlineList();
             context.BeginRequest += new EventHandler(ReUrl_BeginRequest);
-            context.EndRequest += new EventHandler(context_EndRequest);
         }
         
 
@@ -56,11 +55,6 @@ namespace SAS.Logic
             eventTimer = null;
         }
 
-        private void context_EndRequest(object sender, EventArgs e)
-        {
-
-        }
-
         /// <summary>
         /// 重写Url
         /// </summary>
@@ -73,17 +67,6 @@ namespace SAS.Logic
                 return;
             
             GeneralConfigInfo config = GeneralConfigs.GetConfig();
-            DataCacheConfigInfo dataconfig = DataCacheConfigs.GetConfig();
-
-            if (dataconfig.EnableCaching == 1)
-            {
-                System.Data.SqlClient.SqlDependency.Start(baseconfig.Dbconnectstring);
-                SqlCacheDependencyAdmin.EnableNotifications(baseconfig.Dbconnectstring);
-                foreach (string cachetable in Utils.SplitString(dataconfig.CacheTableList, ","))
-                {
-                    SqlCacheDependencyAdmin.EnableTableForNotifications(baseconfig.Dbconnectstring, cachetable);
-                }
-            }
 
             HttpContext context = ((HttpApplication)sender).Context;
             string forumPath = baseconfig.Sitepath.ToLower();

@@ -94,7 +94,6 @@ namespace SAS.Config
 
             }
 
-
             return m_configinfo;
         }
 

@@ -90,6 +90,9 @@
     <Compile Include="aspx\1\zsshow.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\company\company_cardconfiggrid.aspx.cs">
       <DependentUpon>company_cardconfiggrid.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -979,6 +982,7 @@
     <Content Include="tools\ajax.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Global.asax" />
     <Content Include="ManagePage\company\global_ajaxcall.aspx" />
     <Content Include="ManagePage\forum\forum_addforums.aspx" />
     <Content Include="ManagePage\forum\forum_editforums.aspx" />

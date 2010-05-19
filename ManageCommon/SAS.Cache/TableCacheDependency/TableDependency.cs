@@ -3,7 +3,7 @@ using System.Configuration;
 
 using SAS.Config;
 
-namespace SAS.Cache.TableCacheDependency
+namespace SAS.Cache
 {
     public abstract class TableDependency : SAS.Cache.IWMTVCacheDependency.ICacheDependency
     {
