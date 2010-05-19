@@ -1508,6 +1508,7 @@
     <Content Include="templates\default\tipmsg.htm" />
     <Content Include="templates\default\zscard.htm" />
     <Content Include="templates\default\zsshow.htm" />
+    <Content Include="config\datacache.config" />
     <None Include="ManagePage\images\admin-gif\Thumbs.db" />
     <None Include="ManagePage\images\ad\Thumbs.db" />
     <None Include="ManagePage\images\Thumbs.db" />
