@@ -23,7 +23,6 @@ namespace SAS.Cache
         private static object lockHelper = new object();
         private static XmlDocument rootXml = new XmlDocument();
 
-
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -108,9 +107,6 @@ namespace SAS.Cache
             }
         }
 
-
-
-
         /// <summary>
         /// 添加多点路径,在当前的键上插入多值的域
         /// </summary>
@@ -132,7 +128,6 @@ namespace SAS.Cache
                 return true;
             }
         }
-
 
         //缓存标志位类型
         private enum CacheFlag
@@ -394,8 +389,6 @@ namespace SAS.Cache
             }
         }
 
-
-
         /// <summary>
         /// 在XML映射文档中的指定路径,加入当前对象信息
         /// </summary>
@@ -454,8 +447,6 @@ namespace SAS.Cache
                 cs.AddObject(objectId, o);
             }
         }
-
-
 
         /// <summary>
         /// 在XML映射文档中的指定路径,加入当前对象信息
@@ -537,7 +528,6 @@ namespace SAS.Cache
             return o;
         }
 
-
         /// <summary>
         /// 返回当前路径的多值域部分
         /// </summary>
@@ -547,8 +537,6 @@ namespace SAS.Cache
         {
             return RetrieveObjectList(xpath + "/Multi");
         }
-
-
 
         /// <summary>
         /// 返回指定XML路径下的数据项
@@ -566,7 +554,6 @@ namespace SAS.Cache
             }
             return null;
         }
-
 
         //取得指定XML路径下的数据项
         public virtual object RetrieveObject(string xpath)
@@ -688,7 +675,6 @@ namespace SAS.Cache
             }
         }
 
-
         /// <summary>
         /// 返回一个当前路径下的通过AddObject()方法加入的对象列表
         /// </summary>
@@ -709,7 +695,6 @@ namespace SAS.Cache
             //转换 ArrayList 为 object[]
             return (object[])objects.ToArray(typeof(Object));
         }
-
 
         /// <summary>
         /// 通过指定的路径删除缓存中的单值部分对象
@@ -784,7 +769,6 @@ namespace SAS.Cache
             }
         }
 
-
         /// <summary>
         /// 通过指定的路径删除缓存中的对象
         /// </summary>
@@ -796,7 +780,6 @@ namespace SAS.Cache
                 RemoveObject(xpath, true);
             }
         }
-
 
         /// <summary>
         /// 通过指定的路径删除缓存中的对象
@@ -899,7 +882,6 @@ namespace SAS.Cache
             }
         }
 
-
         public void LoadCacheStrategy(ICacheStrategy ics)
         {
             lock (lockHelper)
@@ -916,7 +898,6 @@ namespace SAS.Cache
                 cs = new DefaultCacheStrategy();
             }
         }
-
     }
 
     public class CachesFileMonitor
@@ -928,8 +909,6 @@ namespace SAS.Cache
 
         //最新general.config文件修改时间
         private static DateTime cachefilenewchange;
-
-
 
         private static object cachelockHelper = new object();
 
@@ -949,7 +928,6 @@ namespace SAS.Cache
             }
             cachefileoldchange = System.IO.File.GetLastWriteTime(path);
         }
-
 
         public static SASCache CheckAndRemoveCache(SASCache instance)//
         {

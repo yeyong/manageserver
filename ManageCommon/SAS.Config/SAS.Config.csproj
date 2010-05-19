@@ -44,6 +44,9 @@
     <Compile Include="BaseConfigInfo.cs" />
     <Compile Include="BaseConfigInfoCollection.cs" />
     <Compile Include="BaseConfigs.cs" />
+    <Compile Include="DataCacheConfigFileManager.cs" />
+    <Compile Include="DataCacheConfigInfo.cs" />
+    <Compile Include="DataCacheConfigs.cs" />
     <Compile Include="DbSnapConfigFileManager.cs" />
     <Compile Include="DbSnapConfigs.cs" />
     <Compile Include="DbSnapInfo.cs" />
