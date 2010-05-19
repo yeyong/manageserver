@@ -28,7 +28,7 @@ namespace SAS.ManageWeb
         {
             if (enid > 0)
             {
-                tipmsgeninfo = Companies.GetCompanyInfo(enid);
+                tipmsgeninfo = Companies.GetCompanyCacheInfo(enid);
                 if (tipmsgeninfo == null) AddErrLine("企业信息参数错误！");
             }
             else
