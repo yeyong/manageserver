@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Data;
+using System.Collections;
 using System.Text.RegularExpressions;
 using System.Text;
+using System.Web.Caching;
 
 using SAS.Common;
 using SAS.Data;
@@ -9,6 +11,7 @@ using SAS.Config;
 using SAS.Entity;
 using SAS.Common.Generic;
 using SAS.Cache;
+using SAS.Cache.CacheDependencyFactory;
 
 namespace SAS.Logic
 {
@@ -19,6 +22,7 @@ namespace SAS.Logic
     {
         private static Predicate<Companys> marchPass = new Predicate<Companys>(delegate(Companys companyinfo) { return companyinfo.En_status == 2 && companyinfo.En_visble == 1; });
         private const string COMMSORT = "[en_credits] DESC,[en_accesses] DESC";
+        private static DataCacheConfigInfo dataconfig = DataCacheConfigs.GetConfig();
         
         /// <summary>
         /// 创建企业信息
@@ -101,23 +105,18 @@ namespace SAS.Logic
         /// <returns></returns>
         public static int GetCompanyCount(int catalogid, string conditions)
         {
-            DataTable dt = GetCompanyTableListByCatalog(catalogid);
+            DataTable dt = new DataTable();
+            if (catalogid > 0)
+            {
+                dt = GetCompanyTableListByCatalog(catalogid);
+            }
+            else
+            {
+                dt = GetCompanyTableList();
+            }
             return dt.Select(conditions).Length;
         }
 
-        /// <summary>
-        /// 企业数据分页操作
-        /// </summary>
-        /// <param name="pageindex">当前页</param>
-        /// <param name="pagesize">页面尺寸</param>
-        /// <param name="ordercolumn">排序列名</param>
-        /// <param name="ordertype">排序方式</param>
-        /// <param name="conditions">条件</param>
-        /// <returns></returns>
-        public static List<Companys> GetCompanyPageList(int pageindex, int pagesize, string ordercolumn, string ordertype, string conditions)
-        {
-            return SAS.Data.DataProvider.Companies.GetCompanyPageList(pageindex, pagesize, ordercolumn, ordertype, conditions);
-        }
         /// <summary>
         /// 企业数据分页操作
         /// </summary>
@@ -132,19 +131,19 @@ namespace SAS.Logic
             DataTable companylist = new DataTable();
             if (catalogid > 0) companylist = GetCompanyTableListByCatalog(catalogid);
             else companylist = GetCompanyTableList();
-            DataRow[] redatarow = companylist.Select(conditions, ordercolumn + " " + ordertype);
-            if (redatarow.Length > 0)
-            {
-                if (pageindex * pagesize > redatarow.Length) pagesize = pagesize - (pagesize * pageindex - redatarow.Length);
-                DataRow[] newdatarow = new DataRow[pagesize];
 
-                for (int i = 0; i < pagesize; i++)
-                {
-                    newdatarow[i] = redatarow[pageindex * pagesize + i];
-                }
+            ArrayList redatarow = new ArrayList();
+
+            redatarow.AddRange(companylist.Select(conditions, ordercolumn + " " + ordertype));
+            if (redatarow.Count > 0)
+            {
+                if (pageindex * pagesize > redatarow.Count) pagesize = pagesize - (pagesize * pageindex - redatarow.Count);
+                DataRow[] newdatarow = new DataRow[pagesize];
+                redatarow.CopyTo((pageindex - 1) * pagesize, newdatarow, 0, pagesize);
+
                 return newdatarow;
             }
-            return redatarow;
+            return new DataRow[0];
         }
 
         /// <summary>
@@ -174,16 +173,17 @@ namespace SAS.Logic
         /// <returns></returns>
         public static DataTable GetCompanyTableListByCatalog(int catalogid)
         {
-            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
-            DataTable companylist = cache.RetrieveObject("/SAS/CompanyTableList-" + catalogid) as DataTable;
+            if(dataconfig.EnableCaching != 1){
+                return SAS.Data.DataProvider.Companies.GetCompanyListByCatalog(catalogid);
+            }
+            SAS.Cache.SASDataCache cache = SAS.Cache.SASDataCache.GetCacheService();
+            string cachekey = "CompanyTableList_" + catalogid;
+            DataTable companylist = cache.GetDataCache(cachekey) as DataTable;
             if (companylist == null)
             {
                 companylist = SAS.Data.DataProvider.Companies.GetCompanyListByCatalog(catalogid);
-                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
-                ica.TimeOut = 300;
-                cache.LoadCacheStrategy(ica);
-                cache.AddObject("/SAS/CompanyTableList-" + catalogid, companylist);
-                cache.LoadDefaultCacheStrategy();
+                AggregateCacheDependency cd = DependencyFacade.GetCompanyDependency();
+                cache.SetDataCache(cachekey, companylist, cd);
             }
             return companylist;
         }
@@ -225,9 +225,9 @@ namespace SAS.Logic
         /// <param name="regyear">注册年限</param>
         /// <param name="keyword">关键字</param>
         /// <returns></returns>
-        public static string GetCompanyCondition(int catalogid, string arealist, int typeid, int regyear, string keyword)
+        public static string GetCompanyCondition(string arealist, int typeid, int regyear, string keyword)
         {
-            return SAS.Data.DataProvider.Companies.GetCompanyCondition(catalogid, arealist, typeid, regyear, keyword);
+            return SAS.Data.DataProvider.Companies.GetCompanyCondition(arealist, typeid, regyear, keyword);
         }
     }
 }

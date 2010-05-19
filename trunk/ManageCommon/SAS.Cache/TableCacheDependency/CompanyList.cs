@@ -2,13 +2,13 @@
 
 using SAS.Config;
 
-namespace SAS.Cache.TableCacheDependency
+namespace SAS.Cache
 {
     /// <summary>
     /// 企业信息缓存
     /// </summary>
     public class CompanyList : TableDependency
     {
-        public CompanyList() : base(DataCacheConfigs.GetConfig().CompanyTableDependency) { }
+        public CompanyList() : base(BaseConfigs.GetTablePrefix + DataCacheConfigs.GetConfig().CompanyTableDependency) { }
     }
 }

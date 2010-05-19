@@ -2231,13 +2231,10 @@ namespace SAS.Data.SqlServer
         /// <param name="regyear">注册年限</param>
         /// <param name="keyword">关键字</param>
         /// <returns></returns>
-        public string GetCompanyCondition(int catalogid, string arealist, int typeid, int regyear, string keyword)
+        public string GetCompanyCondition(string arealist, int typeid, int regyear, string keyword)
         {
             StringBuilder commandText = new StringBuilder(" [en_visble] = 1");
-            if (catalogid > 0)
-            {
-                commandText.AppendFormat(" AND dbo.sas_catalogvaild({0},[en_cataloglist]) > 0", catalogid);
-            }
+
             if (arealist != "")
             {
                 commandText.AppendFormat(" AND [en_areas] IN ({0})", arealist);
