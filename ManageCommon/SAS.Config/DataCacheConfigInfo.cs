@@ -13,9 +13,12 @@ namespace SAS.Config
         private string m_cacheDependencyAssembly = "SAS.Cache.TableCacheDependency";    //缓存编译类
         private string m_cacheDatabaseName = "ntw";                                     //缓存数据库
         private string m_cacheTableList = "";                                           //缓存数据表集合
-        private string m_companyTableDependency = "company";                            //缓存企业表
+        private string m_companyTableDependency = "company";                            //缓存企业表依赖项
         private int m_companyCacheDuration = 12;                                        //企业信息缓存失效时间
         private int m_commonCacheDuration = 12;                                         //通用信息缓存失效时间
+        private string m_provinceTableDependency = "province";                          //缓存省份表依赖项
+        private string m_cityTableDependency = "city";                                  //缓存市级表依赖项
+        private string m_districtTableDependency = "district";                          //缓存地区表依赖项
         #endregion
 
         #region 属性
@@ -52,7 +55,7 @@ namespace SAS.Config
             get { return m_cacheTableList; }
         }
         /// <summary>
-        /// 缓存企业表
+        /// 缓存企业表依赖项
         /// </summary>
         public string CompanyTableDependency
         {
@@ -74,6 +77,30 @@ namespace SAS.Config
         {
             set { m_commonCacheDuration = value; }
             get { return m_commonCacheDuration; }
+        }
+        /// <summary>
+        /// 缓存地区表依赖项
+        /// </summary>
+        public string ProvinceTableDependency
+        {
+            set { m_provinceTableDependency = value; }
+            get { return m_provinceTableDependency; }
+        }
+        /// <summary>
+        /// 缓存地区表依赖项
+        /// </summary>
+        public string CityTableDependency
+        {
+            set { m_cityTableDependency = value; }
+            get { return m_cityTableDependency; }
+        }
+        /// <summary>
+        /// 缓存地区表依赖项
+        /// </summary>
+        public string DistrictTableDependency
+        {
+            set { m_districtTableDependency = value; }
+            get { return m_districtTableDependency; }
         }
         #endregion
     }

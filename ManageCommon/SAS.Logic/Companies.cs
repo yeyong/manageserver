@@ -21,6 +21,13 @@ namespace SAS.Logic
     public class Companies
     {
         private static Predicate<Companys> marchPass = new Predicate<Companys>(delegate(Companys companyinfo) { return companyinfo.En_status == 2 && companyinfo.En_visble == 1; });
+        /// <summary>
+        /// 通用条件
+        /// </summary>
+        private const string COMMCONDITION = "[en_visible] = 1 AND [en_status] = 2";
+        /// <summary>
+        /// 通用排序
+        /// </summary>
         private const string COMMSORT = "[en_credits] DESC,[en_accesses] DESC";
         private static DataCacheConfigInfo dataconfig = DataCacheConfigs.GetConfig();
         
@@ -74,28 +81,12 @@ namespace SAS.Logic
         /// <returns></returns>
         public static Companys GetCompanyCacheInfo(int enid)
         {
-            return GetCompanyList().Find(new Predicate<Companys>(delegate(Companys companyinfo) { return companyinfo.En_id == enid; }));
-        }
-
-        /// <summary>
-        /// 获取全部企业信息（带缓存）
-        /// </summary>
-        /// <returns></returns>
-        public static List<Companys> GetCompanyList()
-        {
-            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
-            List<Companys> companylist = cache.RetrieveObject("/SAS/CompanyList") as List<Companys>;
-
-            if (companylist == null)
+            DataRow[] dr = GetCompanyTableList().Select(COMMCONDITION + " AND en_id = " + enid);
+            if (dr.Length > 0)
             {
-                companylist = SAS.Data.DataProvider.Companies.GetCompanyList();
-                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
-                ica.TimeOut = 300;
-                cache.LoadCacheStrategy(ica);
-                cache.AddObject("/SAS/CompanyList", companylist);
-                cache.LoadDefaultCacheStrategy();
+                return SAS.Data.DataProvider.Companies.LoadCompanyInfo(dr[0]);
             }
-            return companylist;
+            return null;
         }
 
         /// <summary>
@@ -159,7 +150,7 @@ namespace SAS.Logic
             {
                 companylist = SAS.Data.DataProvider.Companies.GetCompanyALLList();
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
-                ica.TimeOut = 300;
+                ica.TimeOut = 1440;     //一天更新一次
                 cache.LoadCacheStrategy(ica);
                 cache.AddObject("/SAS/CompanyTableList", companylist);
                 cache.LoadDefaultCacheStrategy();
@@ -195,11 +186,12 @@ namespace SAS.Logic
         public static List<Companys> GetNewCompanyList()
         {
             List<Companys> companylist = new List<Companys>();
+            DataTable dt = GetCompanyTableList();
             int row = 0;
-            foreach (Companys _compinfo in GetCompanyList().FindAll(marchPass))
+            foreach (DataRow dr in dt.Select(COMMCONDITION, "en_createdate desc"))
             {
                 if (row > 4) break;
-                companylist.Add(_compinfo);
+                companylist.Add(SAS.Data.DataProvider.Companies.LoadCompanyInfo(dr));
                 row++;
             }
             return companylist;

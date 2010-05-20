@@ -18,6 +18,33 @@ namespace SAS.Cache.CacheDependencyFactory
         }
 
         /// <summary>
+        /// 创建省级信息缓存依赖
+        /// </summary>
+        /// <returns></returns>
+        public static ICacheDependency CreateProvinceDependency()
+        {
+            return LoadInstance("ProvinceList");
+        }
+
+        /// <summary>
+        /// 创建市级信息缓存依赖
+        /// </summary>
+        /// <returns></returns>
+        public static ICacheDependency CreateCityDependency()
+        {
+            return LoadInstance("CityList");
+        }
+
+        /// <summary>
+        /// 创建区级信息缓存依赖
+        /// </summary>
+        /// <returns></returns>
+        public static ICacheDependency CreateDistrictDependency()
+        {
+            return LoadInstance("DistrictList");
+        }
+
+        /// <summary>
         /// Common method to load dependency class from information provided from configuration file 
         /// </summary>
         /// <param name="className">Type of dependency</param>
