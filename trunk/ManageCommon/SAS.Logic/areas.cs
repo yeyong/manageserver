@@ -4,6 +4,7 @@ using System.Text;
 using System.IO;
 using System.Threading;
 using System.Web;
+using System.Web.Caching;
 using System.Xml.Serialization;
 using System.Data;
 
@@ -11,6 +12,7 @@ using SAS.Common;
 using SAS.Data;
 using SAS.Common.Generic;
 using SAS.Config;
+using SAS.Cache.CacheDependencyFactory;
 
 namespace SAS.Logic
 {
@@ -23,6 +25,7 @@ namespace SAS.Logic
         private static volatile areas instance = null;
         private static object lockHelper = new object();
         private static string jsonPath = "";
+        private static DataCacheConfigInfo dataconfig = DataCacheConfigs.GetConfig();
         #endregion
 
         #region 返回唯一实例
@@ -55,15 +58,31 @@ namespace SAS.Logic
         /// <returns></returns>
         public static DataTable GetDistrictList()
         {
-            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
-            DataTable ddata = cache.RetrieveObject("/SAS/Districts") as DataTable;
+            DataTable ddata = new DataTable();
 
-            if (ddata == null)
+            if (dataconfig.EnableCaching != 1)
             {
-                ddata = SAS.Data.DataProvider.Areas.GetDistrict();
-                cache.AddObject("/SAS/Districts", ddata);
+                SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+                ddata = cache.RetrieveObject("/SAS/Districts") as DataTable;
+                if (ddata == null)
+                {
+                    ddata = SAS.Data.DataProvider.Areas.GetDistrict();
+                    cache.AddObject("/SAS/Districts", ddata);
+                }
             }
+            else
+            {
+                SAS.Cache.SASDataCache datacache = SAS.Cache.SASDataCache.GetCacheService();
+                string cachekey = "Districts";
+                ddata = datacache.GetDataCache(cachekey) as DataTable;
 
+                if (ddata == null)
+                {
+                    ddata = SAS.Data.DataProvider.Areas.GetDistrict();
+                    AggregateCacheDependency cd = DependencyFacade.GetDistrictDependency();
+                    datacache.SetDataCache(cachekey, ddata, cd);
+                }
+            }
             return ddata;
         }
 
@@ -73,13 +92,30 @@ namespace SAS.Logic
         /// <returns></returns>
         public static DataTable GetCityList()
         {
-            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
-            DataTable cdata = cache.RetrieveObject("/SAS/Citys") as DataTable;
-
-            if (cdata == null)
+            DataTable cdata = new DataTable();
+            if (dataconfig.EnableCaching != 1)
             {
-                cdata = SAS.Data.DataProvider.Areas.GetCity();
-                cache.AddObject("/SAS/Citys", cdata);
+                SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+                cdata = cache.RetrieveObject("/SAS/Citys") as DataTable;
+
+                if (cdata == null)
+                {
+                    cdata = SAS.Data.DataProvider.Areas.GetCity();
+                    cache.AddObject("/SAS/Citys", cdata);
+                }
+            }
+            else
+            {
+                SAS.Cache.SASDataCache datacache = SAS.Cache.SASDataCache.GetCacheService();
+                string cachekey = "Citys";
+                cdata = datacache.GetDataCache(cachekey) as DataTable;
+
+                if (cdata == null)
+                {
+                    cdata = SAS.Data.DataProvider.Areas.GetDistrict();
+                    AggregateCacheDependency cd = DependencyFacade.GetCityDependency();
+                    datacache.SetDataCache(cachekey, cdata, cd);
+                }
             }
 
             return cdata;
@@ -91,13 +127,30 @@ namespace SAS.Logic
         /// <returns></returns>
         public static DataTable GetProvinceList()
         {
-            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
-            DataTable pdata = cache.RetrieveObject("/SAS/Provinces") as DataTable;
-
-            if (pdata == null)
+            DataTable pdata = new DataTable();
+            if (dataconfig.EnableCaching != 1)
             {
-                pdata = SAS.Data.DataProvider.Areas.GetProvince();
-                cache.AddObject("/SAS/Provinces", pdata);
+                SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+                pdata = cache.RetrieveObject("/SAS/Provinces") as DataTable;
+
+                if (pdata == null)
+                {
+                    pdata = SAS.Data.DataProvider.Areas.GetProvince();
+                    cache.AddObject("/SAS/Provinces", pdata);
+                }
+            }
+            else
+            {
+                SAS.Cache.SASDataCache datacache = SAS.Cache.SASDataCache.GetCacheService();
+                string cachekey = "Provinces";
+                pdata = datacache.GetDataCache(cachekey) as DataTable;
+
+                if (pdata == null)
+                {
+                    pdata = SAS.Data.DataProvider.Areas.GetDistrict();
+                    AggregateCacheDependency cd = DependencyFacade.GetProvinceDependency();
+                    datacache.SetDataCache(cachekey, pdata, cd);
+                }
             }
             return pdata;
         }
