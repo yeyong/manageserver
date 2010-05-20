@@ -24,7 +24,7 @@ namespace SAS.Logic
         /// <summary>
         /// 通用条件
         /// </summary>
-        private const string COMMCONDITION = "[en_visible] = 1 AND [en_status] = 2";
+        private const string COMMCONDITION = "[en_visble] = 1 AND [en_status] = 2";
         /// <summary>
         /// 通用排序
         /// </summary>
@@ -174,7 +174,7 @@ namespace SAS.Logic
             {
                 companylist = SAS.Data.DataProvider.Companies.GetCompanyListByCatalog(catalogid);
                 AggregateCacheDependency cd = DependencyFacade.GetCompanyDependency();
-                cache.SetDataCache(cachekey, companylist, cd);
+                cache.SetDataCache(cachekey, companylist,1440, cd);
             }
             return companylist;
         }
