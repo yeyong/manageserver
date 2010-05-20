@@ -112,7 +112,7 @@ namespace SAS.Logic
 
                 if (cdata == null)
                 {
-                    cdata = SAS.Data.DataProvider.Areas.GetDistrict();
+                    cdata = SAS.Data.DataProvider.Areas.GetCity();
                     AggregateCacheDependency cd = DependencyFacade.GetCityDependency();
                     datacache.SetDataCache(cachekey, cdata, cd);
                 }
@@ -147,7 +147,7 @@ namespace SAS.Logic
 
                 if (pdata == null)
                 {
-                    pdata = SAS.Data.DataProvider.Areas.GetDistrict();
+                    pdata = SAS.Data.DataProvider.Areas.GetProvince();
                     AggregateCacheDependency cd = DependencyFacade.GetProvinceDependency();
                     datacache.SetDataCache(cachekey, pdata, cd);
                 }

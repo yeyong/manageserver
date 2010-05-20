@@ -77,7 +77,7 @@ namespace SAS.Cache
             }
             else
             {
-                webCache.Insert(keys, o, dep, System.Web.Caching.Cache.NoAbsoluteExpiration, System.Web.Caching.Cache.NoSlidingExpiration, System.Web.Caching.CacheItemPriority.High, callBack);
+                webCache.Insert(keys, o, dep, DateTime.MaxValue, TimeSpan.Zero, System.Web.Caching.CacheItemPriority.High, callBack);
             }
         }
 
