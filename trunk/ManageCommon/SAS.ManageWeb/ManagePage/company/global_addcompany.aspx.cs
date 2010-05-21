@@ -78,7 +78,7 @@ namespace SAS.ManageWeb.ManagePage
                     base.RegisterStartupScript("", "<script>alert('添加操作失败，请与管理员联系!');window.location.href='global_addcompany.aspx';</script>");
                     return;
                 }
-                Caches.ReSetCompanyList();
+
                 AdminVistLogs.InsertLog(this.userid, this.username, this.usergroupid, this.grouptitle, this.ip, "后台添加企业信息", "企业名:" + qyname.Text.Trim());
 
                 base.RegisterStartupScript("PAGE", "window.location.href='company_companygrid.aspx';");

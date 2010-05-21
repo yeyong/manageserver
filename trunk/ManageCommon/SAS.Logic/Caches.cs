@@ -315,18 +315,28 @@ namespace SAS.Logic
         }
 
         /// <summary>
-        /// 重置企业信息
-        /// </summary>
-        public static void ReSetCompanyList()
-        {
-            RemoveObject(CacheKeys.SAS_COMPANY_LIST);
-        }
-        /// <summary>
         /// 重置企业表缓存信息
         /// </summary>
         public static void ReSetCompanyTableList()
         {
             RemoveObject(CacheKeys.SAS_COMPANY_Table_LIST);
+        }
+
+        /// <summary>
+        /// 重置行业类别下的企业缓存
+        /// </summary>
+        /// <param name="catalogid"></param>
+        public static void ReSetCompanyTableSub(int catalogid)
+        {
+            CatalogInfo cinfo = Catalogs.GetCatalogCacheInfo(catalogid);
+            if (cinfo != null && cinfo.parentlist != "")
+            {
+                foreach (string str in cinfo.parentlist.Split(','))
+                {
+                    RemoveObject(CacheKeys.SAS_COMPANY_Table_SUB + TypeConverter.StrToInt(str, 0));
+                }
+            }
+            RemoveObject(CacheKeys.SAS_COMPANY_Table_SUB + catalogid);            
         }
 
         /// <summary>
@@ -339,7 +349,7 @@ namespace SAS.Logic
             ReSetCardConfig();
             ReSetAdminGroupList();
             ReSetUserGroupList();
-            ReSetCompanyList();
+            ReSetCompanyTableList();
         }
 
         #endregion

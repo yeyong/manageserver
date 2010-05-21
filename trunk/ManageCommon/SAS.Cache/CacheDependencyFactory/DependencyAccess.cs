@@ -7,16 +7,7 @@ using SAS.Cache.IWMTVCacheDependency;
 namespace SAS.Cache.CacheDependencyFactory
 {
     public static class DependencyAccess
-    {
-        /// <summary>
-        /// 创建企业信息缓存依赖
-        /// </summary>
-        /// <returns></returns>
-        public static ICacheDependency CreateCompanyDependency()
-        {
-            return LoadInstance("CompanyList");
-        }
-
+    {        
         /// <summary>
         /// 创建省级信息缓存依赖
         /// </summary>
@@ -42,6 +33,15 @@ namespace SAS.Cache.CacheDependencyFactory
         public static ICacheDependency CreateDistrictDependency()
         {
             return LoadInstance("DistrictList");
+        }
+
+        /// <summary>
+        /// 创建行业类别信息缓存依赖项
+        /// </summary>
+        /// <returns></returns>
+        public static ICacheDependency CreateCatalogDependency()
+        {
+            return LoadInstance("CatalogList");
         }
 
         /// <summary>

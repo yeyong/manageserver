@@ -11,8 +11,11 @@ namespace SAS.Cache
         public const string FORUM_ADMIN_GROUP_LIST = "/SAS/AdminGroupList";
         public const string FORUM_USER_GROUP_LIST = "/SAS/UserGroupList";
         public const string FORUM_STATISTICS = "/SAS/Statistics";
-        public const string SAS_COMPANY_LIST = "/SAS/CompanyList";
         public const string SAS_COMPANY_Table_LIST = "/SAS/CompanyTableList";
+        /// <summary>
+        /// 类别企业信息
+        /// </summary>
+        public const string SAS_COMPANY_Table_SUB = "/SAS/CompanyTableList/CompanyTableList_";
         public const string SAS_CARDCONFIG = "/SAS/CardConfig";
     }
 }
