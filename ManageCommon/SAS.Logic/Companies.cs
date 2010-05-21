@@ -11,7 +11,6 @@ using SAS.Config;
 using SAS.Entity;
 using SAS.Common.Generic;
 using SAS.Cache;
-using SAS.Cache.CacheDependencyFactory;
 
 namespace SAS.Logic
 {
@@ -29,7 +28,6 @@ namespace SAS.Logic
         /// 通用排序
         /// </summary>
         private const string COMMSORT = "[en_credits] DESC,[en_accesses] DESC";
-        private static DataCacheConfigInfo dataconfig = DataCacheConfigs.GetConfig();
         
         /// <summary>
         /// 创建企业信息
@@ -143,19 +141,7 @@ namespace SAS.Logic
         /// <returns></returns>
         public static DataTable GetCompanyTableList()
         {
-            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
-            DataTable companylist = cache.RetrieveObject("/SAS/CompanyTableList") as DataTable;
-
-            if (companylist == null)
-            {
-                companylist = SAS.Data.DataProvider.Companies.GetCompanyALLList();
-                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
-                ica.TimeOut = 1440;     //一天更新一次
-                cache.LoadCacheStrategy(ica);
-                cache.AddObject("/SAS/CompanyTableList", companylist);
-                cache.LoadDefaultCacheStrategy();
-            }
-            return companylist;
+            return GetCompanyTableListByCatalog(0);
         }
         /// <summary>
         /// 根据行业ID获取Table型企业信息集合（缓存）
@@ -164,17 +150,15 @@ namespace SAS.Logic
         /// <returns></returns>
         public static DataTable GetCompanyTableListByCatalog(int catalogid)
         {
-            if(dataconfig.EnableCaching != 1){
-                return SAS.Data.DataProvider.Companies.GetCompanyListByCatalog(catalogid);
-            }
-            SAS.Cache.SASDataCache cache = SAS.Cache.SASDataCache.GetCacheService();
-            string cachekey = "CompanyTableList_" + catalogid;
-            DataTable companylist = cache.GetDataCache(cachekey) as DataTable;
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            string cachekey = CacheKeys.SAS_COMPANY_Table_SUB + catalogid;
+            DataTable companylist = cache.RetrieveObject(cachekey) as DataTable;
             if (companylist == null)
             {
                 companylist = SAS.Data.DataProvider.Companies.GetCompanyListByCatalog(catalogid);
-                AggregateCacheDependency cd = DependencyFacade.GetCompanyDependency();
-                cache.SetDataCache(cachekey, companylist,1440, cd);
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 1440;
+                cache.AddObject(cachekey, companylist);
             }
             return companylist;
         }

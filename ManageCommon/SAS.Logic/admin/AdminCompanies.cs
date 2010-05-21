@@ -52,21 +52,8 @@ namespace SAS.Logic
         /// <returns></returns>
         public static bool UpdateCompanyListStatus(string enidlist, int _status)
         {
-            Caches.ReSetCompanyList();
             Caches.ReSetCompanyTableList();
             return SAS.Data.DataProvider.Companies.UpdateCompanyStatus(enidlist, _status);
-        }
-
-        /// <summary>
-        /// 更新企业信息
-        /// </summary>
-        /// <param name="_companyInfo"></param>
-        /// <returns></returns>
-        public static bool UpdateCompanyInfo(Companys _companyInfo)
-        {
-            Caches.ReSetCompanyList();
-            Caches.ReSetCompanyTableList();
-            return SAS.Data.DataProvider.Companies.UpdateCompany(_companyInfo);
-        }
+        }      
     }
 }

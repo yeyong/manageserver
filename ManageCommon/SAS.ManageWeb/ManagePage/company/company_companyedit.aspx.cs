@@ -160,7 +160,10 @@ namespace SAS.ManageWeb.ManagePage
                     return;
                 }
 
-                Caches.ReSetCompanyList();
+                foreach (string str in _companyInfo.En_cataloglist.Split(','))
+                {
+                    Caches.ReSetCompanyTableSub(TypeConverter.StrToInt(str, 0));
+                }
                 AdminVistLogs.InsertLog(this.userid, this.username, this.usergroupid, this.grouptitle, this.ip, "后台修改企业信息", "企业名:" + qyname.Text.Trim());
 
                 base.RegisterStartupScript("PAGE", "window.location.href='company_companygrid.aspx';");

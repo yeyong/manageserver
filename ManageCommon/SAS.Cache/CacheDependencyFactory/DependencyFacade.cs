@@ -11,18 +11,6 @@ namespace SAS.Cache.CacheDependencyFactory
         private static readonly string path = DataCacheConfigs.GetConfig().CacheDependencyAssembly;
 
         /// <summary>
-        /// 获取企业信息缓存依赖
-        /// </summary>
-        /// <returns></returns>
-        public static AggregateCacheDependency GetCompanyDependency()
-        {
-            if (!string.IsNullOrEmpty(path))
-            {
-                return DependencyAccess.CreateCompanyDependency().GetDependency();
-            }
-            return null;
-        }
-        /// <summary>
         /// 获取省级信息缓存依赖
         /// </summary>
         /// <returns></returns>
@@ -55,6 +43,18 @@ namespace SAS.Cache.CacheDependencyFactory
             if (!string.IsNullOrEmpty(path))
             {
                 return DependencyAccess.CreateDistrictDependency().GetDependency();
+            }
+            return null;
+        }
+        /// <summary>
+        /// 获取行业类别信息依赖项
+        /// </summary>
+        /// <returns></returns>
+        public static AggregateCacheDependency GetCatalogDependency()
+        {
+            if (!string.IsNullOrEmpty(path))
+            {
+                return DependencyAccess.CreateCatalogDependency().GetDependency();
             }
             return null;
         }

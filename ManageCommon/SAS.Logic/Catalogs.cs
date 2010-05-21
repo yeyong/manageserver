@@ -4,6 +4,7 @@ using System.Text;
 using System.IO;
 using System.Threading;
 using System.Web;
+using System.Web.Caching;
 using System.Xml.Serialization;
 using System.Data;
 
@@ -11,6 +12,7 @@ using SAS.Common;
 using SAS.Config;
 using SAS.Data;
 using SAS.Entity;
+using SAS.Cache.CacheDependencyFactory;
 
 namespace SAS.Logic
 {
@@ -23,6 +25,7 @@ namespace SAS.Logic
         private static volatile Catalogs instance = null;
         private static object lockHelper = new object();
         private static string jsonPath = "";
+        private static DataCacheConfigInfo dataconfig = DataCacheConfigs.GetConfig();
         #endregion
 
         #region 返回唯一实例
@@ -101,12 +104,28 @@ namespace SAS.Logic
         /// <returns></returns>
         public static DataTable GetAllCatalog()
         {
-            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
-            DataTable dt = cache.RetrieveObject("/SAS/CompanyCategories") as DataTable;
-            if (dt == null)
+            DataTable dt = new DataTable();
+            string cachekeys = "CompanyCategories";
+            if (dataconfig.EnableCaching != 1)
             {
-                dt = SAS.Data.DataProvider.Catalogies.GetAllCatalogList();
-                cache.AddObject("/SAS/CompanyCategories", dt);
+                SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+                dt = cache.RetrieveObject("/SAS/" + cachekeys) as DataTable;
+                if (dt == null)
+                {
+                    dt = SAS.Data.DataProvider.Catalogies.GetAllCatalogList();
+                    cache.AddObject("/SAS/" + cachekeys, dt);
+                }
+            }
+            else
+            {
+                SAS.Cache.SASDataCache datacache = SAS.Cache.SASDataCache.GetCacheService();
+                dt = datacache.GetDataCache("CompanyCategories") as DataTable;
+                if (dt == null)
+                {
+                    dt = SAS.Data.DataProvider.Catalogies.GetAllCatalogList();
+                    AggregateCacheDependency cd = DependencyFacade.GetCatalogDependency();
+                    datacache.SetDataCache(cachekeys, dt, cd);
+                }
             }
             return dt;
         }
