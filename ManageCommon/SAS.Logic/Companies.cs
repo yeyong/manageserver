@@ -123,7 +123,10 @@ namespace SAS.Logic
 
             ArrayList redatarow = new ArrayList();
 
-            redatarow.AddRange(companylist.Select(conditions, ordercolumn + " " + ordertype));
+            string defoder = "[en_status] DESC";
+            if (ordercolumn != "") defoder += "," + ordercolumn + " " + ordertype;
+
+            redatarow.AddRange(companylist.Select(conditions, defoder));
             if (redatarow.Count > 0)
             {
                 if (pageindex * pagesize > redatarow.Count) pagesize = pagesize - (pagesize * pageindex - redatarow.Count);
@@ -178,6 +181,34 @@ namespace SAS.Logic
                 companylist.Add(SAS.Data.DataProvider.Companies.LoadCompanyInfo(dr));
                 row++;
             }
+            return companylist;
+        }
+
+        /// <summary>
+        /// 根据企业类型获取企业信息
+        /// </summary>
+        /// <param name="ete">企业类型</param>
+        /// <returns></returns>
+        public static List<Companys> GetCompanyListByType(EnTypeEnum ete)
+        {
+            List<Companys> companylist = new List<Companys>();
+            DataTable dt = GetCompanyTableList();
+            int row = 0;
+
+            foreach (DataRow dr in dt.Select(COMMCONDITION + " AND [en_type] = " + Convert.ToInt16(ete),"en_credits desc"))
+            {
+                if (row > 9) break;
+                Companys _cominfo = SAS.Data.DataProvider.Companies.LoadCompanyInfo(dr);
+                if (!string.IsNullOrEmpty(dr["en_cataloglist"].ToString()))
+                {
+                    _cominfo.TempCatalogID = TypeConverter.StrToInt(dr["en_cataloglist"].ToString().Split(',')[0], 0);
+                    CatalogInfo _catalog = Catalogs.GetCatalogCacheInfo(_cominfo.TempCatalogID);
+                    if (_catalog != null) _cominfo.CatalogName = _catalog.name;
+                }
+                companylist.Add(_cominfo);
+                row++;
+            }
+
             return companylist;
         }
 

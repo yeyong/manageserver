@@ -39,6 +39,14 @@ namespace SAS.ManageWeb
         /// </summary>
         protected SAS.Common.Generic.List<Companys> newcompanylist = Companies.GetNewCompanyList();
         /// <summary>
+        /// 生产型企业
+        /// </summary>
+        protected SAS.Common.Generic.List<Companys> mancompanylist = Companies.GetCompanyListByType(EnTypeEnum.Manufacturer);
+        /// <summary>
+        /// 销售型企业
+        /// </summary>
+        protected SAS.Common.Generic.List<Companys> selcompanylist = Companies.GetCompanyListByType(EnTypeEnum.Dealers);
+        /// <summary>
         /// 首页城市
         /// </summary>
         protected DataRow[] indexcity;

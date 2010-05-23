@@ -677,6 +677,82 @@ namespace SAS.Logic
             imageAttributes.Dispose();
         }
 
+        /// <summary>
+        /// 增加名片文字水印
+        /// </summary>
+        /// <param name="img">背景图</param>
+        /// <param name="filename">存放文件</param>
+        /// <param name="watermarkTexts">文字组</param>
+        /// <param name="xposes">x坐标组</param>
+        /// <param name="yposes">y坐标组</param>
+        /// <param name="quality">质量</param>
+        /// <param name="fontnames">字体组</param>
+        /// <param name="fontsizes">字号组</param>
+        /// <param name="fontcolors">字体颜色组</param>
+        public static string AddCardSignText(Image img, string filename, string watermarkTexts, string xposes, string yposes, int quality, string fontnames, string fontsizes, string fontcolors)
+        {
+            string errmsgbox = "";
+            Graphics g = Graphics.FromImage(img);
+
+            string[] watertextarray = watermarkTexts.Split(',');
+            string[] fontnamearray = fontnames.Split(',');
+            string[] fontsizearray = fontsizes.Split(',');
+            string[] xposarray = xposes.Split(',');
+            string[] yposarray = yposes.Split(',');
+            string[] fontcolorarray = fontcolors.Split(',');
+            if (watertextarray.Length > 0)
+            {
+                int steplength = 0;
+                foreach (string fontstr in watermarkTexts.Split(','))
+                {
+                    string fontname = "宋体";
+                    int fontsize = 12;
+                    int xpos = 0;
+                    int ypos = 0;
+                    string fontcolor = "#000";
+                    if (fontnamearray.Length > steplength) fontname = fontnamearray[steplength];
+                    if (fontsizearray.Length > steplength) fontsize = TypeConverter.StrToInt(fontsizearray[steplength], 12);
+                    if (xposarray.Length > steplength) xpos = TypeConverter.StrToInt(xposarray[steplength], 0);
+                    if (yposarray.Length > steplength) ypos = TypeConverter.StrToInt(yposarray[steplength], 0);
+                    if (fontcolorarray.Length > steplength) fontcolor = fontcolorarray[steplength];
+                    Font drawFont = new Font(fontname, fontsize, FontStyle.Regular, GraphicsUnit.Pixel);
+                    //g.DrawString(fontstr, drawFont, new SolidBrush(Color.White), xpos + 1, ypos + 1);
+                    g.DrawString(fontstr, drawFont, new SolidBrush(ColorTranslator.FromHtml(fontcolor)), xpos, ypos);
+                    steplength++;
+                }
+
+                ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
+                ImageCodecInfo ici = null;
+                foreach (ImageCodecInfo codec in codecs)
+                {
+                    if (codec.MimeType.IndexOf("jpeg") > -1)
+                        ici = codec;
+                }
+                EncoderParameters encoderParams = new EncoderParameters();
+                long[] qualityParam = new long[1];
+                if (quality < 0 || quality > 100)
+                    quality = 80;
+
+                qualityParam[0] = quality;
+
+                EncoderParameter encoderParam = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, qualityParam);
+                encoderParams.Param[0] = encoderParam;
+
+                if (ici != null)
+                    img.Save(filename, ici, encoderParams);
+                else
+                    img.Save(filename);
+
+                g.Dispose();
+                img.Dispose();
+            }
+            else
+            {
+                errmsgbox = "图片生成出错，文字组信息为空！";
+            }
+
+            return errmsgbox;
+        }
 
         /// <summary>
         /// 增加图片文字水印

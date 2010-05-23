@@ -95,7 +95,19 @@ namespace SAS.ManageWeb
                     b_fs.Dispose();
                     m_ms = new MemoryStream(b_bt);
                     bimage = Image.FromStream(m_ms);
-                    LogicUtils.AddImageSignText(bimage, Utils.GetMapPath(fullfilename), "试试水印", 4, 80, "经典超圆简", 20);
+                    string watertexts = companyinfo.En_name + ",联 系 人：" + companyinfo.En_contact + ",联系电话：" + companyinfo.En_phone + ",地    址：" + companyinfo.En_address;
+                    string xposes = "10,10,10,10";
+                    string yposes = "50,75,97,117";
+                    string fontnames = "经典超圆简,宋体";
+                    string fontsizes = "20,12";
+                    string fontcolors = "#375b1b,#000";
+                    string errormsg = LogicUtils.AddCardSignText(bimage, Utils.GetMapPath(fullfilename), watertexts, xposes, yposes, 80, fontnames, fontsizes, fontcolors);
+                    if (errormsg != "")
+                    {
+                        AddErrLine(errormsg);
+                        return;
+                    }
+                    //LogicUtils.AddImageSignText(bimage, Utils.GetMapPath(fullfilename), "试试水印", 4, 80, "经典超圆简", 20);
                 }
                 catch (Exception ex)
                 {

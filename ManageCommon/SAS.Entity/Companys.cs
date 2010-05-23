@@ -48,6 +48,8 @@ namespace SAS.Entity
         private string _provinceName = "";
         private string _cityName = "";
         private string _districtName = "";
+        private string _catalogname = "";
+        private int _tempcatalogid = 0;
         /// <summary>
         /// 企业ID
         /// </summary>
@@ -359,6 +361,22 @@ namespace SAS.Entity
         {
             set { _districtName = value; }
             get { return _districtName; }
+        }
+        /// <summary>
+        /// 类别名称
+        /// </summary>
+        public string CatalogName
+        {
+            set { _catalogname = value; }
+            get { return _catalogname; }
+        }
+        /// <summary>
+        /// 临时类别ID
+        /// </summary>
+        public int TempCatalogID
+        {
+            set { _tempcatalogid = value; }
+            get { return _tempcatalogid; }
         }
         #endregion Model
     }

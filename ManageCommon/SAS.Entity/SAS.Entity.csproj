@@ -49,9 +49,9 @@
     <Compile Include="Album\AlbumInfo.cs" />
     <Compile Include="AnnouncementInfo.cs" />
     <Compile Include="AttachmentInfo.cs" />
-    <Compile Include="CardConfigInfo.cs" />
-    <Compile Include="CardTemplateAboutInfo.cs" />
-    <Compile Include="CardTemplateInfo.cs" />
+    <Compile Include="Cards\CardConfigInfo.cs" />
+    <Compile Include="Cards\CardTemplateAboutInfo.cs" />
+    <Compile Include="Cards\CardTemplateInfo.cs" />
     <Compile Include="CatalogInfo.cs" />
     <Compile Include="Companys.cs" />
     <Compile Include="CustomEditorButtonInfo.cs" />
