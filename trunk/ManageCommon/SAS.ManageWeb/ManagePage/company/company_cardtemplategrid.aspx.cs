@@ -94,7 +94,8 @@ namespace SAS.ManageWeb.ManagePage
                     return;
                 }
             }
-
+            SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/CardTemplateList");
+            SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/CardTemplateIDList");
             #endregion
         }
 

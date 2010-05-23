@@ -139,30 +139,18 @@
 			<div id="onert3con">
 				<div class="con f_333">
 					<ul class="onert3nr">
-						<li>[<a class="l_f00" title="" href="#">纺织</a>] <a title="" href="#">香港普菲特服饰有限公司</a></li>
-						<li>[<a class="l_f00" title="" href="#">家居</a>] <a title="" href="#">佛山市南海区金钰轩傢俬厂</a></li>
-						<li>[<a class="l_f00" title="" href="#">机械</a>] <a title="" href="#">河南华泰特种电缆有限公司</a></li>
-						<li>[<a class="l_f00" title="" href="#">农业</a>] <a title="" href="#">郑州锦水实业有限公司</a></li>
-						<li>[<a class="l_f00" title="" href="#">纺织</a>] <a title="" href="#">青岛昊坤重型机械技术有限公司</a></li>
-						<li>[<a class="l_f00" title="" href="#">家居</a>] <a title="" href="#">河南黎明路桥重工有限公司</a></li>
-						<li>[<a class="l_f00" title="" href="#">机械</a>] <a title="" href="#">浙江浦江瑞博工艺饰品有限公司</a></li>
-						<li>[<a class="l_f00" title="" href="#">纺织</a>] <a title="" href="#">北京医模科技有限公司</a></li>
-						<li>[<a class="l_f00" title="" href="#">农业</a>] <a title="" href="#">郑州市郑蝶阀门有限公司</a></li>
-						<li>[<a class="l_f00" title="" href="#">家居</a>] <a title="" href="#">上海世邦机器有限公司</a></li>
+					<%loop (Companys) mancompanyinfo mancompanylist%>
+					<%set (string){mancatalogname}=Utils.CutString({mancompanyinfo.catalogName},0,6)%>
+						<li>[<a class="l_f00" title="{mancompanyinfo.catalogName}" href="zshy-{mancompanyinfo.tempCatalogID}.html">{mancatalogname}</a>] <a title="{mancompanyinfo.en_name}" href="{mancompanyinfo.en_id}">{mancompanyinfo.en_name}</a></li>
+					<%/loop%>
 					</ul>
 				</div>
 				<div class="con">
 					<ul class="onert3nr">
-						<li>[<a class="l_f00" title="" href="#">家居</a>] <a title="" href="#">香港普菲特服饰有限公司</a></li>
-						<li>[<a class="l_f00" title="" href="#">纺织</a>] <a title="" href="#">佛山市南海区金钰轩傢俬厂</a></li>
-						<li>[<a class="l_f00" title="" href="#">机械</a>] <a title="" href="#">河南华泰特种电缆有限公司</a></li>
-						<li>[<a class="l_f00" title="" href="#">机械</a>] <a title="" href="#">浙江浦江瑞博工艺饰品有限公司</a></li>
-						<li>[<a class="l_f00" title="" href="#">纺织</a>] <a title="" href="#">北京医模科技有限公司</a></li>
-						<li>[<a class="l_f00" title="" href="#">农业</a>] <a title="" href="#">郑州市郑蝶阀门有限公司</a></li>
-						<li>[<a class="l_f00" title="" href="#">家居</a>] <a title="" href="#">上海世邦机器有限公司</a></li>
-						<li>[<a class="l_f00" title="" href="#">农业</a>] <a title="" href="#">郑州锦水实业有限公司</a></li>
-						<li>[<a class="l_f00" title="" href="#">纺织</a>] <a title="" href="#">青岛昊坤重型机械技术有限公司</a></li>
-						<li>[<a class="l_f00" title="" href="#">家居</a>] <a title="" href="#">河南黎明路桥重工有限公司</a></li>
+					<%loop (Companys) selcompanyinfo selcompanylist%>
+					<%set (string){selcatalogname}=Utils.CutString({selcompanyinfo.catalogName},0,6)%>
+						<li>[<a class="l_f00" title="{selcompanyinfo.catalogName}" href="zshy-{selcompanyinfo.tempCatalogID}.html">{selcompanyinfo.catalogName}</a>] <a title="{selcompanyinfo.en_name}" href="#">{selcompanyinfo.en_name}</a></li>
+					<%/loop%>
 					</ul>
 				</div>
 			</div>
