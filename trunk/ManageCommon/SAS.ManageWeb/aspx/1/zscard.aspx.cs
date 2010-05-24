@@ -118,7 +118,7 @@ namespace SAS.ManageWeb
             script += "\r\n<script src=\"" + forumpath + "javascript/template_catalogadmin.js\" type=\"text/javascript\"></script>";
 
             string loadscript = "\r\n " + "jQuery(document).ready(function() {"
-                    + "\r\n " + "jQuery(\"#thelocation\").LoadLocation({provinceid:" + provinceid + ",cityid:" + cityid + ",areaid:" + areaid + ",urlparms:'zsmp-" + catalogid + "-{1}-{2}-{3}-" + entypeid + "-" + regyear + "-" + ordertype + "-" + keyword + ".html'});"
+                    + "\r\n " + "jQuery(\"#thelocation\").LoadLocation({provinceid:" + provinceid + ",cityid:" + cityid + ",areaid:" + areaid + ",urlparms:'zscard-" + catalogid + "-{1}-{2}-{3}-" + entypeid + "-" + regyear + "-" + ordertype + "-" + keyword + ".html'});"
                     + "\r\n " + "jQuery(\"#views\").ExtendClick(\"views1\",\"viewsnr\",\"i\"," + ordertype + ");"
                     + "\r\n " + "jQuery('#zscard').find(\"dd\").capslide({ caption_color: 'black', caption_bgcolor: 'white', overlay_bgcolor: '#eee9e8', border: '0px solid #e7dad8', showcaption: true });"
                     + "\r\n " + "jQuery(\"input[type=text],textarea\").each(function(){"
@@ -136,13 +136,13 @@ namespace SAS.ManageWeb
                 CatalogInfo _cli = Catalogs.GetCatalogCacheInfo(catalogid);
                 if (_cli != null)
                 {
-                    pagenav = " &gt; <a href=\"zsmp.html\" title=\"浙商名片\" class=\"l_666\">浙商名片</a>";
+                    pagenav = " &gt; <a href=\"zscard.html\" title=\"浙商名片\" class=\"l_666\">浙商名片</a>";
                     foreach (string str in _cli.parentlist.Split(','))
                     {
                         CatalogInfo subcli = Catalogs.GetCatalogCacheInfo(TypeConverter.StrToInt(str, 0));
                         if (subcli == null) continue;
                         if (subcli.parentid == 0) continue;
-                        pagenav += String.Format(" &gt; <a href=\"zsmp-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}.html\" title=\"{0}\" class=\"l_666\">{0}</a>", subcli.name, subcli.id, provinceid, cityid, areaid, entypeid, regyear, ordertype, keyword);
+                        pagenav += String.Format(" &gt; <a href=\"zscard-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}.html\" title=\"{0}\" class=\"l_666\">{0}</a>", subcli.name, subcli.id, provinceid, cityid, areaid, entypeid, regyear, ordertype, keyword);
                     }
                     pagenav += " &gt; " + _cli.name;
                     pagetitle = "浙商名片-浙商名片-" + _cli.name;
@@ -169,7 +169,7 @@ namespace SAS.ManageWeb
             pageid = pageid < 1 ? 1 : pageid;
             pageid = pageid > pagecount ? pagecount : pageid;
 
-            pagenumbers = Utils.GetCompanyPageNumbers(pageid, pagecount, string.Format("zsmp-{0}-{1}-{2}-{3}-{4}-{5}-{6}-{7}.html", catalogid, provinceid, cityid, areaid, entypeid, regyear, ordertype, keyword), 10);
+            pagenumbers = Utils.GetCompanyPageNumbers(pageid, pagecount, string.Format("zscard-{0}-{1}-{2}-{3}-{4}-{5}-{6}-{7}.html", catalogid, provinceid, cityid, areaid, entypeid, regyear, ordertype, keyword), 10);
 
             prevpage = pageid - 1 > 0 ? pageid - 1 : pageid;
             nextpage = pageid + 1 > pagecount ? pagecount : pageid + 1;
