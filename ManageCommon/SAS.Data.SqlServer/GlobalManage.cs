@@ -2169,6 +2169,11 @@ namespace SAS.Data.SqlServer
             string commandText = string.Format("SELECT {0} FROM [{1}Province]", DbFields.PROVINCE, BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
         }
+        public DataTable GetProvinceJosnList()
+        {
+            string commandText = string.Format("SELECT [ProvinceID],[ProvinceName] FROM [{0}Province]", BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
 
         /// <summary>
         /// 获取城市信息集合
@@ -2177,6 +2182,11 @@ namespace SAS.Data.SqlServer
         public DataTable GetCity()
         {
             string commandText = string.Format("SELECT {0} FROM [{1}City]", DbFields.CITY, BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+        public DataTable GetCityJosnList()
+        {
+            string commandText = string.Format("SELECT [CityID],[CityName],[ZipCode],[ProvinceID] FROM [{0}City]", BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
         }
 
@@ -2189,6 +2199,10 @@ namespace SAS.Data.SqlServer
             string commandText = string.Format("SELECT {0} FROM [{1}District]", DbFields.DISTRICT, BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
         }
-
+        public DataTable GetDistrictJosnList()
+        {
+            string commandText = string.Format("SELECT [DistrictID],[DistrictName],[CityID] FROM [{0}District]", BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
     }
 }

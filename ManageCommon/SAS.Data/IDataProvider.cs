@@ -2109,17 +2109,20 @@ namespace SAS.Data
         /// </summary>
         /// <returns></returns>
         DataTable GetProvince();
+        DataTable GetProvinceJosnList();
 
         /// <summary>
         /// 获取城市信息集合
         /// </summary>
         /// <returns></returns>
         DataTable GetCity();
+        DataTable GetCityJosnList();
 
         /// <summary>
         /// 获取地区信息集合
         /// </summary>
         /// <returns></returns>
         DataTable GetDistrict();
+        DataTable GetDistrictJosnList();
     }
 }

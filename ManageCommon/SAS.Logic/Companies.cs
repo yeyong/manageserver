@@ -121,11 +121,10 @@ namespace SAS.Logic
             if (catalogid > 0) companylist = GetCompanyTableListByCatalog(catalogid);
             else companylist = GetCompanyTableList();
 
-            ArrayList redatarow = new ArrayList();
+            List<DataRow> redatarow = new List<DataRow>();
 
             string defoder = "[en_status] DESC";
             if (ordercolumn != "") defoder += "," + ordercolumn + " " + ordertype;
-
             redatarow.AddRange(companylist.Select(conditions, defoder));
             if (redatarow.Count > 0)
             {
@@ -209,6 +208,25 @@ namespace SAS.Logic
                 row++;
             }
 
+            return companylist;
+        }
+
+        /// <summary>
+        /// 根据访问排序，并返回企业信息列表
+        /// </summary>
+        /// <returns></returns>
+        public static List<Companys> GetCompanyListViews()
+        {
+            List<Companys> companylist = new List<Companys>();
+            DataTable dt = GetCompanyTableList();
+            int rows = 0;
+            foreach (DataRow dr in dt.Select(COMMCONDITION, "en_accesses desc"))
+            {
+                if (rows > 9) break;
+                Companys _cominfo = SAS.Data.DataProvider.Companies.LoadCompanyInfo(dr);
+                companylist.Add(_cominfo);
+                rows++;
+            }
             return companylist;
         }
 

@@ -15,6 +15,10 @@ namespace SAS.ManageWeb
     /// </summary>
     public class zsshow : CompanyPage
     {
+        /// <summary>
+        /// 企业详细信息
+        /// </summary>
+        protected Companys companyshowinfo = new Companys();
         protected override void ShowPage()
         {
             
