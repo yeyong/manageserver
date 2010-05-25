@@ -77,6 +77,7 @@ namespace SAS.ManageWeb
                     + "\r\n " + "scrollup.LineHeight = 30;"
                     + "\r\n " + "scrollup.Amount = 2;"
                     + "\r\n " + "scrollup.Start();"
+                    + "\r\n " + "jQuery(this).gettop({objsrc:\"templates/" + templatepath + "/images/diaocha.gif\",objhref:\"javascript:scrollTo(0,0)\"});"
                     + "\r\n " + "});";
             AddfootScript(loadscript);
 

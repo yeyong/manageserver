@@ -113,7 +113,6 @@ namespace SAS.ManageWeb
             keyword = Utils.UrlEncode(keyword).Replace("'", "%27");
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/jquery.cluetip.css");
-            script += "\r\n<script src=\"" + forumpath + "javascript/jqueryFunc.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/locations.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/jquery.cluetip-min.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/template_catalogadmin.js\" type=\"text/javascript\"></script>";            
@@ -121,11 +120,12 @@ namespace SAS.ManageWeb
             string loadscript = "\r\n " + "jQuery(document).ready(function() {"
                     + "\r\n " + "jQuery(\"#thelocation\").LoadLocation({provinceid:" + provinceid + ",cityid:" + cityid + ",areaid:" + areaid + ",urlparms:'zshy-" + catalogid + "-{1}-{2}-{3}-" + entypeid + "-" + regyear + "-" + ordertype + "-" + keyword + ".html'});"
                     + "\r\n " + "jQuery(\"#views\").ExtendClick(\"views1\",\"viewsnr\",\"i\"," + ordertype + ");"
-                    + "\r\n " + "jQuery('#put').find(\".zshynr1ce\").find(\"a\").cluetip({ activation: 'click', sticky: true, width: 350, positionBy: 'bottomTop', closePosition: 'title', closeText: '<img src=\"" + forumpath + "images/cross.png\" alt=\"close\" />',cursor: 'pointer', dropShadow: false});"
+                    + "\r\n " + "jQuery('#put').find(\".zshynr1ce\").find(\"a\").cluetip({ activation: 'mousover', sticky: true, width: 350, positionBy: 'bottomTop', closePosition: 'title', closeText: '<img src=\"" + forumpath + "images/cross.png\" alt=\"close\" />',cursor: 'pointer', dropShadow: false});"
                     + "\r\n " + "jQuery(\"input[type=text],textarea\").each(function(){"
 			        + "\r\n " + "  jQuery(this).blur(function(){jQuery(this).attr(\"class\",\"input2_soout\");});"
 			        + "\r\n " + "  jQuery(this).focus(function(){jQuery(this).attr(\"class\",\"input2_soon\");});"
 		            + "\r\n " + "});"
+                    + "\r\n " + "jQuery(this).gettop({objsrc:\"templates/" + templatepath + "/images/diaocha.gif\",objhref:\"javascript:scrollTo(0,0)\"});"
                     + "\r\n " + "});\r\n";
             AddfootScript(loadscript);            
             SetConditionAndPage();
@@ -148,7 +148,7 @@ namespace SAS.ManageWeb
                     pagenav += " &gt; " + _cli.name;
                     pagetitle = "浙商黄页-浙商黄页-" + _cli.name;
                 }
-            }           
+            }
 
             companylist = Companies.GetCompanyPageList(catalogid, pageid, pagesize, "en_accesses", ordertype == 0 ? "desc" : "", condition);
         }
