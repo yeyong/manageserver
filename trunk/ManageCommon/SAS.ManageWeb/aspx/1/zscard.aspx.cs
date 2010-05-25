@@ -21,6 +21,10 @@ namespace SAS.ManageWeb
         /// </summary>
         protected DataTable cataloglist = new DataTable();
         /// <summary>
+        /// 点击企业排行
+        /// </summary>
+        protected SAS.Common.Generic.List<Companys> companyaccesseslist = Companies.GetCompanyListViews();
+        /// <summary>
         /// 企业信息列表
         /// </summary>
         protected DataRow[] companylist;

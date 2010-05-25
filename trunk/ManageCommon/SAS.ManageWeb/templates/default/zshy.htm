@@ -98,10 +98,10 @@
 				</p>
 				<p class="zshynr1">
 					<span class="zshynr1lt">
-						<%set (string) {zshycompanyinfo_en_desc}=Utils.GetSpacesString(2)+Utils.CutString(Utils.RemoveHtml({zshycompanyinfo[en_desc]}),0,96).Trim()%>
+						<%set (string) {zshycompanyinfo_en_desc}=Utils.GetSpacesString(2)+Utils.CutString(Utils.RemoveHtml({zshycompanyinfo[en_desc]}),0,52).Trim()%>
 						{zshycompanyinfo_en_desc}...[<a title="查看详情" href="" class="l_e00101">查看详情</a>]
 					</span>
-					<span class="zshynr1ce2">注册日期 <b class="f_e00101">2008-05-01</b></span>
+					<span class="zshynr1ce2">注册日期 <b class="f_e00101"><%set (string) {zshyregyear}=Utils.GetStandardDate({zshycompanyinfo[reg_year]})%>{zshyregyear}</b></span>
 					<span class="zshynr1ce2">浏览量 <b>{zshycompanyinfo[en_accesses]}</b></span>
 					<span class="zshynr1ce"><a title="联系方式" href="tipmsg.aspx?msgenid={zshycompanyinfo[en_id]}" rel="tipmsg.aspx?msgenid={zshycompanyinfo[en_id]}" class="l_e00101">联系方式</a></span>
 				</p>
@@ -134,46 +134,16 @@
 				<em></em><strong>企业信息点击量排行</strong>
 			</p>
 			<ul class="zstop2">
+			<%loop (Companys) accesscompanyinfo companyaccesseslist%>
 				<li>
-					<em class="zstopem1">1</em>
-					<p><a title="成都金岚地服饰有限公司" href="#" class="l_666">成都金岚地服饰有限公司</a></p>
+				<%if {accesscompanyinfo__loop__id}<4%>
+					<em class="zstopem1">{accesscompanyinfo__loop__id}</em>
+				<%else%>
+				    <em class="zstopem2">{accesscompanyinfo__loop__id}</em>
+				<%/if%>
+					<p><a title="{accesscompanyinfo.en_name}" href="#" class="l_666">{accesscompanyinfo.en_name}</a></p>
 				</li>
-				<li>
-					<em class="zstopem1">2</em>
-					<p><a title="杭州浪漫一身服饰有限公司" href="#" class="l_666">杭州浪漫一身服饰有限公司</a></p>
-				</li>
-				<li>
-					<em class="zstopem1">3</em>
-					<p><a title="杭州水之恋服饰有限公司" href="#" class="l_666">杭州水之恋服饰有限公司</a></p>
-				</li>
-				<li>
-					<em class="zstopem2">4</em>
-					<p><a title="香港普菲特服饰有限公司" href="#" class="l_666">香港普菲特服饰有限公司</a></p>
-				</li>
-				<li>
-					<em class="zstopem2">5</em>
-					<p><a title="杭州千百惠服饰有限公司" href="#" class="l_666">杭州千百惠服饰有限公司</a></p>
-				</li>
-				<li>
-					<em class="zstopem2">6</em>
-					<p><a title="成都金岚地服饰有限公司" href="#" class="l_666">成都金岚地服饰有限公司</a></p>
-				</li>
-				<li>
-					<em class="zstopem2">7</em>
-					<p><a title="广州市歌莉娅女性服饰有限公司" href="#" class="l_666">广州市歌莉娅女性服饰有限公司</a></p>
-				</li>
-				<li>
-					<em class="zstopem2">8</em>
-					<p><a title="杭州素非服饰有限公司" href="#" class="l_666">杭州素非服饰有限公司</a></p>
-				</li>
-				<li>
-					<em class="zstopem2">9</em>
-					<p><a title="杭州江南布衣服饰有限公司" href="#" class="l_666">杭州江南布衣服饰有限公司</a></p>
-				</li>
-				<li>
-					<em class="zstopem2">10</em>
-					<p><a title="成都金岚地服饰有限公司" href="#" class="l_666">成都金岚地服饰有限公司</a></p>
-				</li>
+			<%/loop%>
 			</ul>
 		</div>
 		<p class="zshyrtad mar_top_8"><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa5.jpg" /></a></p>

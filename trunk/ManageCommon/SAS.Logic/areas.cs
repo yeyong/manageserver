@@ -326,15 +326,15 @@ namespace SAS.Logic
         {
             StringBuilder sb_areas = new StringBuilder("var provinces = ");
 
-            sb_areas.Append(Utils.DataTableToJSON(GetProvinceList()));
+            sb_areas.Append(Utils.DataTableToJSON(SAS.Data.DataProvider.Areas.GetProvinceJosnList()));
 
             sb_areas.Append("var citys = ");
 
-            sb_areas.Append(Utils.DataTableToJSON(GetCityList()));
+            sb_areas.Append(Utils.DataTableToJSON(SAS.Data.DataProvider.Areas.GetCityJosnList()));
 
             sb_areas.Append("var districts = ");
 
-            sb_areas.Append(Utils.DataTableToJSON(GetDistrictList()));
+            sb_areas.Append(Utils.DataTableToJSON(SAS.Data.DataProvider.Areas.GetDistrictJosnList()));
 
             return base.WriteJsonFile(jsonPath, sb_areas);
         }
