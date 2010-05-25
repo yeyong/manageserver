@@ -639,7 +639,6 @@ namespace SAS.Logic
                 meta = meta + "\r\n<meta http-equiv=\"refresh\" content=\"" + sec.ToString() + "; url=" + url + "\" />";
             }
             //AddScript("window.setInterval('location.replace(\"" + url + "\");'," + (sec*1000).ToString() + ");");
-
         }
 
         /// <summary>

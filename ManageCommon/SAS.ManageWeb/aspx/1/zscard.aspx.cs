@@ -112,7 +112,6 @@ namespace SAS.ManageWeb
             searchkey = keyword;
             keyword = Utils.UrlEncode(keyword).Replace("'", "%27");
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
-            script += "\r\n<script src=\"" + forumpath + "javascript/jqueryFunc.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/locations.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/jquery.capSlide.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/template_catalogadmin.js\" type=\"text/javascript\"></script>";

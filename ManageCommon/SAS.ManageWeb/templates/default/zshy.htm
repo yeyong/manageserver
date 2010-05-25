@@ -93,23 +93,25 @@
 			<%set {zshycompanystatus}="已审核"%>
 			<%/if%>
 			<dd class="{zshyddcss}">
+			    <p class="zshynr1">
+					<em class="zshynr1lt1"><strong class="f_805952_18"><a title="{zshycompanyinfo[en_name]}" href="#" class="l_805952">{zshycompanyinfo[en_name]}</a></strong> [{zshycompanystatus}]</em>
+				</p>
 				<p class="zshynr1">
 					<span class="zshynr1lt">
-						<em class="zshynr1lt1"><strong class="f_805952_18"><a title="{zshycompanyinfo[en_name]}" href="#" class="l_805952">{zshycompanyinfo[en_name]}</a></strong> [{zshycompanystatus}]</em>
-						<em class="zshynr1lt2 line">
 						<%set (string) {zshycompanyinfo_en_desc}=Utils.GetSpacesString(2)+Utils.CutString(Utils.RemoveHtml({zshycompanyinfo[en_desc]}),0,96).Trim()%>
-						{zshycompanyinfo_en_desc}&gt;&gt;<a title="查看详情" href="" class="l_e00101">查看详情</a>
-						</em>
+						{zshycompanyinfo_en_desc}...[<a title="查看详情" href="" class="l_e00101">查看详情</a>]
 					</span>
-					<span class="zshynr1ce">[<a title="" href="" class="l_252525">{zshycompanyinfo[provinceName]}{zshycompanyinfo[cityName]}{zshycompanyinfo[districtName]}</a>]</span>
+					<span class="zshynr1ce2">注册日期 <b class="f_e00101">2008-05-01</b></span>
 					<span class="zshynr1ce2">浏览量 <b>{zshycompanyinfo[en_accesses]}</b></span>
 					<span class="zshynr1ce"><a title="联系方式" href="tipmsg.aspx?msgenid={zshycompanyinfo[en_id]}" rel="tipmsg.aspx?msgenid={zshycompanyinfo[en_id]}" class="l_e00101">联系方式</a></span>
 				</p>
 				<p class="zshynr2">
-				<a title="" href="#" class="l_e00101">查看该公司资质证书</a>
+				    <span class="zshynr2lt"><a title="" href="#" class="l_e00101">查看该公司资质证书</a></span>
+				    <span class="zshynr2lt">[<a title="" href="" class="l_252525">{zshycompanyinfo[provinceName]}{zshycompanyinfo[cityName]}{zshycompanyinfo[districtName]}</a>]</span>
 				</p>
-				<p class="zshynr2">
-				<b>经营模式：</b><a title="" href="#" class="l_252525"><%set (string) {zshycompanyinfotype}=EnumCatch.GetCompanyType({strtoint({zshycompanyinfo[en_type]})})%>{zshycompanyinfotype}</a>        <b class="mar_left_30">主营：</b> <%set (string) {zshycompanyinfo_en_main}=Utils.CutString(Utils.ReplaceString({zshycompanyinfo[en_main]},",,",",",false),0,45).Trim(',')%>{zshycompanyinfo_en_main}
+				<p class="zshynr3">
+				    <b>经营模式：</b><a title="" href="#" class="l_252525"><%set (string) {zshycompanyinfotype}=EnumCatch.GetCompanyType({strtoint({zshycompanyinfo[en_type]})})%>{zshycompanyinfotype}</a>
+				    <b class="mar_left_30">主营：</b> <%set (string) {zshycompanyinfo_en_main}=Utils.CutString(Utils.ReplaceString({zshycompanyinfo[en_main]},",,",",",false),0,45).Trim(',')%>{zshycompanyinfo_en_main}
 				</p>
 			</dd>
 			<%/loop%>

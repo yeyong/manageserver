@@ -715,8 +715,8 @@ namespace SAS.Logic
                     if (xposarray.Length > steplength) xpos = TypeConverter.StrToInt(xposarray[steplength], 0);
                     if (yposarray.Length > steplength) ypos = TypeConverter.StrToInt(yposarray[steplength], 0);
                     if (fontcolorarray.Length > steplength) fontcolor = fontcolorarray[steplength];
-                    Font drawFont = new Font(fontname, fontsize, FontStyle.Regular, GraphicsUnit.Pixel);
-                    //g.DrawString(fontstr, drawFont, new SolidBrush(Color.White), xpos + 1, ypos + 1);
+                    Font drawFont = new Font(fontname, fontsize, FontStyle.Bold, GraphicsUnit.Pixel);
+                    g.DrawString(fontstr, drawFont, new SolidBrush(Color.White), xpos + 1, ypos + 1);
                     g.DrawString(fontstr, drawFont, new SolidBrush(ColorTranslator.FromHtml(fontcolor)), xpos, ypos);
                     steplength++;
                 }
