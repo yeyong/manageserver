@@ -270,13 +270,13 @@ namespace SAS.Logic
         {
             switch (pagename)
             {
-                case "website.aspx":
+                case "index.aspx":
                     isguestcachepage = GetCachePage(pagename);
                     break;
-                case "forumindex.aspx":
+                case "zshy.aspx":
                     isguestcachepage = GetCachePage(pagename);
                     break;
-                case "spaceindex.aspx":
+                case "zscard.aspx":
                     isguestcachepage = GetCachePage(pagename);
                     break;
                 case "albumindex.aspx":
