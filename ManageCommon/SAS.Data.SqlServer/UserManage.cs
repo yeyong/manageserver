@@ -2265,16 +2265,14 @@ namespace SAS.Data.SqlServer
         /// <param name="ordertype">排序方式</param>
         /// <param name="conditions">条件</param>
         /// <returns></returns>
-        public IDataReader GetCompanyPageList(int pageindex, int pagesize, string ordercolumn, string ordertype, string conditions)
+        public DataTable GetCompanyPageList(int pageindex, int pagesize, string conditions)
         {
             DbParameter[] parms = {
                           DbHelper.MakeInParam("@pageindex",(DbType)SqlDbType.Int,4,pageindex),
                           DbHelper.MakeInParam("@pagesize",(DbType)SqlDbType.Int,4,pagesize),
-                          DbHelper.MakeInParam("@column",(DbType)SqlDbType.VarChar,20,ordercolumn),
-                          DbHelper.MakeInParam("@ordertype",(DbType)SqlDbType.VarChar,5,ordertype),
                           DbHelper.MakeInParam("@conditions",(DbType)SqlDbType.NVarChar,2000,conditions)
             };
-            return DbHelper.ExecuteReader(CommandType.StoredProcedure, string.Format("{0}getcompanylist", BaseConfigs.GetTablePrefix), parms);
+            return DbHelper.ExecuteDataset(CommandType.StoredProcedure, string.Format("{0}getcompanylistbypage", BaseConfigs.GetTablePrefix), parms).Tables[0];
         }
 
         /// <summary>
