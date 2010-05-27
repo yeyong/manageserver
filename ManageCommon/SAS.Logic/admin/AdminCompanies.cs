@@ -28,6 +28,26 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 企业数据分页操作
+        /// </summary>
+        /// <param name="pageindex"></param>
+        /// <param name="pagesize"></param>
+        /// <param name="condition"></param>
+        /// <returns></returns>
+        public static DataTable GetCompanyListByPage(int pageindex, int pagesize, string condition)
+        {
+            return SAS.Data.DataProvider.Companies.GetCompanyPageList(pageindex, pagesize, condition);
+        }
+        /// <summary>
+        /// 返回企业数量
+        /// </summary>
+        /// <param name="conditions"></param>
+        public static int GetCompanyCount(string conditions)
+        {
+            return SAS.Data.DataProvider.Companies.GetCompanyCountByCondition(conditions);
+        }
+
+        /// <summary>
         /// 批量开启企业
         /// </summary>
         /// <param name="enidlist"></param>
@@ -54,6 +74,6 @@ namespace SAS.Logic
         {
             Caches.ReSetCompanyTableList();
             return SAS.Data.DataProvider.Companies.UpdateCompanyStatus(enidlist, _status);
-        }      
+        }
     }
 }
