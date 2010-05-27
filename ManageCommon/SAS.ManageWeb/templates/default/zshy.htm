@@ -101,7 +101,7 @@
 						<%set (string) {zshycompanyinfo_en_desc}=Utils.GetSpacesString(2)+Utils.CutString(Utils.RemoveHtml({zshycompanyinfo[en_desc]}),0,52).Trim()%>
 						{zshycompanyinfo_en_desc}...[<a title="查看详情" href="" class="l_e00101">查看详情</a>]
 					</span>
-					<span class="zshynr1ce2">注册日期 <b class="f_e00101"><%set (string) {zshyregyear}=Utils.GetStandardDate({zshycompanyinfo[reg_year]})%>{zshyregyear}</b></span>
+					<span class="zshynr1ce2">注册日期 <b class="f_e00101"><%set (string) {zshyregyear}=Utils.GetStandardDate({zshycompanyinfo[en_builddate]})%>{zshyregyear}</b></span>
 					<span class="zshynr1ce2">浏览量 <b>{zshycompanyinfo[en_accesses]}</b></span>
 					<span class="zshynr1ce"><a title="联系方式" href="tipmsg.aspx?msgenid={zshycompanyinfo[en_id]}" rel="tipmsg.aspx?msgenid={zshycompanyinfo[en_id]}" class="l_e00101">联系方式</a></span>
 				</p>
