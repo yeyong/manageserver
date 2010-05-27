@@ -149,7 +149,7 @@ namespace SAS.Logic
             DataTable sortcatalist = dt.Clone();
             foreach (DataRow dr in dt.Select("[sort] = " + sortnum))
             {
-                dr["companycount"] = ReturnCompanyCountById(TypeConverter.ObjectToInt(dr["id"], 0), condition);
+                dr["companycount"] = Companies.GetCompanyTableListByCatalog(TypeConverter.ObjectToInt(dr["id"])).Compute("COUNT(en_id)", condition);
                 sortcatalist.ImportRow(dr);
             }
             return sortcatalist;

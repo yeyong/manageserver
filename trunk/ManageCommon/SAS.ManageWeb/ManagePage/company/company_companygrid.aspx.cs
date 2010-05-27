@@ -24,12 +24,36 @@ namespace SAS.ManageWeb.ManagePage
         public void BindData()
         {
             #region 绑定用户组列表
-            DataGrid1.AllowCustomPaging = false;
-            DataGrid1.TableHeaderName = "企业信息列表";
-            DataGrid1.Attributes.Add("borderStyle", "2");
-            DataGrid1.DataKeyField = "en_id";
-            DataGrid1.BindData(AdminCompanies.GetCompanyList());
+            DataGrid1.VirtualItemCount = GetCompanyCount();
+            DataGrid1.DataSource = BuildCompanyData();
+            DataGrid1.DataBind();
             #endregion
+        }
+
+        /// <summary>
+        /// 绑定企业数据
+        /// </summary>
+        public DataTable BuildCompanyData()
+        {
+            DataTable dt = new DataTable();
+            if (ViewState["condition"] == null)
+            {
+                dt = AdminCompanies.GetCompanyListByPage(DataGrid1.CurrentPageIndex + 1, DataGrid1.PageSize, "");
+            }
+            else
+            {
+                dt = AdminCompanies.GetCompanyListByPage(DataGrid1.CurrentPageIndex + 1, DataGrid1.PageSize, ViewState["condition"].ToString());
+            }
+            return dt;
+        }
+        /// <summary>
+        /// 企业数量
+        /// </summary>
+        /// <returns></returns>
+        public int GetCompanyCount()
+        {
+            if (ViewState["condition"] == null) return AdminCompanies.GetCompanyCount("");
+            else return AdminCompanies.GetCompanyCount(ViewState["condition"].ToString());
         }
 
         /// <summary>
@@ -99,8 +123,15 @@ namespace SAS.ManageWeb.ManagePage
 
         protected void DataGrid_PageIndexChanged(object source, DataGridPageChangedEventArgs e)
         {
-            DataGrid1.LoadCurrentPageIndex(e.NewPageIndex);
+            DataGrid1.CurrentPageIndex = e.NewPageIndex;
+            BindData();
         }
+
+        public void GoToPagerButton_Click(object sender, EventArgs e)
+        {
+            BindData();
+        }
+
         #endregion
 
         #region Web Form Designer generated code
@@ -113,8 +144,12 @@ namespace SAS.ManageWeb.ManagePage
 
         private void InitializeComponent()
         {
+            DataGrid1.AllowCustomPaging = true;
+            DataGrid1.TableHeaderName = "企业信息列表";
+            DataGrid1.Attributes.Add("borderStyle", "2");
             DataGrid1.DataKeyField = "en_id";
             DataGrid1.ColumnSpan = 12;
+            DataGrid1.GoToPagerButton.Click += new EventHandler(GoToPagerButton_Click);
             ENStart.Click += new EventHandler(ENStart_Click);
             ENPause.Click += new EventHandler(ENPause_Click);
             LocationSet.Click += new EventHandler(LocationSet_Click);
