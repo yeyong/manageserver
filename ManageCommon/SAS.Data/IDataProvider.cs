@@ -1930,7 +1930,21 @@ namespace SAS.Data
         /// <param name="strWhere"></param>
         /// <returns></returns>
         DataTable GetCompanyAllList();
-
+        /// <summary>
+        /// 企业数据分页操作
+        /// </summary>
+        /// <param name="pageindex">当前页</param>
+        /// <param name="pagesize">页面尺寸</param>
+        /// <param name="ordercolumn">排序列名</param>
+        /// <param name="ordertype">排序方式</param>
+        /// <param name="conditions">条件</param>
+        /// <returns></returns>
+        DataTable GetCompanyPageList(int pageindex, int pagesize, string conditions);
+        /// <summary>
+        /// 获取符合条件的企业数
+        /// </summary>
+        /// <param name="conditions"></param>
+        int GetCompanyCountByConditions(string condition);
         /// <summary>
         /// 更新活动状态
         /// </summary>
