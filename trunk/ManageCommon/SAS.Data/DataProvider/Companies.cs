@@ -265,6 +265,30 @@ namespace SAS.Data.DataProvider
         }
 
         /// <summary>
+        /// 企业数据分页操作
+        /// </summary>
+        /// <param name="pageindex">当前页</param>
+        /// <param name="pagesize">页面尺寸</param>
+        /// <param name="ordercolumn">排序列名</param>
+        /// <param name="ordertype">排序方式</param>
+        /// <param name="conditions">条件</param>
+        /// <returns></returns>
+        public static DataTable GetCompanyPageList(int pageindex, int pagesize, string conditions)
+        {
+            return DatabaseProvider.GetInstance().GetCompanyPageList(pageindex, pagesize, conditions);
+        }
+
+        /// <summary>
+        /// 获取企业数量
+        /// </summary>
+        /// <param name="conditions"></param>
+        /// <returns></returns>
+        public static int GetCompanyCountByCondition(string conditions)
+        {
+            return DatabaseProvider.GetInstance().GetCompanyCountByConditions(conditions);
+        }
+
+        /// <summary>
         /// 更新活动状态
         /// </summary>
         /// <param name="status"></param>
