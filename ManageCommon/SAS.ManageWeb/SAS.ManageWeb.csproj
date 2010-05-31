@@ -370,6 +370,13 @@
     <Compile Include="ManagePage\global\global_navigationmanage.aspx.designer.cs">
       <DependentUpon>global_navigationmanage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\global\global_searchactivity.aspx.cs">
+      <DependentUpon>global_searchactivity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_searchactivity.aspx.designer.cs">
+      <DependentUpon>global_searchactivity.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\global\global_sysadminusergroupgrid.aspx.cs">
       <DependentUpon>global_sysadminusergroupgrid.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1023,6 +1030,7 @@
     <Content Include="ManagePage\global\global_helplist.aspx" />
     <Content Include="ManagePage\global\global_logandshrinkdb.aspx" />
     <Content Include="ManagePage\global\global_navigationmanage.aspx" />
+    <Content Include="ManagePage\global\global_searchactivity.aspx" />
     <Content Include="ManagePage\global\global_sysadminusergroupgrid.aspx" />
     <Content Include="ManagePage\global\global_templatesedit.aspx" />
     <Content Include="ManagePage\global\global_templatesgrid.aspx" />
