@@ -2257,6 +2257,49 @@ namespace SAS.Data.SqlServer
         }
 
         /// <summary>
+        /// 企业搜索条件
+        /// </summary>
+        /// <param name="islike">是否模糊搜索</param>
+        /// <param name="enname">企业名称</param>
+        /// <param name="enstatus">审核状态</param>
+        /// <param name="isbuilddate">是否查找添加时间</param>
+        /// <param name="starttime">开始时间</param>
+        /// <param name="endtime">结束时间</param>
+        /// <param name="envisible">开启状态</param>
+        public string Global_CompanyGrid_SearchCondition(bool islike, string enname, int enstatus, bool isbuilddate, string starttime, string endtime, int envisible)
+        {
+            string tableName = string.Format("{0}company", BaseConfigs.GetTablePrefix);
+            StringBuilder sqlBuilder = new StringBuilder(" [" + tableName + "].[en_id]>0 ");
+
+            if (islike)
+            {
+                if (!Utils.StrIsNullOrEmpty(enname)) sqlBuilder.AppendFormat(" AND [{1}].[en_name] like '%{0}%'", RegEsc(enname), tableName);
+            }
+            else
+            {
+                if (!Utils.StrIsNullOrEmpty(enname)) sqlBuilder.AppendFormat(" AND [{1}].[en_name] = '{0}'", RegEsc(enname), tableName);
+            }
+
+            if (enstatus > -1)
+            {
+                sqlBuilder.AppendFormat(" AND [{1}].[en_status] = {0}", enstatus, tableName);
+            }
+
+            if (isbuilddate)
+            {
+                sqlBuilder.AppendFormat(" AND [{1}].[en_createdate] >= '{0}'", DateTime.Parse(starttime).ToString("yyyy-MM-dd HH:mm:ss"), tableName);
+                sqlBuilder.AppendFormat(" AND [{1}].[en_createdate] <= '{0}'", DateTime.Parse(endtime).ToString("yyyy-MM-dd HH:mm:ss"), tableName);
+            }
+
+            if (envisible > -1)
+            {
+                sqlBuilder.AppendFormat(" AND [{1}].[en_visble] = {0}", envisible, tableName);
+            }
+
+            return sqlBuilder.ToString();
+        }
+
+        /// <summary>
         /// 企业数据分页操作
         /// </summary>
         /// <param name="pageindex">当前页</param>

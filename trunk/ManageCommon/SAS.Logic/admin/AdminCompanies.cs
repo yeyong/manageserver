@@ -17,6 +17,22 @@ namespace SAS.Logic
     public class AdminCompanies : Companies
     {
         /// <summary>
+        /// 企业搜索条件
+        /// </summary>
+        /// <param name="islike">是否模糊搜索</param>
+        /// <param name="enname">企业名称</param>
+        /// <param name="enstatus">审核状态</param>
+        /// <param name="isbuilddate">是否查找创建时间</param>
+        /// <param name="starttime">开始时间</param>
+        /// <param name="endtime">结束时间</param>
+        /// <param name="envisible">开启状态</param>
+        /// <returns></returns>
+        public static string GetCompanySearchCondition(bool islike, string enname, int enstatus, bool isbuilddate, string starttime, string endtime, int envisible)
+        {
+            return SAS.Data.DataProvider.Companies.GetCompanySearchList(islike, enname, enstatus, isbuilddate, starttime, endtime, envisible);
+        }
+
+        /// <summary>
         /// 获取企业信息集合
         /// </summary>
         /// <param name="strWhere"></param>

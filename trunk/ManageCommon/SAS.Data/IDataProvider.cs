@@ -1969,6 +1969,17 @@ namespace SAS.Data
         /// <returns></returns>
         string GetCompanyCondition(string arealist, int typeid, int regyear, string keyword);
         /// <summary>
+        /// 企业搜索条件
+        /// </summary>
+        /// <param name="islike">是否模糊搜索</param>
+        /// <param name="enname">企业名称</param>
+        /// <param name="enstatus">审核状态</param>
+        /// <param name="isbuilddate">是否查找创建时间</param>
+        /// <param name="starttime">开始时间</param>
+        /// <param name="endtime">结束时间</param>
+        /// <param name="envisible">开启状态</param>
+        string Global_CompanyGrid_SearchCondition(bool islike, string enname, int enstatus, bool isbuilddate, string starttime, string endtime, int envisible);
+        /// <summary>
         /// 获取企业实体信息（有省市区）
         /// </summary>
         IDataReader GetCompanyInfo(int enid);

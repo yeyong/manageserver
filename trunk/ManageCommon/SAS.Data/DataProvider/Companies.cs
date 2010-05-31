@@ -323,6 +323,21 @@ namespace SAS.Data.DataProvider
         }
 
         /// <summary>
+        /// 企业搜索条件
+        /// </summary>
+        /// <param name="islike">是否模糊搜索</param>
+        /// <param name="enname">企业名称</param>
+        /// <param name="enstatus">审核状态</param>
+        /// <param name="isbuilddate">是否查找创建时间</param>
+        /// <param name="starttime">开始时间</param>
+        /// <param name="endtime">结束时间</param>
+        /// <param name="envisible">开启状态</param>
+        public static string GetCompanySearchList(bool islike, string enname, int enstatus, bool isbuilddate, string starttime, string endtime, int envisible)
+        {
+            return DatabaseProvider.GetInstance().Global_CompanyGrid_SearchCondition(islike, enname, enstatus, isbuilddate, starttime, endtime, envisible);
+        }
+
+        /// <summary>
         /// 获取企业信息列表（有省市区）
         /// </summary>
         /// <returns></returns>

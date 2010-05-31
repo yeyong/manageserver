@@ -41,10 +41,10 @@
                                 <tr>
                                     <td>审核状态:</td>
                                     <td>
-                                        <sas:RadioButtonList id="enstatus" runat="server" RepeatColumns="3" HintInfo="企业是否通过审批">                                            
-                                            <asp:ListItem Value="1" Text="审批中" Selected="True"></asp:ListItem>
-                                            <asp:ListItem Value="2" Text="审批通过"></asp:ListItem>
-                                            <asp:ListItem Value="0" Text="审批未通过"></asp:ListItem>
+                                        <sas:RadioButtonList id="enstatus" runat="server" RepeatColumns="3" HintInfo="企业是否通过审核">                                            
+                                            <asp:ListItem Value="1" Text="审核中" Selected="True"></asp:ListItem>
+                                            <asp:ListItem Value="2" Text="审核通过"></asp:ListItem>
+                                            <asp:ListItem Value="0" Text="审核未通过"></asp:ListItem>
                                         </sas:RadioButtonList>
                                     </td>
                                 </tr>
@@ -58,8 +58,17 @@
                                         从&nbsp;<sas:Calendar ID="joindateStart" runat="server" ReadOnly="False" ScriptPath="../js/calendar.js">
                                         </sas:Calendar>
                                         到&nbsp;<sas:Calendar ID="joindateEnd" runat="server" ReadOnly="False" ScriptPath="../js/calendar.js">
-                                        </sas:Calendar><br />
-                                        使用日期查找<input id="ispostdatetime" type="checkbox" value="1" name="cins" runat="server" />
+                                        </sas:Calendar>
+                                        使用注册日期查找<input id="isbuilddatetime" type="checkbox" value="1" name="cins" runat="server" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>启用状态:</td>
+                                    <td>
+                                        <sas:RadioButtonList id="envisible" runat="server" RepeatColumns="2" HintInfo="企业是否通过审批">                                            
+                                            <asp:ListItem Value="1" Text="启用" Selected="True"></asp:ListItem>
+                                            <asp:ListItem Value="0" Text="未启用"></asp:ListItem>
+                                        </sas:RadioButtonList>
                                     </td>
                                 </tr>
                             </table>
