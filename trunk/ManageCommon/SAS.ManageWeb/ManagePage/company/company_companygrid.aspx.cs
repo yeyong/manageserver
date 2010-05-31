@@ -26,7 +26,7 @@ namespace SAS.ManageWeb.ManagePage
 
         public void BindData()
         {
-            #region 绑定用户组列表
+            #region 绑定企业列表
             DataGrid1.VirtualItemCount = GetCompanyCount();
             DataGrid1.DataSource = BuildCompanyData();
             DataGrid1.DataBind();
@@ -126,28 +126,25 @@ namespace SAS.ManageWeb.ManagePage
             {
                 string searchcondition = AdminCompanies.GetCompanySearchCondition(islike.Checked, enname.Text, TypeConverter.ObjectToInt(enstatus.SelectedValue, 0), isbuilddatetime.Checked, joindateStart.SelectedDate.ToString(), joindateEnd.SelectedDate.AddDays(1).ToString(), TypeConverter.StrToInt(envisible.SelectedValue));
                 ViewState["condition"] = searchcondition;
-
                 searchtable.Visible = false;
                 ResetSearchTable.Visible = true;
-                DataTable dt = Users.GetUsersByCondition(searchcondition);
-                if (dt.Rows.Count == 1)
-                {
-                    Response.Redirect("company_companygrid.aspx?condition=" + ViewState["condition"].ToString().Replace("'", "~^").Replace("%", "~$"));
-                }
-                else
-                {
-                    DataGrid1.CurrentPageIndex = 0;
-                    BindData();
-                }
+                DataGrid1.CurrentPageIndex = 0;
+                BindData();
             }
 
             #endregion
+        }
+
+        private void ResetSearchTable_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("company_companygrid.aspx");
         }
 
         #region GridView操作
         protected void Sort_Grid(Object sender, DataGridSortCommandEventArgs e)
         {
             DataGrid1.Sort = e.SortExpression.ToString();
+            BindData();
         }
 
         protected void DataGrid_PageIndexChanged(object source, DataGridPageChangedEventArgs e)
@@ -183,6 +180,7 @@ namespace SAS.ManageWeb.ManagePage
             ENPause.Click += new EventHandler(ENPause_Click);
             LocationSet.Click += new EventHandler(LocationSet_Click);
             Search.Click += new EventHandler(Search_Click);
+            ResetSearchTable.Click += new EventHandler(ResetSearchTable_Click);
         }
 
         #endregion
