@@ -17,6 +17,9 @@ namespace SAS.ManageWeb.ManagePage
         {
             if (!Page.IsPostBack)
             {
+                joindateStart.SelectedDate = System.DateTime.Now.AddDays(-30);
+                joindateEnd.SelectedDate = System.DateTime.Now;
+
                 BindData();
             }
         }
@@ -115,6 +118,32 @@ namespace SAS.ManageWeb.ManagePage
             #endregion
         }
 
+        private void Search_Click(object sender, EventArgs e)
+        {
+            #region 按指定条件查询用户数据
+
+            if (this.CheckCookie())
+            {
+                string searchcondition = AdminCompanies.GetCompanySearchCondition(islike.Checked, enname.Text, TypeConverter.ObjectToInt(enstatus.SelectedValue, 0), isbuilddatetime.Checked, joindateStart.SelectedDate.ToString(), joindateEnd.SelectedDate.AddDays(1).ToString(), TypeConverter.StrToInt(envisible.SelectedValue));
+                ViewState["condition"] = searchcondition;
+
+                searchtable.Visible = false;
+                ResetSearchTable.Visible = true;
+                DataTable dt = Users.GetUsersByCondition(searchcondition);
+                if (dt.Rows.Count == 1)
+                {
+                    Response.Redirect("company_companygrid.aspx?condition=" + ViewState["condition"].ToString().Replace("'", "~^").Replace("%", "~$"));
+                }
+                else
+                {
+                    DataGrid1.CurrentPageIndex = 0;
+                    BindData();
+                }
+            }
+
+            #endregion
+        }
+
         #region GridView操作
         protected void Sort_Grid(Object sender, DataGridSortCommandEventArgs e)
         {
@@ -153,6 +182,7 @@ namespace SAS.ManageWeb.ManagePage
             ENStart.Click += new EventHandler(ENStart_Click);
             ENPause.Click += new EventHandler(ENPause_Click);
             LocationSet.Click += new EventHandler(LocationSet_Click);
+            Search.Click += new EventHandler(Search_Click);
         }
 
         #endregion
