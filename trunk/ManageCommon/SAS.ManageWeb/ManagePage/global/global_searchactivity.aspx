@@ -32,6 +32,13 @@
 		</td>
 		<td class="vtop"></td>
 	</tr>
+	<tr><td class="item_title" colspan="2">活动标题</td></tr>
+	<tr>
+		<td class="vtop rowform">
+			 <sas:TextBox id="title" runat="server" RequiredFieldType="暂无校验" Width="100"></sas:TextBox>
+		</td>
+		<td class="vtop"></td>
+	</tr>
 	<tr><td class="item_title" colspan="2">活动关键字</td></tr>
 	<tr>
 		<td class="vtop rowform">
@@ -42,13 +49,13 @@
 	<tr><td class="item_title" colspan="2">是否启用</td></tr>
 	<tr>
 		<td class="vtop rowform">
-			<sas:radiobuttonlist id="attachment" runat="server" RepeatColumns="3">
+			<sas:radiobuttonlist id="status" runat="server" RepeatColumns="3">
 				<asp:Listitem Value="-1" selected="true">无限制</asp:Listitem>
 				<asp:Listitem Value="1">启用</asp:Listitem>
 				<asp:Listitem Value="0">禁用</asp:Listitem>
 			</sas:radiobuttonlist>
 		</td>
-		<td class="vtop"></td>
+		<td class="vtop">&nbsp;</td>
 	</tr>
 </table>
 <sas:Hint id="Hint1" runat="server" HintImageUrl="../images"></sas:Hint>
