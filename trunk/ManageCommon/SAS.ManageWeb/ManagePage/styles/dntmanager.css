@@ -249,5 +249,18 @@ table {word-break: break-all ;}
 .td_alternating_item12 {height:25px; line-height:180%;}
 
 .datagridpage,.category,.multi {font-size:12px; color:#000;}
+.item_title{font-weight:700;padding:10px 0 8px 0;color:#555;}
+.rowform{ width:306px; overflow:auto; }
+.vtop {vertical-align:top;}
 /*inner*/
+.currentitem{font-weight:bold;}
+/* form */
+.txt,textarea,select{ padding:2px; border:1px solid; border-color:#666 #ccc #ccc #666; background:#fff; color:#333; }
+.txt, select{ vertical-align:middle; }
+.txt_hover, .txt_focus, textarea_hover, textarea_focus{padding:2px; border:1px solid; border-color:#09C; background:#F5F9FD; }
+.txtnobd{ border:1px solid #FFF; background:#FFF; cursor:pointer; }
+.radio, .checkbox{ border:none; background:none; vertical-align:middle; }
+.checkbox{ height:14px; }
+.btn{ margin:3px 0; padding:2px 5px; *padding:4px 5px 1px; border-color:#ddd #666 #666 #ddd; background:#DDD; color:#000; cursor:pointer; vertical-align:middle; }
+.uploadbtn{ width:250px; border-color:#999; }
 .currentitem{font-weight:bold;}
