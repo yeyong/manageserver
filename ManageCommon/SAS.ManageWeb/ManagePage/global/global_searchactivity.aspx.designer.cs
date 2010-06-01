@@ -50,6 +50,15 @@ namespace SAS.ManageWeb.ManagePage {
         protected global::SAS.Control.Calendar postdatetimeEnd;
         
         /// <summary>
+        /// title 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::SAS.Control.TextBox title;
+        
+        /// <summary>
         /// keyword 控件。
         /// </summary>
         /// <remarks>
@@ -59,13 +68,13 @@ namespace SAS.ManageWeb.ManagePage {
         protected global::SAS.Control.TextBox keyword;
         
         /// <summary>
-        /// attachment 控件。
+        /// status 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::SAS.Control.RadioButtonList attachment;
+        protected global::SAS.Control.RadioButtonList status;
         
         /// <summary>
         /// Hint1 控件。

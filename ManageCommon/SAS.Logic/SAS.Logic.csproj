@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities.cs" />
     <Compile Include="admin\AdminCompanies.cs" />
     <Compile Include="Announcements.cs" />
     <Compile Include="areas.cs" />

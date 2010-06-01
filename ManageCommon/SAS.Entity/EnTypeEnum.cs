@@ -93,6 +93,35 @@ namespace SAS.Entity
             }
             return ecname;
         }
+        /// <summary>
+        /// 获取活动专题类型
+        /// </summary>
+        /// <param name="ate"></param>
+        /// <returns></returns>
+        public static string GetActivityType(ActivityType ate)
+        {
+            return GetActivityType(Convert.ToInt16(ate));
+        }
+        public static string GetActivityType(int ate)
+        {
+            string atname = "";
+            switch (ate)
+            {
+                case 1:
+                    atname = "首页活动专题";
+                    break;
+                case 2:
+                    atname = "黄页活动专题";
+                    break;
+                case 3:
+                    atname = "名片页活动专题";
+                    break;
+                case 4:
+                    atname = "淘之购活动专题";
+                    break;
+            }
+            return atname;
+        }
     }
 
     /// <summary>
@@ -162,5 +191,27 @@ namespace SAS.Entity
         /// 外企
         /// </summary>
         CoForeign = 6
+    }
+    /// <summary>
+    /// 活动类型
+    /// </summary>
+    public enum ActivityType
+    {
+        /// <summary>
+        /// 首页活动专题
+        /// </summary>
+        IndexActivity = 1,
+        /// <summary>
+        /// 黄页活动专题
+        /// </summary>
+        HYActivity = 2,
+        /// <summary>
+        /// 名片页活动专题
+        /// </summary>
+        CardActivity = 3,
+        /// <summary>
+        /// 淘之购活动专题
+        /// </summary>
+        TaobaoActivity = 4
     }
 }
