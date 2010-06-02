@@ -11,7 +11,7 @@
 namespace SAS.ManageWeb.ManagePage {
     
     
-    public partial class global_activitygrid {
+    public partial class global_addactivity {
         
         /// <summary>
         /// Form1 控件。
@@ -23,39 +23,66 @@ namespace SAS.ManageWeb.ManagePage {
         protected global::System.Web.UI.HtmlControls.HtmlForm Form1;
         
         /// <summary>
-        /// forumid 控件。
+        /// act_title 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::SAS.Control.DropDownTreeList forumid;
+        protected global::SAS.Control.TextBox act_title;
         
         /// <summary>
-        /// nodeletepostnum 控件。
+        /// act_style 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox nodeletepostnum;
+        protected global::SAS.ManageWeb.ManagePage.TextareaResize act_style;
         
         /// <summary>
-        /// SetTopicInfo 控件。
+        /// act_script 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::SAS.Control.Button SetTopicInfo;
+        protected global::SAS.ManageWeb.ManagePage.TextareaResize act_script;
         
         /// <summary>
-        /// DataGrid1 控件。
+        /// ColorPicker1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::SAS.Control.DataGrid DataGrid1;
+        protected global::SAS.Control.ColorPicker ColorPicker1;
+        
+        /// <summary>
+        /// templatenew 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::SAS.ManageWeb.ManagePage.TextareaResize templatenew;
+        
+        /// <summary>
+        /// Hint1 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::SAS.Control.Hint Hint1;
+        
+        /// <summary>
+        /// AddActInfo 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::SAS.Control.Button AddActInfo;
     }
 }

@@ -27,5 +27,15 @@ namespace SAS.Data.DataProvider
         {
             return DatabaseProvider.GetInstance().GetActivitiesSearchConditions(atype, title, keyword, startdate, endtdate, status);
         }
+
+        /// <summary>
+        /// 根据条件获取活动信息
+        /// </summary>
+        /// <param name="conditions"></param>
+        /// <returns></returns>
+        public static DataTable GetActivitiesByConditions(string conditions)
+        {
+            return DatabaseProvider.GetInstance().GetActivitiesByConditions(conditions);
+        }
     }
 }

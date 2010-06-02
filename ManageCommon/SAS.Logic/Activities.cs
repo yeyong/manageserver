@@ -33,5 +33,15 @@ namespace SAS.Logic
         {
             return SAS.Data.DataProvider.Activities.GetActivitiesSearchConditions(atype, title, keyword, startdate, endtdate, status);
         }
+
+        /// <summary>
+        /// 根据条件获取活动信息
+        /// </summary>
+        /// <param name="conditions"></param>
+        /// <returns></returns>
+        public static DataTable GetActivitiesByConditions(string conditions)
+        {
+            return SAS.Data.DataProvider.Activities.GetActivitiesByConditions(conditions);
+        }
     }
 }
