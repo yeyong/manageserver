@@ -40,7 +40,7 @@ namespace SAS.ManageWeb.ManagePage
 
                 string sqlstring = Activities.GetActivitiesSearchConditions(TypeConverter.StrToInt(typeid.SelectedValue, 0), title.Text, keyword.Text, postdatetimeStart.SelectedDate, postdatetimeEnd.SelectedDate, TypeConverter.StrToInt(status.SelectedValue, 0));
 
-                Session["topicswhere"] = sqlstring;
+                Session["activitieswhere"] = sqlstring;
                 Response.Redirect("global_activitygrid.aspx");
             }
 

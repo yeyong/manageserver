@@ -59,7 +59,10 @@
 	</tr>
 </table>
 <sas:Hint id="Hint1" runat="server" HintImageUrl="../images"></sas:Hint>
-<div class="Navbutton"><sas:Button id="SaveSearchCondition" runat="server" Text="搜索符合条件专题" ButtonImgUrl="../images/search.gif"></sas:Button></div>
+<div class="Navbutton">
+    <sas:Button id="SaveSearchCondition" runat="server" Text="搜索符合条件专题" ButtonImgUrl="../images/search.gif"></sas:Button>
+    <button type="button" class="ManagerButton" onclick="javascript:window.location.href='global_addactivity.aspx';"><img src="../images/add.gif" />添加活动专题</button>
+</div>
 </fieldset>
 <div id="topictypes" style="display:none;">
 	

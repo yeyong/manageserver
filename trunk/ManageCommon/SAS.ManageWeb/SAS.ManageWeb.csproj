@@ -209,6 +209,13 @@
     <Compile Include="ManagePage\global\global_activitygrid.aspx.designer.cs">
       <DependentUpon>global_activitygrid.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\global\global_addactivity.aspx.cs">
+      <DependentUpon>global_addactivity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_addactivity.aspx.designer.cs">
+      <DependentUpon>global_addactivity.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\global\global_addadvs.aspx.cs">
       <DependentUpon>global_addadvs.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1007,6 +1014,7 @@
     <Content Include="ManagePage\framepage\managerbody.aspx" />
     <Content Include="ManagePage\framepage\top.aspx" />
     <Content Include="ManagePage\global\global_activitygrid.aspx" />
+    <Content Include="ManagePage\global\global_addactivity.aspx" />
     <Content Include="ManagePage\global\global_addadvs.aspx" />
     <Content Include="ManagePage\global\global_addannounce.aspx" />
     <Content Include="ManagePage\global\global_addgroup.aspx" />

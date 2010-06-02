@@ -2160,6 +2160,19 @@ namespace SAS.Data.SqlServer
 
             return sqlBuilder.ToString();
         }
+        /// <summary>
+        /// 根据条件获取活动信息
+        /// </summary>
+        /// <param name="conditions"></param>
+        /// <returns></returns>
+        public DataTable GetActivitiesByConditions(string conditions)
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}activity] WHERE {2}",
+                                                DbFields.ACTIVITY,
+                                                BaseConfigs.GetTablePrefix,
+                                                conditions);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
         #endregion
 
         public DataTable GetMailTable(string uids)

@@ -9,126 +9,145 @@
     <meta name="description" content="天狼星工作室综合管理后台" />
     <title>天狼星工作室综合管理后台</title>
     <link href="../styles/datagrid.css" type="text/css" rel="stylesheet" />
-    <link href="../styles/calendar.css" type="text/css" rel="stylesheet" />    
     <link href="../styles/dntmanager.css" type="text/css" rel="stylesheet" />
-    <link href="../styles/modelpopup.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript" src="../js/common.js"></script>
-    <script type="text/javascript" src="../js/modalpopup.js"></script>
+
     <script type="text/javascript">
-        function Check(form, checked) {
-            CheckByName(form, 'enid', checked);
-            checkedEnabledButton(form, 'enid', 'ENStart', 'ENPause');
+        function check(browser) {
+            document.forms[0].operation.value = browser;
+        }
+
+        function CheckAll(form) {
+            for (var i = 0; i < form.elements.length; i++) {
+                var e = form.elements[i];
+                if (e.name == 'tid')
+                    e.checked = form.chkall.checked;
+            }
+        }
+
+        function SH_SelectOne(obj) {
+            if (obj.checked == false) {
+                document.getElementById('chkall').checked = obj.chcked;
+
+            }
+        }
+
+        function Check(form) {
+            CheckAll(form);
+            checkedEnabledButton(form, 'tid', 'SetTopicInfo')
         }
     </script>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
 </head>
 <body>
     <form id="Form1" method="post" runat="server">
     <div class="ManagerForm">
-            <fieldset>
-                <legend style="background: url(../images/icons/icon32.jpg) no-repeat 6px 50%;">搜索活动</legend>
-                <asp:Panel ID="searchtable" runat="server" Visible="true">
-                <table cellspacing="0" cellpadding="4" width="100%" align="center">
-                    <tr>
-                        <td class="panelbox" width="50%" align="left">
-                            <table width="100%">
-                                <tr>
-                                    <td style="width: 80px">企业名称:</td>
-                                    <td>
-                                        <sas:TextBox ID="enname" runat="server" RequiredFieldType="暂无校验" Size="40"></sas:TextBox>&nbsp;
-                                        模糊查找<input id="islike" type="checkbox" value="1" name="cins" runat="server" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>审核状态:</td>
-                                    <td>
-                                        <sas:RadioButtonList id="enstatus" runat="server" RepeatColumns="3" HintInfo="企业是否通过审核">                                            
-                                            <asp:ListItem Value="1" Text="审核中" Selected="True"></asp:ListItem>
-                                            <asp:ListItem Value="2" Text="审核通过"></asp:ListItem>
-                                            <asp:ListItem Value="0" Text="审核未通过"></asp:ListItem>
-                                        </sas:RadioButtonList>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                        <td  class="panelbox" width="50%" align="right">
-                            <table width="100%">
-                                <tr>
-                                    <td>创建日期:</td>
-                                    <td>
-                                        从&nbsp;<sas:Calendar ID="joindateStart" runat="server" ReadOnly="False" ScriptPath="../js/calendar.js">
-                                        </sas:Calendar>
-                                        到&nbsp;<sas:Calendar ID="joindateEnd" runat="server" ReadOnly="False" ScriptPath="../js/calendar.js">
-                                        </sas:Calendar>
-                                        使用注册日期查找<input id="isbuilddatetime" type="checkbox" value="1" name="cins" runat="server" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>启用状态:</td>
-                                    <td>
-                                        <sas:RadioButtonList id="envisible" runat="server" RepeatColumns="2" HintInfo="企业是否通过审批">                                            
-                                            <asp:ListItem Value="1" Text="启用" Selected="True"></asp:ListItem>
-                                            <asp:ListItem Value="0" Text="未启用"></asp:ListItem>
-                                        </sas:RadioButtonList>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>                    
-                    <tr>
-                        <td align="center" colspan="2">
-                            <sas:Button ID="Search" runat="server" Text="开始搜索"></sas:Button><sas:Button ID="LocationSet" runat="server" Text="区域JSON数据生成"></sas:Button>
-                        </td>
-                    </tr>
-                </table>
-                </asp:Panel>
-                <sas:Button ID="ResetSearchTable" runat="server" Text="重设搜索条件" Visible="False"></sas:Button>
-            </fieldset>
-        </div>
-        <table width="100%">
-            <tr>
-                <td>
-                    <sas:DataGrid ID="DataGrid1" runat="server" OnPageIndexChanged="DataGrid_PageIndexChanged" OnSortCommand="Sort_Grid" PageSize="15">
-                        <Columns>
-                            <asp:TemplateColumn HeaderText="<input title='选中/取消' onclick='Check(this.form,this.checked)' type='checkbox' name='chkall' id='chkall' />">
-                                <HeaderStyle Width="20px" />
-                                <ItemTemplate>
-						            <input id="enid" type="checkbox" onclick="checkedEnabledButton(form, 'enid', 'ENStart', 'ENPause')" value="<%# DataBinder.Eval(Container, "DataItem.en_id").ToString()%>"	name="enid">
-						        </ItemTemplate>
-                            </asp:TemplateColumn>
-                            <asp:TemplateColumn HeaderText="">
-                                <ItemTemplate>
-                                    <a href="company_companyedit.aspx?enid=<%# DataBinder.Eval(Container, "DataItem.en_id").ToString()%>">
-                                        编辑</a>
-                                    <%# DataGrid1.LoadSelectedCheckBox(DataBinder.Eval(Container, "DataItem.en_id").ToString())%>
-                                </ItemTemplate>
-                            </asp:TemplateColumn>
-                            <asp:BoundColumn DataField="en_name" SortExpression="en_name" HeaderText="名称" ReadOnly="true"></asp:BoundColumn>
-                            <asp:BoundColumn DataField="en_update" SortExpression="en_update" HeaderText="最近更新时间" ReadOnly="true"></asp:BoundColumn>
-                            <asp:BoundColumn DataField="en_createdate" SortExpression="en_createdate" HeaderText="信息创建时间" ReadOnly="true"></asp:BoundColumn>
-                            <asp:TemplateColumn HeaderText="开启状态" SortExpression="en_visble">
-                                <ItemTemplate>
-                                    <%# DataBinder.Eval(Container, "DataItem.en_visble").ToString() == "0" ? "暂停":"开启"%>
-                                </ItemTemplate>
-                            </asp:TemplateColumn>
-                            <asp:TemplateColumn HeaderText="开启状态" SortExpression="en_status">
-                                <ItemTemplate>
-                                    
-                                </ItemTemplate>
-                            </asp:TemplateColumn>
-                        </Columns>
-                    </sas:DataGrid>
-                </td>
-            </tr>
-        </table>
-        <p style="text-align:right;">
-            <table style="float:right">
-                <tr>
-                    <td><sas:Button ID="ENStart" runat="server" Text=" 开 启 " designtimedragdrop="247" Enabled="false"></sas:Button>&nbsp;&nbsp;</td>
-                    <td><sas:Button ID="ENPause" runat="server" Text=" 暂 停 " ButtonImgUrl="../images/del.gif" Enabled="false"></sas:Button>&nbsp;&nbsp;</td>
-                </tr>
-            </table>              
-        </p>
-        <sas:Hint id="Hint1" runat="server" HintImageUrl="../images"></sas:Hint>
+<fieldset>
+<legend style="background:url(../images/icons/legendimg.jpg) no-repeat 6px 50%;">操作主题</legend>
+<table cellspacing="0" cellpadding="4" width="100%" align="center">
+	<tr>
+		<td class="panelbox" colspan="2">
+			<table width="100%">
+				<tr>
+					<td style="width:100px"><input type="radio" name="operation" value="moveforum" onClick="check(this.value)" checked />批量移动到论坛</td>
+					<td><sas:dropdowntreelist id="forumid" runat="server"></sas:dropdowntreelist></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td class="panelbox" align="left" width="50%">
+			<table width="100%">
+				<tr>
+					<td style="width:100px"><input type="radio" name="operation" value="delete" onClick="check(this.value)" />批量删除</td>
+					<td><input type="checkbox" name="nodeletepostnum" value="1" checked id="nodeletepostnum" runat="server" />删帖不减用户发帖数和积分</td>
+				</tr>
+				<tr>
+					<td><input type="radio" name="operation" value="displayorder" onclick="check(this.value)" />批量置顶</td>
+					<td>
+						<input type="radio" name="displayorder_level" value="0" checked onclick="check(this.value)" />取消置顶 <br />
+						<input type="radio" name="displayorder_level" value="1" onclick="check(this.value)" />
+						<img src="../images/star.gif" width="16" height="16" /> <br /> 
+						<input type="radio" name="displayorder_level" value="2" onclick="check(this.value)" />
+						<img src="../images/star.gif" width="16" height="16" />
+						<img src="../images/star.gif" width="16" height="16" /><br />
+						<input type="radio" name="displayorder_level" value="3" onclick="check(this.value)" />
+						<img src="../images/star.gif" width="16" height="16" />
+						<img src="../images/star.gif" width="16" height="16" />
+						<img src="../images/star.gif" width="16" height="16" />
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td class="panelbox" align="right" width="50%">
+			<table width="100%">
+				<tr>
+					<td style="width:110px"><input type="radio" name="operation" value="deleteattach" onClick="check(this.value)" />删除主题中的附件</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td><input type="radio" name="operation" value="adddigest" onclick="check(this.value)" />批量设置精华</td>
+					<td>
+						<input type="radio" name="digest_level" value="0" checked /> 取消精华 <br />
+						<input type="radio" name="digest_level" value="1" />
+						<img src="../images/star.gif" width="16" height="16" /><br />
+						<input type="radio" name="digest_level" value="2" />
+						<img src="../images/star.gif" width="16" height="16" />
+						<img src="../images/star.gif" width="16" height="16" /><br />
+						<input type="radio" name="digest_level" value="3" /> 
+						<img src="../images/star.gif" width="16" height="16" />
+						<img src="../images/star.gif" width="16" height="16" />
+						<img src="../images/star.gif" width="16" height="16" />
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" colspan="2"><sas:Button id="SetTopicInfo" runat="server" Text=" 提 交 " Enabled="false"></sas:Button></td>
+	</tr>
+</table>
+</fieldset>
+</div>
+        <sas:datagrid id="DataGrid1" runat="server" OnPageIndexChanged="DataGrid_PageIndexChanged" OnSortCommand="Sort_Grid" PageSize="15">
+	<Columns>
+		<asp:TemplateColumn HeaderText="<input title='选中/取消' onclick='Check(this.form)' type='checkbox' name='chkall' id='chkall' />">
+			<HeaderStyle Width="20px" />
+			<ItemTemplate>
+				<input id="tid" onclick="checkedEnabledButton(this.form,'tid','SetTopicInfo')" type="checkbox" value="<%# DataBinder.Eval(Container, "DataItem.tid").ToString() %>" name="tid" />
+			</ItemTemplate>
+		</asp:TemplateColumn>
+		<asp:BoundColumn DataField="tid" SortExpression="tid" HeaderText="帖子ID" Visible="false" ></asp:BoundColumn>
+		<asp:TemplateColumn HeaderText="标题">
+			<ItemTemplate>
+				<a href="../../showtopic.aspx?topicid=<%# DataBinder.Eval(Container, "DataItem.tid").ToString() %>" target="_blank">
+					<%# DataBinder.Eval(Container, "DataItem.title").ToString() %>
+				</a>
+			</ItemTemplate>
+		</asp:TemplateColumn>
+		<asp:TemplateColumn HeaderText="发帖人">
+			<itemtemplate>
+				<%# (DataBinder.Eval(Container, "DataItem.posterid").ToString() != "-1") ? "<a href='../../userinfo.aspx?userid=" + DataBinder.Eval(Container, "DataItem.posterid").ToString() + "' target='_blank'>" + DataBinder.Eval(Container, "DataItem.poster").ToString() + "</a>" : DataBinder.Eval(Container, "DataItem.poster").ToString()%>
+			</itemtemplate>
+		</asp:TemplateColumn>
+		<asp:BoundColumn DataField="postdatetime" SortExpression="postdatetime" HeaderText="发布日期" ></asp:BoundColumn>
+		<asp:TemplateColumn HeaderText="最后回复人">
+			<itemtemplate>
+				<%# (DataBinder.Eval(Container, "DataItem.lastposterid").ToString() != "-1") ? "<a href='../../userinfo.aspx?userid=" + DataBinder.Eval(Container, "DataItem.lastposterid").ToString() + "' target='_blank'>" + DataBinder.Eval(Container, "DataItem.lastposter").ToString() + "</a>" : DataBinder.Eval(Container, "DataItem.lastposter").ToString()%>
+			</itemtemplate>
+		</asp:TemplateColumn>				
+		<asp:BoundColumn DataField="views" SortExpression="views" HeaderText="查看数"></asp:BoundColumn>
+		<asp:BoundColumn DataField="digest" SortExpression="digest" HeaderText="精华帖" ></asp:BoundColumn>
+		<asp:BoundColumn DataField="displayorder" SortExpression="displayorder" HeaderText="显示顺序"></asp:BoundColumn>
+		<asp:BoundColumn DataField="price" SortExpression="price" HeaderText="价格"></asp:BoundColumn>
+		<asp:TemplateColumn HeaderText="关闭">
+			<ItemTemplate>
+				<%# BoolStr(DataBinder.Eval(Container, "DataItem.closed").ToString())%>
+			</ItemTemplate>
+		</asp:TemplateColumn>
+	</Columns>
+</sas:datagrid>
     </form>
     <%=footer%>	
 </body>

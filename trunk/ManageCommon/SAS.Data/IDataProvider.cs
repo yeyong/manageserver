@@ -2059,7 +2059,22 @@ namespace SAS.Data
         #endregion
 
         #region 活动专题操作
+        /// <summary>
+        /// 获得活动专题查询语句
+        /// </summary>
+        /// <param name="atype">专题类型</param>
+        /// <param name="title">标题</param>
+        /// <param name="keyword">关键字</param>
+        /// <param name="startdate">活动开始时间</param>
+        /// <param name="endtdate">活动结束时间</param>
+        /// <param name="status">状态</param>
         string GetActivitiesSearchConditions(int atype, string title, string keyword, DateTime startdate, DateTime endtdate, int status);
+         /// <summary>
+        /// 根据条件获取活动信息
+        /// </summary>
+        /// <param name="conditions"></param>
+        /// <returns></returns>
+        DataTable GetActivitiesByConditions(string conditions);
         #endregion
 
         #region 帮助文档操作 help

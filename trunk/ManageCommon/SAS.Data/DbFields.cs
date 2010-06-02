@@ -7,6 +7,10 @@ namespace SAS.Data
     public class DbFields
     {
         /// <summary>
+        /// 活动专题
+        /// </summary>
+        public const string ACTIVITY = "[id],[atitle],[stylecode],[desccode],[scriptcode],[begintime],[endtime],[atype],[enabled],[seotitle],[seodesc],[seokeyword],[createdate]";
+        /// <summary>
         /// 管理组admingroup personGroup表字段
         /// </summary>
         public const string ADMIN_GROUPS = "[pg_id],[pg_name],[pg_allowSys],[pg_allowSelf],[pg_status],[pg_ext1],[alloweditpost],[allowstickthread],[allowmodpost],[allowdelpost],[allowmassprune],[allowcensorword],[allowviewip],[allowbanip],[allowedituser],[allowmoduser],[allowbanuser],[allowpostannounce],[allowviewlog],[allowviewrealname]";
