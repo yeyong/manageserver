@@ -2129,6 +2129,39 @@ namespace SAS.Data.SqlServer
 
         #endregion
 
+        #region 活动专题操作
+        /// <summary>
+        /// 获得活动专题查询语句
+        /// </summary>
+        /// <param name="atype">专题类型</param>
+        /// <param name="title">标题</param>
+        /// <param name="keyword">关键字</param>
+        /// <param name="startdate">活动开始时间</param>
+        /// <param name="endtdate">活动结束时间</param>
+        /// <param name="status">状态</param>
+        public string GetActivitiesSearchConditions(int atype, string title, string keyword, DateTime startdate, DateTime endtdate, int status)
+        {
+            StringBuilder sqlBuilder = new StringBuilder(" [id]>0 ");
+
+            if (atype > 0) sqlBuilder.AppendFormat(" AND [atype] = {0}", atype);
+            if (!Utils.StrIsNullOrEmpty(title)) sqlBuilder.AppendFormat(" AND [atitle] like '%{0}%'", RegEsc(title));
+            if (keyword != "")
+            {
+                sqlBuilder.Append(" AND (");
+                foreach (string keyinfo in keyword.Split(','))
+                {
+                    if (keyinfo.Trim() != "") sqlBuilder.AppendFormat(" [seokeyword] LIKE '%{0}%' OR ", RegEsc(keyinfo));
+                }
+                sqlBuilder.Remove(sqlBuilder.Length - 3, 3).Append(")");
+            }
+            if (!Utils.StrIsNullOrEmpty(startdate.ToString())) sqlBuilder.AppendFormat(" AND [begintime]>='{0}'", startdate.ToString("yyyy-MM-dd HH:mm:ss"));
+            if (!Utils.StrIsNullOrEmpty(endtdate.ToString())) sqlBuilder.AppendFormat(" AND [begintime]<='{0}'", endtdate.ToString("yyyy-MM-dd HH:mm:ss"));
+            if (status > -1) sqlBuilder.AppendFormat(" AND [enabled] = {0}", status);
+
+            return sqlBuilder.ToString();
+        }
+        #endregion
+
         public DataTable GetMailTable(string uids)
         {
             if (!Utils.IsSafeSqlString(uids))

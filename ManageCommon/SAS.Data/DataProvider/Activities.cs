@@ -1,21 +1,16 @@
 ﻿using System;
-using System.Data;
-using System.Collections;
-using System.Text.RegularExpressions;
 using System.Text;
-using System.Web.Caching;
+using System.Data;
 
-using SAS.Common;
-using SAS.Data;
-using SAS.Config;
-using SAS.Entity;
 using SAS.Common.Generic;
-using SAS.Cache;
+using SAS.Entity;
+using SAS.Common;
+using SAS.Config;
 
-namespace SAS.Logic
+namespace SAS.Data.DataProvider
 {
     /// <summary>
-    /// 活动专题操作类
+    /// 活动专题数据操作
     /// </summary>
     public class Activities
     {
@@ -28,10 +23,9 @@ namespace SAS.Logic
         /// <param name="startdate">活动开始时间</param>
         /// <param name="endtdate">活动结束时间</param>
         /// <param name="status">状态</param>
-        /// <returns></returns>
         public static string GetActivitiesSearchConditions(int atype, string title, string keyword, DateTime startdate, DateTime endtdate, int status)
         {
-            return SAS.Data.DataProvider.Activities.GetActivitiesSearchConditions(atype, title, keyword, startdate, endtdate, status);
+            return DatabaseProvider.GetInstance().GetActivitiesSearchConditions(atype, title, keyword, startdate, endtdate, status);
         }
     }
 }

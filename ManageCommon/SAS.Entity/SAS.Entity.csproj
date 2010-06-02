@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityInfo.cs" />
     <Compile Include="AdminGroupInfo.cs" />
     <Compile Include="AdShowInfo.cs" />
     <Compile Include="AdTypeEnum.cs" />
