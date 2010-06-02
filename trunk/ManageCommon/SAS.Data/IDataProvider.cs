@@ -2058,6 +2058,10 @@ namespace SAS.Data
         int UpdateSASLink(int id, int displayOrder, string name, string url, string note, string logo);
         #endregion
 
+        #region 活动专题操作
+        string GetActivitiesSearchConditions(int atype, string title, string keyword, DateTime startdate, DateTime endtdate, int status);
+        #endregion
+
         #region 帮助文档操作 help
         /// <summary>
         /// 添加帮助信息
