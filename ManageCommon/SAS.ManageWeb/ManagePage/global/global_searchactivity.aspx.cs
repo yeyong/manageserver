@@ -19,15 +19,6 @@ namespace SAS.ManageWeb.ManagePage
                 postdatetimeStart.SelectedDate = DateTime.Now.AddDays(-30);
                 postdatetimeEnd.SelectedDate = DateTime.Now;
             }
-            ActivityType ate = new ActivityType();
-            typeid.Items.Clear();
-            typeid.Items.Add(new ListItem("全部", "0"));
-            foreach (string atname in Enum.GetNames(ate.GetType()))
-            {
-                int s_value = Convert.ToInt16(Enum.Parse(ate.GetType(), atname));
-                string s_text = EnumCatch.GetActivityType(s_value);
-                typeid.Items.Add(new ListItem(s_text, s_value.ToString()));
-            }
         }
 
         private void SaveSearchCondition_Click(object sender, EventArgs e)
@@ -38,7 +29,7 @@ namespace SAS.ManageWeb.ManagePage
             {
                 //TODO:条件，先各个
 
-                string sqlstring = Activities.GetActivitiesSearchConditions(TypeConverter.StrToInt(typeid.SelectedValue, 0), title.Text, keyword.Text, postdatetimeStart.SelectedDate, postdatetimeEnd.SelectedDate, TypeConverter.StrToInt(status.SelectedValue, 0));
+                string sqlstring = AdminActivities.GetActivitiesSearchConditions(TypeConverter.StrToInt(typeid.SelectedValue, 0), title.Text, keyword.Text, postdatetimeStart.SelectedDate, postdatetimeEnd.SelectedDate, TypeConverter.StrToInt(status.SelectedValue, 0));
 
                 Session["activitieswhere"] = sqlstring;
                 Response.Redirect("global_activitygrid.aspx");
@@ -72,6 +63,15 @@ namespace SAS.ManageWeb.ManagePage
         private void InitializeComponent()
         {
             this.SaveSearchCondition.Click += new EventHandler(this.SaveSearchCondition_Click);
+            ActivityType ate = new ActivityType();
+            typeid.Items.Clear();
+            typeid.Items.Add(new ListItem("全部", "0"));
+            foreach (string atname in Enum.GetNames(ate.GetType()))
+            {
+                int s_value = Convert.ToInt16(Enum.Parse(ate.GetType(), atname));
+                string s_text = EnumCatch.GetActivityType(s_value);
+                typeid.Items.Add(new ListItem(s_text, s_value.ToString()));
+            }
         }
 
         #endregion

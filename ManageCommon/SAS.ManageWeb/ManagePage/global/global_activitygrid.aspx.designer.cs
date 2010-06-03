@@ -23,31 +23,22 @@ namespace SAS.ManageWeb.ManagePage {
         protected global::System.Web.UI.HtmlControls.HtmlForm Form1;
         
         /// <summary>
-        /// forumid 控件。
+        /// typeid 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::SAS.Control.DropDownTreeList forumid;
+        protected global::SAS.Control.DropDownList typeid;
         
         /// <summary>
-        /// nodeletepostnum 控件。
+        /// SetActInfo 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox nodeletepostnum;
-        
-        /// <summary>
-        /// SetTopicInfo 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::SAS.Control.Button SetTopicInfo;
+        protected global::SAS.Control.Button SetActInfo;
         
         /// <summary>
         /// DataGrid1 控件。

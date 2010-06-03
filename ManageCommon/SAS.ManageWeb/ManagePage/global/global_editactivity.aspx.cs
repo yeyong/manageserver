@@ -11,25 +11,62 @@ using SAS.Entity;
 
 namespace SAS.ManageWeb.ManagePage
 {
-    /// <summary>
-    /// 活动添加
-    /// </summary>
-    public partial class global_addactivity : AdminPage
+    public partial class global_editactivity : AdminPage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-                postdatetimeStart.SelectedDate = DateTime.Now;
-                postdatetimeEnd.SelectedDate = DateTime.Now.AddDays(30);
+                if (SASRequest.GetString("id") == "")
+                {
+                    Response.Redirect("global_activitygrid.aspx");
+                }
+                else
+                {
+                    LoadActivityInf(SASRequest.GetInt("id", -1));
+                }
             }
         }
 
-        private void AddActInfo_Click(object sender, EventArgs e)
+        public void LoadActivityInf(int id)
         {
-            #region 添加活动
+            #region 加载活动信息
+
+            ActivityInfo actInfo = Activities.GetActivityInfo(id);
+            act_title.Text = actInfo.Atitle;
+            postdatetimeStart.SelectedDate = Convert.ToDateTime(actInfo.Begintime);
+            postdatetimeEnd.SelectedDate = Convert.ToDateTime(actInfo.Endtime);
+            act_style.Text = actInfo.Stylecode;
+            act_script.Text = actInfo.Scriptcode;
+            templatenew.Text = actInfo.Desccode;
+            seotitle.Text = actInfo.Seotitle;
+            seokeyword.Text = actInfo.Seokeyword;
+            seodesc.Text = actInfo.Seodesc;
+            act_status.SelectedValue = actInfo.Enabled.ToString();
+
+            ActivityType ate = new ActivityType();
+            typeid.Items.Clear();
+            typeid.Items.Add(new ListItem("全部", "0"));
+            foreach (string atname in Enum.GetNames(ate.GetType()))
+            {
+                int s_value = Convert.ToInt16(Enum.Parse(ate.GetType(), atname));
+                string s_text = EnumCatch.GetActivityType(s_value);
+                typeid.Items.Add(new ListItem(s_text, s_value.ToString()));
+            }
+            typeid.SelectedValue = actInfo.Atype.ToString();
+
+            #endregion
+        }
+
+        private void EditActInfo_Click(object sender, EventArgs e)
+        {
+            #region 更新公告相关信息
+
             if (this.CheckCookie())
             {
+                ActivityInfo activityInfo = new ActivityInfo();
+                activityInfo.Id = SASRequest.GetInt("id", 0);
+
                 if (templatenew.Text == "")
                 {
                     base.RegisterStartupScript("", "<script>alert('请添加活动页面内容，内容不可为空！');</script>");
@@ -48,34 +85,13 @@ namespace SAS.ManageWeb.ManagePage
                         return;
                     }
                 }
-
-                AdminActivities.CreateActivity(LoadActivityInfo());
+                
                 SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/Activity");
-                AdminVistLogs.InsertLog(this.userid, this.username, this.usergroupid, this.grouptitle, this.ip, "增加活动", "增加活动,标题为:" + act_title.Text);
+                //记录日志
+                AdminVistLogs.InsertLog(this.userid, this.username, this.usergroupid, this.grouptitle, this.ip, "更新活动", "更新活动,标题为:" + act_title.Text);
                 base.RegisterStartupScript("PAGE", "window.location.href='global_searchactivity.aspx';");
             }
             #endregion
-        }
-
-        /// <summary>
-        /// 加载活动实体信息
-        /// </summary>
-        /// <returns></returns>
-        private ActivityInfo LoadActivityInfo()
-        {
-            ActivityInfo aif = new ActivityInfo();
-            aif.Atype = TypeConverter.StrToInt(typeid.SelectedValue, 0);
-            aif.Atitle = Utils.RemoveHtml(act_title.Text);
-            aif.Stylecode = act_style.Text;
-            aif.Scriptcode = act_script.Text;
-            aif.Desccode = templatenew.Text;
-            aif.Begintime = postdatetimeStart.SelectedDate.ToString();
-            aif.Endtime = postdatetimeEnd.SelectedDate.ToString();
-            aif.Seotitle = Utils.RemoveHtml(seotitle.Text);
-            aif.Seokeyword = Utils.RemoveHtml(seokeyword.Text);
-            aif.Seodesc = Utils.RemoveHtml(seodesc.Text);
-            aif.Enabled = TypeConverter.StrToInt(act_status.SelectedValue, 0);
-            return aif;
         }
 
         #region 把VIEWSTATE写入容器
@@ -102,17 +118,7 @@ namespace SAS.ManageWeb.ManagePage
 
         private void InitializeComponent()
         {
-            AddActInfo.Click += new EventHandler(AddActInfo_Click);
-
-            ActivityType ate = new ActivityType();
-            typeid.Items.Clear();
-            typeid.Items.Add(new ListItem("全部", "0"));
-            foreach (string atname in Enum.GetNames(ate.GetType()))
-            {
-                int s_value = Convert.ToInt16(Enum.Parse(ate.GetType(), atname));
-                string s_text = EnumCatch.GetActivityType(s_value);
-                typeid.Items.Add(new ListItem(s_text, s_value.ToString()));
-            }
+            EditActInfo.Click += new EventHandler(EditActInfo_Click);
         }
 
         #endregion

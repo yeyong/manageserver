@@ -2131,6 +2131,61 @@ namespace SAS.Data.SqlServer
 
         #region 活动专题操作
         /// <summary>
+        /// 创建活动专题
+        /// </summary>
+        public void CreateActivityInfo(ActivityInfo aif)
+        {
+            DbParameter[] parms = {
+                                      DbHelper.MakeInParam("@atitle",(DbType)SqlDbType.NVarChar,50,aif.Atitle),
+                                      DbHelper.MakeInParam("@stylecode",(DbType)SqlDbType.NText,0,aif.Stylecode),
+                                      DbHelper.MakeInParam("@desccode",(DbType)SqlDbType.NText,0,aif.Desccode),
+                                      DbHelper.MakeInParam("@scriptcode",(DbType)SqlDbType.NText,0,aif.Scriptcode),
+                                      DbHelper.MakeInParam("@begintime",(DbType)SqlDbType.DateTime,8,aif.Begintime),
+                                      DbHelper.MakeInParam("@endtime",(DbType)SqlDbType.DateTime,8,aif.Endtime),
+                                      DbHelper.MakeInParam("@atype",(DbType)SqlDbType.Int,4,aif.Atype),
+                                      DbHelper.MakeInParam("@enabled",(DbType)SqlDbType.SmallInt,2,aif.Enabled),
+                                      DbHelper.MakeInParam("@seotitle",(DbType)SqlDbType.NVarChar,50,aif.Seotitle),
+                                      DbHelper.MakeInParam("@seodesc",(DbType)SqlDbType.NVarChar,200,aif.Seodesc),
+                                      DbHelper.MakeInParam("@seokeyword",(DbType)SqlDbType.NVarChar,100,aif.Seokeyword)
+                                  };
+            string commandText = string.Format("INSERT INTO [{0}activity]([atitle],[stylecode],[desccode],[scriptcode],[begintime],[endtime],[atype],[enabled],[seotitle],[seodesc],[seokeyword])"
+                               + " VALUES(@atitle,@stylecode,@desccode,@scriptcode,@begintime,@endtime,@atype,@enabled,@seotitle,@seodesc,@seokeyword)",BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+        /// <summary>
+        /// 更新活动专题
+        /// </summary>
+        /// <param name="aif"></param>
+        /// <returns></returns>
+        public int UpdateActivityInfo(ActivityInfo aif)
+        {
+            DbParameter[] parms = {
+                                      DbHelper.MakeInParam("@id",(DbType)SqlDbType.Int,4,aif.Id),
+                                      DbHelper.MakeInParam("@atitle",(DbType)SqlDbType.NVarChar,50,aif.Atitle),
+                                      DbHelper.MakeInParam("@stylecode",(DbType)SqlDbType.NText,0,aif.Stylecode),
+                                      DbHelper.MakeInParam("@desccode",(DbType)SqlDbType.NText,0,aif.Desccode),
+                                      DbHelper.MakeInParam("@scriptcode",(DbType)SqlDbType.NText,0,aif.Scriptcode),
+                                      DbHelper.MakeInParam("@begintime",(DbType)SqlDbType.DateTime,8,aif.Begintime),
+                                      DbHelper.MakeInParam("@endtime",(DbType)SqlDbType.DateTime,8,aif.Endtime),
+                                      DbHelper.MakeInParam("@atype",(DbType)SqlDbType.Int,4,aif.Atype),
+                                      DbHelper.MakeInParam("@enabled",(DbType)SqlDbType.SmallInt,2,aif.Enabled),
+                                      DbHelper.MakeInParam("@seotitle",(DbType)SqlDbType.NVarChar,50,aif.Seotitle),
+                                      DbHelper.MakeInParam("@seodesc",(DbType)SqlDbType.NVarChar,200,aif.Seodesc),
+                                      DbHelper.MakeInParam("@seokeyword",(DbType)SqlDbType.NVarChar,100,aif.Seokeyword)
+                                  };
+            string commandText = string.Format("UPDATE [{0}activity] SET [atitle] = @atitle,[stylecode] = @stylecode,[desccode] = @desccode,[scriptcode] = @scriptcode,[begintime] = @begintime,"
+                               + "[endtime] = @endtime,[atype] = @atype,[enabled] = @enabled,[seotitle] = @seotitle,[seodesc] = @seodesc,[seokeyword] = @seokeyword,[createdate] = @createdate	WHERE id=@id",BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+         /// <summary>
+        /// 删除活动
+        /// </summary>
+        public void DeleteActivities(string idlist)
+        {
+            string commandText = string.Format("DELETE FROM [{0}activity] WHERE [id] IN ({1})", BaseConfigs.GetTablePrefix, idlist);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
+        }
+        /// <summary>
         /// 获得活动专题查询语句
         /// </summary>
         /// <param name="atype">专题类型</param>
@@ -2172,6 +2227,33 @@ namespace SAS.Data.SqlServer
                                                 BaseConfigs.GetTablePrefix,
                                                 conditions);
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+        /// <summary>
+        /// 获取活动信息实体
+        /// </summary>
+        public IDataReader GetActivityInfoReader(int id)
+        {
+            DbParameter param = DbHelper.MakeInParam("@id", (DbType)SqlDbType.Int, 4, id);
+            string commandText = string.Format("SELECT {0} FROM [{1}activity] WHERE [id]=@id",
+                                                DbFields.ACTIVITY,
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText, param);
+        }
+        /// <summary>
+        /// 批量设置活动状态
+        /// </summary>
+        public bool SetActivityStatus(string idlist, int ableid)
+        {
+            int rows = DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("UPDATE [{0}activity] SET [enabled]={1} WHERE [id] IN ({2})", BaseConfigs.GetTablePrefix, ableid, idlist));
+            return rows > 0 ? true : false;
+        }
+        /// <summary>
+        /// 批量设置活动类型
+        /// </summary>
+        public bool SetActivityType(string idlist, int typeid)
+        {
+            int rows = DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("UPDATE [{0}activity] SET [atype]={1} WHERE [id] IN ({2})", BaseConfigs.GetTablePrefix, typeid, idlist));
+            return rows > 0 ? true : false;
         }
         #endregion
 

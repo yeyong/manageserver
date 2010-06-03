@@ -20,7 +20,7 @@
         function CheckAll(form) {
             for (var i = 0; i < form.elements.length; i++) {
                 var e = form.elements[i];
-                if (e.name == 'tid')
+                if (e.name == 'id')
                     e.checked = form.chkall.checked;
             }
         }
@@ -34,7 +34,7 @@
 
         function Check(form) {
             CheckAll(form);
-            checkedEnabledButton(form, 'tid', 'SetTopicInfo')
+            checkedEnabledButton(form, 'id', 'SetActInfo')
         }
     </script>
 
@@ -50,8 +50,8 @@
 		<td class="panelbox" colspan="2">
 			<table width="100%">
 				<tr>
-					<td style="width:100px"><input type="radio" name="operation" value="moveforum" onClick="check(this.value)" checked />批量移动到论坛</td>
-					<td><sas:dropdowntreelist id="forumid" runat="server"></sas:dropdowntreelist></td>
+					<td style="width:100px"><input type="radio" name="operation" value="movetype" onClick="check(this.value)" checked />批量移动到</td>
+					<td><sas:dropdownlist id="typeid" runat="server"></sas:dropdownlist></td>
 				</tr>
 			</table>
 		</td>
@@ -60,52 +60,24 @@
 		<td class="panelbox" align="left" width="50%">
 			<table width="100%">
 				<tr>
-					<td style="width:100px"><input type="radio" name="operation" value="delete" onClick="check(this.value)" />批量删除</td>
-					<td><input type="checkbox" name="nodeletepostnum" value="1" checked id="nodeletepostnum" runat="server" />删帖不减用户发帖数和积分</td>
-				</tr>
-				<tr>
-					<td><input type="radio" name="operation" value="displayorder" onclick="check(this.value)" />批量置顶</td>
-					<td>
-						<input type="radio" name="displayorder_level" value="0" checked onclick="check(this.value)" />取消置顶 <br />
-						<input type="radio" name="displayorder_level" value="1" onclick="check(this.value)" />
-						<img src="../images/star.gif" width="16" height="16" /> <br /> 
-						<input type="radio" name="displayorder_level" value="2" onclick="check(this.value)" />
-						<img src="../images/star.gif" width="16" height="16" />
-						<img src="../images/star.gif" width="16" height="16" /><br />
-						<input type="radio" name="displayorder_level" value="3" onclick="check(this.value)" />
-						<img src="../images/star.gif" width="16" height="16" />
-						<img src="../images/star.gif" width="16" height="16" />
-						<img src="../images/star.gif" width="16" height="16" />
+					<td style="width:100px">
+					    <input type="radio" name="operation" value="allenabled" onClick="check(this.value)" />批量启用					    
 					</td>
+					<td><input type="radio" name="operation" value="allunabled" onClick="check(this.value)" />批量禁用</td>
 				</tr>
 			</table>
 		</td>
 		<td class="panelbox" align="right" width="50%">
 			<table width="100%">
 				<tr>
-					<td style="width:110px"><input type="radio" name="operation" value="deleteattach" onClick="check(this.value)" />删除主题中的附件</td>
+					<td style="width:110px"><input type="radio" name="operation" value="deleteact" onClick="check(this.value)" />批量删除活动</td>
 					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td><input type="radio" name="operation" value="adddigest" onclick="check(this.value)" />批量设置精华</td>
-					<td>
-						<input type="radio" name="digest_level" value="0" checked /> 取消精华 <br />
-						<input type="radio" name="digest_level" value="1" />
-						<img src="../images/star.gif" width="16" height="16" /><br />
-						<input type="radio" name="digest_level" value="2" />
-						<img src="../images/star.gif" width="16" height="16" />
-						<img src="../images/star.gif" width="16" height="16" /><br />
-						<input type="radio" name="digest_level" value="3" /> 
-						<img src="../images/star.gif" width="16" height="16" />
-						<img src="../images/star.gif" width="16" height="16" />
-						<img src="../images/star.gif" width="16" height="16" />
-					</td>
 				</tr>
 			</table>
 		</td>
 	</tr>
 	<tr>
-		<td align="center" colspan="2"><sas:Button id="SetTopicInfo" runat="server" Text=" 提 交 " Enabled="false"></sas:Button></td>
+		<td align="center" colspan="2"><sas:Button id="SetActInfo" runat="server" Text=" 提 交 " Enabled="false"></sas:Button></td>
 	</tr>
 </table>
 </fieldset>
@@ -115,35 +87,27 @@
 		<asp:TemplateColumn HeaderText="<input title='选中/取消' onclick='Check(this.form)' type='checkbox' name='chkall' id='chkall' />">
 			<HeaderStyle Width="20px" />
 			<ItemTemplate>
-				<input id="tid" onclick="checkedEnabledButton(this.form,'tid','SetTopicInfo')" type="checkbox" value="<%# DataBinder.Eval(Container, "DataItem.tid").ToString() %>" name="tid" />
+				<input id="id" onclick="checkedEnabledButton(this.form,'id','SetActInfo')" type="checkbox" value="<%# DataBinder.Eval(Container, "DataItem.id").ToString() %>" name="id" />
 			</ItemTemplate>
 		</asp:TemplateColumn>
-		<asp:BoundColumn DataField="tid" SortExpression="tid" HeaderText="帖子ID" Visible="false" ></asp:BoundColumn>
-		<asp:TemplateColumn HeaderText="标题">
+		<asp:TemplateColumn HeaderText="活动标题">
 			<ItemTemplate>
-				<a href="../../showtopic.aspx?topicid=<%# DataBinder.Eval(Container, "DataItem.tid").ToString() %>" target="_blank">
-					<%# DataBinder.Eval(Container, "DataItem.title").ToString() %>
+				<a href="global_editactivity.aspx?id=<%# DataBinder.Eval(Container, "DataItem.id").ToString() %>">
+					<%# DataBinder.Eval(Container, "DataItem.atitle").ToString() %>
 				</a>
 			</ItemTemplate>
 		</asp:TemplateColumn>
-		<asp:TemplateColumn HeaderText="发帖人">
+		<asp:TemplateColumn HeaderText="活动类型">
 			<itemtemplate>
-				<%# (DataBinder.Eval(Container, "DataItem.posterid").ToString() != "-1") ? "<a href='../../userinfo.aspx?userid=" + DataBinder.Eval(Container, "DataItem.posterid").ToString() + "' target='_blank'>" + DataBinder.Eval(Container, "DataItem.poster").ToString() + "</a>" : DataBinder.Eval(Container, "DataItem.poster").ToString()%>
+				<%# GetActivityType(DataBinder.Eval(Container, "DataItem.atype").ToString())%>
 			</itemtemplate>
 		</asp:TemplateColumn>
-		<asp:BoundColumn DataField="postdatetime" SortExpression="postdatetime" HeaderText="发布日期" ></asp:BoundColumn>
-		<asp:TemplateColumn HeaderText="最后回复人">
-			<itemtemplate>
-				<%# (DataBinder.Eval(Container, "DataItem.lastposterid").ToString() != "-1") ? "<a href='../../userinfo.aspx?userid=" + DataBinder.Eval(Container, "DataItem.lastposterid").ToString() + "' target='_blank'>" + DataBinder.Eval(Container, "DataItem.lastposter").ToString() + "</a>" : DataBinder.Eval(Container, "DataItem.lastposter").ToString()%>
-			</itemtemplate>
-		</asp:TemplateColumn>				
-		<asp:BoundColumn DataField="views" SortExpression="views" HeaderText="查看数"></asp:BoundColumn>
-		<asp:BoundColumn DataField="digest" SortExpression="digest" HeaderText="精华帖" ></asp:BoundColumn>
-		<asp:BoundColumn DataField="displayorder" SortExpression="displayorder" HeaderText="显示顺序"></asp:BoundColumn>
-		<asp:BoundColumn DataField="price" SortExpression="price" HeaderText="价格"></asp:BoundColumn>
-		<asp:TemplateColumn HeaderText="关闭">
+		<asp:BoundColumn DataField="begintime" SortExpression="begintime" HeaderText="活动开始时间" ></asp:BoundColumn>
+		<asp:BoundColumn DataField="endtime" SortExpression="endtime" HeaderText="活动结束时间"></asp:BoundColumn>
+		<asp:BoundColumn DataField="createdate" SortExpression="createdate" HeaderText="活动创建时间" ></asp:BoundColumn>
+		<asp:TemplateColumn HeaderText="开启状态">
 			<ItemTemplate>
-				<%# BoolStr(DataBinder.Eval(Container, "DataItem.closed").ToString())%>
+				<%# BoolStr(DataBinder.Eval(Container, "DataItem.enabled").ToString())%>
 			</ItemTemplate>
 		</asp:TemplateColumn>
 	</Columns>
