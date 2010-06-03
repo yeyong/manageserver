@@ -30,7 +30,7 @@ namespace SAS.Entity
         /// <summary>
         /// 活动专题ID
         /// </summary>
-        public int id
+        public int Id
         {
             set { _id = value; }
             get { return _id; }
@@ -38,7 +38,7 @@ namespace SAS.Entity
         /// <summary>
         /// 活动标题
         /// </summary>
-        public string atitle
+        public string Atitle
         {
             set { _atitle = value; }
             get { return _atitle; }
@@ -46,7 +46,7 @@ namespace SAS.Entity
         /// <summary>
         /// 活动样式
         /// </summary>
-        public string stylecode
+        public string Stylecode
         {
             set { _stylecode = value; }
             get { return _stylecode; }
@@ -54,7 +54,7 @@ namespace SAS.Entity
         /// <summary>
         /// 活动内容
         /// </summary>
-        public string desccode
+        public string Desccode
         {
             set { _desccode = value; }
             get { return _desccode; }
@@ -62,7 +62,7 @@ namespace SAS.Entity
         /// <summary>
         /// 活动脚本
         /// </summary>
-        public string scriptcode
+        public string Scriptcode
         {
             set { _scriptcode = value; }
             get { return _scriptcode; }
@@ -70,7 +70,7 @@ namespace SAS.Entity
         /// <summary>
         /// 活动开始时间
         /// </summary>
-        public string begintime
+        public string Begintime
         {
             set { _begintime = value; }
             get { return _begintime; }
@@ -78,7 +78,7 @@ namespace SAS.Entity
         /// <summary>
         /// 活动结束时间
         /// </summary>
-        public string endtime
+        public string Endtime
         {
             set { _endtime = value; }
             get { return _endtime; }
@@ -86,7 +86,7 @@ namespace SAS.Entity
         /// <summary>
         /// 活动类型（默认1，首页活动；2，黄页活动；3，名片页活动；4，淘之购活动）
         /// </summary>
-        public int atype
+        public int Atype
         {
             set { _atype = value; }
             get { return _atype; }
@@ -94,7 +94,7 @@ namespace SAS.Entity
         /// <summary>
         /// 开启状态（默认0，关闭；1，开启）
         /// </summary>
-        public int enabled
+        public int Enabled
         {
             set { _enabled = value; }
             get { return _enabled; }
@@ -102,7 +102,7 @@ namespace SAS.Entity
         /// <summary>
         /// 搜索优化标题
         /// </summary>
-        public string seotitle
+        public string Seotitle
         {
             set { _seotitle = value; }
             get { return _seotitle; }
@@ -110,7 +110,7 @@ namespace SAS.Entity
         /// <summary>
         /// 搜索优化内容
         /// </summary>
-        public string seodesc
+        public string Seodesc
         {
             set { _seodesc = value; }
             get { return _seodesc; }
@@ -118,7 +118,7 @@ namespace SAS.Entity
         /// <summary>
         /// 搜索优化关键字
         /// </summary>
-        public string seokeyword
+        public string Seokeyword
         {
             set { _seokeyword = value; }
             get { return _seokeyword; }
@@ -126,7 +126,7 @@ namespace SAS.Entity
         /// <summary>
         /// 活动创建时间
         /// </summary>
-        public string createdate
+        public string Createdate
         {
             set { _createdate = value; }
             get { return _createdate; }

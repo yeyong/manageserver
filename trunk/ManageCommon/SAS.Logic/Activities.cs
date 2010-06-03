@@ -43,5 +43,15 @@ namespace SAS.Logic
         {
             return SAS.Data.DataProvider.Activities.GetActivitiesByConditions(conditions);
         }
+
+        /// <summary>
+        /// 获取活动信息实体
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static ActivityInfo GetActivityInfo(int id)
+        {
+            return SAS.Data.DataProvider.Activities.GetActivityInfo(id);
+        }
     }
 }

@@ -2060,6 +2060,19 @@ namespace SAS.Data
 
         #region 活动专题操作
         /// <summary>
+        /// 创建活动专题
+        /// </summary>
+        /// <param name="aif"></param>
+        void CreateActivityInfo(ActivityInfo aif);
+        /// <summary>
+        /// 更新活动专题
+        /// </summary>
+        int UpdateActivityInfo(ActivityInfo aif);
+        /// <summary>
+        /// 删除活动
+        /// </summary>
+        void DeleteActivities(string idlist);
+        /// <summary>
         /// 获得活动专题查询语句
         /// </summary>
         /// <param name="atype">专题类型</param>
@@ -2072,9 +2085,19 @@ namespace SAS.Data
          /// <summary>
         /// 根据条件获取活动信息
         /// </summary>
-        /// <param name="conditions"></param>
-        /// <returns></returns>
         DataTable GetActivitiesByConditions(string conditions);
+         /// <summary>
+        /// 获取活动信息实体
+        /// </summary>
+        IDataReader GetActivityInfoReader(int id);
+        /// <summary>
+        /// 批量设置活动状态
+        /// </summary>
+        bool SetActivityStatus(string idlist, int ableid);
+        /// <summary>
+        /// 批量设置活动类型
+        /// </summary>
+        bool SetActivityType(string idlist, int typeid);
         #endregion
 
         #region 帮助文档操作 help

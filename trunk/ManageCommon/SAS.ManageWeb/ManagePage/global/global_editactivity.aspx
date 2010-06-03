@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" CodeBehind="global_addactivity.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.global_addactivity" %>
+﻿<%@ Page Language="C#" CodeBehind="global_editactivity.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.global_editactivity" %>
 <%@ Register TagPrefix="sas" Namespace="SAS.Control" Assembly="SAS.Control" %>
 <%@ Register TagPrefix="sas1" TagName="TextareaResize" Src="../UserControls/TextareaResize.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <html>
 <head>
-    <title>新建活动</title>
+    <title>编辑活动</title>
     <link href="../styles/calendar.css" type="text/css" rel="stylesheet" />
     <link href="../styles/dntmanager.css" type="text/css" rel="stylesheet" />
     <link href="../styles/colorpicker.css" type="text/css" rel="stylesheet" />
@@ -220,8 +220,8 @@
         </fieldset>
         <sas:Hint id="Hint1" runat="server" HintImageUrl="../images"></sas:Hint>
 	    <div class="Navbutton">
-		    <sas:Button id="AddActInfo" runat="server" Text=" 提 交 " ValidateForm="true"></sas:Button>&nbsp;&nbsp;
-            <button class="ManagerButton" type="button" onclick="javascript:window.location.href='global_searchactivity.aspx';">
+		    <sas:Button id="EditActInfo" runat="server" Text=" 提 交 " ValidateForm="true"></sas:Button>&nbsp;&nbsp;
+            <button class="ManagerButton" type="button" onclick="javascript:window.location.href='global_activitygrid.aspx';">
                 <img src="../images/arrow_undo.gif" />
                 返 回
             </button>

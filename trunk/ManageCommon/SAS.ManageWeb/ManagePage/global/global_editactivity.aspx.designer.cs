@@ -11,7 +11,7 @@
 namespace SAS.ManageWeb.ManagePage {
     
     
-    public partial class global_addactivity {
+    public partial class global_editactivity {
         
         /// <summary>
         /// Form1 控件。
@@ -140,12 +140,12 @@ namespace SAS.ManageWeb.ManagePage {
         protected global::SAS.Control.Hint Hint1;
         
         /// <summary>
-        /// AddActInfo 控件。
+        /// EditActInfo 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::SAS.Control.Button AddActInfo;
+        protected global::SAS.Control.Button EditActInfo;
     }
 }
