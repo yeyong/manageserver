@@ -85,7 +85,20 @@ namespace SAS.ManageWeb.ManagePage
                         return;
                     }
                 }
-                
+
+                activityInfo.Atype = TypeConverter.StrToInt(typeid.SelectedValue, 0);
+                activityInfo.Atitle = Utils.RemoveHtml(act_title.Text);
+                activityInfo.Stylecode = act_style.Text;
+                activityInfo.Scriptcode = act_script.Text;
+                activityInfo.Desccode = templatenew.Text;
+                activityInfo.Begintime = postdatetimeStart.SelectedDate.ToString();
+                activityInfo.Endtime = postdatetimeEnd.SelectedDate.ToString();
+                activityInfo.Seotitle = Utils.RemoveHtml(seotitle.Text);
+                activityInfo.Seokeyword = Utils.RemoveHtml(seokeyword.Text);
+                activityInfo.Seodesc = Utils.RemoveHtml(seodesc.Text);
+                activityInfo.Enabled = TypeConverter.StrToInt(act_status.SelectedValue, 0);
+
+                AdminActivities.UpdateActivityInfo(activityInfo);
                 SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/Activity");
                 //记录日志
                 AdminVistLogs.InsertLog(this.userid, this.username, this.usergroupid, this.grouptitle, this.ip, "更新活动", "更新活动,标题为:" + act_title.Text);
