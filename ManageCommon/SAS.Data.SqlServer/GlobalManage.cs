@@ -2174,7 +2174,7 @@ namespace SAS.Data.SqlServer
                                       DbHelper.MakeInParam("@seokeyword",(DbType)SqlDbType.NVarChar,100,aif.Seokeyword)
                                   };
             string commandText = string.Format("UPDATE [{0}activity] SET [atitle] = @atitle,[stylecode] = @stylecode,[desccode] = @desccode,[scriptcode] = @scriptcode,[begintime] = @begintime,"
-                               + "[endtime] = @endtime,[atype] = @atype,[enabled] = @enabled,[seotitle] = @seotitle,[seodesc] = @seodesc,[seokeyword] = @seokeyword,[createdate] = @createdate	WHERE id=@id",BaseConfigs.GetTablePrefix);
+                               + "[endtime] = @endtime,[atype] = @atype,[enabled] = @enabled,[seotitle] = @seotitle,[seodesc] = @seodesc,[seokeyword] = @seokeyword	WHERE id=@id",BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
         }
          /// <summary>
