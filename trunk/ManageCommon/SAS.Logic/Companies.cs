@@ -69,7 +69,7 @@ namespace SAS.Logic
         /// <returns></returns>
         public static Companys GetCompanyInfo(int enid)
         {
-            return SAS.Data.DataProvider.Companies.GetCompanyInfo(enid);
+            return SAS.Data.DataProvider.Companies.GetCompanyInfoByID(enid);
         }
 
         /// <summary>

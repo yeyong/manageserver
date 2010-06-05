@@ -943,6 +943,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="javascript\jquery.ratingmin.js" />
     <Content Include="javascript\jqueryCommon.js" />
     <Content Include="ManagePage\company\global_ajaxcall.aspx" />
     <Content Include="ManagePage\forum\forum_addforums.aspx" />
@@ -1466,6 +1467,7 @@
     <Content Include="ManagePage\UserControls\usergrouppowersetting.ascx" />
     <Content Include="ManagePage\xml\backup\2009-09-24 09_20_17.config" />
     <Content Include="ManagePage\xml\navmenu.config" />
+    <Content Include="templates\default\images\aa\aa11.jpg" />
     <Content Include="templates\default\images\aa\tianqi.png" />
     <Content Include="templates\default\images\aa\zhuti.png" />
     <Content Include="templates\default\images\agree1.gif" />
@@ -1485,7 +1487,11 @@
     <Content Include="templates\default\images\diaocha.gif" />
     <Content Include="templates\default\images\here.gif" />
     <Content Include="templates\default\images\icon-arrow.gif" />
+    <Content Include="templates\default\images\icon\arrow-icon2.gif" />
     <Content Include="templates\default\images\icon\arrow6.gif" />
+    <Content Include="templates\default\images\icon\arrow7.gif" />
+    <Content Include="templates\default\images\icon\delete.gif" />
+    <Content Include="templates\default\images\icon\star.gif" />
     <Content Include="templates\default\images\inquiry-bg1.gif" />
     <Content Include="templates\default\images\inquiry-bg2.gif" />
     <Content Include="templates\default\images\kuang-1.png" />

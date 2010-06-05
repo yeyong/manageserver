@@ -15,6 +15,15 @@
 	<p>邮&nbsp;&nbsp;&nbsp;&nbsp;编：{tipmsgeninfo.en_post}</p>
 	<p>公司主页：<a href="#" class="l_333">{tipmsgeninfo.en_web}</a></p>
 	<%else%>
+	<%if {msgtype}==1%>
+	<p>成立时间：{tipmsgeninfo.en_builddate}</p>
+	<p>注册资本：{tipmsgeninfo.reg_capital}万元</p>
+	<p>注&nbsp;册&nbsp;号：{tipmsgeninfo.reg_code}</p>
+	<p>注册机关：{tipmsgeninfo.reg_organ}</p>
+	<p>年检时间：{tipmsgeninfo.reg_year}</p>
+	<p>营业期限：{tipmsgeninfo.reg_date}</p>
+	<p>注册地址：{tipmsgeninfo.reg_address}</p>
+	<%/if%>
 	<%/if%>
 	<%/if%>
 <%else%>

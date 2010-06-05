@@ -1,165 +1,133 @@
 ﻿<%template _comheader%>
 <div class="cot">
+	<!--企业信息开始-->
 	<p class="zshysite mar_top_8">
 		<i class="zslt"></i><i class="zsrt"></i>
-		<span class="zshysnr">您当前的位置：<a href="#" class="l_666">首页</a> &gt; <a href="#" class="l_666">浙商黄页</a> &gt; 浙江台州市黄岩恒鑫模塑有限公司</span>
+		<span class="zshysnr">您当前的位置：<a href="#">首页</a> &gt; <a href="zshy.html">浙商黄页</a> &gt; {companyshowinfo.provinceName} {companyshowinfo.cityName} {companyshowinfo.en_name}</span>
 	</p>
-	<!--左边 begin-->
-  <div class="zsshowlt mar_top_8">
-		<h1 class="zsshowlt1 f_666">杭州枫林纺织服装有限公司</h1>
-	    <table border="0" cellspacing="0" cellpadding="0" class="tbshow mar_top_8">
-          <tr>
-            <td width="50%"><b>经营模式：</b> 生产加工</td>
-            <td width="50%"><b>企业类型：</b> 有限责任公司</td>
-          </tr>
-          <tr>
-            <td colspan="2"><b>主  营：</b> 外贸服装加工；外贸服装定单；时尚女装、吊带、睡衣、背心、裙子、套裙、套装、衬衫、上衣</td>
-          </tr>
-          <tr>
-            <td colspan="2"><b>注册年份：</b> 3年</td>
-          </tr>
-          <tr>
-            <td colspan="2"><b>联系人：</b> 某某某</td>
-          </tr>
-          <tr>
-            <td colspan="2"><b>电  话：</b> 86 0571 88538670-8590</td>
-          </tr>
-          <tr>
-            <td colspan="2"><b>传  真：</b> 86 0571 88315435</td>
-          </tr>
-          <tr>
-            <td colspan="2"><b>地  址：</b> 中国 浙江 杭州市 余杭区瓶窑镇凤都工业园区</td>
-          </tr>
-          <tr>
-            <td colspan="2"><b>邮  编：</b> 310014</td>
-          </tr>
-          <tr>
-            <td colspan="2"><b>公司主页：</b> <a title="" href="#" class="l_e00101">http://www.hzfenglin.cn</a>   <a title="" href="#" class="l_e00101">http://www.hzfenglin.com</a>   <a title="" href="#" class="l_e00101">http://hzfenglin.cn.alibaba.com</a></td>
-          </tr>
-        </table>
-		<div class="zsshowltnr f_666">
-		    杭州枫林纺织服装有限公司前身是国有杭州市丝绸控股公司直属工厂—浙高丝绸服装有限公司。现位于杭州市余杭
-区瓶窑镇凤都工业园区。
-    公司现有厂房7000平方米，员工宿舍等后勤设施4000余平方米。拥有从美国、日本、意大利和香港引进的各类制衣
-专业设备400余台（其中平缝机220台）。我公司专业生产真丝类、化纤类、棉布类服装产品，主要生产加工中高档服装
-品牌产品，为ZARA、MANGO、EXPRESS、SEARS、MARKS&SPENCER等品牌来样定货生产，通过国家ISO9001质量认证。产品
-远销欧洲、美国、加拿大。各部门均配有专业管理技术人员，生产技术力量雄厚，员工400余人，专业技术人员占20%。
-    公司依靠得天独厚的面料资源以及20余年的艰苦奋斗，现年销售额超过4000万元，为浙江省领先的中型服装生产企
-业。我司本着“质量第一，诚信服务”的宗旨，热忱欢迎新老朋友前来洽谈商贸、莅临指导。
-    杭州枫林纺织服装有限公司前身是国有杭州市丝绸控股公司直属工厂—浙高丝绸服装有限公司。现位于杭州市余杭
-区瓶窑镇凤都工业园区。
-    公司现有厂房7000平方米，员工宿舍等后勤设施4000余平方米。拥有从美国、日本、意大利和香港引进的各类制衣
-专业设备400余台（其中平缝机220台）。我公司专业生产真丝类、化纤类、棉布类服装产品，主要生产加工中高档服装
-品牌产品，为ZARA、MANGO、EXPRESS、SEARS、MARKS&SPENCER等品牌来样定货生产，通过国家ISO9001质量认证。产品
-远销欧洲、美国、加拿大。各部门均配有专业管理技术人员，生产技术力量雄厚，员工400余人，专业技术人员占20%。
-    公司依靠得天独厚的面料资源以及20余年的艰苦奋斗，现年销售额超过4000万元，为浙江省领先的中型服装生产企
-业。我司本着“质量第一，诚信服务”的宗旨，热忱欢迎新老朋友前来洽谈商贸、莅临指导。
+	<div class="osw mar_top_8" id="put">
+		<h1>{companyshowinfo.en_name}</h1>
+		<div class="oswlt mar_top_8">
+			<p><span class="oswlt1">传&nbsp;&nbsp;&nbsp;&nbsp;真：</span><span class="oswlt2">{companyshowinfo.en_fax}</span></p>
+			<p><span class="oswlt1">邮&nbsp;&nbsp;&nbsp;&nbsp;编：</span><span class="oswlt2">{companyshowinfo.en_post}</span></p>
+			<p><span class="oswlt1">企业类型：</span><span class="oswlt2"><%set (string){showinfoencotype}=EnumCatch.GetEnCommType({companyshowinfo.en_enco})%>{showinfoencotype}</span></p>
+			<p><span class="oswlt1">电子邮箱：</span><span class="oswlt2">{companyshowinfo.en_mail}</span></p>
+			<p><span class="oswlt1">网&nbsp;&nbsp;&nbsp;&nbsp;址：</span><span class="oswlt2">{companyshowinfo.en_web}</span></p>
+			<p><span class="oswlt1">主营商品：</span><span class="oswlt2"><%set {companyshowinfo.En_main}=Utils.ReplaceString({companyshowinfo.en_main},",,",",",false).Trim(',')%>{companyshowinfo.en_main}</span></p>
+			<span class="oswmore"><a title="查看工商注册信息" href="tipmsg.aspx?msgenid={companyshowinfo.en_id}&msgtype=1" rel="tipmsg.aspx?msgenid={companyshowinfo.en_id}&msgtype=1" class="l_f00">更多详情</a></span>
+			<strong class="oswpf">网络评分：<b class="f_f60_24">4.5</b> 分</strong>
 		</div>
-		<p class="zsshowltnr1"><a title="" href="#"><img alt="" src="images/aa/aa9.jpg" /></a></p>
-		<table border="0" cellpadding="0" cellspacing="1" class="tbhot mar_top_8">
-          <tr>
-            <td width="50%" colspan="2"><b>近期热点推荐</b></td>
-          </tr>
-          <tr>
-            <td width="50%">▪&nbsp;<a title="杭州精绘服装研发中心" href="#" class="l_666">杭州精绘服装研发中心</a></td>
-            <td width="50%">▪&nbsp;<a title="建德市中天服装贸易有限公司" href="#" class="l_666">建德市中天服装贸易有限公司</a></td>
-          </tr>
-		  <tr>
-            <td width="50%">▪&nbsp;<a title="杭州萧山南阳七跷板服装厂" href="#" class="l_666">杭州萧山南阳七跷板服装厂</a></td>
-            <td width="50%">▪&nbsp;<a title="杭州成帅服装有限公司" href="#" class="l_666">杭州成帅服装有限公司</a></td>
-          </tr>
-		  <tr>
-            <td width="50%">▪&nbsp;<a title="杭州萧山戴村镇颖炅服装手工加工场" href="#" class="l_666">杭州萧山戴村镇颖炅服装手工加工场</a></td>
-            <td width="50%">▪&nbsp;<a title="浙江旧货交易市场金蚂蚁服装经营部" href="#" class="l_666">浙江旧货交易市场金蚂蚁服装经营部</a></td>
-          </tr>
-		  <tr>
-            <td width="50%" colspan="2" bgcolor="#FFFFFF"><span><a title="更多热点" href="#" class="l_805952">更多热点&gt;&gt;</a></span></td>
-          </tr>
-    </table>
-	<p class="zsshowltnr2">本文标签： <b><a title="服装" href="#" class="l_805952">服装</a></b>&nbsp;&nbsp;<b><a title="生产加工" href="#" class="l_805952">生产加工</a></b>&nbsp;&nbsp;<b><a title="外贸" href="#" class="l_805952">外贸</a></b></p>
-	<p class="zsshowltnr3">
-		<b class="f_000_14">找企业：</b>
-		<span><input name="" type="text" class="input2_soout" onfocus="this.className='input2_soon'" onBlur="this.className='input2_soout'" style="width:420px;" /></span>
-		<span>
-			<select name="">
-				<option>选择城市</option>
-			</select>
-		</span>
-		<span class="zsshowltnr3so"><a title="企业搜索" href="#"></a></span>
-	</p>
-  </div>
-	<!--左边 end-->
-	<!--右边 begin-->
-	<div class="zshyrt mar_top_8">
-		<p class="zshyrt1"><a title="" href="#"><img alt="企业名称" src="images/aa/aa2.jpg" /></a></p>
-		<p class="zshyrt2sub mar_top_8"><a title="" href="#"></a></p>
-		<div class="zsk mar_top_8">
-			<p class="zskt">
-				<em></em><strong>企业信息点击量排行</strong>
+		<p class="oswrt mar_top_8"><img alt="浙江贝因美妇幼保健发展有限公司" src="images/hycard/hycard1.gif" /></p>
+		<div class="tswlt">
+			<p class="tswltp1">
+				<span>评论：<em class="f_e00101">20</em> | 阅读次数：4885</span>
+				<span>发布时间：{companyshowinfo.en_createdate} | 更新时间：{companyshowinfo.en_update}</span>
 			</p>
-			<ul class="zstop2">
-				<li>
-					<em class="zstopem1">1</em>
-					<p><a title="成都金岚地服饰有限公司" href="#" class="l_666">成都金岚地服饰有限公司</a></p>
-				</li>
-				<li>
-					<em class="zstopem1">2</em>
-					<p><a title="杭州浪漫一身服饰有限公司" href="#" class="l_666">杭州浪漫一身服饰有限公司</a></p>
-				</li>
-				<li>
-					<em class="zstopem1">3</em>
-					<p><a title="杭州水之恋服饰有限公司" href="#" class="l_666">杭州水之恋服饰有限公司</a></p>
-				</li>
-				<li>
-					<em class="zstopem2">4</em>
-					<p><a title="香港普菲特服饰有限公司" href="#" class="l_666">香港普菲特服饰有限公司</a></p>
-				</li>
-				<li>
-					<em class="zstopem2">5</em>
-					<p><a title="杭州千百惠服饰有限公司" href="#" class="l_666">杭州千百惠服饰有限公司</a></p>
-				</li>
-				<li>
-					<em class="zstopem2">6</em>
-					<p><a title="成都金岚地服饰有限公司" href="#" class="l_666">成都金岚地服饰有限公司</a></p>
-				</li>
-				<li>
-					<em class="zstopem2">7</em>
-					<p><a title="广州市歌莉娅女性服饰有限公司" href="#" class="l_666">广州市歌莉娅女性服饰有限公司</a></p>
-				</li>
-				<li>
-					<em class="zstopem2">8</em>
-					<p><a title="杭州素非服饰有限公司" href="#" class="l_666">杭州素非服饰有限公司</a></p>
-				</li>
-				<li>
-					<em class="zstopem2">9</em>
-					<p><a title="杭州江南布衣服饰有限公司" href="#" class="l_666">杭州江南布衣服饰有限公司</a></p>
-				</li>
-				<li>
-					<em class="zstopem2">10</em>
-					<p><a title="成都金岚地服饰有限公司" href="#" class="l_666">成都金岚地服饰有限公司</a></p>
-				</li>
-			</ul>
+			<p class="tswltp2 tswltpf1"><a title="点击我要评论" href="#"></a></p>
 		</div>
-		<p class="zshyrtad mar_top_8"><a title="" href="#"><img alt="" src="images/aa/aa5.jpg" /></a></p>
-		<div class="zsk mar_top_8">
-			<p class="zskt">
-				<em></em><strong>最新认证的企业信息</strong>
-			</p>
-			<ul class="zstop2">
-				<li>▪&nbsp;<a title="成都金岚地服饰有限公司" href="#" class="l_666">成都金岚地服饰有限公司</a>
-				</li><li>▪&nbsp;<a title="杭州浪漫一身服饰有限公司" href="#" class="l_666">杭州浪漫一身服饰有限公司</a></li>
-				<li>▪&nbsp;<a title="杭州水之恋服饰有限公司" href="#" class="l_666">杭州水之恋服饰有限公司</a></li>
-				<li>▪&nbsp;<a title="香港普菲特服饰有限公司" href="#" class="l_666">香港普菲特服饰有限公司</a></li>
-				<li>▪&nbsp;<a title="杭州千百惠服饰有限公司" href="#" class="l_666">杭州千百惠服饰有限公司</a></li>
-				<li>▪&nbsp;<a title="杭州千百惠服饰有限公司" href="#" class="l_666">杭州千百惠服饰有限公司</a></li>
-				<li>▪&nbsp;<a title="广州市歌莉娅女性服饰有限公司" href="#" class="l_666">广州市歌莉娅女性服饰有限公司</a></li>
-				<li>▪&nbsp;<a title="杭州素非服饰有限公司" href="#" class="l_666">杭州素非服饰有限公司</a></li>
-				<li>▪&nbsp;<a title="杭州江南布衣服饰有限公司" href="#" class="l_666">杭州江南布衣服饰有限公司</a></li>
-				<li>▪&nbsp;<a title="香港普菲特服饰有限公司" href="#" class="l_666">香港普菲特服饰有限公司</a></li>
-			</ul>
-		</div>
+		<div class="tswrt"><a title="点击进入推广" href="#"></a></div>
 	</div>
-	<!--右边 end-->
+	<!--企业信息结束-->
+	<!--企业简介开始-->
+	<div class="tsw mar_top_8" id="swinf">
+		<b>企业简介</b>
+		<div class="tswnr" id="swinfcot">{companyshowinfo.en_desc}</div>
+		<p class="tswan"><em><img src="templates/{templatepath}/images/icon/arrow-icon1.gif" /></em>点击查看全部介绍</p>
+	</div>
+	<!--企业简介结束-->
+	<!--企业证书开始-->
+	<div class="fsw mar_top_18">
+		<p class="fswt">
+			<em></em><strong>企业证书</strong>
+		</p>
+		<ul class="fswnr">
+			<li><img alt="证书名称" src="images/aa/aa11.jpg" /></li>
+			<li><img alt="证书名称" src="images/aa/aa11.jpg" /></li>
+			<li><img alt="证书名称" src="images/aa/aa11.jpg" /></li>
+			<li><img alt="证书名称" src="images/aa/aa11.jpg" /></li>
+		</ul>
+	</div>
+	<!--企业证书结束-->
+	<!--最新评论开始-->
+	<form class="fsw mar_top_8" id="form1" name="form1">
+		<p class="fswt">
+			<em></em><strong>最新评论</strong>
+		</p>
+		<div class="fsw2">
+			<ul class="fswnr2">
+				<li>
+					<p class="fswnr2zi">
+						<span class="fswnr2zi1">网络评分：<b class="f_f60_24">3</b> 分</span>
+						<span class="fswnr2zi2">小优 发表于 2010-05-12 12:12:12</span>
+					</p>
+					<p class="fswnr2zt">因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure</p>
+				</li>
+				<li>
+					<p class="fswnr2zi">
+						<span class="fswnr2zi1">网络评分：<b class="f_f60_24">5</b> 分</span>
+						<span class="fswnr2zi2">小优 发表于 2010-05-12 12:12:12</span>
+					</p>
+					<p class="fswnr2zt">因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure</p>
+				</li>
+				<li>
+					<p class="fswnr2zi">
+						<span class="fswnr2zi1">网络评分：<b class="f_f60_24">4</b> 分</span>
+						<span class="fswnr2zi2">小优 发表于 2010-05-12 12:12:12</span>
+					</p>
+					<p class="fswnr2zt">因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure</p>
+				</li>
+			</ul>
+			<div class="page f_666">
+				<a title="上一页" href="#">上一页</a>
+				<a title="1" href="#">1</a>
+				<span class="page2">2</span>
+				<a title="3" href="#">3</a>
+				<a title="4" href="#">4</a>
+				<a title="5" href="#">5</a>
+				<a title="6" href="#">6</a>
+				<a title="7" href="#">7</a>
+				<a title="5" href="#">8</a>
+				<a title="6" href="#">9</a>
+				<a title="7" href="#">10</a>
+				<a title="下一页" href="#">下一页</a>
+				共100页　到第
+				<input type="text" name="textfield" class="input2_soout" style="width:25px;" />
+				页
+				<input type="button" name="button1" class="agree1" value="确 定" />
+			</div>
+		</div>
+		<strong class="fswt2">发表评论</strong>
+		<div class="fswnr3">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="fsw3">
+				<tr>
+					<td>网络评分：</td>
+					<td>
+					<input name="star1" type="radio" value="1" class="starshow"/>
+					<input name="star1" type="radio" value="2" class="starshow"/>
+				    <input name="star1" type="radio" value="3" class="starshow"/>
+				    <input name="star1" type="radio" value="4" class="starshow"/>
+				    <input name="star1" type="radio" value="5" class="starshow"/>
+					<span class="fsw3zi">(<em>0</em>分)</span>
+					</td>
+				</tr>
+				<tr>
+					<td>用户昵称：</td>
+					<td><input type="text" name="textfield" class="input2_soout" style="width:150px;" /></td>
+				</tr>
+				<tr>
+					<td>评论内容：</td>
+					<td><textarea class="input2_soout" style="width:700px; height:120px;" name="" cols="" rows=""></textarea></td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td><input type="submit" name="Submit" class="tswltpan" value="" /><input type="hidden" name="scores" id="scores"/></td>
+				</tr>
+			</table>
+		</div>
+		
+	</form>
+	<!--最新评论结束-->
+	
 </div>
 <%template _comcopyright%>
 <%template _comfooter%>
