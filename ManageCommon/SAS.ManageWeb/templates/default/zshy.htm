@@ -94,12 +94,12 @@
 			<%/if%>
 			<dd class="{zshyddcss}">
 			    <p class="zshynr1">
-					<em class="zshynr1lt1"><strong class="f_805952_18"><a title="{zshycompanyinfo[en_name]}" href="#" class="l_805952">{zshycompanyinfo[en_name]}</a></strong> [{zshycompanystatus}]</em>
+					<em class="zshynr1lt1"><strong class="f_805952_18"><a title="{zshycompanyinfo[en_name]}" href="{zshycompanyinfo[en_id]}.html" target="_blank" class="l_805952">{zshycompanyinfo[en_name]}</a></strong> [{zshycompanystatus}]</em>
 				</p>
 				<p class="zshynr1">
 					<span class="zshynr1lt">
 						<%set (string) {zshycompanyinfo_en_desc}=Utils.GetSpacesString(2)+Utils.CutString(Utils.RemoveHtml({zshycompanyinfo[en_desc]}),0,52).Trim()%>
-						{zshycompanyinfo_en_desc}...[<a title="查看详情" href="" class="l_e00101">查看详情</a>]
+						{zshycompanyinfo_en_desc}...[<a title="查看详情" href="{zshycompanyinfo[en_id]}.html" target="_blank" class="l_e00101">查看详情</a>]
 					</span>
 					<span class="zshynr1ce2">注册日期 <b class="f_e00101"><%set (string) {zshyregyear}=Utils.GetStandardDate({zshycompanyinfo[en_builddate]})%>{zshyregyear}</b></span>
 					<span class="zshynr1ce2">浏览量 <b>{zshycompanyinfo[en_accesses]}</b></span>
@@ -141,7 +141,7 @@
 				<%else%>
 				    <em class="zstopem2">{accesscompanyinfo__loop__id}</em>
 				<%/if%>
-					<p><a title="{accesscompanyinfo.en_name}" href="#" class="l_666">{accesscompanyinfo.en_name}</a></p>
+					<p><a title="{accesscompanyinfo.en_name}" href="{accesscompanyinfo.en_id}.html" target="_blank">{accesscompanyinfo.en_name}</a></p>
 				</li>
 			<%/loop%>
 			</ul>

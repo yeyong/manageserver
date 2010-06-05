@@ -64,6 +64,16 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 获取企业信息实体
+        /// </summary>
+        /// <param name="enid"></param>
+        /// <returns></returns>
+        public static Companys GetCompanyInfo(int enid)
+        {
+            return SAS.Data.DataProvider.Companies.GetCompanyInfo(enid);
+        }
+
+        /// <summary>
         /// 批量开启企业
         /// </summary>
         /// <param name="enidlist"></param>

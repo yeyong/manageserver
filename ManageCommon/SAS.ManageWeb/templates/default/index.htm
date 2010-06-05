@@ -100,10 +100,10 @@
 					    <%set (string) {companyinfoname}={companyinfobycity[en_name]}%>
 					    <%if {companyinfolength}>28%>
 					    <%set {companyinfoname}=Utils.CutString({companyinfoname},0,28-{companyinfolength}+{companyinfobycity[en_name]}.Length)%>
-					    <a title="{companyinfobycity[en_name]}" href="#">{companyinfoname}</a>
+					    <a title="{companyinfobycity[en_name]}" href="{companyinfobycity[en_id]}.html" target="_blank">{companyinfoname}</a>
 				        <%break%>
 				        <%else%>
-				        <a title="{companyinfobycity[en_name]}" href="#">{companyinfoname}</a>
+				        <a title="{companyinfobycity[en_name]}" href="{companyinfobycity[en_id]}.html" target="_blank">{companyinfoname}</a>
 				        <%/if%>
 					
 					<%/loop%>
@@ -124,7 +124,7 @@
 			<span>最新加入企业：</span>
 			<ul class="onecomp" id="listcomp">
 			<%loop (Companys) cinfo newcompanylist%>
-			    <li><a title="{cinfo.en_name}" href="#">{cinfo.en_name}</a></li>
+			    <li><a title="{cinfo.en_name}" href="{cinfo.en_id}" target="_blank">{cinfo.en_name}</a></li>
 			<%/loop%>				
 			</ul>
 		</div>
@@ -141,7 +141,7 @@
 					<ul class="onert3nr">
 					<%loop (Companys) mancompanyinfo mancompanylist%>
 					<%set (string){mancatalogname}=Utils.CutString({mancompanyinfo.catalogName},0,6)%>
-						<li>[<a class="l_f00" title="{mancompanyinfo.catalogName}" href="zshy-{mancompanyinfo.tempCatalogID}.html">{mancatalogname}</a>] <a title="{mancompanyinfo.en_name}" href="{mancompanyinfo.en_id}">{mancompanyinfo.en_name}</a></li>
+						<li>[<a class="l_f00" title="{mancompanyinfo.catalogName}" href="zshy-{mancompanyinfo.tempCatalogID}.html">{mancatalogname}</a>] <a title="{mancompanyinfo.en_name}" href="{mancompanyinfo.en_id}.html" target="_blank">{mancompanyinfo.en_name}</a></li>
 					<%/loop%>
 					</ul>
 				</div>
@@ -149,7 +149,7 @@
 					<ul class="onert3nr">
 					<%loop (Companys) selcompanyinfo selcompanylist%>
 					<%set (string){selcatalogname}=Utils.CutString({selcompanyinfo.catalogName},0,6)%>
-						<li>[<a class="l_f00" title="{selcompanyinfo.catalogName}" href="zshy-{selcompanyinfo.tempCatalogID}.html">{selcompanyinfo.catalogName}</a>] <a title="{selcompanyinfo.en_name}" href="#">{selcompanyinfo.en_name}</a></li>
+						<li>[<a class="l_f00" title="{selcompanyinfo.catalogName}" href="zshy-{selcompanyinfo.tempCatalogID}.html">{selcompanyinfo.catalogName}</a>] <a title="{selcompanyinfo.en_name}" href="{selcompanyinfo.en_id}.html" target="_blank">{selcompanyinfo.en_name}</a></li>
 					<%/loop%>
 					</ul>
 				</div>
