@@ -693,7 +693,7 @@ namespace SAS.Logic
         {
             string errmsgbox = "";
             Graphics g = Graphics.FromImage(img);
-
+            g.SmoothingMode = SmoothingMode.HighQuality;
             string[] watertextarray = watermarkTexts.Split(',');
             string[] fontnamearray = fontnames.Split(',');
             string[] fontsizearray = fontsizes.Split(',');
@@ -716,8 +716,9 @@ namespace SAS.Logic
                     if (yposarray.Length > steplength) ypos = TypeConverter.StrToInt(yposarray[steplength], 0);
                     if (fontcolorarray.Length > steplength) fontcolor = fontcolorarray[steplength];
                     Font drawFont = new Font(fontname, fontsize, FontStyle.Bold, GraphicsUnit.Pixel);
-                    g.DrawString(fontstr, drawFont, new SolidBrush(Color.White), xpos + 1, ypos + 1);
-                    g.DrawString(fontstr, drawFont, new SolidBrush(ColorTranslator.FromHtml(fontcolor)), xpos, ypos);
+                    SizeF _size = g.MeasureString(fontstr, drawFont, 306);
+                    g.DrawString(fontstr, drawFont, new SolidBrush(Color.White), new RectangleF(xpos + 1, ypos + 1, _size.Width, _size.Height));
+                    g.DrawString(fontstr, drawFont, new SolidBrush(ColorTranslator.FromHtml(fontcolor)), new RectangleF(xpos, ypos, _size.Width, _size.Height));
                     steplength++;
                 }
 
