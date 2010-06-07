@@ -51,7 +51,7 @@ namespace SAS.ManageWeb
                     + "\r\n " + "});"
                     + "\r\n " + "jQuery(this).gettop({objsrc:\"templates/" + templatepath + "/images/diaocha.gif\",objhref:\"javascript:scrollTo(0,0)\"});"
                     + "\r\n " + "});\r\n";
-            AddfootScript(loadscript);         
+            AddfootScript(loadscript);
         }
     }
 }
