@@ -20,6 +20,10 @@ namespace SAS.ManageWeb
         /// </summary>
         protected Companys companyshowinfo = new Companys();
         protected int showenid = SASRequest.GetInt("enid", 0);
+        /// <summary>
+        /// 企业浏览次数
+        /// </summary>
+        protected int companyviews = 0;
 
         protected override void ShowPage()
         {
@@ -52,6 +56,9 @@ namespace SAS.ManageWeb
                     + "\r\n " + "jQuery(this).gettop({objsrc:\"templates/" + templatepath + "/images/diaocha.gif\",objhref:\"javascript:scrollTo(0,0)\"});"
                     + "\r\n " + "});\r\n";
             AddfootScript(loadscript);
+
+            CompaniesStats.Track(showenid, 1);
+            companyviews = companyshowinfo.En_accesses + 1 + (config.TopicQueueStats == 1 ? CompaniesStats.GetStoredCompanyViewCount(companyshowinfo.En_id) : 0);
         }
     }
 }

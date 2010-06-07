@@ -1959,6 +1959,10 @@ namespace SAS.Data
         /// <returns></returns>
         bool UpdateCompany(Companys _company);
         /// <summary>
+        /// 更新企业浏览次数
+        /// </summary>
+        int UpdateCompanyViewCount(int enid, int viewcount);
+        /// <summary>
         /// 企业搜索条件
         /// </summary>
         /// <param name="catalogid">行业类别ID</param>
