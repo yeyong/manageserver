@@ -309,6 +309,17 @@ namespace SAS.Data.DataProvider
         }
 
         /// <summary>
+        /// 更新企业浏览次数
+        /// </summary>
+        /// <param name="enid"></param>
+        /// <param name="viewcount"></param>
+        /// <returns></returns>
+        public static int UpdataCompanyViewCount(int enid, int viewcount)
+        {
+            return DatabaseProvider.GetInstance().UpdateCompanyViewCount(enid, viewcount);
+        }
+
+        /// <summary>
         /// 企业搜索条件
         /// </summary>
         /// <param name="catalogid">行业类别ID</param>

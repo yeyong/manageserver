@@ -2221,6 +2221,17 @@ namespace SAS.Data.SqlServer
             return DbHelper.ExecuteNonQuery(CommandType.StoredProcedure, string.Format("{0}updatecompany", BaseConfigs.GetTablePrefix), parms) > 0;
         }
 
+        /// <summary>
+        /// 更新企业浏览次数
+        /// </summary>
+        public int UpdateCompanyViewCount(int enid, int viewcount)
+        {
+            DbParameter[] parms = {
+										DbHelper.MakeInParam("@enid",(DbType)SqlDbType.Int,4,enid),	
+										DbHelper.MakeInParam("@viewcount",(DbType)SqlDbType.Int,4,viewcount)			   
+									};
+            return DbHelper.ExecuteNonQuery(CommandType.StoredProcedure, string.Format("{0}updatecompanyviewcount", BaseConfigs.GetTablePrefix), parms);
+        }
 
         /// <summary>
         /// 企业搜索条件

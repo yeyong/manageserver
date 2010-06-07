@@ -16,6 +16,7 @@
 	<p>公司主页：<a href="#" class="l_333">{tipmsgeninfo.en_web}</a></p>
 	<%else%>
 	<%if {msgtype}==1%>
+	<b class="f_805952_14"><%set (string){tipmsgencotype}=EnumCatch.GetEnCommType({tipmsgeninfo.en_enco})%>{tipmsgencotype}</b>
 	<p>成立时间：{tipmsgeninfo.en_builddate}</p>
 	<p>注册资本：{tipmsgeninfo.reg_capital}万元</p>
 	<p>注&nbsp;册&nbsp;号：{tipmsgeninfo.reg_code}</p>

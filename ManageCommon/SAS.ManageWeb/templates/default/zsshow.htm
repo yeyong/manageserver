@@ -8,19 +8,19 @@
 	<div class="osw mar_top_8" id="put">
 		<h1>{companyshowinfo.en_name}</h1>
 		<div class="oswlt mar_top_8">
+		    <p><span class="oswlt1">手&nbsp;&nbsp;&nbsp;&nbsp;机：</span><span class="oswlt2">{companyshowinfo.en_mobile}</span></p>
 			<p><span class="oswlt1">传&nbsp;&nbsp;&nbsp;&nbsp;真：</span><span class="oswlt2">{companyshowinfo.en_fax}</span></p>
 			<p><span class="oswlt1">邮&nbsp;&nbsp;&nbsp;&nbsp;编：</span><span class="oswlt2">{companyshowinfo.en_post}</span></p>
-			<p><span class="oswlt1">企业类型：</span><span class="oswlt2"><%set (string){showinfoencotype}=EnumCatch.GetEnCommType({companyshowinfo.en_enco})%>{showinfoencotype}</span></p>
 			<p><span class="oswlt1">电子邮箱：</span><span class="oswlt2">{companyshowinfo.en_mail}</span></p>
 			<p><span class="oswlt1">网&nbsp;&nbsp;&nbsp;&nbsp;址：</span><span class="oswlt2">{companyshowinfo.en_web}</span></p>
 			<p><span class="oswlt1">主营商品：</span><span class="oswlt2"><%set {companyshowinfo.En_main}=Utils.ReplaceString({companyshowinfo.en_main},",,",",",false).Trim(',')%>{companyshowinfo.en_main}</span></p>
 			<span class="oswmore"><a title="查看工商注册信息" href="tipmsg.aspx?msgenid={companyshowinfo.en_id}&msgtype=1" rel="tipmsg.aspx?msgenid={companyshowinfo.en_id}&msgtype=1" class="l_f00">更多详情</a></span>
 			<strong class="oswpf">网络评分：<b class="f_f60_24">4.5</b> 分</strong>
 		</div>
-		<p class="oswrt mar_top_8"><img alt="浙江贝因美妇幼保健发展有限公司" src="images/hycard/hycard1.gif" /></p>
+		<p class="oswrt mar_top_8"><img alt="浙江贝因美妇幼保健发展有限公司" src="showcardimg_{companyshowinfo.en_id}.html" /></p>
 		<div class="tswlt">
 			<p class="tswltp1">
-				<span>评论：<em class="f_e00101">20</em> | 阅读次数：4885</span>
+				<span>评论：<em class="f_e00101">20</em> | 阅读次数：{companyviews}</span>
 				<span>发布时间：{companyshowinfo.en_createdate} | 更新时间：{companyshowinfo.en_update}</span>
 			</p>
 			<p class="tswltp2 tswltpf1"><a title="点击我要评论" href="#"></a></p>
@@ -41,10 +41,10 @@
 			<em></em><strong>企业证书</strong>
 		</p>
 		<ul class="fswnr">
-			<li><img alt="证书名称" src="images/aa/aa11.jpg" /></li>
-			<li><img alt="证书名称" src="images/aa/aa11.jpg" /></li>
-			<li><img alt="证书名称" src="images/aa/aa11.jpg" /></li>
-			<li><img alt="证书名称" src="images/aa/aa11.jpg" /></li>
+			<li><img alt="证书名称" src="templates/{templatepath}/images/aa/aa11.jpg" /></li>
+			<li><img alt="证书名称" src="templates/{templatepath}/images/aa/aa11.jpg" /></li>
+			<li><img alt="证书名称" src="templates/{templatepath}/images/aa/aa11.jpg" /></li>
+			<li><img alt="证书名称" src="templates/{templatepath}/images/aa/aa11.jpg" /></li>
 		</ul>
 	</div>
 	<!--企业证书结束-->
