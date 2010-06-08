@@ -59,6 +59,9 @@
     <Compile Include="aspx\1\companypostreg.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="aspx\1\help.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="aspx\1\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1467,6 +1470,7 @@
     <Content Include="ManagePage\UserControls\usergrouppowersetting.ascx" />
     <Content Include="ManagePage\xml\backup\2009-09-24 09_20_17.config" />
     <Content Include="ManagePage\xml\navmenu.config" />
+    <Content Include="templates\default\help.htm" />
     <Content Include="templates\default\images\aa\aa11.jpg" />
     <Content Include="templates\default\images\aa\tianqi.png" />
     <Content Include="templates\default\images\aa\zhuti.png" />

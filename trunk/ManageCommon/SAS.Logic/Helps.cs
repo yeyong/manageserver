@@ -25,13 +25,10 @@ namespace SAS.Logic
         /// <returns>帮助列表</returns>
         public static List<HelpInfo> GetHelpList()
         {
-            if (helpListTree == null)
-            {
-                helpListTree = new List<HelpInfo>();
-                List<HelpInfo> helpList = SAS.Data.DataProvider.Help.GetHelpList();
+            helpListTree = new List<HelpInfo>();
+            List<HelpInfo> helpList = SAS.Data.DataProvider.Help.GetHelpList();
+            CreateHelpTree(helpList, 0);
 
-                CreateHelpTree(helpList, 0);
-            }
             return helpListTree;
         }
 
@@ -96,6 +93,25 @@ namespace SAS.Logic
         {
             SAS.Data.DataProvider.Help.DelHelp(idlist);
             SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/helplist");
+        }
+
+        /// <summary>
+        /// 获取帮助信息（缓存）
+        /// </summary>
+        public static List<HelpInfo> GetAllHelpList()
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            List<HelpInfo> helplist = cache.RetrieveObject("/SAS/helplist") as List<HelpInfo>;
+
+            if (helplist == null || helplist.Count == 0)
+            {
+                helplist = SAS.Data.DataProvider.Help.GetHelpList();
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 1440;
+                cache.AddObject("/SAS/helplist", helplist);
+            }
+
+            return helplist;
         }
 
         /// <summary>
