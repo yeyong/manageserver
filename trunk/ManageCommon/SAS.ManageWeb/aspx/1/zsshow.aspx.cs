@@ -28,7 +28,11 @@ namespace SAS.ManageWeb
         protected override void ShowPage()
         {
             companyshowinfo = Companies.GetCompanyInfo(showenid);
-
+            if (companyshowinfo.En_status != 2)
+            {
+                AddErrLine("该企业审批尚未通过！");
+                return;
+            }
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/jquery.cluetip.css");
             script += "\r\n<script src=\"" + forumpath + "javascript/jquery.cluetip-min.js\" type=\"text/javascript\"></script>";

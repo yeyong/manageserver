@@ -1,5 +1,6 @@
 ﻿<%template _comheader%>
 <div class="cot">
+    <%if {page_err}==0%>
 	<!--企业信息开始-->
 	<p class="zshysite mar_top_8">
 		<i class="zslt"></i><i class="zsrt"></i>
@@ -127,7 +128,10 @@
 		
 	</form>
 	<!--最新评论结束-->
-	
+	<%else%>
+	<b class="f_805952_14">出现了{page_err}个错误</b>
+    <p>{msgbox_text}</p>
+	<%/if%>
 </div>
 <%template _comcopyright%>
 <%template _comfooter%>
