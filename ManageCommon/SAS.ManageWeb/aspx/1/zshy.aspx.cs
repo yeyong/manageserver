@@ -154,7 +154,7 @@ namespace SAS.ManageWeb
                 }
             }
 
-            companylist = Companies.GetCompanyPageList(catalogid, pageid, pagesize, "en_accesses", ordertype == 0 ? "desc" : "", condition);
+            companylist = Companies.GetCompanyPageList(catalogid, pageid, pagesize, "en_accesses", ordertype == 0 ? "" : "desc", condition);
         }
 
         /// <summary>
