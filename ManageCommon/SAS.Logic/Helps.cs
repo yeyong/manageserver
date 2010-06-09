@@ -115,6 +115,16 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 获取帮助实体信息
+        /// </summary>
+        /// <param name="helpid"></param>
+        /// <returns></returns>
+        public static HelpInfo GetHelpInfo(int helpid)
+        {
+            return GetAllHelpList().Find(new Predicate<HelpInfo>(delegate(HelpInfo subhelp) { return subhelp.Id == helpid; }));
+        }
+
+        /// <summary>
         /// 返回帮助的分类列表的SQL语句
         /// </summary>
         /// <returns>帮助的分类列表的SQL语句</returns>
