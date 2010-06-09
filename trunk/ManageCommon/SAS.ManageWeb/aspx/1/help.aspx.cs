@@ -24,13 +24,31 @@ namespace SAS.ManageWeb
         /// 帮助列表
         /// </summary>
         protected List<HelpInfo> helplist = Helps.GetAllHelpList();
+        /// <summary>
+        /// 当前帮助信息
+        /// </summary>
+        protected HelpInfo currenthelp = new HelpInfo();
+        /// <summary>
+        /// 帮助ID
+        /// </summary>
+        protected int helpid = SASRequest.GetInt("hid", 0);
 
         protected override void ShowPage()
         {
+            int helpindex = 0;
+
+            if (helpid == 0 && helptype.Rows.Count > 0) helpid = TypeConverter.ObjectToInt(helptype.Rows[0]["id"]);
+            currenthelp = Helps.GetHelpInfo(helpid);
+
+            if (currenthelp.Pid > 0) helpindex = currenthelp.Pid;
+            else helpindex = helpid;
+            helptype.PrimaryKey = new DataColumn[] { helptype.Columns["id"] };
+            helpindex = helptype.Rows.IndexOf(helptype.Rows.Find(helpindex));
+
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
 
             string loadscript = "\r\n " + "jQuery(document).ready(function() {"
-                    + "\r\n " + "jQuery('#help').find(\"b:first\").next().slideDown();"
+                    + "\r\n " + "jQuery('#help').find(\"b\").eq(" + helpindex + ").next().slideDown();"
                     + "\r\n " + "jQuery('#help').find(\"b\").click(function() {"
                     + "\r\n " + "  var helpnr = jQuery(this).next();"
                     + "\r\n " + "  if (helpnr.is(':visible')) {helpnr.slideUp();jQuery(this).find(\"em\").html(\"+\");}"

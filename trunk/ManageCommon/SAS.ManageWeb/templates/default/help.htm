@@ -31,13 +31,13 @@
 			<strong>在线帮助</strong>
 			<div class="helpltnr" id="help">
 			<%loop helpinfos helptype%>
-			    <b class="hpltnrt"><em>-</em>{helpinfos[title]}</b>
+			    <b class="hpltnrt"><em><%if {helpid}=={strtoint({helpinfos[id]})}||{currenthelp.pid}=={strtoint({helpinfos[id]})}%>-<%else%>+<%/if%></em>{helpinfos[title]}</b>
 			    <ul class="hpltcot">
-					<li>▪&nbsp;<a title="信用认证" href="#">信用认证</a></li>
-					<li>▪&nbsp;<a title="信用指数" href="#">信用指数</a></li>
-					<li>▪&nbsp;<a title="诚信中国" href="#">诚信中国</a></li>
-					<li>▪&nbsp;<a title="诚信课堂" href="#">诚信课堂</a></li>
-					<li>▪&nbsp;<a title="如何让排名靠前？" href="#">如何让排名靠前？</a></li>
+			    <%loop (HelpInfo) subhelp helplist%>
+			        <%if {subhelp.pid}=={strtoint({helpinfos[id]})}%>
+			        <li>▪&nbsp;<a title="{subhelp.title}" href="help-{subhelp.id}.html">{subhelp.title}</a></li>
+			        <%/if%>
+			    <%/loop%>
 				</ul>
 			<%/loop%>
 			</div>
