@@ -149,7 +149,7 @@ namespace SAS.Logic
             DataTable sortcatalist = dt.Clone();
             foreach (DataRow dr in dt.Select("[sort] = " + sortnum))
             {
-                dr["companycount"] = Companies.GetCompanyTableListByCatalog(TypeConverter.ObjectToInt(dr["id"])).Compute("COUNT(en_id)", condition);
+                //dr["companycount"] = Companies.GetCompanyTableListByCatalog(TypeConverter.ObjectToInt(dr["id"])).Compute("COUNT(en_id)", condition);
                 sortcatalist.ImportRow(dr);
             }
             return sortcatalist;
@@ -174,7 +174,7 @@ namespace SAS.Logic
             DataTable sortcatalist = dt.Clone();
             foreach (DataRow dr in dt.Select("[parentid] = " + pid))
             {
-                dr["companycount"] = ReturnCompanyCountById(TypeConverter.ObjectToInt(dr["id"], 0), condition);
+                //dr["companycount"] = ReturnCompanyCountById(TypeConverter.ObjectToInt(dr["id"], 0), condition);
                 sortcatalist.ImportRow(dr);
             }
             return sortcatalist;
@@ -194,18 +194,18 @@ namespace SAS.Logic
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static int ReturnCompanyCountById(int id, string conditions)
-        {
-            int num = 0;
-            DataTable dt = GetAllCatalog();
-            foreach (DataRow dr in dt.Select("(','+[parentlist]+',' like '%," + id + ",%' AND [haschild] = 0) OR [id] = " + id))
-            {
-                string querycondition = "','+[en_cataloglist]+',' like '%," + dr["id"].ToString() + ",%'";
-                if (conditions != "") querycondition = "','+[en_cataloglist]+',' like '%," + dr["id"].ToString() + ",%' AND " + conditions;
-                num += TypeConverter.ObjectToInt(Companies.GetCompanyTableList().Compute("COUNT(en_id)", querycondition), 0);
-            }
-            return num;
-        }
+        //public static int ReturnCompanyCountById(int id, string conditions)
+        //{
+        //    int num = 0;
+        //    DataTable dt = GetAllCatalog();
+        //    foreach (DataRow dr in dt.Select("(','+[parentlist]+',' like '%," + id + ",%' AND [haschild] = 0) OR [id] = " + id))
+        //    {
+        //        string querycondition = "','+[en_cataloglist]+',' like '%," + dr["id"].ToString() + ",%'";
+        //        if (conditions != "") querycondition = "','+[en_cataloglist]+',' like '%," + dr["id"].ToString() + ",%' AND " + conditions;
+        //        num += TypeConverter.ObjectToInt(Companies.GetCompanyTableList().Compute("COUNT(en_id)", querycondition), 0);
+        //    }
+        //    return num;
+        //}
 
         /// <summary>
         /// 返回Ajax字符串
@@ -232,6 +232,28 @@ namespace SAS.Logic
         public static void UpdateCatalogInfo(CatalogInfo _catalog)
         {
             SAS.Data.DataProvider.Catalogies.UpdateCatalogInfo(_catalog);
+        }
+
+        /// <summary>
+        /// 更新行业企业数量
+        /// </summary>
+        public static void UpdateCatalogCompanyCount()
+        {
+            DataTable dt = GetAllCatalogNoCache();
+            foreach (DataRow dr in dt.Rows)
+            {
+                CatalogInfo cif = SAS.Data.DataProvider.Catalogies.LoadSingleCatalogInfo(dr);
+                cif.companycount = Companies.GetCompanyCount(cif.id, "en_visble = 1");
+                UpdateCatalogInfo(cif);
+            }
+        }
+
+        /// <summary>
+        /// 更新行业企业数量
+        /// </summary>
+        public static void UpdateCatalogCompanyCount(string catalogids, int companycount)
+        {
+            SAS.Data.DataProvider.Catalogies.UpdateCatalogCompanyCount(catalogids, companycount);
         }
 
         /// <summary>

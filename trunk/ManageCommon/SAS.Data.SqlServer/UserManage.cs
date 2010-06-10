@@ -2363,6 +2363,41 @@ namespace SAS.Data.SqlServer
             DbParameter[] parms = { DbHelper.MakeInParam("@catalogid", (DbType)SqlDbType.Int, 4, catalogid) };
             return DbHelper.ExecuteDataset(CommandType.StoredProcedure, string.Format("{0}getcompanylistbycatalog", BaseConfigs.GetTablePrefix), parms).Tables[0];
         }
+        /// <summary>
+        /// 根据类别获取企业分页信息
+        /// </summary>
+        /// <param name="catalogid"></param>
+        /// <param name="pagesize"></param>
+        /// <param name="pageindex"></param>
+        /// <param name="ordercolumn"></param>
+        /// <param name="ordertype"></param>
+        /// <param name="conditions"></param>
+        public IDataReader GetCompanyListPageByCatalog(int catalogid, int pagesize, int pageindex, string ordercolumn, string ordertype, string conditions)
+        {
+            DbParameter[] parms = {
+                          DbHelper.MakeInParam("@catalogid",(DbType)SqlDbType.Int,4,catalogid),
+                          DbHelper.MakeInParam("@pageindex",(DbType)SqlDbType.Int,4,pageindex),
+                          DbHelper.MakeInParam("@pagesize",(DbType)SqlDbType.Int,4,pagesize),
+                          DbHelper.MakeInParam("@column",(DbType)SqlDbType.VarChar,20,ordercolumn),
+                          DbHelper.MakeInParam("@ordertype",(DbType)SqlDbType.VarChar,5,ordertype),
+                          DbHelper.MakeInParam("@conditions",(DbType)SqlDbType.NVarChar,2000,conditions)
+                                  };
+            return DbHelper.ExecuteReader(CommandType.StoredProcedure, string.Format("{0}getcompanylistpagebycid", BaseConfigs.GetTablePrefix), parms);
+        }
+        /// <summary>
+        /// 根据类别获取企业数量
+        /// </summary>
+        /// <param name="catalogid"></param>
+        /// <param name="conditions"></param>
+        /// <returns></returns>
+        public int GetCompanyCountByCatalog(int catalogid, string conditions)
+        {
+            DbParameter[] parms = {
+                          DbHelper.MakeInParam("@catalogid",(DbType)SqlDbType.Int,4,catalogid),
+                          DbHelper.MakeInParam("@conditions",(DbType)SqlDbType.NVarChar,2000,conditions)
+                                  };
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.StoredProcedure, string.Format("{0}getcompanycountbycidconds", BaseConfigs.GetTablePrefix), parms));
+        }
         #endregion
 
         #region 行业信息操作
@@ -2438,6 +2473,18 @@ namespace SAS.Data.SqlServer
             DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
 
             return true;
+        }
+        /// <summary>
+        /// 更新行业类别下企业信息数量
+        /// </summary>
+        public void UpdateCatalogCompanyCount(string idlist, int counts)
+        {
+            DbParameter[] parms = 
+				{
+						DbHelper.MakeInParam("@idlist", (DbType)SqlDbType.VarChar, 50,idlist),
+						DbHelper.MakeInParam("@counts", (DbType)SqlDbType.Int, 4,counts)
+				};
+            DbHelper.ExecuteNonQuery(CommandType.StoredProcedure, string.Format("{0}updatecatalogcompanycount", BaseConfigs.GetTablePrefix), parms);
         }
         #endregion
 

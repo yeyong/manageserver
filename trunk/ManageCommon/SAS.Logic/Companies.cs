@@ -38,7 +38,9 @@ namespace SAS.Logic
         {
             if (ExistCompanyName(_companyInfo.En_name) > 0) return 0;
             //缓存清理操作暂无
-            return SAS.Data.DataProvider.Companies.CreateCompany(_companyInfo);
+            int rows = SAS.Data.DataProvider.Companies.CreateCompany(_companyInfo);
+            if (rows > 0) Catalogs.UpdateCatalogCompanyCount(_companyInfo.En_cataloglist, 1);
+            return rows;
         }
 
         /// <summary>
@@ -94,48 +96,53 @@ namespace SAS.Logic
         /// <returns></returns>
         public static int GetCompanyCount(int catalogid, string conditions)
         {
-            DataTable dt = new DataTable();
-            if (catalogid > 0)
-            {
-                dt = GetCompanyTableListByCatalog(catalogid);
-            }
-            else
-            {
-                dt = GetCompanyTableList();
-            }
-            return dt.Select(conditions).Length;
+            return SAS.Data.DataProvider.Companies.GetCompanyCountByCatalog(catalogid, conditions);
         }
 
-        /// <summary>
-        /// 企业数据分页操作
-        /// </summary>
-        /// <param name="catalogid">类别</param>
-        /// <param name="pageindex">当前页</param>
-        /// <param name="pagesize">页面尺寸</param>
-        /// <param name="ordercolumn">排序列名</param>
-        /// <param name="ordertype">排序方式</param>
-        /// <param name="conditions">条件</param>
-        public static DataRow[] GetCompanyPageList(int catalogid, int pageindex, int pagesize, string ordercolumn, string ordertype, string conditions)
+        ///// <summary>
+        ///// 企业数据分页操作
+        ///// </summary>
+        ///// <param name="catalogid">类别</param>
+        ///// <param name="pageindex">当前页</param>
+        ///// <param name="pagesize">页面尺寸</param>
+        ///// <param name="ordercolumn">排序列名</param>
+        ///// <param name="ordertype">排序方式</param>
+        ///// <param name="conditions">条件</param>
+        public static List<Companys> GetCompanyPageList(int catalogid, int pageindex, int pagesize, string ordercolumn, string ordertype, string conditions)
         {
-            DataTable companylist = new DataTable();
-            if (catalogid > 0) companylist = GetCompanyTableListByCatalog(catalogid);
-            else companylist = GetCompanyTableList();
-
-            List<DataRow> redatarow = new List<DataRow>();
-
-            string defoder = "[en_status] DESC";
-            if (ordercolumn != "") defoder += "," + ordercolumn + " " + ordertype;
-            redatarow.AddRange(companylist.Select(conditions, defoder));
-            if (redatarow.Count > 0)
-            {
-                if (pageindex * pagesize > redatarow.Count) pagesize = pagesize - (pagesize * pageindex - redatarow.Count);
-                DataRow[] newdatarow = new DataRow[pagesize];
-                redatarow.CopyTo((pageindex - 1) * pagesize, newdatarow, 0, pagesize);
-
-                return newdatarow;
-            }
-            return new DataRow[0];
+            return SAS.Data.DataProvider.Companies.GetCompanyListPage(catalogid, pagesize, pageindex, ordercolumn, ordertype, conditions);
         }
+
+        ///// <summary>
+        ///// 企业数据分页操作
+        ///// </summary>
+        ///// <param name="catalogid">类别</param>
+        ///// <param name="pageindex">当前页</param>
+        ///// <param name="pagesize">页面尺寸</param>
+        ///// <param name="ordercolumn">排序列名</param>
+        ///// <param name="ordertype">排序方式</param>
+        ///// <param name="conditions">条件</param>
+        //public static DataRow[] GetCompanyPageList(int catalogid, int pageindex, int pagesize, string ordercolumn, string ordertype, string conditions)
+        //{
+        //    DataTable companylist = new DataTable();
+        //    if (catalogid > 0) companylist = GetCompanyTableListByCatalog(catalogid);
+        //    else companylist = GetCompanyTableList();
+
+        //    List<DataRow> redatarow = new List<DataRow>();
+
+        //    string defoder = "[en_status] DESC";
+        //    if (ordercolumn != "") defoder += "," + ordercolumn + " " + ordertype;
+        //    redatarow.AddRange(companylist.Select(conditions, defoder));
+        //    if (redatarow.Count > 0)
+        //    {
+        //        if (pageindex * pagesize > redatarow.Count) pagesize = pagesize - (pagesize * pageindex - redatarow.Count);
+        //        DataRow[] newdatarow = new DataRow[pagesize];
+        //        redatarow.CopyTo((pageindex - 1) * pagesize, newdatarow, 0, pagesize);
+
+        //        return newdatarow;
+        //    }
+        //    return new DataRow[0];
+        //}
 
         /// <summary>
         /// 获取Table型企业信息集合（缓存）

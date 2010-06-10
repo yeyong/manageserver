@@ -51,6 +51,26 @@ namespace SAS.Data.DataProvider
         }
 
         /// <summary>
+        /// 企业信息实体化
+        /// </summary>
+        /// <param name="dr"></param>
+        /// <returns></returns>
+        public static CatalogInfo LoadSingleCatalogInfo(DataRow dr)
+        {
+            CatalogInfo _cataloginfo = new CatalogInfo();
+            _cataloginfo.id = TypeConverter.ObjectToInt(dr["id"]);
+            _cataloginfo.parentid = TypeConverter.ObjectToInt(dr["parentid"]);
+            _cataloginfo.sort = TypeConverter.ObjectToInt(dr["sort"]);
+            _cataloginfo.parentlist = dr["parentlist"].ToString().Trim();
+            _cataloginfo.displayorder = TypeConverter.ObjectToInt(dr["displayorder"]);
+            _cataloginfo.name = dr["name"].ToString().Trim();
+            _cataloginfo.haschild = dr["haschild"].ToString() == "True" ? 1 : 0;
+            _cataloginfo.companycount = TypeConverter.ObjectToInt(dr["companycount"]);
+            _cataloginfo.cllogo = dr["cllogo"].ToString();
+            return _cataloginfo;
+        }
+
+        /// <summary>
         /// 获取类别实体
         /// </summary>
         /// <param name="id"></param>
@@ -85,6 +105,16 @@ namespace SAS.Data.DataProvider
         public static void UpdateCatalogInfo(CatalogInfo _catalog)
         {
             DatabaseProvider.GetInstance().UpdateCatalogInfo(_catalog);
+        }
+
+        /// <summary>
+        /// 更新行业类别下企业信息数量
+        /// </summary>
+        /// <param name="idlist"></param>
+        /// <param name="counts"></param>
+        public static void UpdateCatalogCompanyCount(string idlist, int counts)
+        {
+            DatabaseProvider.GetInstance().UpdateCatalogCompanyCount(idlist, counts);
         }
     }
 }
