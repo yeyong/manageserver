@@ -24,10 +24,15 @@ namespace SAS.ManageWeb
         /// 企业浏览次数
         /// </summary>
         protected int companyviews = 0;
+        /// <summary>
+        /// 评论数
+        /// </summary>
+        protected int commentcount = 0;
 
         protected override void ShowPage()
         {
             companyshowinfo = Companies.GetCompanyInfo(showenid);
+            commentcount = Comments.GetCommentCountByQyID(showenid);
             if (companyshowinfo.En_status != 2)
             {
                 AddErrLine("该企业审批尚未通过！");
@@ -35,9 +40,16 @@ namespace SAS.ManageWeb
             }
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/jquery.cluetip.css");
+            script += "\r\n<script src=\"" + forumpath + "javascript/common.js\" type=\"text/javascript\"></script>";
+            script += "\r\n<script src=\"" + forumpath + "javascript/ajax.js\" type=\"text/javascript\"></script>";
+            script += "\r\n<script src=\"" + forumpath + "javascript/template_showcompany.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/jquery.cluetip-min.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/jquery.ratingmin.js\" type=\"text/javascript\"></script>";
-            string loadscript = "\r\n " + "jQuery(document).ready(function() {"
+            string loadscript = "\r\n " + "var page_qyid = " + showenid + ";"
+                    + "\r\n " + "var comment_page_recordcount = " + commentcount + ";"
+                    + "\r\n " + "var comment_page_pagesize = 10;"
+                    + "\r\n " + "var comment_page_currentpage = 1;"
+                    + "\r\n " + "jQuery(document).ready(function() {"
                     + "\r\n " + "jQuery('#put').find(\"span\").find(\"a\").cluetip({ activation: 'click', sticky: true, width: 350, positionBy: 'bottomTop', closePosition: 'title', closeText: '<img src=\"" + forumpath + "images/cross.png\" alt=\"close\" />',cursor: 'pointer', dropShadow: false});"
                     + "\r\n " + "jQuery(\"input[type=text],textarea\").each(function(){"
                     + "\r\n " + "  jQuery(this).blur(function(){jQuery(this).attr(\"class\",\"input2_soout\");});"
@@ -58,11 +70,62 @@ namespace SAS.ManageWeb
                     + "\r\n " + "   jQuery('#swinf').find(\"#swinfcot\").removeClass().addClass(showcss);"
                     + "\r\n " + "});"
                     + "\r\n " + "jQuery(this).gettop({objsrc:\"templates/" + templatepath + "/images/diaocha.gif\",objhref:\"javascript:scrollTo(0,0)\"});"
-                    + "\r\n " + "});\r\n";
+                    + "\r\n " + "});\r\n"
+                    + "\r\n " + "ajaxgetcomment(page_qyid,comment_page_pagesize,comment_page_currentpage);"
+                    + "\r\n " + "function validate(form){"
+                    + "\r\n " + "   if(form.nickname.value==''){alert(\"请输入您的昵称！\");return false;}"
+                    + "\r\n " + "   if(form.commentmsg.value==''){alert(\"请输入您的评论！\");return false;}"
+                    + "\r\n " + "   if(form.commentmsg.value.length > 200){alert(\"评论在200字以内！\");return false;}"
+                    + "\r\n " + "   if(form.commentmsg.value.length < 10){alert(\"评论至少要10字以上！\");return false;}"
+                    + "\r\n " + "}";
             AddfootScript(loadscript);
 
             CompaniesStats.Track(showenid, 1);
             companyviews = companyshowinfo.En_accesses + 1 + (config.TopicQueueStats == 1 ? CompaniesStats.GetStoredCompanyViewCount(companyshowinfo.En_id) : 0);
+
+            if (ispost)
+            {
+                string commentmsg = SASRequest.GetString("commentmsg").Trim();
+                string commentuser = SASRequest.GetString("nickname").Trim();
+                int commentscore = SASRequest.GetInt("scores",0);
+                if (LogicUtils.IsCrossSitePost())
+                {
+                    AddErrLine("您的请求来路不正确，无法提交。如果您安装了某种默认屏蔽来路信息的个人防火墙软件(如 Norton Internet Security)，请设置其不要禁止来路信息后再试。");
+                    return;
+                }
+                if (commentmsg.Length < 1)
+                {
+                    AddErrLine("评论内容不能为空！");
+                    return;
+                }
+                if (commentmsg.Length < config.Minpostsize)
+                {
+                    AddErrLine("评论内容过少！");
+                    return;
+                }
+
+                string lastcommenttime = Utils.GetCookie("lastcomment");
+
+                int interval = Utils.StrDateDiffSeconds(lastcommenttime, config.Postinterval);
+                if (interval < 0)
+                {
+                    AddErrLine("系统规定发帖间隔为"
+                        + config.Postinterval.ToString()
+                        + "秒, 您还需要等待 "
+                        + (interval * -1).ToString()
+                        + " 秒");
+                    return;
+                }
+
+                CommentInfo cif = new CommentInfo();
+                cif.objid = showenid;
+                cif.username = commentuser == "" ? "匿名" : commentuser;
+                cif.userid = userid;
+                cif.userip = SASRequest.GetIP();
+                cif.content = Utils.RemoveHtml(LogicUtils.BanWordFilter(commentmsg));
+                cif.parentid = 0;
+                cif.scored = commentscore;
+            }
         }
     }
 }

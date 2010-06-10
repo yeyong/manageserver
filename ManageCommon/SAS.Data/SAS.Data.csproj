@@ -47,6 +47,7 @@
     <Compile Include="DataProvider\CardConfigs.cs" />
     <Compile Include="DataProvider\CardTemplate.cs" />
     <Compile Include="DataProvider\Catalogies.cs" />
+    <Compile Include="DataProvider\Comments.cs" />
     <Compile Include="DataProvider\Companies.cs" />
     <Compile Include="DataProvider\Databases.cs" />
     <Compile Include="DataProvider\Editors.cs" />

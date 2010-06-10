@@ -2257,6 +2257,17 @@ namespace SAS.Data.SqlServer
         }
         #endregion
 
+        #region 评论操作
+        /// <summary>
+        /// 根据企业ID获取评论数量
+        /// </summary>
+        public int GetCommentCountByQyID(int qyid)
+        {
+            string commandText = string.Format("SELECT COUNT(commentid) FROM [{0}comment]", BaseConfigs.GetTablePrefix);
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText));
+        }
+        #endregion
+
         public DataTable GetMailTable(string uids)
         {
             if (!Utils.IsSafeSqlString(uids))

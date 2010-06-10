@@ -2168,6 +2168,13 @@ namespace SAS.Data
         void UpdateOrder(string orderBy, string id);
         #endregion
 
+        #region 评论表comment操作
+        /// <summary>
+        /// 根据企业ID获取评论数量
+        /// </summary>
+        int GetCommentCountByQyID(int qyid);
+        #endregion
+
         /// <summary>
         /// 获取指定用户ID列表的邮件信息
         /// </summary>
