@@ -81,20 +81,20 @@
 					</span>
 				</p>
 			</dt>
-			<%loop (DataRow) zshycompanyinfo companylist%>
+			<%loop (Companys) zshycompanyinfo companylist%>
 			<%set (int) {zscardimgid}={zshycompanyinfo__loop__id}%4 + 1%>
 			<dd class="zscard">
 				<img alt="" src="templates/{templatepath}/images/hycard/hycard{zscardimgid}.gif" />
 				<p class="overlay" style="display:none;"></p>
 				<p class="ic_caption">
-					<strong class="ic_category">{zshycompanyinfo[en_name]}</strong>
-					<span class="ic_zi">联系人：{zshycompanyinfo[en_contact]}</span>
-					<span class="ic_zi">联系电话：{zshycompanyinfo[en_phone]}</span>
-					<span class="ic_zi">详细地址：{zshycompanyinfo[en_address]}</span>
-					<span class="ic_text">网址：{zshycompanyinfo[en_web]}</span>
-					<span class="ic_text">经营模式：<%set (string){zscardentype}=EnumCatch.GetCompanyType({strtoint({zshycompanyinfo[en_type]})})%>{zscardentype}</span>
+					<strong class="ic_category">{zshycompanyinfo.en_name}</strong>
+					<span class="ic_zi">联系人：{zshycompanyinfo.en_contact}</span>
+					<span class="ic_zi">联系电话：{zshycompanyinfo.en_phone}</span>
+					<span class="ic_zi">详细地址：{zshycompanyinfo.en_address}</span>
+					<span class="ic_text">网址：{zshycompanyinfo.en_web}</span>
+					<span class="ic_text">经营模式：<%set (string){zscardentype}=EnumCatch.GetCompanyType({zshycompanyinfo.en_type})%>{zscardentype}</span>
 					<span class="ic_text">
-						<em class="zscard2nr1"><a title="详细信息" href="{zshycompanyinfo[en_id]}.html" class="l_000" target="_blank">详细信息</a></em>
+						<em class="zscard2nr1"><a title="详细信息" href="{zshycompanyinfo.en_id}.html" class="l_000" target="_blank">详细信息</a></em>
 						<em class="zscard2nr2"><a title="我要推广" href="#" class="l_000">我要推广</a></em>
 					</span>
 				</p>

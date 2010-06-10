@@ -1996,6 +1996,14 @@ namespace SAS.Data
         /// 根据类别获取企业信息列表（有省市区）
         /// </summary>
         DataTable GetCompanyListByCatalogID(int catalogid);
+        /// <summary>
+        /// 根据类别获取企业分页信息
+        /// </summary>
+        IDataReader GetCompanyListPageByCatalog(int catalogid, int pagesize, int pageindex, string ordercolumn, string ordertype, string conditions);
+        /// <summary>
+        /// 根据行业类别获取企业信息数量
+        /// </summary>
+        int GetCompanyCountByCatalog(int catalogid, string conditions);
         #endregion
 
         #region 行业类别操作
@@ -2025,6 +2033,10 @@ namespace SAS.Data
         /// <param name="_catalog"></param>
         /// <returns></returns>
         bool UpdateCatalogInfo(CatalogInfo _catalog);
+        /// <summary>
+        /// 更新行业类别下企业信息数量
+        /// </summary>
+        void UpdateCatalogCompanyCount(string idlist, int counts);
         #endregion
 
         #region 友情链接操作

@@ -46,13 +46,18 @@ namespace SAS.ManageWeb.ManagePage
             //if (SASRequest.GetString("method") == "del")
             //    DeleteNode();
 
-            //if (SASRequest.GetString("method") == "updateall")
-            //    UpdateAll();
+            if (SASRequest.GetString("method") == "updateall")
+                UpdateAll();
 
             //if (SASRequest.GetString("method") == "update")
             //    UpdateCategoryGoodsCount();
             
             LoadCategoryTree();
+        }
+
+        private void UpdateAll()
+        {
+            Catalogs.UpdateCatalogCompanyCount();
         }
 
         private void LoadCategoryTree()

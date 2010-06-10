@@ -27,7 +27,7 @@ namespace SAS.ManageWeb
         /// <summary>
         /// 企业信息列表
         /// </summary>
-        protected DataRow[] companylist;
+        protected SAS.Common.Generic.List<Companys> companylist = new SAS.Common.Generic.List<Companys>();
         /// <summary>
         /// 类别ID
         /// </summary>

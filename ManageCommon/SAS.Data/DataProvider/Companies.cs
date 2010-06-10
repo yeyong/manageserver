@@ -186,6 +186,9 @@ namespace SAS.Data.DataProvider
             _companyInfo.En_createdate = Utils.GetStandardDateTime(reader["en_createdate"].ToString());
             _companyInfo.En_cataloglist = reader["en_cataloglist"].ToString();
             _companyInfo.Configid = TypeConverter.StrToInt(reader["configid"].ToString());
+            _companyInfo.ProvinceName = reader["ProvinceName"].ToString();
+            _companyInfo.CityName = reader["CityName"].ToString();
+            _companyInfo.DistrictName = reader["DistrictName"].ToString();
             return _companyInfo;
         }
         /// <summary>
@@ -362,6 +365,39 @@ namespace SAS.Data.DataProvider
         public static DataTable GetCompanyListByCatalog(int catalogid)
         {
             return DatabaseProvider.GetInstance().GetCompanyListByCatalogID(catalogid);
+        }
+
+        /// <summary>
+        /// 获取企业分页信息表
+        /// </summary>
+        /// <param name="catalogid">类别ID</param>
+        /// <param name="pagesize">每页大小</param>
+        /// <param name="pageindex">当前页码</param>
+        /// <param name="ordercolumn">排序行</param>
+        /// <param name="ordertype">排序方式</param>
+        /// <param name="conditions">条件</param>
+        public static List<Companys> GetCompanyListPage(int catalogid, int pagesize, int pageindex, string ordercolumn, string ordertype, string conditions)
+        {
+            IDataReader reader = DatabaseProvider.GetInstance().GetCompanyListPageByCatalog(catalogid, pagesize, pageindex, ordercolumn, ordertype, conditions);
+            List<Companys> companylist = new List<Companys>();
+
+            while (reader.Read())
+            {
+                companylist.Add(LoadCompanyInfo(reader));
+            }
+
+            reader.Close();
+            return companylist;
+        }
+        /// <summary>
+        /// 根据行业类别获取企业数量
+        /// </summary>
+        /// <param name="catalogid"></param>
+        /// <param name="conditions"></param>
+        /// <returns></returns>
+        public static int GetCompanyCountByCatalog(int catalogid, string conditions)
+        {
+            return DatabaseProvider.GetInstance().GetCompanyCountByCatalog(catalogid, conditions);
         }
     }
 }
