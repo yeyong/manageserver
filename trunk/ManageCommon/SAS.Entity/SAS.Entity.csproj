@@ -54,6 +54,7 @@
     <Compile Include="Cards\CardTemplateAboutInfo.cs" />
     <Compile Include="Cards\CardTemplateInfo.cs" />
     <Compile Include="CatalogInfo.cs" />
+    <Compile Include="CommentInfo.cs" />
     <Compile Include="Companys.cs" />
     <Compile Include="CustomEditorButtonInfo.cs" />
     <Compile Include="EnTypeEnum.cs" />

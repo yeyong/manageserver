@@ -48,6 +48,7 @@
     <Compile Include="areas.cs" />
     <Compile Include="CardConfigs.cs" />
     <Compile Include="Catalogs.cs" />
+    <Compile Include="Comments.cs" />
     <Compile Include="Companies.cs" />
     <Compile Include="CompaniesStats.cs" />
     <Compile Include="Helps.cs" />

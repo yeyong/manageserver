@@ -50,12 +50,12 @@
 	</div>
 	<!--企业证书结束-->
 	<!--最新评论开始-->
-	<form class="fsw mar_top_8" id="form1" name="form1">
+	<form class="fsw mar_top_8" id="form1" name="form1" onsubmit="return validate(this);" method="post">
 		<p class="fswt">
 			<em></em><strong>最新评论</strong>
 		</p>
 		<div class="fsw2">
-			<ul class="fswnr2">
+			<ul class="fswnr2" id="commentlist">
 				<li>
 					<p class="fswnr2zi">
 						<span class="fswnr2zi1">网络评分：<b class="f_f60_24">3</b> 分</span>
@@ -78,7 +78,7 @@
 					<p class="fswnr2zt">因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure</p>
 				</li>
 			</ul>
-			<div class="page f_666">
+			<div class="page f_666" id="commentlist_page">
 				<a title="上一页" href="#">上一页</a>
 				<a title="1" href="#">1</a>
 				<span class="page2">2</span>
@@ -113,15 +113,15 @@
 				</tr>
 				<tr>
 					<td>用户昵称：</td>
-					<td><input type="text" name="textfield" class="input2_soout" style="width:150px;" /></td>
+					<td><input type="text" name="nickname" class="input2_soout" style="width:150px;" /></td>
 				</tr>
 				<tr>
 					<td>评论内容：</td>
-					<td><textarea class="input2_soout" style="width:700px; height:120px;" name="" cols="" rows=""></textarea></td>
+					<td><textarea class="input2_soout" style="width:700px; height:120px;" name="commentmsg" cols="" rows=""></textarea></td>
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
-					<td><input type="submit" name="Submit" class="tswltpan" value="" /><input type="hidden" name="scores" id="scores"/></td>
+					<td><input type="submit" name="Submit" class="tswltpan" value="" /><input type="hidden" name="scores" id="scores" value="0"/></td>
 				</tr>
 			</table>
 		</div>
