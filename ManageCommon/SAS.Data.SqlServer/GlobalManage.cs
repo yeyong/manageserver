@@ -2259,12 +2259,56 @@ namespace SAS.Data.SqlServer
 
         #region 评论操作
         /// <summary>
+        /// 新增评论
+        /// </summary>
+        public int CreateCommentInfo(CommentInfo cif)
+        {
+            DbParameter[] parms = {
+                                        DbHelper.MakeInParam("@objid", (DbType)SqlDbType.Int,4,cif.objid),
+					                    DbHelper.MakeInParam("@username", (DbType)SqlDbType.VarChar,50,cif.username),
+					                    DbHelper.MakeInParam("@userid", (DbType)SqlDbType.Int,4,cif.userid),
+					                    DbHelper.MakeInParam("@userip", (DbType)SqlDbType.VarChar,50,cif.userip),
+					                    DbHelper.MakeInParam("@content",(DbType) SqlDbType.NText,0,cif.content),
+					                    DbHelper.MakeInParam("@parentid", (DbType)SqlDbType.Int,4,cif.parentid),
+					                    DbHelper.MakeInParam("@scored", (DbType)SqlDbType.Int,4,cif.scored)
+                                   };
+            string commandText = string.Format("INSERT INTO [{0}comment]([objid],[username],[userid],[userip],[content],[parentid],[scored]) VALUES(@objid,@username,@userid,@userip,@content,@parentid,@scored);SELECT SCOPE_IDENTITY()", BaseConfigs.GetTablePrefix);
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText, parms), 0);
+        }
+        /// <summary>
         /// 根据企业ID获取评论数量
         /// </summary>
         public int GetCommentCountByQyID(int qyid)
         {
             string commandText = string.Format("SELECT COUNT(commentid) FROM [{0}comment]", BaseConfigs.GetTablePrefix);
             return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText));
+        }
+        /// <summary>
+        /// 根据企业ID获取企业信息集合
+        /// </summary>
+        public DataTable GetCommentListByQyID(int qyid)
+        {
+            string commandText = string.Format("SELECT {1} FROM [{0}comment] WHERE [objid] = {2}", BaseConfigs.GetTablePrefix, DbFields.COMMENT, qyid);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+        /// <summary>
+        /// 根据企业ID获取企业信息集合
+        /// </summary>
+        public DataTable GetCommentListPageByQyID(int qyid, int pageSize, int pageIndex)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@objid",(DbType)SqlDbType.Int,4,qyid)
+    							  };
+
+            string commandText = "";
+            if (pageIndex <= 1)
+                commandText = "SELECT TOP {0} * FROM [{1}comment] WHERE [objid] = @objid ORDER BY commentdate DESC";
+            else
+            {
+
+                commandText = "SELECT TOP {0} * FROM [{1}comment] WHERE [commentid] < (SELECT MIN([commentid])  FROM (SELECT TOP " + ((pageIndex - 1) * pageSize) + " [commentid] FROM [{1}comment]  WHERE  [objid] = @objid ORDER BY commentdate DESC) AS tblTmp ) AND [objid] = @objid ORDER BY commentdate DESC";
+            }
+            return DbHelper.ExecuteDataset(CommandType.Text, string.Format(commandText, pageSize, BaseConfigs.GetTablePrefix), parms).Tables[0];
         }
         #endregion
 
@@ -2278,7 +2322,7 @@ namespace SAS.Data.SqlServer
                                                uids);
             return DbHelper.ExecuteDataset(commandText).Tables[0];
         }
-
+        #region 脏词过滤
         /// <summary>
         /// 获得脏字过滤列表
         /// </summary>
@@ -2289,6 +2333,46 @@ namespace SAS.Data.SqlServer
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
         }
 
+        public void UpdateBadWords(string find, string replacement)
+        {
+            string commandText = string.Format("UPDATE [{0}badword] set [replacement]='{1}' WHERE [find] ='{2}'",
+                                                BaseConfigs.GetTablePrefix,
+                                                replacement,
+                                                find);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
+        }
+
+
+        public int UpdateWord(int id, string find, string replacement)
+        {
+            DbParameter[] parms = {
+                    DbHelper.MakeInParam("@id", (DbType)SqlDbType.Int, 4, id),
+					DbHelper.MakeInParam("@find", (DbType)SqlDbType.VarChar, 255, find),
+					DbHelper.MakeInParam("@replacement", (DbType)SqlDbType.VarChar, 255, replacement)
+				};
+            string commandText = string.Format("UPDATE [{0}badword] SET [find]=@find, [replacement]=@replacement WHERE [id]=@id",
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        public int DeleteWords(string idList)
+        {
+            string commandText = string.Format("DELETE FROM [{0}badword]  WHERE [ID] IN ({1})", BaseConfigs.GetTablePrefix, idList);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
+        }
+
+        public int AddWord(string userName, string find, string replacement)
+        {
+            DbParameter[] parms = { 
+                                        DbHelper.MakeInParam("@username", (DbType)SqlDbType.NVarChar, 20, userName),
+                                        DbHelper.MakeInParam("@find", (DbType)SqlDbType.NVarChar, 255, find),
+                                        DbHelper.MakeInParam("@replacement", (DbType)SqlDbType.NVarChar, 255, replacement)
+                                    };
+            string commandText = string.Format("INSERT INTO [{0}badword] ([admin], [find], [replacement]) VALUES (@username,@find,@replacement)",
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+        #endregion
         /// <summary>
         /// 以DataReader返回自定义编辑器按钮列表
         /// </summary>

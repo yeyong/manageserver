@@ -2398,6 +2398,29 @@ namespace SAS.Data.SqlServer
                                   };
             return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.StoredProcedure, string.Format("{0}getcompanycountbycidconds", BaseConfigs.GetTablePrefix), parms));
         }
+        /// <summary>
+        /// 更新行业类别下企业信息数量
+        /// </summary>
+        public void UpdateCatalogCompanyCount(string idlist, int counts)
+        {
+            DbParameter[] parms = 
+				{
+						DbHelper.MakeInParam("@idlist", (DbType)SqlDbType.VarChar, 50,idlist),
+						DbHelper.MakeInParam("@counts", (DbType)SqlDbType.Int, 4,counts)
+				};
+            DbHelper.ExecuteNonQuery(CommandType.StoredProcedure, string.Format("{0}updatecatalogcompanycount", BaseConfigs.GetTablePrefix), parms);
+        }
+        /// <summary>
+        /// 更新评论总数
+        /// </summary>
+        public void UpdateCompanyCommentCount(int qyid, int counts)
+        {
+            DbParameter[] parms = {
+                DbHelper.MakeInParam("@en_id", (DbType)SqlDbType.Int, 4, qyid),
+                DbHelper.MakeInParam("@en_sell", (DbType)SqlDbType.Int, 4, counts),
+            };
+            DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("UPDATE [{0}company] SET [en_sell]=[en_sell]+@en_sell WHERE [en_id]=@en_id", BaseConfigs.GetTablePrefix), parms);
+        }
         #endregion
 
         #region 行业信息操作
@@ -2473,18 +2496,6 @@ namespace SAS.Data.SqlServer
             DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
 
             return true;
-        }
-        /// <summary>
-        /// 更新行业类别下企业信息数量
-        /// </summary>
-        public void UpdateCatalogCompanyCount(string idlist, int counts)
-        {
-            DbParameter[] parms = 
-				{
-						DbHelper.MakeInParam("@idlist", (DbType)SqlDbType.VarChar, 50,idlist),
-						DbHelper.MakeInParam("@counts", (DbType)SqlDbType.Int, 4,counts)
-				};
-            DbHelper.ExecuteNonQuery(CommandType.StoredProcedure, string.Format("{0}updatecatalogcompanycount", BaseConfigs.GetTablePrefix), parms);
         }
         #endregion
 

@@ -261,5 +261,16 @@ namespace SAS.Logic
         {
             return SAS.Data.DataProvider.Companies.GetCompanyCondition(arealist, typeid, regyear, keyword);
         }
+
+        /// <summary>
+        /// 更新企业评论数
+        /// </summary>
+        /// <param name="qyid"></param>
+        /// <param name="counts"></param>
+        /// <returns></returns>
+        public static void UpdateCompanyCommentCount(int qyid, int counts)
+        {
+            SAS.Data.DataProvider.Companies.UpdateCompanyCommentCount(qyid, counts);
+        }
     }
 }

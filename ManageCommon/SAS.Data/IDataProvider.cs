@@ -2004,6 +2004,10 @@ namespace SAS.Data
         /// 根据行业类别获取企业信息数量
         /// </summary>
         int GetCompanyCountByCatalog(int catalogid, string conditions);
+        /// <summary>
+        /// 更新评论总数
+        /// </summary>
+        void UpdateCompanyCommentCount(int qyid, int counts);
         #endregion
 
         #region 行业类别操作
@@ -2170,9 +2174,57 @@ namespace SAS.Data
 
         #region 评论表comment操作
         /// <summary>
+        /// 新增评论
+        /// </summary>
+        int CreateCommentInfo(CommentInfo cif);
+        /// <summary>
         /// 根据企业ID获取评论数量
         /// </summary>
         int GetCommentCountByQyID(int qyid);
+        /// <summary>
+        /// 根据企业ID获取企业信息集合
+        /// </summary>
+        DataTable GetCommentListByQyID(int qyid);
+        /// <summary>
+        /// 根据企业ID获取企业信息集合
+        /// </summary>
+        DataTable GetCommentListPageByQyID(int qyid, int pageSize, int pageIndex);
+        #endregion
+
+        #region 脏词过滤
+        /// <summary>
+        /// 添加词语过滤
+        /// </summary>
+        /// <param name="userName">创建管理员用户名</param>
+        /// <param name="find">查找词</param>
+        /// <param name="replacement">替换内容</param>
+        /// <returns></returns>
+        int AddWord(string userName, string find, string replacement);
+        /// <summary>
+        /// 获取屏蔽词列表
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetBanWordList();
+        /// <summary>
+        /// 删除词语过滤
+        /// </summary>
+        /// <param name="idList">过滤词条Id列表</param>
+        /// <returns></returns>
+        int DeleteWords(string idList);
+        /// <summary>
+        /// 更新过滤词条
+        /// </summary>
+        /// <param name="id">词条Id</param>
+        /// <param name="find">查找词</param>
+        /// <param name="replacement">替换内容</param>
+        /// <returns></returns>
+        int UpdateWord(int id, string find, string replacement);
+        /// <summary>
+        /// 更新过滤词
+        /// </summary>
+        /// <param name="find">要替换的词</param>
+        /// <param name="replacement">被替换的词</param>
+        void UpdateBadWords(string find, string replacement);
         #endregion
 
         /// <summary>
@@ -2181,12 +2233,6 @@ namespace SAS.Data
         /// <param name="uids">用户id列表</param>
         /// <returns></returns>
         DataTable GetMailTable(string uids);
-
-        /// <summary>
-        /// 获取屏蔽词列表
-        /// </summary>
-        /// <returns></returns>
-        DataTable GetBanWordList();
 
         /// <summary>
         /// 获取自定义按钮列表
