@@ -114,27 +114,24 @@ function createXMLHttp() {
 	throw new Error("XMLHttp object could be created.");
 }
 
-function _sendRequest(url,func,isxml,postdata)
-{
-	var xhr=createXMLHttp();
-	if(!postdata)postdata=null;
-	xhr.open(postdata?"POST":"GET",url,true);
-	if (postdata)
-	{
-		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	}
-	if(func){
-		xhr.onreadystatechange=function(){
-			if(xhr.readyState==4){
-				func(isxml&&xhr.responseXML?xhr.responseXML:xhr.responseText)
-			}
-		}
-	}
-	if (postdata === true)
-	{
-		postdata = '';
-	}
-	xhr.send(postdata)
+function _sendRequest(url, func, isxml, postdata) {
+    var xhr = createXMLHttp();
+    if (!postdata) postdata = null;
+    xhr.open(postdata ? "POST" : "GET", url, true);
+    if (postdata) {
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    }
+    if (func) {
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                func(isxml && xhr.responseXML ? xhr.responseXML : xhr.responseText)
+            }
+        }
+    }
+    if (postdata === true) {
+        postdata = '';
+    }
+    xhr.send(postdata)
 }
 function ajaxRead(file,fun){
 	var xmlObj = createXMLHttp();

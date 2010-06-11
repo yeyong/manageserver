@@ -399,5 +399,14 @@ namespace SAS.Data.DataProvider
         {
             return DatabaseProvider.GetInstance().GetCompanyCountByCatalog(catalogid, conditions);
         }
+        /// <summary>
+        /// 更新评论总数
+        /// </summary>
+        /// <param name="qyid"></param>
+        /// <param name="counts"></param>
+        public static void UpdateCompanyCommentCount(int qyid, int counts)
+        {
+            DatabaseProvider.GetInstance().UpdateCompanyCommentCount(qyid, counts);
+        }
     }
 }

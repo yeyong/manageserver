@@ -32,12 +32,62 @@ namespace SAS.ManageWeb
         protected override void ShowPage()
         {
             companyshowinfo = Companies.GetCompanyInfo(showenid);
-            commentcount = Comments.GetCommentCountByQyID(showenid);
+            commentcount = companyshowinfo.En_sell;
             if (companyshowinfo.En_status != 2)
             {
                 AddErrLine("该企业审批尚未通过！");
                 return;
             }
+
+            if (ispost)
+            {
+                string commentmsg = SASRequest.GetString("commentmsg").Trim();
+                string commentuser = SASRequest.GetString("nickname").Trim();
+                int commentscore = SASRequest.GetInt("scores", 0);
+                if (LogicUtils.IsCrossSitePost())
+                {
+                    AddErrLine("您的请求来路不正确，无法提交。如果您安装了某种默认屏蔽来路信息的个人防火墙软件(如 Norton Internet Security)，请设置其不要禁止来路信息后再试。");
+                    return;
+                }
+                if (commentmsg.Length < 1)
+                {
+                    AddErrLine("评论内容不能为空！");
+                    return;
+                }
+                if (commentmsg.Length < config.Minpostsize)
+                {
+                    AddErrLine("评论内容过少！");
+                    return;
+                }
+
+                string lastcommenttime = Utils.GetCookie("lastcomment");
+                if (lastcommenttime != "")
+                {
+                    int interval = Utils.StrDateDiffSeconds(lastcommenttime, config.Postinterval);
+                    if (interval < 0)
+                    {
+                        AddErrLine("系统规定发帖间隔为"
+                            + config.Postinterval.ToString()
+                            + "秒, 您还需要等待 "
+                            + (interval * -1).ToString()
+                            + " 秒");
+                        return;
+                    }
+                }
+
+                CommentInfo cif = new CommentInfo();
+                cif.objid = showenid;
+                cif.username = commentuser == "" ? "匿名" : commentuser;
+                cif.userid = userid;
+                cif.userip = SASRequest.GetIP();
+                cif.content = Utils.StrFormat(Utils.RemoveHtml(LogicUtils.BanWordFilter(commentmsg)));
+                cif.parentid = 0;
+                cif.scored = commentscore;
+                cif.commentid = Comments.CreateComment(cif);
+                Companies.UpdateCompanyCommentCount(showenid, 1);
+                Utils.WriteCookie("lastcomment", System.DateTime.Now.ToString());
+            }
+
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/jquery.cluetip.css");
             script += "\r\n<script src=\"" + forumpath + "javascript/common.js\" type=\"text/javascript\"></script>";
@@ -82,50 +132,6 @@ namespace SAS.ManageWeb
 
             CompaniesStats.Track(showenid, 1);
             companyviews = companyshowinfo.En_accesses + 1 + (config.TopicQueueStats == 1 ? CompaniesStats.GetStoredCompanyViewCount(companyshowinfo.En_id) : 0);
-
-            if (ispost)
-            {
-                string commentmsg = SASRequest.GetString("commentmsg").Trim();
-                string commentuser = SASRequest.GetString("nickname").Trim();
-                int commentscore = SASRequest.GetInt("scores",0);
-                if (LogicUtils.IsCrossSitePost())
-                {
-                    AddErrLine("您的请求来路不正确，无法提交。如果您安装了某种默认屏蔽来路信息的个人防火墙软件(如 Norton Internet Security)，请设置其不要禁止来路信息后再试。");
-                    return;
-                }
-                if (commentmsg.Length < 1)
-                {
-                    AddErrLine("评论内容不能为空！");
-                    return;
-                }
-                if (commentmsg.Length < config.Minpostsize)
-                {
-                    AddErrLine("评论内容过少！");
-                    return;
-                }
-
-                string lastcommenttime = Utils.GetCookie("lastcomment");
-
-                int interval = Utils.StrDateDiffSeconds(lastcommenttime, config.Postinterval);
-                if (interval < 0)
-                {
-                    AddErrLine("系统规定发帖间隔为"
-                        + config.Postinterval.ToString()
-                        + "秒, 您还需要等待 "
-                        + (interval * -1).ToString()
-                        + " 秒");
-                    return;
-                }
-
-                CommentInfo cif = new CommentInfo();
-                cif.objid = showenid;
-                cif.username = commentuser == "" ? "匿名" : commentuser;
-                cif.userid = userid;
-                cif.userip = SASRequest.GetIP();
-                cif.content = Utils.RemoveHtml(LogicUtils.BanWordFilter(commentmsg));
-                cif.parentid = 0;
-                cif.scored = commentscore;
-            }
         }
     }
 }

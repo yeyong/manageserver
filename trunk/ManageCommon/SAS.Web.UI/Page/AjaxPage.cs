@@ -60,7 +60,30 @@ namespace SAS.Web.UI
                 case "checkenname":
                     CheckCompanyName();
                     break;
+                case "getcompanycomment":
+                    GetCompanyComment(SASRequest.GetInt("qyid", 0), SASRequest.GetInt("pagesize", 10), SASRequest.GetInt("pageindex", 1));
+                    break;
             }
+        }
+
+        /// <summary>
+        /// 获取企业评论
+        /// </summary>
+        /// <param name="qyid"></param>
+        /// <param name="pagesize"></param>
+        /// <param name="pageindex"></param>
+        private void GetCompanyComment(int qyid, int pagesize, int pageindex)
+        {
+            #region 企业评论
+            pageindex = (pageindex < 0) ? 1 : pageindex;
+            pagesize = (pagesize < 0 || pagesize > 25) ? 25 : pagesize;
+
+            HttpContext.Current.Response.ExpiresAbsolute = DateTime.Now.AddSeconds(-1);
+            HttpContext.Current.Response.Expires = -1;
+            HttpContext.Current.Response.Clear();
+            HttpContext.Current.Response.Write(Comments.GetCommentListJosn(qyid, pagesize, pageindex).ToString().Trim(';'));
+            HttpContext.Current.Response.End();
+            #endregion
         }
 
         #region 头像

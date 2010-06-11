@@ -443,6 +443,13 @@
     <Compile Include="ManagePage\global\global_usergroupgrid.aspx.designer.cs">
       <DependentUpon>global_usergroupgrid.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\global\global_wordgrid.aspx.cs">
+      <DependentUpon>global_wordgrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_wordgrid.aspx.designer.cs">
+      <DependentUpon>global_wordgrid.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -991,6 +998,7 @@
     <Content Include="ManagePage\global\global_uiandshowstyle.aspx" />
     <Content Include="ManagePage\global\global_usergrid.aspx" />
     <Content Include="ManagePage\global\global_usergroupgrid.aspx" />
+    <Content Include="ManagePage\global\global_wordgrid.aspx" />
     <Content Include="ManagePage\images\add.gif" />
     <Content Include="ManagePage\images\addmenu.gif" />
     <Content Include="ManagePage\images\addremoveprograms.gif" />
