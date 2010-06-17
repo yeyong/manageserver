@@ -67,7 +67,7 @@
                                     <td>启用状态:</td>
                                     <td>
                                         <sas:RadioButtonList id="envisible" runat="server" RepeatColumns="3" HintInfo="企业是否通过审批">
-                                            <asp:ListItem Value="-1" Text="不限制" Selected="True"></asp:ListItem>                                         
+                                            <asp:ListItem Value="-1" Text="不限制" Selected="True"></asp:ListItem>
                                             <asp:ListItem Value="1" Text="启用"></asp:ListItem>
                                             <asp:ListItem Value="0" Text="未启用"></asp:ListItem>
                                         </sas:RadioButtonList>
@@ -102,6 +102,9 @@
                                     <a href="company_companyedit.aspx?enid=<%# DataBinder.Eval(Container, "DataItem.en_id").ToString()%>">
                                         编辑</a>
                                     <%# DataGrid1.LoadSelectedCheckBox(DataBinder.Eval(Container, "DataItem.en_id").ToString())%>
+                                    <a href="../global/global_commentedit.aspx?objid=<%# DataBinder.Eval(Container, "DataItem.en_id").ToString()%>">
+                                        评论</a>
+                                    <%# DataGrid1.LoadSelectedCheckBox(DataBinder.Eval(Container, "DataItem.en_id").ToString())%>
                                 </ItemTemplate>
                             </asp:TemplateColumn>
                             <asp:BoundColumn DataField="en_name" SortExpression="en_name" HeaderText="名称" ReadOnly="true"></asp:BoundColumn>
@@ -128,7 +131,7 @@
                     <td><sas:Button ID="ENStart" runat="server" Text=" 开 启 " designtimedragdrop="247" Enabled="false"></sas:Button>&nbsp;&nbsp;</td>
                     <td><sas:Button ID="ENPause" runat="server" Text=" 暂 停 " ButtonImgUrl="../images/del.gif" Enabled="false"></sas:Button>&nbsp;&nbsp;</td>
                 </tr>
-            </table>              
+            </table>
         </p>
         <sas:Hint id="Hint1" runat="server" HintImageUrl="../images"></sas:Hint>
     </form>

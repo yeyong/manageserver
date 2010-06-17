@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 
 using SAS.Logic;
 using SAS.Common;
+using SAS.Common.Generic;
 using SAS.Config;
 using SAS.Entity;
 
@@ -25,7 +26,7 @@ namespace SAS.ManageWeb
         /// <summary>
         /// 城市企业信息
         /// </summary>
-        protected DataRow[] companylistbycity;
+        protected List<Companys> companylistbycity = new List<Companys>();
         /// <summary>
         /// 友情链接列表
         /// </summary>

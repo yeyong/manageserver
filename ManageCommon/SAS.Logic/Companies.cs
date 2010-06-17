@@ -178,14 +178,15 @@ namespace SAS.Logic
         /// <returns></returns>
         public static List<Companys> GetNewCompanyList()
         {
-            List<Companys> companylist = new List<Companys>();
-            DataTable dt = GetCompanyTableList();
-            int row = 0;
-            foreach (DataRow dr in dt.Select(COMMCONDITION, "en_createdate desc"))
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            string cachekey = CacheKeys.SAS_COMPANY_INDEX_NEW;
+            List<Companys> companylist = cache.RetrieveObject(cachekey) as List<Companys>;
+            if (companylist == null)
             {
-                if (row > 4) break;
-                companylist.Add(SAS.Data.DataProvider.Companies.LoadCompanyInfo(dr));
-                row++;
+                companylist = SAS.Data.DataProvider.Companies.GetCompanyNewList(10);
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 30;
+                cache.AddObject(cachekey, companylist);
             }
             return companylist;
         }
@@ -242,10 +243,19 @@ namespace SAS.Logic
         /// </summary>
         /// <param name="cityid"></param>
         /// <returns></returns>
-        public static DataRow[] GetCompanyListByCity(int cityid)
+        public static List<Companys> GetCompanyListByCity(int cityid)
         {
-            DataTable dt = GetCompanyTableList();
-            return dt.Select("[en_areas] IN (" + areas.GetDistrictIDByCity(cityid) + ")", COMMSORT);
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            string cachekey = CacheKeys.SAS_COMPANY_INDEX_CITY + cityid;
+            List<Companys> companylist = cache.RetrieveObject(cachekey) as List<Companys>;
+            if (companylist == null)
+            {
+                companylist = SAS.Data.DataProvider.Companies.GetCompanyListByCity(cityid, 4);
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 300;
+                cache.AddObject(cachekey, companylist);
+            }
+            return companylist;
         }
 
         /// <summary>

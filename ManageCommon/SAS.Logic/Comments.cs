@@ -28,6 +28,15 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 批量删除评论
+        /// </summary>
+        /// <param name="commidlist"></param>
+        public static int DelComments(string commidlist)
+        {
+            return SAS.Data.DataProvider.Comments.DelComments(commidlist);
+        }
+
+        /// <summary>
         /// 根据企业ID获取评论数量
         /// </summary>
         public static int GetCommentCountByQyID(int qyid)
@@ -63,6 +72,27 @@ namespace SAS.Logic
         public static StringBuilder GetCommentListJosn(int qyid, int pagesize, int pageindex)
         {
             return Utils.DataTableToJSON(GetCommentListByQyID(qyid, pagesize, pageindex));
+        }
+
+        /// <summary>
+        /// 获取企业评分
+        /// </summary>
+        /// <param name="qyid"></param>
+        /// <returns></returns>
+        public static float GetCommentScored(int qyid)
+        {
+            return SAS.Data.DataProvider.Comments.GetCommentScored(qyid);
+        }
+        /// <summary>
+        /// 获取企业评分Josn数据
+        /// </summary>
+        public static StringBuilder GetCommentScoredJosn(int qyid)
+        {
+            StringBuilder socredjosn = new StringBuilder();
+            socredjosn.Append("[");
+            socredjosn.Append(string.Format("{0}", GetCommentScored(qyid)));
+            socredjosn.Append("]");
+            return socredjosn;
         }
     }
 }

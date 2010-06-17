@@ -4,19 +4,19 @@
 	<!--左边 begin-->
 	<div class="onelt mar_top_8">
 		<div class="onelt1 f_333" id="bulletin">
-			<p class="onelt1tit1">公告栏</p>
-			<ul class="onelt1nr">
-			    <%loop announcement announcementlist%>
-			    <li>▪&nbsp;<a title="{announcement[title]}" href="#">{announcement[title]}</a></li>
-			    <%/loop%>
-			</ul>
-			<p class="onelt1tit1">最新活动</p>
+		    <p class="onelt1tit1">最新活动</p>
 			<ul class="onelt1nr">
 				<li>▪&nbsp;<a title="1688开业注册赢金" href="#">1688开业"注册赢金币"...</a></li>
 				<li>▪&nbsp;<a title="阿里集团开通智利地震专项" href="#" style="color:#f00;">阿里集团开通智利地震专项...</a></li>
 				<li>▪&nbsp;<a title="精选爆款" href="#">精选爆款...</a></li>
 				<li>▪&nbsp;<a title="特色礼品盛宴 正在进行" href="#">特色礼品盛宴 正在进行...</a></li>
 				<li>▪&nbsp;<a title="厂家清仓1件不留" href="#" style="color:#f00;">厂家清仓1件不留...</a></li>
+			</ul>
+			<p class="onelt1tit1">公告栏</p>
+			<ul class="onelt1nr">
+			    <%loop announcement announcementlist%>
+			    <li>▪&nbsp;<a title="{announcement[title]}" href="#">{announcement[title]}</a></li>
+			    <%/loop%>
 			</ul>
 		</div>
 		<div class="onelt2 mar_top_8" id="tao">
@@ -95,17 +95,16 @@
 					<b>{cityinfo1[CityName]}：</b>
 					<%set {companylistbycity}=Companies.GetCompanyListByCity({strtoint({cityinfo1[CityID]})})%>
 					<%set (int) {companyinfolength}=0%>
-					<%loop (DataRow) companyinfobycity companylistbycity%>
-					    <%set {companyinfolength}={companyinfolength}+{companyinfobycity[en_name]}.Length%>
-					    <%set (string) {companyinfoname}={companyinfobycity[en_name]}%>
+					<%loop (Companys) companyinfobycity companylistbycity%>
+					    <%set {companyinfolength}={companyinfolength}+{companyinfobycity.en_name}.Length%>
+					    <%set (string) {companyinfoname}={companyinfobycity.en_name}%>
 					    <%if {companyinfolength}>28%>
-					    <%set {companyinfoname}=Utils.CutString({companyinfoname},0,28-{companyinfolength}+{companyinfobycity[en_name]}.Length)%>
-					    <a title="{companyinfobycity[en_name]}" href="{companyinfobycity[en_id]}.html" target="_blank">{companyinfoname}</a>
+					    <%set {companyinfoname}=Utils.CutString({companyinfoname},0,28-{companyinfolength}+{companyinfobycity.en_name}.Length)%>
+					    <a title="{companyinfobycity.en_name}" href="{companyinfobycity.en_id}.html" target="_blank">{companyinfoname}</a>
 				        <%break%>
 				        <%else%>
-				        <a title="{companyinfobycity[en_name]}" href="{companyinfobycity[en_id]}.html" target="_blank">{companyinfoname}</a>
+				        <a title="{companyinfobycity.en_name}" href="{companyinfobycity.en_id}.html" target="_blank">{companyinfoname}</a>
 				        <%/if%>
-					
 					<%/loop%>
 				</li>
 				<%/loop%>

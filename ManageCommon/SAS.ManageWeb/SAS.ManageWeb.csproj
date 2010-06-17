@@ -296,6 +296,13 @@
     <Compile Include="ManagePage\global\global_baseset.aspx.designer.cs">
       <DependentUpon>global_baseset.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\global\global_commentedit.aspx.cs">
+      <DependentUpon>global_commentedit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_commentedit.aspx.designer.cs">
+      <DependentUpon>global_commentedit.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\global\global_editactivity.aspx.cs">
       <DependentUpon>global_editactivity.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -977,6 +984,7 @@
     <Content Include="ManagePage\global\global_advsgrid.aspx" />
     <Content Include="ManagePage\global\global_announcegrid.aspx" />
     <Content Include="ManagePage\global\global_baseset.aspx" />
+    <Content Include="ManagePage\global\global_commentedit.aspx" />
     <Content Include="ManagePage\global\global_editactivity.aspx" />
     <Content Include="ManagePage\global\global_editadminusergroup.aspx" />
     <Content Include="ManagePage\global\global_editannounce.aspx" />
