@@ -74,23 +74,16 @@ function ajaxgetcomment(qyid, pagesize, pageindex) {
     });
 }
 
-function ajaxgetleavewordbyid(leavewordid) {
-    _sendRequest('tools/ajax.aspx?t=getgoodsleavewordbyid&leavewordid=' + leavewordid, function(d) {
+function ajaxgetcommentscored(qyid) {
+    _sendRequest('tools/ajax.aspx?t=getcompanycommentscored&qyid=' + qyid, function(d) {
         try {
             eval('leavewordmessage_callback(' + d + ')');
-        } catch (e) { };
+        } catch (e) { alert(e.message); };
     });
 }
 
 function leavewordmessage_callback(data) {
-    if (data[0].id > 0) {
-        $("message").value = data[0].message.replace(/<br \/>/g, "\r\n");
-        $("leavewordid").value = data[0].id;
-        $("postleaveword").value = "edit";
-    }
-    else {
-        alert('当前留言不存在或已被删除!');
-    }
+    $("commentscored").innerHTML = data;
 }
 
 function leaveword_callback(data) {

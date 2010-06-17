@@ -2276,6 +2276,14 @@ namespace SAS.Data.SqlServer
             return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText, parms), 0);
         }
         /// <summary>
+        /// 批量删除评论
+        /// </summary>
+        public int DeleteComments(string commidlist)
+        {
+            string commandText = string.Format("Delete FROM [{0}comment] WHERE [commentid] IN ({1})", BaseConfigs.GetTablePrefix, commidlist);
+            return DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
+        }
+        /// <summary>
         /// 根据企业ID获取评论数量
         /// </summary>
         public int GetCommentCountByQyID(int qyid)
@@ -2309,6 +2317,18 @@ namespace SAS.Data.SqlServer
                 commandText = "SELECT TOP {0} * FROM [{1}comment] WHERE [commentid] < (SELECT MIN([commentid])  FROM (SELECT TOP " + ((pageIndex - 1) * pageSize) + " [commentid] FROM [{1}comment]  WHERE  [objid] = @objid ORDER BY commentdate DESC) AS tblTmp ) AND [objid] = @objid ORDER BY commentdate DESC";
             }
             return DbHelper.ExecuteDataset(CommandType.Text, string.Format(commandText, pageSize, BaseConfigs.GetTablePrefix), parms).Tables[0];
+        }
+        /// <summary>
+        /// 获取企业评分
+        /// </summary>
+        public float GetCommentScored(int qyid)
+        {
+            DbParameter[] parms = {
+									   DbHelper.MakeInParam("@objid",(DbType)SqlDbType.Int,4,qyid)
+    							  };
+            string commandText = "SELECT CAST(sum(scored)*1.0/COUNT(commentid) AS DECIMAL(18,1)) FROM [{0}comment] WHERE [objid] = @objid";
+            return TypeConverter.ObjectToFloat(DbHelper.ExecuteScalar(CommandType.Text, string.Format(commandText, BaseConfigs.GetTablePrefix), parms));
+
         }
         #endregion
 

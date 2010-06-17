@@ -63,6 +63,9 @@ namespace SAS.Web.UI
                 case "getcompanycomment":
                     GetCompanyComment(SASRequest.GetInt("qyid", 0), SASRequest.GetInt("pagesize", 10), SASRequest.GetInt("pageindex", 1));
                     break;
+                case "getcompanycommentscored":
+                    GetCompanyCommentScored(SASRequest.GetInt("qyid", 0));
+                    break;
             }
         }
 
@@ -82,6 +85,17 @@ namespace SAS.Web.UI
             HttpContext.Current.Response.Expires = -1;
             HttpContext.Current.Response.Clear();
             HttpContext.Current.Response.Write(Comments.GetCommentListJosn(qyid, pagesize, pageindex).ToString().Trim(';'));
+            HttpContext.Current.Response.End();
+            #endregion
+        }
+
+        private void GetCompanyCommentScored(int qyid)
+        {
+            #region 企业评分
+            HttpContext.Current.Response.ExpiresAbsolute = DateTime.Now.AddSeconds(-1);
+            HttpContext.Current.Response.Expires = -1;
+            HttpContext.Current.Response.Clear();
+            HttpContext.Current.Response.Write(Comments.GetCommentScoredJosn(qyid).ToString());
             HttpContext.Current.Response.End();
             #endregion
         }

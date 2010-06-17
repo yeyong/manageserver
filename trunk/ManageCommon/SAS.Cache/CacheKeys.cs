@@ -17,5 +17,13 @@ namespace SAS.Cache
         /// </summary>
         public const string SAS_COMPANY_Table_SUB = "/SAS/CompanyTableList/CompanyTableList_";
         public const string SAS_CARDCONFIG = "/SAS/CardConfig";
+        /// <summary>
+        /// 首页城市企业信息
+        /// </summary>
+        public const string SAS_COMPANY_INDEX_CITY = "/SAS/CompanyIndexByCity_";
+        /// <summary>
+        /// 最新企业信息
+        /// </summary>
+        public const string SAS_COMPANY_INDEX_NEW = "/SAS/CompanyIndexNEW";
     }
 }

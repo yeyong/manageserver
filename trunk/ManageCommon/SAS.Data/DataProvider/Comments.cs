@@ -24,6 +24,13 @@ namespace SAS.Data.DataProvider
             return DatabaseProvider.GetInstance().CreateCommentInfo(cif);
         }
         /// <summary>
+        /// 删除评论
+        /// </summary>
+        public static int DelComments(string commidlist)
+        {
+            return DatabaseProvider.GetInstance().DeleteComments(commidlist);
+        }
+        /// <summary>
         /// 根据企业ID获取评论数量
         /// </summary>
         /// <param name="qyid"></param>
@@ -45,6 +52,13 @@ namespace SAS.Data.DataProvider
         public static DataTable GetCommentListPageByQyID(int qyid, int pageSize, int pageIndex)
         {
             return DatabaseProvider.GetInstance().GetCommentListPageByQyID(qyid, pageSize, pageIndex);
+        }
+        /// <summary>
+        /// 获取企业评分
+        /// </summary>
+        public static float GetCommentScored(int qyid)
+        {
+            return DatabaseProvider.GetInstance().GetCommentScored(qyid);
         }
     }
 }

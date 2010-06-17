@@ -121,6 +121,7 @@ namespace SAS.ManageWeb
                     + "\r\n " + "});"
                     + "\r\n " + "jQuery(this).gettop({objsrc:\"templates/" + templatepath + "/images/diaocha.gif\",objhref:\"javascript:scrollTo(0,0)\"});"
                     + "\r\n " + "});\r\n"
+                    + "\r\n " + "ajaxgetcommentscored(page_qyid);"
                     + "\r\n " + "ajaxgetcomment(page_qyid,comment_page_pagesize,comment_page_currentpage);"
                     + "\r\n " + "function validate(form){"
                     + "\r\n " + "   if(form.nickname.value==''){alert(\"请输入您的昵称！\");return false;}"

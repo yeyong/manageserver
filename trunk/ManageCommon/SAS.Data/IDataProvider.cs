@@ -2008,6 +2008,14 @@ namespace SAS.Data
         /// 更新评论总数
         /// </summary>
         void UpdateCompanyCommentCount(int qyid, int counts);
+        /// <summary>
+        /// 根据城市获取企业信息
+        /// </summary>
+        IDataReader GetCompanyListByCity(int cityid, int num);
+        /// <summary>
+        /// 获取最新加盟企业信息
+        /// </summary>
+        IDataReader GetCompanyNewList(int nums);
         #endregion
 
         #region 行业类别操作
@@ -2178,6 +2186,10 @@ namespace SAS.Data
         /// </summary>
         int CreateCommentInfo(CommentInfo cif);
         /// <summary>
+        /// 删除评论
+        /// </summary>
+        int DeleteComments(string commidlist);
+        /// <summary>
         /// 根据企业ID获取评论数量
         /// </summary>
         int GetCommentCountByQyID(int qyid);
@@ -2189,6 +2201,10 @@ namespace SAS.Data
         /// 根据企业ID获取企业信息集合
         /// </summary>
         DataTable GetCommentListPageByQyID(int qyid, int pageSize, int pageIndex);
+        /// <summary>
+        /// 获取企业评分
+        /// </summary>
+        float GetCommentScored(int qyid);
         #endregion
 
         #region 脏词过滤
