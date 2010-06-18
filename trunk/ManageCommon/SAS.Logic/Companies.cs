@@ -183,7 +183,7 @@ namespace SAS.Logic
             List<Companys> companylist = cache.RetrieveObject(cachekey) as List<Companys>;
             if (companylist == null)
             {
-                companylist = SAS.Data.DataProvider.Companies.GetCompanyNewList(10);
+                companylist = SAS.Data.DataProvider.Companies.GetCompanyListByOrder(10, "en_createdate", true);
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 30;
                 cache.AddObject(cachekey, companylist);
@@ -198,24 +198,27 @@ namespace SAS.Logic
         /// <returns></returns>
         public static List<Companys> GetCompanyListByType(EnTypeEnum ete)
         {
-            List<Companys> companylist = new List<Companys>();
-            DataTable dt = GetCompanyTableList();
-            int row = 0;
-
-            foreach (DataRow dr in dt.Select(COMMCONDITION + " AND [en_type] = " + Convert.ToInt16(ete),"en_credits desc"))
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            string cachekey = CacheKeys.SAS_COMPANY_INDEX_ENTYPE + Convert.ToInt16(ete);
+            List<Companys> companylist = cache.RetrieveObject(cachekey) as List<Companys>;
+            if (companylist == null)
             {
-                if (row > 9) break;
-                Companys _cominfo = SAS.Data.DataProvider.Companies.LoadCompanyInfo(dr);
-                if (!string.IsNullOrEmpty(dr["en_cataloglist"].ToString()))
+                companylist = new List<Companys>();
+                List<Companys> tempcompanylist = SAS.Data.DataProvider.Companies.GetCompanyListByType(Convert.ToInt16(ete), 10);
+                foreach (Companys compinfo in tempcompanylist)
                 {
-                    _cominfo.TempCatalogID = TypeConverter.StrToInt(dr["en_cataloglist"].ToString().Split(',')[0], 0);
-                    CatalogInfo _catalog = Catalogs.GetCatalogCacheInfo(_cominfo.TempCatalogID);
-                    if (_catalog != null) _cominfo.CatalogName = _catalog.name;
+                    if (compinfo.En_cataloglist.Length > 0)
+                    {
+                        compinfo.TempCatalogID = TypeConverter.StrToInt(compinfo.En_cataloglist.Split(',')[0]);
+                        CatalogInfo _catalog = Catalogs.GetCatalogCacheInfo(compinfo.TempCatalogID);
+                        if (_catalog != null) compinfo.CatalogName = _catalog.name;
+                    }
+                    companylist.Add(compinfo);
                 }
-                companylist.Add(_cominfo);
-                row++;
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 300;
+                cache.AddObject(cachekey, companylist);
             }
-
             return companylist;
         }
 
@@ -225,15 +228,15 @@ namespace SAS.Logic
         /// <returns></returns>
         public static List<Companys> GetCompanyListViews()
         {
-            List<Companys> companylist = new List<Companys>();
-            DataTable dt = GetCompanyTableList();
-            int rows = 0;
-            foreach (DataRow dr in dt.Select(COMMCONDITION, "en_accesses desc"))
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            string cachekey = CacheKeys.SAS_COMPANY_INDEX_ACCESSES;
+            List<Companys> companylist = cache.RetrieveObject(cachekey) as List<Companys>;
+            if (companylist == null)
             {
-                if (rows > 9) break;
-                Companys _cominfo = SAS.Data.DataProvider.Companies.LoadCompanyInfo(dr);
-                companylist.Add(_cominfo);
-                rows++;
+                companylist = SAS.Data.DataProvider.Companies.GetCompanyListByOrder(10, "en_accesses", true);
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 300;
+                cache.AddObject(cachekey, companylist);
             }
             return companylist;
         }

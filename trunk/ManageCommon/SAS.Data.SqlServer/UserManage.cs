@@ -2429,14 +2429,24 @@ namespace SAS.Data.SqlServer
             DbParameter[] parms = {
                 DbHelper.MakeInParam("@cityid", (DbType)SqlDbType.Int, 4, cityid)
             };
-            return DbHelper.ExecuteReader(CommandType.Text, string.Format("SELECT TOP {1} * FROM {0}company WHERE [en_visble] = 1 AND [en_areas] IN (SELECT DistrictID FROM {0}District WHERE [CityID] = @cityid) ORDER BY [en_status] desc,[en_credits] desc", BaseConfigs.GetTablePrefix, num), parms);
+            return DbHelper.ExecuteReader(CommandType.Text, string.Format("SELECT TOP {1} * FROM {0}company WHERE [en_visble] = 1 AND [en_areas] IN (SELECT DistrictID FROM {0}District WHERE [CityID] = @cityid) ORDER BY [en_status] desc,[en_credits] desc,[en_createdate] desc", BaseConfigs.GetTablePrefix, num), parms);
         }
         /// <summary>
-        /// 获取最新加盟企业信息
+        /// 根据排序获取企业信息
         /// </summary>
-        public IDataReader GetCompanyNewList(int nums)
+        public IDataReader GetCompanyListByOrder(int nums, string ordercolumn, bool ordertype)
         {
-            return DbHelper.ExecuteReader(CommandType.Text, string.Format("SELECT TOP {1} * FROM {0}company WHERE [en_visble] = 1 ORDER BY [en_createdate] desc", BaseConfigs.GetTablePrefix, nums));
+            return DbHelper.ExecuteReader(CommandType.Text, string.Format("SELECT TOP {1} * FROM {0}company WHERE [en_visble] = 1 ORDER BY [{2}] {3}", BaseConfigs.GetTablePrefix, nums, ordercolumn, ordertype ? "desc" : ""));
+        }
+        /// <summary>
+        /// 根据类型获取企业信息
+        /// </summary>
+        public IDataReader GetCompanyListByType(int entype, int nums)
+        {
+            DbParameter[] parms = {
+                DbHelper.MakeInParam("@entype", (DbType)SqlDbType.Int, 4, entype)
+            };
+            return DbHelper.ExecuteReader(CommandType.Text, string.Format("SELECT TOP {1} * FROM {0}company WHERE [en_visble] = 1 AND [en_type] = @entype ORDER BY [en_status] desc,[en_credits] desc,[en_createdate] desc", BaseConfigs.GetTablePrefix, nums), parms);
         }
         #endregion
 
