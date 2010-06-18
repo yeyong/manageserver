@@ -20,10 +20,18 @@ namespace SAS.Cache
         /// <summary>
         /// 首页城市企业信息
         /// </summary>
-        public const string SAS_COMPANY_INDEX_CITY = "/SAS/CompanyIndexByCity_";
+        public const string SAS_COMPANY_INDEX_CITY = "/SAS/CompanyIndex/City_";
         /// <summary>
         /// 最新企业信息
         /// </summary>
-        public const string SAS_COMPANY_INDEX_NEW = "/SAS/CompanyIndexNEW";
+        public const string SAS_COMPANY_INDEX_NEW = "/SAS/CompanyIndex/NEW";
+        /// <summary>
+        /// 最多访问的企业
+        /// </summary>
+        public const string SAS_COMPANY_INDEX_ACCESSES = "/SAS/CompanyIndex/ACCESSES";
+        /// <summary>
+        /// 首页类型企业信息
+        /// </summary>
+        public const string SAS_COMPANY_INDEX_ENTYPE = "/SAS/CompanyIndex/ENTYPE_";
     }
 }

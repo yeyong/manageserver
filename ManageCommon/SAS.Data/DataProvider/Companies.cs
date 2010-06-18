@@ -475,9 +475,32 @@ namespace SAS.Data.DataProvider
         /// <summary>
         /// 获取最新加盟企业信息
         /// </summary>
-        public static List<Companys> GetCompanyNewList(int nums)
+        /// <param name="nums">数量</param>
+        /// <param name="ordercolumn">排序列</param>
+        /// <param name="ordertype">排序类型（true，倒序）</param>
+        public static List<Companys> GetCompanyListByOrder(int nums, string ordercolumn, bool ordertype)
         {
-            IDataReader reader = DatabaseProvider.GetInstance().GetCompanyNewList(nums);
+            IDataReader reader = DatabaseProvider.GetInstance().GetCompanyListByOrder(nums, ordercolumn, ordertype);
+            List<Companys> companylist = new List<Companys>();
+
+            while (reader.Read())
+            {
+                companylist.Add(LoadCompanyInfoWithoutCity(reader));
+            }
+
+            reader.Close();
+            return companylist;
+        }
+
+        /// <summary>
+        /// 根据类型获取企业信息
+        /// </summary>
+        /// <param name="entype"></param>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static List<Companys> GetCompanyListByType(int entype, int nums)
+        {
+            IDataReader reader = DatabaseProvider.GetInstance().GetCompanyListByType(entype, nums);
             List<Companys> companylist = new List<Companys>();
 
             while (reader.Read())

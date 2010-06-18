@@ -2013,9 +2013,13 @@ namespace SAS.Data
         /// </summary>
         IDataReader GetCompanyListByCity(int cityid, int num);
         /// <summary>
-        /// 获取最新加盟企业信息
+        /// 根据排序获取企业信息
         /// </summary>
-        IDataReader GetCompanyNewList(int nums);
+        IDataReader GetCompanyListByOrder(int nums, string ordercolumn, bool ordertype);
+        /// <summary>
+        /// 根据类型获取企业信息
+        /// </summary>
+        IDataReader GetCompanyListByType(int entype, int nums);
         #endregion
 
         #region 行业类别操作
