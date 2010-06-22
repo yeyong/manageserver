@@ -59,6 +59,14 @@ namespace SAS.Data.SqlServer
             return DbHelper.ExecuteReader(CommandType.Text, commandText);
         }
         /// <summary>
+        /// 获取首页帮助列表
+        /// </summary>
+        public IDataReader GetIndexHelpList(int num)
+        {
+            string commandText = string.Format("SELECT TOP {2} {0} FROM [{1}help] WHERE [orderby] = 1 AND [pid] > 0", DbFields.HELP, BaseConfigs.GetTablePrefix, num);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText);
+        }
+        /// <summary>
         /// 获取帮助信息类型
         /// </summary>
         /// <returns></returns>

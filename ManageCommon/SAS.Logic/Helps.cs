@@ -83,6 +83,7 @@ namespace SAS.Logic
         {
             SAS.Data.DataProvider.Help.AddHelp(title, message, pid);
             SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/helplist");
+            SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/helpindex");
         }
 
         /// <summary>
@@ -93,6 +94,7 @@ namespace SAS.Logic
         {
             SAS.Data.DataProvider.Help.DelHelp(idlist);
             SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/helplist");
+            SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/helpindex");
         }
 
         /// <summary>
@@ -109,6 +111,26 @@ namespace SAS.Logic
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 1440;
                 cache.AddObject("/SAS/helplist", helplist);
+            }
+
+            return helplist;
+        }
+
+        /// <summary>
+        /// 获取首页帮助
+        /// </summary>
+        /// <returns></returns>
+        public static List<HelpInfo> GetIndexHelpList()
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            List<HelpInfo> helplist = cache.RetrieveObject("/SAS/helpindex") as List<HelpInfo>;
+
+            if (helplist == null || helplist.Count == 0)
+            {
+                helplist = SAS.Data.DataProvider.Help.GetIndexHelpList(5);
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 1440;
+                cache.AddObject("/SAS/helpindex", helplist);
             }
 
             return helplist;
@@ -169,6 +191,8 @@ namespace SAS.Logic
             {
                 SAS.Data.DataProvider.Help.UpdateOrder(orderlist[i].ToString(), idlist[i].ToString());
             }
+            SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/helplist");
+            SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/helpindex");
             return true;
         }
     }

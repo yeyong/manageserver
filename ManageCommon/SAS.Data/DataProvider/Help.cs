@@ -37,6 +37,29 @@ namespace SAS.Data.DataProvider
         }
 
         /// <summary>
+        /// 获取首页帮助
+        /// </summary>
+        /// <returns></returns>
+        public static List<HelpInfo> GetIndexHelpList(int num)
+        {
+            IDataReader reader = DatabaseProvider.GetInstance().GetIndexHelpList(num);
+            List<HelpInfo> helplist = new List<HelpInfo>();
+
+            while (reader.Read())
+            {
+                HelpInfo info = new HelpInfo();
+                info.Id = TypeConverter.ObjectToInt(reader["id"]);
+                info.Title = reader["title"].ToString();
+                info.Message = reader["message"].ToString();
+                info.Pid = TypeConverter.ObjectToInt(reader["pid"]);
+                info.Orderby = TypeConverter.ObjectToInt(reader["orderby"]);
+                helplist.Add(info);
+            }
+            reader.Close();
+            return helplist;
+        }
+
+        /// <summary>
         /// 获取帮助内容
         /// </summary>
         /// <param name="id"></param>
