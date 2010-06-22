@@ -546,6 +546,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tools\flashcomm.aspx.cs">
+      <DependentUpon>flashcomm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="tools\flashcomm.aspx.designer.cs">
+      <DependentUpon>flashcomm.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SAS.Cache\SAS.Cache.csproj">
@@ -1544,6 +1551,7 @@
     <Content Include="templates\default\zscard.htm" />
     <Content Include="templates\default\zsshow.htm" />
     <Content Include="config\datacache.config" />
+    <Content Include="tools\flashcomm.aspx" />
     <None Include="ManagePage\images\admin-gif\Thumbs.db" />
     <None Include="ManagePage\images\ad\Thumbs.db" />
     <None Include="ManagePage\images\Thumbs.db" />
