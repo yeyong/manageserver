@@ -2157,6 +2157,10 @@ namespace SAS.Data
         /// <returns></returns>
         IDataReader GetHelpList();
         /// <summary>
+        /// 获取首页帮助列表
+        /// </summary>
+        IDataReader GetIndexHelpList(int num);
+        /// <summary>
         /// 获取帮助信息类型
         /// </summary>
         /// <returns></returns>

@@ -277,11 +277,9 @@
 				<em></em><strong>服务与帮助</strong>
 			</p>
 			<ul class="cahelp">
-				<li>▪&nbsp;<a title="" href="#" style="color:#f00;">黄金展位 免费咨询最新活动 提供在线服务！</a></li>
-				<li>▪&nbsp;<a title="" href="#">如何获得积分 提高企业信誉度？</a></li>
-				<li>▪&nbsp;<a title="" href="#" style="color:#f00;">如何提升企业搜索排名？</a></li>
-				<li>▪&nbsp;<a title="" href="#">同行竞争怎么脱颖而出？</a></li>
-				<li>▪&nbsp;<a title="" href="#">让客户第一时间找到你！</a></li>
+			<%loop (HelpInfo) helpinfos helplist%>
+			    <li>▪&nbsp;<a title="" href="help-{helpinfos.id}.html" style="color:#f00;">{helpinfos.title}</a></li>
+			<%/loop%>
 			</ul>
 		</div>
 		<p class="cardad mar_top_8"><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa3.jpg" /></a></p>
