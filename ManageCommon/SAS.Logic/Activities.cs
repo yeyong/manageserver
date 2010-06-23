@@ -53,5 +53,43 @@ namespace SAS.Logic
         {
             return SAS.Data.DataProvider.Activities.GetActivityInfo(id);
         }
+
+        /// <summary>
+        /// 获取有效活动信息
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetEnableActivities()
+        {
+            return SAS.Data.DataProvider.Activities.GetEnableActivities();
+        }
+
+        /// <summary>
+        /// 缓存有效活动信息
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetActivitiesCache()
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            string cachekey = CacheKeys.SAS_ACTIVITY;
+            DataTable activelist = cache.RetrieveObject(cachekey) as DataTable;
+            if (activelist == null)
+            {
+                activelist = GetEnableActivities();
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 1440;
+                cache.AddObject(cachekey, activelist);
+            }
+            return activelist;
+        }
+
+        /// <summary>
+        /// 根据ID集合获取活动信息集合
+        /// </summary>
+        /// <param name="idlist"></param>
+        /// <returns></returns>
+        public static DataRow[] GetActivityByIds(string idlist)
+        {
+            return GetActivitiesCache().Select("[id] IN (" + idlist + ")");
+        }
     }
 }

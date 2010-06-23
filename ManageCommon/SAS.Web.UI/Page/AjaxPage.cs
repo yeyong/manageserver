@@ -66,7 +66,33 @@ namespace SAS.Web.UI
                 case "getcompanycommentscored":
                     GetCompanyCommentScored(SASRequest.GetInt("qyid", 0));
                     break;
+                case "getcompanyinfobyflash":
+                    GetCompanyInfoByFlash(SASRequest.GetInt("objid", 0));
+                    break;
             }
+        }
+
+        /// <summary>
+        /// 获取flash数据
+        /// </summary>
+        /// <param name="objid"></param>
+        private void GetCompanyInfoByFlash(int objid)
+        {
+            //Companys companyinfo = Companies.GetCompanyCacheInfo(objid);
+
+            System.Text.StringBuilder xmlnode = new System.Text.StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n");
+            //if (companyinfo == null)
+            //{
+            //    xmlnode.Append("<data><error>企业信息读取错误！请您与管理员联系！</error></data>");
+            //    ResponseText(xmlnode);
+            //    return;
+            //}
+            //else
+            //{
+                xmlnode.Append("<data><error>企业信息读取错误！请您与管理员联系！</error></data>");
+                ResponseXML(xmlnode);
+                //return;
+            //}
         }
 
         /// <summary>

@@ -50,6 +50,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="aspx\1\announcedetail.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="aspx\1\cardimg.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -513,6 +516,13 @@
     <Compile Include="ManagePage\syslogin.aspx.designer.cs">
       <DependentUpon>syslogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\UserControls\activetree.ascx.cs">
+      <DependentUpon>activetree.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\UserControls\activetree.ascx.designer.cs">
+      <DependentUpon>activetree.ascx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\UserControls\forumstree.ascx.cs">
       <DependentUpon>forumstree.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -970,6 +980,7 @@
     <Content Include="javascript\jquery.ratingmin.js" />
     <Content Include="javascript\jqueryCommon.js" />
     <Content Include="javascript\template_showcompany.js" />
+    <Content Include="javascript\sascommon.js" />
     <Content Include="ManagePage\company\global_ajaxcall.aspx" />
     <Content Include="ManagePage\forum\forum_addforums.aspx" />
     <Content Include="ManagePage\forum\forum_editforums.aspx" />
@@ -1487,6 +1498,7 @@
     <Content Include="ManagePage\styles\tab.css" />
     <Content Include="ManagePage\style\admin.css" />
     <Content Include="ManagePage\style\comm.css" />
+    <Content Include="ManagePage\UserControls\activetree.ascx" />
     <Content Include="ManagePage\UserControls\forumstree.ascx" />
     <Content Include="ManagePage\UserControls\onlineeditor.ascx" />
     <Content Include="ManagePage\UserControls\PageInfo.ascx" />
@@ -1494,6 +1506,7 @@
     <Content Include="ManagePage\UserControls\usergrouppowersetting.ascx" />
     <Content Include="ManagePage\xml\backup\2009-09-24 09_20_17.config" />
     <Content Include="ManagePage\xml\navmenu.config" />
+    <Content Include="templates\default\announcedetail.htm" />
     <Content Include="templates\default\help.htm" />
     <Content Include="templates\default\images\aa\aa11.jpg" />
     <Content Include="templates\default\images\aa\tianqi.png" />

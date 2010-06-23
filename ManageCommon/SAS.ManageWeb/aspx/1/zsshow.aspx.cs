@@ -90,7 +90,7 @@ namespace SAS.ManageWeb
 
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/jquery.cluetip.css");
-            script += "\r\n<script src=\"" + forumpath + "javascript/common.js\" type=\"text/javascript\"></script>";
+            script += "\r\n<script src=\"" + forumpath + "javascript/sascommon.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/ajax.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/template_showcompany.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/jquery.cluetip-min.js\" type=\"text/javascript\"></script>";

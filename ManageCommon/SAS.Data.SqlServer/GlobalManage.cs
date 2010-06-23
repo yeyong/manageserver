@@ -591,9 +591,10 @@ namespace SAS.Data.SqlServer
                                         DbHelper.MakeInParam("@displayorder", (DbType)SqlDbType.Int, 4, announcementInfo.Displayorder),
                                         DbHelper.MakeInParam("@starttime", (DbType)SqlDbType.DateTime, 8, announcementInfo.Starttime),
                                         DbHelper.MakeInParam("@endtime", (DbType)SqlDbType.DateTime, 8, announcementInfo.Endtime),
-                                        DbHelper.MakeInParam("@message", (DbType)SqlDbType.NText, 0, announcementInfo.Message)
+                                        DbHelper.MakeInParam("@message", (DbType)SqlDbType.NText, 0, announcementInfo.Message),
+                                        DbHelper.MakeInParam("@relateactive",(DbType)SqlDbType.VarChar,2000,announcementInfo.Relateactive)
                                     };
-            string commandText = string.Format("INSERT INTO [{0}announcements] ([poster],[posterid],[title],[displayorder],[starttime],[endtime],[message]) VALUES(@poster, @posterid, @title, @displayorder, @starttime, @endtime, @message)", BaseConfigs.GetTablePrefix);
+            string commandText = string.Format("INSERT INTO [{0}announcements] ([poster],[posterid],[title],[displayorder],[starttime],[endtime],[message],[relateactive]) VALUES(@poster, @posterid, @title, @displayorder, @starttime, @endtime, @message,@relateactive)", BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
         }
         /// <summary>
@@ -617,6 +618,18 @@ namespace SAS.Data.SqlServer
                                                 DbFields.ANNOUNCEMENTS,
                                                 BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteDatasetInMasterDB(CommandType.Text, commandText).Tables[0];
+        }
+        /// <summary>
+        /// 首页公告
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public IDataReader GetAnnouncementIndex(int nums)
+        {
+            string commandText = string.Format("SELECT TOP {2} {0} FROM [{1}announcements] ORDER BY [displayorder] DESC,[id] DESC",
+                                                DbFields.ANNOUNCEMENTS,
+                                                BaseConfigs.GetTablePrefix, nums);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText);
         }
         /// <summary>
         /// 删除通告
@@ -644,9 +657,10 @@ namespace SAS.Data.SqlServer
                                         DbHelper.MakeInParam("@displayorder", (DbType)SqlDbType.Int, 4, announcementInfo.Displayorder),
                                         DbHelper.MakeInParam("@starttime", (DbType)SqlDbType.DateTime, 8, announcementInfo.Starttime),
                                         DbHelper.MakeInParam("@endtime", (DbType)SqlDbType.DateTime, 8, announcementInfo.Endtime),
-                                        DbHelper.MakeInParam("@message", (DbType)SqlDbType.NText, 0, announcementInfo.Message)
+                                        DbHelper.MakeInParam("@message", (DbType)SqlDbType.NText, 0, announcementInfo.Message),
+                                        DbHelper.MakeInParam("@relateactive",(DbType)SqlDbType.VarChar,2000,announcementInfo.Relateactive)
                                     };
-            string commandText = string.Format("UPDATE [{0}announcements] SET [displayorder]=@displayorder,[title]=@title, [poster]=@poster,[starttime]=@starttime,[endtime]=@endtime,[message]=@message WHERE [id]=@id",
+            string commandText = string.Format("UPDATE [{0}announcements] SET [displayorder]=@displayorder,[title]=@title, [poster]=@poster,[starttime]=@starttime,[endtime]=@endtime,[message]=@message,[relateactive]=@relateactive WHERE [id]=@id",
                                                 BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
         }
