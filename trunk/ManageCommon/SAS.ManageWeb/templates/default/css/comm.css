@@ -1,5 +1,4 @@
 ﻿@charset "utf-8";
-
 body{ font:12px '宋体', Verdana, Arial; background:#fff; margin:0px; padding:0px;}
 span,p,ol,ul,li,form,input,ul,li,dt,dl,dd,em,a,h1,h2,h3,h4,h5,h6,i,iframe,center,del,ins,strong{ margin:0px; padding:0px;}
 input,ul,li{list-style-type:none;}
@@ -57,6 +56,8 @@ a:hover{ color:#e00201; text-decoration:underline;}
 .l_f00:hover{ color:#e00201; text-decoration:underline;}
 .l_f00_u:link, .l_f00_u:visited{ color:#f00; text-decoration:underline;}
 .l_f00_u:hover{ color:#e00201; text-decoration:underline;}
+.l_2d0b00_u:link, .l_2d0b00_u:visited{ color:#2d0b00; text-decoration:none;}
+.l_2d0b00_u:hover{ color:#e00201; text-decoration:underline;}
 /*input*/
 .input_soout{ width:230px; height:18px; line-height:18px; font-size:12px; border:1px solid #c7c1c1; background:#fff; padding:0 2px;}
 .input_soon{ width:230px; height:18px; line-height:18px; font-size:12px; border:1px solid #aea6a6; background:#fbfafa; padding:0 2px;}
@@ -109,7 +110,6 @@ input.so2:hover{ width:71px; height:24px; background:url(../images/soso5.gif) bo
 .soso2tan:hover{ width:71px; height:24px; background:url(../images/soso-an1.gif) bottom no-repeat; float:left;}
 .tswltpan{ width:93px; height:30px; background:url(../images/an-pinlun.gif) top no-repeat; border:0; float:left; cursor:pointer;}
 .tswltpan:hover{ width:93px; height:30px; background:url(../images/an-pinlun.gif) bottom no-repeat; border:0; float:left;}
-
 .soso2b{ width:585px; height:27px; line-height:27px; text-align:left; float:left;}
 .soso2b span{ float:left;}
 .soso2line{ width:0px; height:10px; margin:9px 20px 0; border-left:1px solid #c5b7b4; border-right:1px solid #82605b; display:inline; float:left;}
