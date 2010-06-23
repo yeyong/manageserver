@@ -128,5 +128,14 @@ namespace SAS.Data.DataProvider
             return activityInfo;
         }
         #endregion
+
+        /// <summary>
+        /// 有效活动信息
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetEnableActivities()
+        {
+            return GetActivitiesByConditions("[enabled] = 1");
+        }
     }
 }

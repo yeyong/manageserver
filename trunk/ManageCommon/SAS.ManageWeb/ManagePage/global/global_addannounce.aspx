@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" CodeBehind="global_addannounce.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.global_addannounce" %>
 <%@ Register TagPrefix="yy" Namespace="SAS.Control" Assembly="SAS.Control"%>
 <%@ Register TagPrefix="yy1" TagName="OnlineEditor" Src="../UserControls/onlineeditor.ascx" %>
+<%@ Register TagPrefix="yy1" TagName="ActiveTree" Src="../UserControls/activetree.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <html>
 <head>
@@ -58,6 +59,16 @@
 		</td>
 		<td class="vtop">格式:2005-5-5 13:22:02</td>
 	</tr>
+	<tbody id="targetForum">
+	<tr><td class="item_title" colspan="2">相关活动</td></tr>
+	<tr>
+		<td class="vtop" colspan="2">
+			<div style="overflow: auto;height: 150px;width:70%;border: 1px double #ccc">
+				<yy1:ActiveTree id="TargetFID"  runat="server" HintTitle="提示" HintInfo="设置本公告相关活动专题" PageName="advertisement"></yy1:ActiveTree>
+			</div>										
+		</td>
+	</tr>
+	</tbody>
 	<tr><td class="item_title" colspan="2">公告内容:</td></tr>
 	<tr>
 		<td class="vtop" colspan="2">

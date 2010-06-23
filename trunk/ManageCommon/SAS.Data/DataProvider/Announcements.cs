@@ -50,6 +50,25 @@ namespace SAS.Data.DataProvider
         }
 
         /// <summary>
+        /// 首页公告
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static List<AnnouncementInfo> GetAnnouncementIndex(int nums)
+        {
+            IDataReader reader = DatabaseProvider.GetInstance().GetAnnouncementIndex(nums);
+            List<AnnouncementInfo> announcementlist = new List<AnnouncementInfo>();
+
+            while (reader.Read())
+            {
+                announcementlist.Add(LoadSingleAnnouncementInfo(reader));
+            }
+
+            reader.Close();
+            return announcementlist;
+        }
+
+        /// <summary>
         /// 批量删除公告
         /// </summary>
         /// <param name="aidlist">逗号分隔的id列表字符串</param>
@@ -94,6 +113,7 @@ namespace SAS.Data.DataProvider
             announcementInfo.Starttime = Convert.ToDateTime(reader["starttime"].ToString());
             announcementInfo.Endtime = Convert.ToDateTime(reader["endtime"].ToString());
             announcementInfo.Message = reader["message"].ToString();
+            announcementInfo.Relateactive = reader["relateactive"].ToString();
             return announcementInfo;
         }
         #endregion

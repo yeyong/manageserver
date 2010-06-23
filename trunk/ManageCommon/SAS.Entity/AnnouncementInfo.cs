@@ -16,6 +16,7 @@ namespace SAS.Entity
         private DateTime m_starttime;	//起始时间
         private DateTime m_endtime;	//结束时间
         private string m_message;	//公告内容
+        private string m_relateactive;  //相关活动
 
         ///<summary>
         ///公告id
@@ -80,6 +81,14 @@ namespace SAS.Entity
         {
             get { return m_message; }
             set { m_message = value; }
+        }
+        /// <summary>
+        /// 相关活动
+        /// </summary>
+        public string Relateactive
+        {
+            get { return m_relateactive; }
+            set { m_relateactive = value; }
         }
     }
 }

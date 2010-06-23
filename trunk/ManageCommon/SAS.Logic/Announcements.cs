@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.Common;
 
 using SAS.Common;
+using SAS.Common.Generic;
 using SAS.Entity;
 using SAS.Data;
 
@@ -23,7 +24,8 @@ namespace SAS.Logic
         /// <param name="startDateTime">起始时间</param>
         /// <param name="endDateTime">结束时间</param>
         /// <param name="message">公告内容</param>
-        public static void CreateAnnouncement(string username, int userid, string subject, int displayorder, string starttime, string endtime, string message)
+        /// <param name="relateactive">相关活动</param>
+        public static void CreateAnnouncement(string username, int userid, string subject, int displayorder, string starttime, string endtime, string message, string relateactive)
         {
             AnnouncementInfo announcementInfo = new AnnouncementInfo();
             announcementInfo.Title = subject;
@@ -36,6 +38,7 @@ namespace SAS.Logic
             DateTime.TryParse(endtime, out dt);
             announcementInfo.Endtime = dt;
             announcementInfo.Message = message;
+            announcementInfo.Relateactive = relateactive;
 
             Data.DataProvider.Announcements.CreateAnnouncement(announcementInfo);
         }
@@ -65,6 +68,26 @@ namespace SAS.Logic
             {
                 dt = Data.DataProvider.Announcements.GetAnnouncementList();
                 cache.AddObject("/SAS/AnnouncementList", dt);
+            }
+            return dt;
+        }
+
+        /// <summary>
+        /// 首页公告
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        public static List<AnnouncementInfo> GetAnnouncementIndex()
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            List<AnnouncementInfo> dt = cache.RetrieveObject("/SAS/AnnouncementIndex") as List<AnnouncementInfo>;
+
+            if (dt == null)
+            {
+                dt = Data.DataProvider.Announcements.GetAnnouncementIndex(5);
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 30;
+                cache.AddObject("/SAS/AnnouncementIndex", dt);
             }
             return dt;
         }

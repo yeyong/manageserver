@@ -34,7 +34,7 @@ namespace SAS.ManageWeb
         /// <summary>
         /// 公告列表
         /// </summary>
-        public DataTable announcementlist = new DataTable();
+        public List<AnnouncementInfo> announcementlist = Announcements.GetAnnouncementIndex();
         /// <summary>
         /// 新加入企业集合
         /// </summary>
@@ -89,16 +89,6 @@ namespace SAS.ManageWeb
             cataloglist1 = cataloglist.Select("[sort] = 0");
             cataloglist2 = cataloglist.Select("[sort] = 1");
             cataloglist3 = cataloglist.Select("[sort] = 2");
-
-            DataTable dt = Announcements.GetAnnouncementList(Utils.GetDateTime(), "2099-12-31 23:59:59");
-            announcementlist = dt.Clone();
-            int row = 0;
-            foreach (DataRow dr in dt.Rows)
-            {
-                if (row > 4) break;
-                announcementlist.ImportRow(dr);
-                row++;
-            }
 
             indexcity = areas.GetIndexCity();
         }

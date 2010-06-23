@@ -33,5 +33,9 @@ namespace SAS.Cache
         /// 首页类型企业信息
         /// </summary>
         public const string SAS_COMPANY_INDEX_ENTYPE = "/SAS/CompanyIndex/ENTYPE_";
+        /// <summary>
+        /// 活动缓存
+        /// </summary>
+        public const string SAS_ACTIVITY = "SAS/Activity";
     }
 }

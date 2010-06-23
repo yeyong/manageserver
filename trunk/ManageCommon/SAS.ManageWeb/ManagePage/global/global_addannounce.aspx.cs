@@ -34,7 +34,7 @@ namespace SAS.ManageWeb.ManagePage
             #region 添加公告
             if (this.CheckCookie())
             {
-                Announcements.CreateAnnouncement(username, userid, title.Text, Utils.StrToInt(displayorder.Text, 0), starttime.Text, endtime.Text, message.Text);
+                Announcements.CreateAnnouncement(username, userid, title.Text, Utils.StrToInt(displayorder.Text, 0), starttime.Text, endtime.Text, message.Text, SASRequest.GetString("TargetFID"));
 
                 SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/AnnouncementList");
                 SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/SimplifiedAnnouncementList");

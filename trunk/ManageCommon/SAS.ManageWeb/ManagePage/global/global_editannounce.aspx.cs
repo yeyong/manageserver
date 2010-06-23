@@ -61,6 +61,7 @@ namespace SAS.ManageWeb.ManagePage
                 announcementInfo.Starttime = Convert.ToDateTime(starttime.Text);
                 announcementInfo.Endtime = Convert.ToDateTime(endtime.Text);
                 announcementInfo.Message = message.Text.Trim();
+                announcementInfo.Relateactive = SASRequest.GetString("TargetFID");
                 Announcements.UpdateAnnouncement(announcementInfo);
                 //移除公告缓存
                 SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/AnnouncementList");

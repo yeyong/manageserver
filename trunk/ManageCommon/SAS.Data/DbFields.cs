@@ -25,7 +25,7 @@ namespace SAS.Data
         /// <summary>
         /// 公告字段
         /// </summary>
-        public const string ANNOUNCEMENTS = "[id],[poster],[posterid],[title],[displayorder],[starttime],[endtime],[message]";
+        public const string ANNOUNCEMENTS = "[id],[poster],[posterid],[title],[displayorder],[starttime],[endtime],[message],[relateactive]";
         /// <summary>
         /// 自定义编辑器按钮列表
         /// </summary>

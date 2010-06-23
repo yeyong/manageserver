@@ -1097,6 +1097,12 @@ namespace SAS.Data
         /// <returns></returns>
         DataTable GetAnnouncements();
         /// <summary>
+        /// 首页公告
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <returns></returns>
+        IDataReader GetAnnouncementIndex(int nums);
+        /// <summary>
         /// 删除通告
         /// </summary>
         /// <param name="idList">逗号分隔的id列表字符串</param>

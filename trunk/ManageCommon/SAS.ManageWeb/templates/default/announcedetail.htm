@@ -1,0 +1,101 @@
+﻿<%template _comheader%>
+<div class="cot">
+    <%if {page_err}==0%>
+    <p class="zshysite mar_top_8">
+		<i class="zslt"></i><i class="zsrt"></i>
+		<span class="zshysnr">您当前的位置：<a href="{forumurl}index.html">首页</a> &gt; <a href="#">公告列表</a> &gt; {announceinfo.title}</span>
+	</p>
+	<div class="bult">
+		<p class="bult1 mar_top_8"><a title="" href="#"><img alt="企业广告" src="images/aa/aa2.jpg" /></a></p>
+		<div class="bult2 mar_top_8">
+			<p class="bult2t">
+				<em></em><strong>热门标签</strong>
+			</p>
+			<div class="bult2nr">
+			<table border="0" cellpadding="0" cellspacing="1" class="tbbiaoq">
+				 <tr>
+					<td width="33%"><a title="保健食品" href="#">保健食品</a></td>
+					<td width="33%"><a title="食品加工方便食品" href="#">食品加工方便食品</a></td>
+					<td><a title="食用菌" href="#">食用菌</a></td>
+				 </tr>
+				 <tr>
+					<td width="33%"><a title="食品添加剂" href="#">食品添加剂</a></td>
+					<td width="33%"><a title="茶叶" href="#">茶叶</a></td>
+					<td><a title="调味品" href="#">调味品</a></td>
+				 </tr>
+				 <tr>
+					<td width="33%"><a title="保健食品" href="#">保健食品</a></td>
+					<td width="33%"><a title="食品加工方便食品" href="#">食品加工方便食品</a></td>
+					<td><a title="食用菌" href="#">食用菌</a></td>
+				 </tr>
+				 <tr>
+					<td width="33%"><a title="食品添加剂" href="#">食品添加剂</a></td>
+					<td width="33%"><a title="茶叶" href="#">茶叶</a></td>
+					<td><a title="调味品" href="#">调味品</a></td>
+				 </tr>
+			</table>
+			</div>
+		</div>
+		<div class="bult2 mar_top_8">
+			<p class="bult2t">
+				<em></em><strong>相关活动</strong>
+			</p>
+			<ul class="bult2nr2 f_666">
+			<%loop (DataRow) annouceactiveinfo activelist%>
+			<%set (string){activetime}=Utils.GetStandardDate({annouceactiveinfo[createdate]})%>
+			    <li>
+					<p>▪&nbsp;<a title="{annouceactiveinfo[atitle]}" href="#">{annouceactiveinfo[atitle]}</a></p>
+					<span>[{activetime}]</span>
+				</li>
+			<%/loop%>
+			</ul>
+		</div>
+		<p class="bult3 mar_top_8"><a title="" href="#"><img alt="企业广告" src="images/aa/aa3.jpg" /></a></p>
+	</div>
+	<div class="burt mar_top_8">
+		<h2>{announceinfo.title}</h2>
+		<p class="burt2">有效期：{announceinfo.starttime}至{announceinfo.endtime}&nbsp;&nbsp;&nbsp;&nbsp;相关活动：<a href="{curactiveid}" class="l_999">{curactivetitle}</a></p>
+		<div class="burtnr f_333">{announceinfo.message}</div>
+		<p class="burtnr1 mar_top_8"><a title="" href="#"><img alt="" src="images/aa/aa9.jpg" /></a></p>
+		<table border="0" cellpadding="0" cellspacing="1" class="tbhot mar_top_8">
+			 <tr>
+				<td width="100%" colspan="2"><b>近期热点推荐</b></td>
+			 </tr>
+			 <tr>
+				<td width="50%">▪&nbsp;<a title="杭州精绘服装研发中心" href="#">杭州精绘服装研发中心</a></td>
+				<td>▪&nbsp;<a title="建德市中天服装贸易有限公司" href="#">建德市中天服装贸易有限公司</a></td>
+			 </tr>
+			 <tr>
+				<td>▪&nbsp;<a title="杭州萧山南阳七跷板服装厂" href="#">杭州萧山南阳七跷板服装厂</a></td>
+				<td>▪&nbsp;<a title="杭州成帅服装有限公司" href="#">杭州成帅服装有限公司</a></td>
+			 </tr>
+			 <tr>
+				<td>▪&nbsp;<a title="杭州萧山戴村镇颖炅服装手工加工场" href="#">杭州萧山戴村镇颖炅服装手工加工场</a></td>
+				<td>▪&nbsp;<a title="浙江旧货交易市场金蚂蚁服装经营部" href="#">浙江旧货交易市场金蚂蚁服装经营部</a></td>
+			 </tr>
+			 <tr>
+				<td colspan="2" bgcolor="#FFFFFF"><span><a title="更多热点" href="#" class="l_805952">更多热点&gt;&gt;</a></span></td>
+			 </tr>
+		</table>
+		<p class="burtnr2">本文标签： <b><a title="服装" href="#" class="l_805952">服装</a></b>&nbsp;&nbsp;<b><a title="生产加工" href="#" class="l_805952">生产加工</a></b>&nbsp;&nbsp;<b><a title="外贸" href="#" class="l_805952">外贸</a></b></p>
+		<form class="burtnr3" onsubmit="return search(this);">
+			<b class="f_000_14">找企业：</b>
+			<span><input name="searchcontent" type="text" class="input5_soout" style="width:340px;" /></span>
+			<span>
+				<select name="announcetype" class="select_type">
+				    <option value="0">请选择类型</option>
+			    <%loop (string) announcetypestr Enum.GetNames(entype_enum.GetType())%>
+			    <%set (int) {announcetypevalue}=Convert.ToInt16(Enum.Parse(entype_enum.GetType(), announcetypestr))%>
+			    <%set (string) {announcetypetext}=EnumCatch.GetCompanyType({announcetypevalue})%>
+			        <option value="{announcetypevalue}">{announcetypetext}</option>
+			    <%/loop%>
+			    </select>
+			</span>
+			<span class="burtnr3so"><input type="submit" name="Submit" class="soso2tan" value="" onclick="return search(this.form);"/></span>
+		</form>
+	<%else%>
+	<%template _commsgbox%>
+	<%/if%>
+</div>
+<%template _comcopyright%>
+<%template _comfooter%>

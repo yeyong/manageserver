@@ -146,7 +146,7 @@ namespace SAS.Logic
         /// <summary>
         /// 回退链接的内容
         /// </summary>
-        protected internal string msgbox_backlink = "javascript:history.back();";
+        protected internal string msgbox_backlink = "javascript:history.back(-1);";
         /// <summary>
         /// 返回到的页面url地址
         /// </summary>
@@ -271,12 +271,6 @@ namespace SAS.Logic
             switch (pagename)
             {
                 case "index.aspx":
-                    isguestcachepage = GetCachePage(pagename);
-                    break;
-                case "zshy.aspx":
-                    isguestcachepage = GetCachePage(pagename);
-                    break;
-                case "zscard.aspx":
                     isguestcachepage = GetCachePage(pagename);
                     break;
                 case "albumindex.aspx":
@@ -511,8 +505,8 @@ namespace SAS.Logic
             olid = oluserinfo.Ol_id;
 
             //确保头像可以取到
-            if (userid > 0)
-                useravatar = Avatars.GetAvatarUrl(userid.ToString(), AvatarSize.Small);
+            //if (userid > 0)
+            //    useravatar = Avatars.GetAvatarUrl(userid.ToString(), AvatarSize.Small);
 
             if (Utils.InArray(SASRequest.GetString("selectedtemplateid"), Templates.GetValidTemplateIDList()))
                 templateid = SASRequest.GetInt("selectedtemplateid", 0);
@@ -568,8 +562,8 @@ namespace SAS.Logic
             templatelistboxoptions = templatelistboxoptions.Replace(originalTemplate, newTemplate);
 
             isseccode = Utils.InArray(pagename, config.Seccodestatus);
-            headerad = Advertisements.GetOneHeaderAd("", 0);
-            footerad = Advertisements.GetOneFooterAd("", 0);
+            //headerad = Advertisements.GetOneHeaderAd("", 0);
+            //footerad = Advertisements.GetOneFooterAd("", 0);
 
             //校验验证码
             if (isseccode && ispost && !ValidateVerifyCode())
