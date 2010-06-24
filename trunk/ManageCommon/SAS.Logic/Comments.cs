@@ -57,7 +57,7 @@ namespace SAS.Logic
         /// <summary>
         /// 根据企业ID获取企业信息集合
         /// </summary>
-        public static DataTable GetCommentListByQyID(int qyid,int pageSize, int pageIndex)
+        public static DataTable GetCommentListByQyID(int qyid, int pageSize, int pageIndex)
         {
             return SAS.Data.DataProvider.Comments.GetCommentListPageByQyID(qyid, pageSize, pageIndex);
         }

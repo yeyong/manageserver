@@ -134,50 +134,20 @@ namespace SAS.Logic
         /// 根据级别获取行业类别集合（缓存）
         /// </summary>
         /// <returns></returns>
-        public static DataTable GetAllCatalogBySort(int sortnum)
-        {
-            return GetAllCatalogBySort(sortnum, "");
-        }
-        /// <summary>
-        /// 根据级别获取行业类别集合（缓存）
-        /// </summary>
-        /// <param name="sortnum">级别</param>
-        /// <param name="condition">条件</param>
-        public static DataTable GetAllCatalogBySort(int sortnum, string condition)
+        public static DataRow[] GetAllCatalogBySort(int sortnum)
         {
             DataTable dt = GetAllCatalog();
-            DataTable sortcatalist = dt.Clone();
-            foreach (DataRow dr in dt.Select("[sort] = " + sortnum))
-            {
-                //dr["companycount"] = Companies.GetCompanyTableListByCatalog(TypeConverter.ObjectToInt(dr["id"])).Compute("COUNT(en_id)", condition);
-                sortcatalist.ImportRow(dr);
-            }
-            return sortcatalist;
+            return dt.Select("[sort] = " + sortnum);
         }
 
         /// <summary>
         /// 根据父ID获取行业类别集合（带缓存）
         /// </summary>
         /// <returns></returns>
-        public static DataTable GetAllCatalogByPid(int pid)
-        {
-            return GetAllCatalogByPid(pid, "");
-        }
-        /// <summary>
-        /// 根据父ID获取行业类别集合（带缓存）
-        /// </summary>
-        /// <param name="pid">父类ID</param>
-        /// <param name="condition">条件</param>
-        public static DataTable GetAllCatalogByPid(int pid, string condition)
+        public static DataRow[] GetAllCatalogByPid(int pid)
         {
             DataTable dt = GetAllCatalog();
-            DataTable sortcatalist = dt.Clone();
-            foreach (DataRow dr in dt.Select("[parentid] = " + pid))
-            {
-                //dr["companycount"] = ReturnCompanyCountById(TypeConverter.ObjectToInt(dr["id"], 0), condition);
-                sortcatalist.ImportRow(dr);
-            }
-            return sortcatalist;
+            return dt.Select("[parentid] = " + pid);
         }
 
         /// <summary>

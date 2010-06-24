@@ -49,6 +49,20 @@ namespace SAS.Data.DataProvider
             return DatabaseProvider.GetInstance().GetAnnouncements();
         }
 
+        public static List<AnnouncementInfo> GetAnnouncementList(int pageSize, int pageIndex)
+        {
+            IDataReader reader = DatabaseProvider.GetInstance().GetAnnouncements(pageSize, pageIndex);
+            List<AnnouncementInfo> announcementlist = new List<AnnouncementInfo>();
+
+            while (reader.Read())
+            {
+                announcementlist.Add(LoadSingleAnnouncementInfo(reader));
+            }
+
+            reader.Close();
+            return announcementlist;
+        }
+
         /// <summary>
         /// 首页公告
         /// </summary>
@@ -66,6 +80,13 @@ namespace SAS.Data.DataProvider
 
             reader.Close();
             return announcementlist;
+        }
+        /// <summary>
+        /// 公告数量
+        /// </summary>
+        public static int GetAnnouncementCount()
+        {
+            return DatabaseProvider.GetInstance().GetAnnouncementCount();
         }
 
         /// <summary>

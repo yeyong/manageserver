@@ -1083,25 +1083,28 @@ namespace SAS.Data
         /// 添加公告
         /// </summary>
         /// <param name="announcementInfo">公告对象</param>
-        /// <returns></returns>
         int CreateAnnouncement(AnnouncementInfo announcementInfo);
         /// <summary>
         /// 获取通告
         /// </summary>
         /// <param name="id">公告id</param>
-        /// <returns></returns>
         IDataReader GetAnnouncement(int id);
         /// <summary>
         /// 获取通告
         /// </summary>
-        /// <returns></returns>
         DataTable GetAnnouncements();
+        /// <summary>
+        /// 获取通告
+        /// </summary>
+        IDataReader GetAnnouncements(int pageSize, int pageIndex);
         /// <summary>
         /// 首页公告
         /// </summary>
-        /// <param name="nums"></param>
-        /// <returns></returns>
         IDataReader GetAnnouncementIndex(int nums);
+        /// <summary>
+        /// 公告数量
+        /// </summary>
+        int GetAnnouncementCount();
         /// <summary>
         /// 删除通告
         /// </summary>

@@ -53,6 +53,10 @@
     <Compile Include="aspx\1\announcedetail.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="aspx\1\announcelist.aspx.cs">
+      <DependentUpon>announcelist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="aspx\1\cardimg.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -79,6 +83,9 @@
     </Compile>
     <Compile Include="aspx\1\posttopic.aspx.cs">
       <DependentUpon>posttopic.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="aspx\1\sitemap.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="aspx\1\tipmsg.aspx.cs">
@@ -1507,6 +1514,7 @@
     <Content Include="ManagePage\xml\backup\2009-09-24 09_20_17.config" />
     <Content Include="ManagePage\xml\navmenu.config" />
     <Content Include="templates\default\announcedetail.htm" />
+    <Content Include="templates\default\announcelist.htm" />
     <Content Include="templates\default\help.htm" />
     <Content Include="templates\default\images\aa\aa11.jpg" />
     <Content Include="templates\default\images\aa\tianqi.png" />
@@ -1560,6 +1568,7 @@
     <Content Include="templates\default\images\tab-tit5.gif" />
     <Content Include="templates\default\images\tijiao-an1.gif" />
     <Content Include="templates\default\images\tijiao-an2.gif" />
+    <Content Include="templates\default\sitemap.htm" />
     <Content Include="templates\default\tipmsg.htm" />
     <Content Include="templates\default\zscard.htm" />
     <Content Include="templates\default\zsshow.htm" />

@@ -95,10 +95,25 @@ namespace SAS.Logic
         /// <summary>
         /// 获取公告列表
         /// </summary>
-        /// <returns></returns>
         public static DataTable GetAnnouncementList()
         {
             return Data.DataProvider.Announcements.GetAnnouncementList();
+        }
+
+        /// <summary>
+        /// 获取公告列表
+        /// </summary>
+        public static List<AnnouncementInfo> GetAnnouncementList(int pageSize, int pageIndex)
+        {
+            return SAS.Data.DataProvider.Announcements.GetAnnouncementList(pageSize, pageIndex);
+        }
+
+        /// <summary>
+        /// 公告总数
+        /// </summary>
+        public static int GetAnnouncementCount()
+        {
+            return Data.DataProvider.Announcements.GetAnnouncementCount();
         }
 
         /// <summary>

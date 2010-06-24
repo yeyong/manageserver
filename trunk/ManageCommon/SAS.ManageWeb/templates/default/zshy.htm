@@ -9,8 +9,8 @@
 		<dl class="zshy1 mar_top_8">
 			<dt><b>按主营范围选择：</b></dt>
 			<dd>
-			    <%loop catainfo cataloglist%>
-				<span class="zshy1zt"><a href="zshy-{catainfo[id]}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-{ordertype}-{keyword}.html" class="l_666" title="{catainfo[name]}"><%getsubstring({catainfo[name]},16,"")%>({catainfo[companycount]})</a></span>
+			    <%loop (DataRow) catainfo cataloglist%>
+				<span class="zshy1zt"><a href="zshy-{catainfo[id]}.html" class="l_666" title="{catainfo[name]}"><%getsubstring({catainfo[name]},16,"")%>({catainfo[companycount]})</a></span>
 				<%/loop%>
 			</dd>
 		</dl>

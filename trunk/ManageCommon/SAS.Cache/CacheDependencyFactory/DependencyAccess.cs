@@ -45,6 +45,15 @@ namespace SAS.Cache.CacheDependencyFactory
         }
 
         /// <summary>
+        /// 创建行业类别信息缓存依赖项
+        /// </summary>
+        /// <returns></returns>
+        public static ICacheDependency CreateNavsDependency()
+        {
+            return LoadInstance("NavsList");
+        }
+
+        /// <summary>
         /// Common method to load dependency class from information provided from configuration file 
         /// </summary>
         /// <param name="className">Type of dependency</param>

@@ -620,6 +620,21 @@ namespace SAS.Data.SqlServer
             return DbHelper.ExecuteDatasetInMasterDB(CommandType.Text, commandText).Tables[0];
         }
         /// <summary>
+        /// 获取通告
+        /// </summary>
+        public IDataReader GetAnnouncements(int pageSize, int pageIndex)
+        {
+            string commandText = "";
+            if (pageIndex <= 1)
+                commandText = "SELECT TOP {0} * FROM [{1}announcements] ORDER BY [displayorder] DESC,[id] DESC";
+            else
+            {
+
+                commandText = "SELECT TOP {0} * FROM [{1}announcements] WHERE [id] < (SELECT MIN([id])  FROM (SELECT TOP " + ((pageIndex - 1) * pageSize) + " [id] FROM [{1}announcements] ORDER BY [displayorder] DESC,[id] DESC) AS tblTmp ) ORDER BY [displayorder] DESC,[id] DESC";
+            }
+            return DbHelper.ExecuteReader(CommandType.Text, string.Format(commandText, pageSize, BaseConfigs.GetTablePrefix);
+        }
+        /// <summary>
         /// 首页公告
         /// </summary>
         /// <param name="nums"></param>
@@ -630,6 +645,14 @@ namespace SAS.Data.SqlServer
                                                 DbFields.ANNOUNCEMENTS,
                                                 BaseConfigs.GetTablePrefix, nums);
             return DbHelper.ExecuteReader(CommandType.Text, commandText);
+        }
+        /// <summary>
+        /// 公告数量
+        /// </summary>
+        public int GetAnnouncementCount()
+        {
+            string commandText = string.Format("SELECT COUNT(id) FROM [{0}announcements]", BaseConfigs.GetTablePrefix);
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText));
         }
         /// <summary>
         /// 删除通告

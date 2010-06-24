@@ -58,5 +58,17 @@ namespace SAS.Cache.CacheDependencyFactory
             }
             return null;
         }
+        /// <summary>
+        /// 获取导航信息依赖项
+        /// </summary>
+        /// <returns></returns>
+        public static AggregateCacheDependency GetNavsDependency()
+        {
+            if (!string.IsNullOrEmpty(path))
+            {
+                return DependencyAccess.CreateNavsDependency().GetDependency();
+            }
+            return null;
+        }
     }
 }
