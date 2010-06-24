@@ -49,6 +49,7 @@
     <Compile Include="TableCacheDependency\CatalogList.cs" />
     <Compile Include="TableCacheDependency\CityList.cs" />
     <Compile Include="TableCacheDependency\DistrictList.cs" />
+    <Compile Include="TableCacheDependency\NavsList.cs" />
     <Compile Include="TableCacheDependency\ProvinceList.cs" />
     <Compile Include="TableCacheDependency\TableDependency.cs" />
   </ItemGroup>

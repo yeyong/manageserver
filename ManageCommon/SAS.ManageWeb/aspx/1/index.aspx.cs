@@ -16,13 +16,13 @@ namespace SAS.ManageWeb
         /// <summary>
         /// 类别列表
         /// </summary>
-        private DataTable cataloglist = Catalogs.GetAllCatalog();
+        //private DataTable cataloglist = Catalogs.GetAllCatalog();
         /// <summary>
         /// 行业类别列表
         /// </summary>
-        protected DataRow[] cataloglist1;
-        protected DataRow[] cataloglist2;
-        protected DataRow[] cataloglist3;
+        protected DataRow[] cataloglist1 = Catalogs.GetAllCatalogBySort(0);
+        protected DataRow[] cataloglist2 = Catalogs.GetAllCatalogBySort(1);
+        protected DataRow[] cataloglist3 = Catalogs.GetAllCatalogBySort(2);
         /// <summary>
         /// 城市企业信息
         /// </summary>
@@ -85,10 +85,6 @@ namespace SAS.ManageWeb
                     + "\r\n " + "jQuery(this).gettop({objsrc:\"templates/" + templatepath + "/images/diaocha.gif\",objhref:\"javascript:scrollTo(0,0)\"});"
                     + "\r\n " + "});";
             AddfootScript(loadscript);
-
-            cataloglist1 = cataloglist.Select("[sort] = 0");
-            cataloglist2 = cataloglist.Select("[sort] = 1");
-            cataloglist3 = cataloglist.Select("[sort] = 2");
 
             indexcity = areas.GetIndexCity();
         }

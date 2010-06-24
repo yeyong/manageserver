@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
+using System.Web.Caching;
 
 using SAS.Entity;
 using SAS.Data;
 using SAS.Common;
 using SAS.Config;
+using SAS.Cache.CacheDependencyFactory;
 
 namespace SAS.Logic
 {
@@ -30,6 +32,8 @@ namespace SAS.Logic
         private static List<NavInfo> navigationList = SAS.Data.DataProvider.Navs.GetNavigation();
 
         private static Predicate<NavInfo> matchParent = new Predicate<NavInfo>(delegate(NavInfo navInfo) { return navInfo.Parentid == 0; });
+
+        private static DataCacheConfigInfo dataconfig = DataCacheConfigs.GetConfig();
 
         static Navs()
         {
@@ -242,6 +246,12 @@ namespace SAS.Logic
                 nav = nav.Replace("</a></li>", "</a></p></li>");
                 nav = nav.Replace(" class=\"l_fff\"", " class=\"l_805952\"");
             }
+            if (!Utils.StrIsNullOrEmpty(url) && (url.Contains("http://")))
+            {
+                nav = nav.Replace("class=\"navce1\"><a", "class=\"navce3\"><p class=\"navce3rt\"><a");
+                nav = nav.Replace("</a></li>", "</a></p></li>");
+                nav = nav.Replace(" class=\"l_fff\"", " class=\"l_805952\"");
+            }
             return nav;
         }
 
@@ -278,6 +288,9 @@ namespace SAS.Logic
             InitNavigation();
         }
 
+        /// <summary>
+        /// 获取导航
+        /// </summary>
         public static DataTable GetNavigation(bool getAll)
         {
             DataTable navmenu = new DataTable();
@@ -310,6 +323,48 @@ namespace SAS.Logic
                 navmenu.Rows.Add(dr);
             }
             return navmenu;
+        }
+
+        /// <summary>
+        /// 获取导航（数据缓存）
+        /// </summary>
+        public static DataTable GetNavigationCache()
+        {
+            DataTable dt = new DataTable();
+            string cachekeys = "Navs";
+            if (dataconfig.EnableCaching != 1)
+            {
+                SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+                dt = cache.RetrieveObject("/SAS/" + cachekeys) as DataTable;
+                if (dt == null)
+                {
+                    dt = GetNavigation(true);
+                    cache.AddObject("/SAS/" + cachekeys, dt);
+                }
+            }
+            else
+            {
+                SAS.Cache.SASDataCache datacache = SAS.Cache.SASDataCache.GetCacheService();
+                dt = datacache.GetDataCache(cachekeys) as DataTable;
+                if (dt == null)
+                {
+                    dt = GetNavigation(true);
+                    AggregateCacheDependency cd = DependencyFacade.GetNavsDependency();
+                    datacache.SetDataCache(cachekeys, dt, cd);
+                }
+            }
+            return dt;
+        }
+
+        /// <summary>
+        /// 根据上级ID获取导航信息
+        /// </summary>
+        /// <param name="pid"></param>
+        /// <returns></returns>
+        public static DataRow[] GetNavigationByPid(int pid)
+        {
+            DataTable dt = GetNavigationCache();
+            return dt.Select("[parentid]=" + pid);
         }
 
         /// <summary>

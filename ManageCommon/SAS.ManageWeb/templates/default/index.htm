@@ -15,7 +15,7 @@
 			<p class="onelt1tit1">公告栏</p>
 			<ul class="onelt1nr">
 			    <%loop (AnnouncementInfo) announcement announcementlist%>
-			    <li>▪&nbsp;<a title="{announcement.title}" href="#">{announcement.title}</a></li>
+			    <li>▪&nbsp;<a title="{announcement.title}" href="nouncedetail-{announcement.id}.html">{announcement.title}</a></li>
 			    <%/loop%>
 			</ul>
 		</div>

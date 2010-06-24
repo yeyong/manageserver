@@ -19,7 +19,7 @@ namespace SAS.ManageWeb
         /// <summary>
         /// 行业类别
         /// </summary>
-        protected DataTable cataloglist = new DataTable();
+        protected DataRow[] cataloglist;
         /// <summary>
         /// 点击企业排行
         /// </summary>
@@ -119,39 +119,35 @@ namespace SAS.ManageWeb
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/jquery.cluetip.css");
             script += "\r\n<script src=\"" + forumpath + "javascript/locations.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/jquery.cluetip-min.js\" type=\"text/javascript\"></script>";
-            script += "\r\n<script src=\"" + forumpath + "javascript/template_catalogadmin.js\" type=\"text/javascript\"></script>";            
+            script += "\r\n<script src=\"" + forumpath + "javascript/template_catalogadmin.js\" type=\"text/javascript\"></script>";
 
             string loadscript = "\r\n " + "jQuery(document).ready(function() {"
                     + "\r\n " + "jQuery(\"#thelocation\").LoadLocation({provinceid:" + provinceid + ",cityid:" + cityid + ",areaid:" + areaid + ",urlparms:'zshy-" + catalogid + "-{1}-{2}-{3}-" + entypeid + "-" + regyear + "-" + ordertype + "-" + keyword + ".html'});"
                     + "\r\n " + "jQuery(\"#views\").ExtendClick(\"views1\",\"viewsnr\",\"i\"," + ordertype + ");"
                     + "\r\n " + "jQuery('#put').find(\".zshynr1ce\").find(\"a\").cluetip({ activation: 'click', sticky: true, width: 350, positionBy: 'bottomTop', closePosition: 'title', closeText: '<img src=\"" + forumpath + "images/cross.png\" alt=\"close\" />',cursor: 'pointer', dropShadow: false});"
                     + "\r\n " + "jQuery(\"input[type=text],textarea\").each(function(){"
-			        + "\r\n " + "  jQuery(this).blur(function(){jQuery(this).attr(\"class\",\"input2_soout\");});"
-			        + "\r\n " + "  jQuery(this).focus(function(){jQuery(this).attr(\"class\",\"input2_soon\");});"
-		            + "\r\n " + "});"
+                    + "\r\n " + "  jQuery(this).blur(function(){jQuery(this).attr(\"class\",\"input2_soout\");});"
+                    + "\r\n " + "  jQuery(this).focus(function(){jQuery(this).attr(\"class\",\"input2_soon\");});"
+                    + "\r\n " + "});"
                     + "\r\n " + "jQuery(this).gettop({objsrc:\"templates/" + templatepath + "/images/diaocha.gif\",objhref:\"javascript:scrollTo(0,0)\"});"
                     + "\r\n " + "});\r\n";
-            AddfootScript(loadscript);            
+            AddfootScript(loadscript);
             SetConditionAndPage();
 
-            if (catalogid == 0) cataloglist = Catalogs.GetAllCatalogBySort(1, Companies.GetCompanyCondition(arealist, entypeid, regyear, keyword));
-            else
+            cataloglist = Catalogs.GetAllCatalogByPid(catalogid);
+            CatalogInfo _cli = Catalogs.GetCatalogCacheInfo(catalogid);
+            if (_cli != null)
             {
-                cataloglist = Catalogs.GetAllCatalogByPid(catalogid, Companies.GetCompanyCondition(arealist, entypeid, regyear, keyword));
-                CatalogInfo _cli = Catalogs.GetCatalogCacheInfo(catalogid);
-                if (_cli != null)
+                pagenav = " &gt; <a href=\"zshy.html\" title=\"浙商黄页\" class=\"l_666\">浙商黄页</a>";
+                foreach (string str in _cli.parentlist.Split(','))
                 {
-                    pagenav = " &gt; <a href=\"zshy.html\" title=\"浙商黄页\" class=\"l_666\">浙商黄页</a>";
-                    foreach (string str in _cli.parentlist.Split(','))
-                    {
-                        CatalogInfo subcli = Catalogs.GetCatalogCacheInfo(TypeConverter.StrToInt(str, 0));
-                        if (subcli == null) continue;
-                        if (subcli.parentid == 0) continue;
-                        pagenav += String.Format(" &gt; <a href=\"zshy-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}.html\" title=\"{0}\" class=\"l_666\">{0}</a>", subcli.name, subcli.id, provinceid, cityid, areaid, entypeid, regyear, ordertype, keyword);
-                    }
-                    pagenav += " &gt; " + _cli.name;
-                    pagetitle = "浙商黄页-浙商黄页-" + _cli.name;
+                    CatalogInfo subcli = Catalogs.GetCatalogCacheInfo(TypeConverter.StrToInt(str, 0));
+                    if (subcli == null) continue;
+                    if (subcli.parentid == 0) continue;
+                    pagenav += String.Format(" &gt; <a href=\"zshy-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}.html\" title=\"{0}\" class=\"l_666\">{0}</a>", subcli.name, subcli.id, provinceid, cityid, areaid, entypeid, regyear, ordertype, keyword);
                 }
+                pagenav += " &gt; " + _cli.name;
+                pagetitle = "浙商黄页-浙商黄页-" + _cli.name;
             }
 
             companylist = Companies.GetCompanyPageList(catalogid, pageid, pagesize, "en_accesses", ordertype == 0 ? "" : "desc", condition);

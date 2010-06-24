@@ -19,7 +19,7 @@ namespace SAS.ManageWeb
         /// <summary>
         /// 行业类别
         /// </summary>
-        protected DataTable cataloglist = new DataTable();
+        protected DataRow[] cataloglist;
         /// <summary>
         /// 点击企业排行
         /// </summary>
@@ -132,24 +132,20 @@ namespace SAS.ManageWeb
             AddfootScript(loadscript);
             SetConditionAndPage();
 
-            if (catalogid == 0) cataloglist = Catalogs.GetAllCatalogBySort(1, Companies.GetCompanyCondition(arealist, entypeid, regyear, keyword));
-            else
+            cataloglist = Catalogs.GetAllCatalogByPid(catalogid);
+            CatalogInfo _cli = Catalogs.GetCatalogCacheInfo(catalogid);
+            if (_cli != null)
             {
-                cataloglist = Catalogs.GetAllCatalogByPid(catalogid, Companies.GetCompanyCondition(arealist, entypeid, regyear, keyword));
-                CatalogInfo _cli = Catalogs.GetCatalogCacheInfo(catalogid);
-                if (_cli != null)
+                pagenav = " &gt; <a href=\"zscard.html\" title=\"浙商名片\" class=\"l_666\">浙商名片</a>";
+                foreach (string str in _cli.parentlist.Split(','))
                 {
-                    pagenav = " &gt; <a href=\"zscard.html\" title=\"浙商名片\" class=\"l_666\">浙商名片</a>";
-                    foreach (string str in _cli.parentlist.Split(','))
-                    {
-                        CatalogInfo subcli = Catalogs.GetCatalogCacheInfo(TypeConverter.StrToInt(str, 0));
-                        if (subcli == null) continue;
-                        if (subcli.parentid == 0) continue;
-                        pagenav += String.Format(" &gt; <a href=\"zscard-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}.html\" title=\"{0}\" class=\"l_666\">{0}</a>", subcli.name, subcli.id, provinceid, cityid, areaid, entypeid, regyear, ordertype, keyword);
-                    }
-                    pagenav += " &gt; " + _cli.name;
-                    pagetitle = "浙商名片-浙商名片-" + _cli.name;
+                    CatalogInfo subcli = Catalogs.GetCatalogCacheInfo(TypeConverter.StrToInt(str, 0));
+                    if (subcli == null) continue;
+                    if (subcli.parentid == 0) continue;
+                    pagenav += String.Format(" &gt; <a href=\"zscard-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}.html\" title=\"{0}\" class=\"l_666\">{0}</a>", subcli.name, subcli.id, provinceid, cityid, areaid, entypeid, regyear, ordertype, keyword);
                 }
+                pagenav += " &gt; " + _cli.name;
+                pagetitle = "浙商名片-浙商名片-" + _cli.name;
             }
 
             companylist = Companies.GetCompanyPageList(catalogid, pageid, pagesize, "en_accesses", ordertype == 0 ? "" : "desc", condition);
