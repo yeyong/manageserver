@@ -632,7 +632,7 @@ namespace SAS.Data.SqlServer
 
                 commandText = "SELECT TOP {0} * FROM [{1}announcements] WHERE [id] < (SELECT MIN([id])  FROM (SELECT TOP " + ((pageIndex - 1) * pageSize) + " [id] FROM [{1}announcements] ORDER BY [displayorder] DESC,[id] DESC) AS tblTmp ) ORDER BY [displayorder] DESC,[id] DESC";
             }
-            return DbHelper.ExecuteReader(CommandType.Text, string.Format(commandText, pageSize, BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, string.Format(commandText, pageSize, BaseConfigs.GetTablePrefix));
         }
         /// <summary>
         /// 首页公告

@@ -48,7 +48,9 @@ namespace SAS.Data.DataProvider
         {
             return DatabaseProvider.GetInstance().GetAnnouncements();
         }
-
+        /// <summary>
+        /// 获取公告列表
+        /// </summary>
         public static List<AnnouncementInfo> GetAnnouncementList(int pageSize, int pageIndex)
         {
             IDataReader reader = DatabaseProvider.GetInstance().GetAnnouncements(pageSize, pageIndex);

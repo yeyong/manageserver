@@ -116,14 +116,14 @@
 	<div class="onert mar_top_8">
 		<div class="onert1">
 			<span class="onert1an1"><a title="提交企业信息" href="companypost.aspx"></a></span>
-			<span class="onert1an2"><a title="提交企业信息" href="#"></a></span>
+			<span class="onert1an2"><a title="查找提交状态" href="inquiry.aspx"></a></span>
 			<i class="lt"></i><i class="rt"></i>
 		</div>
 		<div class="onert2 mar_top_8">
 			<span>最新加入企业：</span>
 			<ul class="onecomp" id="listcomp">
 			<%loop (Companys) cinfo newcompanylist%>
-			    <li><a title="{cinfo.en_name}" href="{cinfo.en_id}" target="_blank">{cinfo.en_name}</a></li>
+			    <li><a title="{cinfo.en_name}" href="{cinfo.en_id}.html" target="_blank">{cinfo.en_name}</a></li>
 			<%/loop%>				
 			</ul>
 		</div>
