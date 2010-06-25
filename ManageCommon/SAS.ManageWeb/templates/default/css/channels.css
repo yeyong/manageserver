@@ -212,7 +212,7 @@
 .inq1 .rt{ background-position:-5px 0; right:0;}
 .inq1ce{ width:690px; height:24px; line-height:24px; font-size:13px; font-weight:bold; color:#7c453e; padding:11px 15px; float:left;}
 .inq1ce em{ margin-right:3px; float:left;}
-.inq2{ width:740px; height:58px; background:url(../images/bg1.gif) repeat-x; float:left;}
+.inq2{ width:740px; height:auto; background:url(../images/bg1.gif) repeat-x; float:left;}
 .inq2t{ width:710px; height:29px; padding:0 15px; float:left;}
 .inq2t1{ width:550px; height:21px; line-height:21px; margin:5px 0 0 0; float:left;}
 .inq2t1 em{ margin-right:3px; float:left;}
@@ -227,11 +227,13 @@
 .helpcot{ width:960px; height:auto; border-bottom:1px solid #e5e5e5; overflow:hidden; padding:0 0 20px 0; float:left;}
 .helplt{ width:199px; height:auto; background:#f7f7f7; border:1px solid #e5e5e5; border-right:0; padding:20px; float:left; margin-bottom:-2000px; padding-bottom:2000px; float:left;}
 .helplt strong{ width:199px; height:30px; line-height:30px; font-size:14px; float:left;}
+
 .helpltnr{ width:199px; height:auto; float:left;}
 .hpltnrt{ width:189px; height:30px; line-height:30px; color:#91655c; margin:5px 0 0 0; display:inline; cursor:pointer; float:left;}
 .hpltnrt em{ width:11px; height:11px; line-height:12px; color:#999; text-align:center; background:#fff; border:1px solid #e5e5e5; margin:8px 8px 0 0; display:inline; float:left;}
 .hpltcot{ width:189px; height:auto; margin:3px 0 0 0; display:none; float:left;}
 .hpltcot li{ width:169px; height:25px; line-height:25px; color:#666; padding:0 0 0 20px; float:left;}
+
 .helprt{ width:678px; height:auto; background:#fff; border:1px solid #e5e5e5; padding:20px; margin-bottom:-2000px; padding-bottom:2000px; float:left; margin-right:-3px;}
 .helprt strong{ width:675px; height:30px; line-height:30px; font-size:14px; float:left;}
 .helprtnr{ width:675px; height:auto; line-height:25px; margin:10px 0 0 0; display:inline; float:left;}
