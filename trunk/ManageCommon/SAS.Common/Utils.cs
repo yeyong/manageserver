@@ -1022,15 +1022,28 @@ namespace SAS.Common
         /// <summary>
         /// 获取企业信息分页
         /// </summary>
-        /// <param name="curPage"></param>
-        /// <param name="countPage"></param>
-        /// <param name="url"></param>
-        /// <returns></returns>
+        /// <param name="curPage">当前页</param>
+        /// <param name="countPage">总页数</param>
+        /// <param name="url">链接</param>
+        /// <param name="extendPage">最大页</param>
         public static string GetCompanyPageNumbers(int curPage, int countPage, string url, int extendPage)
+        {
+            return GetCompanyPageNumbers(curPage, countPage, url, extendPage, '-');
+        }
+
+        /// <summary>
+        /// 获取企业信息分页
+        /// </summary>
+        /// <param name="curPage">当前页</param>
+        /// <param name="countPage">总页数</param>
+        /// <param name="url">链接</param>
+        /// <param name="extendPage">最大页</param>
+        /// <param name="separater">分割符号</param>
+        public static string GetCompanyPageNumbers(int curPage, int countPage, string url, int extendPage, char separater)
         {
             int startPage = 1;
             int endPage = countPage;
-            int indexposition = url.IndexOf('-', 0);
+            int indexposition = url.IndexOf(separater, 0);
             string backurl1 = CutString(url, 0, indexposition);
             string backurl2 = CutString(url, indexposition);
             string backurl = backurl1 + "-{0}" + backurl2;

@@ -112,7 +112,9 @@ namespace SAS.ManageWeb
 
         protected override void ShowPage()
         {
-            pagetitle = "浙商黄页-浙商黄页-企业首页";
+            string m_keyword = "浙商黄页,浙商企业检索页,{0}行业,{0}企业,{0}生产商,{0}销售商,{0}供应商,{0}搜索,{0}大全,{0}商机,{0}名片," + config.Seokeywords;  //meta关键字
+            string m_content = "浙商黄页(www.zheshangonline.com)浙商企业信息检索。大力扶持中小企业，中小型企业的摇篮，免费的{0}企业展示平台，让所有的网站都成为您企业的展示平台，更多服务尽在浙商黄页展示平台！" + config.Seodescription;  //meta内容描述
+            pagetitle = "浙商黄页|浙商企业检索首页";
             searchkey = keyword;
             keyword = Utils.UrlEncode(keyword).Replace("'", "%27");
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
@@ -147,8 +149,17 @@ namespace SAS.ManageWeb
                     pagenav += String.Format(" &gt; <a href=\"zshy-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}.html\" title=\"{0}\" class=\"l_666\">{0}</a>", subcli.name, subcli.id, provinceid, cityid, areaid, entypeid, regyear, ordertype, keyword);
                 }
                 pagenav += " &gt; " + _cli.name;
-                pagetitle = "浙商黄页-浙商黄页-" + _cli.name;
+                pagetitle = pagetitle + "-" + _cli.name + "企业信息";
+                m_keyword = String.Format(m_keyword, _cli.name);
+                m_content = String.Format(m_content, _cli.name);
             }
+            else
+            {
+                m_keyword = String.Format(m_keyword, "中小企业");
+                m_content = String.Format(m_content, "中小企业");
+            }
+
+            UpdateMetaInfo(m_keyword, m_content, "");
 
             companylist = Companies.GetCompanyPageList(catalogid, pageid, pagesize, "en_accesses", ordertype == 0 ? "" : "desc", condition);
         }

@@ -4,7 +4,7 @@
 	<div class="zshylt mar_top_8">
 		<p class="zshysite">
 			<i class="zslt"></i><i class="zsrt"></i>
-			<span class="zshysnr">您当前的位置：<a href="{forumurl}index.html" class="l_666">首页</a>{pagenav}</span>
+			<span class="zshysnr">您当前的位置：<a href="{forumurl}index.html" class="l_666" title="商之源">商之源</a>{pagenav}</span>
 		</p>
 		<dl class="zshy1 mar_top_8">
 			<dt><b>按主营范围选择：</b></dt>
@@ -115,13 +115,18 @@
 				</p>
 			</dd>
 			<%/loop%>
+			<%if companylist.Count==0%>
+			<dd class="zshynrdd2">
+			    <p class="zshynr1"><strong class="f_805952_18">未查找到相关数据！</strong></p>
+			</dd>
+			<%/if%>
 		</dl>
 		<div class="page f_666">
 			{pagenumbers}
 			共{pagecount}页　到第
-			<input type="text" name="textfield" class="input3" style="width:25px;" />
+			<input type="text" name="textfield" id="gopage" class="input3" style="width:25px;" />
 			页
-			<input type="button" name="button1" class="agree1" value="确 定" />
+			<input type="button" name="button1" class="agree1" value="确 定" onclick="window.location='zshy-'+document.getElementById('gopage').value+'-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-{ordertype}-{keyword}.html';"/>
 		</div>
 	</div>
 	<!--左边 end-->
