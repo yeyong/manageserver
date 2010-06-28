@@ -96,7 +96,7 @@
 							<input type="checkbox" id="chkall" name="chkall" onclick="Check(this.form);" />选择全部 &nbsp;&nbsp;
 							<yy:Button id="CreateTemplate" runat="server" Text=" 按选中的模板文件生成页面 " OnClick="CreateTemplate_Click"></yy:Button>&nbsp;&nbsp;
 							<yy:Button id="DeleteTemplateFile" runat="server" Text="删除指定的模板文件" ButtonImgUrl="../images/del.gif" OnClick="DeleteTemplateFile_Click" OnClientClick="if(!confirm('你确认要删除所选模板文件吗？\n删除后将不能恢复！')) return false;"></yy:Button>&nbsp;&nbsp;
-							<button type="button" class="ManagerButton" id="Button3" onclick="window.location='global_templatesgrid.aspx';"><img src="../images/arrow_undo.gif"/> 返 回 </button>
+							<button type="button" class="ManagerButton" id="Button3" onclick="window.location='company_cardtemplategrid.aspx';"><img src="../images/arrow_undo.gif"/> 返 回 </button>
 						</p>
 					</yy:TabPage>
 					<yy:TabPage Caption="其它文件" ID="tabPage33">

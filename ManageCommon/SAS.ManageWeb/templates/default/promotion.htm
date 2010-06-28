@@ -1,0 +1,117 @@
+﻿<%template _comheader%>
+<div class="cot">
+    <%if {page_err}==0%>
+    <p class="zshysite mar_top_8">
+		<i class="zslt"></i><i class="zsrt"></i>
+		<span class="zshysnr">您当前的位置：<a href="{forumurl}index.html" title="商之源">商之源</a> &gt; <a href="{forumurl}zshy.html">浙商黄页</a> &gt; {companyshowinfo.en_name}</span>
+	</p>
+	<div class="pmt mar_top_8">
+		<h2 class="pmtit">{companyshowinfo.en_name}</h2>
+		<div class="pmtnrlt">
+			<p><b>联&nbsp;系&nbsp;人：</b> {companyshowinfo.en_contact}</p>
+			<p><b>电&nbsp;&nbsp;&nbsp;&nbsp;话：</b> {companyshowinfo.en_phone}</p>
+			<p><b>传&nbsp;&nbsp;&nbsp;&nbsp;真：</b> {companyshowinfo.en_fax}</p>
+			<p><b>地&nbsp;&nbsp;&nbsp;&nbsp;址：</b> {companyshowinfo.provinceName} {companyshowinfo.cityName} {companyshowinfo.en_address}</p>
+			<p><b>邮&nbsp;&nbsp;&nbsp;&nbsp;编：</b> {companyshowinfo.en_post}</p>
+			<p><b>经营模式：</b> <%set (string) {companyinfotype}=EnumCatch.GetCompanyType({companyshowinfo.en_type})%>{companyinfotype}</p>			
+			<p><b>注册年份：</b> {companyshowinfo.reg_year}</p>
+			<p><b>公司主页：</b> <a class="l_f00_u" title="" href="#">{companyshowinfo.en_web}</a></p>
+			<p><b>主&nbsp;&nbsp;&nbsp;&nbsp;营：</b> <%set {companyshowinfo.En_main}=Utils.ReplaceString({companyshowinfo.en_main},",,",",",false).Trim(',')%>{companyshowinfo.en_main}</p>
+		</div>
+		<div class="pmtnrrt">
+			<strong>企业介绍</strong>
+			<p><%getsubstring(Utils.GetSpacesString(2)+Utils.GetTextFromHTML({companyshowinfo.en_desc}),395,"...")%>[<a title="查看详情" href="{companyshowinfo.en_id}.html" target="_blank" class="l_e00101">查看详情</a>]</p>
+			<i class="lt"></i><i class="rt"></i>
+		</div>
+	</div>
+	<div class="pmt1 mar_top_8">
+		<div class="pmt1lt">
+			<b class="pmt1lt1">文字链形式</em></b>
+			<form class="pmt1lt2 mar_top_3">
+				<p><input type="radio" name="RadioGroup1" value="单选" /> URL推广 </p>
+				<p><input type="radio" name="RadioGroup1" value="单选" /> 杭州生活主题服装有限公司</p>
+				<p>
+				<input type="radio" name="RadioGroup1" value="单选" /> 自定义：<br />
+				<textarea name="textarea" class="input2_soout" style="width:323px; height:60px;"></textarea>
+				</p>
+				<p class="f_999 mar_top_5">
+					<span class="pmt1lt2zi1">不能超过30个字</span>
+					<span class="pmt1lt2zi2"><input name="" type="button" value="确定" /></span>
+				</p>
+			</form>
+		</div>
+		<div class="pmt1rt" id="prom1">
+			<ul id="pmt1rt1">
+				<li>HTML</li>
+				<li>论坛</li>
+			</ul>
+			<div id="pmt1rt2">
+				<div class="con">
+				<textarea class="input2_soout" style="width:510px; height:160px;">images/hycard/hycard1.gif</textarea>
+				</div>
+				<div class="con">
+				<textarea class="input2_soout" style="width:510px; height:160px;">不一样的images/hycard/hycard1.gif</textarea>
+				</div>
+			</div>
+			<p class="pmt1rt3 mar_top_8"><a title="" href="#"></a></p>
+		</div>
+	</div>
+	<div class="pmt1 mar_top_8">
+		<div class="pmt1lt">
+			<b class="pmt1lt1">图片形式<em>（330*205）</em></b>
+			<div class="pmt1lt2 mar_top_3">
+			<img alt="{companyshowinfo.en_name}" src="{rooturl}showcardimg_{companyshowinfo.en_id}.html" />
+			</div>
+		</div>
+		<div class="pmt1rt" id="prom2">
+			<ul id="pmt1rt3">
+				<li>HTML</li>
+				<li>论坛</li>
+			</ul>
+			<div id="pmt1rt4">
+				<div class="con">
+				<textarea class="input2_soout" style="width:510px; height:160px;"><img alt="{companyshowinfo.en_name}" src="{rooturl}showcardimg_{companyshowinfo.en_id}.html" /></textarea>
+				</div>
+				<div class="con">
+				<textarea class="input2_soout" style="width:510px; height:160px;">[img]{rooturl}showcardimg_{companyshowinfo.en_id}.html[/img]</textarea>
+				</div>
+			</div>
+			<p class="pmt1rt3 mar_top_8"><a title="" href="#" onclick="setcopy('ffff','ssss')"></a></p>
+		</div>
+	</div>
+	<div class="pmt1 mar_top_8">
+		<div class="pmt1lt">
+			<b class="pmt1lt1">Flash形式<em>（330*205）</em></b>
+			<div class="pmt1lt2 mar_top_3">
+			<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="100%" height="100%" id="Untitled-1" align="middle">
+				<param name="allowScriptAccess" value="sameDomain" />
+				<param name="movie" value="{flashpath}?objid={companyshowinfo.en_id}" />
+				<param name="quality" value="high" />
+				<param name="wmode" value="transparent" />
+				<embed src="{flashpath}?objid={companyshowinfo.en_id}" quality="high" wmode="transparent" width="100%"  height="100%" name="mymovie" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+			</object>
+			</div>
+		</div>
+		<div class="pmt1rt" id="prom3">
+			<ul id="pmt1rt5">
+				<li>HTML</li>
+				<li>论坛</li>
+			</ul>
+			<div id="pmt1rt6">
+				<div class="con">
+				<textarea class="input2_soout" style="width:510px; height:160px;"><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="100%" height="100%" id="Object1" align="middle"><param name="allowScriptAccess" value="sameDomain" /><param name="movie" value="{rooturl}{flashpath}?objid={companyshowinfo.en_id}" /><param name="quality" value="high" /><param name="wmode" value="transparent" /><embed src="{rooturl}{flashpath}?objid={companyshowinfo.en_id}" quality="high" wmode="transparent" width="100%"  height="100%" name="mymovie" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" /></object>
+				</textarea>
+				</div>
+				<div class="con">
+				<textarea class="input2_soout" style="width:510px; height:160px;">[flash]{rooturl}{flashpath}?objid={companyshowinfo.en_id}[/flash]</textarea>
+				</div>
+			</div>
+			<p class="pmt1rt3 mar_top_8"><a title="" href="#"></a></p>
+		</div>
+	</div>
+    <%else%>
+	    <%template _commsgbox%>
+	<%/if%>
+</div>
+<%template _comcopyright%>
+<%template _comfooter%>

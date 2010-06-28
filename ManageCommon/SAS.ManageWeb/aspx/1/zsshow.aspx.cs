@@ -32,12 +32,22 @@ namespace SAS.ManageWeb
         protected override void ShowPage()
         {
             companyshowinfo = Companies.GetCompanyInfo(showenid);
+            if (companyshowinfo == null)
+            {
+                AddErrLine("该企业信息不存在或已删除！");
+                return;
+            }
             commentcount = companyshowinfo.En_sell;
             if (companyshowinfo.En_status != 2)
             {
                 AddErrLine("该企业审批尚未通过！");
-                return;
             }
+            if (companyshowinfo.En_visble != 1)
+            {
+                AddErrLine("企业已被关闭，请与管理员联系！");
+            }
+            if (page_err > 0) return;
+
             pagetitle = "浙商黄页|" + companyshowinfo.En_name;
             string m_keyword = companyshowinfo.ProvinceName + "," + companyshowinfo.CityName + "," + companyshowinfo.DistrictName + "," + companyshowinfo.En_name + "," + companyshowinfo.En_mail + "," + companyshowinfo.En_main.Trim(',') + "," + config.Seokeywords;
             string m_desc = config.Seodescription + Utils.CutString(Utils.RemoveHtml(companyshowinfo.En_desc), 0, 60);
