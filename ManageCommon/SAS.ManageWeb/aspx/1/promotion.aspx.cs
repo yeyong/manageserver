@@ -57,10 +57,13 @@ namespace SAS.ManageWeb
             UpdateMetaInfo(m_keyword.Trim().Trim(','), m_desc.Trim().Trim(','), "");
 
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
-            //AddLinkCss(forumpath + "templates/" + templatepath + "/float.css");
-            script += "\r\n<script src=\"" + forumpath + "javascript/common.js\" type=\"text/javascript\"></script>";
+            
             script += "\r\n<script src=\"" + forumpath + "javascript/jquery-exchange.js\" type=\"text/javascript\"></script>";
             string loadscript = "\r\n " + "jQuery(document).ready(function() {"
+                     + "\r\n " + "promotion_0 = document.getElementById('html_pro1').innerHTML;"
+                     + "\r\n " + "promotion_1 = document.getElementById('html_pro1').innerHTML;"
+                     + "\r\n " + "promotion_2 = document.getElementById('html_pro2').innerHTML;"
+                     + "\r\n " + "promotion_3 = document.getElementById('html_pro3').innerHTML;"
                      + "\r\n " + "jQuery(\"#prom1\").Exchange({ MIDS: \"pmt1rt1\", CIDS: \"pmt1rt2\", count: 5, mousetype: 0 });"
                      + "\r\n " + "jQuery(\"#prom2\").Exchange({ MIDS: \"pmt1rt3\", CIDS: \"pmt1rt4\", count: 5, mousetype: 0 });"
                      + "\r\n " + "jQuery(\"#prom3\").Exchange({ MIDS: \"pmt1rt5\", CIDS: \"pmt1rt6\", count: 5, mousetype: 0 });"
