@@ -28,8 +28,8 @@
 		<div class="pmt1lt">
 			<b class="pmt1lt1">文字链形式</em></b>
 			<form class="pmt1lt2 mar_top_3">
-				<p><input type="radio" name="RadioGroup1" value="单选" /> URL推广 </p>
-				<p><input type="radio" name="RadioGroup1" value="单选" /> 杭州生活主题服装有限公司</p>
+				<p><input type="radio" name="RadioGroup1" value="单选" onclick="document.getElementById('html_pro1').innerHTML=promotion_0;document.getElementById('forum_pro1').innerHTML=String.format(promotion_farmat2,promotion_0,promotion_0);" checked/> URL推广 </p>
+				<p><input type="radio" name="RadioGroup1" value="单选" onclick="document.getElementById('html_pro1').innerHTML=String.format(promotion_farmat1,'{companyshowinfo.en_name}',promotion_0);document.getElementById('forum_pro1').innerHTML=String.format(promotion_farmat2,'{companyshowinfo.en_name}',promotion_0);"/> {companyshowinfo.en_name}</p>
 				<p>
 				<input type="radio" name="RadioGroup1" value="单选" /> 自定义：<br />
 				<textarea name="textarea" class="input2_soout" style="width:323px; height:60px;"></textarea>
@@ -42,18 +42,18 @@
 		</div>
 		<div class="pmt1rt" id="prom1">
 			<ul id="pmt1rt1">
-				<li>HTML</li>
-				<li>论坛</li>
+				<li onclick="promotion_1=document.getElementById('html_pro1').innerHTML;">HTML</li>
+				<li onclick="promotion_1=document.getElementById('forum_pro1').innerHTML;">论坛</li>
 			</ul>
 			<div id="pmt1rt2">
 				<div class="con">
-				<textarea class="input2_soout" style="width:510px; height:160px;">images/hycard/hycard1.gif</textarea>
+				<textarea class="input2_soout" style="width:510px; height:160px;" id="html_pro1">{rooturl}{companyshowinfo.en_id}.html</textarea>
 				</div>
 				<div class="con">
-				<textarea class="input2_soout" style="width:510px; height:160px;">不一样的images/hycard/hycard1.gif</textarea>
+				<textarea class="input2_soout" style="width:510px; height:160px;" id="forum_pro1">[url={rooturl}{companyshowinfo.en_id}.html]{rooturl}{companyshowinfo.en_id}.html[/url]</textarea>
 				</div>
 			</div>
-			<p class="pmt1rt3 mar_top_8"><a title="" href="#"></a></p>
+			<p class="pmt1rt3 mar_top_8"><a title="" href="javascript:void(0)" onclick="copyToClipboard(promotion_1)"></a></p>
 		</div>
 	</div>
 	<div class="pmt1 mar_top_8">
@@ -65,18 +65,18 @@
 		</div>
 		<div class="pmt1rt" id="prom2">
 			<ul id="pmt1rt3">
-				<li>HTML</li>
-				<li>论坛</li>
+				<li onclick="promotion_2=document.getElementById('html_pro2').innerHTML;">HTML</li>
+				<li onclick="promotion_2=document.getElementById('forum_pro2').innerHTML;">论坛</li>
 			</ul>
 			<div id="pmt1rt4">
 				<div class="con">
-				<textarea class="input2_soout" style="width:510px; height:160px;"><img alt="{companyshowinfo.en_name}" src="{rooturl}showcardimg_{companyshowinfo.en_id}.html" /></textarea>
+				<textarea class="input2_soout" style="width:510px; height:160px;" id="html_pro2"><img alt="{companyshowinfo.en_name}" src="{rooturl}showcardimg_{companyshowinfo.en_id}.html" /></textarea>
 				</div>
 				<div class="con">
-				<textarea class="input2_soout" style="width:510px; height:160px;">[img]{rooturl}showcardimg_{companyshowinfo.en_id}.html[/img]</textarea>
+				<textarea class="input2_soout" style="width:510px; height:160px;" id="forum_pro2">[img]{rooturl}showcardimg_{companyshowinfo.en_id}.html[/img]</textarea>
 				</div>
 			</div>
-			<p class="pmt1rt3 mar_top_8"><a title="" href="#" onclick="setcopy('ffff','ssss')"></a></p>
+			<p class="pmt1rt3 mar_top_8"><a title="" href="javascript:void(0)" onclick="copyToClipboard(promotion_2)"></a></p>
 		</div>
 	</div>
 	<div class="pmt1 mar_top_8">
@@ -94,19 +94,19 @@
 		</div>
 		<div class="pmt1rt" id="prom3">
 			<ul id="pmt1rt5">
-				<li>HTML</li>
-				<li>论坛</li>
+				<li onclick="promotion_3=document.getElementById('html_pro3').innerHTML;">HTML</li>
+				<li onclick="promotion_3=document.getElementById('forum_pro3').innerHTML;">论坛</li>
 			</ul>
 			<div id="pmt1rt6">
 				<div class="con">
-				<textarea class="input2_soout" style="width:510px; height:160px;"><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="100%" height="100%" id="Object1" align="middle"><param name="allowScriptAccess" value="sameDomain" /><param name="movie" value="{rooturl}{flashpath}?objid={companyshowinfo.en_id}" /><param name="quality" value="high" /><param name="wmode" value="transparent" /><embed src="{rooturl}{flashpath}?objid={companyshowinfo.en_id}" quality="high" wmode="transparent" width="100%"  height="100%" name="mymovie" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" /></object>
+				<textarea class="input2_soout" style="width:510px; height:160px;" id="html_pro3"><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="100%" height="100%" id="Object1" align="middle"><param name="allowScriptAccess" value="sameDomain" /><param name="movie" value="{rooturl}{flashpath}?objid={companyshowinfo.en_id}" /><param name="quality" value="high" /><param name="wmode" value="transparent" /><embed src="{rooturl}{flashpath}?objid={companyshowinfo.en_id}" quality="high" wmode="transparent" width="100%"  height="100%" name="mymovie" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" /></object>
 				</textarea>
 				</div>
 				<div class="con">
-				<textarea class="input2_soout" style="width:510px; height:160px;">[flash]{rooturl}{flashpath}?objid={companyshowinfo.en_id}[/flash]</textarea>
+				<textarea class="input2_soout" style="width:510px; height:160px;" id="forum_pro3">[flash]{rooturl}{flashpath}?objid={companyshowinfo.en_id}[/flash]</textarea>
 				</div>
 			</div>
-			<p class="pmt1rt3 mar_top_8"><a title="" href="#"></a></p>
+			<p class="pmt1rt3 mar_top_8"><a title="" href="javascript:void(0)" onclick="copyToClipboard(promotion_3)"></a></p>
 		</div>
 	</div>
     <%else%>
