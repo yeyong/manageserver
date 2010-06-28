@@ -104,7 +104,6 @@ namespace SAS.ManageWeb.ManagePage
             }
         }
 
-
         private DataTable LoadOtherFileDT()
         {
             #region 装入其它文件
@@ -210,7 +209,6 @@ namespace SAS.ManageWeb.ManagePage
             #endregion
         }
 
-
         public bool DeleteFile(string filename)
         {
             #region 删除文件
@@ -222,7 +220,6 @@ namespace SAS.ManageWeb.ManagePage
             return false;
             #endregion
         }
-
 
         protected void CreateTemplate_Click(object sender, EventArgs e)
         {
@@ -322,7 +319,6 @@ namespace SAS.ManageWeb.ManagePage
         //    return result.ToString().TrimEnd(',');
         //    #endregion
         //}
-
 
         #region Web 窗体设计器生成的代码
 

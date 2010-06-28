@@ -88,6 +88,9 @@
       <DependentUpon>posttopic.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="aspx\1\promotion.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="aspx\1\sitemap.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -994,6 +997,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="images\common\clipboard.swf" />
     <Content Include="javascript\jquery.ratingmin.js" />
     <Content Include="javascript\jqueryCommon.js" />
     <Content Include="javascript\template_showcompany.js" />
@@ -1581,6 +1585,7 @@
     <Content Include="templates\default\images\tijiao-an1.gif" />
     <Content Include="templates\default\images\tijiao-an2.gif" />
     <Content Include="templates\default\inquiry.htm" />
+    <Content Include="templates\default\promotion.htm" />
     <Content Include="templates\default\sitemap.htm" />
     <Content Include="templates\default\tipmsg.htm" />
     <Content Include="templates\default\zscard.htm" />
