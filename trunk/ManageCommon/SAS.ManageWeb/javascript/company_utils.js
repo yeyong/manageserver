@@ -10,6 +10,14 @@
     return str;
 }
 
+function chknum(area1_text) {
+    var len_area1_text = area1_text.length;
+    //alert(len_area1_text);
+    if (len_area1_text > 30) {
+        alert("当前有" + len_area1_text + "个字，不能超过30个字");
+    }
+}
+
 function isUndefined(variable) {
     return typeof variable == 'undefined' ? true : false;
 }
