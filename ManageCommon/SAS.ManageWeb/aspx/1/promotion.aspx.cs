@@ -68,7 +68,7 @@ namespace SAS.ManageWeb
                      + "\r\n " + "jQuery(\"#prom2\").Exchange({ MIDS: \"pmt1rt3\", CIDS: \"pmt1rt4\", count: 5, mousetype: 0 });"
                      + "\r\n " + "jQuery(\"#prom3\").Exchange({ MIDS: \"pmt1rt5\", CIDS: \"pmt1rt6\", count: 5, mousetype: 0 });"
                      + "\r\n " + "jQuery(\"#prom4\").Exchange({ MIDS: \"pmt1rt7\", CIDS: \"pmt1rt8\", count: 5, mousetype: 0 });"
-                     + "\r\n " + "jQuery(\"input[type=text],textarea\").each(function(){"
+                     + "\r\n " + "jQuery('#promotioncontent').find(\"input[type=text],textarea\").each(function(){"
                      + "\r\n " + "  jQuery(this).blur(function(){jQuery(this).attr(\"class\",\"input2_soout\");});"
                      + "\r\n " + "  jQuery(this).focus(function(){jQuery(this).attr(\"class\",\"input2_soon\");});"
                      + "\r\n " + "});"

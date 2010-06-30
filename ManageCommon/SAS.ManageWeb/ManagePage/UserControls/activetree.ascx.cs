@@ -46,7 +46,7 @@ namespace SAS.ManageWeb.ManagePage
             //读取论坛版块树
             DataTable dt = AdminActivities.GetEnableActivities();
 
-            if (dt.Rows.Count == 0) Server.Transfer("../global/global_addactivity.aspxx"); //如果版块表中没有任何版块, 则跳转到"添加第一个版块"页面. 
+            if (dt.Rows.Count == 0) Server.Transfer("../global/global_addactivity.aspx"); //如果版块表中没有任何版块, 则跳转到"添加第一个版块"页面. 
 
             ViewState["dt"] = dt;
 

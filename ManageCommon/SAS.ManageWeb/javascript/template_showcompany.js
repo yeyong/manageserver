@@ -87,7 +87,7 @@ function leavewordmessage_callback(data) {
 }
 
 function leaveword_callback(data) {
-    var leaveword_html = '';    
+    var leaveword_html = '';
 
     for (var i in data) {
         leaveword_html += '<li>';

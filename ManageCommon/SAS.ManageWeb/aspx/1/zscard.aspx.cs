@@ -126,7 +126,7 @@ namespace SAS.ManageWeb
                     + "\r\n " + "jQuery(\"#thelocation\").LoadLocation({provinceid:" + provinceid + ",cityid:" + cityid + ",areaid:" + areaid + ",urlparms:'zscard-" + catalogid + "-{1}-{2}-{3}-" + entypeid + "-" + regyear + "-" + ordertype + "-" + keyword + ".html'});"
                     + "\r\n " + "jQuery(\"#views\").ExtendClick(\"views1\",\"viewsnr\",\"i\"," + ordertype + ");"
                     + "\r\n " + "jQuery('#zscard').find(\"dd\").capslide({ caption_color: 'black', caption_bgcolor: 'white', overlay_bgcolor: '#eee9e8', border: '0px solid #e7dad8', showcaption: true });"
-                    + "\r\n " + "jQuery(\"input[type=text],textarea\").each(function(){"
+                    + "\r\n " + "jQuery('#zscard').find(\"input[type=text],textarea\").each(function(){"
                     + "\r\n " + "  jQuery(this).blur(function(){jQuery(this).attr(\"class\",\"input2_soout\");});"
                     + "\r\n " + "  jQuery(this).focus(function(){jQuery(this).attr(\"class\",\"input2_soon\");});"
                     + "\r\n " + "});"
