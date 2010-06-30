@@ -89,6 +89,7 @@ namespace SAS.Logic
         /// <returns></returns>
         public static DataRow[] GetActivityByIds(string idlist)
         {
+            if (string.IsNullOrEmpty(idlist)) return new DataRow[0];
             return GetActivitiesCache().Select("[id] IN (" + idlist + ")");
         }
     }

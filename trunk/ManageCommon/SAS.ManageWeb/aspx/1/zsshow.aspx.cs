@@ -115,7 +115,7 @@ namespace SAS.ManageWeb
                     + "\r\n " + "var comment_page_currentpage = 1;"
                     + "\r\n " + "jQuery(document).ready(function() {"
                     + "\r\n " + "jQuery('#put').find(\"span\").find(\"a\").cluetip({ activation: 'click', sticky: true, width: 350, positionBy: 'bottomTop', closePosition: 'title', closeText: '<img src=\"" + forumpath + "images/cross.png\" alt=\"close\" />',cursor: 'pointer', dropShadow: false});"
-                    + "\r\n " + "jQuery(\"input[type=text],textarea\").each(function(){"
+                    + "\r\n " + "jQuery('#form1').find(\"input[type=text],textarea\").each(function(){"
                     + "\r\n " + "  jQuery(this).blur(function(){jQuery(this).attr(\"class\",\"input2_soout\");});"
                     + "\r\n " + "  jQuery(this).focus(function(){jQuery(this).attr(\"class\",\"input2_soon\");});"
                     + "\r\n " + "});"
