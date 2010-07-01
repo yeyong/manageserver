@@ -23,8 +23,8 @@
 .zshynrt2 i{ font-style:normal;}
 .zshynrt3{ width:130px; height:18px; line-height:18px; border:1px solid #7e9db9; background:#fff url(../images/icon/arrow3.gif) top right no-repeat; display:inline; position:relative; padding:0 0 0 2px; margin:1px 0 0 0; display:inline; float:left; z-index:100;}
 .zshynrt3 em{ font-style:normal; float:left;}
-.zshynrt3nr{ width:132px; height:68px; overflow:hidden; position:absolute; left:-1px; top:19px; background:#fff; border: solid #7e9db9; border-width:0 1px 1px 1px; float:left;}
-.zshynrt3 i{ width:130px; line-height:18px; font-style:normal; padding:2px 2px 2px 2px; border-bottom:1px solid #cbdbe9; cursor:pointer; float:left;}
+.zshynrt3nr{ width:132px; height:auto; overflow:hidden; position:absolute; left:-1px; top:19px; background:#fff; border: solid #7e9db9; border-width:0 1px 1px 1px; float:left;}
+.zshynrt3 i{ width:128px; line-height:18px; font-style:normal; padding:2px 2px 2px 2px; border-bottom:1px solid #cbdbe9; cursor:pointer; float:left; margin-right:-3px;}
 .zshynrt3 i:hover{ background:#eee;}
 .zshynrt3 i.hover{ background:#eee;}
 .zshynrt3 img{ margin:0 2px 0 0;}
@@ -41,12 +41,13 @@
 .zshynr1{ width:740px; height:auto; text-align:left; margin:0 0 5px 0; float:left;}
 .zshynr1lt{ width:370px; height:40px; line-height:20px; color:#333; text-align:left; margin:0 0 0 5px; overflow:hidden; float:left;}
 .zshynr1lt1{ width:730px; height:30px; line-height:30px; letter-spacing:1px; float:left;}
-.zshynr1ce{ width:110px; height:20px; line-height:20px; text-align:center; margin:20px 0 0 10px; float:left;}
-.zshynr1ce2{ width:110px; height:40px; line-height:20px; color:#333; text-align:center; margin:0 0 0 10px; float:left;}
+.zshynr1ce{ width:80px; height:20px; line-height:20px; text-align:center; margin:20px 0 0 10px; float:left;}
+.zshynr1ce2{ width:78px; height:40px; line-height:20px; color:#333; text-align:center; margin:0 0 0 10px; float:left;}
 .zshynr1ce2 b{display:block;}
-.zshynr2{ width:360px; height:25px; line-height:25px; text-align:left; margin:0 0 0 5px; float:left;}
+.zshynr2{ width:700px; height:25px; line-height:25px; text-align:left; margin:0 0 0 5px; float:left;}
 .zshynr2lt{ float:left;}
-.zshynr2rt{ float:right;}
+.zshynr2rt{ margin:0 0 0 130px; display:inline; float:left;}
+.zshynr2rt2{ float:right;}
 .zshynr3{ width:735px; height:25px; line-height:25px; text-align:left; margin:0 0 0 5px; float:left;}
 .zscard{ width:330px; height:205px; margin:20px 20px 10px; display:inline; position:relative; overflow:hidden; float:left;}
 .zscard img{ width:330px; height:205px; float:left;}
@@ -227,13 +228,27 @@
 .helpcot{ width:960px; height:auto; border-bottom:1px solid #e5e5e5; overflow:hidden; padding:0 0 20px 0; float:left;}
 .helplt{ width:199px; height:auto; background:#f7f7f7; border:1px solid #e5e5e5; border-right:0; padding:20px; float:left; margin-bottom:-2000px; padding-bottom:2000px; float:left;}
 .helplt strong{ width:199px; height:30px; line-height:30px; font-size:14px; float:left;}
-
 .helpltnr{ width:199px; height:auto; float:left;}
 .hpltnrt{ width:189px; height:30px; line-height:30px; color:#91655c; margin:5px 0 0 0; display:inline; cursor:pointer; float:left;}
 .hpltnrt em{ width:11px; height:11px; line-height:12px; color:#999; text-align:center; background:#fff; border:1px solid #e5e5e5; margin:8px 8px 0 0; display:inline; float:left;}
 .hpltcot{ width:189px; height:auto; margin:3px 0 0 0; display:none; float:left;}
 .hpltcot li{ width:169px; height:25px; line-height:25px; color:#666; padding:0 0 0 20px; float:left;}
-
 .helprt{ width:678px; height:auto; background:#fff; border:1px solid #e5e5e5; padding:20px; margin-bottom:-2000px; padding-bottom:2000px; float:left; margin-right:-3px;}
 .helprt strong{ width:675px; height:30px; line-height:30px; font-size:14px; float:left;}
 .helprtnr{ width:675px; height:auto; line-height:25px; margin:10px 0 0 0; display:inline; float:left;}
+/*今日浏览*/
+.tvit{ width:960px; height:50px; line-height:50px; font-size:30px; color:#f00; text-align:center; float:left;}
+.tview{ width:960px; height:auto; float:left;}
+.tview1{ width:310px; height:196px; float:left;}
+.tview1 img{ width:310px; height:196px; float:left;}
+.tview2{ width:15px; height:196px; float:left;}
+/*关于浙商*/
+.aboutlt{ width:232px; height:auto; float:left;}
+.aboutit{ width:230px; height:103px; float:left;}
+.aboutnr{ width:190px; height:auto; border: solid #e5e5e5; border-width:0 1px 1px; padding:10px 20px; float:left;}
+.aboutnr li{ width:170px; height:30px; line-height:30px; font-size:14px; font-weight:bold; background:url(../images/icon/arrow.gif) left center no-repeat; padding:0 0 0 20px; float:left;}
+.aboutrt{ width:716px; height:auto; float:right;}
+.about1{ width:714px; height:1px; background:#e5e5e5; border: solid #fff; border-width:0 1px; float:left;}
+.about1t{ width:664px; height:35px; line-height:35px; font-size:14px; border: solid #e5e5e5; border-width:0 1px; padding:10px 25px; float:left;}
+.aboutcot{ width:664px; height:auto; line-height:25px; border: solid #e5e5e5; border-width:0 1px; padding:0 25px 20px; float:left;}
+
