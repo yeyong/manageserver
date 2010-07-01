@@ -97,10 +97,12 @@ input.so2:hover{ width:71px; height:24px; background:url(../images/soso5.gif) bo
 .page2{ width:auto; height:17px; line-height:17px; text-align:center; color:#834338; background:#f2e8e7; border:1px solid #9c827d; padding:0 6px; margin:0 7px 0 0; float:left;}
 /*搜索模块*/
 .soso{ width:940px; height:73px; background:url(../images/soso-bg1.gif) no-repeat; float:left; position:relative; overflow:hidden; padding:0 10px;}
-.soso1{ width:125px; height:50px; padding:13px 0 10px 5px; float:left;}
-.soso1lt{ width:60px; height:50px; float:left;}
-.soso1rt{ width:60px; height:28px; margin:12px 0 0 0; display:inline; float:left;}
-.soso1rt span{ width:60px; height:14px; line-height:14px; font-size:12px; color:#fff; float:left;}
+.soso1{ width:125px; height:54px; line-height:18px; padding:13px 0 10px 5px; cursor:pointer; color:#fff; padding-top:10px; float:left;}
+.soso1 *{ margin:0; padding:0; line-height:18px;}
+.soso1 h6{ font-size:13px; padding-top:10px;}
+.soso1 span.img{ float:left; display: block;}
+.soso1 p{ float:left; margin:0; padding:0;}
+.soso1 div{ font-size:12px; font-family:tahoma,宋体;}
 .soso2{ width:585px; height:61px; margin:12px 0 0 45px; display:inline; float:left;}
 .soso2t{ width:585px; height:33px; float:left;}
 .soso2t span{ margin:0 3px 0 0; display:inline; float:left;}
