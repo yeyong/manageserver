@@ -1002,6 +1002,7 @@
     <Content Include="javascript\jqueryCommon.js" />
     <Content Include="javascript\template_showcompany.js" />
     <Content Include="javascript\sascommon.js" />
+    <Content Include="javascript\weather.js" />
     <Content Include="ManagePage\company\global_ajaxcall.aspx" />
     <Content Include="ManagePage\forum\forum_addforums.aspx" />
     <Content Include="ManagePage\forum\forum_editforums.aspx" />
@@ -1584,6 +1585,8 @@
     <Content Include="templates\default\images\tab-tit5.gif" />
     <Content Include="templates\default\images\tijiao-an1.gif" />
     <Content Include="templates\default\images\tijiao-an2.gif" />
+    <Content Include="templates\default\images\top.gif" />
+    <Content Include="templates\default\images\view.gif" />
     <Content Include="templates\default\inquiry.htm" />
     <Content Include="templates\default\promotion.htm" />
     <Content Include="templates\default\sitemap.htm" />

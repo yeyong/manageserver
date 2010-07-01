@@ -7,10 +7,10 @@
 			<span class="zshysnr">您当前的位置：<a href="{forumurl}index.html" class="l_666" title="商之源">商之源</a>{pagenav}</span>
 		</p>
 		<dl class="zshy1 mar_top_8">
-			<dt><b>按主营范围选择：</b></dt>
+			<dt><b>按行业类别选择：</b></dt>
 			<dd>
 			    <%loop (DataRow) catainfo cataloglist%>
-				<span class="zshy1zt"><a href="zshy-{catainfo[id]}.html" class="l_666" title="{catainfo[name]}"><%getsubstring({catainfo[name]},16,"")%>({catainfo[companycount]})</a></span>
+				<span class="zshy1zt"><a href="zshy-{catainfo[id]}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-{ordertype}-{keyword}.html" class="l_666" title="{catainfo[name]}"><%getsubstring({catainfo[name]},16,"")%>({catainfo[companycount]})</a></span>
 				<%/loop%>
 			</dd>
 		</dl>
@@ -76,7 +76,11 @@
 						<em class="zshynrt3nr" id="views1">
 							<i onclick="window.location='zshy-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-0-{keyword}.html';"><img alt="浏览量从低到高" src="templates/{templatepath}/images/icon/icon-up.gif" />浏览量从低到高</i>
 							<i onclick="window.location='zshy-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-1-{keyword}.html';"><img alt="浏览量从高到低" src="templates/{templatepath}/images/icon/icon-down.gif" />浏览量从高到低</i>
-							<i onclick="window.location='zshy-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-2-{keyword}.html';"><img alt="默认排序" src="templates/{templatepath}/images/icon/icon-up-down.gif" />默认排序</i>
+							<i onclick="window.location='zshy-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-2-{keyword}.html';"><img alt="评论数从低到高" src="templates/{templatepath}/images/icon/icon-up.gif" />评论数从低到高</i>
+							<i onclick="window.location='zshy-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-3-{keyword}.html';"><img alt="评论数从高到低" src="templates/{templatepath}/images/icon/icon-down.gif" />评论数从高到低</i>
+							<i onclick="window.location='zshy-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-4-{keyword}.html';"><img alt="最近发布" src="templates/{templatepath}/images/icon/icon-up.gif" />最近发布</i>
+							<i onclick="window.location='zshy-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-5-{keyword}.html';"><img alt="最久发布" src="templates/{templatepath}/images/icon/icon-down.gif" />最久发布</i>
+							<i onclick="window.location='zshy-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-6-{keyword}.html';"><img alt="默认排序" src="templates/{templatepath}/images/icon/icon-up-down.gif" />默认排序</i>
 						</em>
 					</span>
 				</p>
@@ -103,6 +107,8 @@
 					</span>
 					<span class="zshynr1ce2">注册日期 <b class="f_e00101"><%set (string) {zshyregyear}=Utils.GetStandardDate({zshycompanyinfo.en_builddate})%>{zshyregyear}</b></span>
 					<span class="zshynr1ce2">浏览量 <b>{zshycompanyinfo.en_accesses}</b></span>
+					<span class="zshynr1ce2">发布时间 <b class="f_999">{zshycompanyinfo.en_createdate}</b></span>
+					<span class="zshynr1ce2">评论数 <b class="f_999">{zshycompanyinfo.en_sell}</b></span>
 					<span class="zshynr1ce"><a title="联系方式" href="tipmsg.aspx?msgenid={zshycompanyinfo.en_id}" rel="tipmsg.aspx?msgenid={zshycompanyinfo.en_id}" class="l_e00101">联系方式</a></span>
 				</p>
 				<p class="zshynr2">

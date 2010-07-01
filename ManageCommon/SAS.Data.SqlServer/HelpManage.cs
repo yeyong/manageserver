@@ -63,7 +63,7 @@ namespace SAS.Data.SqlServer
         /// </summary>
         public IDataReader GetIndexHelpList(int num)
         {
-            string commandText = string.Format("SELECT TOP {2} {0} FROM [{1}help] WHERE [orderby] = 1 AND [pid] > 0", DbFields.HELP, BaseConfigs.GetTablePrefix, num);
+            string commandText = string.Format("SELECT TOP {2} {0} FROM [{1}help] WHERE [pid] > 1 ORDER BY ", DbFields.HELP, BaseConfigs.GetTablePrefix, num);
             return DbHelper.ExecuteReader(CommandType.Text, commandText);
         }
         /// <summary>

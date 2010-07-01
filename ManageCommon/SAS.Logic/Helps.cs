@@ -136,6 +136,8 @@ namespace SAS.Logic
             return helplist;
         }
 
+        //public static List<HelpInfo>
+
         /// <summary>
         /// 获取帮助实体信息
         /// </summary>
