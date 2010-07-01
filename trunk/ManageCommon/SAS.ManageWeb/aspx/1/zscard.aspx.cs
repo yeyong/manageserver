@@ -143,7 +143,7 @@ namespace SAS.ManageWeb
                 {
                     CatalogInfo subcli = Catalogs.GetCatalogCacheInfo(TypeConverter.StrToInt(str, 0));
                     if (subcli == null) continue;
-                    if (subcli.parentid == 0) continue;
+                    //if (subcli.parentid == 0) continue;
                     pagenav += String.Format(" &gt; <a href=\"zscard-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}.html\" title=\"{0}\" class=\"l_666\">{0}</a>", subcli.name, subcli.id, provinceid, cityid, areaid, entypeid, regyear, ordertype, keyword);
                 }
                 pagenav += " &gt; " + _cli.name;
