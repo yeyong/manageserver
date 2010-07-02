@@ -123,7 +123,7 @@ jQuery.fn.gettop = function(locobj) {
         objhref: "",
         position: "fixed",
         floattype: "right",
-        distance: 200, 	//和底部的距离
+        distance: 150, 	//和底部的距离
         pagewidth: 960		//页面的有效宽度
     };
     locobj = locobj || {};
@@ -131,6 +131,7 @@ jQuery.fn.gettop = function(locobj) {
 
     var locdiv = jQuery(this).floatdiv(locobj);
     locdiv.find("a").append(jQuery("<img />").attr("src", locsty.objsrc).css({ border: 0 }));
+    locdiv.append("<br/><a href='todayview.html'><img src='../images/view.gif'/></a>");
 
     window.onscroll = function() {
         if (document.documentElement.scrollTop == 0 && document.body.scrollTop == 0) {
