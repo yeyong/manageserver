@@ -131,7 +131,7 @@ namespace SAS.ManageWeb
                     + "\r\n " + "  jQuery(this).blur(function(){jQuery(this).attr(\"class\",\"input2_soout\");});"
                     + "\r\n " + "  jQuery(this).focus(function(){jQuery(this).attr(\"class\",\"input2_soon\");});"
                     + "\r\n " + "});"
-                    + "\r\n " + "jQuery(this).gettop({objsrc:\"templates/" + templatepath + "/images/diaocha.gif\",objhref:\"javascript:scrollTo(0,0)\"});"
+                    + "\r\n " + "jQuery(this).gettop({objsrc:\"templates/" + templatepath + "/images/top.gif\",objhref:\"javascript:scrollTo(0,0)\"});"
                     + "\r\n " + "});\r\n";
             AddfootScript(loadscript);
             SetConditionAndPage();
@@ -161,7 +161,7 @@ namespace SAS.ManageWeb
 
             UpdateMetaInfo(m_keyword, m_content, "");
 
-            companylist = Companies.GetCompanyPageList(catalogid, pageid, pagesize, "en_accesses", ordertype == 0 ? "" : "desc", condition);
+            companylist = Companies.GetCompanyPageList(catalogid, pageid, pagesize, ordertype, condition);
         }
 
         /// <summary>

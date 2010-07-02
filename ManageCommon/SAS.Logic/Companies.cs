@@ -105,6 +105,54 @@ namespace SAS.Logic
         ///// <param name="catalogid">类别</param>
         ///// <param name="pageindex">当前页</param>
         ///// <param name="pagesize">页面尺寸</param>
+        ///// <param name="ordertype">排序方式</param>
+        ///// <param name="conditions">条件</param>
+        public static List<Companys> GetCompanyPageList(int catalogid, int pageindex, int pagesize, int ordertype, string conditions)
+        {
+            string theordertype = "";
+            string theordercolumn = "";
+
+            switch (ordertype)
+            {
+                case 1:
+                    theordertype = "";
+                    theordercolumn = "en_accesses";
+                    break;
+                case 2:
+                    theordertype = "desc";
+                    theordercolumn = "en_accesses";
+                    break;
+                case 3:
+                    theordertype = "";
+                    theordercolumn = "en_sell";
+                    break;
+                case 4:
+                    theordertype = "desc";
+                    theordercolumn = "en_sell";
+                    break;
+                case 5:
+                    theordertype = "desc";
+                    theordercolumn = "en_createdate";
+                    break;
+                case 6:
+                    theordertype = "";
+                    theordercolumn = "en_createdate";
+                    break;
+                default:
+                    theordertype = "desc";
+                    theordercolumn = "en_credits";
+                    break;
+            }
+
+            return GetCompanyPageList(catalogid, pageindex, pagesize, theordercolumn, theordertype, conditions);
+        }
+
+        ///// <summary>
+        ///// 企业数据分页操作
+        ///// </summary>
+        ///// <param name="catalogid">类别</param>
+        ///// <param name="pageindex">当前页</param>
+        ///// <param name="pagesize">页面尺寸</param>
         ///// <param name="ordercolumn">排序列名</param>
         ///// <param name="ordertype">排序方式</param>
         ///// <param name="conditions">条件</param>

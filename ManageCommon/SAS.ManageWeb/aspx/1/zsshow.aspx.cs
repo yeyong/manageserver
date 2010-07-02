@@ -133,7 +133,7 @@ namespace SAS.ManageWeb
                     + "\r\n " + "   jQuery(this).html(\"<em><img src='templates/" + templatepath + "/images/icon/\"+arrowicon+\"'/></em>\"+showzi);"
                     + "\r\n " + "   jQuery('#swinf').find(\"#swinfcot\").removeClass().addClass(showcss);"
                     + "\r\n " + "});"
-                    + "\r\n " + "jQuery(this).gettop({objsrc:\"templates/" + templatepath + "/images/diaocha.gif\",objhref:\"javascript:scrollTo(0,0)\"});"
+                    + "\r\n " + "jQuery(this).gettop({objsrc:\"templates/" + templatepath + "/images/top.gif\",objhref:\"javascript:scrollTo(0,0)\"});"
                     + "\r\n " + "});\r\n"
                     + "\r\n " + "ajaxgetcommentscored(page_qyid);"
                     + "\r\n " + "ajaxgetcomment(page_qyid,comment_page_pagesize,comment_page_currentpage);"
