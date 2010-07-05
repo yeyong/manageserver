@@ -25,6 +25,10 @@ namespace SAS.ManageWeb
         /// </summary>
         protected SAS.Common.Generic.List<Companys> companyaccesseslist = Companies.GetCompanyListViews();
         /// <summary>
+        /// 评论企业排行
+        /// </summary>
+        protected SAS.Common.Generic.List<Companys> companynewlist = Companies.GetNewCompanyList();
+        /// <summary>
         /// 企业信息列表
         /// </summary>
         protected SAS.Common.Generic.List<Companys> companylist = new SAS.Common.Generic.List<Companys>();

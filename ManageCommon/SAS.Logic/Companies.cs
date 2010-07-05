@@ -290,6 +290,25 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 根据评论数量排序，并返回信息列表
+        /// </summary>
+        /// <returns></returns>
+        public static List<Companys> GetCompanyListComments()
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            string cachekey = CacheKeys.SAS_COMPANY_INDEX_COMMENTS;
+            List<Companys> companylist = cache.RetrieveObject(cachekey) as List<Companys>;
+            if (companylist == null)
+            {
+                companylist = SAS.Data.DataProvider.Companies.GetCompanyListByOrder(10, "en_sell", true);
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 300;
+                cache.AddObject(cachekey, companylist);
+            }
+            return companylist;
+        }
+
+        /// <summary>
         /// 根据市级信息获取企业信息
         /// </summary>
         /// <param name="cityid"></param>
