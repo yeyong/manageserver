@@ -30,6 +30,10 @@ namespace SAS.Cache
         /// </summary>
         public const string SAS_COMPANY_INDEX_ACCESSES = "/SAS/CompanyIndex/ACCESSES";
         /// <summary>
+        /// 最多评论的企业
+        /// </summary>
+        public const string SAS_COMPANY_INDEX_COMMENTS = "/SAS/CompanyIndex/COMMENTS";
+        /// <summary>
         /// 首页类型企业信息
         /// </summary>
         public const string SAS_COMPANY_INDEX_ENTYPE = "/SAS/CompanyIndex/ENTYPE_";

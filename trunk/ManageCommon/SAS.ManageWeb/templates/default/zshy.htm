@@ -160,19 +160,12 @@
 		<p class="zshyrtad mar_top_8"><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa5.jpg" /></a></p>
 		<div class="zsk mar_top_8">
 			<p class="zskt">
-				<em></em><strong>最新认证的企业信息</strong>
+				<em></em><strong>最新认发布的企业信息</strong>
 			</p>
 			<ul class="zstop2">
-				<li>▪&nbsp;<a title="成都金岚地服饰有限公司" href="#" class="l_666">成都金岚地服饰有限公司</a>
-				</li><li>▪&nbsp;<a title="杭州浪漫一身服饰有限公司" href="#" class="l_666">杭州浪漫一身服饰有限公司</a></li>
-				<li>▪&nbsp;<a title="杭州水之恋服饰有限公司" href="#" class="l_666">杭州水之恋服饰有限公司</a></li>
-				<li>▪&nbsp;<a title="香港普菲特服饰有限公司" href="#" class="l_666">香港普菲特服饰有限公司</a></li>
-				<li>▪&nbsp;<a title="杭州千百惠服饰有限公司" href="#" class="l_666">杭州千百惠服饰有限公司</a></li>
-				<li>▪&nbsp;<a title="杭州千百惠服饰有限公司" href="#" class="l_666">杭州千百惠服饰有限公司</a></li>
-				<li>▪&nbsp;<a title="广州市歌莉娅女性服饰有限公司" href="#" class="l_666">广州市歌莉娅女性服饰有限公司</a></li>
-				<li>▪&nbsp;<a title="杭州素非服饰有限公司" href="#" class="l_666">杭州素非服饰有限公司</a></li>
-				<li>▪&nbsp;<a title="杭州江南布衣服饰有限公司" href="#" class="l_666">杭州江南布衣服饰有限公司</a></li>
-				<li>▪&nbsp;<a title="香港普菲特服饰有限公司" href="#" class="l_666">香港普菲特服饰有限公司</a></li>
+			<%loop (Companys) newcompanyinfo companynewlist%>
+			    <li>▪&nbsp;<a title="{newcompanyinfo.en_name}" href="{newcompanyinfo.en_id}.html" class="l_666">{newcompanyinfo.en_name}</a></li>
+			<%/loop%>
 			</ul>
 		</div>
 	</div>
