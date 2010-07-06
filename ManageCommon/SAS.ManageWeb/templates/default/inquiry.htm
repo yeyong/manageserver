@@ -10,14 +10,15 @@
 		<form name="checkform" class="inq1ce">
 			<em>请输入企业名称查询企业提交状态：</em>
 			<em><input name="inqyname" type="text" class="input4_soout" onfocus="this.className='input4_soon'" onblur="this.className='input4_soout'" style="width:350px;" /></em>
-			<em><input type="submit" name="Submit" class="so2" value=""/></em>
+			<em><input type="submit" class="so2" value=""/></em>
 		</form>
 		<i class="lt"></i><i class="rt"></i>
 	</div>
+	<%if {getParm}.Length>0%>
 	<div class="inq2 mar_top_8">
 		<p class="inq2t">
 			<span class="inq2t1">
-				共 <i class="f_e00101">1000</i> 条
+				查询到与 "{getParm}" 相关的数据 共 <i class="f_e00101">{companycount}</i> 条
 			</span>
 			<span class="inq2t2"></span>
 		</p>
@@ -27,67 +28,37 @@
 			<b class="inq3t3">原 因</b>
 			<b class="inq3t4">操 作</b>
 		</p>
-		<p class="inq3">
-			<span class="inq3t1"><a title="" class="l_333" href="#">杭州生活主题服装有限公司</a></span>
-			<span class="inq3t2 f_e00101">审核未通过</span>
-			<span class="inq3t3">您还未提交企业注册信息</span>
-			<span class="inq3t4"><a title="" class="l_f00_u" href="">立即填写</a></span>
-		</p>
-		<p class="inq3">
-			<span class="inq3t1"><a title="" class="l_333" href="#">杭州生活主题服装有限公司</a></span>
-			<span class="inq3t2 f_0e8202">审核已通过</span>
-			<span class="inq3t3">&nbsp;</span>
-			<span class="inq3t4"><a title="" class="l_f00_u" href="">如何提高企业信誉度</a></span>
-		</p>
-		<p class="inq3">
-			<span class="inq3t1"><a title="" class="l_333" href="#">杭州生活主题服装有限公司</a></span>
-			<span class="inq3t2 f_e00101">审核未通过</span>
-			<span class="inq3t3">您还未填写企业注册号</span>
-			<span class="inq3t4"><a title="" class="l_f00_u" href="">修改</a></span>
-		</p>
-		<p class="inq3">
-			<span class="inq3t1"><a title="" class="l_333" href="#">杭州生活主题服装有限公司</a></span>
-			<span class="inq3t2 f_ff8a00">服务审核中</span>
-			<span class="inq3t3">您还未提交企业注册信息</span>
-			<span class="inq3t4 f_ff8a00">请耐心等待</span>
-		</p>
-		<p class="inq3">
-			<span class="inq3t1"><a title="" class="l_333" href="#">杭州生活主题服装有限公司</a></span>
-			<span class="inq3t2 f_e00101">审核未通过</span>
-			<span class="inq3t3">您还未提交企业注册信息</span>
-			<span class="inq3t4"><a title="" class="l_f00_u" href="">立即填写</a></span>
-		</p>
-		<p class="inq3">
-			<span class="inq3t1"><a title="" class="l_333" href="#">杭州生活主题服装有限公司</a></span>
-			<span class="inq3t2 f_e00101">审核未通过</span>
-			<span class="inq3t3">您还未提交企业注册信息</span>
-			<span class="inq3t4"><a title="" class="l_f00_u" href="">立即填写</a></span>
-		</p>
-		<p class="inq3">
-			<span class="inq3t1"><a title="" class="l_333" href="#">杭州生活主题服装有限公司</a></span>
-			<span class="inq3t2 f_e00101">审核未通过</span>
-			<span class="inq3t3">您还未提交企业注册信息</span>
-			<span class="inq3t4"><a title="" class="l_f00_u" href="">立即填写</a></span>
-		</p>
+		<%loop (Companys) incompanyinfo companylist%>
+	    <p class="inq3">
+		    <span class="inq3t1"><a title="{incompanyinfo.en_name}" class="l_333" href="{incompanyinfo.en_id}.html">{incompanyinfo.en_name}</a></span>
+		    <%if {incompanyinfo.en_status}==0%>
+		    <span class="inq3t2 f_e00101">审核未通过</span>
+		    <span class="inq3t3">{incompanyinfo.en_reason}</span>
+		        <%if {incompanyinfo.en_visble}==0%>
+		    <span class="inq3t4"><a title="完整{incompanyinfo.en_name}注册信息" class="l_f00_u" href="companypostreg.aspx?companyid={incompanyinfo.en_id}">完整注册信息</a></span>
+		        <%else if {incompanyinfo.en_visble}==1%>
+		    <span class="inq3t4 f_ff8a00">很抱歉该公司信息未通过审核，请联系客服修正相关内容</span>
+		        <%/if%>
+		    <%else if {incompanyinfo.en_status}==1%>
+		    <span class="inq3t2 f_ff8a00">服务审核中</span>
+		    <span class="inq3t3">{incompanyinfo.en_reason}</span>
+		    <span class="inq3t4 f_ff8a00">请耐心等待，或联系客服查看审核进度</span>
+		    <%else if {incompanyinfo.en_status}==2%>
+		    <span class="inq3t2 f_0e8202">审核已通过</span>
+		    <span class="inq3t3"></span>
+		    <span class="inq3t4"><a title="{incompanyinfo.en_name}" class="l_f00_u" href="promotion-{incompanyinfo.en_id}.html">立即推广</a></span>
+		    <%/if%>
+	    </p>
+		<%/loop%>
 		<div class="page f_666">
-			<a title="上一页" href="#">上一页</a>
-			<a title="1" href="#">1</a>
-			<span class="page2">2</span>
-			<a title="3" href="#">3</a>
-			<a title="4" href="#">4</a>
-			<a title="5" href="#">5</a>
-			<a title="6" href="#">6</a>
-			<a title="7" href="#">7</a>
-			<a title="5" href="#">8</a>
-			<a title="6" href="#">9</a>
-			<a title="7" href="#">10</a>
-			<a title="下一页" href="#">下一页</a>
-			共100页　到第
+			{pagenumbers}
+			共{pagecount}页　到第
 			<input type="text" name="textfield" class="input3" style="width:25px;" />
 			页
 			<input type="button" name="button1" class="agree1" value="确 定" />
 		</div>
 	</div>
+	<%/if%>
 </div>
 <!--左边 end-->
 <!--右边 begin-->
@@ -97,46 +68,12 @@
 			<em></em><strong>企业信誉排行榜</strong><span><a class="l_f00_u" title="" href="#">提高信誉度</a></span>
 		</p>
 		<ul class="zstop2">
-			<li>
-				<em class="zstopem1">1</em>
-				<p><a title="成都金岚地服饰有限公司" href="#">成都金岚地服饰有限公司</a></p>
+		    <%loop (Companys) creditcompanyinfo creditcompanylist%>
+		    <li>
+				<em class="<%if {creditcompanyinfo__loop__id}<4%>zstopem1<%else%>zstopem2<%/if%>">{creditcompanyinfo__loop__id}</em>
+				<p><a title="{creditcompanyinfo.en_name}" href="{creditcompanyinfo.en_id}.html">{creditcompanyinfo.en_name}</a></p>
 			</li>
-			<li>
-				<em class="zstopem1">2</em>
-				<p><a title="杭州浪漫一身服饰有限公司" href="#">杭州浪漫一身服饰有限公司</a></p>
-			</li>
-			<li>
-				<em class="zstopem1">3</em>
-				<p><a title="杭州水之恋服饰有限公司" href="#">杭州水之恋服饰有限公司</a></p>
-			</li>
-			<li>
-				<em class="zstopem2">4</em>
-				<p><a title="香港普菲特服饰有限公司" href="#">香港普菲特服饰有限公司</a></p>
-			</li>
-			<li>
-				<em class="zstopem2">5</em>
-				<p><a title="杭州千百惠服饰有限公司" href="#">杭州千百惠服饰有限公司</a></p>
-			</li>
-			<li>
-				<em class="zstopem2">6</em>
-				<p><a title="成都金岚地服饰有限公司" href="#">成都金岚地服饰有限公司</a></p>
-			</li>
-			<li>
-				<em class="zstopem2">7</em>
-				<p><a title="广州市歌莉娅女性服饰有限公司" href="#">广州市歌莉娅女性服饰有限公司</a></p>
-			</li>
-			<li>
-				<em class="zstopem2">8</em>
-				<p><a title="杭州素非服饰有限公司" href="#">杭州素非服饰有限公司</a></p>
-			</li>
-			<li>
-				<em class="zstopem2">9</em>
-				<p><a title="杭州江南布衣服饰有限公司" href="#">杭州江南布衣服饰有限公司</a></p>
-			</li>
-			<li>
-				<em class="zstopem2">10</em>
-				<p><a title="成都金岚地服饰有限公司" href="#">成都金岚地服饰有限公司</a></p>
-			</li>
+		    <%/loop%>
 		</ul>
 	</div>
 </div>

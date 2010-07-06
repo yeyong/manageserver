@@ -309,6 +309,25 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 根据信誉度排序，并返回信息列表
+        /// </summary>
+        /// <returns></returns>
+        public static List<Companys> GetCompanyListCredits()
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            string cachekey = CacheKeys.SAS_COMPANY_INDEX_CREDITS;
+            List<Companys> companylist = cache.RetrieveObject(cachekey) as List<Companys>;
+            if (companylist == null)
+            {
+                companylist = SAS.Data.DataProvider.Companies.GetCompanyListByOrder(10, "en_credits", true);
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 300;
+                cache.AddObject(cachekey, companylist);
+            }
+            return companylist;
+        }
+
+        /// <summary>
         /// 根据市级信息获取企业信息
         /// </summary>
         /// <param name="cityid"></param>
@@ -340,6 +359,22 @@ namespace SAS.Logic
         public static string GetCompanyCondition(string arealist, int typeid, int regyear, string keyword)
         {
             return SAS.Data.DataProvider.Companies.GetCompanyCondition(arealist, typeid, regyear, keyword);
+        }
+
+        /// <summary>
+        /// 企业搜索条件
+        /// </summary>
+        /// <param name="islike">是否模糊搜索</param>
+        /// <param name="enname">企业名称</param>
+        /// <param name="enstatus">审核状态</param>
+        /// <param name="isbuilddate">是否查找创建时间</param>
+        /// <param name="starttime">开始时间</param>
+        /// <param name="endtime">结束时间</param>
+        /// <param name="envisible">开启状态</param>
+        /// <returns></returns>
+        public static string GetCompanySearchCondition(bool islike, string enname, int enstatus, bool isbuilddate, string starttime, string endtime, int envisible)
+        {
+            return SAS.Data.DataProvider.Companies.GetCompanySearchList(islike, enname, enstatus, isbuilddate, starttime, endtime, envisible);
         }
 
         /// <summary>

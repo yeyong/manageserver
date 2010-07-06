@@ -151,6 +151,16 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 根据父ID获取行业类别集合（带缓存）--带有子类的子类
+        /// </summary>
+        /// <returns></returns>
+        public static DataRow[] GetAllCatalogByPidAndSub(int pid)
+        {
+            DataTable dt = GetAllCatalog();
+            return dt.Select("',' + parentlist + ',' LIKE '%," + pid + ",%'");
+        }
+
+        /// <summary>
         /// 获取非缓存行业信息
         /// </summary>
         /// <returns></returns>
