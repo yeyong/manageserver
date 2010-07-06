@@ -169,8 +169,10 @@
 			<ul class="type2nr">
 			<%set (int) {computenum}=0%>
 			<%set (int) {computetimes}=0%>
+			<%csharp%>
+			    DataRow[] cataloglist2 = Catalogs.GetAllCatalogByPid(TypeConverter.ObjectToInt(cataloginfo["id"]));
+			<%/csharp%>
 			<%loop (DataRow) subcata cataloglist2%>
-			<%if {subcata[parentid]}=={cataloginfo[id]}%>
 				<li <%if {computetimes}%2==1%>class="tpbg"<%/if%>>
 				<%if {computenum}%2==1%>
 			        <%set {computetimes}={computetimes}+1%>
@@ -178,19 +180,19 @@
 					<strong><a class="l_e00101" title="{subcata[name]}" href="zshy-{subcata[id]}.html">{subcata[name]}</a></strong>
 					<p>
 					<%set (int){catastrlength} = 0%>
+					<%csharp%>
+			            DataRow[] cataloglist3 = Catalogs.GetAllCatalogByPidAndSub(TypeConverter.ObjectToInt(subcata["id"]));
+			        <%/csharp%>
 					<%loop (DataRow) subsubcata cataloglist3%>
-					<%if {subsubcata[parentid]}=={subcata[id]}%>
-					<%set {catastrlength}={catastrlength}+{subsubcata[name]}.Length%>
-					<%if {catastrlength}>40%>
+					<%set {catastrlength}={catastrlength}+{subsubcata[name]}.Length+3%>
+					<%if {catastrlength}>54%>
 					    <%break%>
 					<%/if%>
 					<a title="{subsubcata[name]}" href="zshy-{subsubcata[id]}.html">{subsubcata[name]}</a> | 
-					<%/if%>
 					<%/loop%>
 					<a class="l_f00" title="{subcata[name]}" href="zshy-{subcata[id]}.html">更多&gt;&gt;</a></p>
 				</li>
 				<%set {computenum}={computenum}+1%>
-			<%/if%>
 			<%/loop%>
 			</ul>
 		</div>
@@ -199,77 +201,27 @@
 	<div class="tprt">
 		<div class="card card1 mar_top_8">
 			<p class="cardt">
-				<em></em><strong>证书认证企业</strong><span><a class="l_f00_u" title="" href="#">立即上传企业证书</a></span>
+				<em></em><strong>企业信誉排行</strong><span><a class="l_f00_u" title="" href="#">如何提高企业信誉度</a></span>
 			</p>
 			<ul class="catop2">
-				<li><a title="" href="#">香港普菲特服饰有限公司</a></li>
-				<li><a title="" href="#">佛山市南海区金钰轩傢俬厂</a></li>
-				<li><a title="" href="#">河南华泰特种电缆有限公司</a></li>
-				<li><a title="" href="#">郑州锦水实业有限公司</a></li>
-				<li><a title="" href="#">青岛昊坤重型机械技术有限公司</a></li>
-				<li><a title="" href="#">河南黎明路桥重工有限公司</a></li>
-				<li><a title="" href="#">浙江浦江瑞博工艺饰品有限公司</a></li>
-				<li><a title="" href="#">北京医模科技有限公司</a></li>
-				<li><a title="" href="#">郑州市郑蝶阀门有限公司</a></li>
-				<li><a title="" href="#">上海世邦机器有限公司</a></li>
+			<%loop (Companys) creditcompanyinfo creditcompanylist%>
+			    <li><a title="{creditcompanyinfo.en_name}" href="{creditcompanyinfo.en_id}.html">{creditcompanyinfo.en_name}</a></li>
+			<%/loop%>
 			</ul>
 		</div>
 		<p class="cardad mar_top_8"><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa3.jpg" /></a></p>
 		<div class="card card2 mar_top_8">
 			<p class="cardt">
-				<em></em><strong>企业信誉排行榜</strong><span><a class="l_f00_u" title="" href="#">如何提高企业信誉度</a></span>
+				<em></em><strong>企业评论排行榜</strong><span></span>
 			</p>
 			<ul class="catop">
-				<li>
-					<em class="catopem1">1</em>
-					<p><a title="" href="#">香港普菲特服饰有限公司</a></p>
-					<span>100</span>
+			<%loop (Companys) commentcompanyinfo commentcompanylist%>
+			    <li>
+					<em class="<%if {commentcompanyinfo__loop__id}<4%>catopem1<%else%>catopem2<%/if%>">{commentcompanyinfo__loop__id}</em>
+					<p><a title="{commentcompanyinfo.en_name}" href="{commentcompanyinfo.en_id}.html">{commentcompanyinfo.en_name}</a></p>
+					<span>{commentcompanyinfo.en_sell}</span>
 				</li>
-				<li>
-					<em class="catopem1">2</em>
-					<p><a title="" href="#">佛山市南海区金钰轩傢俬厂</a></p>
-					<span>98</span>
-				</li>
-				<li>
-					<em class="catopem1">3</em>
-					<p><a title="" href="#">河南华泰特种电缆有限公司</a></p>
-					<span>92</span>
-				</li>
-				<li>
-					<em class="catopem2">4</em>
-					<p><a title="" href="#">郑州锦水实业有限公司</a></p>
-					<span>88</span>
-				</li>
-				<li>
-					<em class="catopem2">5</em>
-					<p><a title="" href="#">青岛昊坤重型机械技术有限公司</a></p>
-					<span>83</span>
-				</li>
-				<li>
-					<em class="catopem2">6</em>
-					<p><a title="" href="#">河南黎明路桥重工有限公司</a></p>
-					<span>82</span>
-				</li>
-				<li>
-					<em class="catopem2">7</em>
-					<p><a title="" href="#">浙江浦江瑞博工艺饰品有限公司</a></p>
-					<span>78</span>
-				</li>
-				<li>
-					<em class="catopem2">8</em>
-					<p><a title="" href="#">北京医模科技有限公司</a></p>
-					<span>76</span>
-				</li>
-				<li>
-					<em class="catopem2">9</em>
-					<p><a title="" href="#">郑州市郑蝶阀门有限公司</a></p>
-					<span>73</span>
-				</li>
-				<li>
-					<em class="catopem2">10</em>
-					<p><a title="" href="#">上海世邦机器有限公司</a></p>
-					<span>68</span>
-				</li>
+			<%/loop%>
 			</ul>
 		</div>
 		<div class="card card3 mar_top_8">
@@ -278,7 +230,7 @@
 			</p>
 			<ul class="cahelp">
 			<%loop (HelpInfo) helpinfos helplist%>
-			    <li>▪&nbsp;<a title="" href="help-{helpinfos.id}.html" style="color:#f00;">{helpinfos.title}</a></li>
+			    <li>▪&nbsp;<a title="{helpinfos.title}" href="help-{helpinfos.id}.html" style="color:#f00;">{helpinfos.title}</a></li>
 			<%/loop%>
 			</ul>
 		</div>

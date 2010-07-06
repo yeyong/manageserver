@@ -5,6 +5,7 @@ using System.Data;
 
 using SAS.Logic;
 using SAS.Common;
+using SAS.Common.Generic;
 using SAS.Config;
 using SAS.Entity;
 
@@ -16,6 +17,10 @@ namespace SAS.ManageWeb
         /// 当前页码
         /// </summary>
         public int pageid = SASRequest.GetInt("page", 1);
+        /// <summary>
+        /// get参数
+        /// </summary>
+        public string getParm = SASRequest.GetString("inqyname");
         /// <summary>
         /// 页面尺寸
         /// </summary>
@@ -44,10 +49,49 @@ namespace SAS.ManageWeb
         /// 页码链接
         /// </summary>
         public string pagenumbers = "";
+        /// <summary>
+        /// 公司总数
+        /// </summary>
+        public int companycount = 0;
+        /// <summary>
+        /// 企业信誉排行
+        /// </summary>
+        protected List<Companys> creditcompanylist = Companies.GetCompanyListCredits();
+        /// <summary>
+        /// 企业信息列表
+        /// </summary>
+        protected List<Companys> companylist = new List<Companys>();
+        /// <summary>
+        /// 查询条件
+        /// </summary>
+        private string condition = "";
 
         protected override void ShowPage()
         {
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
+            getParm = Utils.RemoveHtml(getParm.Trim());
+            SetConditionAndPage();
+            companylist = Companies.GetCompanyPageList(0, pageid, pagesize, 0, condition);
+        }
+
+        /// <summary>
+        /// 设置查询条件以及分页
+        /// </summary>
+        private void SetConditionAndPage()
+        {
+            condition = Companies.GetCompanySearchCondition(true, getParm, -1, false, "", "", -1);
+            companycount = Companies.GetCompanyCount(0, condition);
+            pagesize = TypeConverter.ObjectToInt(config.Tpp, 0);
+            //获取总页数
+            pagecount = companycount % pagesize == 0 ? companycount / pagesize : companycount / pagesize + 1;
+            if (pagecount == 0) pagecount = 1;
+            pageid = pageid < 1 ? 1 : pageid;
+            pageid = pageid > pagecount ? pagecount : pageid;
+
+            pagenumbers = Utils.GetSASPageNumbers(pageid, pagecount, "inquiry.aspx?inqyname=" + Utils.UrlEncode(getParm), 10);
+
+            prevpage = pageid - 1 > 0 ? pageid - 1 : pageid;
+            nextpage = pageid + 1 > pagecount ? pagecount : pageid + 1;
         }
     }
 }

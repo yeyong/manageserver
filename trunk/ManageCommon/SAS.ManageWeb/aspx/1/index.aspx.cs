@@ -14,15 +14,9 @@ namespace SAS.ManageWeb
     public class index : CompanyPage
     {
         /// <summary>
-        /// 类别列表
-        /// </summary>
-        //private DataTable cataloglist = Catalogs.GetAllCatalog();
-        /// <summary>
         /// 行业类别列表
         /// </summary>
         protected DataRow[] cataloglist1 = Catalogs.GetAllCatalogBySort(0);
-        protected DataRow[] cataloglist2 = Catalogs.GetAllCatalogBySort(1);
-        protected DataRow[] cataloglist3 = Catalogs.GetAllCatalogBySort(2);
         /// <summary>
         /// 城市企业信息
         /// </summary>
@@ -39,6 +33,14 @@ namespace SAS.ManageWeb
         /// 新加入企业集合
         /// </summary>
         protected List<Companys> newcompanylist = Companies.GetNewCompanyList();
+        /// <summary>
+        /// 企业信誉排行
+        /// </summary>
+        protected List<Companys> creditcompanylist = Companies.GetCompanyListCredits();
+        /// <summary>
+        /// 企业评论排行
+        /// </summary>
+        protected List<Companys> commentcompanylist = Companies.GetCompanyListComments();
         /// <summary>
         /// 生产型企业
         /// </summary>
@@ -87,6 +89,7 @@ namespace SAS.ManageWeb
             AddfootScript(loadscript);
 
             indexcity = areas.GetIndexCity();
+
         }
     }
 }

@@ -147,6 +147,13 @@ namespace SAS.ManageWeb
 
             CompaniesStats.Track(showenid, 1);
             companyviews = companyshowinfo.En_accesses + 1 + (config.TopicQueueStats == 1 ? CompaniesStats.GetStoredCompanyViewCount(companyshowinfo.En_id) : 0);
+            string lastviewids = "," + Utils.GetCookie("lastviews") + ",";
+
+            if (!lastviewids.Contains("," + showenid + ","))
+            {
+                Utils.WriteCookie("lastviews", Utils.GetCookie("lastviews") + "," + showenid);
+            }
+            
         }
     }
 }

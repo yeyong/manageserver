@@ -1,0 +1,20 @@
+﻿<%template _comheader%>
+<div class="cot">
+	<p class="zshysite mar_top_8">
+		<i class="zslt"></i><i class="zsrt"></i>
+		<span class="zshysnr">您当前的位置：<a href="{forumurl}index.html" title="商之源">商之源</a> &gt; 今日浏览</span>
+	</p>
+	<strong class="tvit mar_top_8">今日浏览</strong>
+	<ul class="tview mar_top_8">
+	    <%loop (string) todayid todaycompanyid%>
+	    <li class="tview1">
+			<a href="{todayid}.html"><img src="showcardimg_{todayid}.html" /></a>
+		</li>
+		<%if todayid__loop__id%3>0%>
+		<li class="tview2"></li>
+		<%/if%>
+	    <%/loop%>
+	</ul>
+</div>
+<%template _comcopyright%>
+<%template _comfooter%>

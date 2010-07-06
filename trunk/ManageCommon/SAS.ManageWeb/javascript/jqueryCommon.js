@@ -131,7 +131,7 @@ jQuery.fn.gettop = function(locobj) {
 
     var locdiv = jQuery(this).floatdiv(locobj);
     locdiv.find("a").append(jQuery("<img />").attr("src", locsty.objsrc).css({ border: 0 }));
-    locdiv.append("<br/><a href='todayview.html'><img src='../images/view.gif'/></a>");
+    locdiv.append("<br/><a href='todayview.html' target='_blank'><img src='../images/view.gif'/></a>");
 
     window.onscroll = function() {
         if (document.documentElement.scrollTop == 0 && document.body.scrollTop == 0) {
