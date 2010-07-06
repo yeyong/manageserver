@@ -219,8 +219,8 @@
 .inq2t1 em{ margin-right:3px; float:left;}
 .inq2t2{ width:auto; height:29px; line-height:29px; float:right;}
 .inq2t2 i{ font-style:normal;}
-.inq3{ width:710px; height:29px; padding:2px 15px 0; border-bottom:1px solid #eee; float:left;}
-.inq3t1{ width:220px; line-height:26px; float:left;}
+.inq3{ width:710px; height:auto; line-height:26px; padding:2px 15px 0; border-bottom:1px solid #eee; float:left;}
+.inq3t1{ width:210px; line-height:26px; margin:0 10px 0 0; display:inline; float:left;}
 .inq3t2{ width:120px; line-height:26px; float:left;}
 .inq3t3{ width:245px; text-align:center; line-height:26px; float:left;}
 .inq3t4{ width:120px; text-align:right; line-height:26px; float:left;}
