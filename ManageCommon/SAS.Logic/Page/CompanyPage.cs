@@ -35,6 +35,10 @@ namespace SAS.Logic
         /// 企业经济类型枚举
         /// </summary>
         protected CommTypeEnum commtype_enum = new CommTypeEnum();
+        /// <summary>
+        /// 通用帮助获取
+        /// </summary>
+        protected System.Collections.Generic.List<HelpInfo> commonhelplist = Helps.GetCommonHelp();
 
         /// <summary>
         /// 插入脚本内容到页面head中

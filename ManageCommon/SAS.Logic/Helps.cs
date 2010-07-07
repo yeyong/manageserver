@@ -71,6 +71,8 @@ namespace SAS.Logic
         {
             if (id > 0)
                 SAS.Data.DataProvider.Help.UpdateHelp(id, title, message, pid, orderby);
+            SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/helplist");
+            SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/helpindex");
         }
 
         /// <summary>
@@ -136,7 +138,14 @@ namespace SAS.Logic
             return helplist;
         }
 
-        //public static List<HelpInfo>
+        /// <summary>
+        /// 获取站内关于相关帮助
+        /// </summary>
+        /// <returns></returns>
+        public static System.Collections.Generic.List<HelpInfo> GetCommonHelp()
+        {
+            return GetAllHelpList().FindAll(new Predicate<HelpInfo>(delegate(HelpInfo subhelp) { return subhelp.Pid == 1; }));
+        }
 
         /// <summary>
         /// 获取帮助实体信息

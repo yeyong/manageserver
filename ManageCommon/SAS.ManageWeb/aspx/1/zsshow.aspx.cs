@@ -151,7 +151,7 @@ namespace SAS.ManageWeb
 
             if (!lastviewids.Contains("," + showenid + ","))
             {
-                Utils.WriteCookie("lastviews", Utils.GetCookie("lastviews") + "," + showenid);
+                Utils.WriteCookie("lastviews", Utils.GetCookie("lastviews") + "," + showenid, 1440);
             }
             
         }
