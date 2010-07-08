@@ -39,6 +39,10 @@ namespace SAS.Logic
         /// 通用帮助获取
         /// </summary>
         protected System.Collections.Generic.List<HelpInfo> commonhelplist = Helps.GetCommonHelp();
+        /// <summary>
+        /// 首页活动广告
+        /// </summary>
+        protected string indexheadad = Advertisements.GetOneIndexHeaderAd();
 
         /// <summary>
         /// 插入脚本内容到页面head中

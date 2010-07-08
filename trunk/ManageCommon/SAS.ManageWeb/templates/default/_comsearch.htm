@@ -33,7 +33,12 @@
 		    </p>
 		</div>
 		<div class="soso3">
-			<p style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src='templates/{templatepath}/images/aa/zhuti.png'); background:url(templates/{templatepath}/images/aa/zhuti.png) center top no-repeat;*background:none;"><a href="#"></a></p>
+		<%if {indexheadad}.Length>0%>
+		<%csharp%>
+		string[] indexheadadarray = indexheadad.Split('|');
+		<%/csharp%>
+			<a href="{indexheadadarray[4]}" title="{indexheadadarray[5]}"><p style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src='{indexheadadarray[1]}'); background:url({indexheadadarray[1]}) center top no-repeat;*background:none;"></p></a>
+		<%/if%>
 		</div>
 	</div>
 </div>

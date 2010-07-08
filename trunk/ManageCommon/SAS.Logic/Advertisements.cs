@@ -109,6 +109,25 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 返回首页头部随机一条活动广告	
+        /// </summary>
+        /// <param name="pagename">页面名称</param>
+        /// <param name="forumid">版块ID</param>
+        /// <returns>广告内容</returns>
+        public static string GetOneIndexHeaderAd()
+        {
+            string result = "";
+
+            AdShowInfo[] adshowArray = GetAdsTable(GetSelectStr("", 0, AdType.IndexHeaderAd));
+            if (adshowArray.Length > 0)
+            {
+                int number = new Random().Next(0, adshowArray.Length);
+                result = adshowArray[number].Parameters;
+            }
+            return result;
+        }
+
+        /// <summary>
         /// 返回尾部横幅广告
         /// </summary>
         /// <param name="pagename">页面名称</param>
@@ -363,85 +382,7 @@ namespace SAS.Logic
             doublestr.AppendFormat("\n</script>");
 
             return doublestr.ToString();
-        }
-
-
-        /// <summary>
-        /// 返回silverlight广告
-        /// </summary>
-        /// <param name="templatepath">模板路径</param>
-        /// <param name="pagename">页面名称</param>
-        /// <param name="forumid">版块id</param>
-        /// <returns>返回广告内容</returns>
-        public static string GetMediaAd(string templatepath, string pagename, int forumid)
-        {
-            AdShowInfo[] adshowArray = GetAdsTable(GetSelectStr(pagename, forumid, AdType.MediaAd));
-
-            return (adshowArray.Length > 0) ? string.Format(adshowArray[0].Code, templatepath, pagename, forumid) : "";
-        }
-
-        /// <summary>
-        /// 获取视频广告的参数
-        /// </summary>
-        /// <param name="pagename">页面名称</param>
-        /// <param name="forumid">版块id</param>
-        /// <returns>获取视频广告的参数</returns>
-        public static string[] GetMediaAdParams(string pagename, int forumid)
-        {
-            AdShowInfo[] adshowArray = GetAdsTable(GetSelectStr(pagename, forumid, AdType.MediaAd));
-
-            if (adshowArray.Length > 0)
-                return adshowArray[0].Parameters.Split('|');
-
-            return new string[0];
-        }
-
-        /// <summary>
-        /// 返回帖间通栏广告
-        /// </summary>
-        /// <param name="pagename">页面名称</param>
-        /// <param name="forumid">版块id</param>
-        /// <returns>返回帖间通栏广告</returns>
-        public static string GetOnePostLeaderboardAD(string pagename, int forumid)
-        {
-            string result = "";
-
-            AdShowInfo[] adshowArray = GetAdsTable(GetSelectStr(pagename, forumid, AdType.PostLeaderboardAd));
-            if (adshowArray.Length > 0)
-            {
-                int number = new Random().Next(0, adshowArray.Length);
-                result = adshowArray[number].Code;
-            }
-            return result;
-        }
-
-        /////// <summary>
-        /////// 返回分类间广告
-        /////// </summary>
-        /////// <param name="pagename">页面名称</param>
-        /////// <param name="forumid">版块id</param>
-        /////// <param name="count">总数</param>
-        /////// <returns>返回分类间广告</returns>
-        ////public static string GetInForumAd(string pagename, int forumid, List<IndexPageForumInfo> topforum, string templatepath)
-        ////{
-        ////    AdShowInfo[] adshowArray = GetAdsTable(GetSelectStr(pagename, forumid, AdType.InForumAd));
-        ////    StringBuilder result = new StringBuilder();
-
-        ////    if (adshowArray.Length > 0)
-        ////    {
-        ////        Random ran = new Random();
-        ////        result.Append("<div style=\"display: none\" id=\"ad_none\">\r\n");
-        ////        for (int i = 0; i < topforum.Count; i++)
-        ////        {
-        ////            if (i >= adshowArray.Length)
-        ////                break;
-
-        ////            result.AppendFormat("<div class=\"ad_column\" id=\"ad_intercat_{0}_none\">{1}</div>\r\n", topforum[i].Fid, adshowArray[i].Code);
-        ////        }
-        ////        result.Append("</div><script type='text/javascript' src='javascript/template_inforumad.js'></script>\r\n");
-        ////    }
-        ////    return result.ToString();
-        ////}
+        }        
 
         /// <summary>
         /// 获取指定楼层的帖内广告
@@ -500,45 +441,6 @@ namespace SAS.Logic
             }
 
             return adsMsg;
-        }
-
-        /// <summary>
-        /// 返回快速发帖广告
-        /// </summary>
-        /// <param name="pagename">页面名称</param>
-        /// <param name="forumid">板块id</param>
-        /// <returns>返回快速发帖广告</returns>
-        public static string GetQuickEditorAD(string pagename, int forumid)
-        {
-            string result = "";
-            AdShowInfo[] adshowArray = GetAdsTable(GetSelectStr(pagename, forumid, AdType.QuickEditorAd));
-
-            if (adshowArray.Length > 0)
-            {
-                int number = new Random().Next(0, adshowArray.Length);
-                result = adshowArray[number].Code;
-            }
-            return result;
-        }
-
-        /// <summary>
-        /// 快速编辑器背景广告
-        /// </summary>
-        /// <param name="pagename">页面名称</param>
-        /// <param name="forumid">板块id</param>
-        /// <returns>快速编辑器背景广告</returns>
-        public static string[] GetQuickEditorBgAd(string pagename, int forumid)
-        {
-            string[] result = new string[2] { "", "" };
-            AdShowInfo[] adshowArray = GetAdsTable(GetSelectStr(pagename, forumid, AdType.QuickEditorBgAd));
-
-            if (adshowArray.Length > 0)
-            {
-                int number = new Random().Next(0, adshowArray.Length);
-                result[1] = adshowArray[number].Parameters.Split('|')[1];
-                result[0] = adshowArray[number].Parameters.Split('|')[4];
-            }
-            return result;
         }
 
         /// <summary>

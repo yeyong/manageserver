@@ -89,7 +89,6 @@ namespace SAS.ManageWeb
             AddfootScript(loadscript);
 
             indexcity = areas.GetIndexCity();
-
         }
     }
 }

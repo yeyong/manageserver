@@ -49,6 +49,9 @@
     <Compile Include="Data\DTOProvider.cs" />
     <Compile Include="Data\SqlDataProvider.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="Pages\showphoto.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Pages\usercpalbummanage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>

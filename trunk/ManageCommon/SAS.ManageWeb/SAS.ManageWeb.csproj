@@ -339,6 +339,13 @@
     <Compile Include="ManagePage\global\global_editadminusergroup.aspx.designer.cs">
       <DependentUpon>global_editadminusergroup.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\global\global_editadvs.aspx.cs">
+      <DependentUpon>global_editadvs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_editadvs.aspx.designer.cs">
+      <DependentUpon>global_editadvs.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\global\global_editannounce.aspx.cs">
       <DependentUpon>global_editannounce.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1008,6 +1015,7 @@
     <Content Include="javascript\jqueryCommon.js" />
     <Content Include="javascript\template_showcompany.js" />
     <Content Include="javascript\sascommon.js" />
+    <Content Include="javascript\template_showphoto.js" />
     <Content Include="ManagePage\company\global_ajaxcall.aspx" />
     <Content Include="ManagePage\forum\forum_addforums.aspx" />
     <Content Include="ManagePage\forum\forum_editforums.aspx" />
@@ -1032,6 +1040,7 @@
     <Content Include="ManagePage\global\global_commentedit.aspx" />
     <Content Include="ManagePage\global\global_editactivity.aspx" />
     <Content Include="ManagePage\global\global_editadminusergroup.aspx" />
+    <Content Include="ManagePage\global\global_editadvs.aspx" />
     <Content Include="ManagePage\global\global_editannounce.aspx" />
     <Content Include="ManagePage\global\global_editgroup.aspx" />
     <Content Include="ManagePage\global\global_edithelp.aspx" />
@@ -1534,7 +1543,44 @@
     <Content Include="ManagePage\UserControls\usergrouppowersetting.ascx" />
     <Content Include="ManagePage\xml\backup\2009-09-24 09_20_17.config" />
     <Content Include="ManagePage\xml\navmenu.config" />
+    <Content Include="templates\default\activities.htm" />
     <Content Include="templates\default\agreement.htm" />
+    <Content Include="templates\default\album\album.css" />
+    <Content Include="templates\default\album\images\albumLine.gif" />
+    <Content Include="templates\default\album\images\albumLine2.gif" />
+    <Content Include="templates\default\album\images\album_edit.gif" />
+    <Content Include="templates\default\album\images\album_fav.gif" />
+    <Content Include="templates\default\album\images\album_info.gif" />
+    <Content Include="templates\default\album\images\al_bg.gif" />
+    <Content Include="templates\default\album\images\attphoto.gif" />
+    <Content Include="templates\default\album\images\buttonreport.gif" />
+    <Content Include="templates\default\album\images\button_seeit.gif" />
+    <Content Include="templates\default\album\images\dotphoto.gif" />
+    <Content Include="templates\default\album\images\dotspace.gif" />
+    <Content Include="templates\default\album\images\error.gif" />
+    <Content Include="templates\default\album\images\errorphoto.gif" />
+    <Content Include="templates\default\album\images\focusbg.gif" />
+    <Content Include="templates\default\album\images\icon_album.gif" />
+    <Content Include="templates\default\album\images\icon_hot.gif" />
+    <Content Include="templates\default\album\images\lastother.gif" />
+    <Content Include="templates\default\album\images\lastupdate.gif" />
+    <Content Include="templates\default\album\images\nophoto.jpg" />
+    <Content Include="templates\default\album\images\picturebg.gif" />
+    <Content Include="templates\default\album\images\rank_bg.jpg" />
+    <Content Include="templates\default\album\images\reportfinish.gif" />
+    <Content Include="templates\default\album\images\right.gif" />
+    <Content Include="templates\default\album\images\ScrollarrowLeft.jpg" />
+    <Content Include="templates\default\album\images\ScrollarrowRight.jpg" />
+    <Content Include="templates\default\album\images\scrollphoto.jpg" />
+    <Content Include="templates\default\album\images\side_bg.gif" />
+    <Content Include="templates\default\album\images\title_bg.jpg" />
+    <Content Include="templates\default\album\images\title_bg2.gif" />
+    <Content Include="templates\default\album\images\user_album.gif" />
+    <Content Include="templates\default\album\images\user_info.gif" />
+    <Content Include="templates\default\album\_albumheader.htm" />
+    <Content Include="templates\default\album\_albumnavigation.htm" />
+    <Content Include="templates\default\album\_photoerrmsgbox.htm" />
+    <Content Include="templates\default\album\_photomsgbox.htm" />
     <Content Include="templates\default\announcedetail.htm" />
     <Content Include="templates\default\announcelist.htm" />
     <Content Include="templates\default\help.htm" />
@@ -1595,6 +1641,7 @@
     <Content Include="images\view.gif" />
     <Content Include="templates\default\inquiry.htm" />
     <Content Include="templates\default\promotion.htm" />
+    <Content Include="templates\default\album\showphoto.htm" />
     <Content Include="templates\default\sitemap.htm" />
     <Content Include="templates\default\tipmsg.htm" />
     <Content Include="templates\default\todayviews.htm" />

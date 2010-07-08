@@ -117,7 +117,7 @@ input.so2:hover{ width:71px; height:24px; background:url(../images/soso5.gif) bo
 .soso2line{ width:0px; height:10px; margin:9px 20px 0; border-left:1px solid #c5b7b4; border-right:1px solid #82605b; display:inline; float:left;}
 .soso3{ width:170px; height:73px; float:right;}
 .soso3 p{ width:170px; height:73px; float:left;}
-.soso3 a{ width:170px; height:73px; float:left;}
+.soso3 a{ width:170px; height:73px; float:left; cursor:pointer;}
 /*提示*/
 .tishi{ width:400px; height:auto; margin:0 auto;}
 .tstu{ width:48px; height:48px; margin:152px 10px 0 0; padding:0 0 150px 0; display:inline; float:left;}

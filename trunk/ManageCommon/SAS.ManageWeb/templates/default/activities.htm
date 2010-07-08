@@ -1,0 +1,16 @@
+﻿<%template _compageheader%>
+<body>
+<%if {page_err}==0%>
+    <%if {msgbox_text}!=""%>
+    <b class="f_805952_14">{msgbox_text}</b>
+    <%else%>
+    
+	<%/if%>
+	<%/if%>
+	<%/if%>
+<%else%>
+<b class="f_805952_14">出现了{page_err}个错误</b>
+<p>{msgbox_text}</p>
+<%/if%>
+<%template _comfooter%>
+

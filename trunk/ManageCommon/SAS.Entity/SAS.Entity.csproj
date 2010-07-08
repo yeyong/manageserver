@@ -45,7 +45,6 @@
     <Compile Include="ActivityInfo.cs" />
     <Compile Include="AdminGroupInfo.cs" />
     <Compile Include="AdShowInfo.cs" />
-    <Compile Include="AdTypeEnum.cs" />
     <Compile Include="Album\AlbumCategoryInfo.cs" />
     <Compile Include="Album\AlbumInfo.cs" />
     <Compile Include="AnnouncementInfo.cs" />

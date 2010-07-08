@@ -128,5 +128,10 @@ namespace SAS.Album.Data
             }
         }
 
+        public static PhotoInfo GetPhotoInfo(int photoid, int albumid, byte mode)
+        {
+            return GetPhotoInfo(Data.DbProvider.GetInstance().GetPhotoByID(photoid, albumid, mode));
+        }
+
     }
 }

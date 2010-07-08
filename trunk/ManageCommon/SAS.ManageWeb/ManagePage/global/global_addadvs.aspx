@@ -8,7 +8,7 @@
 <title>添加广告</title>		
 <link href="../styles/calendar.css" type="text/css" rel="stylesheet" />
 <link href="../styles/dntmanager.css" type="text/css" rel="stylesheet" />        
-<link href="../styles/modelpopup.css" type="text/css" rel="stylesheet" />		
+<link href="../styles/modelpopup.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="../js/common.js"></script>
 <script type="text/javascript" src="../js/modalpopup.js"></script>
 <script type="text/javascript">
