@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B096ACF0-E4BD-4EE9-9084-9B728598AF59}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SAS.Taobao</RootNamespace>
+    <AssemblyName>SAS.Taobao</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Domain\Area.cs" />
+    <Compile Include="Domain\AuthorizeMessage.cs" />
+    <Compile Include="Domain\BaseObject.cs" />
+    <Compile Include="Domain\Brand.cs" />
+    <Compile Include="Domain\Feature.cs" />
+    <Compile Include="Domain\Item.cs" />
+    <Compile Include="Domain\ItemCat.cs" />
+    <Compile Include="Domain\ItemCategory.cs" />
+    <Compile Include="Domain\ItemExtra.cs" />
+    <Compile Include="Domain\ItemImg.cs" />
+    <Compile Include="Domain\ItemProp.cs" />
+    <Compile Include="Domain\ItemSearch.cs" />
+    <Compile Include="Domain\ItemVerticalProp.cs" />
+    <Compile Include="Domain\Location.cs" />
+    <Compile Include="Domain\LogisticsCompany.cs" />
+    <Compile Include="Domain\NotifyItem.cs" />
+    <Compile Include="Domain\NotifyRefund.cs" />
+    <Compile Include="Domain\NotifyTrade.cs" />
+    <Compile Include="Domain\Order.cs" />
+    <Compile Include="Domain\PageList.cs" />
+    <Compile Include="Domain\Picture.cs" />
+    <Compile Include="Domain\PictureCategory.cs" />
+    <Compile Include="Domain\PicUrl.cs" />
+    <Compile Include="Domain\Postage.cs" />
+    <Compile Include="Domain\PostageMode.cs" />
+    <Compile Include="Domain\Product.cs" />
+    <Compile Include="Domain\ProductImg.cs" />
+    <Compile Include="Domain\ProductPropImg.cs" />
+    <Compile Include="Domain\PropImg.cs" />
+    <Compile Include="Domain\PropValue.cs" />
+    <Compile Include="Domain\Refund.cs" />
+    <Compile Include="Domain\RefundMessage.cs" />
+    <Compile Include="Domain\RefundRemindTimeout.cs" />
+    <Compile Include="Domain\SellerAuthorize.cs" />
+    <Compile Include="Domain\SellerCat.cs" />
+    <Compile Include="Domain\Shipping.cs" />
+    <Compile Include="Domain\ShippingAddress.cs" />
+    <Compile Include="Domain\Shop.cs" />
+    <Compile Include="Domain\ShopCat.cs" />
+    <Compile Include="Domain\ShopScore.cs" />
+    <Compile Include="Domain\Sku.cs" />
+    <Compile Include="Domain\SubscribeMessage.cs" />
+    <Compile Include="Domain\Subscription.cs" />
+    <Compile Include="Domain\Suite.cs" />
+    <Compile Include="Domain\Tadget.cs" />
+    <Compile Include="Domain\TaobaokeItem.cs" />
+    <Compile Include="Domain\TaobaokeItemDetail.cs" />
+    <Compile Include="Domain\TaobaokeReport.cs" />
+    <Compile Include="Domain\TaobaokeReportMember.cs" />
+    <Compile Include="Domain\TaobaokeShop.cs" />
+    <Compile Include="Domain\Trade.cs" />
+    <Compile Include="Domain\TradeConfirmFee.cs" />
+    <Compile Include="Domain\TradeRate.cs" />
+    <Compile Include="Domain\User.cs" />
+    <Compile Include="Domain\UserCredit.cs" />
+    <Compile Include="Domain\Video.cs" />
+    <Compile Include="Parser\INTWParser.cs" />
+    <Compile Include="Parser\ListXmlParser.cs" />
+    <Compile Include="Parser\ObjectXmlParser.cs" />
+    <Compile Include="Parser\ParseData.cs" />
+    <Compile Include="Parser\StringParser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

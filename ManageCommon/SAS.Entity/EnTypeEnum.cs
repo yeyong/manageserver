@@ -8,6 +8,35 @@ namespace SAS.Entity
     public class EnumCatch
     {
         /// <summary>
+        /// 获取广告枚举实例名称
+        /// </summary>
+        /// <param name="obj"></param>
+        public static string GetADTpyeName(AdType obj)
+        {
+            return GetADTpyeName(Convert.ToInt16(obj));
+        }
+
+        /// <summary>
+        /// 获取广告枚举实例名称
+        /// </summary>
+        public static string GetADTpyeName(int intvalue)
+        {
+            switch (intvalue)
+            {
+                case 1: return "头部横幅广告";
+                case 2: return "尾部横幅广告";
+                case 3: return "页内文字广告";
+                case 4: return "信息页内广告";
+                case 5: return "浮动广告";
+                case 6: return "对联广告";
+                case 7: return "首页头部活动广告";
+                case 8: return "首页页内文字广告";
+                case 9: return "首页页内轮显图片广告";
+                case 10: return "首页页内图片广告";
+                default: return "";
+            }
+        }
+        /// <summary>
         /// 获取企业类型名称
         /// </summary>
         /// <param name="ete"></param>
@@ -213,5 +242,51 @@ namespace SAS.Entity
         /// 淘之购活动专题
         /// </summary>
         TaobaoActivity = 4
+    }
+    /// <summary>
+    /// 广告类型
+    /// </summary>
+    public enum AdType
+    {
+        /// <summary>
+        /// 头部横幅广告
+        /// </summary>
+        HeaderAd = 1,
+        /// <summary>
+        /// 尾部横幅广告
+        /// </summary>
+        FooterAd = 2,
+        /// <summary>
+        /// 页内文字广告
+        /// </summary>
+        PageWordAd = 3,
+        /// <summary>
+        /// 信息页内广告
+        /// </summary>
+        InPostAd = 4,
+        /// <summary>
+        /// 浮动广告
+        /// </summary>
+        FloatAd = 5,
+        /// <summary>
+        /// 对联广告
+        /// </summary>
+        DoubleAd = 6,
+        /// <summary>
+        /// 首页头部活动广告
+        /// </summary>
+        IndexHeaderAd = 7,
+        /// <summary>
+        /// 首页页内文字广告
+        /// </summary>
+        IndexWordPageAd = 8,
+        /// <summary>
+        /// 首页页内轮显图片广告
+        /// </summary>
+        IndexImageTrunAd = 9,
+        /// <summary>
+        /// 首页页内图片广告
+        /// </summary>
+        IndexImageAd = 10
     }
 }

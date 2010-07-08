@@ -106,10 +106,10 @@ namespace SAS.ManageWeb.ManagePage
                         break;
                     }
             }
-            if (type.SelectedValue == Convert.ToInt16(AdType.MediaAd).ToString())
-            {
-                result = "<script type='text/javascript' src='templates/{0}/mediaad.js'></script><script type='text/javascript'>printMediaAD('{1}', {2});</script>";
-            }
+            //if (type.SelectedValue == Convert.ToInt16(AdType.MediaAd).ToString())
+            //{
+            //    result = "<script type='text/javascript' src='templates/{0}/mediaad.js'></script><script type='text/javascript'>printMediaAD('{1}', {2});</script>";
+            //}
             return result;
             #endregion
         }
@@ -219,25 +219,15 @@ namespace SAS.ManageWeb.ManagePage
             title.AddAttributes("size", "40");
 
             //加载树
+             AdType thetype = new AdType();
+            //加载树
             type.Items.Clear();
-            type.Items.Add(new ListItem("头部横幅广告", Convert.ToInt16(AdType.HeaderAd).ToString()));
-            type.Items.Add(new ListItem("尾部横幅广告", Convert.ToInt16(AdType.FooterAd).ToString()));
-            type.Items.Add(new ListItem("页内文字广告", Convert.ToInt16(AdType.PageWordAd).ToString()));
-            type.Items.Add(new ListItem("帖内广告", Convert.ToInt16(AdType.InPostAd).ToString()));
-            type.Items.Add(new ListItem("帖间通栏广告", Convert.ToInt16(AdType.PostLeaderboardAd).ToString()));
-            type.Items.Add(new ListItem("浮动广告", Convert.ToInt16(AdType.FloatAd).ToString()));
-            type.Items.Add(new ListItem("对联广告", Convert.ToInt16(AdType.DoubleAd).ToString()));
-            type.Items.Add(new ListItem("分类间广告", Convert.ToInt16(AdType.InForumAd).ToString()));
-            type.Items.Add(new ListItem("快速发帖栏上方广告", Convert.ToInt16(AdType.QuickEditorAd).ToString()));
-            type.Items.Add(new ListItem("快速编辑器背景广告", Convert.ToInt16(AdType.QuickEditorBgAd).ToString()));
-
-            type.Items.Add(new ListItem("聚合首页头部广告", Convert.ToInt16(AdType.WebSiteHeaderAd).ToString()));
-            type.Items.Add(new ListItem("聚合首页热贴下方广告", Convert.ToInt16(AdType.WebSiteHotTopicAd).ToString()));
-            type.Items.Add(new ListItem("聚合首页发帖排行上方广告", Convert.ToInt16(AdType.WebSiteUserPostTopAd).ToString()));
-            type.Items.Add(new ListItem("聚合首页推荐版块上方广告", Convert.ToInt16(AdType.WebSiteRecForumTopAd).ToString()));
-            type.Items.Add(new ListItem("聚合首页推荐版块下方广告", Convert.ToInt16(AdType.WebSiteRecForumBottomAd).ToString()));
-            type.Items.Add(new ListItem("聚合首页推荐相册下方广告", Convert.ToInt16(AdType.WebSiteRecAlbumAd).ToString()));
-            type.Items.Add(new ListItem("聚合首页底部广告", Convert.ToInt16(AdType.WebSiteBottomAd).ToString()));
+            foreach (string tts in Enum.GetNames(thetype.GetType()))
+            {
+                string thetext = EnumCatch.GetADTpyeName(Convert.ToInt16(Enum.Parse(thetype.GetType(), tts)));
+                string thevalue = Convert.ToInt16(Enum.Parse(thetype.GetType(), tts)).ToString();
+                type.Items.Add(new ListItem(thetext, thevalue));
+            }
             type.Attributes.Add("onChange", "showadhint();");
             type.SelectedIndex = 0;
 
