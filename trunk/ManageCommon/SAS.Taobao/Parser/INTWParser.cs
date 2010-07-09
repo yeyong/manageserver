@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NTW.Taobao.Parser
+namespace SAS.Taobao.Parser
 {
     /// <summary>
     /// NTW API响应解释器接口。响应格式可以是XML, JSON等等。
