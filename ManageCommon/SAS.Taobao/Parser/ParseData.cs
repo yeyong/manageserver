@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace NTW.Taobao.Parser
+namespace SAS.Taobao.Parser
 {
     /// <summary>
     /// 解释数据。

@@ -2,10 +2,10 @@
 using System.IO;
 using System.Xml.Serialization;
 
-using NTW.Taobao.Domain;
-using NTW.Taobao.Util;
+using SAS.Taobao.Domain;
+using SAS.Taobao.Util;
 
-namespace NTW.Taobao.Parser
+namespace SAS.Taobao.Parser
 {
     /// <summary>
     /// TOP XML对象响应通用解释器。

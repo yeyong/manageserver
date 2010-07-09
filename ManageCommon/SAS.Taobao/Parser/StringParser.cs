@@ -1,4 +1,4 @@
-﻿namespace NTW.Taobao.Parser
+﻿namespace SAS.Taobao.Parser
 {
     /// <summary>
     /// 不作任何处理，直接返回响应字符串。
