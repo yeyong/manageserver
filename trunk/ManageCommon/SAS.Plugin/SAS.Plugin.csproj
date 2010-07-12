@@ -56,6 +56,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sirius\SiriusPluginBase.cs" />
     <Compile Include="Sirius\SiriusPluginProvider.cs" />
+    <Compile Include="TaoBao\TaoBaoPluginBase.cs" />
+    <Compile Include="TaoBao\TaoBaoPluginProvider.cs" />
     <Compile Include="VerifyImage\IVerifyImage.cs" />
     <Compile Include="VerifyImage\VerifyImage.cs" />
     <Compile Include="VerifyImage\VerifyImageProvider.cs" />

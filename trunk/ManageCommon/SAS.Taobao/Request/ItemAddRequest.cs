@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-using SAS.Taobao.Domain;
+using SAS.Entity.Domain;
 using SAS.Taobao.Util;
 
 namespace SAS.Taobao.Request

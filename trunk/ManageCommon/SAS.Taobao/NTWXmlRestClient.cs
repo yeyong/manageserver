@@ -2,7 +2,7 @@
 
 using SAS.Taobao.Request;
 using SAS.Taobao.Parser;
-using SAS.Taobao.Domain;
+using SAS.Entity.Domain;
 
 namespace SAS.Taobao
 {

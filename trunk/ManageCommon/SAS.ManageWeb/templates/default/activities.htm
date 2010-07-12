@@ -1,16 +1,20 @@
-﻿<%template _compageheader%>
-<body>
+﻿<%template _actheader%>
 <%if {page_err}==0%>
     <%if {msgbox_text}!=""%>
-    <b class="f_805952_14">{msgbox_text}</b>
+    <div class="cot>
+    <div class="tishi">
+		<p class="tstu"><img alt="错误提示" src="{rooturl}templates/{templatepath}/images/icon/error.jpg" /></p>
+		<p class="tszi">
+            <span>{msgbox_text}</span>
+        </p>
+	</div>
+    </div>
     <%else%>
-    
-	<%/if%>
-	<%/if%>
+    {actinfo.desccode}
 	<%/if%>
 <%else%>
-<b class="f_805952_14">出现了{page_err}个错误</b>
-<p>{msgbox_text}</p>
+<%template _commsgbox%>
 <%/if%>
+<%template _comcopyright%>
 <%template _comfooter%>
 
