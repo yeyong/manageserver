@@ -50,6 +50,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="aspx\1\activities.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="aspx\1\agreement.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -576,6 +579,13 @@
     </Compile>
     <Compile Include="ManagePage\UserControls\PageInfo.ascx.designer.cs">
       <DependentUpon>PageInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\UserControls\taobaoitemcattree.ascx.cs">
+      <DependentUpon>taobaoitemcattree.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\UserControls\taobaoitemcattree.ascx.designer.cs">
+      <DependentUpon>taobaoitemcattree.ascx</DependentUpon>
     </Compile>
     <Compile Include="ManagePage\UserControls\TextareaResize.ascx.cs">
       <DependentUpon>TextareaResize.ascx</DependentUpon>
@@ -1539,6 +1549,7 @@
     <Content Include="ManagePage\UserControls\forumstree.ascx" />
     <Content Include="ManagePage\UserControls\onlineeditor.ascx" />
     <Content Include="ManagePage\UserControls\PageInfo.ascx" />
+    <Content Include="ManagePage\UserControls\taobaoitemcattree.ascx" />
     <Content Include="ManagePage\UserControls\TextareaResize.ascx" />
     <Content Include="ManagePage\UserControls\usergrouppowersetting.ascx" />
     <Content Include="ManagePage\xml\backup\2009-09-24 09_20_17.config" />
@@ -1648,6 +1659,7 @@
     <Content Include="templates\default\zscard.htm" />
     <Content Include="templates\default\zsshow.htm" />
     <Content Include="config\datacache.config" />
+    <Content Include="templates\default\_actheader.htm" />
     <Content Include="tools\flashcomm.aspx" />
     <None Include="ManagePage\images\admin-gif\Thumbs.db" />
     <None Include="ManagePage\images\ad\Thumbs.db" />

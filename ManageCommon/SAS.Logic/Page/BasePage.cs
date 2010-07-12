@@ -124,6 +124,10 @@ namespace SAS.Logic
         /// </summary>
         protected internal string link;
         /// <summary>
+        /// 当前页面显示样式
+        /// </summary>
+        protected internal string stylecodes = "";
+        /// <summary>
         /// 当前页面中增加script
         /// </summary>
         protected internal string script;
@@ -650,6 +654,14 @@ namespace SAS.Logic
 
         }
 
+        /// <summary>
+        /// 插入样式
+        /// </summary>
+        /// <param name="csscode"></param>
+        public void AddStyleCss(string csscode)
+        {
+            stylecodes = stylecodes + "\r\n<style type=\"text/css\" media=\"all\">\r\n" + csscode + "\r\n</style>";
+        }
 
         /// <summary>
         /// 插入指定路径的CSS

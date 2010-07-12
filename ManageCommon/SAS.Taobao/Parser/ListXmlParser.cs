@@ -2,7 +2,7 @@
 using System.IO;
 using System.Xml.Serialization;
 
-using SAS.Taobao.Domain;
+using SAS.Entity.Domain;
 using SAS.Taobao.Util;
 
 namespace SAS.Taobao.Parser
