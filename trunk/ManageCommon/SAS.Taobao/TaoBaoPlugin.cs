@@ -34,5 +34,19 @@ namespace SAS.Taobao
         {
             return TaoBaos.GetAllCategoryList();
         }
+        /// <summary>
+        /// 创建商品类别
+        /// </summary>
+        public override int CreateCategoryInfo(SAS.Entity.CategoryInfo cinfo)
+        {
+            return TaoBaos.CreateCateInfo(cinfo);
+        }
+        /// <summary>
+        /// 修改商品类别
+        /// </summary>
+        public override void UpdateCategoryInfo(SAS.Entity.CategoryInfo cinfo)
+        {
+            TaoBaos.UpdateCategoryInfo(cinfo);
+        }
     }
 }

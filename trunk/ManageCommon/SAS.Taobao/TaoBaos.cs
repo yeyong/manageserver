@@ -125,6 +125,13 @@ namespace SAS.Taobao
 
         #region 商品类别category操作
         /// <summary>
+        /// 创建商品类别
+        /// </summary>
+        public static int CreateCateInfo(CategoryInfo cinfo)
+        {
+            return Data.DbProvider.GetInstance().CreateCategoryInfo(cinfo);
+        }
+        /// <summary>
         /// 获取商品类别
         /// </summary>
         /// <param name="cid"></param>
@@ -138,6 +145,13 @@ namespace SAS.Taobao
         public static DataTable GetAllCategoryList()
         {
             return Data.DbProvider.GetInstance().GetAllCategoryList();
+        }
+        /// <summary>
+        /// 修改商品类别
+        /// </summary>
+        public static void UpdateCategoryInfo(CategoryInfo cinfo)
+        {
+            Data.DbProvider.GetInstance().UpdateCategoryInfo(cinfo);
         }
         #endregion
     }

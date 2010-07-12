@@ -59,9 +59,9 @@ namespace SAS.ManageWeb.ManagePage
             int cid = SASRequest.GetInt("cid", 0);
             CategoryInfo ad_dt = taobaos.GetCategoryInfo(cid);
 
-            if (ad_dt != null && !string.IsNullOrEmpty(ad_dt.Cg_relatetype))
+            if (ad_dt != null && !string.IsNullOrEmpty(ad_dt.Cg_relateclass))
             {
-                this.SelectForumStr = "," + ad_dt.Cg_relatetype + ",";
+                this.SelectForumStr = "," + ad_dt.Cg_relateclass + ",";
             }
 
             System.Collections.Generic.List<ItemCat> itemcatlist1 = itemcatlist.FindAll(new Predicate<ItemCat>(delegate(ItemCat iteminfo) { return iteminfo.ParentCid == 0; }));

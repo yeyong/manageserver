@@ -566,6 +566,13 @@
     <Compile Include="ManagePage\taobao\taobao_categorygrid.aspx.designer.cs">
       <DependentUpon>taobao_categorygrid.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\taobao\taobao_editcategory.aspx.cs">
+      <DependentUpon>taobao_editcategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\taobao\taobao_editcategory.aspx.designer.cs">
+      <DependentUpon>taobao_editcategory.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\UserControls\activetree.ascx.cs">
       <DependentUpon>activetree.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1565,6 +1572,7 @@
     <Content Include="ManagePage\style\comm.css" />
     <Content Include="ManagePage\taobao\taobao_addCategory.aspx" />
     <Content Include="ManagePage\taobao\taobao_categorygrid.aspx" />
+    <Content Include="ManagePage\taobao\taobao_editcategory.aspx" />
     <Content Include="ManagePage\UserControls\activetree.ascx" />
     <Content Include="ManagePage\UserControls\forumstree.ascx" />
     <Content Include="ManagePage\UserControls\onlineeditor.ascx" />

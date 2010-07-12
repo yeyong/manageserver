@@ -2468,7 +2468,7 @@ namespace SAS.Data.SqlServer
 						DbHelper.MakeInParam("@cllogo", (DbType)SqlDbType.VarChar, 100,_cataloginfo.cllogo),
 						DbHelper.MakeInParam("@companycount", (DbType)SqlDbType.Int, 4,_cataloginfo.companycount)
 				};
-            string commandText = String.Format("INSERT INTO [{0}catalog] ([parentid], [sort], [parentlist], [displayorder], [name], [haschild], [cllogo], [companycount]) VALUES (@parentid, @sort, @parentlist, @displayorder, @name, @haschild, @cllogo, @companycount);SELECT SCOPE_IDENTITY()  AS id", BaseConfigs.GetTablePrefix);
+            string commandText = String.Format("INSERT INTO [{0}catalog] ([parentid], [sort], [parentlist], [displayorder], [name], [haschild], [cllogo], [companycount]) VALUES (@parentid, @sort, @parentlist, @displayorder, @name, @haschild, @cllogo, @companycount);SELECT SCOPE_IDENTITY() AS id", BaseConfigs.GetTablePrefix);
             return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText, parms), -1);
         }
         /// <summary>
@@ -2518,7 +2518,7 @@ namespace SAS.Data.SqlServer
 						DbHelper.MakeInParam("@companycount", (DbType)SqlDbType.Int, 4,_cataloginfo.companycount),
                         DbHelper.MakeInParam("@categoryid", (DbType)SqlDbType.Int, 4,_cataloginfo.id)
 				};
-            string commandText = String.Format("Update [{0}catalog]  Set [parentid] = @parentid, [sort] = @sort, [parentlist] = @parentlist, [displayorder] = @displayorder, [name] = @name, [haschild] = @haschild, [cllogo] = @cllogo, [companycount] = @companycount WHERE [id] = @categoryid", BaseConfigs.GetTablePrefix);
+            string commandText = String.Format("Update [{0}catalog] SET [parentid] = @parentid, [sort] = @sort, [parentlist] = @parentlist, [displayorder] = @displayorder, [name] = @name, [haschild] = @haschild, [cllogo] = @cllogo, [companycount] = @companycount WHERE [id] = @categoryid", BaseConfigs.GetTablePrefix);
 
             DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
 

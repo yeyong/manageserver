@@ -11,7 +11,7 @@
 namespace SAS.ManageWeb.ManagePage {
     
     
-    public partial class taobao_addCategory {
+    public partial class taobao_editcategory {
         
         /// <summary>
         /// Form1 控件。
