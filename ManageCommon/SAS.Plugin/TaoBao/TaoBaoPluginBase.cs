@@ -27,5 +27,13 @@ namespace SAS.Plugin.TaoBao
         /// 获取商品类别全部信息
         /// </summary>
         public abstract DataTable GetAllCategoryList();
+        /// <summary>
+        /// 创建商品类别
+        /// </summary>
+        public abstract int CreateCategoryInfo(CategoryInfo cinfo);
+        /// <summary>
+        /// 修改商品类别
+        /// </summary>
+        public abstract void UpdateCategoryInfo(CategoryInfo cinfo);
     }
 }

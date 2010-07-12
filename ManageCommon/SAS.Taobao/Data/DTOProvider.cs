@@ -26,7 +26,7 @@ namespace SAS.Taobao.Data
                 cinfo.Cg_prefix = reader["cg_prefix"].ToString();
                 cinfo.Cg_status = TypeConverter.ObjectToInt(reader["cg_status"].ToString(),0);
                 cinfo.Displayorder = TypeConverter.ObjectToInt(reader["displayorder"].ToString(),0);
-                cinfo.Haschild = reader["haschild"].ToString() == "0" ? false : true;
+                cinfo.Haschild = reader["haschild"].ToString() == "True" ? 1 : 0;
                 cinfo.Cg_relatetype = reader["cg_relatetype"].ToString();
                 cinfo.Cg_relateclass = reader["cg_relateclass"].ToString();
                 cinfo.Cg_relatebrand = reader["cg_relatebrand"].ToString();

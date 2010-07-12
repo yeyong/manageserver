@@ -221,10 +221,9 @@
 				     str = "onmousedown=\"" + this.id + ".onmousedown(event);\" onmouseup=\"" + this.id + ".onmouseup(event);\" onmouseover=\"" + this.id;
 				     str += ".onmouseover(event)\" onmouseout=\"" + this.id + ".onmouseout(event)\">" + treeNodes[i].subject;
 				     str += " &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src=../images/cal_nextMonth.gif> &nbsp;<a class=\"TopicButton\"";
-				     str += " type=\"button\" onclick=\"javascript:addNode('" + treeNodes[i].fid + "'," + (treeNodes[i].layer == 0 ? "true" : "false") + "," + treeNodes[i].addfid + ",event);\">";
+				     str += " type=\"button\" onclick=\"window.location='taobao_addcategory.aspx?pid=" + treeNodes[i].fid + "'\">";
 				     str += "<img src=\"../images/add.gif\"/>添加</a><a class=\"TopicButton\" type=\"button\"";
-				     str += " onclick=\"javascript:editNode('" + treeNodes[i].fid + "','" + treeNodes[i].name + "',";
-				     str += ((treeNodes[i].layer == 0 || treeNodes[i].layer == 1) ? "true" : "false") + "," + treeNodes[i].editfid + "," + treeNodes[i].cfid + ",event);\"><img src=\"../images/submit.gif\"/>编辑</a>";
+				     str += " onclick=\"window.location='taobao_editcategory.aspx?cid=" + treeNodes[i].fid + "'\"><img src=\"../images/submit.gif\"/>编辑</a>";
 				     if(treeNodes[i].subforumcount == '0')
 				     {
 				        str += "<a class=\"TopicButton\" type=\"button\" onclick=\"javascript:if(confirm('您要删除该项吗?'))";
@@ -241,10 +240,9 @@
 				     str = "onmousedown=\"" + this.id + ".onmousedown(event);\" onmouseup=\"" + this.id + ".onmouseup(event);\" onmouseover=\"" + this.id;
 				     str += ".onmouseover(event)\" onmouseout=\"" + this.id + ".onmouseout(event)\">" + treeNodes[i].subject;
 				     str += " &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src=../images/cal_nextMonth.gif>&nbsp;<a class=\"TopicButton\"";
-				     str += "type=\"button\" onclick=\"javascript:addNode('" + treeNodes[i].fid + "'," + (treeNodes[i].layer == 0 ? "true" : "false") + "," + treeNodes[i].addfid + ",event);\">";
+				     str += "type=\"button\" onclick=\"window.location='taobao_addcategory.aspx?pid=" + treeNodes[i].fid + "'\">";
 				     str += "<img src=\"../images/add.gif\"/>添加</a><a class=\"TopicButton\" type=\"button\"";
-				     str += " onclick=\"javascript:editNode('" + treeNodes[i].fid + "','" + treeNodes[i].name + "',";
-				     str += ((treeNodes[i].layer == 0 || treeNodes[i].layer == 1) ? "true" : "false") + "," + treeNodes[i].editfid + "," + treeNodes[i].cfid + ",event);\"><img src=\"../images/submit.gif\"/>编辑</a>";
+				     str += " onclick=\"window.location='taobao_editcategory.aspx?cid=" + treeNodes[i].fid + "'\"><img src=\"../images/submit.gif\"/>编辑</a>";
 				     if(treeNodes[i].subforumcount == '0')
 				     {
 				        str += "<a class=\"TopicButton\" type=\"button\" onclick=\"javascript:if(confirm('您要删除该项吗?'))";
@@ -507,7 +505,7 @@
         <form id="Form1" runat="server" >
             <div style="clear:both;position:relative">
                 <uc1:PageInfo id="info1" runat="server" Icon="Information" Text="<li>支持鼠标拖拽更改行业分类</li>"></uc1:PageInfo>
-                <a class="TopicButton" href="taobao_addcategory.aspx" type="button"><img src="../images/add.gif"/> 添加顶级分类 </a>&nbsp;&nbsp;
+                <a class="TopicButton" onclick="window.location='taobao_addcategory.aspx'" type="button"><img src="../images/add.gif"/> 添加顶级分类 </a>&nbsp;&nbsp;
                 <a class="TopicButton" onclick="javascript:sethighlevel();" type="button"><img src="../images/del.gif"/> 取消绑定 </a>&nbsp;&nbsp;
                 <a class="TopicButton" onclick="javascript:window.location='company_cataloggrid.aspx?method=updateall';" type="button"><img src="../images/cache_resetall.gif"/> 更新所有分类商品数 </a>
                 <input type="hidden" name="highlevel" id="highlevel" />

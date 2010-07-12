@@ -1,11 +1,11 @@
-﻿<%@ Page Language="C#" CodeBehind="taobao_addCategory.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.taobao_addCategory" %>
+﻿<%@ Page Language="C#" CodeBehind="taobao_editcategory.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.taobao_editcategory" %>
 <%@ Register Namespace="SAS.Control" Assembly="SAS.Control" TagPrefix="yy"%>
 <%@ Register TagPrefix="yy1" TagName="PageInfo" Src="../UserControls/PageInfo.ascx" %>
 <%@ Register TagPrefix="yy1" TagName="TaoBaoItemCatTree" Src="../UserControls/taobaoitemcattree.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
 <html>
 <head>
-    <title>添加类别</title>
+    <title>编辑类别</title>
 <link href="../styles/calendar.css" type="text/css" rel="stylesheet" />
 <link href="../styles/dntmanager.css" type="text/css" rel="stylesheet" />        
 <link href="../styles/modelpopup.css" type="text/css" rel="stylesheet" />
@@ -44,7 +44,7 @@
     <div class="ManagerForm">
 <form id="Form1" method="post" runat="server">
 <fieldset>
-<legend style="background:url(../images/icons/icon36.jpg) no-repeat 6px 50%;"><%=ltitle%></legend>
+<legend style="background:url(../images/icons/icon36.jpg) no-repeat 6px 50%;">编辑类别</legend>
 <table width="100%">
 	<tr><td class="item_title" colspan="2">是否生效</td></tr>
 	<tr>

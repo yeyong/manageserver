@@ -10,21 +10,21 @@ namespace SAS.Entity
     {
         #region Model
         private int _cid;
-        private string _name;
+        private string _name = "";
         private int _parentid;
-        private string _parentlist;
-        private string _cg_img;
+        private string _parentlist = "";
+        private string _cg_img = "";
         private int _sort;
-        private string _cg_prefix;
+        private string _cg_prefix = "";
         private int _cg_status;
         private int _displayorder;
-        private bool _haschild;
-        private string _cg_relatetype;
-        private string _cg_relateclass;
-        private string _cg_relatebrand;
-        private string _cg_desc;
-        private string _cg_keyword;
-        private int _goodcount;
+        private int _haschild;
+        private string _cg_relatetype = "";
+        private string _cg_relateclass = "";
+        private string _cg_relatebrand = "";
+        private string _cg_desc = "";
+        private string _cg_keyword = "";
+        private int _goodcount = 0;
         /// <summary>
         /// 商品类别ID
         /// </summary>
@@ -100,7 +100,7 @@ namespace SAS.Entity
         /// <summary>
         /// 是否包含子类
         /// </summary>
-        public bool Haschild
+        public int Haschild
         {
             set { _haschild = value; }
             get { return _haschild; }
