@@ -89,6 +89,9 @@
     <Compile Include="Page\CompanyPage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Page\TaoBaoPage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="PrivateMessages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SASCacheStrategy.cs" />

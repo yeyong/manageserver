@@ -43,6 +43,10 @@ namespace SAS.Data
         /// </summary>
         public const string CATALOG = "[id],[name],[parentid],[parentlist],[sort],[cllogo],[displayorder],[haschild],[companycount]";
         /// <summary>
+        /// 商品类别字段
+        /// </summary>
+        public const string CATEGORY = "[cid],[name],[parentid],[parentlist],[cg_img],[sort],[cg_prefix],[cg_status],[displayorder],[haschild],[cg_relatetype],[cg_relateclass],[cg_relatebrand],[cg_desc],[cg_keyword],[goodcount]";
+        /// <summary>
         /// 城市信息字段
         /// </summary>
         public const string CITY = "[CityID],[CityName],[ZipCode],[ProvinceID],[DateCreated],[DateUpdated]";
