@@ -39,6 +39,7 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Data\DbProvider.cs" />
+    <Compile Include="Data\DTOProvider.cs" />
     <Compile Include="Data\SqlDataProvider.cs" />
     <Compile Include="INTWClient.cs" />
     <Compile Include="NTWDictionary.cs" />

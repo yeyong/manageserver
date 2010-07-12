@@ -552,6 +552,20 @@
     <Compile Include="ManagePage\syslogin.aspx.designer.cs">
       <DependentUpon>syslogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\taobao\taobao_addCategory.aspx.cs">
+      <DependentUpon>taobao_addCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\taobao\taobao_addCategory.aspx.designer.cs">
+      <DependentUpon>taobao_addCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\taobao\taobao_categorygrid.aspx.cs">
+      <DependentUpon>taobao_categorygrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\taobao\taobao_categorygrid.aspx.designer.cs">
+      <DependentUpon>taobao_categorygrid.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\UserControls\activetree.ascx.cs">
       <DependentUpon>activetree.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -644,6 +658,10 @@
     <ProjectReference Include="..\SAS.Plugin\SAS.Plugin.csproj">
       <Project>{2EA29B20-569F-421C-B359-7E7F8C7045CD}</Project>
       <Name>SAS.Plugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SAS.Taobao\SAS.Taobao.csproj">
+      <Project>{B096ACF0-E4BD-4EE9-9084-9B728598AF59}</Project>
+      <Name>SAS.Taobao</Name>
     </ProjectReference>
     <ProjectReference Include="..\SAS.Web.UI\SAS.Web.UI.csproj">
       <Project>{15188167-C7FB-4A1B-9AC0-480A26825AAF}</Project>
@@ -1545,6 +1563,8 @@
     <Content Include="ManagePage\styles\tab.css" />
     <Content Include="ManagePage\style\admin.css" />
     <Content Include="ManagePage\style\comm.css" />
+    <Content Include="ManagePage\taobao\taobao_addCategory.aspx" />
+    <Content Include="ManagePage\taobao\taobao_categorygrid.aspx" />
     <Content Include="ManagePage\UserControls\activetree.ascx" />
     <Content Include="ManagePage\UserControls\forumstree.ascx" />
     <Content Include="ManagePage\UserControls\onlineeditor.ascx" />

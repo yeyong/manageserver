@@ -7,6 +7,7 @@ using System.Data;
 using SAS.Common;
 using SAS.Logic;
 using SAS.Entity;
+using SAS.Entity.Domain;
 using SAS.Config;
 using SAS.Plugin.TaoBao;
 
@@ -49,30 +50,27 @@ namespace SAS.ManageWeb.ManagePage
         public void LoadActivityTree()
         {
             //读取论坛版块树
-            DataTable dt = AdminActivities.GetEnableActivities();
+            System.Collections.Generic.List<ItemCat> itemcatlist = taobaos.GetItemCatCache();
 
-            if (dt.Rows.Count == 0) Server.Transfer("../global/global_addactivity.aspx"); //如果版块表中没有任何版块, 则跳转到"添加第一个版块"页面. 
-
-            ViewState["dt"] = dt;
+            ViewState["itemcatlist"] = itemcatlist;
 
             sb.Append("<table border=\"0\"  width=\"100%\" align=\"center\" cellspacing=\"0\" cellpadding=\"0\">");
 
+            int cid = SASRequest.GetInt("cid", 0);
+            CategoryInfo ad_dt = taobaos.GetCategoryInfo(cid);
 
-            int advid = SASRequest.GetInt("id", 0);
-            AnnouncementInfo ad_dt = Announcements.GetAnnouncement(advid);
-
-            if (ad_dt != null && !string.IsNullOrEmpty(ad_dt.Relateactive))
+            if (ad_dt != null && !string.IsNullOrEmpty(ad_dt.Cg_relatetype))
             {
-                this.SelectForumStr = "," + ad_dt.Relateactive + ",";
+                this.SelectForumStr = "," + ad_dt.Cg_relatetype + ",";
             }
 
-            ActivityType ate = new ActivityType();
+            System.Collections.Generic.List<ItemCat> itemcatlist1 = itemcatlist.FindAll(new Predicate<ItemCat>(delegate(ItemCat iteminfo) { return iteminfo.ParentCid == 0; }));
             int n = 0;
-            int atlength = Enum.GetNames(ate.GetType()).Length;
-            foreach (string atname in Enum.GetNames(ate.GetType()))
+            int atlength = itemcatlist1.Count;
+            foreach (ItemCat itemcatinfo in itemcatlist1)
             {
-                int s_value = Convert.ToInt16(Enum.Parse(ate.GetType(), atname));
-                string s_text = EnumCatch.GetActivityType(s_value);
+                long s_value = itemcatinfo.Cid;
+                string s_text = itemcatinfo.Name;
                 string mystr = "";
                 string currentnodestr = "";
                 if ((n >= 0) && (n < (atlength - 1)))
@@ -85,8 +83,21 @@ namespace SAS.ManageWeb.ManagePage
                     mystr += L_rootpic;
                     currentnodestr = No_nodepic;
                 }
-                sb.Append("<tr><td class=treetd> " + mystr + "<img src=../images/folders.gif class=treeimg > " + s_text + "</td></tr>");
-                AddAdsTree(dt.Select("[atype] = " + s_value), currentnodestr);
+
+                if (this.SelectForumStr.IndexOf("," + s_value.ToString().Trim() + ",") >= 0)
+                {
+                    sb.Append("<tr><td class=treetd> " + mystr + " <img src=../images/folder.gif class=treeimg > <input class=\"input1\" type=checkbox id=\"" + this.ClientID + "\" name=\"" + this.ClientID + "\" value=\"" + s_value.ToString().Trim() + "\"  checked> " + s_text.ToString().Trim() + "</td></tr>");
+                }
+                else
+                {
+                    sb.Append("<tr><td class=treetd> " + mystr + " <img src=../images/folder.gif class=treeimg > <input class=\"input1\" type=checkbox id=\"" + this.ClientID + "\" name=\"" + this.ClientID + "\" value=\"" + s_value.ToString().Trim() + "\" > " + s_text.ToString().Trim() + "</td></tr>");
+                } 
+                
+                if (itemcatinfo.IsParent)
+                {
+                    System.Collections.Generic.List<ItemCat> itemcatlist2 = itemcatlist.FindAll(new Predicate<ItemCat>(delegate(ItemCat iteminfo) { return iteminfo.ParentCid == s_value; }));
+                    AddAdsTree(itemcatlist2, currentnodestr);
+                }
                 n++;
             }
 
@@ -95,15 +106,15 @@ namespace SAS.ManageWeb.ManagePage
             TreeContent.Text = sb.ToString();
         }
 
-        private void AddAdsTree(DataRow[] drs, string currentnodestr)
+        private void AddAdsTree(System.Collections.Generic.List<ItemCat> subitemlist, string currentnodestr)
         {
-            for (int n = 0; n < drs.Length; n++)
+            for (int n = 0; n < subitemlist.Count; n++)
             {
                 string mystr = "";
                 mystr += currentnodestr;
                 string temp = currentnodestr;
 
-                if ((n >= 0) && (n < (drs.Length - 1)))
+                if ((n >= 0) && (n < (subitemlist.Count - 1)))
                 {
                     mystr += T_nodepic; //
                     temp += I_nodepic;
@@ -115,13 +126,13 @@ namespace SAS.ManageWeb.ManagePage
                     temp += No_nodepic;
                 }
 
-                if ((this.SelectForumStr.IndexOf("," + drs[n]["id"].ToString().Trim() + ",") >= 0) && (this.SelectForumStr.IndexOf("全部") < 0))
+                if ((this.SelectForumStr.IndexOf("," + subitemlist[n].Cid.ToString().Trim() + ",") >= 0) && (this.SelectForumStr.IndexOf("全部") < 0))
                 {
-                    sb.Append("<tr><td class=treetd> " + mystr + " <img src=../images/folder.gif class=treeimg > <input class=\"input1\" type=checkbox id=\"" + this.ClientID + "\" name=\"" + this.ClientID + "\" value=\"" + drs[n]["id"].ToString().Trim() + "\"  checked> " + drs[n]["atitle"].ToString().Trim() + "</td></tr>");
+                    sb.Append("<tr><td class=treetd> " + mystr + " <img src=../images/folder.gif class=treeimg > <input class=\"input1\" type=checkbox id=\"" + this.ClientID + "\" name=\"" + this.ClientID + "\" value=\"" + subitemlist[n].Cid.ToString().Trim() + "\"  checked> " + subitemlist[n].Name.ToString().Trim() + "</td></tr>");
                 }
                 else
                 {
-                    sb.Append("<tr><td class=treetd> " + mystr + " <img src=../images/folder.gif class=treeimg > <input class=\"input1\" type=checkbox id=\"" + this.ClientID + "\" name=\"" + this.ClientID + "\" value=\"" + drs[n]["id"].ToString().Trim() + "\" > " + drs[n]["atitle"].ToString().Trim() + "</td></tr>");
+                    sb.Append("<tr><td class=treetd> " + mystr + " <img src=../images/folder.gif class=treeimg > <input class=\"input1\" type=checkbox id=\"" + this.ClientID + "\" name=\"" + this.ClientID + "\" value=\"" + subitemlist[n].Cid.ToString().Trim() + "\" > " + subitemlist[n].Name.ToString().Trim() + "</td></tr>");
                 }
             }
         }

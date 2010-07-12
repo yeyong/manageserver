@@ -18,7 +18,21 @@ namespace SAS.Taobao
         /// </summary>
         public override List<ItemCat> GetItemCatCache()
         {
-            
+            return TaoBaos.GetItemCatCache();
+        }
+        /// <summary>
+        /// 获取商品类目信息
+        /// </summary>
+        public override SAS.Entity.CategoryInfo GetCategoryInfo(int cid)
+        {
+            return TaoBaos.GetCategoryInfo(cid);
+        }
+        /// <summary>
+        /// 获取全部商品类别信息
+        /// </summary>
+        public override DataTable GetAllCategoryList()
+        {
+            return TaoBaos.GetAllCategoryList();
         }
     }
 }

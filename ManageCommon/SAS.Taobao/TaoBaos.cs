@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
 
+using SAS.Entity;
 using SAS.Entity.Domain;
 using SAS.Common;
 using SAS.Config;
@@ -57,12 +58,38 @@ namespace SAS.Taobao
                 ItemcatsGetRequest igr = new ItemcatsGetRequest();
                 igr.Fields="cid,parent_cid,name,is_parent,status,sort_order";
                 igr.ParentCid = 0;
+                PageList<ItemCat> pageitems = client.ItemcatsGet(igr);
                 itemcatlist = client.ItemcatsGet(igr).Content;
-                SAS.Cache.ICacheStrategy ica = new DefaultCacheStrategy();
-                ica.TimeOut = 300;
+                List<ItemCat> templist = new List<ItemCat>();
+                foreach (ItemCat iteminfo in itemcatlist)
+                {
+                    if (iteminfo.IsParent)
+                    {
+                        ItemcatsGetRequest subigr = new ItemcatsGetRequest();
+                        subigr.Fields = "cid,parent_cid,name,is_parent,status,sort_order";
+                        subigr.ParentCid = iteminfo.Cid;
+                        PageList<ItemCat> subpageitems = client.ItemcatsGet(subigr);
+                        if (subpageitems.Content.Count > 0) templist.AddRange(subpageitems.Content);
+                    }
+                }
+                itemcatlist.InsertRange(itemcatlist.Count - 1, templist);
                 cache.AddObject("SAS/Taobao/ItemCats", itemcatlist);
             }
             return itemcatlist;
+        }
+
+        /// <summary>
+        /// 获取相关父类下子类别的数量
+        /// </summary>
+        /// <param name="parentid"></param>
+        /// <returns></returns>
+        public static long GetItemCatCount(long parentid)
+        {
+            ItemcatsGetRequest igr = new ItemcatsGetRequest();
+            igr.Fields = "cid,parent_cid,name,is_parent,status,sort_order";
+            igr.ParentCid = parentid;
+            PageList<ItemCat> pageitems = client.ItemcatsGet(igr);
+            return pageitems.TotalResults;
         }
 
         /// <summary>
@@ -95,5 +122,23 @@ namespace SAS.Taobao
 
             return sessionKey;
         }
+
+        #region 商品类别category操作
+        /// <summary>
+        /// 获取商品类别
+        /// </summary>
+        /// <param name="cid"></param>
+        public static CategoryInfo GetCategoryInfo(int cid)
+        {
+            return cid > 0 ? DTOProvider.GetCategoryInfoEntity(Data.DbProvider.GetInstance().GetCategoryInfo(cid)) : null;
+        }
+        /// <summary>
+        /// 获取全部商品类别信息
+        /// </summary>
+        public static DataTable GetAllCategoryList()
+        {
+            return Data.DbProvider.GetInstance().GetAllCategoryList();
+        }
+        #endregion
     }
 }

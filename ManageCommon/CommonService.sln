@@ -35,6 +35,28 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAS.Web.Services", "SAS.Web
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAS.Taobao", "SAS.Taobao\SAS.Taobao.csproj", "{B096ACF0-E4BD-4EE9-9084-9B728598AF59}"
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SAS.TZGWeb", "SAS.TZGWeb\", "{33234003-58D9-4718-AB85-6B94A8A36B81}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFramework = "3.5"
+		ProjectReferences = "{2EA29B20-569F-421C-B359-7E7F8C7045CD}|SAS.Plugin.dll;{203EB763-E07B-4047-9473-D16F84B2E554}|SAS.Common.dll;{5325F618-33FA-4B03-9A3E-96ED8C554F6C}|SAS.Config.dll;{E15BF13F-EC22-47A3-ACF4-AA79738FB7E8}|SAS.Data.dll;{F6CFD248-E9E3-480A-B518-526298AAF81E}|SAS.Entity.dll;{9145299A-21C2-4558-A956-2DBDCBF477DE}|SAS.Logic.dll;{7A65B383-BFA6-4B0D-AA97-2C24F5B2F613}|SAS.Cache.dll;{7A7B0B03-0109-408C-BC7A-7FA36911C924}|SAS.Data.SqlServer.dll;{B096ACF0-E4BD-4EE9-9084-9B728598AF59}|SAS.Taobao.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/SAS.TZGWeb"
+		Debug.AspNetCompiler.PhysicalPath = "SAS.TZGWeb\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\SAS.TZGWeb\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/SAS.TZGWeb"
+		Release.AspNetCompiler.PhysicalPath = "SAS.TZGWeb\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\SAS.TZGWeb\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "1396"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -113,6 +135,10 @@ Global
 		{B096ACF0-E4BD-4EE9-9084-9B728598AF59}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B096ACF0-E4BD-4EE9-9084-9B728598AF59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B096ACF0-E4BD-4EE9-9084-9B728598AF59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33234003-58D9-4718-AB85-6B94A8A36B81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33234003-58D9-4718-AB85-6B94A8A36B81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33234003-58D9-4718-AB85-6B94A8A36B81}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{33234003-58D9-4718-AB85-6B94A8A36B81}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,7 +7,7 @@ using System.IO;
 
 using SAS.Config;
 using SAS.Data;
-using SAS.Entity.Domain;
+using SAS.Entity;
 using SAS.Common;
 
 namespace SAS.Taobao.Data
@@ -39,6 +39,26 @@ namespace SAS.Taobao.Data
                 }
             }
             return str;
+        }
+
+        /// <summary>
+        /// 获取商品类别
+        /// </summary>
+        public IDataReader GetCategoryInfo(int cid)
+        {
+            DbParameter param = DbHelper.MakeInParam("@id", (DbType)SqlDbType.Int, 4, cid);
+            string commandText = string.Format("SELECT {0} FROM [{1}category] WHERE [cid]=@id",
+                                                DbFields.CATEGORY,
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText, param);
+        }
+        /// <summary>
+        /// 获取商品类别全部信息
+        /// </summary>
+        public DataTable GetAllCategoryList()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}category]", DbFields.CATEGORY,  BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
         }
     }
 }
