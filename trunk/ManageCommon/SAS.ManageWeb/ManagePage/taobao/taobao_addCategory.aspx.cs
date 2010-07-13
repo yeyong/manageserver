@@ -64,7 +64,8 @@ namespace SAS.ManageWeb.ManagePage
                 {
                     parentinfo.Haschild = 1;
                     tbp.UpdateCategoryInfo(parentinfo);
-                    base.RegisterStartupScript("PAGE", "window.location.href='taobao_categorygrid.aspx';");
+                    SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/CategoryList");
+                    base.RegisterStartupScript("PAGE", "window.location.href='taobao_categorygrid.aspx';");                    
                 }
                 else
                 {
@@ -76,7 +77,8 @@ namespace SAS.ManageWeb.ManagePage
             {
                 if (tbp.CreateCategoryInfo(cinfo) > 0)
                 {
-                    base.RegisterStartupScript("PAGE", "window.location.href='taobao_categorygrid.aspx';");
+                    SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/CategoryList");
+                    base.RegisterStartupScript("PAGE", "window.location.href='taobao_categorygrid.aspx';");                    
                 }
                 else
                 {

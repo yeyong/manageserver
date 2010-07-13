@@ -47,6 +47,7 @@ namespace SAS.ManageWeb.ManagePage
             cinfo.Cg_relateclass = SASRequest.GetString("TargetFID");
 
             tbp.UpdateCategoryInfo(cinfo);
+            SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/CategoryList");
             base.RegisterStartupScript("PAGE", "window.location.href='taobao_categorygrid.aspx';");
         }
 
