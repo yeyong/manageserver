@@ -11,7 +11,7 @@
 namespace SAS.ManageWeb.ManagePage {
     
     
-    public partial class taobao_itemsgrid {
+    public partial class taobao_addrecommend {
         
         /// <summary>
         /// Head1 控件。
