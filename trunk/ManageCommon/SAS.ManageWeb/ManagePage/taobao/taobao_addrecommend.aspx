@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="taobao_itemsgrid.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.taobao_itemsgrid" %>
+﻿<%@ Page Language="C#" CodeBehind="taobao_addrecommend.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.taobao_addrecommend" %>
 <%@ Register TagPrefix="cc1" Namespace="SAS.Control" Assembly="SAS.Control" %>
 <%@ Register TagPrefix="uc1" TagName="AjaxItemList" Src="../UserControls/ajaxtaobaoitems.ascx" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

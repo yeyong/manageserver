@@ -116,6 +116,7 @@
     <Compile Include="ForumInfo.cs" />
     <Compile Include="ForumSpecialUserPower.cs" />
     <Compile Include="Goods\CategoryInfo.cs" />
+    <Compile Include="Goods\RecommendInfo.cs" />
     <Compile Include="HelpInfo.cs" />
     <Compile Include="IpInfo.cs" />
     <Compile Include="NavInfo.cs" />
