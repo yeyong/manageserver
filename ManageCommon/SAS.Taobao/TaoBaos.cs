@@ -23,6 +23,7 @@ namespace SAS.Taobao
     {
         private const string TOP_AUTHORIZE_URL = "http://open.taobao.com/isv/authorize.php";
         private const string TOP_CONTAINER_URL = "http://container.sandbox.taobao.com/container";
+        private const string SAS_USERNICK = "yeyong2086521";
 
         public static NTWXmlRestClient GetDevelopTopClient()
         {
@@ -36,15 +37,16 @@ namespace SAS.Taobao
 
         public static NTWXmlRestClient GetSandboxTopClient()
         {
-            return new NTWXmlRestClient("http://gw.api.tbsandbox.com/router/rest", "sns", "sns");
+            return new NTWXmlRestClient("http://gw.api.tbsandbox.com/router/rest", "sandbox_c_1", "taobao1234");
         }
 
         public static NTWXmlRestClient GetProductTopClient()
         {
-            return new NTWXmlRestClient("http://gw.api.taobao.com/router/rest", "12097501", "551096b28b1631251639544b70590ee6");
+            //return new NTWXmlRestClient("http://gw.api.taobao.com/router/rest", "12097501", "551096b28b1631251639544b70590ee6");
+            return new NTWXmlRestClient("http://gw.api.taobao.com/router/rest", "12005076", "64292c42ca49632200289324fba42572");
         }
 
-        private static NTWXmlRestClient client = GetSandboxTopClient();
+        private static NTWXmlRestClient client = GetProductTopClient();
 
         /// <summary>
         /// 获取类目列表
@@ -76,6 +78,62 @@ namespace SAS.Taobao
                 cache.AddObject("SAS/Taobao/ItemCats", itemcatlist);
             }
             return itemcatlist;
+        }
+
+        /// <summary>
+        /// 根据条件获取商品分页信息
+        /// </summary>
+        /// <param name="cid">类别ID</param>
+        /// <param name="keyword">关键字</param>
+        /// <param name="startmoney">最低价格</param>
+        /// <param name="endmoney">最高价格</param>
+        /// <param name="startcredit">最低信誉度</param>
+        /// <param name="endcredit">最高信誉度</param>
+        /// <param name="startrate">最低佣金率</param>
+        /// <param name="endrate">最高佣金率</param>
+        /// <param name="startnum">最低推广量</param>
+        /// <param name="endnum">最高推广量</param>
+        /// <param name="pagesize">页面尺寸</param>
+        /// <param name="currentpage">当前页码</param>
+        /// <param name="itemcount">返回总数量</param>
+        public static List<TaobaokeItem> GetItemList(int cid, string keyword, string startmoney, string endmoney, string startcredit, string endcredit, string startrate, string endrate, string startnum, string endnum, int pagesize, int currentpage, out long itemcount)
+        {
+            itemcount = 0;
+            TaobaokeItemsGetRequest tgr = new TaobaokeItemsGetRequest();
+            tgr.Fields = "iid,num_iid,title,nick,pic_url,price,click_url,commission,commission_rate,commission_num,commission_volume,shop_click_url,seller_credit_score,item_location,keyword_click_url";
+            tgr.Nick = SAS_USERNICK;
+            tgr.Cid = cid;
+            tgr.Keyword = keyword;
+
+            if (!string.IsNullOrEmpty(startmoney) && !string.IsNullOrEmpty(endmoney))
+            {
+                tgr.StartPrice = startmoney;
+                tgr.EndPrice = endmoney;
+            }
+
+            if (!string.IsNullOrEmpty(startcredit) && !string.IsNullOrEmpty(endcredit))
+            {
+                tgr.StartCredit = startcredit;
+                tgr.EndCredit = endcredit;
+            }
+
+            if (!string.IsNullOrEmpty(startrate) && !string.IsNullOrEmpty(endrate))
+            {
+                tgr.StartCommissionRate = startrate;
+                tgr.EndCommissionRate = endrate;
+            }
+
+            if (!string.IsNullOrEmpty(startnum) && !string.IsNullOrEmpty(endnum))
+            {
+                tgr.StartCommissionNum = startnum;
+                tgr.EndCommissionNum = endnum;
+            }
+
+            tgr.PageSize = pagesize;
+            tgr.PageNo = currentpage;
+            PageList<TaobaokeItem> pageitems = client.TaobaokeItemsGet(tgr);
+            itemcount = pageitems.TotalResults;
+            return pageitems.Content;
         }
 
         /// <summary>

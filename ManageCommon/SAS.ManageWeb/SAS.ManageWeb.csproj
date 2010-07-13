@@ -121,6 +121,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\ajax.aspx.cs">
+      <DependentUpon>ajax.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\ajax.aspx.designer.cs">
+      <DependentUpon>ajax.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\company\company_cardconfiggrid.aspx.cs">
       <DependentUpon>company_cardconfiggrid.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -573,12 +580,26 @@
     <Compile Include="ManagePage\taobao\taobao_editcategory.aspx.designer.cs">
       <DependentUpon>taobao_editcategory.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\taobao\taobao_itemsgrid.aspx.cs">
+      <DependentUpon>taobao_itemsgrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\taobao\taobao_itemsgrid.aspx.designer.cs">
+      <DependentUpon>taobao_itemsgrid.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\UserControls\activetree.ascx.cs">
       <DependentUpon>activetree.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManagePage\UserControls\activetree.ascx.designer.cs">
       <DependentUpon>activetree.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\UserControls\ajaxtaobaoitems.ascx.cs">
+      <DependentUpon>ajaxtaobaoitems.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\UserControls\ajaxtaobaoitems.ascx.designer.cs">
+      <DependentUpon>ajaxtaobaoitems.ascx</DependentUpon>
     </Compile>
     <Compile Include="ManagePage\UserControls\forumstree.ascx.cs">
       <DependentUpon>forumstree.ascx</DependentUpon>
@@ -1051,6 +1072,7 @@
     <Content Include="javascript\template_showcompany.js" />
     <Content Include="javascript\sascommon.js" />
     <Content Include="javascript\template_showphoto.js" />
+    <Content Include="ManagePage\ajax.aspx" />
     <Content Include="ManagePage\company\global_ajaxcall.aspx" />
     <Content Include="ManagePage\forum\forum_addforums.aspx" />
     <Content Include="ManagePage\forum\forum_editforums.aspx" />
@@ -1573,7 +1595,9 @@
     <Content Include="ManagePage\taobao\taobao_addCategory.aspx" />
     <Content Include="ManagePage\taobao\taobao_categorygrid.aspx" />
     <Content Include="ManagePage\taobao\taobao_editcategory.aspx" />
+    <Content Include="ManagePage\taobao\taobao_itemsgrid.aspx" />
     <Content Include="ManagePage\UserControls\activetree.ascx" />
+    <Content Include="ManagePage\UserControls\ajaxtaobaoitems.ascx" />
     <Content Include="ManagePage\UserControls\forumstree.ascx" />
     <Content Include="ManagePage\UserControls\onlineeditor.ascx" />
     <Content Include="ManagePage\UserControls\PageInfo.ascx" />
