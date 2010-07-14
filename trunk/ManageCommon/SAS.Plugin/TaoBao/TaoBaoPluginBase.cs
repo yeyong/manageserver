@@ -18,7 +18,7 @@ namespace SAS.Plugin.TaoBao
         /// <summary>
         /// 获取Taobao类目列表
         /// </summary>
-        public abstract System.Collections.Generic.List<ItemCat> GetItemCatCache();
+        public abstract System.Collections.Generic.List<ItemCat> GetItemCatCache(long cid);
         /// <summary>
         /// 获取商品类目信息
         /// </summary>
