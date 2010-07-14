@@ -50,9 +50,7 @@ namespace SAS.ManageWeb.ManagePage
         public void LoadActivityTree()
         {
             //读取论坛版块树
-            System.Collections.Generic.List<ItemCat> itemcatlist = taobaos.GetItemCatCache();
-
-            ViewState["itemcatlist"] = itemcatlist;
+            System.Collections.Generic.List<ItemCat> itemcatlist = taobaos.GetItemCatCache(0);
 
             sb.Append("<table border=\"0\"  width=\"100%\" align=\"center\" cellspacing=\"0\" cellpadding=\"0\">");
 
@@ -95,7 +93,7 @@ namespace SAS.ManageWeb.ManagePage
                 
                 if (itemcatinfo.IsParent)
                 {
-                    System.Collections.Generic.List<ItemCat> itemcatlist2 = itemcatlist.FindAll(new Predicate<ItemCat>(delegate(ItemCat iteminfo) { return iteminfo.ParentCid == s_value; }));
+                    System.Collections.Generic.List<ItemCat> itemcatlist2 = taobaos.GetItemCatCache(itemcatinfo.Cid);
                     AddAdsTree(itemcatlist2, currentnodestr);
                 }
                 n++;
