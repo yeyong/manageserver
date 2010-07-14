@@ -39,8 +39,6 @@ namespace SAS.Entity
         /// <summary>
         /// 获取企业类型名称
         /// </summary>
-        /// <param name="ete"></param>
-        /// <returns></returns>
         public static string GetCompanyType(EnTypeEnum ete)
         {
             return GetCompanyType(Convert.ToInt16(ete));
@@ -48,8 +46,6 @@ namespace SAS.Entity
         /// <summary>
         /// 获取企业类型名称
         /// </summary>
-        /// <param name="ete"></param>
-        /// <returns></returns>
         public static string GetCompanyType(int ete)
         {
             string cname = "";
@@ -85,8 +81,6 @@ namespace SAS.Entity
         /// <summary>
         /// 获取企业经济类型名称
         /// </summary>
-        /// <param name="cte"></param>
-        /// <returns></returns>
         public static string GetEnCommType(CommTypeEnum cte)
         {
             return GetEnCommType(Convert.ToInt16(cte));
@@ -94,8 +88,6 @@ namespace SAS.Entity
         /// <summary>
         /// 获取企业经济类型名称
         /// </summary>
-        /// <param name="cte"></param>
-        /// <returns></returns>
         public static string GetEnCommType(int cte)
         {
             string ecname = "";
@@ -125,12 +117,13 @@ namespace SAS.Entity
         /// <summary>
         /// 获取活动专题类型
         /// </summary>
-        /// <param name="ate"></param>
-        /// <returns></returns>
         public static string GetActivityType(ActivityType ate)
         {
             return GetActivityType(Convert.ToInt16(ate));
         }
+        /// <summary>
+        /// 获取活动专题类型
+        /// </summary>
         public static string GetActivityType(int ate)
         {
             string atname = "";
@@ -150,6 +143,33 @@ namespace SAS.Entity
                     break;
             }
             return atname;
+        }
+        /// <summary>
+        /// 获取淘之购频道
+        /// </summary>
+        public static string GetTaoChanel(TaoChanel enumobj)
+        {
+            return GetTaoChanel(Convert.ToInt16(enumobj));
+        }
+          /// <summary>
+        /// 获取淘之购频道
+        /// </summary>
+        public static string GetTaoChanel(int intobj)
+        {
+            switch (intobj)
+            {
+                case 1: return "首页频道";
+                case 2: return "潮货汇";
+                case 3: return "品牌馆";
+                case 4: return "专题馆";
+                case 5: return "信誉铺";
+                case 6: return "女人馆";
+                case 7: return "淘清凉";
+                case 8: return "列表页";
+                case 9: return "详细页";
+                case 10: return "其他";
+                default: return "";
+            }
         }
     }
 
@@ -288,5 +308,51 @@ namespace SAS.Entity
         /// 首页页内图片广告
         /// </summary>
         IndexImageAd = 10
+    }
+    /// <summary>
+    /// 淘之购相关频道
+    /// </summary>
+    public enum TaoChanel
+    {
+        /// <summary>
+        /// 首页频道
+        /// </summary>
+        Index = 1,
+        /// <summary>
+        /// 潮货汇
+        /// </summary>
+        Trend = 2,
+        /// <summary>
+        /// 品牌馆
+        /// </summary>
+        Brand = 3,
+        /// <summary>
+        /// 专题馆
+        /// </summary>
+        Topic = 4,
+        /// <summary>
+        /// 信誉铺
+        /// </summary>
+        Credit = 5,
+        /// <summary>
+        /// 女人馆
+        /// </summary>
+        Woman = 6,
+        /// <summary>
+        /// 淘清凉
+        /// </summary>
+        Amoy = 7,
+        /// <summary>
+        /// 列表页
+        /// </summary>
+        List = 8,
+        /// <summary>
+        /// 详细页
+        /// </summary>
+        Detail = 9,
+        /// <summary>
+        /// 其他
+        /// </summary>
+        Other = 10
     }
 }

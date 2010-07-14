@@ -50,13 +50,22 @@ namespace SAS.ManageWeb.ManagePage {
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox islike;
         
         /// <summary>
-        /// enstatus 控件。
+        /// rchanel 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::SAS.Control.RadioButtonList enstatus;
+        protected global::SAS.Control.DropDownList rchanel;
+        
+        /// <summary>
+        /// rcategory 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::SAS.Control.DropDownTreeList rcategory;
         
         /// <summary>
         /// joindateStart 控件。
@@ -86,13 +95,31 @@ namespace SAS.ManageWeb.ManagePage {
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox isbuilddatetime;
         
         /// <summary>
-        /// envisible 控件。
+        /// updatedateStart 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::SAS.Control.RadioButtonList envisible;
+        protected global::SAS.Control.Calendar updatedateStart;
+        
+        /// <summary>
+        /// updatedateEnd 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::SAS.Control.Calendar updatedateEnd;
+        
+        /// <summary>
+        /// isupdatedatetime 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox isupdatedatetime;
         
         /// <summary>
         /// Search 控件。
@@ -102,15 +129,6 @@ namespace SAS.ManageWeb.ManagePage {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::SAS.Control.Button Search;
-        
-        /// <summary>
-        /// LocationSet 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::SAS.Control.Button LocationSet;
         
         /// <summary>
         /// ResetSearchTable 控件。
@@ -129,24 +147,6 @@ namespace SAS.ManageWeb.ManagePage {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::SAS.Control.DataGrid DataGrid1;
-        
-        /// <summary>
-        /// ENStart 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::SAS.Control.Button ENStart;
-        
-        /// <summary>
-        /// ENPause 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::SAS.Control.Button ENPause;
         
         /// <summary>
         /// Hint1 控件。

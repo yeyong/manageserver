@@ -1,66 +1,30 @@
 ﻿<%@ Page Language="C#" CodeBehind="taobao_addrecommend.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.taobao_addrecommend" %>
-<%@ Register TagPrefix="cc1" Namespace="SAS.Control" Assembly="SAS.Control" %>
-<%@ Register TagPrefix="uc1" TagName="AjaxItemList" Src="../UserControls/ajaxtaobaoitems.ascx" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
-<head id="Head1" runat="server">
-<title>无标题页</title>
-<link href="../styles/calendar.css" type="text/css" rel="stylesheet" />
-<link href="../styles/datagrid.css" type="text/css" rel="stylesheet" />	
-<link href="../styles/dntmanager.css" type="text/css" rel="stylesheet" />
-<link href="../styles/modelpopup.css" type="text/css" rel="stylesheet" />	
-<script type="text/javascript" src="../js/common.js"></script>
-<script type="text/javascript" src="../js/AjaxHelper.js"></script>
-<script type="text/javascript" src="../js/calendar.js"></script>
-<script type="text/javascript" src="../js/modalpopup.js"></script>
-<script type="text/javascript" src="../../javascript/common.js"></script>
-<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <meta name="keywords" content="天狼星,工作室" />
+    <meta name="description" content="天狼星工作室综合管理后台" />
+    <title>天狼星工作室综合管理后台-推荐添加</title>
+    <link href="../styles/dntmanager.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
-<form id="form1" runat="server">
-<div class="ManagerForm">
-<fieldset>
-<legend style="background:url(../images/icons/legendimg.jpg) no-repeat 6px 50%;">搜索相册</legend>
-<table width="100%">
-	<tr><td class="item_title" colspan="2">用户名</td></tr>
-	<tr>
-		<td class="vtop rowform">
-			 <input name="cid" type="text"/>
-		</td>
-		<td class="vtop"></td>
-	</tr>
-	<tr><td class="item_title" colspan="2">相册标题</td></tr>
-	<tr>
-		<td class="vtop rowform">
-			<input name="albumtitle"type="text" />
-		</td>
-		<td class="vtop"></td>
-	</tr>
-	<tr><td class="item_title" colspan="2">相册描述</td></tr>
-	<tr>
-		<td class="vtop rowform">
-			 <input name="albumdescription" type="text" />
-		</td>
-		<td class="vtop"></td>
-	</tr>
-	<tr><td class="item_title" colspan="2">创建时间</td></tr>
-	<tr>
-		<td class="vtop rowform">
-			起始日期:<input name="albumdatetimeStart" id="albumdatetimeStart" type="text" readonly="true"/>
-			<img src="../images/btn_calendar.gif" align="bottom" onclick="showcalendar(event, $('albumdatetimeStart'))" class="calendarimg" /><br />
-			结束日期:<input name="albumdatetimeEnd" id="albumdatetimeEnd" type="text" readonly="true"/>
-			<img src="../images/btn_calendar.gif" align="bottom" onclick="showcalendar(event, $('albumdatetimeEnd'))" class="calendarimg" />
-		</td>
-		<td class="vtop"></td>
-	</tr>
-</table>
-<div class="Navbutton"><cc1:Button id="SearchAlbum" runat="server" Text=" 搜索符合条件的相册 " ></cc1:Button></div>	
-</fieldset>
-<cc1:Hint id="Hint1" runat="server" HintImageUrl="../images"></cc1:Hint>
-</div>
-<div id="taobaoitemlistgrid"><uc1:AjaxItemList id="AjaxItemList1" runat="server"></uc1:AjaxItemList></div>
-<p style="text-align:right;"><cc1:Button id="DeleteApply" runat="server" Text=" 删 除 "  ButtonImgUrl="../images/del.gif"></cc1:Button></p>
-</form>
-<%=footer%>
+    <form id="form1" runat="server">
+    <div class="ManagerForm">
+		<fieldset>
+		<legend style="background:url(../images/icons/legendimg.jpg) no-repeat 6px 50%;">添加推荐组</legend>
+		<table class="table1" cellspacing="0" cellpadding="8" width="100%" align="center" >
+		    <tr align="center">
+		        <td><button type="button" class="ManagerButton" onclick="window.location='taobao_additemrecommend.aspx';"><img src="../images/submit.gif" /> 添加商品推荐组</button></td>
+		        <td><button type="button" class="ManagerButton" onclick="window.location='taobao_recommendgrid.aspx?ctype=2';"><img src="../images/submit.gif" /> 添加店铺推荐组</button></td>
+		        <td><button type="button" class="ManagerButton" onclick="window.location='taobao_recommendgrid.aspx?ctype=3';"><img src="../images/submit.gif" /> 添加活动推荐组</button></td>
+                <td><button type="button" class="ManagerButton" onclick="window.location='taobao_recommendgrid.aspx?ctype=4';"><img src="../images/submit.gif" /> 添加频道推荐组</button></td>
+		    </tr>
+		</table>
+		</fieldset>
+	</div>
+    </form>
+    <%=footer%>
 </body>
 </html>

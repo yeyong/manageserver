@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SAS.Entity
 {
@@ -17,8 +14,8 @@ namespace SAS.Entity
         private int _id;
         private string _ctitle;
         private int _ctype;
-        private string _relatechanel;
-        private string _relatecategory;
+        private int _relatechanel;
+        private int _relatecategory;
         private string _ccontent;
         private string _createdatetime;
         private string _updatedatetime;
@@ -49,7 +46,7 @@ namespace SAS.Entity
         /// <summary>
         /// 相关频道
         /// </summary>
-        public string relatechanel
+        public int relatechanel
         {
             set { _relatechanel = value; }
             get { return _relatechanel; }
@@ -57,7 +54,7 @@ namespace SAS.Entity
         /// <summary>
         /// 相关类别
         /// </summary>
-        public string relatecategory
+        public int relatecategory
         {
             set { _relatecategory = value; }
             get { return _relatecategory; }
