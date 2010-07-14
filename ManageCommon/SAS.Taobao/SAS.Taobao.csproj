@@ -177,6 +177,7 @@
     <Compile Include="Request\UserDetailGetRequest.cs" />
     <Compile Include="Request\UserGetRequest.cs" />
     <Compile Include="Request\UsersGetRequest.cs" />
+    <Compile Include="TaoBaoCacheStrategy.cs" />
     <Compile Include="TaoBaoPlugin.cs" />
     <Compile Include="TaoBaos.cs" />
     <Compile Include="Util\FileItem.cs" />

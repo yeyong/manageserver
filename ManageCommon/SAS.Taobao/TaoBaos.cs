@@ -51,31 +51,20 @@ namespace SAS.Taobao
         /// <summary>
         /// 获取类目列表
         /// </summary>
-        public static List<ItemCat> GetItemCatCache()
+        public static List<ItemCat> GetItemCatCache(long cid)
         {
             SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
-            List<ItemCat> itemcatlist = cache.RetrieveObject("SAS/Taobao/ItemCats") as List<ItemCat>;
+            List<ItemCat> itemcatlist = cache.RetrieveObject("SAS/Taobao/ItemCats_" + cid) as List<ItemCat>;
             if (itemcatlist == null)
             {
                 ItemcatsGetRequest igr = new ItemcatsGetRequest();
-                igr.Fields="cid,parent_cid,name,is_parent,status,sort_order";
+                igr.Fields = "cid,parent_cid,name,is_parent,status,sort_order";
                 igr.ParentCid = 0;
                 PageList<ItemCat> pageitems = client.ItemcatsGet(igr);
-                itemcatlist = client.ItemcatsGet(igr).Content;
-                List<ItemCat> templist = new List<ItemCat>();
-                foreach (ItemCat iteminfo in itemcatlist)
-                {
-                    if (iteminfo.IsParent)
-                    {
-                        ItemcatsGetRequest subigr = new ItemcatsGetRequest();
-                        subigr.Fields = "cid,parent_cid,name,is_parent,status,sort_order";
-                        subigr.ParentCid = iteminfo.Cid;
-                        PageList<ItemCat> subpageitems = client.ItemcatsGet(subigr);
-                        if (subpageitems.Content.Count > 0) templist.AddRange(subpageitems.Content);
-                    }
-                }
-                itemcatlist.InsertRange(itemcatlist.Count - 1, templist);
-                cache.AddObject("SAS/Taobao/ItemCats", itemcatlist);
+                itemcatlist = pageitems.Content;
+                SAS.Cache.ICacheStrategy ica = new TaoBaoCacheStrategy();
+                ica.TimeOut = 20000;
+                cache.AddObject("SAS/Taobao/ItemCats_" + cid, itemcatlist);
             }
             return itemcatlist;
         }

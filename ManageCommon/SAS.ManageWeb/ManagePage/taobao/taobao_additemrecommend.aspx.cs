@@ -22,7 +22,7 @@ namespace SAS.ManageWeb.ManagePage
         {
             if (!IsPostBack)
             {
-                icatlist = tpb.GetItemCatCache().FindAll(new Predicate<ItemCat>(delegate(ItemCat itemcatinfo) { return itemcatinfo.ParentCid == 0; }));
+                icatlist = tpb.GetItemCatCache(0);
             }
         }
 
