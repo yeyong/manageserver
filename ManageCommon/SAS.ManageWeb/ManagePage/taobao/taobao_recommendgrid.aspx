@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="taobao_recommendgrid.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.taobao_recommendgrid" %>
+﻿<%@ Page Language="C#" CodeBehind="taobao_recommendgrid.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.taobao_recommendgrid" %>
 <%@ Register TagPrefix="sas" Namespace="SAS.Control" Assembly="SAS.Control" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
@@ -25,28 +25,30 @@
     <form id="Form1" method="post" runat="server">
     <div class="ManagerForm">
             <fieldset>
-                <legend style="background: url(../images/icons/icon32.jpg) no-repeat 6px 50%;">搜索企业</legend>
+                <legend style="background: url(../images/icons/icon32.jpg) no-repeat 6px 50%;">搜索<%=rtypestr%>推荐信息</legend>
                 <asp:Panel ID="searchtable" runat="server" Visible="true">
                 <table cellspacing="0" cellpadding="4" width="100%" align="center">
                     <tr>
                         <td  class="panelbox" width="50%" align="left">
                             <table width="100%">
                                 <tr>
-                                    <td style="width: 80px">企业名称:</td>
+                                    <td style="width: 80px"><%=rtypestr%>推荐标题:</td>
                                     <td>
                                         <sas:TextBox ID="enname" runat="server" RequiredFieldType="暂无校验" Size="40"></sas:TextBox>&nbsp;
                                         模糊查找<input id="islike" type="checkbox" value="1" name="cins" runat="server" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>审核状态:</td>
+                                    <td>相关频道:</td>
                                     <td>
-                                        <sas:RadioButtonList id="enstatus" runat="server" RepeatColumns="4" HintInfo="企业是否通过审核">
-                                            <asp:ListItem Value="-1" Text="不限制" Selected="True"></asp:ListItem>                                          
-                                            <asp:ListItem Value="1" Text="审核中"></asp:ListItem>
-                                            <asp:ListItem Value="2" Text="审核通过"></asp:ListItem>
-                                            <asp:ListItem Value="0" Text="审核未通过"></asp:ListItem>
-                                        </sas:RadioButtonList>
+                                        <sas:DropDownList runat="server" ID="rchanel">
+                                        </sas:DropDownList>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>相关类别:</td>
+                                    <td>
+                                        <sas:DropDownTreeList runat="server" ID="rcategory" />
                                     </td>
                                 </tr>
                             </table>
@@ -60,17 +62,17 @@
                                         </sas:Calendar>
                                         到&nbsp;<sas:Calendar ID="joindateEnd" runat="server" ReadOnly="False" ScriptPath="../js/calendar.js">
                                         </sas:Calendar>
-                                        使用注册日期查找<input id="isbuilddatetime" type="checkbox" value="1" name="cins" runat="server" />
+                                        使用创建日期查找<input id="isbuilddatetime" type="checkbox" value="1" name="cins" runat="server" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>启用状态:</td>
+                                    <td>更新日期:</td>
                                     <td>
-                                        <sas:RadioButtonList id="envisible" runat="server" RepeatColumns="3" HintInfo="企业是否通过审批">
-                                            <asp:ListItem Value="-1" Text="不限制" Selected="True"></asp:ListItem>
-                                            <asp:ListItem Value="1" Text="启用"></asp:ListItem>
-                                            <asp:ListItem Value="0" Text="未启用"></asp:ListItem>
-                                        </sas:RadioButtonList>
+                                        从&nbsp;<sas:Calendar ID="updatedateStart" runat="server" ReadOnly="False" ScriptPath="../js/calendar.js">
+                                        </sas:Calendar>
+                                        到&nbsp;<sas:Calendar ID="updatedateEnd" runat="server" ReadOnly="False" ScriptPath="../js/calendar.js">
+                                        </sas:Calendar>
+                                        使用更新日期查找<input id="isupdatedatetime" type="checkbox" value="1" name="cins" runat="server" />
                                     </td>
                                 </tr>
                             </table>
@@ -78,7 +80,7 @@
                     </tr>                    
                     <tr>
                         <td align="center" colspan="2">
-                            <sas:Button ID="Search" runat="server" Text="开始搜索"></sas:Button><sas:Button ID="LocationSet" runat="server" Text="区域JSON数据生成"></sas:Button>
+                            <sas:Button ID="Search" runat="server" Text="开始搜索"></sas:Button>
                         </td>
                     </tr>
                 </table>
@@ -117,7 +119,7 @@
                             </asp:TemplateColumn>
                             <asp:TemplateColumn HeaderText="开启状态" SortExpression="en_status">
                                 <ItemTemplate>
-                                    <%#GetStatusName(DataBinder.Eval(Container, "DataItem.en_status").ToString()) %>
+                                    
                                 </ItemTemplate>
                             </asp:TemplateColumn>
                         </Columns>
@@ -125,14 +127,6 @@
                 </td>
             </tr>
         </table>
-        <p style="text-align:right;">
-            <table style="float:right">
-                <tr>
-                    <td><sas:Button ID="ENStart" runat="server" Text=" 开 启 " designtimedragdrop="247" Enabled="false"></sas:Button>&nbsp;&nbsp;</td>
-                    <td><sas:Button ID="ENPause" runat="server" Text=" 暂 停 " ButtonImgUrl="../images/del.gif" Enabled="false"></sas:Button>&nbsp;&nbsp;</td>
-                </tr>
-            </table>
-        </p>
         <sas:Hint id="Hint1" runat="server" HintImageUrl="../images"></sas:Hint>
     </form>
     <%=footer%>	

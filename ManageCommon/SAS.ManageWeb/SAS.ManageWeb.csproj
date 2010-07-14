@@ -566,6 +566,13 @@
     <Compile Include="ManagePage\taobao\taobao_addCategory.aspx.designer.cs">
       <DependentUpon>taobao_addCategory.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\taobao\taobao_additemrecommend.aspx.cs">
+      <DependentUpon>taobao_additemrecommend.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\taobao\taobao_additemrecommend.aspx.designer.cs">
+      <DependentUpon>taobao_additemrecommend.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\taobao\taobao_addrecommend.aspx.cs">
       <DependentUpon>taobao_addrecommend.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1607,6 +1614,7 @@
     <Content Include="ManagePage\style\admin.css" />
     <Content Include="ManagePage\style\comm.css" />
     <Content Include="ManagePage\taobao\taobao_addCategory.aspx" />
+    <Content Include="ManagePage\taobao\taobao_additemrecommend.aspx" />
     <Content Include="ManagePage\taobao\taobao_addrecommend.aspx" />
     <Content Include="ManagePage\taobao\taobao_categorygrid.aspx" />
     <Content Include="ManagePage\taobao\taobao_editcategory.aspx" />
