@@ -6,10 +6,8 @@ namespace SAS.Entity
 	/// 推荐信息实体
 	/// </summary>
     [Serializable]
-    public class sas_recommend
+    public class RecommendInfo
     {
-        public sas_recommend()
-        { }
         #region Model
         private int _id;
         private string _ctitle;
