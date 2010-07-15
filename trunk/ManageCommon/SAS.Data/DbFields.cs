@@ -95,6 +95,10 @@ namespace SAS.Data
         /// </summary>
         public const string PMS = "[pmid],[msgfrom],[msgfromid],[msgto],[msgtoid],[folder],[new],[subject],[postdatetime],[message]";
         /// <summary>
+        /// 推荐信息字段
+        /// </summary>
+        public const string RECOMMEND = "[id],[ctitle],[ctype],[relatechanel],[relatecategory],[ccontent],[createdatetime],[updatedatetime]";
+        /// <summary>
         /// 表情字段
         /// </summary>
         public const string SMILIES = "[id],[displayorder],[smtype],[code],[url]";

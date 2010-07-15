@@ -69,17 +69,37 @@
     function selectItem(obj,thevalue) {
         var theobj = getRowObj(obj);
         var thebutton = document.createElement("input");
-        thebutton.setAttribute("type","button");
-        thebutton.setAttribute("class","ManagerButton");
-        thebutton.setAttribute("value","删除");
+        thebutton.type="button";
+        thebutton.className= "ManagerButton";
+        thebutton.value="删除";
+        thebutton.onclick = function() {
+            delRow(this);
+            $("selitems").value = $("selitems").value.replace("," + thevalue, "");
+            alert($("selitems").value);
+        };
         theobj.firstChild.replaceChild(thebutton, theobj.firstChild.firstChild);
         $("SelectItem").firstChild.appendChild(theobj);
+        $("selitems").value = $("selitems").value + "," + thevalue;
+    }
+
+    function validate(theForm) {
+        if ($("rtitle").value == "") {
+            alert("推荐标题不能为空!");
+            $("rtitle").focus();
+            return false;
+        }
+        if ($("selitems").value == "") {
+            alert("推荐商品不能为空!");
+            $("selitems").focus();
+            return false;
+        }
+        return true;
     }
 </script>
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
 </head>
 <body>
-<form id="form2" runat="server">
+<form id="Form1" runat="server">
 <div class="ManagerForm">
 <fieldset>
 <legend style="background:url(../images/icons/legendimg.jpg) no-repeat 6px 50%;">添加商品推荐</legend>
@@ -150,7 +170,7 @@
           </tr>
     </table>
     <div class="Navbutton">
-		<cc1:Button id="AddRecommendInfo" runat="server" Text=" 添 加 " ValidateForm="true"></cc1:Button>&nbsp;&nbsp;
+		<cc1:Button id="AddRecommendInfo" runat="server" Text=" 添 加 " ValidateForm="true"></cc1:Button>&nbsp;&nbsp;<input type="hidden" name="selitems" id="selitems"/>
 		<button type="button" class="ManagerButton" id="Button3" onclick="window.history.back();"><img src="../images/arrow_undo.gif"/> 返 回 </button>
 	</div>
 </fieldset>
