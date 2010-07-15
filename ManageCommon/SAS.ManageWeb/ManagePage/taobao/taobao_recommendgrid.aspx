@@ -101,7 +101,7 @@
                             </asp:TemplateColumn>
                             <asp:TemplateColumn HeaderText="">
                                 <ItemTemplate>
-                                    <a href="taobao_itemrecommendedit.aspx?rid=<%# DataBinder.Eval(Container, "DataItem.id").ToString()%>">
+                                    <a href="taobao_edititemrecommend.aspx?id=<%# DataBinder.Eval(Container, "DataItem.id").ToString()%>">
                                         编辑</a>
                                     <%# DataGrid1.LoadSelectedCheckBox(DataBinder.Eval(Container, "DataItem.id").ToString())%>
                                 </ItemTemplate>

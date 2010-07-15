@@ -11,7 +11,7 @@ using SAS.Plugin.TaoBao;
 
 namespace SAS.ManageWeb.ManagePage
 {
-    public partial class ajaxtaobaoitems : System.Web.UI.UserControl
+    public partial class ajaxtaobaoshops : System.Web.UI.UserControl
     {
         protected System.Collections.Generic.List<TaobaokeItem> taobaoitemlist = new System.Collections.Generic.List<TaobaokeItem>();
         public string pagelink;
@@ -31,7 +31,7 @@ namespace SAS.ManageWeb.ManagePage
         public int pagesize = 16;
         protected TaoBaoPluginBase tpb = TaoBaoPluginProvider.GetInstance();
 
-        public ajaxtaobaoitems()
+        public ajaxtaobaoshops()
         {
             currentpage = SASRequest.GetInt("currentpage", 1);
             //获取当前页数
@@ -140,5 +140,6 @@ namespace SAS.ManageWeb.ManagePage
             return currentpagestr;
 
         }
+
     }
 }

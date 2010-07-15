@@ -134,6 +134,17 @@ namespace SAS.Taobao.Data
         /// <summary>
         /// 获取推荐信息
         /// </summary>
+        public IDataReader GetRecommendInfo(int id)
+        {
+            DbParameter param = DbHelper.MakeInParam("@id", (DbType)SqlDbType.Int, 4, id);
+            string commandText = string.Format("SELECT {0} FROM [{1}recommend] WHERE [id]=@id",
+                                                DbFields.RECOMMEND,
+                                                BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText, param);
+        }
+        /// <summary>
+        /// 获取推荐信息
+        /// </summary>
         public DataTable GetRecommendList(string conditions)
         {
             string commandText = "";
@@ -189,6 +200,28 @@ namespace SAS.Taobao.Data
             }
 
             return sqlBuilder.ToString();
+        }
+        /// <summary>
+        /// 更新推荐信息
+        /// </summary>
+        /// <param name="id">推荐ID</param>
+        /// <param name="cid">相关类别</param>
+        /// <param name="chanelid">相关频道</param>
+        /// <param name="rtitle">推荐标题</param>
+        /// <param name="rcontent">推荐内容</param>
+        /// <param name="rtype">推荐类型（默认1，商品推荐；2，店铺推荐；3，活动推荐；4，店铺推荐）</param>
+        public void UpdateRecommendInfo(int id, int cid, int chanelid, string rtitle, string rcontent, int rtype)
+        {
+            DbParameter[] parms = {
+                                    DbHelper.MakeInParam("id", (DbType)SqlDbType.Int,4, id),
+                                    DbHelper.MakeInParam("relatecategory", (DbType)SqlDbType.Int,4, cid),
+		                            DbHelper.MakeInParam("relatechanel", (DbType)SqlDbType.Int,4, chanelid),
+		                            DbHelper.MakeInParam("ctitle", (DbType)SqlDbType.NVarChar,200, rtitle),
+		                            DbHelper.MakeInParam("ccontent", (DbType)SqlDbType.Text,0, rcontent),
+		                            DbHelper.MakeInParam("ctype", (DbType)SqlDbType.Int,4, rtype)
+                                  };
+            string commandText = String.Format("Update [{0}recommend] SET [relatecategory] = @relatecategory,[relatechanel] = @relatechanel,[ctitle] = @ctitle,[ccontent] = @ccontent,[ctype] = @ctype WHERE [id]=@id ", BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
         }
     }
 }

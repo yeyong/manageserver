@@ -46,13 +46,16 @@ namespace SAS.ManageWeb.ManagePage
 
         public void BindData()
         {
-            #region 绑定企业列表
+            #region 绑定推荐列表
             string conditions = "";
 
             if (ViewState["condition"] != null)
             {
                 conditions = ViewState["condition"].ToString();
             }
+
+            conditions += " AND [ctype] = " + rtype;
+
             DataGrid1.AllowCustomPaging = false;
             DataGrid1.BindData(tpb.GetRecommendsByCond(conditions));
             #endregion
