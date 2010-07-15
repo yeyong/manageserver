@@ -147,6 +147,19 @@ namespace SAS.Taobao
         }
 
         /// <summary>
+        /// 获取淘宝客商品列表
+        /// </summary>
+        public static List<TaobaokeItem> GetTaoBaoKeItemList(string numiidlist)
+        {
+            TaobaokeItemsConvertRequest tgr = new TaobaokeItemsConvertRequest();
+            tgr.Fields = "iid,num_iid,title,nick,pic_url,price,click_url,commission,commission_rate,commission_num,commission_volume,shop_click_url,seller_credit_score,item_location,keyword_click_url";
+            tgr.Nick = SAS_USERNICK;
+            tgr.NumIids = numiidlist;
+            PageList<TaobaokeItem> pageitems = client.TaobaokeItemsConvert(tgr);
+            return pageitems.Content;
+        }
+
+        /// <summary>
         /// 获取测试环境下的用户会话授权码。
         /// </summary>
         /// <param name="appkey">应用编号</param>
@@ -235,6 +248,26 @@ namespace SAS.Taobao
         public static string GetRecommendCondition(bool islike, string rtitle, int rcategory, int rchanel, bool iscreatedate, string startcreate, string endcreate, bool isupdatedate, string startupdate, string endupdate)
         {
             return Data.DbProvider.GetInstance().GetRecommendCondition(islike, rtitle, rcategory, rchanel, iscreatedate, startcreate, endcreate, isupdatedate, startupdate, endupdate);
+        }
+        /// <summary>
+        /// 获取推荐实体
+        /// </summary>
+        public static RecommendInfo GetRecommendInfo(int id)
+        {
+            return DTOProvider.GetRecommendInfoEntity(Data.DbProvider.GetInstance().GetRecommendInfo(id));
+        }
+        /// <summary>
+        /// 更新推荐信息
+        /// </summary>
+        /// <param name="id">推荐ID</param>
+        /// <param name="cid">相关类别</param>
+        /// <param name="chanelid">相关频道</param>
+        /// <param name="rtitle">推荐标题</param>
+        /// <param name="rcontent">推荐内容</param>
+        /// <param name="rtype">推荐类型（默认1，商品推荐；2，店铺推荐；3，活动推荐；4，店铺推荐）</param>
+        public static void UpdateRecommendInfo(int id, int cid, int chanelid, string rtitle, string rcontent, int rtype)
+        {
+            Data.DbProvider.GetInstance().UpdateRecommendInfo(id, cid, chanelid, rtitle, rcontent, rtype);
         }
         #endregion
     }

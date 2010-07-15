@@ -12,6 +12,7 @@ namespace SAS.Taobao.Request
         public string Iids { get; set; }
         public string Nick { get; set; }
         public string OuterCode { get; set; }
+        public string NumIids { get; set; }
 
         #region INTWRequest Members
 
@@ -27,6 +28,7 @@ namespace SAS.Taobao.Request
             parameters.Add("iids", this.Iids);
             parameters.Add("nick", this.Nick);
             parameters.Add("outer_code", this.OuterCode);
+            parameters.Add("num_iids", this.NumIids);
             return parameters;
         }
 

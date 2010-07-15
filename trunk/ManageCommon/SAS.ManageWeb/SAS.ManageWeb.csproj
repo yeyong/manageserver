@@ -580,6 +580,13 @@
     <Compile Include="ManagePage\taobao\taobao_addrecommend.aspx.designer.cs">
       <DependentUpon>taobao_addrecommend.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\taobao\taobao_addshoprecommend.aspx.cs">
+      <DependentUpon>taobao_addshoprecommend.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\taobao\taobao_addshoprecommend.aspx.designer.cs">
+      <DependentUpon>taobao_addshoprecommend.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\taobao\taobao_categorygrid.aspx.cs">
       <DependentUpon>taobao_categorygrid.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -593,6 +600,13 @@
     </Compile>
     <Compile Include="ManagePage\taobao\taobao_editcategory.aspx.designer.cs">
       <DependentUpon>taobao_editcategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\taobao\taobao_edititemrecommend.aspx.cs">
+      <DependentUpon>taobao_edititemrecommend.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\taobao\taobao_edititemrecommend.aspx.designer.cs">
+      <DependentUpon>taobao_edititemrecommend.aspx</DependentUpon>
     </Compile>
     <Compile Include="ManagePage\taobao\taobao_editrecommend.aspx.cs">
       <DependentUpon>taobao_editrecommend.aspx</DependentUpon>
@@ -621,6 +635,13 @@
     </Compile>
     <Compile Include="ManagePage\UserControls\ajaxtaobaoitems.ascx.designer.cs">
       <DependentUpon>ajaxtaobaoitems.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\UserControls\ajaxtaobaoshops.ascx.cs">
+      <DependentUpon>ajaxtaobaoshops.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\UserControls\ajaxtaobaoshops.ascx.designer.cs">
+      <DependentUpon>ajaxtaobaoshops.ascx</DependentUpon>
     </Compile>
     <Compile Include="ManagePage\UserControls\forumstree.ascx.cs">
       <DependentUpon>forumstree.ascx</DependentUpon>
@@ -1616,12 +1637,15 @@
     <Content Include="ManagePage\taobao\taobao_addCategory.aspx" />
     <Content Include="ManagePage\taobao\taobao_additemrecommend.aspx" />
     <Content Include="ManagePage\taobao\taobao_addrecommend.aspx" />
+    <Content Include="ManagePage\taobao\taobao_addshoprecommend.aspx" />
     <Content Include="ManagePage\taobao\taobao_categorygrid.aspx" />
     <Content Include="ManagePage\taobao\taobao_editcategory.aspx" />
+    <Content Include="ManagePage\taobao\taobao_edititemrecommend.aspx" />
     <Content Include="ManagePage\taobao\taobao_editrecommend.aspx" />
     <Content Include="ManagePage\taobao\taobao_recommendgrid.aspx" />
     <Content Include="ManagePage\UserControls\activetree.ascx" />
     <Content Include="ManagePage\UserControls\ajaxtaobaoitems.ascx" />
+    <Content Include="ManagePage\UserControls\ajaxtaobaoshops.ascx" />
     <Content Include="ManagePage\UserControls\forumstree.ascx" />
     <Content Include="ManagePage\UserControls\onlineeditor.ascx" />
     <Content Include="ManagePage\UserControls\PageInfo.ascx" />

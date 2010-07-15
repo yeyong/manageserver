@@ -20,6 +20,10 @@ namespace SAS.Plugin.TaoBao
         /// </summary>
         public abstract System.Collections.Generic.List<ItemCat> GetItemCatCache(long cid);
         /// <summary>
+        /// 获取淘宝客商品列表
+        /// </summary>
+        public abstract System.Collections.Generic.List<TaobaokeItem> GetTaoBaoKeItemList(string numiidlist);
+        /// <summary>
         /// 获取商品类目信息
         /// </summary>
         public abstract CategoryInfo GetCategoryInfo(int cid);
@@ -61,6 +65,10 @@ namespace SAS.Plugin.TaoBao
         /// <param name="rcontent">推荐内容</param>
         /// <param name="rtype">推荐类型（默认1，商品推荐；2，店铺推荐；3，活动推荐；4，店铺推荐）</param>
         public abstract int CreateRecommendInfo(int cid, int chanelid, string rtitle, string rcontent, int rtype);
+        /// <summary>
+        /// 获取推荐实体
+        /// </summary>
+        public abstract RecommendInfo GetRecommendInfo(int id);
          /// <summary>
         /// 根据条件获取推荐信息
         /// </summary>
@@ -69,6 +77,15 @@ namespace SAS.Plugin.TaoBao
         /// 设置推荐搜索条件
         /// </summary>
         public abstract string GetRecommendCondition(bool islike, string rtitle, int rcategory, int rchanel, bool iscreatedate, string startcreate, string endcreate, bool isupdatedate, string startupdate, string endupdate);
-        
+        /// <summary>
+        /// 更新推荐信息
+        /// </summary>
+        /// <param name="id">推荐ID</param>
+        /// <param name="cid">相关类别</param>
+        /// <param name="chanelid">相关频道</param>
+        /// <param name="rtitle">推荐标题</param>
+        /// <param name="rcontent">推荐内容</param>
+        /// <param name="rtype">推荐类型（默认1，商品推荐；2，店铺推荐；3，活动推荐；4，店铺推荐）</param>
+        public abstract void UpdateRecommendInfo(int id, int cid, int chanelid, string rtitle, string rcontent, int rtype);
     }
 }

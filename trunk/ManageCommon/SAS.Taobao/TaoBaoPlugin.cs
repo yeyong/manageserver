@@ -6,6 +6,7 @@ using System.Data;
 
 using SAS.Plugin.TaoBao;
 using SAS.Common;
+using SAS.Entity;
 using SAS.Entity.Domain;
 using SAS.Config;
 
@@ -19,6 +20,13 @@ namespace SAS.Taobao
         public override List<ItemCat> GetItemCatCache(long cid)
         {
             return TaoBaos.GetItemCatCache(cid);
+        }
+        /// <summary>
+        /// 获取淘宝客商品列表
+        /// </summary>
+        public override List<TaobaokeItem> GetTaoBaoKeItemList(string numiidlist)
+        {
+            return TaoBaos.GetTaoBaoKeItemList(numiidlist);
         }
         /// <summary>
         /// 获取商品类目信息
@@ -81,6 +89,13 @@ namespace SAS.Taobao
             return TaoBaos.CreateRecommendInfo(cid, chanelid, rtitle, rcontent, rtype);
         }
         /// <summary>
+        /// 获取推荐实体
+        /// </summary>
+        public override RecommendInfo GetRecommendInfo(int id)
+        {
+            return TaoBaos.GetRecommendInfo(id);
+        }
+        /// <summary>
         /// 设置推荐搜索条件
         /// </summary>
         public override string GetRecommendCondition(bool islike, string rtitle, int rcategory, int rchanel, bool iscreatedate, string startcreate, string endcreate, bool isupdatedate, string startupdate, string endupdate)
@@ -93,6 +108,19 @@ namespace SAS.Taobao
         public override DataTable GetRecommendsByCond(string conditions)
         {
             return TaoBaos.GetRecommendsByCond(conditions);
+        }
+        /// <summary>
+        /// 更新推荐信息
+        /// </summary>
+        /// <param name="id">推荐ID</param>
+        /// <param name="cid">相关类别</param>
+        /// <param name="chanelid">相关频道</param>
+        /// <param name="rtitle">推荐标题</param>
+        /// <param name="rcontent">推荐内容</param>
+        /// <param name="rtype">推荐类型（默认1，商品推荐；2，店铺推荐；3，活动推荐；4，店铺推荐）</param>
+        public override void UpdateRecommendInfo(int id, int cid, int chanelid, string rtitle, string rcontent, int rtype)
+        {
+            TaoBaos.UpdateRecommendInfo(id, cid, chanelid, rtitle, rcontent, rtype);
         }
     }
 }

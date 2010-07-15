@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" CodeBehind="ajaxtaobaoitems.ascx.cs" Inherits="SAS.ManageWeb.ManagePage.ajaxtaobaoitems" %>
+﻿<%@ Control Language="C#" CodeBehind="ajaxtaobaoshops.ascx.cs" Inherits="SAS.ManageWeb.ManagePage.ajaxtaobaoshops" %>
 <%@ Import Namespace="SAS.Config" %>
 <br />
 <div style="width:100%" align="center">
@@ -7,7 +7,7 @@
 		<td colspan="2">
 		<table class="ntcplist" >
             <tr class="head">
-              <td>&nbsp;&nbsp;候选商品列表<%=keyword%></td>
+              <td>&nbsp;&nbsp;候选店铺列表<%=keyword%></td>
             </tr>
             <tr>
             <td>
