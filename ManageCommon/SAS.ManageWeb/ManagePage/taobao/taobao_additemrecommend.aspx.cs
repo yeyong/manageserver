@@ -17,6 +17,7 @@ namespace SAS.ManageWeb.ManagePage
     {
         private TaoBaoPluginBase tpb = TaoBaoPluginProvider.GetInstance();
         protected System.Collections.Generic.List<ItemCat> icatlist = new System.Collections.Generic.List<ItemCat>();
+        private int rtype = 1;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,7 +29,32 @@ namespace SAS.ManageWeb.ManagePage
 
         protected void AddRecommendInfo_Click(object sender, EventArgs e)
         {
+            string thertitle = rtitle.Text.Trim();
+            int thercategory = TypeConverter.ObjectToInt(rcategory.SelectedValue, 0);
+            int therchanel = TypeConverter.ObjectToInt(rchanel.SelectedValue, 0);
+            string thecontent = SASRequest.GetString("selitems").Trim().Trim(',');
 
+            string errmsg = "";
+            if (thertitle == "")
+            {
+                errmsg = "推荐标题不可为空，请仔细填写！";
+            }
+            if (thecontent == "")
+            {
+                errmsg = "推荐内容不可为空！";
+            }
+
+            if (errmsg != "")
+            {
+                base.RegisterStartupScript("", "<script>alert('" + errmsg + "');window.location.href='taobao_additemrecommend.aspx';</script>");
+                return;
+            }
+
+            if (tpb.CreateRecommendInfo(thercategory, therchanel, thertitle, thecontent, rtype) > 0)
+            {
+                SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/RecommendList");
+                base.RegisterStartupScript("PAGE", "window.location.href='taobao_additemrecommend.aspx';");
+            }
         }
 
         #region Web Form Designer generated code

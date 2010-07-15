@@ -52,5 +52,23 @@ namespace SAS.Plugin.TaoBao
         /// 修改商品类别
         /// </summary>
         public abstract void UpdateCategoryInfo(CategoryInfo cinfo);
+        /// <summary>
+        /// 创建推荐信息
+        /// </summary>
+        /// <param name="cid">相关类别</param>
+        /// <param name="chanelid">相关频道</param>
+        /// <param name="rtitle">推荐标题</param>
+        /// <param name="rcontent">推荐内容</param>
+        /// <param name="rtype">推荐类型（默认1，商品推荐；2，店铺推荐；3，活动推荐；4，店铺推荐）</param>
+        public abstract int CreateRecommendInfo(int cid, int chanelid, string rtitle, string rcontent, int rtype);
+         /// <summary>
+        /// 根据条件获取推荐信息
+        /// </summary>
+        public abstract DataTable GetRecommendsByCond(string conditions);
+        /// <summary>
+        /// 设置推荐搜索条件
+        /// </summary>
+        public abstract string GetRecommendCondition(bool islike, string rtitle, int rcategory, int rchanel, bool iscreatedate, string startcreate, string endcreate, bool isupdatedate, string startupdate, string endupdate);
+        
     }
 }

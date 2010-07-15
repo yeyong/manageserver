@@ -89,7 +89,7 @@ namespace SAS.ManageWeb.ManagePage
                 else
                 {
                     sb.Append("<tr><td class=treetd> " + mystr + " <img src=../images/folder.gif class=treeimg > <input class=\"input1\" type=checkbox id=\"" + this.ClientID + "\" name=\"" + this.ClientID + "\" value=\"" + s_value.ToString().Trim() + "\" > " + s_text.ToString().Trim() + "</td></tr>");
-                } 
+                }
                 
                 if (itemcatinfo.IsParent)
                 {

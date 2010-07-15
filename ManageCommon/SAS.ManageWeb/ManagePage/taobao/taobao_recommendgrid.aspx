@@ -34,7 +34,7 @@
                                 <tr>
                                     <td style="width: 80px"><%=rtypestr%>推荐标题:</td>
                                     <td>
-                                        <sas:TextBox ID="enname" runat="server" RequiredFieldType="暂无校验" Size="40"></sas:TextBox>&nbsp;
+                                        <sas:TextBox ID="rtitle" runat="server" RequiredFieldType="暂无校验" Size="40"></sas:TextBox>&nbsp;
                                         模糊查找<input id="islike" type="checkbox" value="1" name="cins" runat="server" />
                                     </td>
                                 </tr>
@@ -96,32 +96,25 @@
                             <asp:TemplateColumn HeaderText="<input title='选中/取消' onclick='Check(this.form,this.checked)' type='checkbox' name='chkall' id='chkall' />">
                                 <HeaderStyle Width="20px" />
                                 <ItemTemplate>
-						            <input id="enid" type="checkbox" onclick="checkedEnabledButton(form, 'enid', 'ENStart', 'ENPause')" value="<%# DataBinder.Eval(Container, "DataItem.en_id").ToString()%>"	name="enid">
+						            <input id="enid" type="checkbox" onclick="checkedEnabledButton(form, 'enid', 'ENStart', 'ENPause')" value="<%# DataBinder.Eval(Container, "DataItem.id").ToString()%>"	name="enid">
 						        </ItemTemplate>
                             </asp:TemplateColumn>
                             <asp:TemplateColumn HeaderText="">
                                 <ItemTemplate>
-                                    <a href="company_companyedit.aspx?enid=<%# DataBinder.Eval(Container, "DataItem.en_id").ToString()%>">
+                                    <a href="taobao_itemrecommendedit.aspx?rid=<%# DataBinder.Eval(Container, "DataItem.id").ToString()%>">
                                         编辑</a>
-                                    <%# DataGrid1.LoadSelectedCheckBox(DataBinder.Eval(Container, "DataItem.en_id").ToString())%>
-                                    <a href="../global/global_commentedit.aspx?objid=<%# DataBinder.Eval(Container, "DataItem.en_id").ToString()%>">
-                                        评论</a>
-                                    <%# DataGrid1.LoadSelectedCheckBox(DataBinder.Eval(Container, "DataItem.en_id").ToString())%>
+                                    <%# DataGrid1.LoadSelectedCheckBox(DataBinder.Eval(Container, "DataItem.id").ToString())%>
                                 </ItemTemplate>
                             </asp:TemplateColumn>
-                            <asp:BoundColumn DataField="en_name" SortExpression="en_name" HeaderText="名称" ReadOnly="true"></asp:BoundColumn>
-                            <asp:BoundColumn DataField="en_update" SortExpression="en_update" HeaderText="最近更新时间" ReadOnly="true"></asp:BoundColumn>
-                            <asp:BoundColumn DataField="en_createdate" SortExpression="en_createdate" HeaderText="信息创建时间" ReadOnly="true"></asp:BoundColumn>
-                            <asp:TemplateColumn HeaderText="开启状态" SortExpression="en_visble">
+                            <asp:BoundColumn DataField="ctitle" SortExpression="ctitle" HeaderText="推荐标题" ReadOnly="true"></asp:BoundColumn>
+                            <asp:TemplateColumn HeaderText="相关频道" SortExpression="relatechanel">
                                 <ItemTemplate>
-                                    <%# DataBinder.Eval(Container, "DataItem.en_visble").ToString() == "0" ? "暂停":"开启"%>
+                                    <%# SAS.Entity.EnumCatch.GetTaoChanel(Int32.Parse(DataBinder.Eval(Container, "DataItem.relatechanel").ToString()))%>
                                 </ItemTemplate>
                             </asp:TemplateColumn>
-                            <asp:TemplateColumn HeaderText="开启状态" SortExpression="en_status">
-                                <ItemTemplate>
-                                    
-                                </ItemTemplate>
-                            </asp:TemplateColumn>
+                            <asp:BoundColumn DataField="name" SortExpression="name" HeaderText="相关类别" ReadOnly="true"></asp:BoundColumn>
+                            <asp:BoundColumn DataField="updatedatetime" SortExpression="updatedatetime" HeaderText="最近更新时间" ReadOnly="true"></asp:BoundColumn>
+                            <asp:BoundColumn DataField="createdatetime" SortExpression="createdatetime" HeaderText="信息创建时间" ReadOnly="true"></asp:BoundColumn>
                         </Columns>
                     </sas:DataGrid>
                 </td>

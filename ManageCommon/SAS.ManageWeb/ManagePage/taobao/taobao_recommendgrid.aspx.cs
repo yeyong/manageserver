@@ -54,7 +54,7 @@ namespace SAS.ManageWeb.ManagePage
                 conditions = ViewState["condition"].ToString();
             }
             DataGrid1.AllowCustomPaging = false;
-            DataGrid1.BindData( );
+            DataGrid1.BindData(tpb.GetRecommendsByCond(conditions));
             #endregion
         }
 
@@ -64,7 +64,7 @@ namespace SAS.ManageWeb.ManagePage
 
             if (this.CheckCookie())
             {
-                string searchcondition = "";
+                string searchcondition = tpb.GetRecommendCondition(islike.Checked, rtitle.Text.Trim(), TypeConverter.ObjectToInt(rcategory.SelectedValue, -1), TypeConverter.ObjectToInt(rchanel.SelectedValue, -1), isbuilddatetime.Checked, joindateStart.SelectedDate.ToString(), joindateEnd.SelectedDate.ToString(), isupdatedatetime.Checked, updatedateStart.SelectedDate.ToString(), updatedateEnd.SelectedDate.ToString());
                 ViewState["condition"] = searchcondition;
                 searchtable.Visible = false;
                 ResetSearchTable.Visible = true;
@@ -121,6 +121,7 @@ namespace SAS.ManageWeb.ManagePage
 
             TaoChanel ete = new TaoChanel();
             rchanel.Items.Clear();
+            rchanel.Items.Add(new ListItem("请选择频道", "-1"));
             foreach (string cname in Enum.GetNames(ete.GetType()))
             {
                 int s_value = Convert.ToInt16(Enum.Parse(ete.GetType(), cname));

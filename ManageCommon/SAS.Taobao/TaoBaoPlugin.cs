@@ -68,5 +68,31 @@ namespace SAS.Taobao
         {
             TaoBaos.UpdateCategoryInfo(cinfo);
         }
+        /// <summary>
+        /// 创建推荐信息
+        /// </summary>
+        /// <param name="cid">相关类别</param>
+        /// <param name="chanelid">相关频道</param>
+        /// <param name="rtitle">推荐标题</param>
+        /// <param name="rcontent">推荐内容</param>
+        /// <param name="rtype">推荐类型（默认1，商品推荐；2，店铺推荐；3，活动推荐；4，店铺推荐）</param>
+        public override int CreateRecommendInfo(int cid, int chanelid, string rtitle, string rcontent, int rtype)
+        {
+            return TaoBaos.CreateRecommendInfo(cid, chanelid, rtitle, rcontent, rtype);
+        }
+        /// <summary>
+        /// 设置推荐搜索条件
+        /// </summary>
+        public override string GetRecommendCondition(bool islike, string rtitle, int rcategory, int rchanel, bool iscreatedate, string startcreate, string endcreate, bool isupdatedate, string startupdate, string endupdate)
+        {
+            return TaoBaos.GetRecommendCondition(islike, rtitle, rcategory, rchanel, iscreatedate, startcreate, endcreate, isupdatedate, startupdate, endupdate);
+        }
+        /// <summary>
+        /// 根据条件获取推荐信息
+        /// </summary>
+        public override DataTable GetRecommendsByCond(string conditions)
+        {
+            return TaoBaos.GetRecommendsByCond(conditions);
+        }
     }
 }
