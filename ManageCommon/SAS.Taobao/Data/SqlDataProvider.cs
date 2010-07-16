@@ -223,5 +223,67 @@ namespace SAS.Taobao.Data
             string commandText = String.Format("Update [{0}recommend] SET [relatecategory] = @relatecategory,[relatechanel] = @relatechanel,[ctitle] = @ctitle,[ccontent] = @ccontent,[ctype] = @ctype WHERE [id]=@id ", BaseConfigs.GetTablePrefix);
             DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
         }
+
+        #region 店铺收集
+        /// <summary>
+        /// 店铺信息收集
+        /// </summary>
+        /// <returns>返回1，更新店铺信息；返回2，增加店铺信息</returns>
+        public int CollectionTaobaoShops(ShopDetailInfo sinfo)
+        {
+            DbParameter[] parms = {
+                                    DbHelper.MakeInParam("sid", (DbType)SqlDbType.BigInt,8,sinfo.sid),
+				                    DbHelper.MakeInParam("user_id", (DbType)SqlDbType.BigInt,8,sinfo.user_id),
+				                    DbHelper.MakeInParam("cid", (DbType)SqlDbType.BigInt,8,sinfo.cid),
+				                    DbHelper.MakeInParam("nick", (DbType)SqlDbType.NVarChar,200,sinfo.nick),
+				                    DbHelper.MakeInParam("title", (DbType)SqlDbType.NVarChar,500,sinfo.title),
+				                    DbHelper.MakeInParam("item_score", (DbType)SqlDbType.Int,4,sinfo.item_score),
+				                    DbHelper.MakeInParam("service_score", (DbType)SqlDbType.Int,4,sinfo.service_score),
+				                    DbHelper.MakeInParam("delivery_score", (DbType)SqlDbType.Int,4,sinfo.delivery_score),
+				                    DbHelper.MakeInParam("shop_desc", (DbType)SqlDbType.Text,0,sinfo.shop_desc),
+				                    DbHelper.MakeInParam("bulletin", (DbType)SqlDbType.NVarChar,200,sinfo.bulletin),
+				                    DbHelper.MakeInParam("pic_path", (DbType)SqlDbType.VarChar,500,sinfo.pic_path),
+				                    DbHelper.MakeInParam("created", (DbType)SqlDbType.DateTime,8,sinfo.created),
+				                    DbHelper.MakeInParam("modified", (DbType)SqlDbType.DateTime,8,sinfo.modified),
+				                    DbHelper.MakeInParam("promoted_type", (DbType)SqlDbType.VarChar,50,sinfo.promoted_type),
+				                    DbHelper.MakeInParam("consumer_protection", (DbType)SqlDbType.Bit,1,sinfo.consumer_protection),
+				                    DbHelper.MakeInParam("shop_status", (DbType)SqlDbType.VarChar,50,sinfo.shop_status),
+				                    DbHelper.MakeInParam("shop_type", (DbType)SqlDbType.VarChar,20,sinfo.shop_type),
+				                    DbHelper.MakeInParam("shop_level", (DbType)SqlDbType.Int,4,sinfo.shop_level),
+				                    DbHelper.MakeInParam("@shop_score", (DbType)SqlDbType.Int,4,sinfo.shop_score),
+				                    DbHelper.MakeInParam("@total_num", (DbType)SqlDbType.BigInt,8,sinfo.total_num),
+				                    DbHelper.MakeInParam("@good_num", (DbType)SqlDbType.BigInt,8,sinfo.good_num),
+				                    DbHelper.MakeInParam("@shop_country", (DbType)SqlDbType.NVarChar,50,sinfo.shop_country),
+				                    DbHelper.MakeInParam("@shop_province", (DbType)SqlDbType.NVarChar,50,sinfo.shop_province),
+				                    DbHelper.MakeInParam("@shop_city", (DbType)SqlDbType.NVarChar,50,sinfo.shop_city),
+				                    DbHelper.MakeInParam("@shop_address", (DbType)SqlDbType.NVarChar,200,sinfo.shop_address),
+				                    DbHelper.MakeInParam("@commission_rate", (DbType)SqlDbType.VarChar,10,sinfo.commission_rate),
+				                    DbHelper.MakeInParam("@click_url", (DbType)SqlDbType.VarChar,500,sinfo.click_url)
+                                  };
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.StoredProcedure, string.Format("{0}collectiontaobaoshop", BaseConfigs.GetTablePrefix), parms), 0);
+        }
+        /// <summary>
+        /// 根据条件获取淘宝店铺分页信息
+        /// </summary>
+        public IDataReader GetTaoBaoShopListPage(string conditions, int pagesize, int pageindex, string ordercolumn, string ordertype)
+        {
+            DbParameter[] parms = {
+                                    DbHelper.MakeInParam("@pageindex",(DbType)SqlDbType.Int,4,pageindex),
+                                    DbHelper.MakeInParam("@pagesize",(DbType)SqlDbType.Int,4,pagesize),
+                                    DbHelper.MakeInParam("@ordercolumn",(DbType)SqlDbType.VarChar,20,ordercolumn),
+                                    DbHelper.MakeInParam("@ordertype",(DbType)SqlDbType.VarChar,5,ordertype),
+                                    DbHelper.MakeInParam("@conditions",(DbType)SqlDbType.NVarChar,2000,conditions)
+                                  };
+            return DbHelper.ExecuteReader(CommandType.StoredProcedure, string.Format("{0}gettaobaoshoplistbypage", BaseConfigs.GetTablePrefix), parms);
+        }
+        /// <summary>
+        /// 根据条件获取淘宝店铺数量
+        /// </summary>
+        public int GetTaoBaoShopCount(string conditions)
+        {
+            string commandText = string.Format("SELECT COUNT(*) FROM [{0}taobaoshop] WHERE 1=1 {1}", BaseConfigs.GetTablePrefix, conditions);
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText), 0);
+        }
+        #endregion
     }
 }

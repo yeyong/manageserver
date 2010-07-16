@@ -4,6 +4,7 @@ using System.Data;
 
 using SAS.Logic;
 using SAS.Common;
+using SAS.Plugin.TaoBao;
 
 namespace SAS.ManageWeb.ManagePage
 {
@@ -12,6 +13,8 @@ namespace SAS.ManageWeb.ManagePage
     /// </summary>
     public class global_ajaxcall : AdminPage
     {
+        private TaoBaoPluginBase tpb = TaoBaoPluginProvider.GetInstance();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             int parentid = SASRequest.GetInt("parentcode", 0);
@@ -32,6 +35,9 @@ namespace SAS.ManageWeb.ManagePage
                         break;
                     case "catalog":
                         resultmessage = Catalogs.ReturnCalalogList(SASRequest.GetInt("parentid", 0));
+                        break;
+                    case "collectionshop":
+                        resultmessage = tpb.SearchAndAddShop(SASRequest.GetString("nick")).ToString();
                         break;
                 }
                 Response.Write(resultmessage);

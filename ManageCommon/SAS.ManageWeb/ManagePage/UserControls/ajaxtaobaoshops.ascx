@@ -7,40 +7,53 @@
 		<td colspan="2">
 		<table class="ntcplist" >
             <tr class="head">
-              <td>&nbsp;&nbsp;候选店铺列表<%=keyword%></td>
+              <td>&nbsp;&nbsp;候选店铺列表</td>
             </tr>
             <tr>
             <td>
              <table class="datalist" cellspacing="0" rules="all" border="1" id="DataGrid1" style="border-collapse:collapse;">
                   <tr class="category">
                     <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">选择</td>
-                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">宝贝名称</td>
-                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">卖家昵称</td>
-                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">商品价格</td>
-                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">淘宝客佣金</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">店铺名称</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">店铺卖家</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">累积信用</td>
                     <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">佣金比率</td>
-                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">30天累计成交量</td>
-                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">佣金支出量</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">商家类型</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">是否参加消保</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">有无实名认证</td>
                     <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">信用等级</td>
-                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">商品所在地</td>
-                  </tr>
-                  <%foreach(SAS.Entity.Domain.TaobaokeItem tkiteminfo in taobaoitemlist){ %>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">信用总分</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">评价总条数</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">好评总条数</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">商品描述评分</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">服务态度评分</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">发货速度评分</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">详细地址</td>
+                  </tr>               
+                  <%foreach (SAS.Entity.ShopDetailInfo tbshopinfo in shoplist)
+                    { %>
                   <tr class="mouseoutstyle" onmouseover="this.className='mouseoverstyle'" onmouseout="this.className='mouseoutstyle'" style="cursor:hand;">
-                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><input type="button" class="ManagerButton" value="选择" onclick="selectItem(this,'<%=tkiteminfo.NumIid%>');"/></td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><input type="button" class="ManagerButton" value="选择" onclick="selectItem(this,'<%=tbshopinfo.sid%>');"/></td>
                     <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;">
-                        <span id="<%=tkiteminfo.Iid%>" onmouseover="showMenu(this.id,0,0,1,0);" style="font-weight:bold"><%=tkiteminfo.Title%><img src="../images/eye.gif" style="vertical-align:middle" /></span>
-                        <div id="<%=tkiteminfo.Iid%>_menu" style="display:none">
-					        <img src="<%=tkiteminfo.PicUrl%>_250x250.jpg" onerror="this.src='../../images/common/none.gif'" />
+                        <span id="<%=tbshopinfo.sid%>" onmouseover="showMenu(this.id,0,0,1,0);" style="font-weight:bold"><%=tbshopinfo.title%><img src="../images/eye.gif" style="vertical-align:middle" /></span>
+                        <div id="<%=tbshopinfo.sid%>_menu" style="display:none">
+					        <img src="http://logo.taobao.com/shop-logo<%=tbshopinfo.pic_path%>" onerror="this.src='../../images/common/none.gif'" />
 						</div>
                     </td>
-                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tkiteminfo.Nick%></td>
-                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tkiteminfo.Price%></td>
-                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tkiteminfo.Commission%></td>
-                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=SAS.Common.TypeConverter.ObjectToFloat(tkiteminfo.CommissionRate)/100%>%</td>
-                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tkiteminfo.CommissionNum%></td>                    
-                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tkiteminfo.CommissionVolume%></td>
-                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tkiteminfo.SellerCreditScore%></td>
-                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tkiteminfo.ItemLocation%></td>
+                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tbshopinfo.nick%></td>
+                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tbshopinfo.shop_level%></td>
+                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=SAS.Common.TypeConverter.ObjectToFloat(tbshopinfo.commission_rate)%>%</td>
+                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tbshopinfo.shop_type%></td>                    
+                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tbshopinfo.consumer_protection%></td> 
+                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tbshopinfo.promoted_type%></td> 
+                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tbshopinfo.shop_level%></td> 
+                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tbshopinfo.shop_type%></td> 
+                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tbshopinfo.shop_type%></td> 
+                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tbshopinfo.shop_type%></td> 
+                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tbshopinfo.shop_type%></td> 
+                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tbshopinfo.shop_type%></td> 
+                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tbshopinfo.shop_type%></td> 
+                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tbshopinfo.shop_type%></td> 
                   </tr>
                   <%} %>
                   <tr>

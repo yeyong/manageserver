@@ -594,6 +594,13 @@
     <Compile Include="ManagePage\taobao\taobao_categorygrid.aspx.designer.cs">
       <DependentUpon>taobao_categorygrid.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\taobao\taobao_collectionshop.aspx.cs">
+      <DependentUpon>taobao_collectionshop.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\taobao\taobao_collectionshop.aspx.designer.cs">
+      <DependentUpon>taobao_collectionshop.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\taobao\taobao_editcategory.aspx.cs">
       <DependentUpon>taobao_editcategory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1639,6 +1646,7 @@
     <Content Include="ManagePage\taobao\taobao_addrecommend.aspx" />
     <Content Include="ManagePage\taobao\taobao_addshoprecommend.aspx" />
     <Content Include="ManagePage\taobao\taobao_categorygrid.aspx" />
+    <Content Include="ManagePage\taobao\taobao_collectionshop.aspx" />
     <Content Include="ManagePage\taobao\taobao_editcategory.aspx" />
     <Content Include="ManagePage\taobao\taobao_edititemrecommend.aspx" />
     <Content Include="ManagePage\taobao\taobao_editrecommend.aspx" />
