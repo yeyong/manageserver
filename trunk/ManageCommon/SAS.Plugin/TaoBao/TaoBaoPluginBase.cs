@@ -87,5 +87,18 @@ namespace SAS.Plugin.TaoBao
         /// <param name="rcontent">推荐内容</param>
         /// <param name="rtype">推荐类型（默认1，商品推荐；2，店铺推荐；3，活动推荐；4，店铺推荐）</param>
         public abstract void UpdateRecommendInfo(int id, int cid, int chanelid, string rtitle, string rcontent, int rtype);
+        /// <summary>
+        /// 搜索并增加或更新店铺信息
+        /// </summary>
+        /// <param name="nickname">卖家昵称</param>
+        public abstract int SearchAndAddShop(string nickname);
+        /// <summary>
+        /// 根据条件获取淘宝店铺分页信息
+        /// </summary>
+        public abstract SAS.Common.Generic.List<ShopDetailInfo> GetTaoBaoShopsPage(string conditions, int pagesize, int pageindex, string ordercolumn, string ordertype);
+        /// <summary>
+        /// 根据条件获取淘宝店铺数量
+        /// </summary>
+        public abstract int GetTaoBaoShopCountByCondition(string conditions);
     }
 }

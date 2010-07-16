@@ -44,7 +44,7 @@ namespace SAS.ManageWeb.ManagePage
             pagelink = AjaxPagination(recordcount, 12, currentpage);
         }
 
-        //// <summary>
+        /// <summary>
         /// 分页函数
         /// </summary>
         /// <param name="recordcount">总记录数</param>

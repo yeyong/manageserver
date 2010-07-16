@@ -270,5 +270,105 @@ namespace SAS.Taobao
             Data.DbProvider.GetInstance().UpdateRecommendInfo(id, cid, chanelid, rtitle, rcontent, rtype);
         }
         #endregion
+
+        #region 淘宝店铺操作
+        /// <summary>
+        /// 搜索并增加或更新店铺信息
+        /// </summary>
+        /// <param name="nickname">卖家昵称</param>
+        public static int SearchAndAddShop(string nickname)
+        {
+            UserGetRequest ugr = new UserGetRequest();
+            ugr.Fields = "user_id,nick,seller_credit,location,type,promoted_type,status,consumer_protection";
+            ugr.Nick = nickname;
+            User userinfo = new User();
+            try
+            {
+                userinfo = client.UserGet(ugr);
+            }
+            catch (NTWException ntwe1)
+            {
+                userinfo = null;
+            }
+            if (userinfo == null) return 0;
+            Location locainfo = userinfo.Location;
+            UserCredit ucredit = userinfo.SellerCredit;
+
+            ShopGetRequest sgr = new ShopGetRequest();
+            sgr.Fields = "sid,cid,title,nick,desc,bulletin,pic_path,created,modified,shop_score";
+            sgr.Nick = nickname;
+            Shop shopinfo = new Shop();
+            try
+            {
+                shopinfo = client.ShopGet(sgr);
+            }
+            catch (NTWException ntwe2)
+            {
+                shopinfo = null;
+            }
+            if (shopinfo == null) return 0;
+            ShopScore shopscore = shopinfo.ShopScore;
+
+            TaobaokeShopsConvertRequest tcr = new TaobaokeShopsConvertRequest();
+            tcr.Fields = "user_id,shop_title,click_url,commission_rate";
+            tcr.Nick = SAS_USERNICK;
+            tcr.Sids = shopinfo.Sid;
+            PageList<TaobaokeShop> tks = client.TaobaokeShopsConvert(tcr);
+            if (tks.Content.Count == 0) return 0;
+            TaobaokeShop tshopinfo = tks.Content[0];
+
+            ShopDetailInfo sinfo = new ShopDetailInfo();
+            sinfo.sid = long.Parse(shopinfo.Sid.Trim());
+            sinfo.user_id = long.Parse(tshopinfo.UserId.Trim());
+            sinfo.cid = long.Parse(shopinfo.Cid.Trim());
+            sinfo.nick = shopinfo.Nick;
+            sinfo.title = shopinfo.Title;
+            sinfo.item_score = TypeConverter.ObjectToInt(shopscore.ItemScore, 0);
+            sinfo.service_score = TypeConverter.ObjectToInt(shopscore.ServiceScore, 0);
+            sinfo.delivery_score = TypeConverter.ObjectToInt(shopscore.DeliveryScore, 0);
+            sinfo.shop_desc = shopinfo.Desc == null ? "" : shopinfo.Desc;
+            sinfo.bulletin = shopinfo.Bulletin == null ? "" : shopinfo.Bulletin;
+            sinfo.pic_path = shopinfo.PicPath == null ? "" : shopinfo.PicPath;
+            sinfo.created = shopinfo.Created == null ? "" : shopinfo.Created; ;
+            sinfo.modified = shopinfo.Modified == null ? "" : shopinfo.Modified; ;
+            sinfo.promoted_type = userinfo.PromotedType == null ? "" : userinfo.PromotedType;
+            sinfo.consumer_protection = userinfo.ConsumerProtection;
+            sinfo.shop_status = userinfo.Status == null ? "" : userinfo.Status;
+            sinfo.shop_type = userinfo.Type;
+            sinfo.shop_level = ucredit.Level;
+            sinfo.shop_score = ucredit.Score;
+            sinfo.total_num = ucredit.TotalNum;
+            sinfo.good_num = ucredit.GoodNum;
+            sinfo.shop_country = locainfo.Country == null ? "" : locainfo.Country;
+            sinfo.shop_province = locainfo.State == null ? "" : locainfo.State;
+            sinfo.shop_city = locainfo.City == null ? "" : locainfo.City;
+            sinfo.shop_address = locainfo.Address == null ? "" : locainfo.Address;
+            sinfo.commission_rate = tshopinfo.CommissionRate == null ? "" : tshopinfo.CommissionRate;
+            sinfo.click_url = tshopinfo.ClickUrl == null ? "" : tshopinfo.ClickUrl;
+            return CollectionTaoBaoShop(sinfo);
+        }
+        /// <summary>
+        /// 店铺信息收集
+        /// </summary>
+        /// <returns>返回1，更新店铺信息；返回2，增加店铺信息</returns>
+        public static int CollectionTaoBaoShop(ShopDetailInfo sinfo)
+        {
+            return Data.DbProvider.GetInstance().CollectionTaobaoShops(sinfo);
+        }
+        /// <summary>
+        /// 根据条件获取淘宝店铺分页信息
+        /// </summary>
+        public static SAS.Common.Generic.List<ShopDetailInfo> GetTaoBaoShopsPage(string conditions, int pagesize, int pageindex, string ordercolumn, string ordertype)
+        {
+            return DTOProvider.GetTaoBaoShopList(Data.DbProvider.GetInstance().GetTaoBaoShopListPage(conditions, pagesize, pageindex, ordercolumn, ordertype));
+        }
+        /// <summary>
+        /// 根据条件获取淘宝店铺数量
+        /// </summary>
+        public static int GetTaoBaoShopCountByCondition(string conditions)
+        {
+            return Data.DbProvider.GetInstance().GetTaoBaoShopCount(conditions);
+        }
+        #endregion
     }
 }

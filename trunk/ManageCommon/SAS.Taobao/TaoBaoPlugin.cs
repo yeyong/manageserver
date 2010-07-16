@@ -122,5 +122,27 @@ namespace SAS.Taobao
         {
             TaoBaos.UpdateRecommendInfo(id, cid, chanelid, rtitle, rcontent, rtype);
         }
+        /// <summary>
+        /// 搜索并增加或更新店铺信息
+        /// </summary>
+        /// <param name="nickname">卖家昵称</param>
+        public override int SearchAndAddShop(string nickname)
+        {
+            return TaoBaos.SearchAndAddShop(nickname);
+        }
+        /// <summary>
+        /// 根据条件获取淘宝店铺分页信息
+        /// </summary>
+        public override SAS.Common.Generic.List<ShopDetailInfo> GetTaoBaoShopsPage(string conditions, int pagesize, int pageindex, string ordercolumn, string ordertype)
+        {
+            return TaoBaos.GetTaoBaoShopsPage(conditions, pagesize, pageindex, ordercolumn, ordertype);
+        }
+        /// <summary>
+        /// 根据条件获取淘宝店铺数量
+        /// </summary>
+        public override int GetTaoBaoShopCountByCondition(string conditions)
+        {
+            return TaoBaos.GetTaoBaoShopCountByCondition(conditions);
+        }
     }
 }

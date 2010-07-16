@@ -4,32 +4,23 @@ using System.Text.RegularExpressions;
 using System.Web.UI;
 
 using SAS.Common;
+using SAS.Common.Generic;
 using SAS.Data;
 using SAS.Config;
-using SAS.Entity.Domain;
+using SAS.Entity;
 using SAS.Plugin.TaoBao;
 
 namespace SAS.ManageWeb.ManagePage
 {
     public partial class ajaxtaobaoshops : System.Web.UI.UserControl
     {
-        protected System.Collections.Generic.List<TaobaokeItem> taobaoitemlist = new System.Collections.Generic.List<TaobaokeItem>();
+        protected List<ShopDetailInfo> shoplist = new List<ShopDetailInfo>();
+        public string nick = SASRequest.GetString("nick");
+        protected TaoBaoPluginBase tpb = TaoBaoPluginProvider.GetInstance();
         public string pagelink;
         public int currentpage = 0;
-        public string itemname = "";
-        public int cid = SASRequest.GetInt("cid", 0);
-        public string keyword = SASRequest.GetString("keyword");
-        public string startmoney = SASRequest.GetString("startmoney");
-        public string endmoney = SASRequest.GetString("endmoney");
-        public string startcredit = SASRequest.GetString("startcredit");
-        public string endcredit = SASRequest.GetString("endcredit");
-        public string startrate = SASRequest.GetString("startrate");
-        public string endrate = SASRequest.GetString("endrate");
-        public string startnum = SASRequest.GetString("startnum");
-        public string endnum = SASRequest.GetString("endnum");
         //页面大小
         public int pagesize = 16;
-        protected TaoBaoPluginBase tpb = TaoBaoPluginProvider.GetInstance();
 
         public ajaxtaobaoshops()
         {
@@ -39,26 +30,26 @@ namespace SAS.ManageWeb.ManagePage
             {
                 pagesize = SASRequest.GetInt("postnumber", 0);
             }
-            long recordcount = 0;
-            taobaoitemlist = tpb.GetItemListByCondition(cid, keyword, startmoney, endmoney, startcredit, endcredit, startrate, endrate, startnum, endnum, pagesize, currentpage, out recordcount);
-            pagelink = AjaxPagination(recordcount, 12, currentpage);
+            int recordcount = tpb.GetTaoBaoShopCountByCondition("");
+            shoplist = tpb.GetTaoBaoShopsPage("", pagesize, currentpage, "shop_level", "desc");
+            pagelink = AjaxPagination(recordcount, pagesize, currentpage);
         }
 
-        //// <summary>
+        /// <summary>
         /// 分页函数
         /// </summary>
         /// <param name="recordcount">总记录数</param>
         /// <param name="pagesize">每页记录数</param>
         /// <param name="currentpage">当前页数</param>
-        public string AjaxPagination(long recordcount, int pagesize, int currentpage)
+        public string AjaxPagination(int recordcount, int pagesize, int currentpage)
         {
             if (SASRequest.GetInt("postnumber", 0) > 0)
             {
-                return AjaxPagination(recordcount, pagesize, currentpage, "../usercontrols/ajaxtaobaoitems.ascx", "cid=" + cid + "&keyword=" + keyword + "&startmoney=" + startmoney + "&endmoney=" + endmoney + "&startcredit=" + startcredit + "&endcredit=" + endcredit + "&startrate=" + startrate + "&endrate=" + endrate + "&startnum=" + startnum + "endnum=" + endnum + "postnumber=" + SASRequest.GetInt("postnumber", 0), "taobaoitemlistgrid");
+                return AjaxPagination(recordcount, pagesize, currentpage, "../usercontrols/ajaxtaobaoitems.ascx", "nick=" + nick + "postnumber=" + SASRequest.GetInt("postnumber", 0), "taobaoshoplistgrid");
             }
             else
             {
-                return AjaxPagination(recordcount, pagesize, currentpage, "../usercontrols/ajaxtaobaoitems.ascx", "cid=" + cid + "&keyword=" + keyword + "&startmoney=" + startmoney + "&endmoney=" + endmoney + "&startcredit=" + startcredit + "&endcredit=" + endcredit + "&startrate=" + startrate + "&endrate=" + endrate + "&startnum=" + startnum + "endnum=" + endnum, "taobaoitemlistgrid");
+                return AjaxPagination(recordcount, pagesize, currentpage, "../usercontrols/ajaxtaobaoitems.ascx", "nick=" + nick, "taobaoshoplistgrid");
             }
         }
 
@@ -68,7 +59,7 @@ namespace SAS.ManageWeb.ManagePage
         /// <param name="recordcount">总记录数</param>
         /// <param name="pagesize">每页记录数</param>
         /// <param name="currentpage">当前页数</param>
-        public string AjaxPagination(long recordcount, int pagesize, int currentpage, string usercontrolname, string paramstr, string divname)
+        public string AjaxPagination(int recordcount, int pagesize, int currentpage, string usercontrolname, string paramstr, string divname)
         {
             int allcurrentpage = 0;
             int next = 0;
@@ -140,6 +131,5 @@ namespace SAS.ManageWeb.ManagePage
             return currentpagestr;
 
         }
-
     }
 }
