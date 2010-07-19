@@ -18,7 +18,7 @@
 		    <tr align="center">
 		        <td><button type="button" class="ManagerButton" onclick="window.location='taobao_additemrecommend.aspx';"><img src="../images/submit.gif" /> 添加商品推荐组</button></td>
 		        <td><button type="button" class="ManagerButton" onclick="window.location='taobao_addshoprecommend.aspx';"><img src="../images/submit.gif" /> 添加店铺推荐组</button></td>
-		        <td><button type="button" class="ManagerButton" onclick="window.location='taobao_recommendgrid.aspx?ctype=3';"><img src="../images/submit.gif" /> 添加活动推荐组</button></td>
+		        <td><button type="button" class="ManagerButton" onclick="window.location='taobao_addtopicrecommend.aspx';"><img src="../images/submit.gif" /> 添加活动推荐组</button></td>
                 <td><button type="button" class="ManagerButton" onclick="window.location='taobao_recommendgrid.aspx?ctype=4';"><img src="../images/submit.gif" /> 添加频道推荐组</button></td>
 		    </tr>
 		</table>
