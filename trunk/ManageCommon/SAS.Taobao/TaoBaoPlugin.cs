@@ -161,5 +161,13 @@ namespace SAS.Taobao
         {
             return TaoBaos.GetTaoBaoShopCountByCondition(conditions);
         }
+        /// <summary>
+        /// 根据店铺ID集合获取店铺信息
+        /// </summary>
+        /// <param name="ids"></param>
+        public override SAS.Common.Generic.List<ShopDetailInfo> GetTaoBaoShopListByIds(string ids)
+        {
+            return TaoBaos.GetTaoBaoShopListByIds(ids);
+        }
     }
 }

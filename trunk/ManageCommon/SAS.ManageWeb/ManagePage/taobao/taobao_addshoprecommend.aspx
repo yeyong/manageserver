@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" CodeBehind="taobao_addshoprecommend.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.taobao_addshoprecommend" %>
 <%@ Register TagPrefix="cc1" Namespace="SAS.Control" Assembly="SAS.Control" %>
-<%@ Register TagPrefix="uc1" TagName="AjaxItemList" Src="../UserControls/ajaxtaobaoitems.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="AjaxShopList" Src="../UserControls/ajaxtaobaoshops.ascx" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head id="Head1" runat="server">
@@ -16,53 +16,55 @@
 <script type="text/javascript" src="../js/modalpopup.js"></script>
 <script type="text/javascript" src="../../javascript/common.js"></script>
 <script type="text/javascript">
-    function searchitem(objform) {
+    function searchshop() {
         var errmsg = "";
-        var srate = objform.startrate.value;
-        var erate = objform.endrate.value;
-        var smoney = objform.startmoney.value;
-        var emoney = objform.endmoney.value;
-        var scredit = objform.startcredit.value;
-        var ecredit = objform.endcredit.value;
-        var snums = objform.startnum.value;
-        var enums = objform.endnum.value;
+        var shoptitle = Form1.shoptitle.value;
+        var shopnick = Form1.shopnick.value;
+        var province = Form1.province.value;
+        var city = Form1.city.value;
+        var startscore = Form1.startscore.value;
+        var endscore = Form1.endscore.value;
+        var startcredit = Form1.startcredit.value;
+        var endcredit = Form1.endcredit.value;
+        var startrate = Form1.startrate.value;
+        var endrate = Form1.endrate.value;
+        var ordertype = "";
         var parems = "";
 
-        if (srate.length > 0 && erate.length > 0) {
-            if (!isNumber(srate) || !isNumber(erate)) errmsg += "佣金比率请输入数字格式!\r\n";
-            else if (srate > erate) errmsg += "最低佣金比率应低于最高佣金比率\r\n";
-            else parems += "&startrate=" + srate + "&endrate=" + erate;
-        } else if (((srate.length + erate.length) > 0) && (srate.length == 0 || erate.length == 0)) {
-            errmsg += "佣金比率请输入完整或都不输入\r\n";
+
+        //alert(shoptitle);
+
+        if (startscore != "" && endscore != "") {
+            if (!isNumber(startscore) || !isNumber(endscore)) errmsg += "店铺总评分请输入数字！";
+            else if (startscore > endscore) errmsg += "店铺最小评分应小于最大评分，请仔细检查！";
+            else parems += "&startscore=" + startscore + "&endscore=" + endscore;
+        } else if ((startscore.length == 0 || endscore.length == 0) && (startscore.length + endscore.length) > 0) {
+            errmsg += "店铺评分区间请填写完整或清空！";
         }
 
-        if (smoney.length > 0 && emoney.length > 0) {
-            if (!isNumber(smoney) || !isNumber(emoney)) errmsg += "销售价格请输入数字格式!\r\n";
-            else if (smoney > emoney) errmsg += "最低销售价格应低于最高佣金比率\r\n";
-            else parems += "&startmoney=" + smoney + "&endmoney=" + emoney;
-        } else if (((smoney.length + emoney.length) > 0) && (smoney.length == 0 || emoney.length == 0)) {
-            errmsg += "销售价格请输入完整或都不输入\r\n";
+        if (startcredit != "" && endcredit != "") {
+            if (!isNumber(startcredit) || !isNumber(endcredit)) errmsg += "店铺信誉度请输入数字！";
+            else if (startcredit > endcredit) errmsg += "店铺最小誉度应小于最大誉度，请仔细检查！";
+            else parems += "&startcredit=" + startcredit + "&endcredit=" + endcredit;
+        } else if ((startcredit.length == 0 || endcredit.length == 0) && (startcredit.length + endcredit.length) > 0) {
+            errmsg += "店铺誉度区间请填写完整或清空！";
         }
 
-        if (scredit.length > 0 && ecredit.length > 0) {
-            if (!isNumber(scredit) || !isNumber(ecredit)) errmsg += "卖家信誉请输入数字格式!\r\n";
-            else if (scredit > ecredit) errmsg += "最低卖家信誉应低于最高佣金比率\r\n";
-            else parems += "&startcredit=" + scredit + "&endcredit=" + ecredit;
-        } else if (((scredit.length + ecredit.length) > 0) && (scredit.length == 0 || ecredit.length == 0)) {
-            errmsg += "卖家信誉请输入完整或都不输入\r\n";
+        if (startrate != "" && endrate != "") {
+            if (!isNumber(startrate) || !isNumber(endrate)) errmsg += "店铺佣金请输入数字！";
+            else if (startrate > endrate) errmsg += "店铺最小佣金应小于最大佣金，请仔细检查！";
+            else parems += "&startrate=" + startrate + "&endrate=" + endrate;
+        } else if ((startrate.length == 0 || endrate.length == 0) && (startrate.length + endrate.length) > 0) {
+            errmsg += "店铺佣金区间请填写完整或清空！";
         }
 
-        if (snums.length > 0 && enums.length > 0) {
-            if (!isNumber(snums) || !isNumber(enums)) errmsg += "最近推广量请输入数字格式!\r\n";
-            else if (snums > enums) errmsg += "最低最近推广量应低于最高佣金比率\r\n";
-            else parems += "&startnum=" + snums + "&endnum=" + enums;
-        } else if (((snums.length + enums.length) > 0) && (snums.length == 0 || enums.length == 0)) {
-            errmsg += "最近推广量请输入完整或都不输入\r\n";
+        if (Form1.descorder.checked) {
+            ordertype = "desc";
         }
-
+        parems += "&shoptitle=" + shoptitle + "&shopnick=" + shopnick + "&province=" + province + "&city=" + city;
         if (errmsg != "") alert(errmsg);
         else {
-            AjaxHelper.Updater("../usercontrols/ajaxtaobaoitems.ascx", "taobaoitemlistgrid", "load=true&keyword=" + objform.keyword.value + "&cid=" + $("rcategory").value + parems);
+            AjaxHelper.Updater("../usercontrols/ajaxtaobaoshops.ascx", "taobaoshoplistgrid", "load=true&display=0&ordercolumn=" + Form1.Select1.value + "&ordertype=" + ordertype + parems);
         }
     }
 
@@ -75,7 +77,6 @@
         thebutton.onclick = function() {
             delRow(this);
             $("selitems").value = $("selitems").value.replace("," + thevalue, "");
-            alert($("selitems").value);
         };
         theobj.firstChild.replaceChild(thebutton, theobj.firstChild.firstChild);
         $("SelectItem").firstChild.appendChild(theobj);
@@ -102,7 +103,7 @@
 <form id="Form1" runat="server">
 <div class="ManagerForm">
 <fieldset>
-<legend style="background:url(../images/icons/legendimg.jpg) no-repeat 6px 50%;">添加商品推荐</legend>
+<legend style="background:url(../images/icons/legendimg.jpg) no-repeat 6px 50%;">添加店铺推荐</legend>
     <table cellspacing="0" cellpadding="4" width="100%" align="center">
         <tr>
             <td class="item_title" colspan="2">
@@ -145,22 +146,27 @@
 		<td colspan="2">
 		<table class="ntcplist">
 		    <tr class="head">
-              <td>&nbsp;&nbsp;已选商品列表</td>
+              <td>&nbsp;&nbsp;已选店铺列表</td>
             </tr>
             <tr>
             <td>
              <table class="datalist" cellspacing="0" rules="all" border="1" id="SelectItem" style="border-collapse:collapse;">
                   <tr class="category">
                     <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">选择</td>
-                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">宝贝名称</td>
-                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">卖家昵称</td>
-                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">商品价格</td>
-                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">淘宝客佣金</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">店铺图标</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">店铺名称</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">店铺卖家</td>
                     <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">佣金比率</td>
-                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">30天累计成交量</td>
-                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">佣金支出量</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">商家类型</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">是否参加消保</td>
                     <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">信用等级</td>
-                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">商品所在地</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">信用总分</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">评价总条数</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">好评总条数</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">商品描述评分</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">服务态度评分</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">发货速度评分</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">详细地址</td>
                   </tr>
               </table>
               </td>
@@ -175,86 +181,96 @@
 	</div>
 </fieldset>
 <fieldset>
-<legend style="background:url(../images/icons/legendimg.jpg) no-repeat 6px 50%;">搜索商品</legend>
-    <table cellspacing="0" cellpadding="4" width="100%" align="center">
-        <tr>
-            <td class="panelbox" width="50%" align="left">
-                <table width="100%">
-                    <tr>
-                        <td style="width: 80px">
-                            商品关键字:
-                        </td>
-                        <td>
-                           <input type="text" name="keyword" size="30" class="FormBase" onfocus="this.className='FormFocus';" onblur="this.className='FormBase';"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            相关类别:
-                        </td>
-                        <td>
-                            <select name="rcategory">
-                                <option value="0">请选择类别</option>
-                                <%
-                                    foreach (SAS.Entity.Domain.ItemCat iteminfo in icatlist)
-                                    {
-                                      %>
-                                      <option value="<%=iteminfo.Cid%>"><%=iteminfo.Name%></option>
-                                      <%
-                                    }
-                                         %>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            佣金比率:
-                        </td>
-                        <td>
-                            从&nbsp;<input type="text" name="startrate" size="10" class="FormBase" onfocus="this.className='FormFocus';" onblur="this.className='FormBase';"/>
-                            到&nbsp;<input type="text" name="endrate" size="10" class="FormBase" onfocus="this.className='FormFocus';" onblur="this.className='FormBase';"/>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-            <td class="panelbox" width="50%" align="right">
-                <table width="100%">
-                    <tr>
-                        <td>
-                            商品价格:
-                        </td>
-                        <td>
-                            从&nbsp;<input type="text" name="startmoney" size="10" class="FormBase" onfocus="this.className='FormFocus';" onblur="this.className='FormBase';"/>
-                            到&nbsp;<input type="text" name="endmoney" size="10" class="FormBase" onfocus="this.className='FormFocus';" onblur="this.className='FormBase';"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            卖家信誉度:
-                        </td>
-                        <td>
-                            从&nbsp;<input type="text" name="startcredit" size="10" class="FormBase" onfocus="this.className='FormFocus';" onblur="this.className='FormBase';"/>
-                            到&nbsp;<input type="text" name="endcredit" size="10" class="FormBase" onfocus="this.className='FormFocus';" onblur="this.className='FormBase';"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            累计推广量:
-                        </td>
-                        <td>
-                            从&nbsp;<input type="text" name="startnum" size="10" class="FormBase" onfocus="this.className='FormFocus';" onblur="this.className='FormBase';"/>
-                            到&nbsp;<input type="text" name="endnum" size="10" class="FormBase" onfocus="this.className='FormFocus';" onblur="this.className='FormBase';"/>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
-<div class="Navbutton"><input type="button" class="ManagerButton" value="查找符合条件的商品" onclick="searchitem(this.form)"/></div>	
+<legend style="background: url(&quot;../images/icons/icon32.jpg&quot;) no-repeat scroll 6px 50% transparent;">
+            搜索相关店铺</legend>
+        <table cellspacing="0" cellpadding="4" width="100%" align="center">
+            <tr>
+                <td class="panelbox" width="50%" align="left">
+                    <table width="100%">
+                        <tr>
+                            <td style="width: 80px">
+                                店铺名称标题:
+                            </td>
+                            <td>
+                                <input type="text" name="shoptitle" size="30" class="FormBase" onfocus="this.className='FormFocus';"
+                                    onblur="this.className='FormBase';" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 80px">
+                                店铺卖家:
+                            </td>
+                            <td>
+                                <input type="text" name="shopnick" size="20" class="FormBase" onfocus="this.className='FormFocus';"
+                                    onblur="this.className='FormBase';" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 80px">
+                                店铺地区:
+                            </td>
+                            <td>
+                                省<input type="text" name="province" size="10" class="FormBase" onfocus="this.className='FormFocus';"
+                                    onblur="this.className='FormBase';" />
+                                市<input type="text" name="city" size="10" class="FormBase" onfocus="this.className='FormFocus';"
+                                    onblur="this.className='FormBase';" />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="panelbox" width="50%" align="right">
+                    <table width="100%">
+                        <tr>
+                            <td>
+                                店铺总评分区间:
+                            </td>
+                            <td>
+                                从&nbsp;<input type="text" name="startscore" size="10" class="FormBase" onfocus="this.className='FormFocus';"
+                                    onblur="this.className='FormBase';" />
+                                到&nbsp;<input type="text" name="endscore" size="10" class="FormBase" onfocus="this.className='FormFocus';"
+                                    onblur="this.className='FormBase';" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                店铺信誉区间:
+                            </td>
+                            <td>
+                                从&nbsp;<input type="text" name="startcredit" size="10" class="FormBase" onfocus="this.className='FormFocus';"
+                                    onblur="this.className='FormBase';" />
+                                到&nbsp;<input type="text" name="endcredit" size="10" class="FormBase" onfocus="this.className='FormFocus';"
+                                    onblur="this.className='FormBase';" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                店铺推广佣金率:
+                            </td>
+                            <td>
+                                从&nbsp;<input type="text" name="startrate" size="10" class="FormBase" onfocus="this.className='FormFocus';"
+                                    onblur="this.className='FormBase';" />
+                                到&nbsp;<input type="text" name="endrate" size="10" class="FormBase" onfocus="this.className='FormFocus';"
+                                    onblur="this.className='FormBase';" />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <div class="Navbutton">
+            <span style="padding-right: 4px;">排序方式</span>
+            <select name="showtype" id="Select1" style="margin-right: 8px;">
+                <option value="shop_level">按信誉度排序</option>
+                <option value="commission_rate">按佣金比率排序</option>
+            </select>
+            <input type="radio" name="theorder" id="descorder" class="txt" checked="checked" />倒序
+            <input type="radio" name="theorder" id="ascorder" class="txt" />正序
+            <input type="button" value="开始搜索" class="ManagerButton" onclick="searchshop()" />
+        </div>
 </fieldset>
 <cc1:Hint id="Hint1" runat="server" HintImageUrl="../images"></cc1:Hint>
 </div>
-<div id="taobaoitemlistgrid"><uc1:AjaxItemList id="AjaxItemList1" runat="server"></uc1:AjaxItemList></div>
+<div id="taobaoshoplistgrid"><uc1:AjaxShopList id="AjaxShopList1" runat="server"></uc1:AjaxShopList></div>
 </form>
 <%=footer%>
 </body>

@@ -559,6 +559,13 @@
     <Compile Include="ManagePage\syslogin.aspx.designer.cs">
       <DependentUpon>syslogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\taobao\taobao_editshoprecommend.aspx.cs">
+      <DependentUpon>taobao_editshoprecommend.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\taobao\taobao_editshoprecommend.aspx.designer.cs">
+      <DependentUpon>taobao_editshoprecommend.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\taobao\taobao_addCategory.aspx.cs">
       <DependentUpon>taobao_addCategory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1116,6 +1123,7 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="images\common\clipboard.swf" />
+    <Content Include="images\logo.gif" />
     <Content Include="javascript\jquery.ratingmin.js" />
     <Content Include="javascript\jqueryCommon.js" />
     <Content Include="javascript\template_showcompany.js" />
@@ -1641,6 +1649,7 @@
     <Content Include="ManagePage\styles\tab.css" />
     <Content Include="ManagePage\style\admin.css" />
     <Content Include="ManagePage\style\comm.css" />
+    <Content Include="ManagePage\taobao\taobao_editshoprecommend.aspx" />
     <Content Include="ManagePage\taobao\taobao_addCategory.aspx" />
     <Content Include="ManagePage\taobao\taobao_additemrecommend.aspx" />
     <Content Include="ManagePage\taobao\taobao_addrecommend.aspx" />

@@ -342,6 +342,14 @@ namespace SAS.Taobao.Data
             string commandText = string.Format("SELECT COUNT(*) FROM [{0}taobaoshop] WHERE {1}", BaseConfigs.GetTablePrefix, conditions);
             return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText), 0);
         }
+        /// <summary>
+        /// 根据店铺ID集合获取店铺信息集合
+        /// </summary>
+        public IDataReader GetTaoBaoShopList(string ids)
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}taobaoshop] WHERE [sid] IN ({2})", DbFields.SHOPDETAIL, BaseConfigs.GetTablePrefix, ids);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText);
+        }
         #endregion
     }
 }

@@ -390,6 +390,14 @@ namespace SAS.Taobao
         {
             return Data.DbProvider.GetInstance().GetTaoBaoShopCount(conditions);
         }
+        /// <summary>
+        /// 根据店铺ID集合获取店铺信息
+        /// </summary>
+        /// <param name="ids"></param>
+        public static SAS.Common.Generic.List<ShopDetailInfo> GetTaoBaoShopListByIds(string ids)
+        {
+            return DTOProvider.GetTaoBaoShopList(Data.DbProvider.GetInstance().GetTaoBaoShopList(ids));
+        }
         #endregion
     }
 }

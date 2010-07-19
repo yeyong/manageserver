@@ -77,12 +77,12 @@ namespace SAS.ManageWeb.ManagePage {
         protected global::SAS.Control.Hint Hint1;
         
         /// <summary>
-        /// AjaxItemList1 控件。
+        /// AjaxShopList1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::SAS.ManageWeb.ManagePage.ajaxtaobaoitems AjaxItemList1;
+        protected global::SAS.ManageWeb.ManagePage.ajaxtaobaoshops AjaxShopList1;
     }
 }

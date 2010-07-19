@@ -194,7 +194,7 @@
           </tr>
     </table>
     <div class="Navbutton">
-		<cc1:Button id="EditRecommendInfo" runat="server" Text=" 添 加 " ValidateForm="true"></cc1:Button>&nbsp;&nbsp;<input type="hidden" name="selitems" id="selitems" value="<%=selectitems%>"/>
+		<cc1:Button id="EditRecommendInfo" runat="server" Text=" 修 改 " ValidateForm="true"></cc1:Button>&nbsp;&nbsp;<input type="hidden" name="selitems" id="selitems" value="<%=selectitems%>"/>
 		<button type="button" class="ManagerButton" id="Button3" onclick="window.history.back();"><img src="../images/arrow_undo.gif"/> 返 回 </button>
 	</div>
 </fieldset>

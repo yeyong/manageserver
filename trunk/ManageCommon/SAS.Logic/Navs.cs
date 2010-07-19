@@ -332,26 +332,13 @@ namespace SAS.Logic
         {
             DataTable dt = new DataTable();
             string cachekeys = "Navs";
-            if (dataconfig.EnableCaching != 1)
+
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            dt = cache.RetrieveObject("/SAS/" + cachekeys) as DataTable;
+            if (dt == null)
             {
-                SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
-                dt = cache.RetrieveObject("/SAS/" + cachekeys) as DataTable;
-                if (dt == null)
-                {
-                    dt = GetNavigation(true);
-                    cache.AddObject("/SAS/" + cachekeys, dt);
-                }
-            }
-            else
-            {
-                SAS.Cache.SASDataCache datacache = SAS.Cache.SASDataCache.GetCacheService();
-                dt = datacache.GetDataCache(cachekeys) as DataTable;
-                if (dt == null)
-                {
-                    dt = GetNavigation(true);
-                    AggregateCacheDependency cd = DependencyFacade.GetNavsDependency();
-                    datacache.SetDataCache(cachekeys, dt, cd);
-                }
+                dt = GetNavigation(true);
+                cache.AddObject("/SAS/" + cachekeys, dt);
             }
             return dt;
         }
