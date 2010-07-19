@@ -1,17 +1,494 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="main.master.cs" Inherits="main" %>
+<%@ Import Namespace="SAS.Entity"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <asp:ContentPlaceHolder id="head" runat="server">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>首页</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta http-equiv="X-UA-Compatible" content="IE=7" />
+<link href="css/comm.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery.js" type="text/javascript"></script>
+    <asp:ContentPlaceHolder id="header" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="form1" runat="server">
-    <div>
-        <asp:ContentPlaceHolder id="mainbody" runat="server">
-        
-        </asp:ContentPlaceHolder>
-    </div>
-    </form>
+<div class="hd">
+	<div class="hd1">
+		<strong><a target="_blank" title="浙商黄页" href="<%=mainsiteurl%>"><img alt="浙商黄页" src="<%=mainsiteurl%>/images/logo.gif" /></a></strong>
+		<em></em>
+		<b><a title="淘之购" href="<%=therooturl%>"><img alt="淘之购" src="images/logo.gif" /></a></b>
+	</div>
+	<ul class="nav">
+	    <%
+            foreach (System.Data.DataRow dr in subnavs)
+            {
+	            %>
+	    <li class="<%=(dr["url"].ToString() == currentpagename + ".html")?"nav1":"nav2"%>"><a title="<%=dr["title"]%>" href="<%=dr["url"]%>"><%=dr["name"]%></a></li>
+	            <%
+            }
+              %>
+		<li class="nav3"><img alt="new" src="images/new.gif" /></li>
+		<li class="nav_tipic"><a title="" href="topicshow.shtml"><img alt="七夕节" src="images/ad/145x60.gif" /></a></li>
+	</ul>
+	<div class="hd2">
+		<div class="hd2nr" id="menu">
+			<div class="menu1">
+				<strong><a class="l_000" title="点击查看全部商品分类" href="category.shtml">全部商品分类和品牌</a></strong>
+				<ul class="nr">
+					<li class="nrli1">
+						<a title="服装服饰" href="channels.shtml">
+						<span class="mntu"><img alt="服装服饰" src="images/menu_1.gif" /></span>
+						<span class="mnzi">服装服饰 <em>连衣裙 手饰</em></span>
+						</a>
+						<p class="cot">
+							<span class="cotlt">
+								<b class="tit">选择分类：</b>
+								<b class="tit1"><a title="" href="list.shtml">热销类目</a></b>
+								<em class="type"><a title="" href="list.shtml">1OL连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">淑女连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">吊带裙</a></em>
+								<em class="type"><a title="" href="list.shtml">抹胸裙</a></em>
+								<em class="type"><a title="" href="list.shtml">T恤</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺衫</a></em>
+								<em class="type"><a title="" href="list.shtml">V领裙</a></em>
+								<em class="type"><a title="" href="list.shtml">衬衫</a></em>
+								<i class="line"></i>
+								<b class="tit1"><a title="" href="list.shtml">上装</a></b>
+								<em class="type"><a title="" href="list.shtml">1OL连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">淑女连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">小背心/吊带</a></em>
+								<em class="type"><a title="" href="list.shtml">针织衫</a></em>
+								<em class="type"><a title="" href="list.shtml">短外套</a></em>
+								<em class="type"><a title="" href="list.shtml">小西装</a></em>
+								<i class="line"></i>
+								<b class="tit1"><a title="" href="list.shtml">裙/裤装</a></b>
+								<em class="type"><a title="" href="list.shtml">1OL连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">淑女连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">吊带裙</a></em>
+								<em class="type"><a title="" href="list.shtml">抹胸裙</a></em>
+								<em class="type"><a title="" href="list.shtml">T恤</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺衫</a></em>
+							</span>
+							<span class="cotrt">
+								<b class="tit">选择品牌：</b>
+								<em class="bra"><a title="" href="list.shtml">优衣库</a></em>
+								<em class="bra"><a title="" href="list.shtml">歌莉娅</a></em>
+								<em class="bra"><a title="" href="list.shtml">十月传奇</a></em>
+								<em class="bra"><a title="" href="list.shtml">欧时力</a></em>
+								<em class="bra"><a title="" href="list.shtml">太平鸟</a></em>
+								<em class="bra"><a title="" href="list.shtml">美特斯·邦威</a></em>
+								<em class="bra"><a title="" href="list.shtml">ONLY</a></em>
+								<em class="bra"><a title="" href="list.shtml">Esprit</a></em>
+								<em class="bra"><a title="" href="list.shtml">以纯</a></em>
+								<em class="bra"><a title="" href="list.shtml">真维斯</a></em>
+								<em class="bra"><a title="" href="list.shtml">堡狮龙</a></em>
+								<em class="bra"><a title="" href="list.shtml">佐丹奴</a></em>
+								<em class="bra"><a title="" href="list.shtml">O.SA欧莎</a></em>
+								<em class="bra"><a title="" href="list.shtml">裂帛</a></em>
+								<em class="bra"><a title="" href="list.shtml">美特斯·邦威</a></em>
+								<em class="bra"><a title="" href="list.shtml">ONLY</a></em>
+								<em class="bra"><a title="" href="list.shtml">Esprit</a></em>
+								<em class="bra"><a title="" href="list.shtml">以纯</a></em>
+								<em class="bra"><a title="" href="list.shtml">真维斯</a></em>
+							</span>
+						</p>
+					</li>
+					<li class="nrli1">
+						<a title="鞋帽箱包" href="channels.shtml">
+						<span class="mntu"><img alt="鞋帽箱包" src="images/menu_2.gif" /></span>
+						<span class="mnzi">鞋帽箱包 <em>单肩包 帽子</em></span>
+						</a>
+						<p class="cot">
+							<span class="cotlt">
+								<b class="tit">选择分类：</b>
+								<b class="tit1"><a title="" href="list.shtml">热销类目</a></b>
+								<em class="type"><a title="" href="list.shtml">2OL连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">淑女连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">吊带裙</a></em>
+								<em class="type"><a title="" href="list.shtml">抹胸裙</a></em>
+								<em class="type"><a title="" href="list.shtml">T恤</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺衫</a></em>
+								<em class="type"><a title="" href="list.shtml">V领裙</a></em>
+								<em class="type"><a title="" href="list.shtml">衬衫</a></em>
+								<i class="line"></i>
+								<b class="tit1"><a title="" href="list.shtml">上装</a></b>
+								<em class="type"><a title="" href="list.shtml">2OL连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">淑女连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">小背心/吊带</a></em>
+								<em class="type"><a title="" href="list.shtml">针织衫</a></em>
+								<em class="type"><a title="" href="list.shtml">短外套</a></em>
+								<em class="type"><a title="" href="list.shtml">小西装</a></em>
+								<i class="line"></i>
+								<b class="tit1"><a title="" href="list.shtml">裙/裤装</a></b>
+								<em class="type"><a title="" href="list.shtml">2OL连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">淑女连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">吊带裙</a></em>
+								<em class="type"><a title="" href="list.shtml">抹胸裙</a></em>
+								<em class="type"><a title="" href="list.shtml">T恤</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺衫</a></em>
+							</span>
+							<span class="cotrt">
+								<b class="tit">选择品牌：</b>
+								<em class="bra"><a title="" href="list.shtml">优衣库</a></em>
+								<em class="bra"><a title="" href="list.shtml">歌莉娅</a></em>
+								<em class="bra"><a title="" href="list.shtml">十月传奇</a></em>
+								<em class="bra"><a title="" href="list.shtml">欧时力</a></em>
+								<em class="bra"><a title="" href="list.shtml">太平鸟</a></em>
+								<em class="bra"><a title="" href="list.shtml">美特斯·邦威</a></em>
+								<em class="bra"><a title="" href="list.shtml">ONLY</a></em>
+								<em class="bra"><a title="" href="list.shtml">Esprit</a></em>
+								<em class="bra"><a title="" href="list.shtml">以纯</a></em>
+								<em class="bra"><a title="" href="list.shtml">真维斯</a></em>
+								<em class="bra"><a title="" href="list.shtml">堡狮龙</a></em>
+								<em class="bra"><a title="" href="list.shtml">佐丹奴</a></em>
+								<em class="bra"><a title="" href="list.shtml">O.SA欧莎</a></em>
+								<em class="bra"><a title="" href="list.shtml">裂帛</a></em>
+								<em class="bra"><a title="" href="list.shtml">美特斯·邦威</a></em>
+								<em class="bra"><a title="" href="list.shtml">ONLY</a></em>
+								<em class="bra"><a title="" href="list.shtml">Esprit</a></em>
+								<em class="bra"><a title="" href="list.shtml">以纯</a></em>
+								<em class="bra"><a title="" href="list.shtml">真维斯</a></em>
+							</span>
+						</p>
+					</li>
+					<li class="nrli1">
+						<a title="手机数码" href="channels.shtml">
+						<span class="mntu"><img alt="手机数码" src="images/menu_3.gif" /></span>
+						<span class="mnzi">手机数码 <em>数码相机 手机</em></span>
+						</a>
+						<p class="cot">
+							<span class="cotlt">
+								<b class="tit">选择分类：</b>
+								<b class="tit1"><a title="" href="list.shtml">热销类目</a></b>
+								<em class="type"><a title="" href="list.shtml">3OL连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">淑女连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">吊带裙</a></em>
+								<em class="type"><a title="" href="list.shtml">抹胸裙</a></em>
+								<em class="type"><a title="" href="list.shtml">T恤</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺衫</a></em>
+								<em class="type"><a title="" href="list.shtml">V领裙</a></em>
+								<em class="type"><a title="" href="list.shtml">衬衫</a></em>
+								<i class="line"></i>
+								<b class="tit1"><a title="" href="list.shtml">上装</a></b>
+								<em class="type"><a title="" href="list.shtml">3OL连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">淑女连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">小背心/吊带</a></em>
+								<em class="type"><a title="" href="list.shtml">针织衫</a></em>
+								<em class="type"><a title="" href="list.shtml">短外套</a></em>
+								<em class="type"><a title="" href="list.shtml">小西装</a></em>
+								<i class="line"></i>
+								<b class="tit1"><a title="" href="list.shtml">裙/裤装</a></b>
+								<em class="type"><a title="" href="list.shtml">3OL连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">淑女连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">吊带裙</a></em>
+								<em class="type"><a title="" href="list.shtml">抹胸裙</a></em>
+								<em class="type"><a title="" href="list.shtml">T恤</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺衫</a></em>
+							</span>
+							<span class="cotrt">
+								<b class="tit">选择品牌：</b>
+								<em class="bra"><a title="" href="list.shtml">优衣库</a></em>
+								<em class="bra"><a title="" href="list.shtml">歌莉娅</a></em>
+								<em class="bra"><a title="" href="list.shtml">十月传奇</a></em>
+								<em class="bra"><a title="" href="list.shtml">欧时力</a></em>
+								<em class="bra"><a title="" href="list.shtml">太平鸟</a></em>
+								<em class="bra"><a title="" href="list.shtml">美特斯·邦威</a></em>
+								<em class="bra"><a title="" href="list.shtml">ONLY</a></em>
+								<em class="bra"><a title="" href="list.shtml">Esprit</a></em>
+								<em class="bra"><a title="" href="list.shtml">以纯</a></em>
+								<em class="bra"><a title="" href="list.shtml">真维斯</a></em>
+								<em class="bra"><a title="" href="list.shtml">堡狮龙</a></em>
+								<em class="bra"><a title="" href="list.shtml">佐丹奴</a></em>
+								<em class="bra"><a title="" href="list.shtml">O.SA欧莎</a></em>
+								<em class="bra"><a title="" href="list.shtml">裂帛</a></em>
+								<em class="bra"><a title="" href="list.shtml">美特斯·邦威</a></em>
+								<em class="bra"><a title="" href="list.shtml">ONLY</a></em>
+								<em class="bra"><a title="" href="list.shtml">Esprit</a></em>
+								<em class="bra"><a title="" href="list.shtml">以纯</a></em>
+								<em class="bra"><a title="" href="list.shtml">真维斯</a></em>
+							</span>
+						</p>
+					</li>
+					<li class="nrli1">
+						<a title="日用百货" href="channels.shtml">
+						<span class="mntu"><img alt="日用百货" src="images/menu_4.gif" /></span>
+						<span class="mnzi">日用百货 <em>家具 居家/收纳</em></span>
+						</a>
+						<p class="cot">
+							<span class="cotlt">
+								<b class="tit">选择分类：</b>
+								<b class="tit1"><a title="" href="list.shtml">热销类目</a></b>
+								<em class="type"><a title="" href="list.shtml">4OL连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">淑女连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">吊带裙</a></em>
+								<em class="type"><a title="" href="list.shtml">抹胸裙</a></em>
+								<em class="type"><a title="" href="list.shtml">T恤</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺衫</a></em>
+								<em class="type"><a title="" href="list.shtml">V领裙</a></em>
+								<em class="type"><a title="" href="list.shtml">衬衫</a></em>
+								<i class="line"></i>
+								<b class="tit1"><a title="" href="list.shtml">上装</a></b>
+								<em class="type"><a title="" href="list.shtml">4OL连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">淑女连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">小背心/吊带</a></em>
+								<em class="type"><a title="" href="list.shtml">针织衫</a></em>
+								<em class="type"><a title="" href="list.shtml">短外套</a></em>
+								<em class="type"><a title="" href="list.shtml">小西装</a></em>
+								<i class="line"></i>
+								<b class="tit1"><a title="" href="list.shtml">裙/裤装</a></b>
+								<em class="type"><a title="" href="list.shtml">4OL连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">淑女连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">吊带裙</a></em>
+								<em class="type"><a title="" href="list.shtml">抹胸裙</a></em>
+								<em class="type"><a title="" href="list.shtml">T恤</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺衫</a></em>
+							</span>
+							<span class="cotrt">
+								<b class="tit">选择品牌：</b>
+								<em class="bra"><a title="" href="list.shtml">优衣库</a></em>
+								<em class="bra"><a title="" href="list.shtml">歌莉娅</a></em>
+								<em class="bra"><a title="" href="list.shtml">十月传奇</a></em>
+								<em class="bra"><a title="" href="list.shtml">欧时力</a></em>
+								<em class="bra"><a title="" href="list.shtml">太平鸟</a></em>
+								<em class="bra"><a title="" href="list.shtml">美特斯·邦威</a></em>
+								<em class="bra"><a title="" href="list.shtml">ONLY</a></em>
+								<em class="bra"><a title="" href="list.shtml">Esprit</a></em>
+								<em class="bra"><a title="" href="list.shtml">以纯</a></em>
+								<em class="bra"><a title="" href="list.shtml">真维斯</a></em>
+								<em class="bra"><a title="" href="list.shtml">堡狮龙</a></em>
+								<em class="bra"><a title="" href="list.shtml">佐丹奴</a></em>
+								<em class="bra"><a title="" href="list.shtml">O.SA欧莎</a></em>
+								<em class="bra"><a title="" href="list.shtml">裂帛</a></em>
+								<em class="bra"><a title="" href="list.shtml">美特斯·邦威</a></em>
+								<em class="bra"><a title="" href="list.shtml">ONLY</a></em>
+								<em class="bra"><a title="" href="list.shtml">Esprit</a></em>
+								<em class="bra"><a title="" href="list.shtml">以纯</a></em>
+								<em class="bra"><a title="" href="list.shtml">真维斯</a></em>
+							</span>
+						</p>
+					</li>
+					<li class="nrli1">
+						<a title="美食美味" href="channels.shtml">
+						<span class="mntu"><img alt="美食美味" src="images/menu_5.gif" /></span>
+						<span class="mnzi">美食美味 <em>零食 茶叶</em></span>
+						</a>
+						<p class="cot">
+							<span class="cotlt">
+								<b class="tit">选择分类：</b>
+								<b class="tit1"><a title="" href="list.shtml">热销类目</a></b>
+								<em class="type"><a title="" href="list.shtml">5OL连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">淑女连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">吊带裙</a></em>
+								<em class="type"><a title="" href="list.shtml">抹胸裙</a></em>
+								<em class="type"><a title="" href="list.shtml">T恤</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺衫</a></em>
+								<em class="type"><a title="" href="list.shtml">V领裙</a></em>
+								<em class="type"><a title="" href="list.shtml">衬衫</a></em>
+								<i class="line"></i>
+								<b class="tit1"><a title="" href="list.shtml">上装</a></b>
+								<em class="type"><a title="" href="list.shtml">5OL连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">淑女连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">小背心/吊带</a></em>
+								<em class="type"><a title="" href="list.shtml">针织衫</a></em>
+								<em class="type"><a title="" href="list.shtml">短外套</a></em>
+								<em class="type"><a title="" href="list.shtml">小西装</a></em>
+								<i class="line"></i>
+								<b class="tit1"><a title="" href="list.shtml">裙/裤装</a></b>
+								<em class="type"><a title="" href="list.shtml">5OL连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">淑女连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">吊带裙</a></em>
+								<em class="type"><a title="" href="list.shtml">抹胸裙</a></em>
+								<em class="type"><a title="" href="list.shtml">T恤</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺衫</a></em>
+							</span>
+							<span class="cotrt">
+								<b class="tit">选择品牌：</b>
+								<em class="bra"><a title="" href="list.shtml">优衣库</a></em>
+								<em class="bra"><a title="" href="list.shtml">歌莉娅</a></em>
+								<em class="bra"><a title="" href="list.shtml">十月传奇</a></em>
+								<em class="bra"><a title="" href="list.shtml">欧时力</a></em>
+								<em class="bra"><a title="" href="list.shtml">太平鸟</a></em>
+								<em class="bra"><a title="" href="list.shtml">美特斯·邦威</a></em>
+								<em class="bra"><a title="" href="list.shtml">ONLY</a></em>
+								<em class="bra"><a title="" href="list.shtml">Esprit</a></em>
+								<em class="bra"><a title="" href="list.shtml">以纯</a></em>
+								<em class="bra"><a title="" href="list.shtml">真维斯</a></em>
+								<em class="bra"><a title="" href="list.shtml">堡狮龙</a></em>
+								<em class="bra"><a title="" href="list.shtml">佐丹奴</a></em>
+								<em class="bra"><a title="" href="list.shtml">O.SA欧莎</a></em>
+								<em class="bra"><a title="" href="list.shtml">裂帛</a></em>
+								<em class="bra"><a title="" href="list.shtml">美特斯·邦威</a></em>
+								<em class="bra"><a title="" href="list.shtml">ONLY</a></em>
+								<em class="bra"><a title="" href="list.shtml">Esprit</a></em>
+								<em class="bra"><a title="" href="list.shtml">以纯</a></em>
+								<em class="bra"><a title="" href="list.shtml">真维斯</a></em>
+							</span>
+						</p>
+					</li>
+					<li class="nrli1">
+						<a title="美容美妆" href="channels.shtml">
+						<span class="mntu"><img alt="美容美妆" src="images/menu_6.gif" /></span>
+						<span class="mnzi">美容美妆 <em>瘦身美体 护肤</em></span>
+						</a>
+						<p class="cot">
+							<span class="cotlt">
+								<b class="tit">选择分类：</b>
+								<b class="tit1"><a title="" href="list.shtml">热销类目</a></b>
+								<em class="type"><a title="" href="list.shtml">6OL连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">淑女连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">吊带裙</a></em>
+								<em class="type"><a title="" href="list.shtml">抹胸裙</a></em>
+								<em class="type"><a title="" href="list.shtml">T恤</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺衫</a></em>
+								<em class="type"><a title="" href="list.shtml">V领裙</a></em>
+								<em class="type"><a title="" href="list.shtml">衬衫</a></em>
+								<i class="line"></i>
+								<b class="tit1"><a title="" href="list.shtml">上装</a></b>
+								<em class="type"><a title="" href="list.shtml">6OL连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">淑女连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">小背心/吊带</a></em>
+								<em class="type"><a title="" href="list.shtml">针织衫</a></em>
+								<em class="type"><a title="" href="list.shtml">短外套</a></em>
+								<em class="type"><a title="" href="list.shtml">小西装</a></em>
+								<i class="line"></i>
+								<b class="tit1"><a title="" href="list.shtml">裙/裤装</a></b>
+								<em class="type"><a title="" href="list.shtml">6OL连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">淑女连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">吊带裙</a></em>
+								<em class="type"><a title="" href="list.shtml">抹胸裙</a></em>
+								<em class="type"><a title="" href="list.shtml">T恤</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺衫</a></em>
+							</span>
+							<span class="cotrt">
+								<b class="tit">选择品牌：</b>
+								<em class="bra"><a title="" href="list.shtml">优衣库</a></em>
+								<em class="bra"><a title="" href="list.shtml">歌莉娅</a></em>
+								<em class="bra"><a title="" href="list.shtml">十月传奇</a></em>
+								<em class="bra"><a title="" href="list.shtml">欧时力</a></em>
+								<em class="bra"><a title="" href="list.shtml">太平鸟</a></em>
+								<em class="bra"><a title="" href="list.shtml">美特斯·邦威</a></em>
+								<em class="bra"><a title="" href="list.shtml">ONLY</a></em>
+								<em class="bra"><a title="" href="list.shtml">Esprit</a></em>
+								<em class="bra"><a title="" href="list.shtml">以纯</a></em>
+								<em class="bra"><a title="" href="list.shtml">真维斯</a></em>
+								<em class="bra"><a title="" href="list.shtml">堡狮龙</a></em>
+								<em class="bra"><a title="" href="list.shtml">佐丹奴</a></em>
+								<em class="bra"><a title="" href="list.shtml">O.SA欧莎</a></em>
+								<em class="bra"><a title="" href="list.shtml">裂帛</a></em>
+								<em class="bra"><a title="" href="list.shtml">美特斯·邦威</a></em>
+								<em class="bra"><a title="" href="list.shtml">ONLY</a></em>
+								<em class="bra"><a title="" href="list.shtml">Esprit</a></em>
+								<em class="bra"><a title="" href="list.shtml">以纯</a></em>
+								<em class="bra"><a title="" href="list.shtml">真维斯</a></em>
+							</span>
+						</p>
+					</li>
+					<li class="nrli1">
+						<a title="其他" href="channels.shtml">
+						<span class="mntu"><img alt="其他" src="images/menu_7.gif" /></span>
+						<span class="mnzi">其&nbsp;&nbsp;&nbsp;&nbsp;他 <em>母婴 文体</em></span>
+						</a>
+						<p class="cot">
+							<span class="cotlt">
+								<b class="tit">选择分类：</b>
+								<b class="tit1"><a title="" href="list.shtml">热销类目</a></b>
+								<em class="type"><a title="" href="list.shtml">7OL连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">淑女连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">吊带裙</a></em>
+								<em class="type"><a title="" href="list.shtml">抹胸裙</a></em>
+								<em class="type"><a title="" href="list.shtml">T恤</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺衫</a></em>
+								<em class="type"><a title="" href="list.shtml">V领裙</a></em>
+								<em class="type"><a title="" href="list.shtml">衬衫</a></em>
+								<i class="line"></i>
+								<b class="tit1"><a title="" href="list.shtml">上装</a></b>
+								<em class="type"><a title="" href="list.shtml">7OL连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">淑女连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">小背心/吊带</a></em>
+								<em class="type"><a title="" href="list.shtml">针织衫</a></em>
+								<em class="type"><a title="" href="list.shtml">短外套</a></em>
+								<em class="type"><a title="" href="list.shtml">小西装</a></em>
+								<i class="line"></i>
+								<b class="tit1"><a title="" href="list.shtml">裙/裤装</a></b>
+								<em class="type"><a title="" href="list.shtml">7OL连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">淑女连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺连衣裙</a></em>
+								<em class="type"><a title="" href="list.shtml">吊带裙</a></em>
+								<em class="type"><a title="" href="list.shtml">抹胸裙</a></em>
+								<em class="type"><a title="" href="list.shtml">T恤</a></em>
+								<em class="type"><a title="" href="list.shtml">雪纺衫</a></em>
+							</span>
+							<span class="cotrt">
+								<b class="tit">选择品牌：</b>
+								<em class="bra"><a title="" href="list.shtml">优衣库</a></em>
+								<em class="bra"><a title="" href="list.shtml">歌莉娅</a></em>
+								<em class="bra"><a title="" href="list.shtml">十月传奇</a></em>
+								<em class="bra"><a title="" href="list.shtml">欧时力</a></em>
+								<em class="bra"><a title="" href="list.shtml">太平鸟</a></em>
+								<em class="bra"><a title="" href="list.shtml">美特斯·邦威</a></em>
+								<em class="bra"><a title="" href="list.shtml">ONLY</a></em>
+								<em class="bra"><a title="" href="list.shtml">Esprit</a></em>
+								<em class="bra"><a title="" href="list.shtml">以纯</a></em>
+								<em class="bra"><a title="" href="list.shtml">真维斯</a></em>
+								<em class="bra"><a title="" href="list.shtml">堡狮龙</a></em>
+								<em class="bra"><a title="" href="list.shtml">佐丹奴</a></em>
+								<em class="bra"><a title="" href="list.shtml">O.SA欧莎</a></em>
+								<em class="bra"><a title="" href="list.shtml">裂帛</a></em>
+								<em class="bra"><a title="" href="list.shtml">美特斯·邦威</a></em>
+								<em class="bra"><a title="" href="list.shtml">ONLY</a></em>
+								<em class="bra"><a title="" href="list.shtml">Esprit</a></em>
+								<em class="bra"><a title="" href="list.shtml">以纯</a></em>
+								<em class="bra"><a title="" href="list.shtml">真维斯</a></em>
+							</span>
+						</p>
+					</li>
+				</ul>
+				<i class="lt"></i><i class="rt"></i>
+			</div>
+			<form name="form1" id="form1" method="post" class="soso">
+				<p><input name="" type="text" class="input_soout" value="输入搜索的关键字" onblur="if(this.value==''||this.value=='输入搜索的关键字'){this.value='输入搜索的关键字';this.className='input_soout';}" onfocus="if(this.value=='输入搜索的关键字'){this.value='';this.className='input_soon';}" /></p>
+				<p><input name="" type="button" class="so" value="" /></p>
+			</form>
+			<p class="tdrec">
+				<strong>今日推荐：</strong>
+				<a class="l_fcc556" title="打造森女系低碳美人" href="show.shtml">打造森女系低碳美人</a>
+			</p>
+		</div>
+	</div>
+</div>
+    <asp:ContentPlaceHolder id="mainbody" runat="server">
+    </asp:ContentPlaceHolder>
+<div class="foot mar_top">
+	<div class="ftnr">
+		<strong><a title="" href="#"><img alt="" src="images/foot_logo.gif" /></a></strong>
+		<span class="line"></span>
+		<p><a class="l_fff" title="" href="#">关于淘之购</a> | <a class="l_fff" title="" href="#">法律声明</a> | <a class="l_fff" title="" href="#">联系我们</a> | <a class="l_fff" title="" href="#">网站地图</a> | <a class="l_fff" title="" href="#">友情链接</a></p>
+		<p>网站备案号：浙<%=configinfo.Icp%> Copyright @ 2010 <a class="l_fff" title="" href="#">天狼星</a> All Rights Reserved</p>
+	</div>
+</div>
 </body>
+    <asp:ContentPlaceHolder id="footer" runat="server">
+    </asp:ContentPlaceHolder>
 </html>

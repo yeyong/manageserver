@@ -75,7 +75,6 @@
         thebutton.onclick = function() {
             delRow(this);
             $("selitems").value = $("selitems").value.replace("," + thevalue, "");
-            alert($("selitems").value);
         };
         theobj.firstChild.replaceChild(thebutton, theobj.firstChild.firstChild);
         $("SelectItem").firstChild.appendChild(theobj);

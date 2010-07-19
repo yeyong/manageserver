@@ -16,6 +16,7 @@ namespace SAS.ManageWeb.ManagePage
     {
         protected int rtype = SASRequest.GetInt("ctype", 0);
         protected string rtypestr = "";
+        protected string rtypeurl = "";
         private TaoBaoPluginBase tpb = TaoBaoPluginProvider.GetInstance();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -28,10 +29,10 @@ namespace SAS.ManageWeb.ManagePage
 
             switch (rtype)
             {
-                case 1: rtypestr = "商品"; break;
-                case 2: rtypestr = "店铺"; break;
-                case 3: rtypestr = "活动"; break;
-                case 4: rtypestr = "频道"; break;
+                case 1: rtypestr = "商品"; rtypeurl = "taobao_edititemrecommend.aspx"; break;
+                case 2: rtypestr = "店铺"; rtypeurl = "taobao_editshoprecommend.aspx"; break;
+                case 3: rtypestr = "活动"; rtypeurl = "taobao_edititemrecommend.aspx"; break;
+                case 4: rtypestr = "频道"; rtypeurl = "taobao_edititemrecommend.aspx"; break;
             }
 
             if (!Page.IsPostBack)

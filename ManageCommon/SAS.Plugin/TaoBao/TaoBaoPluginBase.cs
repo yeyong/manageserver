@@ -114,5 +114,10 @@ namespace SAS.Plugin.TaoBao
         /// 根据条件获取淘宝店铺数量
         /// </summary>
         public abstract int GetTaoBaoShopCountByCondition(string conditions);
+        /// <summary>
+        /// 根据店铺ID集合获取店铺信息
+        /// </summary>
+        /// <param name="ids"></param>
+        public abstract SAS.Common.Generic.List<ShopDetailInfo> GetTaoBaoShopListByIds(string ids);
     }
 }
