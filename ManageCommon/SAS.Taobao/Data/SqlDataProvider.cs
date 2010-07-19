@@ -277,11 +277,69 @@ namespace SAS.Taobao.Data
             return DbHelper.ExecuteReader(CommandType.StoredProcedure, string.Format("{0}gettaobaoshoplistbypage", BaseConfigs.GetTablePrefix), parms);
         }
         /// <summary>
+        /// 获取店铺搜索条件
+        /// </summary>
+        /// <param name="shoptitle">店铺标题名称</param>
+        /// <param name="shopnick">卖家昵称</param>
+        /// <param name="province">所在省份</param>
+        /// <param name="city">所在市</param>
+        /// <param name="startscore">最小评分</param>
+        /// <param name="endstartscore">最大评分</param>
+        /// <param name="startcredit">最小信誉值</param>
+        /// <param name="endcredit">最大信誉值</param>
+        /// <param name="startrate">最小佣金率</param>
+        /// <param name="endrate">最大佣金率</param>
+        public string GetTaoBaoShopCondition(string shoptitle, string shopnick, string province, string city, int startscore, int endscore, int startcredit, int endcredit, int startrate, int endrate)
+        {
+            string tableName = string.Format("{0}taobaoshop", BaseConfigs.GetTablePrefix);
+            StringBuilder sqlBuilder = new StringBuilder("1=1");
+
+            if (shoptitle != "")
+            {
+                sqlBuilder.AppendFormat(" AND [{1}].[title] like '%{0}%'", shoptitle, tableName);
+            }
+
+            if (shopnick != "")
+            {
+                sqlBuilder.AppendFormat(" AND [{1}].[nick] like '%{0}%'", shopnick, tableName);
+            }
+
+            if (province != "")
+            {
+                sqlBuilder.AppendFormat(" AND [{1}].[shop_province] like '%{0}%'", province, tableName);
+            }
+
+            if (city != "")
+            {
+                sqlBuilder.AppendFormat(" AND [{1}].[shop_city] like '%{0}%'", city, tableName);
+            }
+
+            if (startscore * endscore > 0 && startscore < endscore)
+            {
+                sqlBuilder.AppendFormat(" AND [{1}].[shop_score] >= {0}", startscore, tableName);
+                sqlBuilder.AppendFormat(" AND [{1}].[shop_score] <= {0}", endscore, tableName);
+            }
+
+            if (startcredit * endcredit > 0 && startcredit < endcredit)
+            {
+                sqlBuilder.AppendFormat(" AND [{1}].[shop_score] >= {0}", startcredit, tableName);
+                sqlBuilder.AppendFormat(" AND [{1}].[shop_score] <= {0}", endcredit, tableName);
+            }
+
+            if (startrate * endrate > 0 && startrate < endrate)
+            {
+                sqlBuilder.AppendFormat(" AND [{1}].[shop_score] >= {0}", startrate, tableName);
+                sqlBuilder.AppendFormat(" AND [{1}].[shop_score] <= {0}", endrate, tableName);
+            }
+
+            return sqlBuilder.ToString();
+        }
+        /// <summary>
         /// 根据条件获取淘宝店铺数量
         /// </summary>
         public int GetTaoBaoShopCount(string conditions)
         {
-            string commandText = string.Format("SELECT COUNT(*) FROM [{0}taobaoshop] WHERE 1=1 {1}", BaseConfigs.GetTablePrefix, conditions);
+            string commandText = string.Format("SELECT COUNT(*) FROM [{0}taobaoshop] WHERE {1}", BaseConfigs.GetTablePrefix, conditions);
             return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText), 0);
         }
         #endregion

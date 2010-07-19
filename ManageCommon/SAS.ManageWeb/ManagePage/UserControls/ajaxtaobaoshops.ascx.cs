@@ -15,23 +15,48 @@ namespace SAS.ManageWeb.ManagePage
     public partial class ajaxtaobaoshops : System.Web.UI.UserControl
     {
         protected List<ShopDetailInfo> shoplist = new List<ShopDetailInfo>();
-        public string nick = SASRequest.GetString("nick");
         protected TaoBaoPluginBase tpb = TaoBaoPluginProvider.GetInstance();
         public string pagelink;
         public int currentpage = 0;
         //页面大小
         public int pagesize = 16;
+        protected DisplayMode dmode = DisplayMode.SearchMode;
+
+        public string shoptitle = SASRequest.GetString("shoptitle").Trim();
+        public string shopnick = SASRequest.GetString("shopnick").Trim();
+        public string province = SASRequest.GetString("province").Trim();
+        public string city = SASRequest.GetString("city").Trim();
+        public int startscore = SASRequest.GetInt("startscore",-1);
+        public int endscore = SASRequest.GetInt("endscore", -1);
+        public int startcredit = SASRequest.GetInt("startcredit", -1);
+        public int endcredit = SASRequest.GetInt("endcredit", -1);
+        public int startrate = SASRequest.GetInt("startrate", -1);
+        public int endrate = SASRequest.GetInt("endrate", -1);
+        public string ordercolumn = SASRequest.GetString("ordercolumn");
+        public string ordertype = SASRequest.GetString("ordertype");
+        public int display = SASRequest.GetInt("display", -1);
+
+        /// <summary>
+        /// 显示模式
+        /// </summary>
+        public DisplayMode Display
+        {
+            set { dmode = value; }
+            get { return dmode; }
+        }
 
         public ajaxtaobaoshops()
         {
+            if (display == 1) dmode = DisplayMode.ManageMode;
             currentpage = SASRequest.GetInt("currentpage", 1);
             //获取当前页数
             if (SASRequest.GetInt("postnumber", 0) > 0)
             {
                 pagesize = SASRequest.GetInt("postnumber", 0);
             }
-            int recordcount = tpb.GetTaoBaoShopCountByCondition("");
-            shoplist = tpb.GetTaoBaoShopsPage("", pagesize, currentpage, "shop_level", "desc");
+            string conditions = tpb.GetTaoBaoShopCondition(shoptitle, shopnick, province, city, startscore, endscore, startcredit, endcredit, startrate, endrate);
+            int recordcount = tpb.GetTaoBaoShopCountByCondition(conditions);
+            shoplist = tpb.GetTaoBaoShopsPage(conditions, pagesize, currentpage, ordercolumn, ordertype);
             pagelink = AjaxPagination(recordcount, pagesize, currentpage);
         }
 
@@ -45,11 +70,11 @@ namespace SAS.ManageWeb.ManagePage
         {
             if (SASRequest.GetInt("postnumber", 0) > 0)
             {
-                return AjaxPagination(recordcount, pagesize, currentpage, "../usercontrols/ajaxtaobaoitems.ascx", "nick=" + nick + "postnumber=" + SASRequest.GetInt("postnumber", 0), "taobaoshoplistgrid");
+                return AjaxPagination(recordcount, pagesize, currentpage, "../usercontrols/ajaxtaobaoshops.ascx", "shoptitle=" + shoptitle + "&shopnick=" + shopnick + "&province=" + province + "&city=" + city + "&startscore=" + startscore + "&endscore=" + endscore + "&startcredit=" + startcredit + "&endcredit=" + endcredit + "&startrate=" + startrate + "&endrate=" + endrate + "&ordercolumn=" + ordercolumn + "&ordertype=" + ordertype + "&postnumber=" + SASRequest.GetInt("postnumber", 0), "taobaoshoplistgrid");
             }
             else
             {
-                return AjaxPagination(recordcount, pagesize, currentpage, "../usercontrols/ajaxtaobaoitems.ascx", "nick=" + nick, "taobaoshoplistgrid");
+                return AjaxPagination(recordcount, pagesize, currentpage, "../usercontrols/ajaxtaobaoshops.ascx", "shoptitle=" + shoptitle + "&shopnick=" + shopnick + "&province=" + province + "&city=" + city + "&startscore=" + startscore + "&endscore=" + endscore + "&startcredit=" + startcredit + "&endcredit=" + endcredit + "&startrate=" + startrate + "&endrate=" + endrate + "&ordercolumn=" + ordercolumn + "&ordertype=" + ordertype, "taobaoshoplistgrid");
             }
         }
 
@@ -130,6 +155,21 @@ namespace SAS.ManageWeb.ManagePage
 
             return currentpagestr;
 
+        }
+
+        /// <summary>
+        /// 显示模式
+        /// </summary>
+        public enum DisplayMode
+        {
+            /// <summary>
+            /// 搜索模式
+            /// </summary>
+            SearchMode,
+            /// <summary>
+            /// 管理模式
+            /// </summary>
+            ManageMode
         }
     }
 }
