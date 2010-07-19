@@ -91,11 +91,11 @@ namespace SAS.ManageWeb.ManagePage
                     sb.Append("<tr><td class=treetd> " + mystr + " <img src=../images/folder.gif class=treeimg > <input class=\"input1\" type=checkbox id=\"" + this.ClientID + "\" name=\"" + this.ClientID + "\" value=\"" + s_value.ToString().Trim() + "\" > " + s_text.ToString().Trim() + "</td></tr>");
                 }
                 
-                if (itemcatinfo.IsParent)
-                {
-                    System.Collections.Generic.List<ItemCat> itemcatlist2 = taobaos.GetItemCatCache(itemcatinfo.Cid);
-                    AddAdsTree(itemcatlist2, currentnodestr);
-                }
+                //if (itemcatinfo.IsParent)
+                //{
+                //    System.Collections.Generic.List<ItemCat> itemcatlist2 = taobaos.GetItemCatCache(itemcatinfo.Cid);
+                //    AddAdsTree(itemcatlist2, currentnodestr);
+                //}
                 n++;
             }
 

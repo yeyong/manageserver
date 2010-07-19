@@ -97,6 +97,20 @@ namespace SAS.Plugin.TaoBao
         /// </summary>
         public abstract SAS.Common.Generic.List<ShopDetailInfo> GetTaoBaoShopsPage(string conditions, int pagesize, int pageindex, string ordercolumn, string ordertype);
         /// <summary>
+        /// 获取店铺搜索条件
+        /// </summary>
+        /// <param name="shoptitle">店铺标题名称</param>
+        /// <param name="shopnick">卖家昵称</param>
+        /// <param name="province">所在省份</param>
+        /// <param name="city">所在市</param>
+        /// <param name="startscore">最小评分</param>
+        /// <param name="endstartscore">最大评分</param>
+        /// <param name="startcredit">最小信誉值</param>
+        /// <param name="endcredit">最大信誉值</param>
+        /// <param name="startrate">最小佣金率</param>
+        /// <param name="endrate">最大佣金率</param>
+        public abstract string GetTaoBaoShopCondition(string shoptitle, string shopnick, string province, string city, int startscore, int endscore, int startcredit, int endcredit, int startrate, int endrate);
+        /// <summary>
         /// 根据条件获取淘宝店铺数量
         /// </summary>
         public abstract int GetTaoBaoShopCountByCondition(string conditions);
