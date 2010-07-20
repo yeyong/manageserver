@@ -74,7 +74,7 @@
 
         var tdobj2 = document.createElement("td");
         tdobj2.setAttribute("style", "border-color:#EAE9E1;border-width:1px;border-style:solid;");
-        tdobj2.innerHTML = "<img width=\"82px\" height=\"82px\" src=\"" + Form1.actpic.value + "\"/>";
+        tdobj2.innerHTML = "<img src=\"" + Form1.actpic.value + "\"/>";
         trobj.appendChild(tdobj2);
 
         for (var i = 0; i < thevalue.length; i++) {

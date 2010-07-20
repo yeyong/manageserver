@@ -31,7 +31,7 @@ namespace SAS.ManageWeb.ManagePage
             {
                 case 1: rtypestr = "商品"; rtypeurl = "taobao_edititemrecommend.aspx"; break;
                 case 2: rtypestr = "店铺"; rtypeurl = "taobao_editshoprecommend.aspx"; break;
-                case 3: rtypestr = "活动"; rtypeurl = "taobao_edititemrecommend.aspx"; break;
+                case 3: rtypestr = "活动"; rtypeurl = "taobao_edittopicrecommend.aspx"; break;
                 case 4: rtypestr = "频道"; rtypeurl = "taobao_edititemrecommend.aspx"; break;
             }
 

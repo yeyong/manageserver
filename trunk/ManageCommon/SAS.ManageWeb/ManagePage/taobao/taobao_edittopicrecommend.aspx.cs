@@ -19,15 +19,15 @@ namespace SAS.ManageWeb.ManagePage
         protected int rid = SASRequest.GetInt("id", 0);
         protected string selectitems = "";
         protected RecommendInfo rinfo = new RecommendInfo();
+        protected string taobaouserid = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                rinfo = tpb.GetRecommendInfo(rid);
                 if (rinfo == null)
                 {
-                    base.RegisterStartupScript("", "<script>alert('参数传递错误！');window.location.href='taobao_additemrecommend.aspx';</script>");
+                    base.RegisterStartupScript("", "<script>alert('参数传递错误！');window.location.href='taobao_editrecommend.aspx';</script>");
                     return;
                 }
 
@@ -78,7 +78,7 @@ namespace SAS.ManageWeb.ManagePage
         private void InitializeComponent()
         {
             EditRecommendInfo.Click += new EventHandler(EditRecommendInfo_Click);
-
+            taobaouserid = taobaoconfig.UserID;
             TaoChanel ete = new TaoChanel();
             rchanel.Items.Clear();
             foreach (string cname in Enum.GetNames(ete.GetType()))
@@ -89,6 +89,7 @@ namespace SAS.ManageWeb.ManagePage
             }
 
             rcategory.BuildTree(tpb.GetAllCategoryList(), "name", "cid");
+            rinfo = tpb.GetRecommendInfo(rid);
         }
 
         #endregion
