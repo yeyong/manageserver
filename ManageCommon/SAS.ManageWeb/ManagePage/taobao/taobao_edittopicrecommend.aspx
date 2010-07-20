@@ -74,7 +74,7 @@
 
         var tdobj2 = document.createElement("td");
         tdobj2.setAttribute("style", "border-color:#EAE9E1;border-width:1px;border-style:solid;");
-        tdobj2.innerHTML = "<img width=\"82px\" height=\"82px\" src=\"" + Form1.actpic.value + "\"/>";
+        tdobj2.innerHTML = "<img src=\"" + Form1.actpic.value + "\"/>";
         trobj.appendChild(tdobj2);
 
         for (var i = 0; i < thevalue.length; i++) {
@@ -86,6 +86,11 @@
 
         $("SelectItem").firstChild.appendChild(trobj);
         $("selitems").value = $("selitems").value + "," + addvalue;
+    }
+
+    function del(obj,thevalue) {
+        delRow(obj);
+        $("selitems").value = $("selitems").value.replace("," + thevalue, "");
     }
 
     function watchtopic() {
@@ -173,6 +178,21 @@
                     <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">活动类型</td>                    
                     <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">排列顺序</td>
                   </tr>
+                  <%
+                      foreach (string topicstr in rinfo.ccontent.Split(','))
+                      {
+                       %>
+                  <tr class="mouseoutstyle" onmouseover="this.className='mouseoverstyle'" onmouseout="this.className='mouseoutstyle'" style="cursor:hand;">
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><input type="button" class="ManagerButton" value="删除" onclick="del(this,'<%=topicstr%>');"/></td>
+                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><img src="<%=topicstr.Split('|')[4]%>" /></td>
+                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=topicstr.Split('|')[0]%></td>
+                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=topicstr.Split('|')[1]%></td>
+                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=topicstr.Split('|')[2]%></td>
+                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=topicstr.Split('|')[3]%></td>
+                  </tr>
+                  <%
+                      }
+                           %>
               </table>
               </td>
             </tr>
@@ -181,7 +201,7 @@
           </tr>
     </table>
     <div class="Navbutton">
-		<cc1:Button id="EditRecommendInfo" runat="server" Text=" 修 改 " ValidateForm="true"></cc1:Button>&nbsp;&nbsp;<input type="hidden" name="selitems" id="selitems"/>
+		<cc1:Button id="EditRecommendInfo" runat="server" Text=" 修 改 " ValidateForm="true"></cc1:Button>&nbsp;&nbsp;<input type="hidden" name="selitems" id="selitems" value="<%=selectitems%>"/>
 		<button type="button" class="ManagerButton" id="Button3" onclick="window.history.back();"><img src="../images/arrow_undo.gif"/> 返 回 </button>
 	</div>
 </fieldset>
