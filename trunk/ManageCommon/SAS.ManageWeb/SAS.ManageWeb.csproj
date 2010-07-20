@@ -636,6 +636,13 @@
     <Compile Include="ManagePage\taobao\taobao_editrecommend.aspx.designer.cs">
       <DependentUpon>taobao_editrecommend.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\taobao\taobao_edittopicrecommend.aspx.cs">
+      <DependentUpon>taobao_edittopicrecommend.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\taobao\taobao_edittopicrecommend.aspx.designer.cs">
+      <DependentUpon>taobao_edittopicrecommend.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\taobao\taobao_recommendgrid.aspx.cs">
       <DependentUpon>taobao_recommendgrid.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1667,6 +1674,7 @@
     <Content Include="ManagePage\taobao\taobao_editcategory.aspx" />
     <Content Include="ManagePage\taobao\taobao_edititemrecommend.aspx" />
     <Content Include="ManagePage\taobao\taobao_editrecommend.aspx" />
+    <Content Include="ManagePage\taobao\taobao_edittopicrecommend.aspx" />
     <Content Include="ManagePage\taobao\taobao_recommendgrid.aspx" />
     <Content Include="ManagePage\UserControls\activetree.ascx" />
     <Content Include="ManagePage\UserControls\ajaxtaobaoitems.ascx" />
@@ -1786,6 +1794,7 @@
     <Content Include="config\datacache.config" />
     <Content Include="templates\default\_actheader.htm" />
     <Content Include="tools\flashcomm.aspx" />
+    <Content Include="config\taobao.config" />
     <None Include="ManagePage\images\admin-gif\Thumbs.db" />
     <None Include="ManagePage\images\ad\Thumbs.db" />
     <None Include="ManagePage\images\Thumbs.db" />

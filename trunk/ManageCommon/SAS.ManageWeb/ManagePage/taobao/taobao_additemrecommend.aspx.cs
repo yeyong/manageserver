@@ -17,6 +17,9 @@ namespace SAS.ManageWeb.ManagePage
     {
         private TaoBaoPluginBase tpb = TaoBaoPluginProvider.GetInstance();
         protected System.Collections.Generic.List<ItemCat> icatlist = new System.Collections.Generic.List<ItemCat>();
+        /// <summary>
+        /// 推荐类型1，商品推广；2，店铺推广;3，活动推广
+        /// </summary>
         private int rtype = 1;
 
         protected void Page_Load(object sender, EventArgs e)
