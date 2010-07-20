@@ -44,6 +44,8 @@ namespace SAS.Logic
 
         protected internal GeneralConfigInfo config;
 
+        protected internal TaoBaoConfigInfo taobaoconfig;
+
         private const int MaxShortcutMenuCount = 15;    //快捷菜单最大收藏数
 
         public string footer = "<div align=\"center\" style=\" padding-top:60px;font-size:11px; font-family: Arial;\">Powered by <a style=\"COLOR: #000000\" href=\"http://www.sirius.org.cn\" target=\"_blank\">" + Utils.GetAssemblyProductName() + "</a> &nbsp;&copy; 2009-" + DateTime.Now.Year + ", <a style=\"COLOR: #000000;font-weight:bold\" href=\"http://www.sirius.org.cn\" target=\"_blank\">Studio after 80s.</a></div>";
@@ -84,9 +86,8 @@ namespace SAS.Logic
                 this.RegisterAdminPageClientScriptBlock();
             }
 
-
             config = GeneralConfigs.GetConfig();
-
+            taobaoconfig = TaoBaoConfigs.GetConfig();
 
             // 如果IP访问列表有设置则进行判断
             if (config.Adminipaccess.Trim() != "")

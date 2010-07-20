@@ -67,6 +67,9 @@
     <Compile Include="ScheduleConfigFileManager.cs" />
     <Compile Include="ScheduleConfigInfo.cs" />
     <Compile Include="ScheduleConfigs.cs" />
+    <Compile Include="TaoBaoConfigFileManager.cs" />
+    <Compile Include="TaoBaoConfigInfo.cs" />
+    <Compile Include="TaoBaoConfigs.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SAS.Common\SAS.Common.csproj">

@@ -3,7 +3,6 @@ using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-using SAS.Control;
 using SAS.Config;
 using SAS.Entity;
 using SAS.Common;
@@ -13,19 +12,33 @@ using SAS.Plugin.TaoBao;
 
 namespace SAS.ManageWeb.ManagePage
 {
-    public partial class taobao_addshoprecommend : AdminPage
+    public partial class taobao_edittopicrecommend : AdminPage
     {
         private TaoBaoPluginBase tpb = TaoBaoPluginProvider.GetInstance();
-        /// <summary>
-        /// 推荐类型1，商品推广；2，店铺推广;3，活动推广
-        /// </summary>
-        private int rtype = 2;
+        private int rtype = 3;
+        protected int rid = SASRequest.GetInt("id", 0);
+        protected string selectitems = "";
+        protected RecommendInfo rinfo = new RecommendInfo();
 
         protected void Page_Load(object sender, EventArgs e)
-        {                    
+        {
+            if (!IsPostBack)
+            {
+                rinfo = tpb.GetRecommendInfo(rid);
+                if (rinfo == null)
+                {
+                    base.RegisterStartupScript("", "<script>alert('参数传递错误！');window.location.href='taobao_additemrecommend.aspx';</script>");
+                    return;
+                }
+
+                rtitle.Text = rinfo.ctitle;
+                rchanel.SelectedValue = rinfo.relatechanel.ToString();
+                rcategory.SelectedValue = rinfo.relatecategory.ToString();
+                selectitems = "," + rinfo.ccontent;
+            }
         }
 
-        protected void AddRecommendInfo_Click(object sender, EventArgs e)
+        protected void EditRecommendInfo_Click(object sender, EventArgs e)
         {
             string thertitle = rtitle.Text.Trim();
             int thercategory = TypeConverter.ObjectToInt(rcategory.SelectedValue, 0);
@@ -48,11 +61,10 @@ namespace SAS.ManageWeb.ManagePage
                 return;
             }
 
-            if (tpb.CreateRecommendInfo(thercategory, therchanel, thertitle, thecontent, rtype) > 0)
-            {
-                SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/RecommendList");
-                base.RegisterStartupScript("PAGE", "window.location.href='taobao_recommendGrid.aspx?ctype=" + rtype + "';");
-            }
+            tpb.UpdateRecommendInfo(rid, thercategory, therchanel, thertitle, thecontent, rtype);
+            SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/RecommendList");
+            base.RegisterStartupScript("PAGE", "window.location.href='taobao_recommendgrid.aspx?ctype=" + rtype + "';");
+
         }
 
         #region Web Form Designer generated code
@@ -65,7 +77,7 @@ namespace SAS.ManageWeb.ManagePage
 
         private void InitializeComponent()
         {
-            AddRecommendInfo.Click += new EventHandler(AddRecommendInfo_Click);
+            EditRecommendInfo.Click += new EventHandler(EditRecommendInfo_Click);
 
             TaoChanel ete = new TaoChanel();
             rchanel.Items.Clear();

@@ -1,9 +1,9 @@
-﻿<%@ Page Language="C#" CodeBehind="taobao_addtopicrecommend.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.taobao_addtopicrecommend" %>
+﻿<%@ Page Language="C#" CodeBehind="taobao_edittopicrecommend.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.taobao_edittopicrecommend" %>
 <%@ Register TagPrefix="cc1" Namespace="SAS.Control" Assembly="SAS.Control" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head id="Head1">
-<title>添加专题活动推荐</title>
+<title>修改专题活动推荐</title>
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 <link href="../styles/calendar.css" type="text/css" rel="stylesheet" />
 <link href="../styles/datagrid.css" type="text/css" rel="stylesheet" />	
@@ -181,7 +181,7 @@
           </tr>
     </table>
     <div class="Navbutton">
-		<cc1:Button id="AddRecommendInfo" runat="server" Text=" 添 加 " ValidateForm="true"></cc1:Button>&nbsp;&nbsp;<input type="hidden" name="selitems" id="selitems"/>
+		<cc1:Button id="EditRecommendInfo" runat="server" Text=" 修 改 " ValidateForm="true"></cc1:Button>&nbsp;&nbsp;<input type="hidden" name="selitems" id="selitems"/>
 		<button type="button" class="ManagerButton" id="Button3" onclick="window.history.back();"><img src="../images/arrow_undo.gif"/> 返 回 </button>
 	</div>
 </fieldset>
