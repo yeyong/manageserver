@@ -70,5 +70,16 @@ namespace SAS.Cache.CacheDependencyFactory
             }
             return null;
         }
+        /// <summary>
+        /// 获取商品类被信息依赖项
+        /// </summary>
+        public static AggregateCacheDependency GetCategoryDependency()
+        {
+            if (!string.IsNullOrEmpty(path))
+            {
+                return DependencyAccess.CreateCategoryDependency().GetDependency();
+            }
+            return null;
+        }
     }
 }

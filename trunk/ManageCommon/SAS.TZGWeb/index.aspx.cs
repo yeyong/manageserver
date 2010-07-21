@@ -4,7 +4,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Text.RegularExpressions;
 
+using SAS.Common;
 using SAS.Logic;
 using SAS.Plugin;
 using SAS.Plugin.TaoBao;
@@ -13,9 +15,9 @@ using SAS.Taobao;
 using SAS.Taobao.Request;
 
 public partial class index : TaoBaoPage
-{
-    protected void Page_Load(object sender, EventArgs e)
+{   
+    protected override void ShowPage()
     {
-
+        
     }
 }

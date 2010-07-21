@@ -8,10 +8,15 @@ using System.Web.UI.WebControls;
 using SAS.Config;
 using SAS.Common;
 using SAS.Logic;
-using SAS.Plugin.TaoBao;
+using SAS.Entity;
+using SAS.Taobao;
 
 public partial class main : System.Web.UI.MasterPage
 {
+    /// <summary>
+    /// 类别集合
+    /// </summary>
+    protected List<CategoryInfo> parentcategorylist = new List<CategoryInfo>();
     /// <summary>
     /// 站点根目录
     /// </summary>
@@ -25,7 +30,7 @@ public partial class main : System.Web.UI.MasterPage
     /// </summary>
     protected DataRow[] subnavs = Navs.GetNavigationByPid(4);
     /// <summary>
-    /// 当前链接
+    /// 当前页面名称
     /// </summary>
     protected string currentpagename = "";
     protected GeneralConfigInfo configinfo = GeneralConfigs.GetConfig();
@@ -33,5 +38,6 @@ public partial class main : System.Web.UI.MasterPage
     protected void Page_Load(object sender, EventArgs e)
     {
         currentpagename = SASRequest.GetPageName().Split('.')[0];
+        parentcategorylist = TaoBaos.GetCategoryListByParentID(0);
     }
 }

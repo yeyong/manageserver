@@ -11,7 +11,6 @@ namespace SAS.Cache.CacheDependencyFactory
         /// <summary>
         /// 创建省级信息缓存依赖
         /// </summary>
-        /// <returns></returns>
         public static ICacheDependency CreateProvinceDependency()
         {
             return LoadInstance("ProvinceList");
@@ -20,7 +19,6 @@ namespace SAS.Cache.CacheDependencyFactory
         /// <summary>
         /// 创建市级信息缓存依赖
         /// </summary>
-        /// <returns></returns>
         public static ICacheDependency CreateCityDependency()
         {
             return LoadInstance("CityList");
@@ -29,7 +27,6 @@ namespace SAS.Cache.CacheDependencyFactory
         /// <summary>
         /// 创建区级信息缓存依赖
         /// </summary>
-        /// <returns></returns>
         public static ICacheDependency CreateDistrictDependency()
         {
             return LoadInstance("DistrictList");
@@ -38,7 +35,6 @@ namespace SAS.Cache.CacheDependencyFactory
         /// <summary>
         /// 创建行业类别信息缓存依赖项
         /// </summary>
-        /// <returns></returns>
         public static ICacheDependency CreateCatalogDependency()
         {
             return LoadInstance("CatalogList");
@@ -47,10 +43,17 @@ namespace SAS.Cache.CacheDependencyFactory
         /// <summary>
         /// 创建行业类别信息缓存依赖项
         /// </summary>
-        /// <returns></returns>
         public static ICacheDependency CreateNavsDependency()
         {
             return LoadInstance("NavsList");
+        }
+
+        /// <summary>
+        /// 创建商品类别信息缓存依赖项
+        /// </summary>
+        public static ICacheDependency CreateCategoryDependency()
+        {
+            return LoadInstance("CategoryList");
         }
 
         /// <summary>

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.Web.Caching;
 
 using SAS.Entity;
 using SAS.Entity.Domain;
@@ -13,6 +14,7 @@ using SAS.Cache;
 using SAS.Taobao.Data;
 using SAS.Taobao.Util;
 using SAS.Taobao.Request;
+using SAS.Cache.CacheDependencyFactory;
 
 namespace SAS.Taobao
 {
@@ -21,6 +23,7 @@ namespace SAS.Taobao
     /// </summary>
     public class TaoBaos
     {
+        private static DataCacheConfigInfo dataconfig = DataCacheConfigs.GetConfig();
         private const string TOP_AUTHORIZE_URL = "http://open.taobao.com/isv/authorize.php";
         private const string TOP_CONTAINER_URL = "http://container.sandbox.taobao.com/container";
         private const string SAS_USERNICK = "yeyong2086521";
@@ -59,7 +62,7 @@ namespace SAS.Taobao
             {
                 ItemcatsGetRequest igr = new ItemcatsGetRequest();
                 igr.Fields = "cid,parent_cid,name,is_parent,status,sort_order";
-                igr.ParentCid = 0;
+                igr.ParentCid = cid;
                 try
                 {
                     PageList<ItemCat> pageitems = client.ItemcatsGet(igr);
@@ -219,6 +222,43 @@ namespace SAS.Taobao
         public static void UpdateCategoryInfo(CategoryInfo cinfo)
         {
             Data.DbProvider.GetInstance().UpdateCategoryInfo(cinfo);
+        }
+        /// <summary>
+        /// 获取有效类别集合
+        /// </summary>
+        public static SAS.Common.Generic.List<CategoryInfo> GetVaildCategoryList()
+        {
+            List<CategoryInfo> categorylist = new List<CategoryInfo>();
+            string cachekeys = "categorylist";
+            if (dataconfig.EnableCaching != 1)
+            {
+                SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+                categorylist = cache.RetrieveObject("/SAS/" + cachekeys) as List<CategoryInfo>;
+                if (categorylist == null || categorylist.Count == 0)
+                {
+                    categorylist = DTOProvider.GetCategoryListEntity(Data.DbProvider.GetInstance().GetVaildCategoryList());
+                    cache.AddObject("/SAS/" + cachekeys, categorylist);
+                }
+            }
+            else
+            {
+                SAS.Cache.SASDataCache datacache = SAS.Cache.SASDataCache.GetCacheService();
+                categorylist = datacache.GetDataCache(cachekeys) as List<CategoryInfo>;
+                if (categorylist == null || categorylist.Count == 0)
+                {
+                    categorylist = DTOProvider.GetCategoryListEntity(Data.DbProvider.GetInstance().GetVaildCategoryList());
+                    AggregateCacheDependency cd = DependencyFacade.GetCategoryDependency();
+                    datacache.SetDataCache(cachekeys, categorylist, cd);
+                }
+            }
+            return DTOProvider.GetCategoryListEntity(Data.DbProvider.GetInstance().GetVaildCategoryList());
+        }
+        /// <summary>
+        /// 获取有效类别集合（根据父级）
+        /// </summary>
+        public static List<CategoryInfo> GetCategoryListByParentID(int pid)
+        {
+            return GetVaildCategoryList().FindAll(new Predicate<CategoryInfo>(delegate(CategoryInfo cinfo) { return cinfo.Parentid == pid; }));
         }
         #endregion
 

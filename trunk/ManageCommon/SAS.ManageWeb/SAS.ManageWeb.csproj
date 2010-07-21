@@ -559,6 +559,13 @@
     <Compile Include="ManagePage\syslogin.aspx.designer.cs">
       <DependentUpon>syslogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\taobao\taobao_addgoodsbrand.aspx.cs">
+      <DependentUpon>taobao_addgoodsbrand.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\taobao\taobao_addgoodsbrand.aspx.designer.cs">
+      <DependentUpon>taobao_addgoodsbrand.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\taobao\taobao_editshoprecommend.aspx.cs">
       <DependentUpon>taobao_editshoprecommend.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1663,6 +1670,7 @@
     <Content Include="ManagePage\styles\tab.css" />
     <Content Include="ManagePage\style\admin.css" />
     <Content Include="ManagePage\style\comm.css" />
+    <Content Include="ManagePage\taobao\taobao_addgoodsbrand.aspx" />
     <Content Include="ManagePage\taobao\taobao_editshoprecommend.aspx" />
     <Content Include="ManagePage\taobao\taobao_addCategory.aspx" />
     <Content Include="ManagePage\taobao\taobao_additemrecommend.aspx" />
