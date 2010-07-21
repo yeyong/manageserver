@@ -47,6 +47,7 @@
     <Compile Include="SASCache.cs" />
     <Compile Include="SASDataCache.cs" />
     <Compile Include="TableCacheDependency\CatalogList.cs" />
+    <Compile Include="TableCacheDependency\CategoryList.cs" />
     <Compile Include="TableCacheDependency\CityList.cs" />
     <Compile Include="TableCacheDependency\DistrictList.cs" />
     <Compile Include="TableCacheDependency\NavsList.cs" />

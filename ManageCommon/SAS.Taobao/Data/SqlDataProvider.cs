@@ -86,6 +86,14 @@ namespace SAS.Taobao.Data
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
         }
         /// <summary>
+        /// 获取全部有效的商品类别信息
+        /// </summary>
+        public IDataReader GetVaildCategoryList()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}category] WHERE [cg_status] > 0", DbFields.CATEGORY, BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText);
+        }
+        /// <summary>
         /// 修改商品类别
         /// </summary>
         public void UpdateCategoryInfo(CategoryInfo cinfo)

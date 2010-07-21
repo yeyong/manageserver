@@ -82,20 +82,20 @@ namespace SAS.ManageWeb.ManagePage
                     currentnodestr = No_nodepic;
                 }
 
-                if (this.SelectForumStr.IndexOf("," + s_value.ToString().Trim() + ",") >= 0)
+                if (this.SelectForumStr.IndexOf("," + s_value.ToString().Trim() + "|" + s_text.Trim() + ",") >= 0)
                 {
-                    sb.Append("<tr><td class=treetd> " + mystr + " <img src=../images/folder.gif class=treeimg > <input class=\"input1\" type=checkbox id=\"" + this.ClientID + "\" name=\"" + this.ClientID + "\" value=\"" + s_value.ToString().Trim() + "\"  checked> " + s_text.ToString().Trim() + "</td></tr>");
+                    sb.Append("<tr><td class=treetd> " + mystr + " <img src=../images/folder.gif class=treeimg > <input class=\"input1\" type=checkbox id=\"" + this.ClientID + "\" name=\"" + this.ClientID + "\" value=\"" + s_value.ToString().Trim() + "|" + s_text.Trim() + "\"  checked> " + s_text.ToString().Trim() + "</td></tr>");
                 }
                 else
                 {
-                    sb.Append("<tr><td class=treetd> " + mystr + " <img src=../images/folder.gif class=treeimg > <input class=\"input1\" type=checkbox id=\"" + this.ClientID + "\" name=\"" + this.ClientID + "\" value=\"" + s_value.ToString().Trim() + "\" > " + s_text.ToString().Trim() + "</td></tr>");
+                    sb.Append("<tr><td class=treetd> " + mystr + " <img src=../images/folder.gif class=treeimg > <input class=\"input1\" type=checkbox id=\"" + this.ClientID + "\" name=\"" + this.ClientID + "\" value=\"" + s_value.ToString().Trim() + "|" + s_text.Trim() + "\" > " + s_text.ToString().Trim() + "</td></tr>");
                 }
-                
-                //if (itemcatinfo.IsParent)
-                //{
-                //    System.Collections.Generic.List<ItemCat> itemcatlist2 = taobaos.GetItemCatCache(itemcatinfo.Cid);
-                //    AddAdsTree(itemcatlist2, currentnodestr);
-                //}
+
+                if (itemcatinfo.IsParent)
+                {
+                    System.Collections.Generic.List<ItemCat> itemcatlist2 = taobaos.GetItemCatCache(itemcatinfo.Cid);
+                    AddAdsTree(itemcatlist2, currentnodestr);
+                }
                 n++;
             }
 
@@ -124,13 +124,13 @@ namespace SAS.ManageWeb.ManagePage
                     temp += No_nodepic;
                 }
 
-                if ((this.SelectForumStr.IndexOf("," + subitemlist[n].Cid.ToString().Trim() + ",") >= 0) && (this.SelectForumStr.IndexOf("全部") < 0))
+                if ((this.SelectForumStr.IndexOf("," + subitemlist[n].Cid.ToString().Trim() + "|" + subitemlist[n].Name.ToString().Trim() + ",") >= 0) && (this.SelectForumStr.IndexOf("全部") < 0))
                 {
-                    sb.Append("<tr><td class=treetd> " + mystr + " <img src=../images/folder.gif class=treeimg > <input class=\"input1\" type=checkbox id=\"" + this.ClientID + "\" name=\"" + this.ClientID + "\" value=\"" + subitemlist[n].Cid.ToString().Trim() + "\"  checked> " + subitemlist[n].Name.ToString().Trim() + "</td></tr>");
+                    sb.Append("<tr><td class=treetd> " + mystr + " <img src=../images/folder.gif class=treeimg > <input class=\"input1\" type=checkbox id=\"" + this.ClientID + "\" name=\"" + this.ClientID + "\" value=\"" + subitemlist[n].Cid.ToString().Trim() + "|" + subitemlist[n].Name.ToString().Trim() + "\"  checked> " + subitemlist[n].Name.ToString().Trim() + "</td></tr>");
                 }
                 else
                 {
-                    sb.Append("<tr><td class=treetd> " + mystr + " <img src=../images/folder.gif class=treeimg > <input class=\"input1\" type=checkbox id=\"" + this.ClientID + "\" name=\"" + this.ClientID + "\" value=\"" + subitemlist[n].Cid.ToString().Trim() + "\" > " + subitemlist[n].Name.ToString().Trim() + "</td></tr>");
+                    sb.Append("<tr><td class=treetd> " + mystr + " <img src=../images/folder.gif class=treeimg > <input class=\"input1\" type=checkbox id=\"" + this.ClientID + "\" name=\"" + this.ClientID + "\" value=\"" + subitemlist[n].Cid.ToString().Trim() + "|" + subitemlist[n].Name.ToString().Trim() + "\" > " + subitemlist[n].Name.ToString().Trim() + "</td></tr>");
                 }
             }
         }

@@ -43,6 +43,13 @@ namespace SAS.Taobao
             return TaoBaos.GetAllCategoryList();
         }
         /// <summary>
+        /// 获取有效类别集合
+        /// </summary>
+        public override SAS.Common.Generic.List<CategoryInfo> GetVaildCategoryList()
+        {
+            return TaoBaos.GetVaildCategoryList();
+        }
+        /// <summary>
         /// 创建商品类别
         /// </summary>
         public override int CreateCategoryInfo(SAS.Entity.CategoryInfo cinfo)

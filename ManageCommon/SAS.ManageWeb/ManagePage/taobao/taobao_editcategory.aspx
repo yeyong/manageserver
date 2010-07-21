@@ -20,21 +20,30 @@
 			$("cname").focus();
 			return false;
 		}
-		var target = document.getElementsByName("TargetFID");
-		var checkTarget = false;
-		for (var i = 0; i < target.length; i++)
-		{
-			if (target[i].checked)
-			{
-				checkTarget = true;
-				break;
-			}
+		if ($("displayorder").value == "") {
+		    alert("显示顺序不能为空不能为空!");
+		    $("displayorder").focus();
+		    return false;
+		} else if (!isNumber($("displayorder").value)) {
+		    alert("显示顺序请填写数字格式!");
+		    $("displayorder").focus();
+		    return false;
 		}
-		if (!checkTarget && (parseInt(Form1.type.value)<=10))
-		{
-			alert("未选择相关淘宝类别!");
-			return false;
-		}
+//		var target = document.getElementsByName("TargetFID");
+//		var checkTarget = false;
+//		for (var i = 0; i < target.length; i++)
+//		{
+//			if (target[i].checked)
+//			{
+//				checkTarget = true;
+//				break;
+//			}
+//		}
+//		if (!checkTarget)
+//		{
+//			alert("未选择相关淘宝类别!");
+//			return false;
+//		}
 		return true;
 	}
 </script>	
@@ -74,7 +83,7 @@
 	<tr><td class="item_title" colspan="2">相关淘宝类别</td></tr>
 	<tr>
 		<td class="vtop" colspan="2">
-			<div style="overflow: auto;height: 150px;width:70%;border: 1px double #ccc">
+			<div style="overflow: auto;height: 200px;width:70%;border: 1px double #ccc">
 				<yy1:TaoBaoItemCatTree id="TargetFID"  runat="server" HintTitle="提示" HintInfo="设置相关淘宝类别" PageName="advertisement"></yy1:TaoBaoItemCatTree>
 			</div>										
 		</td>

@@ -262,11 +262,9 @@
 </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="footer" Runat="Server">
-<script type="text/javascript">
     MYScrollPic("crown", 460, 460, 10, 100, true, 6); //调用方法
     jQuery(document).ready(function() {
         jQuery("#twoad").Exchange({ MIDS: "twoadtit", CIDS: "twoadnr", count: 3, mousetype: 1 });
-        jQuery("#menu").menudrop(1);
         var banobj = jQuery('#banner').find("p");
         jQuery('#banner').find("li").mouseover(function() {
             banobj.find("a").attr("href", jQuery(this).find("img").attr("rel"));
@@ -279,9 +277,6 @@
             jQuery('#brand').find("li").css("background-position", "top");
             jQuery(this).css("background-position", "bottom");
         });
-
-
     });	
-</script>
 </asp:Content>
 

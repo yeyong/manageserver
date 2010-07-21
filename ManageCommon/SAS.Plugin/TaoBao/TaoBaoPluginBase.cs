@@ -32,6 +32,10 @@ namespace SAS.Plugin.TaoBao
         /// </summary>
         public abstract DataTable GetAllCategoryList();
         /// <summary>
+        /// 获取有效类别集合
+        /// </summary>
+        public abstract SAS.Common.Generic.List<CategoryInfo> GetVaildCategoryList();
+        /// <summary>
         /// 创建商品类别
         /// </summary>
         public abstract int CreateCategoryInfo(CategoryInfo cinfo);

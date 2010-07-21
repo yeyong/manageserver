@@ -21,6 +21,7 @@ namespace SAS.Config
         private string m_districtTableDependency = "district";                          //缓存地区表依赖项
         private string m_catalogTableDependency = "catalog";                            //缓存行业类别依赖项
         private string m_navsTableDependency = "navs";                                  //缓存导航菜单依赖项
+        private string m_categoryTableDependency = "category";                          //缓存商品类别依赖项
         #endregion
 
         #region 属性
@@ -119,6 +120,14 @@ namespace SAS.Config
         {
             set { m_navsTableDependency = value; }
             get { return m_navsTableDependency; }
+        }
+        /// <summary>
+        /// 缓存商品类别依赖项
+        /// </summary>
+        public string CateGoryTableDependency
+        {
+            set { m_categoryTableDependency = value; }
+            get { return m_categoryTableDependency; }
         }
         #endregion
     }

@@ -39,6 +39,34 @@ namespace SAS.Taobao.Data
             return null;
         }
 
+        public static List<CategoryInfo> GetCategoryListEntity(IDataReader reader)
+        {
+            List<CategoryInfo> categorylist = new List<CategoryInfo>();
+            while (reader.Read())
+            {
+                CategoryInfo cinfo = new CategoryInfo();
+                cinfo.Cid = TypeConverter.ObjectToInt(reader["cid"], 0);
+                cinfo.Name = reader["name"].ToString();
+                cinfo.Parentid = TypeConverter.ObjectToInt(reader["parentid"].ToString(), 0);
+                cinfo.Parentlist = reader["parentlist"].ToString();
+                cinfo.Cg_img = reader["cg_img"].ToString();
+                cinfo.Sort = TypeConverter.ObjectToInt(reader["sort"].ToString(), 0);
+                cinfo.Cg_prefix = reader["cg_prefix"].ToString();
+                cinfo.Cg_status = TypeConverter.ObjectToInt(reader["cg_status"].ToString(), 0);
+                cinfo.Displayorder = TypeConverter.ObjectToInt(reader["displayorder"].ToString(), 0);
+                cinfo.Haschild = reader["haschild"].ToString() == "True" ? 1 : 0;
+                cinfo.Cg_relatetype = reader["cg_relatetype"].ToString();
+                cinfo.Cg_relateclass = reader["cg_relateclass"].ToString();
+                cinfo.Cg_relatebrand = reader["cg_relatebrand"].ToString();
+                cinfo.Cg_desc = reader["cg_desc"].ToString();
+                cinfo.Cg_keyword = reader["cg_keyword"].ToString();
+                cinfo.Goodcount = TypeConverter.ObjectToInt(reader["goodcount"].ToString(), 0);
+                categorylist.Add(cinfo);
+            }
+            reader.Close();
+            return categorylist;
+        }
+
         public static RecommendInfo GetRecommendInfoEntity(IDataReader reader)
         {
             if (reader.Read())
