@@ -75,6 +75,10 @@ namespace SAS.Data
         /// </summary>
         public const string FRIENDLINK = "[id],[displayorder],[name],[linkurl],[note],[logo]";
         /// <summary>
+        /// 商品品牌字段
+        /// </summary>
+        public const string GOODSBRAND = "[id],[bname],[spell],[website],[bcompany],[order],[logo],[img],[keyword],[shortdesc],[detaildesc],[status],[relateclass]";
+        /// <summary>
         /// 帮助信息字段
         /// </summary>
         public const string HELP = "[id],[title],[message],[pid],[orderby]";

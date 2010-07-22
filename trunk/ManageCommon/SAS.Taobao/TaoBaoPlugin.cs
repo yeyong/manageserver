@@ -176,5 +176,67 @@ namespace SAS.Taobao
         {
             return TaoBaos.GetTaoBaoShopListByIds(ids);
         }
+        /// <summary>
+        /// 创建商品品牌
+        /// </summary>
+        public override int CreateGoodsBrand(GoodsBrandInfo ginfo)
+        {
+            return TaoBaos.CreateGoodsBrand(ginfo);
+        }
+        /// <summary>
+        /// 根据条件返回品牌数量
+        /// </summary>
+        public override int GetGoodsBrandCountByCond(string conditions)
+        {
+            return TaoBaos.GetGoodsBrandCountByCond(conditions);
+        }
+        /// <summary>
+        /// 根据条件返回品牌分页集合
+        /// </summary>
+        public override DataTable GetGoodsBrandByPage(string conditions, int pagesize, int pageindex)
+        {
+            return TaoBaos.GetGoodsBrandByPage(conditions, pagesize, pageindex);
+        }
+        /// <summary>
+        /// 返回品牌查询条件
+        /// </summary>
+        /// <param name="isspell">是否同时查询别名</param>
+        /// <param name="brandname">品牌名称</param>
+        /// <param name="relateclass">关联类别</param>
+        /// <param name="brandstatus">状态</param>
+        public override string GetGoodsBrandSearchCondition(bool isspell, string brandname, string relateclass, int brandstatus)
+        {
+            return TaoBaos.GetGoodsBrandSearchCondition(isspell, brandname, relateclass, brandstatus);
+        }
+        /// <summary>
+        /// 设置品牌批量开启
+        /// </summary>
+        /// <param name="idlist"></param>
+        public override void SetGoodsBrandListStart(string idlist)
+        {
+            TaoBaos.SetGoodsBrandListStart(idlist);
+        }
+        /// <summary>
+        /// 设置品牌批量关闭
+        /// </summary>
+        /// <param name="idlist"></param>
+        public override void SetGoodsBrandListStop(string idlist)
+        {
+            TaoBaos.SetGoodsBrandListStop(idlist);
+        }
+        /// <summary>
+        /// 获取品牌实体
+        /// </summary>
+        public override GoodsBrandInfo GetGoodsBrandInfo(int id)
+        {
+            return TaoBaos.GetGoodsBrandInfo(id);
+        }
+        /// <summary>
+        /// 更新品牌信息
+        /// </summary>
+        public override void UpdateGoodsBrand(GoodsBrandInfo ginfo)
+        {
+            TaoBaos.UpdateGoodsBrand(ginfo);
+        }
     }
 }

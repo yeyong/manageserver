@@ -11,7 +11,7 @@
 namespace SAS.ManageWeb.ManagePage {
     
     
-    public partial class taobao_addgoodsbrand {
+    public partial class taobao_goodsbrandgrid {
         
         /// <summary>
         /// Form1 控件。
@@ -23,13 +23,13 @@ namespace SAS.ManageWeb.ManagePage {
         protected global::System.Web.UI.HtmlControls.HtmlForm Form1;
         
         /// <summary>
-        /// brandclass 控件。
+        /// searchtable 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::SAS.Control.DropDownTreeList brandclass;
+        protected global::System.Web.UI.WebControls.Panel searchtable;
         
         /// <summary>
         /// brandname 控件。
@@ -41,94 +41,76 @@ namespace SAS.ManageWeb.ManagePage {
         protected global::SAS.Control.TextBox brandname;
         
         /// <summary>
-        /// brandspell 控件。
+        /// islike 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::SAS.Control.TextBox brandspell;
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox islike;
         
         /// <summary>
-        /// brandlogo 控件。
+        /// enstatus 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::SAS.Control.TextBox brandlogo;
+        protected global::SAS.Control.RadioButtonList enstatus;
         
         /// <summary>
-        /// brandimg 控件。
+        /// relateclass 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::SAS.Control.TextBox brandimg;
+        protected global::SAS.Control.DropDownTreeList relateclass;
         
         /// <summary>
-        /// brandwebsite 控件。
+        /// Search 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::SAS.Control.TextBox brandwebsite;
+        protected global::SAS.Control.Button Search;
         
         /// <summary>
-        /// brandcompany 控件。
+        /// ResetSearchTable 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::SAS.Control.TextBox brandcompany;
+        protected global::SAS.Control.Button ResetSearchTable;
         
         /// <summary>
-        /// seokeyword 控件。
+        /// DataGrid1 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::SAS.Control.TextBox seokeyword;
+        protected global::SAS.Control.DataGrid DataGrid1;
         
         /// <summary>
-        /// brandshortdesc 控件。
+        /// ENStart 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::SAS.Control.TextBox brandshortdesc;
+        protected global::SAS.Control.Button ENStart;
         
         /// <summary>
-        /// branddesc 控件。
+        /// ENPause 控件。
         /// </summary>
         /// <remarks>
         /// 自动生成的字段。
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
-        protected global::SAS.ManageWeb.ManagePage.TextareaResize branddesc;
-        
-        /// <summary>
-        /// brandorder 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::SAS.Control.TextBox brandorder;
-        
-        /// <summary>
-        /// brandstatus 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::SAS.Control.RadioButtonList brandstatus;
+        protected global::SAS.Control.Button ENPause;
         
         /// <summary>
         /// Hint1 控件。
@@ -138,14 +120,5 @@ namespace SAS.ManageWeb.ManagePage {
         /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
         /// </remarks>
         protected global::SAS.Control.Hint Hint1;
-        
-        /// <summary>
-        /// AddBrandInfo 控件。
-        /// </summary>
-        /// <remarks>
-        /// 自动生成的字段。
-        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
-        /// </remarks>
-        protected global::SAS.Control.Button AddBrandInfo;
     }
 }

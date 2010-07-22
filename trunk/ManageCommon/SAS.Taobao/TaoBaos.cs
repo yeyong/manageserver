@@ -439,5 +439,70 @@ namespace SAS.Taobao
             return DTOProvider.GetTaoBaoShopList(Data.DbProvider.GetInstance().GetTaoBaoShopList(ids));
         }
         #endregion
+
+        #region 商品品牌goodsbrand操作
+        /// <summary>
+        /// 创建商品品牌
+        /// </summary>
+        public static int CreateGoodsBrand(GoodsBrandInfo ginfo)
+        {
+            return Data.DbProvider.GetInstance().CreateGoodsBrandInfo(ginfo);
+        }
+        /// <summary>
+        /// 根据条件返回品牌数量
+        /// </summary>
+        public static int GetGoodsBrandCountByCond(string conditions)
+        {
+            return Data.DbProvider.GetInstance().GetGoodsBrandCountByCond(conditions);
+        }
+        /// <summary>
+        /// 根据条件返回品牌分页集合
+        /// </summary>
+        public static DataTable GetGoodsBrandByPage(string conditions, int pagesize, int pageindex)
+        {
+            return Data.DbProvider.GetInstance().GetGoodsBrandByPage(conditions, pagesize, pageindex);
+        }
+        /// <summary>
+        /// 返回品牌查询条件
+        /// </summary>
+        /// <param name="isspell">是否同时查询别名</param>
+        /// <param name="brandname">品牌名称</param>
+        /// <param name="relateclass">关联类别</param>
+        /// <param name="brandstatus">状态</param>
+        public static string GetGoodsBrandSearchCondition(bool isspell, string brandname, string relateclass, int brandstatus)
+        {
+            return Data.DbProvider.GetInstance().GetGoodsBrandSearchCondition(isspell, brandname, relateclass, brandstatus);
+        }
+        /// <summary>
+        /// 设置品牌批量开启
+        /// </summary>
+        /// <param name="idlist"></param>
+        public static void SetGoodsBrandListStart(string idlist)
+        {
+            Data.DbProvider.GetInstance().UpdateGoodsBrandStatus(idlist, 1);
+        }
+        /// <summary>
+        /// 设置品牌批量关闭
+        /// </summary>
+        /// <param name="idlist"></param>
+        public static void SetGoodsBrandListStop(string idlist)
+        {
+            Data.DbProvider.GetInstance().UpdateGoodsBrandStatus(idlist, 0);
+        }
+        /// <summary>
+        /// 获取品牌实体
+        /// </summary>
+        public static GoodsBrandInfo GetGoodsBrandInfo(int id)
+        {
+            return DTOProvider.GetGoodsBrandInfoEntity(Data.DbProvider.GetInstance().GetGoodsBrandInfo(id));
+        }
+        /// <summary>
+        /// 更新品牌信息
+        /// </summary>
+        public static void UpdateGoodsBrand(GoodsBrandInfo ginfo)
+        {
+            Data.DbProvider.GetInstance().UpdateGoodsBrand(ginfo);
+        }
+        #endregion
     }
 }

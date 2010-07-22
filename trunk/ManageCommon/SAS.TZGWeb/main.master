@@ -35,7 +35,7 @@
 	<div class="hd2">
 		<div class="hd2nr" id="menu">
 			<div class="menu1">
-				<strong><a class="l_000" title="点击查看全部商品分类" href="category.shtml">全部商品分类和品牌</a></strong>
+				<strong><a class="l_000" title="点击查看全部商品分类" href="category.html">全部商品分类和品牌</a></strong>
 				<ul class="nr">
 				<%
                     int parentcinfo__id = 1;		    
@@ -132,8 +132,8 @@
 	</div>
 </div>
 </body>
+<asp:ContentPlaceHolder id="footer" runat="server"></asp:ContentPlaceHolder>
 <script type="text/javascript">
-    <asp:ContentPlaceHolder id="footer" runat="server"></asp:ContentPlaceHolder>
     var pagename = '<%=currentpagename%>';
     if(pagename == "index")jQuery("#menu").menudrop(1);
     else jQuery("#menu").menudrop(0);
