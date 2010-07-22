@@ -47,21 +47,21 @@ namespace SAS.Taobao.Data
         public int CreateCategoryInfo(CategoryInfo cinfo)
         {
             DbParameter[] parms = {
-                                    DbHelper.MakeInParam("name", (DbType)SqlDbType.NVarChar,50, cinfo.Name),
-		                            DbHelper.MakeInParam("parentid", (DbType)SqlDbType.Int,4, cinfo.Parentid),
-		                            DbHelper.MakeInParam("parentlist", (DbType)SqlDbType.NVarChar,50, cinfo.Parentlist),
-		                            DbHelper.MakeInParam("cg_img", (DbType)SqlDbType.VarChar,50, cinfo.Cg_img),
-		                            DbHelper.MakeInParam("sort", (DbType)SqlDbType.Int,4, cinfo.Sort),
-		                            DbHelper.MakeInParam("cg_prefix", (DbType)SqlDbType.VarChar,50, cinfo.Cg_prefix),
-		                            DbHelper.MakeInParam("cg_status", (DbType)SqlDbType.Int,4, cinfo.Cg_status),
-		                            DbHelper.MakeInParam("displayorder", (DbType)SqlDbType.Int,4, cinfo.Displayorder),
-		                            DbHelper.MakeInParam("haschild", (DbType)SqlDbType.Bit,1, cinfo.Haschild),
-		                            DbHelper.MakeInParam("cg_relatetype", (DbType)SqlDbType.Text,0, cinfo.Cg_relatetype),
-		                            DbHelper.MakeInParam("cg_relateclass", (DbType)SqlDbType.Text,0, cinfo.Cg_relateclass),
-		                            DbHelper.MakeInParam("cg_relatebrand", (DbType)SqlDbType.Text,0, cinfo.Cg_relatebrand),
-		                            DbHelper.MakeInParam("cg_desc", (DbType)SqlDbType.Text,0, cinfo.Cg_desc),
-		                            DbHelper.MakeInParam("cg_keyword", (DbType)SqlDbType.VarChar,200, cinfo.Cg_keyword),
-		                            DbHelper.MakeInParam("goodcount", (DbType)SqlDbType.Int,4, cinfo.Goodcount)
+                                    DbHelper.MakeInParam("@name", (DbType)SqlDbType.NVarChar,50, cinfo.Name),
+		                            DbHelper.MakeInParam("@parentid", (DbType)SqlDbType.Int,4, cinfo.Parentid),
+		                            DbHelper.MakeInParam("@parentlist", (DbType)SqlDbType.NVarChar,50, cinfo.Parentlist),
+		                            DbHelper.MakeInParam("@cg_img", (DbType)SqlDbType.VarChar,50, cinfo.Cg_img),
+		                            DbHelper.MakeInParam("@sort", (DbType)SqlDbType.Int,4, cinfo.Sort),
+		                            DbHelper.MakeInParam("@cg_prefix", (DbType)SqlDbType.VarChar,50, cinfo.Cg_prefix),
+		                            DbHelper.MakeInParam("@cg_status", (DbType)SqlDbType.Int,4, cinfo.Cg_status),
+		                            DbHelper.MakeInParam("@displayorder", (DbType)SqlDbType.Int,4, cinfo.Displayorder),
+		                            DbHelper.MakeInParam("@haschild", (DbType)SqlDbType.Bit,1, cinfo.Haschild),
+		                            DbHelper.MakeInParam("@cg_relatetype", (DbType)SqlDbType.Text,0, cinfo.Cg_relatetype),
+		                            DbHelper.MakeInParam("@cg_relateclass", (DbType)SqlDbType.Text,0, cinfo.Cg_relateclass),
+		                            DbHelper.MakeInParam("@cg_relatebrand", (DbType)SqlDbType.Text,0, cinfo.Cg_relatebrand),
+		                            DbHelper.MakeInParam("@cg_desc", (DbType)SqlDbType.Text,0, cinfo.Cg_desc),
+		                            DbHelper.MakeInParam("@cg_keyword", (DbType)SqlDbType.VarChar,200, cinfo.Cg_keyword),
+		                            DbHelper.MakeInParam("@goodcount", (DbType)SqlDbType.Int,4, cinfo.Goodcount)
                                   };
             string commandText = String.Format("INSERT INTO [{0}category] ([name],[parentid],[parentlist],[cg_img],[sort],[cg_prefix],[cg_status],[displayorder],[haschild],[cg_relatetype],[cg_relateclass],[cg_relatebrand],[cg_desc],[cg_keyword],[goodcount]) VALUES (@name,@parentid,@parentlist,@cg_img,@sort,@cg_prefix,@cg_status,@displayorder,@haschild,@cg_relatetype,@cg_relateclass,@cg_relatebrand,@cg_desc,@cg_keyword,@goodcount);SELECT SCOPE_IDENTITY() AS cid", BaseConfigs.GetTablePrefix);
             return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText, parms), -1);
@@ -99,22 +99,22 @@ namespace SAS.Taobao.Data
         public void UpdateCategoryInfo(CategoryInfo cinfo)
         {
             DbParameter[] parms = {
-                                    DbHelper.MakeInParam("cid",(DbType)SqlDbType.Int,4,cinfo.Cid),
-                                    DbHelper.MakeInParam("name", (DbType)SqlDbType.NVarChar,50, cinfo.Name),
-		                            DbHelper.MakeInParam("parentid", (DbType)SqlDbType.Int,4, cinfo.Parentid),
-		                            DbHelper.MakeInParam("parentlist", (DbType)SqlDbType.NVarChar,50, cinfo.Parentlist),
-		                            DbHelper.MakeInParam("cg_img", (DbType)SqlDbType.VarChar,50, cinfo.Cg_img),
-		                            DbHelper.MakeInParam("sort", (DbType)SqlDbType.Int,4, cinfo.Sort),
-		                            DbHelper.MakeInParam("cg_prefix", (DbType)SqlDbType.VarChar,50, cinfo.Cg_prefix),
-		                            DbHelper.MakeInParam("cg_status", (DbType)SqlDbType.Int,4, cinfo.Cg_status),
-		                            DbHelper.MakeInParam("displayorder", (DbType)SqlDbType.Int,4, cinfo.Displayorder),
-		                            DbHelper.MakeInParam("haschild", (DbType)SqlDbType.Bit,1, cinfo.Haschild),
-		                            DbHelper.MakeInParam("cg_relatetype", (DbType)SqlDbType.Text,0, cinfo.Cg_relatetype),
-		                            DbHelper.MakeInParam("cg_relateclass", (DbType)SqlDbType.Text,0, cinfo.Cg_relateclass),
-		                            DbHelper.MakeInParam("cg_relatebrand", (DbType)SqlDbType.Text,0, cinfo.Cg_relatebrand),
-		                            DbHelper.MakeInParam("cg_desc", (DbType)SqlDbType.Text,0, cinfo.Cg_desc),
-		                            DbHelper.MakeInParam("cg_keyword", (DbType)SqlDbType.VarChar,200, cinfo.Cg_keyword),
-		                            DbHelper.MakeInParam("goodcount", (DbType)SqlDbType.Int,4, cinfo.Goodcount)
+                                    DbHelper.MakeInParam("@cid",(DbType)SqlDbType.Int,4,cinfo.Cid),
+                                    DbHelper.MakeInParam("@name", (DbType)SqlDbType.NVarChar,50, cinfo.Name),
+		                            DbHelper.MakeInParam("@parentid", (DbType)SqlDbType.Int,4, cinfo.Parentid),
+		                            DbHelper.MakeInParam("@parentlist", (DbType)SqlDbType.NVarChar,50, cinfo.Parentlist),
+		                            DbHelper.MakeInParam("@cg_img", (DbType)SqlDbType.VarChar,50, cinfo.Cg_img),
+		                            DbHelper.MakeInParam("@sort", (DbType)SqlDbType.Int,4, cinfo.Sort),
+		                            DbHelper.MakeInParam("@cg_prefix", (DbType)SqlDbType.VarChar,50, cinfo.Cg_prefix),
+		                            DbHelper.MakeInParam("@cg_status", (DbType)SqlDbType.Int,4, cinfo.Cg_status),
+		                            DbHelper.MakeInParam("@displayorder", (DbType)SqlDbType.Int,4, cinfo.Displayorder),
+		                            DbHelper.MakeInParam("@haschild", (DbType)SqlDbType.Bit,1, cinfo.Haschild),
+		                            DbHelper.MakeInParam("@cg_relatetype", (DbType)SqlDbType.Text,0, cinfo.Cg_relatetype),
+		                            DbHelper.MakeInParam("@cg_relateclass", (DbType)SqlDbType.Text,0, cinfo.Cg_relateclass),
+		                            DbHelper.MakeInParam("@cg_relatebrand", (DbType)SqlDbType.Text,0, cinfo.Cg_relatebrand),
+		                            DbHelper.MakeInParam("@cg_desc", (DbType)SqlDbType.Text,0, cinfo.Cg_desc),
+		                            DbHelper.MakeInParam("@cg_keyword", (DbType)SqlDbType.VarChar,200, cinfo.Cg_keyword),
+		                            DbHelper.MakeInParam("@goodcount", (DbType)SqlDbType.Int,4, cinfo.Goodcount)
                                   };
             string commandText = String.Format("Update [{0}category] SET [name] = @name,[parentid] = @parentid,[parentlist] = @parentlist,[cg_img] = @cg_img,[sort] = @sort,[cg_prefix] = @cg_prefix,[cg_status] = @cg_status,[displayorder] = @displayorder,[haschild] = @haschild,[cg_relatetype] = @cg_relatetype,[cg_relateclass] = @cg_relateclass,[cg_relatebrand] = @cg_relatebrand,[cg_desc] = @cg_desc,[cg_keyword] = @cg_keyword,[goodcount] = @goodcount WHERE [cid]=@cid ", BaseConfigs.GetTablePrefix);
             DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
@@ -130,11 +130,11 @@ namespace SAS.Taobao.Data
         public int CreateRecommendInfo(int cid, int chanelid, string rtitle, string rcontent, int rtype)
         {
             DbParameter[] parms = {
-                                    DbHelper.MakeInParam("relatecategory", (DbType)SqlDbType.Int,4, cid),
-		                            DbHelper.MakeInParam("relatechanel", (DbType)SqlDbType.Int,4, chanelid),
-		                            DbHelper.MakeInParam("ctitle", (DbType)SqlDbType.NVarChar,200, rtitle),
-		                            DbHelper.MakeInParam("ccontent", (DbType)SqlDbType.Text,0, rcontent),
-		                            DbHelper.MakeInParam("ctype", (DbType)SqlDbType.Int,4, rtype)
+                                    DbHelper.MakeInParam("@relatecategory", (DbType)SqlDbType.Int,4, cid),
+		                            DbHelper.MakeInParam("@relatechanel", (DbType)SqlDbType.Int,4, chanelid),
+		                            DbHelper.MakeInParam("@ctitle", (DbType)SqlDbType.NVarChar,200, rtitle),
+		                            DbHelper.MakeInParam("@ccontent", (DbType)SqlDbType.Text,0, rcontent),
+		                            DbHelper.MakeInParam("@ctype", (DbType)SqlDbType.Int,4, rtype)
                                   };
             string commandText = String.Format("INSERT INTO [{0}recommend] ([ctitle],[ctype],[relatechanel],[relatecategory],[ccontent]) VALUES (@ctitle,@ctype,@relatechanel,@relatecategory,@ccontent);SELECT SCOPE_IDENTITY() AS cid", BaseConfigs.GetTablePrefix);
             return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText, parms), -1);
@@ -221,12 +221,12 @@ namespace SAS.Taobao.Data
         public void UpdateRecommendInfo(int id, int cid, int chanelid, string rtitle, string rcontent, int rtype)
         {
             DbParameter[] parms = {
-                                    DbHelper.MakeInParam("id", (DbType)SqlDbType.Int,4, id),
-                                    DbHelper.MakeInParam("relatecategory", (DbType)SqlDbType.Int,4, cid),
-		                            DbHelper.MakeInParam("relatechanel", (DbType)SqlDbType.Int,4, chanelid),
-		                            DbHelper.MakeInParam("ctitle", (DbType)SqlDbType.NVarChar,200, rtitle),
-		                            DbHelper.MakeInParam("ccontent", (DbType)SqlDbType.Text,0, rcontent),
-		                            DbHelper.MakeInParam("ctype", (DbType)SqlDbType.Int,4, rtype)
+                                    DbHelper.MakeInParam("@id", (DbType)SqlDbType.Int,4, id),
+                                    DbHelper.MakeInParam("@relatecategory", (DbType)SqlDbType.Int,4, cid),
+		                            DbHelper.MakeInParam("@relatechanel", (DbType)SqlDbType.Int,4, chanelid),
+		                            DbHelper.MakeInParam("@ctitle", (DbType)SqlDbType.NVarChar,200, rtitle),
+		                            DbHelper.MakeInParam("@ccontent", (DbType)SqlDbType.Text,0, rcontent),
+		                            DbHelper.MakeInParam("@ctype", (DbType)SqlDbType.Int,4, rtype)
                                   };
             string commandText = String.Format("Update [{0}recommend] SET [relatecategory] = @relatecategory,[relatechanel] = @relatechanel,[ctitle] = @ctitle,[ccontent] = @ccontent,[ctype] = @ctype WHERE [id]=@id ", BaseConfigs.GetTablePrefix);
             DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
@@ -357,6 +357,127 @@ namespace SAS.Taobao.Data
         {
             string commandText = string.Format("SELECT {0} FROM [{1}taobaoshop] WHERE [sid] IN ({2})", DbFields.SHOPDETAIL, BaseConfigs.GetTablePrefix, ids);
             return DbHelper.ExecuteReader(CommandType.Text, commandText);
+        }
+        #endregion
+
+        #region 品牌操作
+        /// <summary>
+        /// 创建品牌
+        /// </summary>
+        public int CreateGoodsBrandInfo(GoodsBrandInfo ginfo)
+        {
+            DbParameter[] parms = {
+			                        DbHelper.MakeInParam("@bname", (DbType)SqlDbType.NVarChar,100, ginfo.bname),
+			                        DbHelper.MakeInParam("@spell", (DbType)SqlDbType.VarChar,100, ginfo.spell),
+			                        DbHelper.MakeInParam("@website", (DbType)SqlDbType.VarChar,200, ginfo.website),
+			                        DbHelper.MakeInParam("@bcompany", (DbType)SqlDbType.VarChar,200, ginfo.bcompany),
+			                        DbHelper.MakeInParam("@order", (DbType)SqlDbType.Int,4, ginfo.order),
+			                        DbHelper.MakeInParam("@logo", (DbType)SqlDbType.NVarChar,100, ginfo.logo),
+			                        DbHelper.MakeInParam("@img", (DbType)SqlDbType.VarChar,200, ginfo.img),
+			                        DbHelper.MakeInParam("@keyword", (DbType)SqlDbType.VarChar,500, ginfo.keyword),
+			                        DbHelper.MakeInParam("@shortdesc", (DbType)SqlDbType.VarChar,500, ginfo.shortdesc),
+			                        DbHelper.MakeInParam("@detaildesc", (DbType)SqlDbType.Text,0, ginfo.detaildesc),
+			                        DbHelper.MakeInParam("@status", (DbType)SqlDbType.Int,4, ginfo.status),
+			                        DbHelper.MakeInParam("@relateclass", (DbType)SqlDbType.VarChar,200, ginfo.relateclass)
+                                  };
+            string commandText = String.Format("INSERT INTO [{0}goodsbrand] ([bname],[spell],[website],[bcompany],[order],[logo],[img],[keyword],[shortdesc],[detaildesc],[status],[relateclass]) VALUES (@bname,@spell,@website,@bcompany,@order,@logo,@img,@keyword,@shortdesc,@detaildesc,@status,@relateclass);SELECT SCOPE_IDENTITY() AS id", BaseConfigs.GetTablePrefix);
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText, parms), -1);
+        }
+        /// <summary>
+        /// 根据条件获取品牌数量
+        /// </summary>
+        public int GetGoodsBrandCountByCond(string condition)
+        {
+            string commandText = string.Format("SELECT COUNT(*) FROM [{0}goodsbrand] WHERE {1}", BaseConfigs.GetTablePrefix, condition);
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText), 0);
+        }
+        /// <summary>
+        /// 品牌信息分页
+        /// </summary>
+        public DataTable GetGoodsBrandByPage(string conditions, int pagesize, int pageindex)
+        {
+            DbParameter[] parms = {
+                                    DbHelper.MakeInParam("@pageindex",(DbType)SqlDbType.Int,4,pageindex),
+                                    DbHelper.MakeInParam("@pagesize",(DbType)SqlDbType.Int,4,pagesize),
+                                    DbHelper.MakeInParam("@conditions",(DbType)SqlDbType.NVarChar,2000,conditions)
+                                  };
+            return DbHelper.ExecuteDataset(CommandType.StoredProcedure, string.Format("{0}getgoodsbrandlistbypage", BaseConfigs.GetTablePrefix), parms).Tables[0];
+        }
+        /// <summary>
+        /// 返回品牌查询条件
+        /// </summary>
+        /// <param name="isspell">是否同时查询别名</param>
+        /// <param name="brandname">品牌名称</param>
+        /// <param name="relateclass">关联类别</param>
+        /// <param name="brandstatus">状态</param>
+        public string GetGoodsBrandSearchCondition(bool isspell, string brandname, string relateclass, int brandstatus)
+        {
+            string tableName = string.Format("{0}goodsbrand", BaseConfigs.GetTablePrefix);
+            StringBuilder sqlBuilder = new StringBuilder("1=1");
+
+            if (brandname != "")
+            {
+                if (!isspell)
+                {
+                    sqlBuilder.AppendFormat(" AND [{1}].[bname] like '%{0}%'", brandname, tableName);
+                }
+                else
+                {
+                    sqlBuilder.AppendFormat(" AND ([{1}].[bname] like '%{0}%' OR [{1}].[spell] like '%{0}%')", brandname, tableName);
+                }
+            }
+
+            if (relateclass != "" && relateclass != "0")
+            {
+                sqlBuilder.AppendFormat(" AND [{1}].[relateclass] = '{0}'", relateclass, tableName);
+            }
+
+            if (brandstatus > -1)
+            {
+                sqlBuilder.AppendFormat(" AND [{1}].[status] = {0}", brandstatus, tableName);
+            }
+
+            return sqlBuilder.ToString();
+        }
+        /// <summary>
+        /// 更改品牌状态
+        /// </summary>
+        public void UpdateGoodsBrandStatus(string idlist,int status)
+        {
+            string commandText = string.Format("UPDATE [{0}goodsbrand] SET [status] = {1} WHERE [id] IN ({2})", BaseConfigs.GetTablePrefix, status, idlist);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText);
+        }
+        /// <summary>
+        /// 获取品牌信息
+        /// </summary>
+        public IDataReader GetGoodsBrandInfo(int id)
+        {
+            DbParameter param = DbHelper.MakeInParam("@id", (DbType)SqlDbType.Int, 4, id);
+            string commandText = string.Format("SELECT {0} FROM [{1}goodsbrand] WHERE [id]=@id", DbFields.GOODSBRAND, BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText, param);
+        }
+        /// <summary>
+        /// 更新品牌信息
+        /// </summary>
+        public void UpdateGoodsBrand(GoodsBrandInfo ginfo)
+        {
+            DbParameter[] parms = {
+                                    DbHelper.MakeInParam("@id",(DbType)SqlDbType.Int,4,ginfo.id),
+			                        DbHelper.MakeInParam("@bname", (DbType)SqlDbType.NVarChar,100, ginfo.bname),
+			                        DbHelper.MakeInParam("@spell", (DbType)SqlDbType.VarChar,100, ginfo.spell),
+			                        DbHelper.MakeInParam("@website", (DbType)SqlDbType.VarChar,200, ginfo.website),
+			                        DbHelper.MakeInParam("@bcompany", (DbType)SqlDbType.VarChar,200, ginfo.bcompany),
+			                        DbHelper.MakeInParam("@order", (DbType)SqlDbType.Int,4, ginfo.order),
+			                        DbHelper.MakeInParam("@logo", (DbType)SqlDbType.NVarChar,100, ginfo.logo),
+			                        DbHelper.MakeInParam("@img", (DbType)SqlDbType.VarChar,200, ginfo.img),
+			                        DbHelper.MakeInParam("@keyword", (DbType)SqlDbType.VarChar,500, ginfo.keyword),
+			                        DbHelper.MakeInParam("@shortdesc", (DbType)SqlDbType.VarChar,500, ginfo.shortdesc),
+			                        DbHelper.MakeInParam("@detaildesc", (DbType)SqlDbType.Text,0, ginfo.detaildesc),
+			                        DbHelper.MakeInParam("@status", (DbType)SqlDbType.Int,4, ginfo.status),
+			                        DbHelper.MakeInParam("@relateclass", (DbType)SqlDbType.VarChar,200, ginfo.relateclass)
+                                  };
+            string commandText = String.Format("Update [{0}goodsbrand] SET [bname] = @bname,[spell] = @spell,[website] = @website,[bcompany] = @bcompany,[order] = @order,[logo] = @logo,[img] = @img,[keyword] = @keyword,[shortdesc] = @shortdesc,[detaildesc] = @detaildesc,[status] = @status,[relateclass] = @relateclass WHERE [id]=@id ", BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
         }
         #endregion
     }

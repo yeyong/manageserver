@@ -123,5 +123,43 @@ namespace SAS.Plugin.TaoBao
         /// </summary>
         /// <param name="ids"></param>
         public abstract SAS.Common.Generic.List<ShopDetailInfo> GetTaoBaoShopListByIds(string ids);
+        /// <summary>
+        /// 创建商品品牌
+        /// </summary>
+        public abstract int CreateGoodsBrand(GoodsBrandInfo ginfo);
+        /// <summary>
+        /// 根据条件返回品牌数量
+        /// </summary>
+        public abstract int GetGoodsBrandCountByCond(string conditions);
+        /// <summary>
+        /// 根据条件返回品牌分页集合
+        /// </summary>
+        public abstract DataTable GetGoodsBrandByPage(string conditions, int pagesize, int pageindex);
+        /// <summary>
+        /// 返回品牌查询条件
+        /// </summary>
+        /// <param name="isspell">是否同时查询别名</param>
+        /// <param name="brandname">品牌名称</param>
+        /// <param name="relateclass">关联类别</param>
+        /// <param name="brandstatus">状态</param>
+        public abstract string GetGoodsBrandSearchCondition(bool isspell, string brandname, string relateclass, int brandstatus);
+        /// <summary>
+        /// 设置品牌批量开启
+        /// </summary>
+        /// <param name="idlist"></param>
+        public abstract void SetGoodsBrandListStart(string idlist);
+        /// <summary>
+        /// 设置品牌批量关闭
+        /// </summary>
+        /// <param name="idlist"></param>
+        public abstract void SetGoodsBrandListStop(string idlist);
+        /// <summary>
+        /// 获取品牌实体
+        /// </summary>
+        public abstract GoodsBrandInfo GetGoodsBrandInfo(int id);
+        /// <summary>
+        /// 更新品牌信息
+        /// </summary>
+        public abstract void UpdateGoodsBrand(GoodsBrandInfo ginfo);
     }
 }

@@ -12,16 +12,43 @@ using SAS.Plugin.TaoBao;
 
 namespace SAS.ManageWeb.ManagePage
 {
-    public partial class taobao_addgoodsbrand : AdminPage
+    public partial class taobao_editgoodsbrand : AdminPage
     {
         private TaoBaoPluginBase tpb = TaoBaoPluginProvider.GetInstance();
+        protected GoodsBrandInfo ginfo = new GoodsBrandInfo();
+        protected int bid = SASRequest.GetInt("id", 0);
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                ginfo = tpb.GetGoodsBrandInfo(bid);
+                if (ginfo == null)
+                {
+                    base.RegisterStartupScript("", "<script>alert('参数传递错误！');window.location.href='taobao_goodsbrandgrid.aspx';</script>");
+                    return;
+                }
+                InitGoodsBrandInfo();
+            }
         }
 
-        private void AddBrandInfo_Click(object sender, EventArgs e)
+        private void InitGoodsBrandInfo()
+        {
+            brandname.Text = ginfo.bname;
+            brandspell.Text = ginfo.spell;
+            brandwebsite.Text = ginfo.website;
+            brandcompany.Text = ginfo.bcompany;
+            brandorder.Text = ginfo.order.ToString();
+            brandlogo.Text = ginfo.logo;
+            brandimg.Text = ginfo.img;
+            seokeyword.Text = ginfo.keyword;
+            brandshortdesc.Text = ginfo.shortdesc;
+            branddesc.Text = ginfo.detaildesc;
+            brandclass.SelectedValue = ginfo.relateclass;
+            brandstatus.SelectedValue = ginfo.status.ToString();
+        }
+
+        private void UpdateBrandInfo_Click(object sender, EventArgs e)
         {
             #region 添加活动
             if (this.CheckCookie())
@@ -42,9 +69,9 @@ namespace SAS.ManageWeb.ManagePage
                     return;
                 }
 
-                int rows = tpb.CreateGoodsBrand(LoadGoodsBrandInfo());
+                tpb.UpdateGoodsBrand(LoadGoodsBrandInfo());
                 SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/GoodsBrandList");
-                AdminVistLogs.InsertLog(this.userid, this.username, this.usergroupid, this.grouptitle, this.ip, "增加品牌", "创建新品牌,品牌名称:" + brandname.Text);
+                AdminVistLogs.InsertLog(this.userid, this.username, this.usergroupid, this.grouptitle, this.ip, "修改品牌", "编辑品牌,品牌名称:" + brandname.Text);
                 base.RegisterStartupScript("PAGE", "window.location.href='taobao_goodsbrandgrid.aspx';");
             }
             #endregion
@@ -57,6 +84,7 @@ namespace SAS.ManageWeb.ManagePage
         private GoodsBrandInfo LoadGoodsBrandInfo()
         {
             GoodsBrandInfo brandinfo = new GoodsBrandInfo();
+            brandinfo.id = bid;
             brandinfo.bname = brandname.Text.Trim();
             brandinfo.spell = brandspell.Text.Trim();
             brandinfo.website = brandwebsite.Text.Trim();
@@ -96,9 +124,7 @@ namespace SAS.ManageWeb.ManagePage
 
         private void InitializeComponent()
         {
-            AddBrandInfo.Click += new EventHandler(AddBrandInfo_Click);
-
-            ActivityType ate = new ActivityType();
+            UpdateBrandInfo.Click += new EventHandler(UpdateBrandInfo_Click);
             brandclass.BuildTree(tpb.GetAllCategoryList(), "name", "cid");
         }
 

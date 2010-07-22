@@ -123,71 +123,7 @@ namespace SAS.ManageWeb.ManagePage
         public string GetAdType(string adtype)
         {
             #region 得到广告类型
-
-            string result = "";
-            switch (adtype)
-            {
-                case "0":
-                    result = "头部横幅广告";
-                    break;
-                case "1":
-                    result = "尾部横幅广告";
-                    break;
-                case "2":
-                    result = "页内文字广告";
-                    break;
-                case "3":
-                    result = "帖内广告";
-                    break;
-                case "4":
-                    result = "浮动广告";
-                    break;
-                case "5":
-                    result = "对联广告";
-                    break;
-                case "6":
-                    result = "Silverlight媒体广告";
-                    break;
-                case "7":
-                    result = "帖间通栏广告";
-                    break;
-                case "8":
-                    result = "分类间广告";
-                    break;
-                case "9":
-                    result = "快速发帖栏上方广告";
-                    break;
-                case "10":
-                    result = "快速编辑器背景广告";
-                    break;
-
-                case "11":
-                    result = "聚合首页头部广告";
-                    break;
-                case "12":
-                    result = "聚合首页热贴下方广告";
-                    break;
-                case "13":
-                    result = "聚合首页发帖排行上方广告";
-                    break;
-                case "14":
-                    result = "聚合首页推荐版块上方广告";
-                    break;
-                case "15":
-                    result = "聚合首页推荐版块下方广告";
-                    break;
-                case "16":
-                    result = "聚合首页推荐相册下方广告";
-                    break;
-                case "17":
-                    result = "聚合首页底部广告";
-                    break;
-                default:
-                    result = "未知";
-                    break;
-            }
-            return result;
-
+            return EnumCatch.GetADTpyeName(Convert.ToInt32(adtype));
             #endregion
         }
 

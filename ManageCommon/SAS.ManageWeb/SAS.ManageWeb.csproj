@@ -566,6 +566,13 @@
     <Compile Include="ManagePage\taobao\taobao_addgoodsbrand.aspx.designer.cs">
       <DependentUpon>taobao_addgoodsbrand.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\taobao\taobao_editgoodsbrand.aspx.cs">
+      <DependentUpon>taobao_editgoodsbrand.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\taobao\taobao_editgoodsbrand.aspx.designer.cs">
+      <DependentUpon>taobao_editgoodsbrand.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\taobao\taobao_editshoprecommend.aspx.cs">
       <DependentUpon>taobao_editshoprecommend.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -649,6 +656,13 @@
     </Compile>
     <Compile Include="ManagePage\taobao\taobao_edittopicrecommend.aspx.designer.cs">
       <DependentUpon>taobao_edittopicrecommend.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\taobao\taobao_goodsbrandgrid.aspx.cs">
+      <DependentUpon>taobao_goodsbrandgrid.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\taobao\taobao_goodsbrandgrid.aspx.designer.cs">
+      <DependentUpon>taobao_goodsbrandgrid.aspx</DependentUpon>
     </Compile>
     <Compile Include="ManagePage\taobao\taobao_recommendgrid.aspx.cs">
       <DependentUpon>taobao_recommendgrid.aspx</DependentUpon>
@@ -1671,6 +1685,7 @@
     <Content Include="ManagePage\style\admin.css" />
     <Content Include="ManagePage\style\comm.css" />
     <Content Include="ManagePage\taobao\taobao_addgoodsbrand.aspx" />
+    <Content Include="ManagePage\taobao\taobao_editgoodsbrand.aspx" />
     <Content Include="ManagePage\taobao\taobao_editshoprecommend.aspx" />
     <Content Include="ManagePage\taobao\taobao_addCategory.aspx" />
     <Content Include="ManagePage\taobao\taobao_additemrecommend.aspx" />
@@ -1683,6 +1698,7 @@
     <Content Include="ManagePage\taobao\taobao_edititemrecommend.aspx" />
     <Content Include="ManagePage\taobao\taobao_editrecommend.aspx" />
     <Content Include="ManagePage\taobao\taobao_edittopicrecommend.aspx" />
+    <Content Include="ManagePage\taobao\taobao_goodsbrandgrid.aspx" />
     <Content Include="ManagePage\taobao\taobao_recommendgrid.aspx" />
     <Content Include="ManagePage\UserControls\activetree.ascx" />
     <Content Include="ManagePage\UserControls\ajaxtaobaoitems.ascx" />

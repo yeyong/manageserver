@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" CodeBehind="taobao_addgoodsbrand.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.taobao_addgoodsbrand" %>
+﻿<%@ Page Language="C#" CodeBehind="taobao_editgoodsbrand.aspx.cs" Inherits="SAS.ManageWeb.ManagePage.taobao_editgoodsbrand" %>
 <%@ Register TagPrefix="sas" Namespace="SAS.Control" Assembly="SAS.Control" %>
 <%@ Register TagPrefix="sas1" TagName="TextareaResize" Src="../UserControls/TextareaResize.ascx" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
@@ -17,7 +17,9 @@
             top: 0.5%;
         }
     </style>
-    <script type="text/javascript">	
+
+    <script type="text/javascript">
+	
 	function validate(theForm) {
 	    if ($("brandname").value == "") {
 	        alert("品牌名称不能为空!");
@@ -143,7 +145,7 @@
         </fieldset>
         <sas:Hint id="Hint1" runat="server" HintImageUrl="../images"></sas:Hint>
 	    <div class="Navbutton">
-		    <sas:Button id="AddBrandInfo" runat="server" Text=" 提 交 " ValidateForm="true"></sas:Button>&nbsp;&nbsp;
+		    <sas:Button id="UpdateBrandInfo" runat="server" Text=" 提 交 " ValidateForm="true"></sas:Button>&nbsp;&nbsp;
             <button class="ManagerButton" type="button" onclick="javascript:window.location.href='taobao_goodsbrandgrid.aspx';">
                 <img src="../images/arrow_undo.gif" />
                 返 回
