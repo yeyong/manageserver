@@ -1,10 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.master" CodeFile="index.aspx.cs" Inherits="index" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="header" Runat="Server">
+<asp:Content ID="Content0" ContentPlaceHolderID="styles" runat="server">
 <link href="css/index.css" rel="stylesheet" type="text/css" />
+</asp:Content>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="scripts" Runat="Server">
 <script src="js/scrollPic.js" type="text/javascript"></script>
-<script src="js/common.js" type="text/javascript"></script>
 <script src="js/jquery-exchange.js" type="text/javascript"></script>
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="mainbody" Runat="Server">
 <div class="cot">
 	<div class="ban mar_top" id="banner">
@@ -16,21 +19,21 @@
 		</ul>
 	</div>
 	<div class="hpin mar_top">
-		<strong>百分百好评店铺</strong>
+		<strong>最新活动</strong>
 		<ul class="hpinnr">
-			<li>[<a class="l_f18c08" title="" href="shop_list.shtml">服装服饰</a>] <a title="" href="shop_show.shtml">Michelle 美包专卖</a></li>
-			<li>[<a class="l_f18c08" title="" href="shop_list.shtml">鞋帽箱包</a>] <a title="" href="shop_show.shtml">杜拉拉 时尚潮流 风向标</a></li>
-			<li>[<a class="l_f18c08" title="" href="shop_list.shtml">手机数码</a>] <a title="" href="shop_show.shtml">NOKIE 数码专卖</a></li>
-			<li>[<a class="l_f18c08" title="" href="shop_list.shtml">日用百货</a>] <a title="" href="shop_show.shtml">时尚潮流 日用专卖</a></li>
-			<li>[<a class="l_f18c08" title="" href="shop_list.shtml">美食美味</a>] <a title="" href="shop_show.shtml">想吃就吃 不怕胖</a></li>
-			<li>[<a class="l_f18c08" title="" href="shop_list.shtml">美容美妆</a>] <a title="" href="shop_show.shtml">瘦身美体 Michelle</a></li>
+			<li>[<em>2010-07-22</em>] <a title="" href="shop_show.shtml">Michelle 美包专卖</a></li>
+			<li>[<em>2010-07-20</em>] <a title="" href="shop_show.shtml">杜拉拉 时尚潮流 风向标</a></li>
+			<li>[<em>2010-07-19</em>] <a title="" href="shop_show.shtml">NOKIE 数码专卖</a></li>
+			<li>[<em>2010-07-18</em>] <a title="" href="shop_show.shtml">时尚潮流 日用专卖</a></li>
+			<li>[<em>2010-07-17</em>] <a title="" href="shop_show.shtml">想吃就吃 不怕胖</a></li>
+			<li>[<em>2010-07-17</em>] <a title="" href="shop_show.shtml">瘦身美体 Michelle</a></li>
 		</ul>
 		<p class="onead mar_top_5"><a title="" href="#"><img alt="" src="images/ad/223x95.gif" /></a></p>
 	</div>
 </div>
 <div class="cot">
 	<div class="pref mar_top">
-		<strong>优惠活动场</strong><span></span>
+		<strong><img alt="优惠活动场" src="images/index_tit1.gif" /></strong>
 		<em><a title="" href="brand.shtml">查看更多活动&gt;&gt;</a></em>
 		<div class="prefnr">
 			<p><a title="" href="#"><img alt="" src="images/ad/156x243.gif" /></a></p>
@@ -64,13 +67,82 @@
 		</ul>
 	</div>
 </div>
+<div class="cot" id="like">
+	<div class="liketit mar_top">
+		<strong><img alt="潮我喜欢" src="images/index_tit2.gif" /></strong>
+		<ul id="likert">
+			<li>衣</li>
+			<li>鞋</li>
+			<li>饰</li>
+			<li>妆</li>
+			<li>居</li>
+		</ul>
+	</div>
+	<div id="likenr">
+		<div class="con">
+			<p class="mar1"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
+			<p class="mar2"><a title="" href="#"><img alt="" src="images/ad/175x340x2.gif" /></a></p>
+			<p class="mar3"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
+			<p class="mar4"><a title="" href="#"><img alt="" src="images/ad/175x340x2.gif" /></a></p>
+			<p class="mar5"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
+			<span></span>
+		</div>
+		<div class="con">
+			<p class="mar1"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
+			<p class="mar2"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
+			<p class="mar3"><a title="" href="#"><img alt="" src="images/ad/175x340x2.gif" /></a></p>
+			<p class="mar4"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
+			<p class="mar5"><a title="" href="#"><img alt="" src="images/ad/175x340x2.gif" /></a></p>
+			<span></span>
+		</div>
+		<div class="con">
+			<p class="mar1"><a title="" href="#"><img alt="" src="images/ad/175x340x2.gif" /></a></p>
+			<p class="mar2"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
+			<p class="mar3"><a title="" href="#"><img alt="" src="images/ad/175x340x2.gif" /></a></p>
+			<p class="mar4"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
+			<p class="mar5"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
+			<span></span>
+		</div>
+		<div class="con">
+			<p class="mar1"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
+			<p class="mar2"><a title="" href="#"><img alt="" src="images/ad/175x340x2.gif" /></a></p>
+			<p class="mar3"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
+			<p class="mar4"><a title="" href="#"><img alt="" src="images/ad/175x340x2.gif" /></a></p>
+			<p class="mar5"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
+			<span></span>
+		</div>
+		<div class="con">
+			<p class="mar1"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
+			<p class="mar2"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
+			<p class="mar3"><a title="" href="#"><img alt="" src="images/ad/175x340x2.gif" /></a></p>
+			<p class="mar4"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
+			<p class="mar5"><a title="" href="#"><img alt="" src="images/ad/175x340x2.gif" /></a></p>
+			<span></span>
+		</div>
+	</div>
+</div>
+<div class="cot">
+	<ul class="inxbrd mar_top">
+		<li><a title="" href="#"><img alt="" src="images/ad/70x50.gif" /></a></li>
+		<li><a title="" href="#"><img alt="" src="images/ad/70x50.gif" /></a></li>
+		<li><a title="" href="#"><img alt="" src="images/ad/70x50.gif" /></a></li>
+		<li><a title="" href="#"><img alt="" src="images/ad/70x50.gif" /></a></li>
+		<li><a title="" href="#"><img alt="" src="images/ad/70x50.gif" /></a></li>
+		<li><a title="" href="#"><img alt="" src="images/ad/70x50.gif" /></a></li>
+		<li><a title="" href="#"><img alt="" src="images/ad/70x50.gif" /></a></li>
+		<li><a title="" href="#"><img alt="" src="images/ad/70x50.gif" /></a></li>
+		<li><a title="" href="#"><img alt="" src="images/ad/70x50.gif" /></a></li>
+		<li><a title="" href="#"><img alt="" src="images/ad/70x50.gif" /></a></li>
+		<li><a title="" href="#"><img alt="" src="images/ad/70x50.gif" /></a></li>
+	</ul>
+</div>
 <div class="cot">
 	<div class="three">
 		<p class="threead mar_top"><a title="" href="#"><img alt="" src="images/ad/220x287.gif" /></a></p>
 		<div class="crown mar_top mar_left">
 			<p class="crowntit">
-				<strong>皇冠店铺</strong><span></span>
-				<em><a title="" href="credit.shtml">查看更多皇冠店铺&gt;&gt;</a></em>
+				<strong><img alt="皇冠店铺" src="images/index_tit3.gif" /></strong>
+				<em><a title="" href="credit.shtml">查看更多店铺&gt;&gt;</a></em>
 			</p>
 			<div class="crownr">
 				<p class="crownlt" id="LeftArr"></p>
@@ -80,7 +152,7 @@
 						<p><img alt="" src="images/ad/120x120.gif" /></p>
 						<span>1零点正品折扣店 匡威专卖店</span>
 						</a>
-						<strong><img alt="" src="images/cap_4.gif" /></strong>
+						<strong><ins class="rankbg rank4 rankw4"></ins></strong>
 						<em>好评率：<i class="f_f00">99.89%</i></em>
 						<em>所在地：杭州</em>
 						<em>收藏数：<i class="f_f00">1258</i></em>
@@ -92,7 +164,7 @@
 						<p><img alt="" src="images/ad/120x120.gif" /></p>
 						<span>2零点正品折扣店 匡威专卖店</span>
 						</a>
-						<strong><img alt="" src="images/cap_4.gif" /></strong>
+						<strong><ins class="rankbg rank6 rankw4"></ins></strong>
 						<em>好评率：<i class="f_f00">99.89%</i></em>
 						<em>所在地：杭州</em>
 						<em>收藏数：<i class="f_f00">1258</i></em>
@@ -104,7 +176,7 @@
 						<p><img alt="" src="images/ad/120x120.gif" /></p>
 						<span>3零点正品折扣店 匡威专卖店</span>
 						</a>
-						<strong><img alt="" src="images/cap_4.gif" /></strong>
+						<strong><ins class="rankbg rank2 rankw5"></ins></strong>
 						<em>好评率：<i class="f_f00">99.89%</i></em>
 						<em>所在地：杭州</em>
 						<em>收藏数：<i class="f_f00">1258</i></em>
@@ -116,7 +188,7 @@
 						<p><img alt="" src="images/ad/120x120.gif" /></p>
 						<span>4零点正品折扣店 匡威专卖店</span>
 						</a>
-						<strong><img alt="" src="images/cap_4.gif" /></strong>
+						<strong><ins class="rankbg rank3 rankw1"></ins></strong>
 						<em>好评率：<i class="f_f00">99.89%</i></em>
 						<em>所在地：杭州</em>
 						<em>收藏数：<i class="f_f00">1258</i></em>
@@ -127,7 +199,7 @@
 						<p><img alt="" src="images/ad/120x120.gif" /></p>
 						<span>5零点正品折扣店 匡威专卖店</span>
 						</a>
-						<strong><img alt="" src="images/cap_4.gif" /></strong>
+						<strong><ins class="rankbg rank6 rankw4"></ins></strong>
 						<em>好评率：<i class="f_f00">99.89%</i></em>
 						<em>所在地：杭州</em>
 						<em>收藏数：<i class="f_f00">1258</i></em>
@@ -139,7 +211,7 @@
 						<p><img alt="" src="images/ad/120x120.gif" /></p>
 						<span>6零点正品折扣店 匡威专卖店</span>
 						</a>
-						<strong><img alt="" src="images/cap_4.gif" /></strong>
+						<strong><ins class="rankbg rank2 rankw5"></ins></strong>
 						<em>好评率：<i class="f_f00">99.89%</i></em>
 						<em>所在地：杭州</em>
 						<em>收藏数：<i class="f_f00">1258</i></em>
@@ -151,7 +223,7 @@
 						<p><img alt="" src="images/ad/120x120.gif" /></p>
 						<span>7零点正品折扣店 匡威专卖店</span>
 						</a>
-						<strong><img alt="" src="images/cap_4.gif" /></strong>
+						<strong><ins class="rankbg rank1 rankw4"></ins></strong>
 						<em>好评率：<i class="f_f00">99.89%</i></em>
 						<em>所在地：杭州</em>
 						<em>收藏数：<i class="f_f00">1258</i></em>
@@ -163,7 +235,7 @@
 						<p><img alt="" src="images/ad/120x120.gif" /></p>
 						<span>8零点正品折扣店 匡威专卖店</span>
 						</a>
-						<strong><img alt="" src="images/cap_4.gif" /></strong>
+						<strong><ins class="rankbg rank5 rankw4"></ins></strong>
 						<em>好评率：<i class="f_f00">99.89%</i></em>
 						<em>所在地：杭州</em>
 						<em>收藏数：<i class="f_f00">1258</i></em>
@@ -186,86 +258,20 @@
 	</ul>
 </div>
 <div class="cot">
-	<p class="tidetit mar_top">
-		<strong>潮货特区</strong><span></span>
-		<b><a class="l_999" title="" href="#">日系淑女</a>  <a class="l_999" title="" href="#">波西米亚</a>  <a class="l_999" title="" href="#">摇滚朋克</a>  <a class="l_999" title="" href="#">性感OL</a>  <a class="l_999" title="" href="#">学院风</a>  <a class="l_999" title="" href="#">可爱</a>  <a class="l_999" title="" href="#">卡通</a>  <a class="l_999" title="" href="#">嘻哈街头</a>  <a class="l_999" title="" href="#">中国风</a>  <a class="l_999" title="" href="#">民族风</a>  <a class="l_999" title="" href="#">波普</a></b>
-		<em><a title="" href="trend.shtml">查看更多潮货&gt;&gt;</a></em>
+	<p class="link mar_top">
+		<strong>友 情链 接</strong>
+		<span><a class="l_666" title="" href="#">浙商黄页</a> | <a class="l_666" title="" href="#">淘宝皇冠店</a> | <a class="l_666" title="" href="#">团购网站大全</a> | <a class="l_666" title="" href="#">浙商黄页</a> | <a class="l_666" title="" href="#">淘宝皇冠店</a> | <a class="l_666" title="" href="#">团购网站大全</a> | <a class="l_666" title="" href="#">浙商黄页</a> | <a class="l_666" title="" href="#">淘宝皇冠店</a> | <a class="l_666" title="" href="#">团购网站大全</a> | <a class="l_666" title="" href="#">浙商黄页</a> | <a class="l_666" title="" href="#">淘宝皇冠店</a> | <a class="l_666" title="" href="#">团购网站大全</a> | <a class="l_666" title="" href="#">浙商黄页</a> | <a class="l_666" title="" href="#">淘宝皇冠店</a> | <a class="l_666" title="" href="#">团购网站大全</a></span>
+		<em></em>
 	</p>
-	<div class="tidelt">
-		<ul class="tideltnr">
-			<li class="tideltnr1">
-				<a title="" href="list.shtml">
-					<img alt="韩式潮流风" src="images/ad/248x168x1.gif" />
-				</a>
-			</li>
-			<li class="tideltnr2">
-				<a title="" href="show.shtml">
-					<img alt="" src="images/ad/120x120.gif" />
-					<span>Michelle 夏季休闲鞋</span>
-				</a>
-			</li>
-			<li class="tideltnr2">
-				<a title="" href="show.shtml">
-					<img alt="" src="images/ad/120x120.gif" />
-					<span>Michelle 夏季休闲鞋</span>
-				</a>
-			</li>
-			<li class="tideltnr2">
-				<a title="" href="show.shtml">
-					<img alt="" src="images/ad/120x120.gif" />
-					<span>Michelle 夏季休闲鞋</span>
-				</a>
-			</li>
-		</ul>
-		<ul class="tideltnr">
-			<li class="tideltnr1">
-				<a title="" href="list.shtml">
-					<img alt="英伦复古风" src="images/ad/248x168x2.gif" />
-				</a>
-			</li>
-			<li class="tideltnr2">
-				<a title="" href="show.shtml">
-					<img alt="" src="images/ad/120x120.gif" />
-					<span>Michelle 夏季休闲鞋</span>
-				</a>
-			</li>
-			<li class="tideltnr2">
-				<a title="" href="show.shtml">
-					<img alt="" src="images/ad/120x120.gif" />
-					<span>Michelle 夏季休闲鞋</span>
-				</a>
-			</li>
-			<li class="tideltnr2">
-				<a title="" href="show.shtml">
-					<img alt="" src="images/ad/120x120.gif" />
-					<span>Michelle 夏季休闲鞋</span>
-				</a>
-			</li>
-		</ul>
-	</div>
-	<ul class="tidert">
-		<li class="tidert1">
-			<a class="l_fff" title="" href="show.shtml">
-				<img alt="" src="images/ad/120x120.gif" />
-				<span>日系超甜美横条纹大 领收腰粉色圆点</span>
-				<strong>￥26</strong>
-			</a>
-		</li>
-		<li class="tidert2">·<a title="" href="show.shtml">日系精简亮皮两糖果色单肩包</a></li>
-		<li class="tidert2">·<a title="" href="show.shtml">日系日式基本款，七分袖宽松褶皱</a></li>
-		<li class="tidert2">·<a title="" href="show.shtml">浅尔镇MIX-CUTE℡VIVI日系杂志推荐</a></li>
-		<li class="tidert2">·<a title="" href="show.shtml">日系超甜美横条纹大 领收腰粉色圆点</a></li>
-		<li class="tidert2">·<a title="" href="show.shtml">日系精简亮皮两糖果色单肩包</a></li>
-		<li class="tidert2">·<a title="" href="show.shtml">日系日式基本款，七分袖宽松褶皱</a></li>
-		<li class="tidert2">·<a title="" href="show.shtml">浅尔镇MIX-CUTE℡VIVI日系杂志推荐</a></li>
-	</ul>
 </div>
 </asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="footer" Runat="Server">
 <script type="text/javascript">
     MYScrollPic("crown", 460, 460, 10, 100, true, 6); //调用方法
     jQuery(document).ready(function() {
         jQuery("#twoad").Exchange({ MIDS: "twoadtit", CIDS: "twoadnr", count: 3, mousetype: 1 });
+        jQuery("#like").Exchange({ MIDS: "likert", CIDS: "likenr", count: 5, timer: 8000, mousetype: 1 });
         var banobj = jQuery('#banner').find("p");
         jQuery('#banner').find("li").mouseover(function() {
             banobj.find("a").attr("href", jQuery(this).find("img").attr("rel"));

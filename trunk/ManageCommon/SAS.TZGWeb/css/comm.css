@@ -28,8 +28,25 @@ a:hover{ color:#e00000; text-decoration:underline;}
 .l_f18c08:hover{ color:#e00000; text-decoration:underline;}
 .l_999:link, .l_999:visited{ color:#999; text-decoration:none;}
 .l_999:hover{ color:#e00000; text-decoration:underline;}
+.l_666:link, .l_666:visited{ color:#666; text-decoration:none;}
+.l_666:hover{ color:#000; text-decoration:underline;}
 .l_b09b4b:link, .l_b09b4b:visited{ color:#b09b4b; text-decoration:none;}
 .l_b09b4b:hover{ color:#e00000; text-decoration:underline;}
+.l_734d01:link, .l_734d01:visited{ color:#734d01; text-decoration:none;}
+.l_734d01:hover{ color:#e00000; text-decoration:underline;}
+/*信誉图*/
+.rankbg{ background:url(../images/rank_bg.gif) repeat-x;}
+.rank1{ height:13px; background-position:0 -1px;}
+.rank2{ height:14px; background-position:0 -17px;}
+.rank3{ height:13px; background-position:0 -34px;}
+.rank4{ height:13px; background-position:0 -50px;}
+.rank5{ height:16px; background-position:0 -64px;}
+.rank6{ height:16px; background-position:0 -80px;}
+.rankw1{ width:17px;}
+.rankw2{ width:34px;}
+.rankw3{ width:51px;}
+.rankw4{ width:68px;}
+.rankw5{ width:85px;}
 /*input*/
 .input_soout{ width:331px; height:24px; line-height:24px; font-size:14px; color:#ccc; border:1px solid #989898; background:#fff; padding:0 2px;}
 .input_soon{ width:331px; height:24px; line-height:24px; font-size:14px; color:#000; border:1px solid #9b8d6f; background:#fbfafa; padding:0 2px;}
@@ -66,7 +83,7 @@ input.jia{ width:40px; height:19px; line-height:19px; background:url(../images/a
 .menu1 .lt, .menu1 .rt{ width:3px; height:27px; background:url(../images/menu_bg1.gif) no-repeat; top:0; position:absolute;}
 .menu1 .lt{ left:0;}
 .menu1 .rt{ background-position:-3px 0; right:0;}
-.menu1 .nr{ display:none;}
+.menu1 .nr, .menu1 .other{ display:none;}
 .menu2{ width:210px; height:302px; background:url(../images/menu_bg4.gif) repeat-x; float:left; position:absolute; left:0; top:7px; z-index:80;}
 .menu2 strong{ width:165px; height:27px; line-height:27px; font-size:14px; padding:0 15px; float:left;}
 .menu2 .lt, .menu2 .rt{ width:6px; height:302px; background:url(../images/menu_bg3.gif) no-repeat; top:0; position:absolute; z-index:-1}
@@ -80,22 +97,31 @@ input.jia{ width:40px; height:19px; line-height:19px; background:url(../images/a
 .menu2 .nrli1 a:hover{ text-decoration:none; cursor:pointer;}
 .menu2 .nrli2{ width:172px; height:32px; line-height:32px; background:#fffaf1; border:3px solid #927e56; border-right:0; padding:0 10px 0 7px; text-decoration:none; float:left; cursor:pointer;}
 .menu2 .nrli2 .mntu{ width:13px; height:11px; margin:10px 12px 0 0; display:inline; float:left;}
-.menu2 .nrli2 .mnzi{ width:147px; height:32px; color:#734d01; background:url(../images/arrow2.gif) right center no-repeat; float:left; margin-right:-3px;; text-decoration:none;}
-.menu2 .cot{ width:490px; height:260px; background:#fffaf1; border:3px solid #927e56; position:absolute; top:0; left:195px; z-index:-1; overflow:hidden; display:none;}
+.menu2 .nrli2 .mnzi{ width:147px; height:32px; color:#734d01; background:url(../images/arrow2.gif) right center no-repeat; float:left; margin-right:-3px; text-decoration:none;}
+.menu2 .cot{ width:490px; height:260px; background:#fffaf1; border:3px solid #927e56; position:absolute; top:0; left:195px; z-index:-1; overflow:hidden; display:none; cursor:text;}
 .menu2 .cotlt{ width:280px; height:243px; padding:7px 10px 10px; float:left;}
 .menu2 .cotlt .tit, .menu2 .cotlt .tit1{ width:280px; height:21px; line-height:21px; margin:0 -3px 0 0; float:left;}
 .menu2 .cotlt .tit{ color:#734d01; margin:0 0 4px 0;}
-.menu2 .cotlt .tit1 a, .menu2 .cotlt .tit1 a:hover{ width:auto; height:21px; color:#e00000; background:none; line-height:20px; padding:0; margin:0; float:left;}
-.menu2 .cotlt .tit1 a:hover{ border:0; color:#734d01; text-decoration:underline;}
+.menu2 .cotlt .tit .titlt, .menu2 .cotlt .tit .titrt{ width:auto; font-style:normal;}
+.menu2 .cotlt .tit .titlt{ float:left;}
+.menu2 .cotlt .tit .titrt{ float:right; font-weight:normal;}
+.menu2 .cotlt .tit .titrt a:hover{ text-decoration:underline;}
+.menu2 .cotlt .tit1{ color:#e00000;}
 .menu2 .cotlt .type{ width:70px; height:20px; line-height:20px; float:left;}
 .menu2 .cotlt .type a, .menu2 .cotlt .type a:hover{ width:70px; height:20px; color:#555; background:none; line-height:20px; padding:0; margin:0 0 0 0; float:left;}
 .menu2 .cotlt .type a:hover{ border:0; color:#e00000; text-decoration:underline;}
 .menu2 .cotlt .line{ width:280px; height:0; line-height:0px; border-bottom:1px dashed #d3c6ac; margin-top:4px; margin-bottom:4px; overflow:hidden; float:left; margin-right:-3px;}
 .menu2 .cotrt{ width:170px; height:243px; background:#f7f0e5; padding:7px 10px 10px; float:left;}
 .menu2 .cotrt .tit{ width:170px; height:20px; line-height:20px; color:#734d01; margin:0 -3px 7px 0; float:left;}
+.menu2 .cotrt .tit .titlt, .menu2 .cotrt .tit .titrt{ width:auto; font-style:normal;}
+.menu2 .cotrt .tit .titlt{ float:left;}
+.menu2 .cotrt .tit .titrt{ float:right; font-weight:normal;}
+.menu2 .cotrt .tit .titrt a:hover{ text-decoration:underline;}
 .menu2 .cotrt .bra{ width:85px; height:22px; line-height:22px; float:left; margin-right:-2px;}
 .menu2 .cotrt .bra a, .menu2 .cotrt .bra a:hover{ width:85px; height:22px; color:#555; background:none; line-height:20px; padding:0; margin:0 0 0 0; float:left;}
 .menu2 .cotrt .bra a:hover{ border:0; color:#e00000; text-decoration:underline;}
+.menu2 .other{ width:137px; height:30px; line-height:32px; color:#734d01; background:url(../images/menu_7.gif) left center no-repeat; padding:0 10px 0 25px; margin-left:17px; display:inline; float:left;}
+.menu2 .other a{ width:137px; height:32px; float:left;}
 .soso{ width:430px; height:26px; margin:0 0 0 220px; display:inline; float:left;}
 .soso p{ width:auto; height:26px; margin:0 2px 0 0; display:inline; float:left;}
 .tdrec{ width:280px; height:33px; line-height:33px; float:right;}
