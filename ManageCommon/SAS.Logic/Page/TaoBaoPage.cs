@@ -2,6 +2,7 @@
 using System.IO;
 using System.Web;
 using System.Data;
+using System.Web.UI.HtmlControls;
 
 using SAS.Common;
 using SAS.Config;
@@ -26,6 +27,10 @@ namespace SAS.Logic
         /// </summary>
         protected internal GeneralConfigInfo config;
         /// <summary>
+        /// 淘之购配置信息
+        /// </summary>
+        protected internal TaoBaoConfigInfo taobaoconfig;
+        /// <summary>
         /// 当前用户的用户ID
         /// </summary>
         protected internal int userid;
@@ -47,6 +52,18 @@ namespace SAS.Logic
         /// </summary>
         protected internal bool ispost;
         /// <summary>
+        /// 是否跳转
+        /// </summary>
+        protected internal bool isrefresh = false;
+        /// <summary>
+        /// 跳转时间
+        /// </summary>
+        private int refreshsec = 0;
+        /// <summary>
+        /// 跳转连接
+        /// </summary>
+        private string refreshurl = "";
+        /// <summary>
         /// 当前页面是否被GET请求
         /// </summary>
         protected internal bool isget;
@@ -67,9 +84,13 @@ namespace SAS.Logic
         /// </summary>
         protected internal string nowdatetime;
         /// <summary>
-        /// 当前页面Meta字段内容
+        /// 当前页面Meta keyword字段内容
         /// </summary>
-        protected internal string meta = "";
+        protected internal string seokeyword = "";
+        /// <summary>
+        /// 当前页面Meta description字段内容
+        /// </summary>
+        protected internal string seodescription = "";
         /// <summary>
         /// 当前页面Link字段内容
         /// </summary>
@@ -351,6 +372,7 @@ namespace SAS.Logic
         public TaoBaoPage()
         {
             config = GeneralConfigs.GetConfig();
+            taobaoconfig = TaoBaoConfigs.GetConfig();
             if (TaoBaoPluginProvider.GetInstance() != null)
             {
                 tpb = TaoBaoPluginProvider.GetInstance();
@@ -362,7 +384,6 @@ namespace SAS.Logic
             // 如果启用游客页面缓存，则对游客输出缓存页
             if (userid == -1 && config.Guestcachepagetimeout > 0 && GetUserCachePage(pagename))
                 return;
-            AddMetaInfo(config.Seokeywords, config.Seodescription, config.Seohead);
 
             if (config.Nocacheheaders == 1)
             {
@@ -454,10 +475,9 @@ namespace SAS.Logic
         /// <param name="url">转向地址</param>
         public void SetMetaRefresh(int sec, string url)
         {
-            if (infloat != 1)
-            {
-                meta = meta + "\r\n<meta http-equiv=\"refresh\" content=\"" + sec.ToString() + "; url=" + url + "\" />";
-            }
+            refreshsec = sec;
+            refreshurl = url;
+            isrefresh = true;
             //AddScript("window.setInterval('location.replace(\"" + url + "\");'," + (sec*1000).ToString() + ");");
         }
 
@@ -516,74 +536,6 @@ namespace SAS.Logic
                 scripttype = "javascript";
             }
             script = script + "\r\n<script type=\"text/" + scripttype + "\">" + scriptstr + "</script>";
-        }
-
-        /// <summary>
-        /// 插入指定Meta
-        /// </summary>
-        /// <param name="metastr">Meta项</param>
-        public void AddMeta(string metastr)
-        {
-            meta = meta + "\r\n<meta " + metastr + " />";
-        }
-
-        /// <summary>
-        /// 更新页面Meta
-        /// </summary>
-        /// <param name="Seokeywords">关键词</param>
-        /// <param name="Seodescription">说明</param>
-        /// <param name="Seohead">其它增加项</param>
-        public void UpdateMetaInfo(string Seokeywords, string Seodescription, string Seohead)
-        {
-            string[] metaArray = Utils.SplitString(meta, "\r\n");
-            //设置为空,并在下面代码中进行重新赋值
-            meta = "";
-            foreach (string metaoption in metaArray)
-            {
-                //找出keywords关键字
-                if (metaoption.ToLower().IndexOf("name=\"keywords\"") > 0)
-                {
-                    if (Seokeywords != null && Seokeywords.Trim() != "")
-                    {
-                        meta += "<meta name=\"keywords\" content=\"" + Utils.RemoveHtml(Seokeywords).Replace("\"", " ") + "\" />\r\n";
-                        continue;
-                    }
-                }
-
-                //找出description关键字
-                if (metaoption.ToLower().IndexOf("name=\"description\"") > 0)
-                {
-                    if (Seodescription != null && Seodescription.Trim() != "")
-                    {
-                        meta += "<meta name=\"description\" content=\"" + Utils.RemoveHtml(Seodescription).Replace("\"", " ") + "\" />\r\n";
-                        continue;
-                    }
-                }
-
-                meta = meta + metaoption + "\r\n";
-            }
-
-            // meta = meta + Seohead;
-        }
-
-
-        /// <summary>
-        /// 添加页面Meta信息
-        /// </summary>
-        /// <param name="Seokeywords">关键词</param>
-        /// <param name="Seodescription">说明</param>
-        /// <param name="Seohead">其它增加项</param>
-        public void AddMetaInfo(string Seokeywords, string Seodescription, string Seohead)
-        {
-            if (Seokeywords != "")
-            {
-                meta = meta + "<meta name=\"keywords\" content=\"" + Utils.RemoveHtml(Seokeywords).Replace("\"", " ") + "\" />\r\n";
-            }
-            if (Seodescription != "")
-            {
-                meta = meta + "<meta name=\"description\" content=\"" + Utils.RemoveHtml(Seodescription).Replace("\"", " ") + "\" />\r\n";
-            }
-            meta = meta + Seohead;
         }
 
         /// <summary>
@@ -749,7 +701,6 @@ namespace SAS.Logic
             System.Web.HttpContext.Current.Response.Write(" - ");
             System.Web.HttpContext.Current.Response.Write(config.Sitetitle);
             System.Web.HttpContext.Current.Response.Write(" - Powered by 天狼星工作室</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
-            System.Web.HttpContext.Current.Response.Write(meta);
             System.Web.HttpContext.Current.Response.Write("<style type=\"text/css\"><!-- body { margin: 20px; font-family: Tahoma, Verdana; font-size: 14px; color: #333333; background-color: #FFFFFF; }a {color: #1F4881;text-decoration: none;}--></style></head><body><div style=\"border: #cccccc solid 1px; padding: 20px; width: 500px; margin:auto\" align=\"center\">");
             System.Web.HttpContext.Current.Response.Write(body);
             System.Web.HttpContext.Current.Response.Write("</div><br /><br /><br /><div style=\"border: 0px; padding: 0px; width: 500px; margin:auto\"><strong>当前服务器时间:</strong> ");
@@ -799,6 +750,25 @@ namespace SAS.Logic
             {
                 m_processtime = 0;
             }
+
+            Page.Title = pagetitle + taobaoconfig.SeoTitle;
+            HtmlMeta keywords = new HtmlMeta();
+            keywords.Name = "keywords";
+            keywords.Content = seokeyword + taobaoconfig.SeoKeyword;
+            Page.Header.Controls.AddAt(0, keywords);
+            HtmlMeta description = new HtmlMeta();
+            description.Name = "description";
+            description.Content = seodescription + taobaoconfig.SeoDescription;
+            Page.Header.Controls.AddAt(1, description);
+
+            if (isrefresh)
+            {
+                HtmlMeta refresh = new HtmlMeta();
+                refresh.HttpEquiv = "refresh";
+                refresh.Content = refreshsec.ToString() + "; url = " + refreshurl;
+                Page.Header.Controls.Add(refresh);
+            }
+
             base.OnInit(e);
         }
     }

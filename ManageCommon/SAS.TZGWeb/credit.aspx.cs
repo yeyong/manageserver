@@ -10,10 +10,12 @@ using SAS.Common;
 using SAS.Logic;
 using SAS.Taobao;
 
-public partial class index : TaoBaoPage
+public partial class credit : TaoBaoPage
 {
+    
+
     protected override void ShowPage()
     {
-        pagetitle = "商之源";
+        pagetitle = "信誉店铺导购";
     }
 }

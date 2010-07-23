@@ -14,6 +14,9 @@ namespace SAS.Config
         private string m_userid = "mm_13451138_0_0";                    //淘客ID
         private string m_appkey = "12005076";                           //Appkey
         private string m_appsecret = "64292c42ca49632200289324fba42572";//Appsecret
+        private string m_seotitle = "";                                 //seo标题
+        private string m_seokeyword = "";                               //seo关键字
+        private string m_seodescription = "";                           //seo描述
 
         /// <summary>
         /// 淘客昵称
@@ -46,6 +49,30 @@ namespace SAS.Config
         {
             get { return m_appsecret; }
             set { m_appsecret = value; }
+        }
+        /// <summary>
+        /// seo标题
+        /// </summary>
+        public string SeoTitle
+        {
+            get { return m_seotitle; }
+            set { m_seotitle = value; }
+        }
+        /// <summary>
+        /// seo关键字
+        /// </summary>
+        public string SeoKeyword
+        {
+            get { return m_seokeyword; }
+            set { m_seokeyword = value; }
+        }
+        /// <summary>
+        /// seo描述
+        /// </summary>
+        public string SeoDescription
+        {
+            get { return m_seodescription; }
+            set { m_seodescription = value; }
         }
     }
 }
