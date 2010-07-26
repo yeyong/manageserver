@@ -5,7 +5,8 @@ input,ul,li{list-style-type:none;}
 em{ font-style:normal;}
 img{ border:0px;}
 .cot{ width:960px; height:auto; margin:0 auto;}
-.mar_top{ margin-top:10px;}
+.mar_top{ margin-top:15px;}
+.mar_top_10{ margin-top:9px;}
 .mar_top_5{ margin-top:5px;}
 .mar_left{ margin-left:10px;}
 /*font*/
@@ -37,11 +38,11 @@ a:hover{ color:#e00000; text-decoration:underline;}
 /*信誉图*/
 .rankbg{ background:url(../images/rank_bg.gif) repeat-x;}
 .rank1{ height:13px; background-position:0 -1px;}
-.rank2{ height:14px; background-position:0 -17px;}
-.rank3{ height:13px; background-position:0 -34px;}
-.rank4{ height:13px; background-position:0 -50px;}
-.rank5{ height:16px; background-position:0 -64px;}
-.rank6{ height:16px; background-position:0 -80px;}
+.rank2{ height:13px; background-position:0 -34px;}
+.rank3{ height:16px; background-position:0 -64px;}
+.rank4{ height:16px; background-position:0 -80px;}
+.rank5{ height:14px; background-position:0 -17px;}
+.rank6{ height:13px; background-position:0 -50px;}
 .rankw1{ width:17px;}
 .rankw2{ width:34px;}
 .rankw3{ width:51px;}
@@ -89,7 +90,7 @@ input.jia{ width:40px; height:19px; line-height:19px; background:url(../images/a
 .menu2 .lt, .menu2 .rt{ width:6px; height:302px; background:url(../images/menu_bg3.gif) no-repeat; top:0; position:absolute; z-index:-1}
 .menu2 .lt{ left:0;}
 .menu2 .rt{ background-position:-2px 0; right:0;}
-.menu2 .nr{ width:192px; height:auto; padding:0 6px; float:left; margin-right:-3px; position:relative; z-index:101;}
+.menu2 .nr{ width:192px; height:auto; padding:2px 6px 0; float:left; margin-right:-3px; position:relative; z-index:101;}
 .menu2 .nrli1{ width:176px; height:38px; line-height:38px; padding:0 10px; text-decoration:none; cursor:pointer; float:left; margin-right:-3px;}
 .menu2 .mntu{ width:13px; height:11px; margin:13px 12px 0 0; display:inline; float:left;}
 .menu2 .mnzi{ width:147px; height:38px; color:#734d01; background:url(../images/arrow2.gif) right center no-repeat; float:left; margin-right:-3px;; text-decoration:none;}
@@ -98,7 +99,7 @@ input.jia{ width:40px; height:19px; line-height:19px; background:url(../images/a
 .menu2 .nrli2{ width:172px; height:32px; line-height:32px; background:#fffaf1; border:3px solid #927e56; border-right:0; padding:0 10px 0 7px; text-decoration:none; float:left; cursor:pointer;}
 .menu2 .nrli2 .mntu{ width:13px; height:11px; margin:10px 12px 0 0; display:inline; float:left;}
 .menu2 .nrli2 .mnzi{ width:147px; height:32px; color:#734d01; background:url(../images/arrow2.gif) right center no-repeat; float:left; margin-right:-3px; text-decoration:none;}
-.menu2 .cot{ width:490px; height:260px; background:#fffaf1; border:3px solid #927e56; position:absolute; top:0; left:195px; z-index:-1; overflow:hidden; display:none; cursor:text;}
+.menu2 .cot{ width:490px; height:260px; background:#fffaf1; border:3px solid #927e56; position:absolute; top:2px; left:195px; z-index:-1; overflow:hidden; display:none; cursor:text;}
 .menu2 .cotlt{ width:280px; height:243px; padding:7px 10px 10px; float:left;}
 .menu2 .cotlt .tit, .menu2 .cotlt .tit1{ width:280px; height:21px; line-height:21px; margin:0 -3px 0 0; float:left;}
 .menu2 .cotlt .tit{ color:#734d01; margin:0 0 4px 0;}

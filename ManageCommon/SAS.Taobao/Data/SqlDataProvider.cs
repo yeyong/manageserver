@@ -169,6 +169,14 @@ namespace SAS.Taobao.Data
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
         }
         /// <summary>
+        /// 获取全部推荐信息
+        /// </summary>
+        public IDataReader GetAllRecommendList()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}recommend]", DbFields.RECOMMEND, BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText);
+        }
+        /// <summary>
         /// 设置推荐搜索条件
         /// </summary>
         public string GetRecommendCondition(bool islike, string rtitle, int rcategory, int rchanel, bool iscreatedate, string startcreate, string endcreate, bool isupdatedate, string startupdate, string endupdate)

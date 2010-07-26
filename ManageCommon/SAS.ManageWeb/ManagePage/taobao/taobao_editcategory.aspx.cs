@@ -20,22 +20,25 @@ namespace SAS.ManageWeb.ManagePage
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (cid <= 0)
+            if (!IsPostBack)
             {
-                base.RegisterStartupScript("", "<script>alert('类别异常，请与管理员联系!');window.location.href='taobao_categorygrid.aspx';</script>");
-                return;
-            }
-            CategoryInfo curinfo = tbp.GetCategoryInfo(cid);
+                if (cid <= 0)
+                {
+                    base.RegisterStartupScript("", "<script>alert('类别异常，请与管理员联系!');window.location.href='taobao_categorygrid.aspx';</script>");
+                    return;
+                }
+                CategoryInfo curinfo = tbp.GetCategoryInfo(cid);
 
-            if (curinfo == null)
-            {
-                base.RegisterStartupScript("", "<script>alert('类别异常，请与管理员联系!');window.location.href='taobao_categorygrid.aspx';</script>");
-                return;
-            }
+                if (curinfo == null)
+                {
+                    base.RegisterStartupScript("", "<script>alert('类别异常，请与管理员联系!');window.location.href='taobao_categorygrid.aspx';</script>");
+                    return;
+                }
 
-            cname.Text = curinfo.Name.Trim();
-            displayorder.Text = curinfo.Displayorder.ToString();
-            available.SelectedValue = curinfo.Cg_status.ToString();
+                cname.Text = curinfo.Name.Trim();
+                displayorder.Text = curinfo.Displayorder.ToString();
+                available.SelectedValue = curinfo.Cg_status.ToString();
+            }
         }
 
         private void AddCategoryInfo_Click(object sender, EventArgs e)

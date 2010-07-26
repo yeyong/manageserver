@@ -45,7 +45,8 @@
 				<%
                     int parentcinfo__id = 1;		    
                     foreach (CategoryInfo parentcinfo in parentcategorylist)
-                    {			
+                    {
+                        if (parentcinfo__id > 6) break;
 			     %>
 					<li class="nrli1">
 						<a title="<%=parentcinfo.Name%>" href="channels.shtml">
@@ -54,8 +55,14 @@
 						</a>
 						<p class="cot">
 							<span class="cotlt">
-								<b class="tit">选择分类：</b>
-								<b class="tit1"><a title="" href="list.shtml">热销类目</a></b>
+								<b class="tit"><i class="titlt">选择分类：</i><i class="titrt"><a title="" href="list.shtml">更多&gt;&gt;</a></i></b>
+								<%
+                                    int subcinfo__id = 1;
+                                    foreach (CategoryInfo subcinfo in SAS.Taobao.TaoBaos.GetCategoryListByParentID(parentcinfo.Cid))
+                                    {
+                                        if (subcinfo__id > 3) break;
+                        %>
+								<b class="tit1"><%=subcinfo.Name%></b>
 								<em class="type"><a title="" href="list.shtml">1OL连衣裙</a></em>
 								<em class="type"><a title="" href="list.shtml">淑女连衣裙</a></em>
 								<em class="type"><a title="" href="list.shtml">雪纺连衣裙</a></em>
@@ -65,27 +72,21 @@
 								<em class="type"><a title="" href="list.shtml">雪纺衫</a></em>
 								<em class="type"><a title="" href="list.shtml">V领裙</a></em>
 								<em class="type"><a title="" href="list.shtml">衬衫</a></em>
+								<%
+                                    if (subcinfo__id < 2)
+                                    {
+                                        %>
 								<i class="line"></i>
-								<b class="tit1"><a title="" href="list.shtml">上装</a></b>
-								<em class="type"><a title="" href="list.shtml">1OL连衣裙</a></em>
-								<em class="type"><a title="" href="list.shtml">淑女连衣裙</a></em>
-								<em class="type"><a title="" href="list.shtml">雪纺连衣裙</a></em>
-								<em class="type"><a title="" href="list.shtml">小背心/吊带</a></em>
-								<em class="type"><a title="" href="list.shtml">针织衫</a></em>
-								<em class="type"><a title="" href="list.shtml">短外套</a></em>
-								<em class="type"><a title="" href="list.shtml">小西装</a></em>
-								<i class="line"></i>
-								<b class="tit1"><a title="" href="list.shtml">裙/裤装</a></b>
-								<em class="type"><a title="" href="list.shtml">1OL连衣裙</a></em>
-								<em class="type"><a title="" href="list.shtml">淑女连衣裙</a></em>
-								<em class="type"><a title="" href="list.shtml">雪纺连衣裙</a></em>
-								<em class="type"><a title="" href="list.shtml">吊带裙</a></em>
-								<em class="type"><a title="" href="list.shtml">抹胸裙</a></em>
-								<em class="type"><a title="" href="list.shtml">T恤</a></em>
-								<em class="type"><a title="" href="list.shtml">雪纺衫</a></em>
+								<%
+                                    }
+                                            %>
+								<%
+                                    subcinfo__id++;
+                                    }
+                            %>
 							</span>
 							<span class="cotrt">
-								<b class="tit">选择品牌：</b>
+								<b class="tit"><i class="titlt">选择品牌：</i><i class="titrt"><a title="" href="list.shtml">更多&gt;&gt;</a></i></b>
 								<em class="bra"><a title="" href="list.shtml">优衣库</a></em>
 								<em class="bra"><a title="" href="list.shtml">歌莉娅</a></em>
 								<em class="bra"><a title="" href="list.shtml">十月传奇</a></em>
@@ -113,6 +114,7 @@
                     }
                      %>
 				</ul>
+				<p class="other"><a title="" href="category.shtml">所有商品分类&gt;&gt;</a></p>
 				<i class="lt"></i><i class="rt"></i>
 			</div>
 			<form name="form1" id="form1" method="post" class="soso">
