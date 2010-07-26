@@ -9,13 +9,21 @@ using System.Text.RegularExpressions;
 using SAS.Common;
 using SAS.Logic;
 using SAS.Taobao;
+using SAS.Entity;
 
 public partial class credit : TaoBaoPage
 {
-    
+    protected List<CategoryInfo> classlist = TaoBaos.GetCategoryListByParentID(0);
+    protected int classcount = 0;
 
     protected override void ShowPage()
     {
         pagetitle = "信誉店铺导购";
+        classcount = classlist.Count;
+    }
+
+    protected SAS.Common.Generic.List<ShopDetailInfo> GetShopList(int classid)
+    {
+        return TaoBaos.GetTaoBaoShopListByRecommend(Convert.ToInt16(TaoChanel.Credit), classid);
     }
 }

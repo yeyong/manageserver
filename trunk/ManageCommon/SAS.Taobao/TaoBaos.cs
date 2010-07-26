@@ -297,6 +297,35 @@ namespace SAS.Taobao
             return DTOProvider.GetRecommendInfoEntity(Data.DbProvider.GetInstance().GetRecommendInfo(id));
         }
         /// <summary>
+        /// 获取全部推荐实体（缓存方式）
+        /// </summary>
+        public static List<RecommendInfo> GetAllRecommendList()
+        {
+            List<RecommendInfo> rinfolist = new List<RecommendInfo>();
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            rinfolist = cache.RetrieveObject("/SAS/RecommendList") as List<RecommendInfo>;
+            if (rinfolist == null)
+            {
+                rinfolist = DTOProvider.GetRecommendListEntity(Data.DbProvider.GetInstance().GetAllRecommendList());
+                SAS.Cache.ICacheStrategy ica = new TaoBaoCacheStrategy();
+                ica.TimeOut = 1440;
+                cache.AddObject("/SAS/RecommendList", rinfolist);
+            }
+            return rinfolist;
+        }
+        /// <summary>
+        /// 获取推荐信息（根据频道，类别）
+        /// </summary>
+        /// <param name="chanel">频道</param>
+        /// <param name="classid">类别</param>
+        public static List<RecommendInfo> GetRecommendList(int chanel, int classid)
+        {
+            if (chanel > -1 && classid > -1) return GetAllRecommendList().FindAll(new Predicate<RecommendInfo>(delegate(RecommendInfo rinfo) { return rinfo.relatechanel == chanel && rinfo.relatecategory == classid; }));
+            else if (chanel > -1) return GetAllRecommendList().FindAll(new Predicate<RecommendInfo>(delegate(RecommendInfo rinfo) { return rinfo.relatechanel == chanel; }));
+            else if (classid > -1) return GetAllRecommendList().FindAll(new Predicate<RecommendInfo>(delegate(RecommendInfo rinfo) { return rinfo.relatecategory == classid; }));
+            else return new List<RecommendInfo>();
+        }
+        /// <summary>
         /// 更新推荐信息
         /// </summary>
         /// <param name="id">推荐ID</param>
@@ -433,10 +462,33 @@ namespace SAS.Taobao
         /// <summary>
         /// 根据店铺ID集合获取店铺信息
         /// </summary>
-        /// <param name="ids"></param>
         public static SAS.Common.Generic.List<ShopDetailInfo> GetTaoBaoShopListByIds(string ids)
         {
+            if (ids == "") return new SAS.Common.Generic.List<ShopDetailInfo>();
             return DTOProvider.GetTaoBaoShopList(Data.DbProvider.GetInstance().GetTaoBaoShopList(ids));
+        }
+        /// <summary>
+        /// 根据频道类别获取店铺信息
+        /// </summary>
+        public static SAS.Common.Generic.List<ShopDetailInfo> GetTaoBaoShopListByRecommend(int chanel, int classid)
+        {
+            SAS.Common.Generic.List<ShopDetailInfo> shoplist = new SAS.Common.Generic.List<ShopDetailInfo>();
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            shoplist = cache.RetrieveObject("/SAS/RecommendList/Chanel_" + chanel + "/Class_" + classid) as SAS.Common.Generic.List<ShopDetailInfo>;
+            if (shoplist == null)
+            {
+                List<RecommendInfo> rlist = GetRecommendList(chanel, classid);
+                string shopidlist = "";
+                foreach (RecommendInfo rinfo in rlist)
+                {
+                    shopidlist += rinfo.ccontent + ",";
+                }
+                shoplist = GetTaoBaoShopListByIds(shopidlist.Trim().Trim(','));
+                //SAS.Cache.ICacheStrategy ica = new TaoBaoCacheStrategy();
+                //ica.TimeOut = 1440;
+                cache.AddObject("/SAS/RecommendList/Chanel_" + chanel + "/Class_" + classid, shoplist);
+            }
+            return shoplist;
         }
         #endregion
 

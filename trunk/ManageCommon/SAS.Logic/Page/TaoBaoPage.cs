@@ -19,6 +19,10 @@ namespace SAS.Logic
     public class TaoBaoPage : System.Web.UI.Page
     {
         /// <summary>
+        /// 店铺图片路径
+        /// </summary>
+        protected internal string shoppic_path = "http://logo.taobao.com/shop-logo";
+        /// <summary>
         /// 淘宝插件
         /// </summary>
         protected internal TaoBaoPluginBase tpb;

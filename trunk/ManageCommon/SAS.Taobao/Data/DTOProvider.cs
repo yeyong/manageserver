@@ -88,6 +88,26 @@ namespace SAS.Taobao.Data
             return null;
         }
 
+        public static List<RecommendInfo> GetRecommendListEntity(IDataReader reader)
+        {
+            List<RecommendInfo> rinfolist = new List<RecommendInfo>();
+            while (reader.Read())
+            {
+                RecommendInfo rinfo = new RecommendInfo();
+                rinfo.id = TypeConverter.ObjectToInt(reader["id"].ToString());
+                rinfo.ctitle = reader["ctitle"].ToString();
+                rinfo.ctype = TypeConverter.ObjectToInt(reader["ctype"].ToString());
+                rinfo.relatechanel = TypeConverter.ObjectToInt(reader["relatechanel"].ToString());
+                rinfo.relatecategory = TypeConverter.ObjectToInt(reader["relatecategory"].ToString());
+                rinfo.ccontent = reader["ccontent"].ToString();
+                rinfo.createdatetime = reader["createdatetime"].ToString();
+                rinfo.updatedatetime = reader["updatedatetime"].ToString();
+                rinfolist.Add(rinfo);
+            }
+            reader.Close();
+            return rinfolist;
+        }
+
         public static List<ShopDetailInfo> GetTaoBaoShopList(IDataReader reader)
         {
             List<ShopDetailInfo> shoplist = new List<ShopDetailInfo>();
