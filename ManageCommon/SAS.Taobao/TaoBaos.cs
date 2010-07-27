@@ -56,8 +56,7 @@ namespace SAS.Taobao
         /// </summary>
         public static List<ItemCat> GetItemCatCache(long cid)
         {
-            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
-            List<ItemCat> itemcatlist = cache.RetrieveObject("SAS/Taobao/ItemCats_" + cid) as List<ItemCat>;
+            List<ItemCat> itemcatlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("SAS/Taobao/ItemCats_" + cid) as List<ItemCat>;
             if (itemcatlist == null)
             {
                 ItemcatsGetRequest igr = new ItemcatsGetRequest();
@@ -67,9 +66,7 @@ namespace SAS.Taobao
                 {
                     PageList<ItemCat> pageitems = client.ItemcatsGet(igr);
                     itemcatlist = pageitems.Content;
-                    SAS.Cache.ICacheStrategy ica = new TaoBaoCacheStrategy();
-                    ica.TimeOut = 20000;
-                    cache.AddObject("SAS/Taobao/ItemCats_" + cid, itemcatlist);
+                    SAS.Cache.WebCacheFactory.GetWebCache().Add("SAS/Taobao/ItemCats_" + cid, itemcatlist);
                 }
                 catch (NTWException e)
                 {
@@ -302,14 +299,16 @@ namespace SAS.Taobao
         public static List<RecommendInfo> GetAllRecommendList()
         {
             List<RecommendInfo> rinfolist = new List<RecommendInfo>();
-            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
-            rinfolist = cache.RetrieveObject("/SAS/RecommendList") as List<RecommendInfo>;
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();            
+            //rinfolist = cache.RetrieveObject("/SAS/RecommendList") as List<RecommendInfo>;
+            rinfolist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/RecommendList") as List<RecommendInfo>;
             if (rinfolist == null)
             {
                 rinfolist = DTOProvider.GetRecommendListEntity(Data.DbProvider.GetInstance().GetAllRecommendList());
                 SAS.Cache.ICacheStrategy ica = new TaoBaoCacheStrategy();
                 ica.TimeOut = 1440;
-                cache.AddObject("/SAS/RecommendList", rinfolist);
+                //cache.AddObject("/SAS/RecommendList", rinfolist);
+                SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/RecommendList", rinfolist);
             }
             return rinfolist;
         }
@@ -473,20 +472,17 @@ namespace SAS.Taobao
         public static SAS.Common.Generic.List<ShopDetailInfo> GetTaoBaoShopListByRecommend(int chanel, int classid)
         {
             SAS.Common.Generic.List<ShopDetailInfo> shoplist = new SAS.Common.Generic.List<ShopDetailInfo>();
-            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
-            shoplist = cache.RetrieveObject("/SAS/RecommendList/Chanel_" + chanel + "/Class_" + classid) as SAS.Common.Generic.List<ShopDetailInfo>;
+            shoplist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/ShopList/Chanel_" + chanel + "/Class_" + classid) as SAS.Common.Generic.List<ShopDetailInfo>;
             if (shoplist == null)
             {
-                List<RecommendInfo> rlist = GetRecommendList(chanel, classid);
+                List<RecommendInfo> rlist = GetRecommendList(chanel, classid).FindAll(new Predicate<RecommendInfo>(delegate(RecommendInfo rdinfo) { return rdinfo.ctype == 2; }));
                 string shopidlist = "";
                 foreach (RecommendInfo rinfo in rlist)
                 {
                     shopidlist += rinfo.ccontent + ",";
                 }
                 shoplist = GetTaoBaoShopListByIds(shopidlist.Trim().Trim(','));
-                //SAS.Cache.ICacheStrategy ica = new TaoBaoCacheStrategy();
-                //ica.TimeOut = 1440;
-                cache.AddObject("/SAS/RecommendList/Chanel_" + chanel + "/Class_" + classid, shoplist);
+                SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/ShopList/Chanel_" + chanel + "/Class_" + classid, shoplist);
             }
             return shoplist;
         }
@@ -547,6 +543,20 @@ namespace SAS.Taobao
         public static GoodsBrandInfo GetGoodsBrandInfo(int id)
         {
             return DTOProvider.GetGoodsBrandInfoEntity(Data.DbProvider.GetInstance().GetGoodsBrandInfo(id));
+        }
+        /// <summary>
+        /// 根据类别获取品牌信息集合
+        /// </summary>
+        public static List<GoodsBrandInfo> GetGoodsBrandListByClass(int classid)
+        {
+            SAS.Common.Generic.List<GoodsBrandInfo> brandlist = new SAS.Common.Generic.List<GoodsBrandInfo>();
+            brandlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/GoodsBrand/Class_" + classid) as SAS.Common.Generic.List<GoodsBrandInfo>;
+            if (brandlist == null)
+            {
+                brandlist = DTOProvider.GetGoodsBrandListEntity(Data.DbProvider.GetInstance().GetGoodsBrandListByClass(classid));
+                SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/GoodsBrand/Class_" + classid, brandlist);
+            }
+            return brandlist;
         }
         /// <summary>
         /// 更新品牌信息

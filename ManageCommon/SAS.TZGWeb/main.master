@@ -43,7 +43,7 @@
 				<strong><a class="l_000" title="点击查看全部商品分类" href="category.html">全部商品分类和品牌</a></strong>
 				<ul class="nr">
 				<%
-                    int parentcinfo__id = 1;		    
+                    int parentcinfo__id = 1;
                     foreach (CategoryInfo parentcinfo in parentcategorylist)
                     {
                         if (parentcinfo__id > 6) break;
@@ -57,64 +57,55 @@
 							<span class="cotlt">
 								<b class="tit"><i class="titlt">选择分类：</i><i class="titrt"><a title="" href="list.shtml">更多&gt;&gt;</a></i></b>
 								<%
-                                    int subcinfo__id = 1;
-                                    foreach (CategoryInfo subcinfo in SAS.Taobao.TaoBaos.GetCategoryListByParentID(parentcinfo.Cid))
-                                    {
-                                        if (subcinfo__id > 3) break;
-                        %>
+                        int subcinfo__id = 1;
+                        foreach (CategoryInfo subcinfo in SAS.Taobao.TaoBaos.GetCategoryListByParentID(parentcinfo.Cid))
+                        {
+                            if (subcinfo__id > 3) break;
+                                %>
 								<b class="tit1"><%=subcinfo.Name%></b>
-								<em class="type"><a title="" href="list.shtml">1OL连衣裙</a></em>
-								<em class="type"><a title="" href="list.shtml">淑女连衣裙</a></em>
-								<em class="type"><a title="" href="list.shtml">雪纺连衣裙</a></em>
-								<em class="type"><a title="" href="list.shtml">吊带裙</a></em>
-								<em class="type"><a title="" href="list.shtml">抹胸裙</a></em>
-								<em class="type"><a title="" href="list.shtml">T恤</a></em>
-								<em class="type"><a title="" href="list.shtml">雪纺衫</a></em>
-								<em class="type"><a title="" href="list.shtml">V领裙</a></em>
-								<em class="type"><a title="" href="list.shtml">衬衫</a></em>
+							<%
+                            foreach (string subsubcinfo in subcinfo.Cg_relateclass.Split(','))
+                            {
+                                if (subsubcinfo != "")
+                                {
+				             %>
+				                <em class="type"><a title="<%=subsubcinfo.Split('|')[1]%>" href="goodslist-<%=subsubcinfo.Split('|')[0]%>.html"><%=subsubcinfo.Split('|')[1]%></a></em>  
+				             <%
+                                }
+                            }
+                             %>
 								<%
-                                    if (subcinfo__id < 2)
-                                    {
-                                        %>
+                            if (subcinfo__id < 2)
+                            {
+                                %>
 								<i class="line"></i>
 								<%
-                                    }
-                                            %>
+                            }
+                                %>
 								<%
-                                    subcinfo__id++;
-                                    }
+                            subcinfo__id++;
+                        }
                             %>
 							</span>
 							<span class="cotrt">
 								<b class="tit"><i class="titlt">选择品牌：</i><i class="titrt"><a title="" href="list.shtml">更多&gt;&gt;</a></i></b>
-								<em class="bra"><a title="" href="list.shtml">优衣库</a></em>
-								<em class="bra"><a title="" href="list.shtml">歌莉娅</a></em>
-								<em class="bra"><a title="" href="list.shtml">十月传奇</a></em>
-								<em class="bra"><a title="" href="list.shtml">欧时力</a></em>
-								<em class="bra"><a title="" href="list.shtml">太平鸟</a></em>
-								<em class="bra"><a title="" href="list.shtml">美特斯·邦威</a></em>
-								<em class="bra"><a title="" href="list.shtml">ONLY</a></em>
-								<em class="bra"><a title="" href="list.shtml">Esprit</a></em>
-								<em class="bra"><a title="" href="list.shtml">以纯</a></em>
-								<em class="bra"><a title="" href="list.shtml">真维斯</a></em>
-								<em class="bra"><a title="" href="list.shtml">堡狮龙</a></em>
-								<em class="bra"><a title="" href="list.shtml">佐丹奴</a></em>
-								<em class="bra"><a title="" href="list.shtml">O.SA欧莎</a></em>
-								<em class="bra"><a title="" href="list.shtml">裂帛</a></em>
-								<em class="bra"><a title="" href="list.shtml">美特斯·邦威</a></em>
-								<em class="bra"><a title="" href="list.shtml">ONLY</a></em>
-								<em class="bra"><a title="" href="list.shtml">Esprit</a></em>
-								<em class="bra"><a title="" href="list.shtml">以纯</a></em>
-								<em class="bra"><a title="" href="list.shtml">真维斯</a></em>
+								<%
+                                    foreach (GoodsBrandInfo goodbinfo in SAS.Taobao.TaoBaos.GetGoodsBrandListByClass(parentcinfo.Cid))
+                                    {
+                                %>
+								<em class="bra"><a title="<%=goodbinfo.bname%>" href="list.shtml"><%=goodbinfo.spell%></a></em>
+								<%
+                                    }
+                                %>
 							</span>
 						</p>
 					</li>
 					<% 
-                        parentcinfo__id++;
+                    parentcinfo__id++;
                     }
                      %>
 				</ul>
-				<p class="other"><a title="" href="category.shtml">所有商品分类&gt;&gt;</a></p>
+				<p class="other"><a title="" href="category.html">所有商品分类&gt;&gt;</a></p>
 				<i class="lt"></i><i class="rt"></i>
 			</div>
 			<form name="form1" id="form1" method="post" class="soso">

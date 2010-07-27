@@ -46,7 +46,7 @@ namespace SAS.ManageWeb.ManagePage
 
             if (tpb.CreateRecommendInfo(thercategory, therchanel, thertitle, thecontent, rtype) > 0)
             {
-                SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/RecommendList");
+                SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/RecommendList", true);
                 base.RegisterStartupScript("PAGE", "window.location.href='taobao_recommendGrid.aspx?ctype=" + rtype + "';");
             }
         }

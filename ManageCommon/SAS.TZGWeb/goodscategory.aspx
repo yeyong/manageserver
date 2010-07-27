@@ -25,7 +25,7 @@
                         if (subsubcinfo != "")
                         {
 				 %>
-				    <a title="" href="goodslist-<%=subsubcinfo.Split('|')[0]%>.html"><%=subsubcinfo.Split('|')[1]%></a>  
+				    <a title="<%=subsubcinfo.Split('|')[1]%>" href="goodslist-<%=subsubcinfo.Split('|')[0]%>.html"><%=subsubcinfo.Split('|')[1]%></a>  
 				 <%
                         } 
                     }

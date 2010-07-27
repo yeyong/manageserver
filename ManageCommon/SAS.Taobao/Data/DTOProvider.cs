@@ -172,5 +172,31 @@ namespace SAS.Taobao.Data
             }
             return null;
         }
+
+        public static List<GoodsBrandInfo> GetGoodsBrandListEntity(IDataReader reader)
+        {
+            List<GoodsBrandInfo> ginfolist = new List<GoodsBrandInfo>();
+            while (reader.Read())
+            {
+                GoodsBrandInfo model = new GoodsBrandInfo();
+
+                model.id = TypeConverter.ObjectToInt(reader["id"].ToString(), 0);
+                model.bname = reader["bname"].ToString();
+                model.spell = reader["spell"].ToString();
+                model.website = reader["website"].ToString();
+                model.bcompany = reader["bcompany"].ToString();
+                model.order = TypeConverter.ObjectToInt(reader["order"], 0);
+                model.logo = reader["logo"].ToString();
+                model.img = reader["img"].ToString();
+                model.keyword = reader["keyword"].ToString();
+                model.shortdesc = reader["shortdesc"].ToString();
+                model.detaildesc = reader["detaildesc"].ToString();
+                model.status = TypeConverter.ObjectToInt(reader["status"], 0);
+                model.relateclass = reader["relateclass"].ToString();
+                ginfolist.Add(model);
+            }
+            reader.Close();
+            return ginfolist;
+        }
     }
 }

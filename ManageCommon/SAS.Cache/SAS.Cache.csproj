@@ -46,6 +46,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SASCache.cs" />
     <Compile Include="SASDataCache.cs" />
+    <Compile Include="SASSQLCache.cs" />
     <Compile Include="TableCacheDependency\CatalogList.cs" />
     <Compile Include="TableCacheDependency\CategoryList.cs" />
     <Compile Include="TableCacheDependency\CityList.cs" />
