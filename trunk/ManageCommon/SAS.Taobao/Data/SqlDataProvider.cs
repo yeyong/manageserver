@@ -363,7 +363,7 @@ namespace SAS.Taobao.Data
         /// </summary>
         public IDataReader GetTaoBaoShopList(string ids)
         {
-            string commandText = string.Format("SELECT {0} FROM [{1}taobaoshop] WHERE [sid] IN ({2})", DbFields.SHOPDETAIL, BaseConfigs.GetTablePrefix, ids);
+            string commandText = string.Format("SELECT {0} FROM [{1}taobaoshop] WHERE [sid] IN ({2}) ORDER BY [shop_level] DESC", DbFields.SHOPDETAIL, BaseConfigs.GetTablePrefix, ids);
             return DbHelper.ExecuteReader(CommandType.Text, commandText);
         }
         #endregion
@@ -462,6 +462,15 @@ namespace SAS.Taobao.Data
         {
             DbParameter param = DbHelper.MakeInParam("@id", (DbType)SqlDbType.Int, 4, id);
             string commandText = string.Format("SELECT {0} FROM [{1}goodsbrand] WHERE [id]=@id", DbFields.GOODSBRAND, BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText, param);
+        }
+        /// <summary>
+        /// 根据类别获取品牌列表信息
+        /// </summary>
+        public IDataReader GetGoodsBrandListByClass(int classid)
+        {
+            DbParameter param = DbHelper.MakeInParam("@classid", (DbType)SqlDbType.Int, 4, classid);
+            string commandText = string.Format("SELECT {0} FROM [{1}goodsbrand] WHERE [relateclass]=@classid AND [status] > 0 ORDER BY [order]", DbFields.GOODSBRAND, BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteReader(CommandType.Text, commandText, param);
         }
         /// <summary>

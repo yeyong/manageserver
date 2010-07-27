@@ -54,11 +54,11 @@ namespace SAS.ManageWeb.ManagePage
         {
             if (SASRequest.GetInt("postnumber", 0) > 0)
             {
-                return AjaxPagination(recordcount, pagesize, currentpage, "../usercontrols/ajaxtaobaoitems.ascx", "cid=" + cid + "&keyword=" + keyword + "&startmoney=" + startmoney + "&endmoney=" + endmoney + "&startcredit=" + startcredit + "&endcredit=" + endcredit + "&startrate=" + startrate + "&endrate=" + endrate + "&startnum=" + startnum + "endnum=" + endnum + "postnumber=" + SASRequest.GetInt("postnumber", 0), "taobaoitemlistgrid");
+                return AjaxPagination(recordcount, pagesize, currentpage, "../usercontrols/ajaxtaobaoitems.ascx", "cid=" + cid + "&keyword=" + keyword + "&startmoney=" + startmoney + "&endmoney=" + endmoney + "&startcredit=" + startcredit + "&endcredit=" + endcredit + "&startrate=" + startrate + "&endrate=" + endrate + "&startnum=" + startnum + "&endnum=" + endnum + "postnumber=" + SASRequest.GetInt("postnumber", 0), "taobaoitemlistgrid");
             }
             else
             {
-                return AjaxPagination(recordcount, pagesize, currentpage, "../usercontrols/ajaxtaobaoitems.ascx", "cid=" + cid + "&keyword=" + keyword + "&startmoney=" + startmoney + "&endmoney=" + endmoney + "&startcredit=" + startcredit + "&endcredit=" + endcredit + "&startrate=" + startrate + "&endrate=" + endrate + "&startnum=" + startnum + "endnum=" + endnum, "taobaoitemlistgrid");
+                return AjaxPagination(recordcount, pagesize, currentpage, "../usercontrols/ajaxtaobaoitems.ascx", "cid=" + cid + "&keyword=" + keyword + "&startmoney=" + startmoney + "&endmoney=" + endmoney + "&startcredit=" + startcredit + "&endcredit=" + endcredit + "&startrate=" + startrate + "&endrate=" + endrate + "&startnum=" + startnum + "&endnum=" + endnum, "taobaoitemlistgrid");
             }
         }
 

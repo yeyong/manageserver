@@ -26,10 +26,9 @@ namespace SAS.ManageWeb.ManagePage
         {
             if (!IsPostBack)
             {
-                rinfo = tpb.GetRecommendInfo(rid);
                 if (rinfo == null)
                 {
-                    base.RegisterStartupScript("", "<script>alert('参数传递错误！');window.location.href='taobao_additemrecommend.aspx';</script>");
+                    base.RegisterStartupScript("", "<script>alert('参数传递错误！');window.location.href='taobao_addrecommend.aspx';</script>");
                     return;
                 }
                 shoplist = tpb.GetTaoBaoShopListByIds(rinfo.ccontent);
@@ -60,12 +59,15 @@ namespace SAS.ManageWeb.ManagePage
 
             if (errmsg != "")
             {
-                base.RegisterStartupScript("", "<script>alert('" + errmsg + "');window.location.href='taobao_additemrecommend.aspx';</script>");
+                base.RegisterStartupScript("", "<script>alert('" + errmsg + "');window.location.href='taobao_addshoprecommend.aspx';</script>");
                 return;
             }
 
             tpb.UpdateRecommendInfo(rid, thercategory, therchanel, thertitle, thecontent, rtype);
-            SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/RecommendList");
+            //SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/RecommendList");
+            SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/RecommendList", true);
+            SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/ShopList/Chanel_" + rinfo.relatechanel + "/Class_" + rinfo.relatecategory, true);
+            SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/ShopList/Chanel_" + therchanel + "/Class_" + thercategory, true);
             base.RegisterStartupScript("PAGE", "window.location.href='taobao_recommendgrid.aspx?ctype=" + rtype + "';");
 
         }
@@ -92,6 +94,7 @@ namespace SAS.ManageWeb.ManagePage
             }
 
             rcategory.BuildTree(tpb.GetAllCategoryList(), "name", "cid");
+            rinfo = tpb.GetRecommendInfo(rid);
         }
 
         #endregion

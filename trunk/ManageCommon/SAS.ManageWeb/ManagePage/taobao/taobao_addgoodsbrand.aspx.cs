@@ -43,7 +43,7 @@ namespace SAS.ManageWeb.ManagePage
                 }
 
                 int rows = tpb.CreateGoodsBrand(LoadGoodsBrandInfo());
-                SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/GoodsBrandList");
+                SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/GoodsBrand/Class_" + brandclass.SelectedValue, true);
                 AdminVistLogs.InsertLog(this.userid, this.username, this.usergroupid, this.grouptitle, this.ip, "增加品牌", "创建新品牌,品牌名称:" + brandname.Text);
                 base.RegisterStartupScript("PAGE", "window.location.href='taobao_goodsbrandgrid.aspx';");
             }

@@ -45,7 +45,7 @@
 					<em class="credcot1x">收藏人气：1234</em>
 					<em class="credcot1x">地址：<%=sinfo.shop_province+sinfo.shop_city%></em>
 					<em class="credcot1x">好评率：<%=decimal.Round(decimal.Parse((((double)sinfo.good_num / (double)sinfo.total_num)*100).ToString()),2)%>%</em>
-					<em class="credcot1x2 rankbg rank<%=System.Math.Ceiling((double)sinfo.shop_level / 6)%> rankw<%=sinfo.shop_level - 5*(sinfo.shop_level / 6)%>"></em>
+					<em class="credcot1x2 rankbg rank<%=System.Math.Ceiling((double)sinfo.shop_level / 5)%> rankw<%=sinfo.shop_level % 5==0?5:sinfo.shop_level % 5%>"></em>
 				</span>
 				</a>
 			</li>
