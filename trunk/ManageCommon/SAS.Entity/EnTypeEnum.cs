@@ -33,6 +33,14 @@ namespace SAS.Entity
                 case 8: return "首页页内文字广告";
                 case 9: return "首页页内轮显图片广告";
                 case 10: return "首页页内图片广告";
+                case 11: return "淘之购首页头部广告";
+                case 12: return "淘之购首页广告";
+                case 13: return "淘之购潮货汇广告";
+                case 14: return "淘之购品牌馆广告";
+                case 15: return "淘之购女人馆广告";
+                case 16: return "淘之购女人馆广告";
+                case 17: return "淘之购商品列表页广告";
+                case 18: return "淘之购商品详细页广告";
                 default: return "";
             }
         }
@@ -307,7 +315,39 @@ namespace SAS.Entity
         /// <summary>
         /// 首页页内图片广告
         /// </summary>
-        IndexImageAd = 10
+        IndexImageAd = 10,
+        /// <summary>
+        /// 淘之购首页头部广告
+        /// </summary>
+        TaoIndexHeaderAD = 11,
+        /// <summary>
+        /// 淘之购首页广告
+        /// </summary>
+        TaoIndexAD = 12,
+        /// <summary>
+        /// 淘之购潮货汇广告
+        /// </summary>
+        TaoTrend = 13,
+        /// <summary>
+        /// 淘之购品牌馆广告
+        /// </summary>
+        TaoBrand = 14,
+        /// <summary>
+        /// 淘之购信誉铺广告
+        /// </summary>
+        TaoCredit = 15,
+        /// <summary>
+        /// 淘之购女人馆广告
+        /// </summary>
+        TaoWomen = 16,
+        /// <summary>
+        /// 淘之购商品列表页广告
+        /// </summary>
+        TaoItemList = 17,
+        /// <summary>
+        /// 淘之购商品详细页广告
+        /// </summary>
+        TaoItemDetail = 18
     }
     /// <summary>
     /// 淘之购相关频道

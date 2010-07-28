@@ -56,7 +56,7 @@ namespace SAS.Taobao
         /// </summary>
         public static List<ItemCat> GetItemCatCache(long cid)
         {
-            List<ItemCat> itemcatlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("SAS/Taobao/ItemCats_" + cid) as List<ItemCat>;
+            List<ItemCat> itemcatlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/Taobao/ItemCats_" + cid) as List<ItemCat>;
             if (itemcatlist == null)
             {
                 ItemcatsGetRequest igr = new ItemcatsGetRequest();
@@ -66,7 +66,7 @@ namespace SAS.Taobao
                 {
                     PageList<ItemCat> pageitems = client.ItemcatsGet(igr);
                     itemcatlist = pageitems.Content;
-                    SAS.Cache.WebCacheFactory.GetWebCache().Add("SAS/Taobao/ItemCats_" + cid, itemcatlist);
+                    SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/Taobao/ItemCats_" + cid, itemcatlist);
                 }
                 catch (NTWException e)
                 {
