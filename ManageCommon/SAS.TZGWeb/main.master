@@ -63,17 +63,19 @@
                             if (subcinfo__id > 3) break;
                                 %>
 								<b class="tit1"><%=subcinfo.Name%></b>
+								<em class="type">
 							<%
                             foreach (string subsubcinfo in subcinfo.Cg_relateclass.Split(','))
                             {
                                 if (subsubcinfo != "")
                                 {
 				             %>
-				                <em class="type"><a title="<%=subsubcinfo.Split('|')[1]%>" href="goodslist-<%=subsubcinfo.Split('|')[0]%>.html"><%=subsubcinfo.Split('|')[1]%></a></em>  
+				                <a title="<%=subsubcinfo.Split('|')[1]%>" href="goodslist-<%=subsubcinfo.Split('|')[0]%>.html"><%=subsubcinfo.Split('|')[1]%></a> | 
 				             <%
                                 }
                             }
                              %>
+                                </em>
 								<%
                             if (subcinfo__id < 2)
                             {

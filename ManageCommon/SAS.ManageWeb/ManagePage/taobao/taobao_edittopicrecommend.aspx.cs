@@ -57,12 +57,12 @@ namespace SAS.ManageWeb.ManagePage
 
             if (errmsg != "")
             {
-                base.RegisterStartupScript("", "<script>alert('" + errmsg + "');window.location.href='taobao_additemrecommend.aspx';</script>");
+                base.RegisterStartupScript("", "<script>alert('" + errmsg + "');window.location.href='taobao_edittopicrecommend.aspx?id=" + rid + "';</script>");
                 return;
             }
 
             tpb.UpdateRecommendInfo(rid, thercategory, therchanel, thertitle, thecontent, rtype);
-            SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/RecommendList", true);
+            SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TopicList", true);
             base.RegisterStartupScript("PAGE", "window.location.href='taobao_recommendgrid.aspx?ctype=" + rtype + "';");
 
         }

@@ -54,8 +54,9 @@ namespace SAS.Plugin.TaoBao
         /// <param name="endnum">最高推广量</param>
         /// <param name="pagesize">页面尺寸</param>
         /// <param name="currentpage">当前页码</param>
+        /// <param name="sortstr">排序</param>
         /// <param name="itemcount">返回总数量</param>
-        public abstract System.Collections.Generic.List<TaobaokeItem> GetItemListByCondition(int cid, string keyword, string startmoney, string endmoney, string startcredit, string endcredit, string startrate, string endrate, string startnum, string endnum, int pagesize, int currentpage, out long itemcount);
+        public abstract System.Collections.Generic.List<TaobaokeItem> GetItemListByCondition(int cid, string keyword, string startmoney, string endmoney, string startcredit, string endcredit, string startrate, string endrate, string startnum, string endnum, int pagesize, int currentpage, string sortstr, out long itemcount);
         /// <summary>
         /// 修改商品类别
         /// </summary>
@@ -73,7 +74,7 @@ namespace SAS.Plugin.TaoBao
         /// 获取推荐实体
         /// </summary>
         public abstract RecommendInfo GetRecommendInfo(int id);
-         /// <summary>
+        /// <summary>
         /// 根据条件获取推荐信息
         /// </summary>
         public abstract DataTable GetRecommendsByCond(string conditions);

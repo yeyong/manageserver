@@ -35,6 +35,8 @@ a:hover{ color:#e00000; text-decoration:underline;}
 .l_b09b4b:hover{ color:#e00000; text-decoration:underline;}
 .l_734d01:link, .l_734d01:visited{ color:#734d01; text-decoration:none;}
 .l_734d01:hover{ color:#e00000; text-decoration:underline;}
+.l_e00000:link, .l_e00000:visited{ color:#e00000; text-decoration:none;}
+.l_e00000:hover{ color:#e00000; text-decoration:underline;}
 /*信誉图*/
 .rankbg{ background:url(../images/rank_bg.gif) repeat-x;}
 .rank1{ height:13px; background-position:0 -1px;}
@@ -108,8 +110,8 @@ input.jia{ width:40px; height:19px; line-height:19px; background:url(../images/a
 .menu2 .cotlt .tit .titrt{ float:right; font-weight:normal;}
 .menu2 .cotlt .tit .titrt a:hover{ text-decoration:underline;}
 .menu2 .cotlt .tit1{ color:#e00000;}
-.menu2 .cotlt .type{ width:70px; height:20px; line-height:20px; float:left;}
-.menu2 .cotlt .type a, .menu2 .cotlt .type a:hover{ width:70px; height:20px; color:#555; background:none; line-height:20px; padding:0; margin:0 0 0 0; float:left;}
+.menu2 .cotlt .type{ width:auto; height:auto; line-height:20px; color:#ecdcac; float:left;}
+.menu2 .cotlt .type a, .menu2 .cotlt .type a:hover{ width:auto; height:auto; color:#555; background:none; line-height:20px;}
 .menu2 .cotlt .type a:hover{ border:0; color:#e00000; text-decoration:underline;}
 .menu2 .cotlt .line{ width:280px; height:0; line-height:0px; border-bottom:1px dashed #d3c6ac; margin-top:4px; margin-bottom:4px; overflow:hidden; float:left; margin-right:-3px;}
 .menu2 .cotrt{ width:170px; height:243px; background:#f7f0e5; padding:7px 10px 10px; float:left;}

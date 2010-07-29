@@ -36,6 +36,20 @@
             msgbox += "活动图片不能为空\r\n";
             Form1.actpic.focus();
         }
+        if (Form1.actwidth.value == "") {
+            msgbox += "活动宽度不能为空\r\n";
+            Form1.actwidth.focus();
+        } else if (!isNumber(Form1.actwidth.value)) {
+            msgbox += "活动宽度必须为数字\r\n";
+            Form1.actwidth.focus();
+        }
+        if (Form1.actheight.value == "") {
+            msgbox += "活动高度不能为空\r\n";
+            Form1.actheight.focus();
+        } else if (!isNumber(Form1.actheight.value)) {
+            msgbox += "活动高度必须为数字\r\n";
+            Form1.actheight.focus();
+        }
         if (msgbox != "") {
             alert(msgbox);
             return false;
@@ -45,9 +59,9 @@
 
     function addact() {
         if (!validateact()) return;
-    
-        var addvalue = Form1.actid.value + "|" + Form1.acttitle.value + "|" + $('acttype').value + "|" + Form1.actorder.value + "|" + Form1.actpic.value;
-        var thevalue = [Form1.actid.value, Form1.acttitle.value, $('acttype').value, Form1.actorder.value];
+
+        var addvalue = Form1.actid.value + "|" + Form1.acttitle.value + "|" + $('acttype').value + "|" + Form1.actorder.value + "|" + Form1.actpic.value + "|" + Form1.actwidth.value + "|" + Form1.actheight.value;
+        var thevalue = [Form1.actid.value, Form1.acttitle.value, $('acttype').value, Form1.actorder.value, Form1.actwidth.value, Form1.actheight.value];
         var trobj = document.createElement("tr");
         trobj.className = "mouseoutstyle";
         trobj.setAttribute("style", "cursor:hand;");
@@ -100,6 +114,8 @@
         if ($('acttype').value == "1") typeurl = "http://haibao.huoban.taobao.com/tms/topic.php?pid=<%=taobaouserid%>&eventid=";
         else if ($('acttype').value == "2") typeurl = "http://zhuti.huoban.taobao.com/event.php?pid=<%=taobaouserid%>&eventid=";
         $("lookact").src = typeurl + Form1.actid.value;
+        $("lookact").width = Form1.actwidth.value;
+        $("lookact").height = Form1.actheight.value;
     }
 
     function validate(theForm) {
@@ -177,10 +193,13 @@
                     <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">活动标题</td>
                     <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">活动类型</td>                    
                     <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">排列顺序</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">页面宽度</td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;">页面高度</td>
                   </tr>
                   <%
                       foreach (string topicstr in rinfo.ccontent.Split(','))
                       {
+                          if (string.IsNullOrEmpty(topicstr)) continue;
                        %>
                   <tr class="mouseoutstyle" onmouseover="this.className='mouseoverstyle'" onmouseout="this.className='mouseoutstyle'" style="cursor:hand;">
                     <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><input type="button" class="ManagerButton" value="删除" onclick="del(this,'<%=topicstr%>');"/></td>
@@ -189,6 +208,8 @@
                     <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=topicstr.Split('|')[1]%></td>
                     <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=topicstr.Split('|')[2]%></td>
                     <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=topicstr.Split('|')[3]%></td>
+                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=topicstr.Split('|')[5]%></td>
+                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=topicstr.Split('|')[6]%></td>
                   </tr>
                   <%
                       }
@@ -256,6 +277,15 @@
                         </td>
                         <td>
                             <input type="text" name="actpic" size="40" class="FormBase" onfocus="this.className='FormFocus';" onblur="this.className='FormBase';"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            活动属性:
+                        </td>
+                        <td>
+                            宽度：<input type="text" name="actwidth" size="10" class="FormBase" onfocus="this.className='FormFocus';" onblur="this.className='FormBase';"/>
+                            高度：<input type="text" name="actheight" size="10" class="FormBase" onfocus="this.className='FormFocus';" onblur="this.className='FormBase';"/>
                         </td>
                     </tr>
                 </table>

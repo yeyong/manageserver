@@ -76,7 +76,7 @@
 .brand li{ width:222px; height:35px; margin:1px 0 0 0; display:inline; float:left;}
 .brand li a{ width:222px; height:35px; float:left;}
 /*友情链接*/
-.link{ width:956px; height:46px; border:1px solid #eee; float:left;}
+.link{ width:958px; height:46px; border:1px solid #eee; float:left;}
 .link strong, .link em{  background:url(../images/index_bg.gif) repeat-x;}
 .link strong{ width:34px; height:40px; line-height:20px; color:#fff; font-weight:normal; text-align:center; padding:3px 8px; float:left;}
 .link em{ width:5px; height:46px; float:right;}
