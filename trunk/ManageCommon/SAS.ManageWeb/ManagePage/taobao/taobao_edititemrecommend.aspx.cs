@@ -28,7 +28,6 @@ namespace SAS.ManageWeb.ManagePage
             if (!IsPostBack)
             {
                 icatlist = tpb.GetItemCatCache(0);
-                rinfo = tpb.GetRecommendInfo(rid);
                 if (rinfo == null)
                 {
                     base.RegisterStartupScript("", "<script>alert('参数传递错误！');window.location.href='taobao_additemrecommend.aspx';</script>");
@@ -67,7 +66,6 @@ namespace SAS.ManageWeb.ManagePage
             }
 
             tpb.UpdateRecommendInfo(rid, thercategory, therchanel, thertitle, thecontent, rtype);
-            SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/RecommendList", true);
             base.RegisterStartupScript("PAGE", "window.location.href='taobao_recommendgrid.aspx?ctype=" + rtype + "';");
 
         }
@@ -94,6 +92,7 @@ namespace SAS.ManageWeb.ManagePage
             }
 
             rcategory.BuildTree(tpb.GetAllCategoryList(), "name", "cid");
+            rinfo = tpb.GetRecommendInfo(rid);
         }
 
         #endregion

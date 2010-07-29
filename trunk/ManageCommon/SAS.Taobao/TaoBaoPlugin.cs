@@ -71,10 +71,11 @@ namespace SAS.Taobao
         /// <param name="endnum">最高推广量</param>
         /// <param name="pagesize">页面尺寸</param>
         /// <param name="currentpage">当前页码</param>
+        /// <param name="sortstr">排序</param>
         /// <param name="itemcount">返回总数量</param>
-        public override List<TaobaokeItem> GetItemListByCondition(int cid, string keyword, string startmoney, string endmoney, string startcredit, string endcredit, string startrate, string endrate, string startnum, string endnum, int pagesize, int currentpage, out long itemcount)
+        public override List<TaobaokeItem> GetItemListByCondition(int cid, string keyword, string startmoney, string endmoney, string startcredit, string endcredit, string startrate, string endrate, string startnum, string endnum, int pagesize, int currentpage, string sortstr, out long itemcount)
         {
-            return TaoBaos.GetItemList(cid, keyword, startmoney, endmoney, startcredit, endcredit, startrate, endrate, startnum, endnum, pagesize, currentpage, out itemcount);
+            return TaoBaos.GetItemList(cid, keyword, startmoney, endmoney, startcredit, endcredit, startrate, endrate, startnum, endnum, pagesize, currentpage, sortstr, out itemcount);
         }
         /// <summary>
         /// 修改商品类别

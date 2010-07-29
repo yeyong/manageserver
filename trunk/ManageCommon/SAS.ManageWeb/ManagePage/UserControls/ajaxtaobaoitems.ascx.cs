@@ -27,6 +27,7 @@ namespace SAS.ManageWeb.ManagePage
         public string endrate = SASRequest.GetString("endrate");
         public string startnum = SASRequest.GetString("startnum");
         public string endnum = SASRequest.GetString("endnum");
+        public string sortstr = SASRequest.GetString("sortstr");
         //页面大小
         public int pagesize = 16;
         protected TaoBaoPluginBase tpb = TaoBaoPluginProvider.GetInstance();
@@ -40,7 +41,7 @@ namespace SAS.ManageWeb.ManagePage
                 pagesize = SASRequest.GetInt("postnumber", 0);
             }
             long recordcount = 0;
-            taobaoitemlist = tpb.GetItemListByCondition(cid, keyword, startmoney, endmoney, startcredit, endcredit, startrate, endrate, startnum, endnum, pagesize, currentpage, out recordcount);
+            taobaoitemlist = tpb.GetItemListByCondition(cid, keyword, startmoney, endmoney, startcredit, endcredit, startrate, endrate, startnum, endnum, pagesize, currentpage, sortstr, out recordcount);
             pagelink = AjaxPagination(recordcount, 12, currentpage);
         }
 

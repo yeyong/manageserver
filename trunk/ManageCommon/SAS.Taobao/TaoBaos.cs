@@ -24,6 +24,7 @@ namespace SAS.Taobao
     public class TaoBaos
     {
         private static DataCacheConfigInfo dataconfig = DataCacheConfigs.GetConfig();
+        private static TaoBaoConfigInfo taobaoconfig = TaoBaoConfigs.GetConfig();
         private const string TOP_AUTHORIZE_URL = "http://open.taobao.com/isv/authorize.php";
         private const string TOP_CONTAINER_URL = "http://container.sandbox.taobao.com/container";
         private const string SAS_USERNICK = "yeyong2086521";
@@ -91,8 +92,9 @@ namespace SAS.Taobao
         /// <param name="endnum">最高推广量</param>
         /// <param name="pagesize">页面尺寸</param>
         /// <param name="currentpage">当前页码</param>
+        /// <param name="sortstr">排序</param>
         /// <param name="itemcount">返回总数量</param>
-        public static List<TaobaokeItem> GetItemList(int cid, string keyword, string startmoney, string endmoney, string startcredit, string endcredit, string startrate, string endrate, string startnum, string endnum, int pagesize, int currentpage, out long itemcount)
+        public static List<TaobaokeItem> GetItemList(int cid, string keyword, string startmoney, string endmoney, string startcredit, string endcredit, string startrate, string endrate, string startnum, string endnum, int pagesize, int currentpage,string sortstr, out long itemcount)
         {
             itemcount = 0;
             TaobaokeItemsGetRequest tgr = new TaobaokeItemsGetRequest();
@@ -123,6 +125,11 @@ namespace SAS.Taobao
             {
                 tgr.StartCommissionNum = startnum;
                 tgr.EndCommissionNum = endnum;
+            }
+
+            if (!string.IsNullOrEmpty(sortstr))
+            {
+                tgr.Sort = sortstr;
             }
 
             tgr.PageSize = pagesize;
@@ -251,6 +258,20 @@ namespace SAS.Taobao
             return DTOProvider.GetCategoryListEntity(Data.DbProvider.GetInstance().GetVaildCategoryList());
         }
         /// <summary>
+        /// 获取类别实体（缓存）
+        /// </summary>
+        public static CategoryInfo GetCategoryInfoByCache(int cid)
+        {
+            return GetVaildCategoryList().Find(new Predicate<CategoryInfo>(delegate(CategoryInfo cinfo) { return cinfo.Cid == cid; }));
+        }
+        /// <summary>
+        /// 获取类别实体根据底层类（缓存）
+        /// </summary>
+        public static CategoryInfo GetCategoryInfoByCache(string sid)
+        {
+            return GetVaildCategoryList().Find(new Predicate<CategoryInfo>(delegate(CategoryInfo cinfo) { return cinfo.Cg_relateclass.Contains(sid + "|"); }));
+        }
+        /// <summary>
         /// 获取有效类别集合（根据父级）
         /// </summary>
         public static List<CategoryInfo> GetCategoryListByParentID(int pid)
@@ -293,36 +314,33 @@ namespace SAS.Taobao
         {
             return DTOProvider.GetRecommendInfoEntity(Data.DbProvider.GetInstance().GetRecommendInfo(id));
         }
+
         /// <summary>
-        /// 获取全部推荐实体（缓存方式）
+        /// 获取推荐信息
         /// </summary>
-        public static List<RecommendInfo> GetAllRecommendList()
+        /// <param name="chanel">类型</param>
+        public static List<RecommendInfo> GetRecommendList(int ctype)
         {
-            List<RecommendInfo> rinfolist = new List<RecommendInfo>();
-            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();            
-            //rinfolist = cache.RetrieveObject("/SAS/RecommendList") as List<RecommendInfo>;
-            rinfolist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/RecommendList") as List<RecommendInfo>;
-            if (rinfolist == null)
-            {
-                rinfolist = DTOProvider.GetRecommendListEntity(Data.DbProvider.GetInstance().GetAllRecommendList());
-                SAS.Cache.ICacheStrategy ica = new TaoBaoCacheStrategy();
-                ica.TimeOut = 1440;
-                //cache.AddObject("/SAS/RecommendList", rinfolist);
-                SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/RecommendList", rinfolist);
-            }
-            return rinfolist;
+            return GetRecommendList(ctype, 0, 0);
         }
         /// <summary>
-        /// 获取推荐信息（根据频道，类别）
+        /// 获取推荐信息
         /// </summary>
+        /// <param name="chanel">类型</param>
+        /// <param name="classid">频道<</param>
+        public static List<RecommendInfo> GetRecommendList(int ctype, int chanel)
+        {
+            return GetRecommendList(ctype, chanel, 0);
+        }
+        /// <summary>
+        /// 获取推荐信息
+        /// </summary>
+        /// <param name="ctype">类型</param>
         /// <param name="chanel">频道</param>
         /// <param name="classid">类别</param>
-        public static List<RecommendInfo> GetRecommendList(int chanel, int classid)
+        public static List<RecommendInfo> GetRecommendList(int ctype, int chanel, int classid)
         {
-            if (chanel > -1 && classid > -1) return GetAllRecommendList().FindAll(new Predicate<RecommendInfo>(delegate(RecommendInfo rinfo) { return rinfo.relatechanel == chanel && rinfo.relatecategory == classid; }));
-            else if (chanel > -1) return GetAllRecommendList().FindAll(new Predicate<RecommendInfo>(delegate(RecommendInfo rinfo) { return rinfo.relatechanel == chanel; }));
-            else if (classid > -1) return GetAllRecommendList().FindAll(new Predicate<RecommendInfo>(delegate(RecommendInfo rinfo) { return rinfo.relatecategory == classid; }));
-            else return new List<RecommendInfo>();
+            return DTOProvider.GetRecommendListEntity(Data.DbProvider.GetInstance().GetAllRecommendList(ctype, chanel, classid));
         }
         /// <summary>
         /// 更新推荐信息
@@ -475,7 +493,7 @@ namespace SAS.Taobao
             shoplist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/ShopList/Chanel_" + chanel + "/Class_" + classid) as SAS.Common.Generic.List<ShopDetailInfo>;
             if (shoplist == null)
             {
-                List<RecommendInfo> rlist = GetRecommendList(chanel, classid).FindAll(new Predicate<RecommendInfo>(delegate(RecommendInfo rdinfo) { return rdinfo.ctype == 2; }));
+                List<RecommendInfo> rlist = GetRecommendList(2, chanel, classid);
                 string shopidlist = "";
                 foreach (RecommendInfo rinfo in rlist)
                 {
@@ -564,6 +582,53 @@ namespace SAS.Taobao
         public static void UpdateGoodsBrand(GoodsBrandInfo ginfo)
         {
             Data.DbProvider.GetInstance().UpdateGoodsBrand(ginfo);
+        }
+        #endregion
+
+        #region 淘宝专题操作
+        /// <summary>
+        /// 获取淘宝专题列表
+        /// </summary>
+        public static List<TaoBaoTopicInfo> GetTaoBaoTopicList()
+        {
+            List<TaoBaoTopicInfo> tbtlist = new List<TaoBaoTopicInfo>();
+            tbtlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/TopicList") as List<TaoBaoTopicInfo>;
+            if (tbtlist == null)
+            {
+                tbtlist = new List<TaoBaoTopicInfo>();
+                List<RecommendInfo> rinfolist = GetRecommendList(3);
+                string topicarray = "";
+                foreach (RecommendInfo rinfo in rinfolist)
+                {
+                    topicarray += rinfo.ccontent + ",";
+                }
+                foreach (string str in topicarray.Trim().Trim(',').Split(','))
+                {
+                    if (string.IsNullOrEmpty(str)) continue;
+                    string[] topicinfo = str.Split('|');
+                    if (topicinfo.Length != 7) continue;
+                    TaoBaoTopicInfo ttinfo = new TaoBaoTopicInfo();
+                    ttinfo.Tid = long.Parse(topicinfo[0]);
+                    ttinfo.Title = topicinfo[1];
+                    ttinfo.Type = TypeConverter.StrToInt(topicinfo[2]);
+                    ttinfo.Order = TypeConverter.StrToInt(topicinfo[3]);
+                    ttinfo.Pic = topicinfo[4];
+                    if (ttinfo.Type == 1) ttinfo.Url = "http://haibao.huoban.taobao.com/tms/topic.php?pid=" + taobaoconfig.UserID + "&eventid=" + ttinfo.Tid;
+                    if (ttinfo.Type == 2) ttinfo.Url = "http://zhuti.huoban.taobao.com/event.php?pid=" + taobaoconfig.UserID + "&eventid=" + ttinfo.Tid;
+                    ttinfo.Width = TypeConverter.StrToInt(topicinfo[5]);
+                    ttinfo.Height = TypeConverter.StrToInt(topicinfo[6]);
+                    tbtlist.Add(ttinfo);
+                }
+                SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/TopicList", tbtlist);
+            }
+            return tbtlist;
+        }
+        /// <summary>
+        /// 获取淘宝专题信息
+        /// </summary>
+        public static TaoBaoTopicInfo GetTaoBaoTopicInfo(long tid)
+        {
+            return GetTaoBaoTopicList().Find(new Predicate<TaoBaoTopicInfo>(delegate(TaoBaoTopicInfo tinfo) { return tinfo.Tid == tid; }));
         }
         #endregion
     }
