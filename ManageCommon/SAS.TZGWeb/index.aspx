@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.master" CodeFile="index.aspx.cs" Inherits="index" %>
+<%@ Import Namespace="SAS.Entity"%>
 <asp:Content ID="Content0" ContentPlaceHolderID="styles" runat="server">
 <link href="css/index.css" rel="stylesheet" type="text/css" />
 </asp:Content>
@@ -123,17 +124,14 @@
 </div>
 <div class="cot">
 	<ul class="inxbrd mar_top">
-		<li><a title="" href="#"><img alt="" src="images/ad/70x50.gif" /></a></li>
-		<li><a title="" href="#"><img alt="" src="images/ad/70x50.gif" /></a></li>
-		<li><a title="" href="#"><img alt="" src="images/ad/70x50.gif" /></a></li>
-		<li><a title="" href="#"><img alt="" src="images/ad/70x50.gif" /></a></li>
-		<li><a title="" href="#"><img alt="" src="images/ad/70x50.gif" /></a></li>
-		<li><a title="" href="#"><img alt="" src="images/ad/70x50.gif" /></a></li>
-		<li><a title="" href="#"><img alt="" src="images/ad/70x50.gif" /></a></li>
-		<li><a title="" href="#"><img alt="" src="images/ad/70x50.gif" /></a></li>
-		<li><a title="" href="#"><img alt="" src="images/ad/70x50.gif" /></a></li>
-		<li><a title="" href="#"><img alt="" src="images/ad/70x50.gif" /></a></li>
-		<li><a title="" href="#"><img alt="" src="images/ad/70x50.gif" /></a></li>
+	<%
+        foreach (GoodsBrandInfo ginfo in ginfolist)
+        {
+	%>
+		<li><a title="<%=ginfo.bname%>" href="<%=ginfo.id%>"><img alt="<%=ginfo.bname%>" src="<%=ginfo.logo%>" /></a></li>
+	<%
+        }
+    %>
 	</ul>
 </div>
 <div class="cot">
@@ -142,15 +140,19 @@
 		<div class="crown mar_top mar_left">
 			<p class="crowntit">
 				<strong><img alt="皇冠店铺" src="images/index_tit3.gif" /></strong>
-				<em><a title="" href="credit.shtml">查看更多店铺&gt;&gt;</a></em>
+				<em><a title="" href="credit.html">查看更多店铺&gt;&gt;</a></em>
 			</p>
 			<div class="crownr">
 				<p class="crownlt" id="LeftArr"></p>
 				<ul class="crowncot" id="crown">
+				<%
+                    foreach (ShopDetailInfo sinfo in shoplist)
+                    {		    
+			    %>
 					<li>
-						<a title="" href="shop_show.shtml">
-						<p><img alt="" src="images/ad/120x120.gif" /></p>
-						<span>1零点正品折扣店 匡威专卖店</span>
+						<a title="<%=sinfo.title%>" href="shop_show.shtml">
+						<p><img alt="<%=sinfo.title%>" src="images/ad/120x120.gif" /></p>
+						<span><%=sinfo.title%></span>
 						</a>
 						<strong><ins class="rankbg rank4 rankw4"></ins></strong>
 						<em>好评率：<i class="f_f00">99.89%</i></em>
@@ -159,88 +161,9 @@
 						<b>1</b>
 					</li>
 					<li class="li2"></li>
-					<li>
-						<a title="" href="shop_show.shtml">
-						<p><img alt="" src="images/ad/120x120.gif" /></p>
-						<span>2零点正品折扣店 匡威专卖店</span>
-						</a>
-						<strong><ins class="rankbg rank6 rankw4"></ins></strong>
-						<em>好评率：<i class="f_f00">99.89%</i></em>
-						<em>所在地：杭州</em>
-						<em>收藏数：<i class="f_f00">1258</i></em>
-						<b>2</b>
-					</li>
-					<li class="li2"></li>
-					<li>
-						<a title="" href="shop_show.shtml">
-						<p><img alt="" src="images/ad/120x120.gif" /></p>
-						<span>3零点正品折扣店 匡威专卖店</span>
-						</a>
-						<strong><ins class="rankbg rank2 rankw5"></ins></strong>
-						<em>好评率：<i class="f_f00">99.89%</i></em>
-						<em>所在地：杭州</em>
-						<em>收藏数：<i class="f_f00">1258</i></em>
-						<b>3</b>
-					</li>
-					<li class="li2"></li>
-					<li>
-						<a title="" href="shop_show.shtml">
-						<p><img alt="" src="images/ad/120x120.gif" /></p>
-						<span>4零点正品折扣店 匡威专卖店</span>
-						</a>
-						<strong><ins class="rankbg rank3 rankw1"></ins></strong>
-						<em>好评率：<i class="f_f00">99.89%</i></em>
-						<em>所在地：杭州</em>
-						<em>收藏数：<i class="f_f00">1258</i></em>
-						<b>4</b>
-					</li>
-					<li>
-						<a title="" href="shop_show.shtml">
-						<p><img alt="" src="images/ad/120x120.gif" /></p>
-						<span>5零点正品折扣店 匡威专卖店</span>
-						</a>
-						<strong><ins class="rankbg rank6 rankw4"></ins></strong>
-						<em>好评率：<i class="f_f00">99.89%</i></em>
-						<em>所在地：杭州</em>
-						<em>收藏数：<i class="f_f00">1258</i></em>
-						<b>5</b>
-					</li>
-					<li class="li2"></li>
-					<li>
-						<a title="" href="shop_show.shtml">
-						<p><img alt="" src="images/ad/120x120.gif" /></p>
-						<span>6零点正品折扣店 匡威专卖店</span>
-						</a>
-						<strong><ins class="rankbg rank2 rankw5"></ins></strong>
-						<em>好评率：<i class="f_f00">99.89%</i></em>
-						<em>所在地：杭州</em>
-						<em>收藏数：<i class="f_f00">1258</i></em>
-						<b>6</b>
-					</li>
-					<li class="li2"></li>
-					<li>
-						<a title="" href="shop_show.shtml">
-						<p><img alt="" src="images/ad/120x120.gif" /></p>
-						<span>7零点正品折扣店 匡威专卖店</span>
-						</a>
-						<strong><ins class="rankbg rank1 rankw4"></ins></strong>
-						<em>好评率：<i class="f_f00">99.89%</i></em>
-						<em>所在地：杭州</em>
-						<em>收藏数：<i class="f_f00">1258</i></em>
-						<b>7</b>
-					</li>
-					<li class="li2"></li>
-					<li>
-						<a title="" href="shop_show.shtml">
-						<p><img alt="" src="images/ad/120x120.gif" /></p>
-						<span>8零点正品折扣店 匡威专卖店</span>
-						</a>
-						<strong><ins class="rankbg rank5 rankw4"></ins></strong>
-						<em>好评率：<i class="f_f00">99.89%</i></em>
-						<em>所在地：杭州</em>
-						<em>收藏数：<i class="f_f00">1258</i></em>
-						<b>8</b>
-					</li>
+				<%
+                    }
+				%>
 				</ul>
 				<p class="crownrt" id="RightArr"></p>
 			</div>

@@ -63,6 +63,13 @@ function MYScrollPic(myidname,framewidth,pagewidth,speed,space,play,time)
 	//--><!]]>
 }
 
+function $(id) {
+    return document.getElementById(id);
+}
+
+function isNumber(str) {
+    return (/^[+|-]?\d+$/.test(str));
+}
 
 
 

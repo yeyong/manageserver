@@ -201,10 +201,13 @@
 /*.listnr2 li .listnrtu{ width:80px; height:80px; vertical-align:middle;*display:block;*font-family:Arial!important;*font-size:70px;*line-height:1; display:table-cell; text-align:center; background:#fff; border:1px solid #eee; float:left;}*/
 .listnr2 li .listnrtu img{ width:80px; height:80px;vertical-align:middle; float:left;}
 .listnr2 li .listnrt{ width:270px; height:42px; line-height:21px; overflow:hidden; float:right;}
-.listnr2 li p, .listnr2 li ins, .listnr2 li b, .listnr2 li strong{ width:160px; height:21px; line-height:21px; color:#999;}
+.listnr2 li p, .listnr2 li ins, .listnr2 li b, .listnr2 li strong{ height:21px; line-height:21px; color:#999;}
+.listnr2 li p, .listnr2 li ins{ width:120px;}
+.listnr2 li b, .listnr2 li strong{ width:150px; margin-left:20px; display:inline;}
 .listnr2 li p, .listnr2 li ins{ text-align:right; text-decoration:none; float:right;}
-.listnr2 li strong, .listnr2 li b{ text-align:center; float:left;}
+.listnr2 li strong, .listnr2 li b{ text-align:left; float:left;}
 .listnr2 li b{ font-weight:normal;}
+.listnr2 li b a{ width:auto; height:21px; float:none;}
 .listnr2 li strong, .listnr2 li .zi{ color:#e00000; font-style:normal;}
 .listnr2 li .zi2{ display:-moz-display-box;display:inline-block;*display:block;}
 .listnr2 li strong{ font-size:14px;}

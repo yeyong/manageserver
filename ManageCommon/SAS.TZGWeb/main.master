@@ -76,14 +76,7 @@
                             }
                              %>
                                 </em>
-								<%
-                            if (subcinfo__id < 2)
-                            {
-                                %>
-								<i class="line"></i>
-								<%
-                            }
-                                %>
+								<%if (subcinfo__id < 2){%><i class="line"></i><%}%>
 								<%
                             subcinfo__id++;
                         }

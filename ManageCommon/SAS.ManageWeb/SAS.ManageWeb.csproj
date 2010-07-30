@@ -559,12 +559,26 @@
     <Compile Include="ManagePage\syslogin.aspx.designer.cs">
       <DependentUpon>syslogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\taobao\taobao_addbrandrecommend.aspx.cs">
+      <DependentUpon>taobao_addbrandrecommend.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\taobao\taobao_addbrandrecommend.aspx.designer.cs">
+      <DependentUpon>taobao_addbrandrecommend.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\taobao\taobao_addgoodsbrand.aspx.cs">
       <DependentUpon>taobao_addgoodsbrand.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManagePage\taobao\taobao_addgoodsbrand.aspx.designer.cs">
       <DependentUpon>taobao_addgoodsbrand.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\taobao\taobao_editbrandrecommend.aspx.cs">
+      <DependentUpon>taobao_editbrandrecommend.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\taobao\taobao_editbrandrecommend.aspx.designer.cs">
+      <DependentUpon>taobao_editbrandrecommend.aspx</DependentUpon>
     </Compile>
     <Compile Include="ManagePage\taobao\taobao_editgoodsbrand.aspx.cs">
       <DependentUpon>taobao_editgoodsbrand.aspx</DependentUpon>
@@ -677,6 +691,13 @@
     </Compile>
     <Compile Include="ManagePage\UserControls\activetree.ascx.designer.cs">
       <DependentUpon>activetree.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\UserControls\ajaxbrandlist.ascx.cs">
+      <DependentUpon>ajaxbrandlist.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\UserControls\ajaxbrandlist.ascx.designer.cs">
+      <DependentUpon>ajaxbrandlist.ascx</DependentUpon>
     </Compile>
     <Compile Include="ManagePage\UserControls\ajaxtaobaoitems.ascx.cs">
       <DependentUpon>ajaxtaobaoitems.ascx</DependentUpon>
@@ -1684,7 +1705,9 @@
     <Content Include="ManagePage\styles\tab.css" />
     <Content Include="ManagePage\style\admin.css" />
     <Content Include="ManagePage\style\comm.css" />
+    <Content Include="ManagePage\taobao\taobao_addbrandrecommend.aspx" />
     <Content Include="ManagePage\taobao\taobao_addgoodsbrand.aspx" />
+    <Content Include="ManagePage\taobao\taobao_editbrandrecommend.aspx" />
     <Content Include="ManagePage\taobao\taobao_editgoodsbrand.aspx" />
     <Content Include="ManagePage\taobao\taobao_editshoprecommend.aspx" />
     <Content Include="ManagePage\taobao\taobao_addCategory.aspx" />
@@ -1701,6 +1724,7 @@
     <Content Include="ManagePage\taobao\taobao_goodsbrandgrid.aspx" />
     <Content Include="ManagePage\taobao\taobao_recommendgrid.aspx" />
     <Content Include="ManagePage\UserControls\activetree.ascx" />
+    <Content Include="ManagePage\UserControls\ajaxbrandlist.ascx" />
     <Content Include="ManagePage\UserControls\ajaxtaobaoitems.ascx" />
     <Content Include="ManagePage\UserControls\ajaxtaobaoshops.ascx" />
     <Content Include="ManagePage\UserControls\forumstree.ascx" />

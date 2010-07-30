@@ -198,5 +198,30 @@ namespace SAS.Taobao.Data
             reader.Close();
             return ginfolist;
         }
+
+        public static List<GoodsBrandInfo> GetGoodsBrandListEntity(DataTable dt)
+        {
+            List<GoodsBrandInfo> ginfolist = new List<GoodsBrandInfo>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                GoodsBrandInfo model = new GoodsBrandInfo();
+
+                model.id = TypeConverter.ObjectToInt(dr["id"].ToString(), 0);
+                model.bname = dr["bname"].ToString();
+                model.spell = dr["spell"].ToString();
+                model.website = dr["website"].ToString();
+                model.bcompany = dr["bcompany"].ToString();
+                model.order = TypeConverter.ObjectToInt(dr["order"], 0);
+                model.logo = dr["logo"].ToString();
+                model.img = dr["img"].ToString();
+                model.keyword = dr["keyword"].ToString();
+                model.shortdesc = dr["shortdesc"].ToString();
+                model.detaildesc = dr["detaildesc"].ToString();
+                model.status = TypeConverter.ObjectToInt(dr["status"], 0);
+                model.relateclass = dr["relateclass"].ToString();
+                ginfolist.Add(model);
+            }
+            return ginfolist;
+        }
     }
 }

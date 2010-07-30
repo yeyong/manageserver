@@ -233,6 +233,13 @@ namespace SAS.Taobao
             return TaoBaos.GetGoodsBrandInfo(id);
         }
         /// <summary>
+        /// 根据ID集合获取品牌信息集合
+        /// </summary>
+        public override DataTable GetGoodsBrandListByIds(string ids)
+        {
+            return TaoBaos.GetGoodsBrandListByIds(ids);
+        }
+        /// <summary>
         /// 更新品牌信息
         /// </summary>
         public override void UpdateGoodsBrand(GoodsBrandInfo ginfo)

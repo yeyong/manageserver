@@ -1102,6 +1102,86 @@ namespace SAS.Common
             s.Append(t2);
             return s.ToString();
         }
+        /// <summary>
+        /// 获取淘宝商品信息分页
+        /// </summary>
+        /// <param name="curPage">当前页</param>
+        /// <param name="countPage">总页数</param>
+        /// <param name="url">链接</param>
+        /// <param name="extendPage">最大页</param>
+        public static string GetTaoBaoItemPageNumbers(int curPage, int countPage, string url, int extendPage)
+        {
+            return GetTaoBaoItemPageNumbers(curPage, countPage, url, extendPage, '-');
+        }
+        /// <summary>
+        /// 获取淘宝商品信息分页
+        /// </summary>
+        /// <param name="curPage">当前页</param>
+        /// <param name="countPage">总页数</param>
+        /// <param name="url">链接</param>
+        /// <param name="extendPage">最大页</param>
+        /// <param name="separater">分割符号</param>
+        public static string GetTaoBaoItemPageNumbers(int curPage, int countPage, string url, int extendPage, char separater)
+        {
+            int startPage = 1;
+            int endPage = countPage;
+            int indexposition = url.IndexOf(separater, 0);
+            string backurl1 = CutString(url, 0, indexposition);
+            string backurl2 = CutString(url, indexposition);
+            string backurl = backurl1 + "-{0}" + backurl2;
+            string t1 = string.Format("<a title=\"首  页\" href=\"" + backurl + "\">首  页</a>", startPage);
+            string t2 = string.Format("<a title=\"末  页\" href=\"" + backurl + "\">末  页</a>", countPage);
+            if (countPage < 1) countPage = 1;
+            if (extendPage < 3) extendPage = 2;
+
+            if (countPage > extendPage)
+            {
+                if (curPage - (extendPage / 2) > 0)
+                {
+                    if (curPage + (extendPage / 2) < countPage)
+                    {
+                        startPage = curPage - (extendPage / 2);
+                        endPage = startPage + extendPage - 1;
+                    }
+                    else
+                    {
+                        endPage = countPage;
+                        startPage = endPage - extendPage + 1;
+                    }
+                }
+                else
+                {
+                    endPage = extendPage;
+                }
+            }
+            else
+            {
+                startPage = 1;
+                endPage = countPage;
+            }
+
+            StringBuilder s = new StringBuilder();
+            s.Append(t1);
+            if (curPage > 1) s.AppendFormat("<a title=\"上一页\" href=\"" + backurl + "\">上一页</a>", curPage - 1);
+
+            for (int i = startPage; i <= endPage; i++)
+            {
+                if (i == curPage)
+                {
+                    s.Append("<span class=\"disabled\">");
+                    s.Append(i);
+                    s.Append("</span>");
+                }
+                else
+                {
+                    s.AppendFormat("<a title=\"{0}\" href=\"" + backurl + "\">{0}</a>", i);
+                }
+            }
+
+            if (curPage < countPage) s.AppendFormat("<a title=\"下一页\" href=\"" + backurl + "\">下一页</a>", curPage + 1);
+            s.Append(t2);
+            return s.ToString();
+        }
 
         /// <summary>
         /// 获得伪静态页码显示链接
