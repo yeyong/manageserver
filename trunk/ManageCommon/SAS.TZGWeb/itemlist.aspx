@@ -1,5 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.master" AutoEventWireup="true" CodeFile="itemlist.aspx.cs" Inherits="itemlist" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.master" CodeFile="itemlist.aspx.cs" Inherits="itemlist" %>
 <%@ Import Namespace="SAS.Entity" %>
+<%@ Import Namespace="SAS.Entity.Domain" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="styles" Runat="Server">
 <link href="css/channels.css" rel="stylesheet" type="text/css" />
 </asp:Content>
@@ -113,34 +114,36 @@
 	</div>
 	<div class="listrt" id="list">
 		<div class="listrtit">
+		    <form name="form1" onsubmit="return vaildform(this);">
 			<span class="listt9">
-			关键字：<input type="text" name="textfield" class="input_jiaout" onblur="this.className='input_jiaout'" onfocus="this.className='input_jiaon'" style="width:150px;" />
+			关键字：<input type="text" name="keyword" class="input_jiaout" onblur="this.className='input_jiaout'" onfocus="this.className='input_jiaon'" style="width:150px;" value="<%=keyword%>"/>
 			</span>
 			<span class="listt9">
-			价格：<input type="text" name="textfield" class="input_jiaout" onblur="this.className='input_jiaout'" onfocus="this.className='input_jiaon'" style="width:30px;" />
+			价格：<input type="text" name="startmoney" class="input_jiaout" onblur="this.className='input_jiaout'" onfocus="this.className='input_jiaon'" style="width:30px;" value="<%=startmoney%>"/>
 				-
-				<input type="text" name="textfield" class="input_jiaout" onblur="this.className='input_jiaout'" onfocus="this.className='input_jiaon'" style="width:30px;" />
-				<input type="submit" name="Submit" class="jia" value="确定" />
+				<input type="text" name="endmoney" class="input_jiaout" onblur="this.className='input_jiaout'" onfocus="this.className='input_jiaon'" style="width:30px;" value="<%=endmoney%>"/>
+				<input type="submit" class="jia" value="确定" />
 			</span>
+			</form>
 			<p class="listtit2">
-				<span>共<em class="f_f00">102</em>条</span>
-				<span>1/52</span>
-				<span class="listtit3"><a title="" href="#"><img alt="" src="images/arrow8.gif" /></a></span>
-				<span class="listtit4"><a title="" href="#"><em>下一页</em><img alt="" src="images/arrow9.gif" /></a></span>
+				<span>共<em class="f_f00"><%=itemcount%></em>条</span>
+				<span><%=pageid%>/<%=pagecount%></span>
+				<span class="listtit3"><a title="上一页" href="goodslist-<%=prevpage%>-<%=cid%>-<%=sortid%>-<%=viewtype%>-<%=startmoney%>-<%=endmoney%>-<%=searchkey%>.html"><img alt="" src="images/arrow8.gif" /></a></span>
+				<span class="listtit4"><a title="下一页" href="goodslist-<%=nextpage%>-<%=cid%>-<%=sortid%>-<%=viewtype%>-<%=startmoney%>-<%=endmoney%>-<%=searchkey%>.html"><em>下一页</em><img alt="" src="images/arrow9.gif" /></a></span>
 			</p>
 		</div>
 		<div class="listtit">
 			<div class="listtnr">
 				<p class="listtit1">
-					<span class="listt2"><a title="切换到列表" href="javascript:void(0)">切换到列表</a></span>
-					<span class="listt3"><a title="销量从高到低" href="javascript:void(0)">销量</a></span>
-					<span class="listt3"><a title="信用从高到低" href="javascript:void(0)">信用</a></span>
-					<span class="listt5"><a title="价格从低到高" href="javascript:void(0)">价格</a></span>
+					<span class="listt<%=viewtype%2+1%>"><a title="<%=viewtype == 1 ? "切换到列表" : "切换到视图"%>" href="goodslist-<%=pageid%>-<%=cid%>-<%=sortid%>-<%=viewtype==1?2:1%>-<%=startmoney%>-<%=endmoney%>-<%=searchkey%>.html"><%=viewtype == 1 ? "切换到列表" : "切换到视图"%></a></span>
+					<span class="listt<%=sortid==1?4:3%>"><a title="销量从高到低" href="goodslist-<%=pageid%>-<%=cid%>-<%=1%>-<%=viewtype%>-<%=startmoney%>-<%=endmoney%>-<%=searchkey%>.html">销量</a></span>
+					<span class="listt<%=sortid==2?4:3%>"><a title="信用从高到低" href="goodslist-<%=pageid%>-<%=cid%>-<%=2%>-<%=viewtype%>-<%=startmoney%>-<%=endmoney%>-<%=searchkey%>.html">信用</a></span>
+					<span class="listt<%=sortid==3?6:5%>"><a title="价格从低到高" href="goodslist-<%=pageid%>-<%=cid%>-<%=3%>-<%=viewtype%>-<%=startmoney%>-<%=endmoney%>-<%=searchkey%>.html">价格</a></span>
 				</p>
 				
 			</div>
 		</div>
-		<ul class="listnr listbg">
+		<ul class="<%=viewtype == 1 ? "listnr" : "listnr2"%> listbg">
 			<li>
 				<a title="" href="show.shtml">
 				<em class="listnrtu"><img alt="" src="images/ad/380x260.gif" /></em>
@@ -178,142 +181,48 @@
 				<i class="zi2 rankbg rank5 rankw4"></i></ins>
 			</li>
 		</ul>
-		<ul class="listnr">
+		<ul class="<%=viewtype == 1 ? "listnr" : "listnr2"%>">
+		<%
+            foreach (TaobaokeItem tkinfo in itemlistitems)
+            {
+		%>
 			<li>
 				<a title="" href="show.shtml">
-				<em class="listnrtu"><img alt="" src="images/ad/380x260.gif" /></em>
-				<em class="listnrt">josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</em>
+				<em class="listnrtu"><img alt="" src="<%=tkinfo.PicUrl%>_b.jpg" /></em>
+				<em class="listnrt"><%=tkinfo.Title%></em>
 				</a>
-				<p>已售出：<i class="zi">201</i>件</p>
-				<strong>￥158.00</strong>
-				<b>运费：8.00</b>
+				<p>已售出：<i class="zi"><%=tkinfo.CommissionNum%></i>件</p>
+				<strong>￥<%=tkinfo.Price%></strong>
+				<b>所在地：<%=tkinfo.ItemLocation%><br/>掌柜：<a title="<%=tkinfo.Nick%>" href="<%=tkinfo.ShopClickUrl%>"><%=tkinfo.Nick%></a></b>
 				<ins>所属店铺信誉度：<br />
-				<i class="zi2 rankbg rank1 rankw5"></i></ins>
+				<i class="zi2 rankbg rank<%=System.Math.Ceiling((double)tkinfo.SellerCreditScore / 5)%> rankw<%=tkinfo.SellerCreditScore % 5==0?5:tkinfo.SellerCreditScore % 5%>"></i></ins>
 			</li>
-			<li>
-				<a title="" href="show.shtml">
-				<em class="listnrtu"><img alt="" src="images/ad/380x260.gif" /></em>
-				<em class="listnrt">josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</em>
-				</a>
-				<p>已售出：<i class="zi">201</i>件</p>
-				<strong>￥158.00</strong>
-				<b>运费：8.00</b>
-				<ins>所属店铺信誉度：<br />
-				<i class="zi2 rankbg rank3 rankw4"></i></ins>
-			</li>
-			<li>
-				<a title="" href="show.shtml">
-				<em class="listnrtu"><img alt="" src="images/ad/380x260.gif" /></em>
-				<em class="listnrt">josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</em>
-				</a>
-				<p>已售出：<i class="zi">201</i>件</p>
-				<strong>￥158.00</strong>
-				<b>运费：8.00</b>
-				<ins>所属店铺信誉度：<br />
-				<i class="zi2 rankbg rank5 rankw1"></i></ins>
-			</li>
-			<li>
-				<a title="" href="show.shtml">
-				<em class="listnrtu"><img alt="" src="images/ad/380x260.gif" /></em>
-				<em class="listnrt">josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</em>
-				</a>
-				<p>已售出：<i class="zi">201</i>件</p>
-				<strong>￥158.00</strong>
-				<b>运费：8.00</b>
-				<ins>所属店铺信誉度：<br />
-				<i class="zi2 rankbg rank6 rankw2"></i></ins>
-			</li>
-			<li>
-				<a title="" href="show.shtml">
-				<em class="listnrtu"><img alt="" src="images/ad/380x260.gif" /></em>
-				<em class="listnrt">josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</em>
-				</a>
-				<p>已售出：<i class="zi">201</i>件</p>
-				<strong>￥158.00</strong>
-				<b>运费：8.00</b>
-				<ins>所属店铺信誉度：<br />
-				<i class="zi2 rankbg rank2 rankw4"></i></ins>
-			</li>
-			<li>
-				<a title="" href="show.shtml">
-				<em class="listnrtu"><img alt="" src="images/ad/380x260.gif" /></em>
-				<em class="listnrt">josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</em>
-				</a>
-				<p>已售出：<i class="zi">201</i>件</p>
-				<strong>￥158.00</strong>
-				<b>运费：8.00</b>
-				<ins>所属店铺信誉度：<br />
-				<i class="zi2 rankbg rank4 rankw5"></i></ins>
-			</li>
-			<li>
-				<a title="" href="show.shtml">
-				<em class="listnrtu"><img alt="" src="images/ad/380x260.gif" /></em>
-				<em class="listnrt">josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</em>
-				</a>
-				<p>已售出：<i class="zi">201</i>件</p>
-				<strong>￥158.00</strong>
-				<b>运费：8.00</b>
-				<ins>所属店铺信誉度：<br />
-				<i class="zi2 rankbg rank5 rankw2"></i></ins>
-			</li>
-			<li>
-				<a title="" href="show.shtml">
-				<em class="listnrtu"><img alt="" src="images/ad/380x260.gif" /></em>
-				<em class="listnrt">josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</em>
-				</a>
-				<p>已售出：<i class="zi">201</i>件</p>
-				<strong>￥158.00</strong>
-				<b>运费：8.00</b>
-				<ins>所属店铺信誉度：<br />
-				<i class="zi2 rankbg rank2 rankw5"></i></ins>
-			</li>
-			<li>
-				<a title="" href="show.shtml">
-				<em class="listnrtu"><img alt="" src="images/ad/380x260.gif" /></em>
-				<em class="listnrt">josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</em>
-				</a>
-				<p>已售出：<i class="zi">201</i>件</p>
-				<strong>￥158.00</strong>
-				<b>运费：8.00</b>
-				<ins>所属店铺信誉度：<br />
-				<i class="zi2 rankbg rank3 rankw2"></i></ins>
-			</li>
+			<%
+            }
+            %>
 		</ul>
 		<p class="page f_666">
-			<a title="上一页" href="#">上一页</a>
-			<a title="1" href="#">1</a>
-			<span class="disabled">2</span>
-			<a title="3" href="#">3</a>
-			<a title="4" href="#">4</a>
-			<a title="5" href="#">5</a>
-			<a title="6" href="#">6</a>
-			<a title="7" href="#">7</a>
-			<a title="6" href="#">8</a>
-			<a title="7" href="#">9</a>
-			<a title="7" href="#">...</a>
-			<a title="下一页" href="#">下一页</a>
+			<%=pagenumbers%>
 		</p>
 	</div>
 </div>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="footer" Runat="Server">
 <script type="text/javascript">
+    function vaildform(formobj) {
+        if (formobj.startmoney.value!= "" && !isNumber(formobj.startmoney.value)) {
+            alert("价格请输入整数！");
+            return false;
+        }
+        if (formobj.endmoney.value != "" && !isNumber(formobj.endmoney.value)) {
+            alert("价格请输入整数！");
+            return false;
+        }
+        window.location.href = "goodslist-<%=pageid%>-<%=cid%>-<%=sortid%>-<%=viewtype%>-" + formobj.startmoney.value + "-" + formobj.endmoney.value + "-" + encodeURIComponent(formobj.keyword.value).replace("'", "%27") + ".html";
+        return false;
+    }
+
     jQuery(document).ready(function() {
-        jQuery("#menu").menudrop();
-        jQuery("#list").find(".listt2").click(function() {
-            var listcss1 = jQuery("#list").find(".listt2").attr("class");
-            if (listcss1 == 'listt2') {
-                jQuery(this).removeClass().addClass("listt1");
-                jQuery(this).find("a").html("切换到大图").attr("title", "切换到大图");
-                jQuery("#list").find("ul").removeClass().addClass("listnr2");
-                jQuery("#list").find("ul:first").removeClass().addClass("listnr2 listbg");
-            } else {
-                jQuery(this).removeClass().addClass("listt2");
-                jQuery(this).find("a").html("切换到列表").attr("title", "切换到列表");
-                jQuery("#list").find("ul").removeClass().addClass("listnr");
-                jQuery("#list").find("ul:first").removeClass().addClass("listnr listbg");
-            }
-        });
         jQuery("#list").find(".listt3").click(function() {
             jQuery("#list").find(".listt4").removeClass().addClass("listt3");
             jQuery("#list").find(".listt6").removeClass().addClass("listt5");

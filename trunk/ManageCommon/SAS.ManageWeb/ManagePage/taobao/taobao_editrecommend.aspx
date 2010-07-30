@@ -19,7 +19,7 @@
 		        <td><button type="button" class="ManagerButton" onclick="window.location='taobao_recommendgrid.aspx?ctype=1';"><img src="../images/submit.gif" /> 编辑商品推荐组</button></td>
 		        <td><button type="button" class="ManagerButton" onclick="window.location='taobao_recommendgrid.aspx?ctype=2';"><img src="../images/submit.gif" /> 编辑店铺推荐组</button></td>
 		        <td><button type="button" class="ManagerButton" onclick="window.location='taobao_recommendgrid.aspx?ctype=3';"><img src="../images/submit.gif" /> 编辑活动推荐组</button></td>
-                <td><button type="button" class="ManagerButton" onclick="window.location='taobao_recommendgrid.aspx?ctype=4';"><img src="../images/submit.gif" /> 编辑频道推荐组</button></td>
+                <td><button type="button" class="ManagerButton" onclick="window.location='taobao_recommendgrid.aspx?ctype=4';"><img src="../images/submit.gif" /> 编辑品牌推荐组</button></td>
 		    </tr>
 		</table>
 		</fieldset>

@@ -159,6 +159,10 @@ namespace SAS.Plugin.TaoBao
         /// </summary>
         public abstract GoodsBrandInfo GetGoodsBrandInfo(int id);
         /// <summary>
+        /// 根据ID集合获取品牌信息集合
+        /// </summary>
+        public abstract DataTable GetGoodsBrandListByIds(string ids);
+        /// <summary>
         /// 更新品牌信息
         /// </summary>
         public abstract void UpdateGoodsBrand(GoodsBrandInfo ginfo);

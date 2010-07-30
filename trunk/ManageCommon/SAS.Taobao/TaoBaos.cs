@@ -46,8 +46,8 @@ namespace SAS.Taobao
 
         public static NTWXmlRestClient GetProductTopClient()
         {
-            //return new NTWXmlRestClient("http://gw.api.taobao.com/router/rest", "12097501", "551096b28b1631251639544b70590ee6");
-            return new NTWXmlRestClient("http://gw.api.taobao.com/router/rest", "12005076", "64292c42ca49632200289324fba42572");
+            return new NTWXmlRestClient("http://gw.api.taobao.com/router/rest", "12097501", "551096b28b1631251639544b70590ee6");
+            //return new NTWXmlRestClient("http://gw.api.taobao.com/router/rest", "12005076", "64292c42ca49632200289324fba42572");
         }
 
         private static NTWXmlRestClient client = GetProductTopClient();
@@ -563,6 +563,13 @@ namespace SAS.Taobao
             return DTOProvider.GetGoodsBrandInfoEntity(Data.DbProvider.GetInstance().GetGoodsBrandInfo(id));
         }
         /// <summary>
+        /// 根据ID集合获取品牌信息集合
+        /// </summary>
+        public static DataTable GetGoodsBrandListByIds(string ids)
+        {
+            return Data.DbProvider.GetInstance().GetGoodsBrandListByIds(ids);
+        }
+        /// <summary>
         /// 根据类别获取品牌信息集合
         /// </summary>
         public static List<GoodsBrandInfo> GetGoodsBrandListByClass(int classid)
@@ -575,6 +582,26 @@ namespace SAS.Taobao
                 SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/GoodsBrand/Class_" + classid, brandlist);
             }
             return brandlist;
+        }
+        /// <summary>
+        /// 根据推荐获取品牌信息集合
+        /// </summary>
+        public static List<GoodsBrandInfo> GetGoodsBrandList(int chanel, int classid)
+        {
+            SAS.Common.Generic.List<GoodsBrandInfo> goodsbrandlist = new SAS.Common.Generic.List<GoodsBrandInfo>();
+            goodsbrandlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/BrandList/Chanel_" + chanel + "/Class_" + classid) as SAS.Common.Generic.List<GoodsBrandInfo>;
+            if (goodsbrandlist == null)
+            {
+                List<RecommendInfo> rlist = GetRecommendList(4, chanel, classid);
+                string shopidlist = "";
+                foreach (RecommendInfo rinfo in rlist)
+                {
+                    shopidlist += rinfo.ccontent + ",";
+                }
+                goodsbrandlist = DTOProvider.GetGoodsBrandListEntity(GetGoodsBrandListByIds(shopidlist.Trim().Trim(',')));
+                SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/BrandList/Chanel_" + chanel + "/Class_" + classid, goodsbrandlist);
+            }
+            return goodsbrandlist;
         }
         /// <summary>
         /// 更新品牌信息

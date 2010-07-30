@@ -159,11 +159,11 @@ namespace SAS.Taobao.Data
 
             if (string.IsNullOrEmpty(conditions))
             {
-                commandText = string.Format("SELECT {0},[{1}category].[name] FROM [{1}recommend] LEFT JOIN [{1}category] ON [ctype]=[cid]", DbFields.RECOMMEND, BaseConfigs.GetTablePrefix);
+                commandText = string.Format("SELECT {0},[{1}category].[name] FROM [{1}recommend] LEFT JOIN [{1}category] ON [relatecategory]=[cid]", DbFields.RECOMMEND, BaseConfigs.GetTablePrefix);
             }
             else
             {
-                commandText = string.Format("SELECT {0},[{1}category].[name] FROM [{1}recommend] LEFT JOIN [{1}category] ON [ctype]=[cid] WHERE 1=1 {2}", DbFields.RECOMMEND, BaseConfigs.GetTablePrefix, conditions);
+                commandText = string.Format("SELECT {0},[{1}category].[name] FROM [{1}recommend] LEFT JOIN [{1}category] ON [relatecategory]=[cid] WHERE 1=1 {2}", DbFields.RECOMMEND, BaseConfigs.GetTablePrefix, conditions);
             }
             
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
@@ -468,6 +468,14 @@ namespace SAS.Taobao.Data
             DbParameter param = DbHelper.MakeInParam("@id", (DbType)SqlDbType.Int, 4, id);
             string commandText = string.Format("SELECT {0} FROM [{1}goodsbrand] WHERE [id]=@id", DbFields.GOODSBRAND, BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteReader(CommandType.Text, commandText, param);
+        }
+        /// <summary>
+        /// 根据ID集合获取品牌信息集合
+        /// </summary>
+        public DataTable GetGoodsBrandListByIds(string ids)
+        {
+            string commandText = string.Format("SELECT {0},[{1}category].[name] as cname FROM [{1}goodsbrand] LEFT JOIN [{1}category] ON [{1}goodsbrand].[relateclass] = [{1}category].[cid] WHERE [{1}goodsbrand].[id] IN ({2})", DbFields.GOODSBRAND, BaseConfigs.GetTablePrefix, ids);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
         }
         /// <summary>
         /// 根据类别获取品牌列表信息
