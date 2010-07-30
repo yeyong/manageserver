@@ -49,7 +49,7 @@
                         if (parentcinfo__id > 6) break;
 			     %>
 					<li class="nrli1">
-						<a title="<%=parentcinfo.Name%>" href="channels.shtml">
+						<a title="<%=parentcinfo.Name%>" href="chanels_<%=parentcinfo.Cid%>.html">
 						<span class="mntu"><img alt="<%=parentcinfo.Name%>" src="images/menu_<%=parentcinfo__id%>.gif" /></span>
 						<span class="mnzi"><%=parentcinfo.Name%> <em>连衣裙 手饰</em></span>
 						</a>
