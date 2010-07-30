@@ -598,7 +598,10 @@ namespace SAS.Taobao
                 {
                     shopidlist += rinfo.ccontent + ",";
                 }
+
+                if (shopidlist.Trim().Trim(',') == "") return new List<GoodsBrandInfo>();
                 goodsbrandlist = DTOProvider.GetGoodsBrandListEntity(GetGoodsBrandListByIds(shopidlist.Trim().Trim(',')));
+                
                 SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/BrandList/Chanel_" + chanel + "/Class_" + classid, goodsbrandlist);
             }
             return goodsbrandlist;

@@ -146,22 +146,24 @@
 				<p class="crownlt" id="LeftArr"></p>
 				<ul class="crowncot" id="crown">
 				<%
+                    int sinfo__id = 1;		    
                     foreach (ShopDetailInfo sinfo in shoplist)
                     {		    
 			    %>
 					<li>
 						<a title="<%=sinfo.title%>" href="shop_show.shtml">
-						<p><img alt="<%=sinfo.title%>" src="images/ad/120x120.gif" /></p>
+						<p><img alt="<%=sinfo.title%>" src="<%=shoppic_path + sinfo.pic_path%>" /></p>
 						<span><%=sinfo.title%></span>
 						</a>
-						<strong><ins class="rankbg rank4 rankw4"></ins></strong>
-						<em>好评率：<i class="f_f00">99.89%</i></em>
-						<em>所在地：杭州</em>
+						<strong><ins class="rankbg rank<%=System.Math.Ceiling((double)sinfo.shop_level / 5)%> rankw<%=sinfo.shop_level % 5==0?5:sinfo.shop_level % 5%>"></ins></strong>
+						<em>好评率：<i class="f_f00"><%=decimal.Round(decimal.Parse((((double)sinfo.good_num / (double)sinfo.total_num)*100).ToString()),2)%>%</i></em>
+						<em>所在地：<%=sinfo.shop_province+sinfo.shop_city%></em>
 						<em>收藏数：<i class="f_f00">1258</i></em>
-						<b>1</b>
+						<b><%=sinfo__id%></b>
 					</li>
-					<li class="li2"></li>
+					<%if (sinfo__id % 4 > 0){%><li class="li2"></li><%}%>
 				<%
+                        sinfo__id++;
                     }
 				%>
 				</ul>
