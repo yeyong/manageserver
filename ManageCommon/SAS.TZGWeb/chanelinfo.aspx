@@ -7,6 +7,9 @@
 <script src="js/jquery-exchange.js" type="text/javascript"></script>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="mainbody" Runat="Server">
+<%
+    
+%>
 <div class="cot">
 	<ul class="chal mar_top_10">
 	
