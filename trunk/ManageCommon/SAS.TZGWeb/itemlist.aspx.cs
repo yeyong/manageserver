@@ -80,24 +80,39 @@ public partial class itemlist : TaoBaoPage
         if (cid > 0)
         {
             parentcategory = TaoBaos.GetCategoryInfoByCache(cid.ToString());
-            if (parentcategory == null)
-            {
-                AddErrLine("您的信息错误！");
-                return;
-            }
-            rootcategory = TaoBaos.GetCategoryInfoByCache(parentcategory.Parentid);
-            if (rootcategory == null)
-            {
-                AddErrLine("您的信息错误！");
-                return;
-            }
-            itemlistcategories = TaoBaos.GetCategoryListByParentID(rootcategory.Cid);
         }
         else if (pid > 0)
         {
+            parentcategory = TaoBaos.GetCategoryInfoByCache(pid);
+            if (parentcategory.Cg_relateclass.Split(',').Length > 0)
+            {
+                if (parentcategory.Cg_relateclass.Split(',')[0].Split('|').Length > 0)
+                {
+                    cid = TypeConverter.StrToInt(parentcategory.Cg_relateclass.Split(',')[0].Split('|')[0], 0);
+                }
+            }
 
+            if (cid<= 0)
+            {
+                AddErrLine("您的信息错误！");
+                return;
+            }
         }
 
+        if (parentcategory == null)
+        {
+            AddErrLine("您的信息错误！");
+            return;
+        }
+
+        rootcategory = TaoBaos.GetCategoryInfoByCache(parentcategory.Parentid);
+        if (rootcategory == null)
+        {
+            AddErrLine("您的信息错误！");
+            return;
+        }
+
+        itemlistcategories = TaoBaos.GetCategoryListByParentID(rootcategory.Cid);
         itemlistgoodsbrands = TaoBaos.GetGoodsBrandListByClass(rootcategory.Cid);
 
         string sortstr = "commissionNum_desc";

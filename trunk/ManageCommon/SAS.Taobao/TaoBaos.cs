@@ -78,6 +78,20 @@ namespace SAS.Taobao
         }
 
         /// <summary>
+        /// 根据类别获取同级类别集合
+        /// </summary>
+        public static ItemCat GetItemCatInfo(long cid)
+        {
+            ItemcatsGetRequest igr = new ItemcatsGetRequest();
+            igr.Fields = "cid,parent_cid,name,is_parent,status,sort_order";
+            igr.Cids = cid.ToString();
+            PageList<ItemCat> pageitems = client.ItemcatsGet(igr);
+            ItemCat icinfo = new ItemCat();
+            if (pageitems.Content.Count > 0) icinfo = pageitems.Content[0];
+            return icinfo;
+        }
+
+        /// <summary>
         /// 根据条件获取商品分页信息
         /// </summary>
         /// <param name="cid">类别ID</param>
