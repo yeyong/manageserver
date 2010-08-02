@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.master" CodeFile="topicshow.aspx.cs" Inherits="topicshow" %>
-<%@ Register TagPrefix="tao" TagName="error" Src="~/toolcontrol/showmsg.ascx"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="styles" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="scripts" Runat="Server">
@@ -18,8 +17,7 @@
     else
     {
 %>
-<tao:error runat="server" ID="taoerror" />
-<%=msgbox_text%>
+<!--#include file="msgbox.htm"-->
 <%
     }
 %>

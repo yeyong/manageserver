@@ -175,7 +175,8 @@ namespace SAS.Entity
                 case 7: return "淘清凉";
                 case 8: return "列表页";
                 case 9: return "详细页";
-                case 10: return "其他";
+                case 10: return "频道页";
+                case 11: return "其他";
                 default: return "";
             }
         }
@@ -391,8 +392,12 @@ namespace SAS.Entity
         /// </summary>
         Detail = 9,
         /// <summary>
+        /// 频道页
+        /// </summary>
+        Chanel = 10,
+        /// <summary>
         /// 其他
         /// </summary>
-        Other = 10
+        Other = 11
     }
 }

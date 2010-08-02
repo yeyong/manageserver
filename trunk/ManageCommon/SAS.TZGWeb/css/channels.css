@@ -59,7 +59,7 @@
 .xbrd strong{ width:960px; height:25px; line-height:25px; font-size:14px; float:left;}
 .xbrd p{ width:960px; height:25px; line-height:25px; color:#eee; float:left;}
 .xbrdnr{ width:960px; height:auto; float:left;}
-.xbrdnr1{ width:70px; height:50px; border:1px solid #eee; margin:8px 0 5px; display:inline; float:left;}
+.xbrdnr1{ width:70px; height:50px; border:1px solid #eee; margin:8px 0 5px; display:inline; overflow:hidden; float:left;}
 .xbrdnr2{ width:16px; height:50px; margin:8px 0 5px; display:inline; float:left;}
 /*专题展*/
 .topic{ width:960px; height:auto; float:left}
@@ -253,6 +253,8 @@
 .showtu{ width:310px; height:310px; float:left;}
 .showtu img{ width:310px; height:310px; float:left;}
 .showrt{ width:420px; height:auto; float:right;}
+.showrt b{ display:-moz-display-box;display:inline-block;*display:block; margin:4px 0 0 0; display:inline; float:left;}
+.showrt i{ font-style:normal; float:left;}
 .showrt h1{ width:420px; height:54px; line-height:22px; font-size:18px; float:left;}
 .showrt p{ width:420px; height:28px; line-height:28px; float:left;}
 .showrt .zi{ font-size:18px; font-weight:bold; font-family:Georgia, "Times New Roman", Times, serif; color:#e00;}
@@ -275,6 +277,22 @@
 .showcot2 li img{ width:120px; height:120px; float:left;}
 .showcot2 li span{ width:120px; height:40px; line-height:20px; overflow:hidden; float:left;}
 .showcot2 li b{ width:120px; height:20px; line-height:20px; color:#e00; font-weight:normal; float:left;}
+.showcon{ width:740px; height:auto; padding:10px 0; border-top:1px solid #eee; float:left;}
+.showcont{ width:740px; height:25px; line-height:25px; font-size:14px; float:left;}
+/*品牌详细*/
+.brdswl{ width:750px; height:auto; float:left;}
+.brdswnr{ width:708px; height:auto; border:1px solid #eee; padding:15px; float:left;}
+.brdswnr h3{ width:708px; height:30px; line-height:25px; font-size:14px; font-weight:bold; text-align:left; border-bottom:1px solid #eee; float:left;}
+.brdswnrtu{ width:100px; height:50px; text-align:center; float:left;}
+.brdswnrtu img{ width:70px; height:50px; border:1px solid #eee;}
+.brdswnrzi{ width:580px; height:auto; margin-left:15px; display:inline; float:left;}
+.brdswnrzi b{ width:550px; height:30px; line-height:30px; border-bottom:1px dashed #eee; padding:0 15px; float:left; margin-right:-3px;}
+.brdswnrzi em{ font-weight:normal;}
+.brdswnrzi span{ width:124px; height:39px; float:left;}
+.brdswcor{ width:740px; height:auto; border-top:1px solid #eee; padding:10px 0; float:left;}
+.brdswcort{ width:740px; height:25px; line-height:25px; font-size:14px; float:left;}
+.brdswr{ width:196px; height:auto; padding:0 5px 15px; float:left;}
+.brdswr li{ width:70px; height:50px; margin:15px 13px 0; border:1px solid #eee; display:inline; overflow:hidden; float:left;}
 /*搜索*/
 .seach{ width:714px; height:34px; line-height:34px; background:url(../images/seach_bg.gif) repeat-x; color:#333; font-size:13px; padding:0 12px; border:1px solid #ccc; float:left; overflow:hidden;}
 .seach span{ color:#ccc;}
@@ -282,10 +300,3 @@
 .seachrt{ width:550px; height:auto; color:#333; margin-top:25px; display:inline; padding:0 0 120px 0; float:right;}
 .seachrt strong{ width:550px; height:35px; line-height:35px; font-size:14px; float:left;}
 .seachrt span{ width:550px; height:22px; line-height:22px; float:left;}
-/*错误页*/
-.error{ width:400px; height:auto; margin:0 auto;}
-.errortu{ width:48px; height:50px; margin-top:150px; display:inline; float:left;}
-.errorrt{ width:340px; height:400px; margin-top:150px; display:inline; float:right;}
-.errorrt strong{ width:340px; line-height:25px; font-size:18px; color:#e00000; float:left;}
-.errorrt span{ width:340px; height:auto; line-height:25px; font-size:14px; margin-top:2px; display:inline; float:left;}
-.errorrt em{ width:340px; height:auto; line-height:25px; margin-top:8px; display:inline; float:left;}

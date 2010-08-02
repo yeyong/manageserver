@@ -35,23 +35,23 @@
 <div class="cot">
 	<div class="pref mar_top">
 		<strong><img alt="优惠活动场" src="images/index_tit1.gif" /></strong>
-		<em><a title="" href="brand.shtml">查看更多活动&gt;&gt;</a></em>
+		<em><a title="" href="topics.html">查看更多专题&gt;&gt;</a></em>
 		<div class="prefnr">
 			<p><a title="" href="#"><img alt="" src="images/ad/156x243.gif" /></a></p>
 			<p><a title="" href="#"><img alt="" src="images/ad/203x243.gif" /></a></p>
 			<p><a title="" href="#"><img alt="" src="images/ad/192x243.gif" /></a></p>
 			<ul class="prefzi">
-				<li><a title="" href="#">Michelle 运动装七折特卖</a></li>
-				<li><a title="" href="#">男装商务鞋五折</a></li>
-				<li><a title="" href="#">运动馆家庭组买二赠一</a></li>
-				<li></li>
-				<li><a title="" href="#">男装商务鞋五折</a></li>
-				<li><a title="" href="#">运动馆家庭组买二赠一</a></li>
-				<li><a title="" href="#">Michelle 运动装七折特卖</a></li>
-				<li></li>
-				<li><a title="" href="#">Michelle 运动装七折特卖</a></li>
-				<li><a title="" href="#">男装商务鞋五折</a></li>
-				<li><a title="" href="#">运动馆家庭组买二赠一</a></li>
+			<%
+                int indextopicinfo__id = 1;	    
+                foreach (TaoBaoTopicInfo indextopicinfo in indextopiclist)
+                {	    
+		    %>
+				<li><a title="<%=indextopicinfo.Title%>" href="topicshow-<%=indextopicinfo.Tid%>.html"><%=indextopicinfo.Title%></a></li>
+				<%if (indextopicinfo__id % 3 == 0){%><li></li><%}%>
+				<%
+                    indextopicinfo__id++;
+                }
+                %>
 			</ul>
 		</div>
 	</div>
