@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.master" CodeFile="itemshow.aspx.cs" Inherits="itemshow" %>
+<%@ Register TagPrefix="sas" TagName="viewgood" Src="~/usercontrol/viewgoods.ascx"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="styles" Runat="Server">
 <link href="css/channels.css" rel="stylesheet" type="text/css" />
 <link href="css/jquery.cluetip.css" rel="stylesheet" type="text/css">
@@ -8,73 +9,32 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="mainbody" Runat="Server">
 <div class="cot">
-	<p class="site">您现在的位置：<a title="" href="index.shtml">淘之购</a> &gt; <a title="" href="list.shtml">户外运动</a> &gt; <a title="" href="list.shtml">运动鞋</a> &gt; 今夏完美时尚热卖韩版 高腰显瘦衬衣 短袖翻领格子女 衬衫 送腰带</p>
+	<p class="site">您现在的位置：<a title="淘之购" href="index.html">淘之购</a> &gt; <a title="<%=rootinfo.Name%>" href="chanels_<%=rootinfo.Cid%>.html"><%=rootinfo.Name%></a> &gt; <a title="<%=subcinfo.Name%>" href="goodslist-p-<%=subcinfo.Cid%>.html"><%=subcinfo.Name%></a> &gt; <%=iteminfo.Title%></p>
 	<div class="listlt">
 		<div class="listlt1">
 			<h3>相关类别</h3>
 			<ul class="listlt1nr">
-				<li><a title="" href="list.shtml">运动休闲鞋(1774)</a></li>
-				<li><a title="" href="list.shtml">跑步鞋(1153)</a></li>
-				<li><a title="" href="list.shtml">复古鞋/板鞋(1121)</a></li>
-				<li><a title="" href="list.shtml">篮球鞋(475)</a></li>
-				<li><a title="" href="list.shtml">训练鞋(358)</a></li>
-				<li><a title="" href="list.shtml">网球鞋(302)</a></li>
-				<li><a title="" href="list.shtml">运动休闲鞋(1774)</a></li>
-				<li><a title="" href="list.shtml">跑步鞋(1153)</a></li>
-				<li><a title="" href="list.shtml">复古鞋/板鞋(1121)</a></li>
-				<li><a title="" href="list.shtml">篮球鞋(475)</a></li>
-				<li><a title="" href="list.shtml">训练鞋(358)</a></li>
-				<li><a title="" href="list.shtml">网球鞋(302)</a></li>
+			<%
+                foreach (string subcate in subcinfo.Cg_relateclass.Split(','))
+                {
+                    if (subcate == "") continue;
+                    string[] substr = subcate.Split('|');
+                    if (substr.Length < 2) continue;    
+		    %>
+				<li><a title="<%=substr[0]%>" href="goodslist-<%=substr[0]%>.html"><%=substr[1]%></a></li>
+			<%
+                }
+			%>
 			</ul>
 		</div>
-		<div class="listlt2 mar_top">
-			<strong>浏览过的商品</strong>
-			<ul class="listlt2nr">
-				<li>
-					<a title="" href="show.shtml">
-					<img alt="" src="images/ad/120x120.gif" />
-					<span>￥120.00</span>
-					</a>
-				</li>
-				<li>
-					<a title="" href="show.shtml">
-					<img alt="" src="images/ad/120x120.gif" />
-					<span>￥120.00</span>
-					</a>
-				</li>
-				<li>
-					<a title="" href="show.shtml">
-					<img alt="" src="images/ad/120x120.gif" />
-					<span>￥120.00</span>
-					</a>
-				</li>
-				<li>
-					<a title="" href="show.shtml">
-					<img alt="" src="images/ad/120x120.gif" />
-					<span>￥120.00</span>
-					</a>
-				</li>
-				<li>
-					<a title="" href="show.shtml">
-					<img alt="" src="images/ad/120x120.gif" />
-					<span>￥120.00</span>
-					</a>
-				</li>
-				<li>
-					<a title="" href="show.shtml">
-					<img alt="" src="images/ad/120x120.gif" />
-					<span>￥120.00</span>
-					</a>
-				</li>
-			</ul>
-		</div>
+		<sas:viewgood runat="server" ID="viewgoods" />
 	</div>
 	<div class="listrt">
 		<p class="showtu"><img alt="<%=iteminfo.Title%>" src="<%=iteminfo.PicUrl%>_310x310.jpg" /></p>
 		<div class="showrt">
 			<h1><%=iteminfo.Title%></h1>
 			<p>价格：<em class="zi">￥<%=iteminfo.Price%></em></p>
-			<p>已售出：<em class="f_f00"><%=iteminfo.Volume%></em><%=iteminfo.Cid%> 件</p>
+			<p>已售出：<em class="f_f00">10<%=iteminfo.Volume%></em> 件</p>
 			<p>
 				<span>商品数：<%=iteminfo.Num%></span>
 			</p>

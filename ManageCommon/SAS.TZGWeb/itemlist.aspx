@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.master" CodeFile="itemlist.aspx.cs" Inherits="itemlist" %>
 <%@ Import Namespace="SAS.Entity" %>
 <%@ Import Namespace="SAS.Entity.Domain" %>
+<%@ Register TagPrefix="sas" TagName="viewgood" Src="~/usercontrol/viewgoods.ascx"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="styles" Runat="Server">
 <link href="css/channels.css" rel="stylesheet" type="text/css" />
 </asp:Content>
@@ -70,47 +71,7 @@
                 %>
 			</ul>
 		</div>
-		<div class="listlt2 mar_top">
-			<strong>浏览过的商品</strong>
-			<ul class="listlt2nr">
-				<li>
-					<a title="" href="show.shtml">
-					<img alt="" src="images/ad/120x120.gif" />
-					<span>￥120.00</span>
-					</a>
-				</li>
-				<li>
-					<a title="" href="show.shtml">
-					<img alt="" src="images/ad/120x120.gif" />
-					<span>￥120.00</span>
-					</a>
-				</li>
-				<li>
-					<a title="" href="show.shtml">
-					<img alt="" src="images/ad/120x120.gif" />
-					<span>￥120.00</span>
-					</a>
-				</li>
-				<li>
-					<a title="" href="show.shtml">
-					<img alt="" src="images/ad/120x120.gif" />
-					<span>￥120.00</span>
-					</a>
-				</li>
-				<li>
-					<a title="" href="show.shtml">
-					<img alt="" src="images/ad/120x120.gif" />
-					<span>￥120.00</span>
-					</a>
-				</li>
-				<li>
-					<a title="" href="show.shtml">
-					<img alt="" src="images/ad/120x120.gif" />
-					<span>￥120.00</span>
-					</a>
-				</li>
-			</ul>
-		</div>
+		<sas:viewgood runat="server" ID="viewgoods" />
 	</div>
 	<div class="listrt" id="list">
 		<div class="listrtit">
@@ -187,7 +148,7 @@
             {
 		%>
 			<li>
-				<a title="<%=tkinfo.Title%>" href="productshow-<%=tkinfo.NumIid%>.html">
+				<a target="_blank" title="<%=tkinfo.Title%>" href="productshow-<%=tkinfo.NumIid%>.html">
 				<em class="listnrtu"><img alt="" src="<%=tkinfo.PicUrl%>_b.jpg" /></em>
 				<em class="listnrt"><%=tkinfo.Title%></em>
 				</a>
