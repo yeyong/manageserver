@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.master" CodeFile="chanelinfo.aspx.cs" Inherits="chanelinfo" %>
-
+<%@ Import Namespace="SAS.Entity"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="styles" Runat="Server">
 <link href="css/channels.css" rel="stylesheet" type="text/css" />
 </asp:Content>
@@ -8,85 +8,47 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="mainbody" Runat="Server">
 <%
-    
+    if (page_err == 0)
+    {
 %>
 <div class="cot">
 	<ul class="chal mar_top_10">
-	
+	<%
+        foreach (CategoryInfo subcinfo in csubclasslist)
+        {
+    %>
 		<li>
-			<strong>OL连衣裙</strong>
+			<strong><%=subcinfo.Name%></strong>
 			<p>
-			<a title="" href="list.shtml">短袖</a> | <a title="" href="list.shtml">真丝</a> | <a title="" href="list.shtml">V领</a> | <a title="" href="list.shtml">纯棉</a> | <a title="" href="list.shtml">纯色</a> | <a title="" href="list.shtml">修身</a> | <a title="" href="list.shtml">拼接</a> | <a title="" href="list.shtml">套装</a> <a title="" href="list.shtml">花边</a> | <a title="" href="list.shtml">款花</a> | <a title="" href="list.shtml">色裙</a> | <a title="" href="list.shtml">收腰款</a> | <a title="" href="list.shtml">七分袖</a> | <a title="" href="list.shtml">高腰款</a>
+			<%
+        int substr__length = 0;
+        foreach (string substr in subcinfo.Cg_relateclass.Split(','))
+        {
+            if (substr__length > 36) break;
+            if (substr == "") continue;
+            string[] str = substr.Split('|');
+            if (str.Length < 2) continue;                    
+            %>
+			<a title="" href="goodslist-<%=str[0]%>.html"><%=str[1]%></a> |
+			<%
+        substr__length += str[1].Length;
+        }
+            %>
 			</p>
 		</li>
-		<li>
-			<strong>淑女连衣裙</strong>
-			<p>
-			<a title="" href="list.shtml">短袖</a> | <a title="" href="list.shtml">真丝</a> | <a title="" href="list.shtml">V领</a> | <a title="" href="list.shtml">纯棉</a> | <a title="" href="list.shtml">纯色</a> | <a title="" href="list.shtml">修身</a> | <a title="" href="list.shtml">拼接</a> | <a title="" href="list.shtml">套装</a> <a title="" href="list.shtml">花边</a> | <a title="" href="list.shtml">款花</a> | <a title="" href="list.shtml">色裙</a> | <a title="" href="list.shtml">收腰款</a> | <a title="" href="list.shtml">七分袖</a> | <a title="" href="list.shtml">高腰款</a>
-			</p>
-		</li>
-		<li>
-			<strong>雪纺连衣裙</strong>
-			<p>
-			<a title="" href="list.shtml">短袖</a> | <a title="" href="list.shtml">真丝</a> | <a title="" href="list.shtml">V领</a> | <a title="" href="list.shtml">纯棉</a> | <a title="" href="list.shtml">纯色</a> | <a title="" href="list.shtml">修身</a> | <a title="" href="list.shtml">拼接</a> | <a title="" href="list.shtml">套装</a> <a title="" href="list.shtml">花边</a> | <a title="" href="list.shtml">款花</a> | <a title="" href="list.shtml">色裙</a> | <a title="" href="list.shtml">收腰款</a> | <a title="" href="list.shtml">七分袖</a> | <a title="" href="list.shtml">高腰款</a>
-			</p>
-		</li>
-		<li>
-			<strong>七分裤/九分裤</strong>
-			<p>
-			<a title="" href="list.shtml">短袖</a> | <a title="" href="list.shtml">真丝</a> | <a title="" href="list.shtml">V领</a> | <a title="" href="list.shtml">纯棉</a> | <a title="" href="list.shtml">纯色</a> | <a title="" href="list.shtml">修身</a> | <a title="" href="list.shtml">拼接</a> | <a title="" href="list.shtml">套装</a> <a title="" href="list.shtml">花边</a> | <a title="" href="list.shtml">款花</a> | <a title="" href="list.shtml">色裙</a> | <a title="" href="list.shtml">收腰款</a> | <a title="" href="list.shtml">七分袖</a> | <a title="" href="list.shtml">高腰款</a>
-			</p>
-		</li>
-		<li>
-			<strong>短裤</strong>
-			<p>
-			<a title="" href="list.shtml">短袖</a> | <a title="" href="list.shtml">真丝</a> | <a title="" href="list.shtml">V领</a> | <a title="" href="list.shtml">纯棉</a> | <a title="" href="list.shtml">纯色</a> | <a title="" href="list.shtml">修身</a> | <a title="" href="list.shtml">拼接</a> | <a title="" href="list.shtml">套装</a> <a title="" href="list.shtml">花边</a> | <a title="" href="list.shtml">款花</a> | <a title="" href="list.shtml">色裙</a> | <a title="" href="list.shtml">收腰款</a> | <a title="" href="list.shtml">七分袖</a> | <a title="" href="list.shtml">高腰款</a>
-			</p>
-		</li>
-		<li>
-			<strong>T恤</strong>
-			<p>
-			<a title="" href="list.shtml">短袖</a> | <a title="" href="list.shtml">真丝</a> | <a title="" href="list.shtml">V领</a> | <a title="" href="list.shtml">纯棉</a> | <a title="" href="list.shtml">纯色</a> | <a title="" href="list.shtml">修身</a> | <a title="" href="list.shtml">拼接</a> | <a title="" href="list.shtml">套装</a> <a title="" href="list.shtml">花边</a> | <a title="" href="list.shtml">款花</a> | <a title="" href="list.shtml">色裙</a> | <a title="" href="list.shtml">收腰款</a> | <a title="" href="list.shtml">七分袖</a> | <a title="" href="list.shtml">高腰款</a>
-			</p>
-		</li>
-		<li>
-			<strong>雪纺衫</strong>
-			<p>
-			<a title="" href="list.shtml">短袖</a> | <a title="" href="list.shtml">真丝</a> | <a title="" href="list.shtml">V领</a> | <a title="" href="list.shtml">纯棉</a> | <a title="" href="list.shtml">纯色</a> | <a title="" href="list.shtml">修身</a> | <a title="" href="list.shtml">拼接</a> | <a title="" href="list.shtml">套装</a> <a title="" href="list.shtml">花边</a> | <a title="" href="list.shtml">款花</a> | <a title="" href="list.shtml">色裙</a> | <a title="" href="list.shtml">收腰款</a> | <a title="" href="list.shtml">七分袖</a> | <a title="" href="list.shtml">高腰款</a>
-			</p>
-		</li>
-		<li>
-			<strong>衬衫</strong>
-			<p>
-			<a title="" href="list.shtml">短袖</a> | <a title="" href="list.shtml">真丝</a> | <a title="" href="list.shtml">V领</a> | <a title="" href="list.shtml">纯棉</a> | <a title="" href="list.shtml">纯色</a> | <a title="" href="list.shtml">修身</a> | <a title="" href="list.shtml">拼接</a> | <a title="" href="list.shtml">套装</a> <a title="" href="list.shtml">花边</a> | <a title="" href="list.shtml">款花</a> | <a title="" href="list.shtml">色裙</a> | <a title="" href="list.shtml">收腰款</a> | <a title="" href="list.shtml">七分袖</a> | <a title="" href="list.shtml">高腰款</a>
-			</p>
-		</li>
-		<li>
-			<strong>小背心/吊带</strong>
-			<p>
-			<a title="" href="list.shtml">短袖</a> | <a title="" href="list.shtml">真丝</a> | <a title="" href="list.shtml">V领</a> | <a title="" href="list.shtml">纯棉</a> | <a title="" href="list.shtml">纯色</a> | <a title="" href="list.shtml">修身</a> | <a title="" href="list.shtml">拼接</a> | <a title="" href="list.shtml">套装</a> <a title="" href="list.shtml">花边</a> | <a title="" href="list.shtml">款花</a> | <a title="" href="list.shtml">色裙</a> | <a title="" href="list.shtml">收腰款</a> | <a title="" href="list.shtml">七分袖</a> | <a title="" href="list.shtml">高腰款</a>
-			</p>
-		</li>
-		<li>
-			<strong>针织衫</strong>
-			<p>
-			<a title="" href="list.shtml">短袖</a> | <a title="" href="list.shtml">真丝</a> | <a title="" href="list.shtml">V领</a> | <a title="" href="list.shtml">纯棉</a> | <a title="" href="list.shtml">纯色</a> | <a title="" href="list.shtml">修身</a> | <a title="" href="list.shtml">拼接</a> | <a title="" href="list.shtml">套装</a> <a title="" href="list.shtml">花边</a> | <a title="" href="list.shtml">款花</a> | <a title="" href="list.shtml">色裙</a> | <a title="" href="list.shtml">收腰款</a> | <a title="" href="list.shtml">七分袖</a> | <a title="" href="list.shtml">高腰款</a>
-			</p>
-		</li>
+	<%
+        }
+    %>
 	</ul>
 	<ul class="chalbar">
-		<li class="barli1"><a title="" href="list.shtml"><img alt="" src="images/ad/70x50.gif" /></a></li>
-		<li class="barli1"><a title="" href="list.shtml"><img alt="" src="images/ad/70x50.gif" /></a></li>
-		<li class="barli1"><a title="" href="list.shtml"><img alt="" src="images/ad/70x50.gif" /></a></li>
-		<li class="barli1"><a title="" href="list.shtml"><img alt="" src="images/ad/70x50.gif" /></a></li>
-		<li class="barli1"><a title="" href="list.shtml"><img alt="" src="images/ad/70x50.gif" /></a></li>
-		<li class="barli1"><a title="" href="list.shtml"><img alt="" src="images/ad/70x50.gif" /></a></li>
-		<li class="barli1"><a title="" href="list.shtml"><img alt="" src="images/ad/70x50.gif" /></a></li>
-		<li class="barli1"><a title="" href="list.shtml"><img alt="" src="images/ad/70x50.gif" /></a></li>
-		<li class="barli1"><a title="" href="list.shtml"><img alt="" src="images/ad/70x50.gif" /></a></li>
-		<li class="barli1"><a title="" href="list.shtml"><img alt="" src="images/ad/70x50.gif" /></a></li>
-		<li class="barli1"><a title="" href="list.shtml"><img alt="" src="images/ad/70x50.gif" /></a></li>
-		<li class="barli1"><a title="" href="list.shtml"><img alt="" src="images/ad/70x50.gif" /></a></li>
+	<%
+        foreach (GoodsBrandInfo cbrandinfo in cbrandlist)
+        {
+    %>
+		<li class="barli1"><a title="<%=cbrandinfo.bname%>" href="showbrand-<%=cbrandinfo.id%>.html"><img alt="<%=cbrandinfo.bname%>" src="<%=cbrandinfo.logo%>" /></a></li>
+	<%
+        }
+    %>
 	</ul>
 	<div class="chalad mar_top">
 		<p class="chalad1"><a title="" href="list.shtml"><img alt="" src="images/ad/220x287.gif" /></a></p>
@@ -101,834 +63,58 @@
 		<div class="trdtht">
 			<strong><img alt="潮我喜欢" src="images/index_tit2.gif" /></strong>
 			<ul id="chalprdrt">
-				<li>TEE</li>
-				<li>雪纺衫</li>
-				<li>连衣裙</li>
-				<li>短  裤</li>
-				<li>小背心</li>
-				<li>男  装</li>
+			<%
+                foreach (CategoryInfo subcinfo in csubclasslist)
+                {
+            %>
+				<li><%=subcinfo.Name%></li>
+			<%
+                }
+            %>
 			</ul>
 		</div>
 		<div id="chalprdnr">
+		    <%
+                foreach (CategoryInfo subcinfo in csubclasslist)
+                {
+            %>
 			<div class="con">
 				<ul class="trdcot">
+				    <%
+                        int tkiteminfo__id = 1;
+                        foreach (SAS.Entity.Domain.TaobaokeItem tkiteminfo in SAS.Taobao.TaoBaos.GetRecommendProduct(Convert.ToInt16(TaoChanel.Chanel), subcinfo.Cid))
+                        {
+                    %>
 					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>1josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
+						<a title="<%=tkiteminfo.Title%>" href="productshow-<%=tkiteminfo.NumIid%>.html">
+						<img alt="<%=tkiteminfo.Title%>" src="<%=tkiteminfo.PicUrl%>_120x120.jpg" />
+						<span><%=tkiteminfo.Title%></span>
 						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
+						<em>已售出：<ins><%=tkiteminfo.CommissionNum%></ins>件</em>
+						<b>￥<%=tkiteminfo.Price%></b>
 					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>1josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>1josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>1josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>1josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>1josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>1josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>1josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>1josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>1josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>1josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>1josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>1josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>1josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>1josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
+					<%if (tkiteminfo__id % 5 > 0){%><li class="trdcot2"></li><%}%>
+					<%
+                        tkiteminfo__id++;
+                        }
+                    %>
 				</ul>
 			</div>
-			<div class="con">
-				<ul class="trdcot">
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>2josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>2josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>2josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>2josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>2josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>2josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>2josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>2josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>2josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>2josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>2josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>2josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>2josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>2josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>2josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-				</ul>
-			</div>
-			<div class="con">
-				<ul class="trdcot">
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>3josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>3josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>3josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>3josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>3josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>3josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>3josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>3josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>3josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>3josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>3josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>3josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>3josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>3josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>3josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-				</ul>
-			</div>
-			<div class="con">
-				<ul class="trdcot">
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>4josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>4josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>4josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>4josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>4josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>4josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>4josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>4josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>4josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>4josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>4josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>4josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>4josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>4josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>4josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-				</ul>
-			</div>
-			<div class="con">
-				<ul class="trdcot">
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>5josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>5josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>5josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>5josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>5josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>5josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>5josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>5josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>5josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>5josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>5josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>5josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>5josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>5josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>5josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-				</ul>
-			</div>
-			<div class="con">
-				<ul class="trdcot">
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>6josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>6josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>6josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>6josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>6josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>6josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>6josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>6josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>6josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>6josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>6josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>6josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>6josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>6josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-					<li class="trdcot2"></li>
-					<li class="trdcot1">
-						<a title="" href="show.shtml">
-						<img alt="" src="images/ad/120x120.gif" />
-						<span>6josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-						</a>
-						<em>已售出：<ins>201</ins>件</em>
-						<b>￥158.00</b>
-					</li>
-				</ul>
-			</div>
+			<%
+                }
+            %>
 		</div>
 	</div>
 </div>
+<%
+    }
+    else
+    {
+%>
+<!--#include file="msgbox.htm"-->
+<%
+    }
+%>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="footer" Runat="Server">
 <script type="text/javascript">

@@ -165,6 +165,19 @@ namespace SAS.Taobao
             PageList<TaobaokeItem> pageitems = client.TaobaokeItemsConvert(tgr);
             return pageitems.Content;
         }
+        /// <summary>
+        /// 获取淘宝客商品详细信息
+        /// </summary>
+        public static TaobaokeItemDetail GetTaoBaoKeItemDetail(long numiid)
+        {
+            TaobaokeItemsDetailGetRequest ttg = new TaobaokeItemsDetailGetRequest();
+            ttg.Fields = "iid,num_iid,title,nick,type,cid,desc,pic_url,num,location,price,score,volume,click_url,shop_click_url,seller_credit_score";
+            ttg.NumIids = numiid.ToString();
+            ttg.Nick = SAS_USERNICK;
+            PageList<TaobaokeItemDetail> pagetd = client.TaobaokeItemsDetailGet(ttg);
+            if (pagetd.Content.Count == 0) return null;
+            return pagetd.Content[0];
+        }
 
         /// <summary>
         /// 获取测试环境下的用户会话授权码。
@@ -263,6 +276,13 @@ namespace SAS.Taobao
         public static CategoryInfo GetCategoryInfoByCache(int cid)
         {
             return GetVaildCategoryList().Find(new Predicate<CategoryInfo>(delegate(CategoryInfo cinfo) { return cinfo.Cid == cid; }));
+        }
+        /// <summary>
+        /// 获取频道实体（缓存）
+        /// </summary>
+        public static CategoryInfo GetChanelInfoByCache(int chanelid)
+        {
+            return GetVaildCategoryList().Find(new Predicate<CategoryInfo>(delegate(CategoryInfo cinfo) { return cinfo.Cid == chanelid && cinfo.Parentid == 0; }));
         }
         /// <summary>
         /// 获取类别实体根据底层类（缓存）
@@ -659,6 +679,76 @@ namespace SAS.Taobao
         public static TaoBaoTopicInfo GetTaoBaoTopicInfo(long tid)
         {
             return GetTaoBaoTopicList().Find(new Predicate<TaoBaoTopicInfo>(delegate(TaoBaoTopicInfo tinfo) { return tinfo.Tid == tid; }));
+        }
+        /// <summary>
+        /// 根据频道获取专题信息
+        /// </summary>
+        public static List<TaoBaoTopicInfo> GetTaoBaoTopicList(int chanel)
+        {
+            List<TaoBaoTopicInfo> tbtlist = new List<TaoBaoTopicInfo>();
+            tbtlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/TopicList_" + chanel) as List<TaoBaoTopicInfo>;
+            if (tbtlist == null)
+            {
+                tbtlist = new List<TaoBaoTopicInfo>();
+                List<RecommendInfo> rinfolist = GetRecommendList(3, chanel);
+                string topicarray = "";
+                foreach (RecommendInfo rinfo in rinfolist)
+                {
+                    topicarray += rinfo.ccontent + ",";
+                }
+                foreach (string str in topicarray.Trim().Trim(',').Split(','))
+                {
+                    if (string.IsNullOrEmpty(str)) continue;
+                    string[] topicinfo = str.Split('|');
+                    if (topicinfo.Length != 7) continue;
+                    TaoBaoTopicInfo ttinfo = new TaoBaoTopicInfo();
+                    ttinfo.Tid = long.Parse(topicinfo[0]);
+                    ttinfo.Title = topicinfo[1];
+                    ttinfo.Type = TypeConverter.StrToInt(topicinfo[2]);
+                    ttinfo.Order = TypeConverter.StrToInt(topicinfo[3]);
+                    ttinfo.Pic = topicinfo[4];
+                    if (ttinfo.Type == 1) ttinfo.Url = "http://haibao.huoban.taobao.com/tms/topic.php?pid=" + taobaoconfig.UserID + "&eventid=" + ttinfo.Tid;
+                    if (ttinfo.Type == 2) ttinfo.Url = "http://zhuti.huoban.taobao.com/event.php?pid=" + taobaoconfig.UserID + "&eventid=" + ttinfo.Tid;
+                    ttinfo.Width = TypeConverter.StrToInt(topicinfo[5]);
+                    ttinfo.Height = TypeConverter.StrToInt(topicinfo[6]);
+                    tbtlist.Add(ttinfo);
+                }
+                SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/TopicList_" + chanel, tbtlist);
+            }
+            return tbtlist;
+        }
+        #endregion
+
+        #region 淘宝商品操作
+        /// <summary>
+        /// 根据推荐获取商品信息集合
+        /// </summary>
+        public static List<TaobaokeItem> GetRecommendProduct(int chanel, int classid)
+        {
+            List<TaobaokeItem> taobaoitemlist = new List<TaobaokeItem>();
+            taobaoitemlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/RecommendItem/Chanel_" + chanel + "/Class_" + classid) as List<TaobaokeItem>;
+
+            if (taobaoitemlist == null)
+            {
+                List<RecommendInfo> rlist = GetRecommendList(1, chanel, classid);
+                string itemlistid = "";
+                foreach (RecommendInfo rinfo in rlist)
+                {
+                    itemlistid += rinfo.ccontent + ",";
+                }
+
+                if (itemlistid.Trim().Trim(',') == "") return new List<TaobaokeItem>();
+                TaobaokeItemsConvertRequest tcr = new TaobaokeItemsConvertRequest();
+                tcr.Fields = "iid,num_iid,title,nick,pic_url,price,click_url,commission,commission_rate,commission_num,commission_volume,shop_click_url,seller_credit_score,item_location,keyword_click_url";
+                tcr.Nick = SAS_USERNICK;
+                tcr.NumIids = itemlistid;
+
+                PageList<TaobaokeItem> pageitems = client.TaobaokeItemsConvert(tcr);
+                taobaoitemlist = pageitems.Content;
+
+                SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/RecommendItem/Chanel_" + chanel + "/Class_" + classid, taobaoitemlist);
+            }
+            return taobaoitemlist;
         }
         #endregion
     }

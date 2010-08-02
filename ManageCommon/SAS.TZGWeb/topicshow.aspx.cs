@@ -21,7 +21,11 @@ public partial class topicshow : TaoBaoPage
         tinfo = TaoBaos.GetTaoBaoTopicInfo(tid);
         if (tinfo == null) AddErrLine("您的专题不存在或已删除！");
 
-        if (page_err > 0) return;
+        if (page_err > 0)
+        {
+            SetMetaRefresh(2, LogicUtils.GetReUrl());
+            return;
+        }
 
         pagetitle = tinfo.Title;
     }

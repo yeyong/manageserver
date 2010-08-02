@@ -55,7 +55,7 @@
 						</a>
 						<p class="cot">
 							<span class="cotlt">
-								<b class="tit"><i class="titlt">选择分类：</i><i class="titrt"><a title="" href="list.shtml">更多&gt;&gt;</a></i></b>
+								<b class="tit"><i class="titlt">选择分类：</i><i class="titrt"><a title="" href="chanels_<%=parentcinfo.Cid%>.html">进入频道&gt;&gt;</a></i></b>
 								<%
                         int subcinfo__id = 1;
                         foreach (CategoryInfo subcinfo in SAS.Taobao.TaoBaos.GetCategoryListByParentID(parentcinfo.Cid))
@@ -83,7 +83,7 @@
                             %>
 							</span>
 							<span class="cotrt">
-								<b class="tit"><i class="titlt">选择品牌：</i><i class="titrt"><a title="" href="list.shtml">更多&gt;&gt;</a></i></b>
+								<b class="tit"><i class="titlt">选择品牌：</i><i class="titrt"><a title="" href="brand.html">更多&gt;&gt;</a></i></b>
 								<%
                                     foreach (GoodsBrandInfo goodbinfo in SAS.Taobao.TaoBaos.GetGoodsBrandListByClass(parentcinfo.Cid))
                                     {

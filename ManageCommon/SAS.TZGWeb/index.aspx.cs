@@ -21,11 +21,16 @@ public partial class index : TaoBaoPage
     /// 首页推荐店铺
     /// </summary>
     protected List<ShopDetailInfo> shoplist = new List<ShopDetailInfo>();
+    /// <summary>
+    /// 首页淘宝专题
+    /// </summary>
+    protected List<TaoBaoTopicInfo> indextopiclist = new List<TaoBaoTopicInfo>();
 
     protected override void ShowPage()
     {
         pagetitle = "商之源";
         ginfolist = TaoBaos.GetGoodsBrandList(Convert.ToInt16(TaoChanel.Index), 0);
         shoplist = TaoBaos.GetTaoBaoShopListByRecommend(Convert.ToInt16(TaoChanel.Index), 0);
+        indextopiclist = TaoBaos.GetTaoBaoTopicList(Convert.ToInt16(TaoChanel.Index));
     }
 }

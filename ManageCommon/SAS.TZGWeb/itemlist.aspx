@@ -9,7 +9,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="mainbody" Runat="Server">
 <!--内容开始-->
 <div class="cot">
-	<p class="site">您现在的位置：<a title="" href="index.html">淘之购</a> &gt; <a title="" href="list.shtml"><%=rootcategory.Name%></a> &gt; <%=parentcategory.Name%></p>
+	<p class="site">您现在的位置：<a title="" href="index.html">淘之购</a> &gt; <a title="" href="chanels_<%=rootcategory.Cid%>.html"><%=rootcategory.Name%></a> &gt; <%=parentcategory.Name%></p>
 	<div class="listlt">
 		<div class="listlt1" id="listmu">
 			<h3><%=rootcategory.Name%></h3>
@@ -187,7 +187,7 @@
             {
 		%>
 			<li>
-				<a title="" href="show.shtml">
+				<a title="<%=tkinfo.Title%>" href="productshow-<%=tkinfo.NumIid%>.html">
 				<em class="listnrtu"><img alt="" src="<%=tkinfo.PicUrl%>_b.jpg" /></em>
 				<em class="listnrt"><%=tkinfo.Title%></em>
 				</a>
