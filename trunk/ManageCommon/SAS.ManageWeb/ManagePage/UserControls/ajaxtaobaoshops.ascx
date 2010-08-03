@@ -32,7 +32,7 @@
                   <%foreach (SAS.Entity.ShopDetailInfo tbshopinfo in shoplist)
                     { %>
                   <tr class="mouseoutstyle" onmouseover="this.className='mouseoverstyle'" onmouseout="this.className='mouseoutstyle'" style="cursor:hand;">
-                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%if(dmode==DisplayMode.SearchMode){%><input type="button" class="ManagerButton" value="选择" onclick="selectItem(this,'<%=tbshopinfo.sid%>');"/><%}else if(dmode==DisplayMode.ManageMode){%><input type="checkbox" value="<%=tbshopinfo.sid%>" name="shopsids"/><%}%></td>
+                    <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%if(dmode==DisplayMode.SearchMode){%><input type="button" class="ManagerButton" value="选择" onclick="selectItem(this,'<%=tbshopinfo.sid%>');"/><%}else if(dmode==DisplayMode.ManageMode){%><input type="checkbox" value="<%=tbshopinfo.sid%>" name="shopsids"/><a href="toabao_editshopproduct.aspx?sid=<%=tbshopinfo.sid%>">推荐商品</a><%}%></td>
                     <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><img width="82px" height="82px" src="http://logo.taobao.com/shop-logo<%=tbshopinfo.pic_path%>"/></td>
                     <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tbshopinfo.title%></td>
                     <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tbshopinfo.nick%></td>

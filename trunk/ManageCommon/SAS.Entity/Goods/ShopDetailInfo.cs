@@ -30,12 +30,13 @@ namespace SAS.Entity
         private int _shop_score;
         private long _total_num;
         private long _good_num;
-        private string _shop_country;
-        private string _shop_province;
-        private string _shop_city;
-        private string _shop_address;
+        private string _shop_country = "";
+        private string _shop_province = "";
+        private string _shop_city = "";
+        private string _shop_address = "";
         private string _commission_rate;
         private string _click_url;
+        private string _relategoods = "";
         /// <summary>
         /// 淘宝店铺ID
         /// </summary>
@@ -251,6 +252,14 @@ namespace SAS.Entity
         {
             set { _click_url = value; }
             get { return _click_url; }
+        }
+        /// <summary>
+        /// 相关商品（ID|名称|价格|图片）
+        /// </summary>
+        public string relategoods
+        {
+            set { _relategoods = value; }
+            get { return _relategoods; }
         }
         #endregion Model
     }

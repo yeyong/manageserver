@@ -118,6 +118,7 @@
     <Compile Include="Goods\CategoryInfo.cs" />
     <Compile Include="Goods\GoodsBrandInfo.cs" />
     <Compile Include="Goods\RecommendInfo.cs" />
+    <Compile Include="Goods\RecommendWithProduct.cs" />
     <Compile Include="Goods\ShopDetailInfo.cs" />
     <Compile Include="Goods\TaoBaoTopicInfo.cs" />
     <Compile Include="HelpInfo.cs" />

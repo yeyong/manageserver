@@ -36,6 +36,10 @@ namespace SAS.Plugin.TaoBao
         /// </summary>
         public abstract SAS.Common.Generic.List<CategoryInfo> GetVaildCategoryList();
         /// <summary>
+        /// 获取有效类别集合（根据父级）
+        /// </summary>
+        public abstract System.Collections.Generic.List<CategoryInfo> GetCategoryListByParentID(int pid);
+        /// <summary>
         /// 创建商品类别
         /// </summary>
         public abstract int CreateCategoryInfo(CategoryInfo cinfo);
@@ -124,6 +128,14 @@ namespace SAS.Plugin.TaoBao
         /// </summary>
         /// <param name="ids"></param>
         public abstract SAS.Common.Generic.List<ShopDetailInfo> GetTaoBaoShopListByIds(string ids);
+        /// <summary>
+        /// 根据店铺ID获取店铺信息
+        /// </summary>
+        public abstract ShopDetailInfo GetTaoBaoShopInfo(string id);
+        /// <summary>
+        /// 店铺推荐商品变动
+        /// </summary>
+        public abstract void UpdateTaoBaoShopProduct(long sid, string products);
         /// <summary>
         /// 创建商品品牌
         /// </summary>

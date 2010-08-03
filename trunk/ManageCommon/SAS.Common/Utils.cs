@@ -166,7 +166,7 @@ namespace SAS.Common
         /// <returns></returns>
         public static string RTrim(string str)
         {
-            for (int i = str.Length; i >= 0; i--)
+            for (int i = str.Length - 1; i >= 0; i--)
             {
                 if (str[i].Equals(" ") || str[i].Equals("\r") || str[i].Equals("\n"))
                 {

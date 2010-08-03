@@ -105,7 +105,7 @@ namespace SAS.Data
         /// <summary>
         /// 店铺详请字段
         /// </summary>
-        public const string SHOPDETAIL = "[sid],[user_id],[cid],[nick],[title],[item_score],[service_score],[delivery_score],[shop_desc],[bulletin],[pic_path],[created],[modified],[promoted_type],[consumer_protection],[shop_status],[shop_type],[shop_level],[shop_score],[total_num],[good_num],[shop_country],[shop_province],[shop_city],[shop_address],[commission_rate],[click_url]";
+        public const string SHOPDETAIL = "[sid],[user_id],[cid],[nick],[title],[item_score],[service_score],[delivery_score],[shop_desc],[bulletin],[pic_path],[created],[modified],[promoted_type],[consumer_protection],[shop_status],[shop_type],[shop_level],[shop_score],[total_num],[good_num],[shop_country],[shop_province],[shop_city],[shop_address],[commission_rate],[click_url],[relategoods]";
         /// <summary>
         /// 表情字段
         /// </summary>

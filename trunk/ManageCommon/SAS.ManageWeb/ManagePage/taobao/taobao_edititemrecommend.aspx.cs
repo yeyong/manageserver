@@ -66,6 +66,8 @@ namespace SAS.ManageWeb.ManagePage
             }
 
             tpb.UpdateRecommendInfo(rid, thercategory, therchanel, thertitle, thecontent, rtype);
+            SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/RecommendItem/Chanel_" + rinfo.relatechanel, true);
+            SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/RecommendItem/Chanel_" + therchanel, true);
             SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/RecommendItem/Chanel_" + rinfo.relatechanel + "/Class_" + rinfo.relatecategory, true);
             SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/RecommendItem/Chanel_" + therchanel + "/Class_" + thercategory, true);
             base.RegisterStartupScript("PAGE", "window.location.href='taobao_recommendgrid.aspx?ctype=" + rtype + "';");
