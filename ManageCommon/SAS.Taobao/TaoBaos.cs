@@ -519,6 +519,20 @@ namespace SAS.Taobao
             return DTOProvider.GetTaoBaoShopList(Data.DbProvider.GetInstance().GetTaoBaoShopList(ids));
         }
         /// <summary>
+        /// 根据店铺ID获取店铺信息
+        /// </summary>
+        public static ShopDetailInfo GetTaoBaoShopInfo(string id)
+        {
+            return DTOProvider.GetTaoBaoShopEntity(Data.DbProvider.GetInstance().GetTaoBaoShopList(id));
+        }
+        /// <summary>
+        /// 根据店铺ID获取店铺信息
+        /// </summary>
+        public static ShopDetailInfo GetTaoBaoShopInfoByNick(string nick)
+        {
+            return DTOProvider.GetTaoBaoShopEntity(Data.DbProvider.GetInstance().GetTaoBaoShopInfo(nick));
+        }
+        /// <summary>
         /// 根据频道类别获取店铺信息
         /// </summary>
         public static SAS.Common.Generic.List<ShopDetailInfo> GetTaoBaoShopListByRecommend(int chanel, int classid)
@@ -537,6 +551,13 @@ namespace SAS.Taobao
                 SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/ShopList/Chanel_" + chanel + "/Class_" + classid, shoplist);
             }
             return shoplist;
+        }
+        /// <summary>
+        /// 店铺推荐商品变动
+        /// </summary>
+        public static void UpdateTaoBaoShopProduct(long sid, string products)
+        {
+            Data.DbProvider.GetInstance().UpdateShopProduct(sid, products);
         }
         #endregion
 
@@ -763,6 +784,38 @@ namespace SAS.Taobao
                 SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/RecommendItem/Chanel_" + chanel + "/Class_" + classid, taobaoitemlist);
             }
             return taobaoitemlist;
+        }
+        /// <summary>
+        /// 根据推荐获取商品信息集合（推荐信息与商品信息联合）
+        /// </summary>
+        public static List<RecommendWithProduct> GetProductWithRecommend(int chanel)
+        {
+            List<RecommendWithProduct> recommendlist = new List<RecommendWithProduct>();
+            recommendlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/RecommendItem/Chanel_" + chanel) as List<RecommendWithProduct>;
+
+            if (recommendlist == null)
+            {
+                recommendlist = new List<RecommendWithProduct>();
+                List<RecommendInfo> rlist = GetRecommendList(1, chanel);
+
+                foreach (RecommendInfo rinfo in rlist)
+                {
+                    RecommendWithProduct rpinfo = new RecommendWithProduct();
+                    if (rinfo.ccontent.Trim().Trim(',') == "") continue;
+                    TaobaokeItemsConvertRequest tcr = new TaobaokeItemsConvertRequest();
+                    tcr.Fields = "iid,num_iid,title,nick,pic_url,price,click_url,commission,commission_rate,commission_num,commission_volume,shop_click_url,seller_credit_score,item_location,keyword_click_url";
+                    tcr.Nick = SAS_USERNICK;
+                    tcr.NumIids = rinfo.ccontent.Trim().Trim(',');
+                    PageList<TaobaokeItem> pageitems = client.TaobaokeItemsConvert(tcr);
+                    rpinfo.id = rinfo.id;
+                    rpinfo.ctitle = rinfo.ctitle;
+                    rpinfo.item = pageitems.Content;
+                    recommendlist.Add(rpinfo);
+                }
+
+                SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/RecommendItem/Chanel_" + chanel, recommendlist);
+            }
+            return recommendlist;
         }
         #endregion
     }

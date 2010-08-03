@@ -50,6 +50,13 @@ namespace SAS.Taobao
             return TaoBaos.GetVaildCategoryList();
         }
         /// <summary>
+        /// 获取有效类别集合（根据父级）
+        /// </summary>
+        public override List<CategoryInfo> GetCategoryListByParentID(int pid)
+        {
+            return TaoBaos.GetCategoryListByParentID(pid);
+        }
+        /// <summary>
         /// 创建商品类别
         /// </summary>
         public override int CreateCategoryInfo(SAS.Entity.CategoryInfo cinfo)
@@ -176,6 +183,20 @@ namespace SAS.Taobao
         public override SAS.Common.Generic.List<ShopDetailInfo> GetTaoBaoShopListByIds(string ids)
         {
             return TaoBaos.GetTaoBaoShopListByIds(ids);
+        }
+        /// <summary>
+        /// 根据店铺ID获取店铺信息
+        /// </summary>
+        public override ShopDetailInfo GetTaoBaoShopInfo(string id)
+        {
+            return TaoBaos.GetTaoBaoShopInfo(id);
+        }
+        /// <summary>
+        /// 店铺推荐商品变动
+        /// </summary>
+        public override void UpdateTaoBaoShopProduct(long sid, string products)
+        {
+            TaoBaos.UpdateTaoBaoShopProduct(sid, products);
         }
         /// <summary>
         /// 创建商品品牌

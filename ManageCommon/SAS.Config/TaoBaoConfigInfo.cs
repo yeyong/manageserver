@@ -18,6 +18,7 @@ namespace SAS.Config
         private string m_seokeyword = "";                               //seo关键字
         private string m_seodescription = "";                           //seo描述
         private int m_itempagesize = 30;                                //商品页面大小
+        private string m_taodomain = "http://taobao.sirius.com/";               //淘之购域名
 
         /// <summary>
         /// 淘客昵称
@@ -82,6 +83,14 @@ namespace SAS.Config
         {
             get { return m_itempagesize; }
             set { m_itempagesize = value; }
+        }
+        /// <summary>
+        /// 淘宝域名
+        /// </summary>
+        public string TaoDomain
+        {
+            get { return m_taodomain; }
+            set { m_taodomain = value; }
         }
     }
 }

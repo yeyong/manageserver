@@ -29,6 +29,31 @@ public partial class itemshow : TaoBaoPage
     protected Location tklocation = new Location();
     protected CategoryInfo subcinfo = new CategoryInfo();
     protected CategoryInfo rootinfo = new CategoryInfo();
+    protected ShopDetailInfo sdinfo = new ShopDetailInfo();
+    /// <summary>
+    /// 店铺名称
+    /// </summary>
+    protected string shopname = "";
+    /// <summary>
+    /// 店铺推荐商品
+    /// </summary>
+    protected string shopproducts = "";
+    /// <summary>
+    /// 店铺好评率
+    /// </summary>
+    protected string shopscore = "";
+    /// <summary>
+    /// 店铺链接地址
+    /// </summary>
+    protected string shopurl = "";
+    /// <summary>
+    /// 店铺地址
+    /// </summary>
+    protected string shopaddress = "";
+    /// <summary>
+    /// 同类商品
+    /// </summary>
+    protected List<TaobaokeItem> sameclassproducts = new List<TaobaokeItem>();
 
     protected override void ShowPage()
     {
@@ -37,13 +62,38 @@ public partial class itemshow : TaoBaoPage
         tklocation = iteminfo.Location;
 
         subcinfo = TaoBaos.GetCategoryInfoByCache(iteminfo.Cid.ToString());
+
+        if (subcinfo == null)
+        {
+            AddErrLine("您的页面正在跳转，请稍等！");
+            SetMetaRefresh(2, tkitem.ClickUrl);
+            return;
+        }
+
         rootinfo = TaoBaos.GetCategoryInfoByCache(subcinfo.Parentid);
+        shopname = iteminfo.Nick;
+        shopscore = "100";
+        shopurl = tkitem.ShopClickUrl;
+        shopaddress = tklocation.State + tklocation.City;
+        sdinfo = TaoBaos.GetTaoBaoShopInfoByNick(iteminfo.Nick);
+
+        if (sdinfo != null)
+        {
+            shopname = sdinfo.title;
+            shopproducts = sdinfo.relategoods;
+            shopscore = (decimal.Round(decimal.Parse((((double)sdinfo.good_num / (double)sdinfo.total_num) * 100).ToString()), 2)).ToString();
+            shopurl = "shopshow-" + sdinfo.sid + ".html";
+            shopaddress = sdinfo.shop_province + sdinfo.shop_city;
+        }
+
         if (tkitem == null)
         {
             AddErrLine("商品详请错误！");
             SetMetaRefresh(2, LogicUtils.GetReUrl());
             return;
         }
+
+        sameclassproducts = TaoBaos.GetRecommendProduct(Convert.ToInt16(TaoChanel.Detail), subcinfo.Cid);
 
         string viewinfo = iid + "|" + Utils.UrlEncode(iteminfo.Title) + "|" + iteminfo.Price + "|" + iteminfo.PicUrl;
         string lastviewids = "," + Utils.GetCookie("goodviews") + ",";

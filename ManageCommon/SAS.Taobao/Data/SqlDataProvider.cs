@@ -371,6 +371,26 @@ namespace SAS.Taobao.Data
             string commandText = string.Format("SELECT {0} FROM [{1}taobaoshop] WHERE [sid] IN ({2}) ORDER BY [shop_level] DESC", DbFields.SHOPDETAIL, BaseConfigs.GetTablePrefix, ids);
             return DbHelper.ExecuteReader(CommandType.Text, commandText);
         }
+        /// <summary>
+        /// 根据店铺掌柜昵称获取店铺信息
+        /// </summary>
+        public IDataReader GetTaoBaoShopInfo(string nick)
+        {
+            string commandText = string.Format("SELECT TOP 1 {0} FROM [{1}taobaoshop] WHERE [nick] = '{2}'", DbFields.SHOPDETAIL, BaseConfigs.GetTablePrefix, nick);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText);
+        }
+        /// <summary>
+        /// 店铺商品变动
+        /// </summary>
+        public void UpdateShopProduct(long sid,string products)
+        {
+            DbParameter[] parms = {
+                                    DbHelper.MakeInParam("@id",(DbType)SqlDbType.BigInt,8,sid),
+			                        DbHelper.MakeInParam("@products", (DbType)SqlDbType.Text,0, products)
+                                  };
+            string commandText = String.Format("Update [{0}taobaoshop] SET [relategoods] = @products WHERE [sid]=@id ", BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
         #endregion
 
         #region 品牌操作

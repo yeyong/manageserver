@@ -37,14 +37,19 @@
 			<strong>网站导航</strong>
 			<p>
 			<%loop (DataRow) mapnavinfo2 mapnavlist2%>
-			<%if {mapnavinfo2__loop__id}>1%> | <%/if%><a title="{mapnavinfo2[title]}" class="l_2d0b00_u" href="{mapnavinfo2[url]}">{mapnavinfo2[name]}</a>
+			<%if {mapnavinfo2__loop__id}>1%> | <%/if%><a target="_blank" title="{mapnavinfo2[title]}" class="l_2d0b00_u" href="{tbconfig.taoDomain}{mapnavinfo2[url]}">{mapnavinfo2[name]}</a>
 			<%/loop%>			
 			</p>
 		</li>
+		<%loop (CategoryInfo) taocategoryinfo categorylist%>
 		<li>
-			<strong>商品分类</strong>
-			<p><a title="" class="l_2d0b00_u" href="#">女装、女士精品</a> | <a title="" class="l_2d0b00_u" href="#">女士内衣、男士内衣、家居服</a> | <a title="" class="l_2d0b00_u" href="#">配件、皮带、围巾、领带、帽子手套</a> | <a title="" class="l_2d0b00_u" href="#">饰品、流行首饰、时尚饰品</a> | <a title="" class="l_2d0b00_u" href="#">品牌手表、流行手表</a></p>
+			<strong>{taocategoryinfo.name}</strong>
+			<%csharp%>
+			    System.Collections.Generic.List<CategoryInfo> templist = GetCategoryList(taocategoryinfo.Cid);
+			<%/csharp%>
+			<p><%loop (CategoryInfo) subtaocategoryinfo templist%><a target="_blank" title="{subtaocategoryinfo.name}" class="l_2d0b00_u" href="{tbconfig.taoDomain}goodslist-p-{subtaocategoryinfo.cid}.html">{subtaocategoryinfo.name}</a> | <%/loop%></p>
 		</li>
+		<%/loop%>
 	</ul>
 </div>
 <%template _comcopyright%>

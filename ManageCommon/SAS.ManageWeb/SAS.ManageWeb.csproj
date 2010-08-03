@@ -685,6 +685,13 @@
     <Compile Include="ManagePage\taobao\taobao_recommendgrid.aspx.designer.cs">
       <DependentUpon>taobao_recommendgrid.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\taobao\toabao_editshopproduct.aspx.cs">
+      <DependentUpon>toabao_editshopproduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\taobao\toabao_editshopproduct.aspx.designer.cs">
+      <DependentUpon>toabao_editshopproduct.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\UserControls\activetree.ascx.cs">
       <DependentUpon>activetree.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1723,6 +1730,7 @@
     <Content Include="ManagePage\taobao\taobao_edittopicrecommend.aspx" />
     <Content Include="ManagePage\taobao\taobao_goodsbrandgrid.aspx" />
     <Content Include="ManagePage\taobao\taobao_recommendgrid.aspx" />
+    <Content Include="ManagePage\taobao\toabao_editshopproduct.aspx" />
     <Content Include="ManagePage\UserControls\activetree.ascx" />
     <Content Include="ManagePage\UserControls\ajaxbrandlist.ascx" />
     <Content Include="ManagePage\UserControls\ajaxtaobaoitems.ascx" />
