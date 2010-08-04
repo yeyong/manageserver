@@ -90,7 +90,7 @@ namespace SAS.Taobao.Data
         /// </summary>
         public IDataReader GetVaildCategoryList()
         {
-            string commandText = string.Format("SELECT {0} FROM [{1}category] WHERE [cg_status] > 0", DbFields.CATEGORY, BaseConfigs.GetTablePrefix);
+            string commandText = string.Format("SELECT {0} FROM [{1}category] WHERE [cg_status] > 0 ORDER BY [displayorder]", DbFields.CATEGORY, BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteReader(CommandType.Text, commandText);
         }
         /// <summary>

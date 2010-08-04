@@ -132,10 +132,23 @@ namespace SAS.Data.DataProvider
         /// <summary>
         /// 有效活动信息
         /// </summary>
-        /// <returns></returns>
         public static DataTable GetEnableActivities()
         {
             return GetActivitiesByConditions("[enabled] = 1");
+        }
+        /// <summary>
+        /// 淘之购活动信息
+        /// </summary>
+        public static System.Collections.Generic.List<ActivityInfo> GetTaoActivities()
+        {
+            System.Collections.Generic.List<ActivityInfo> actlist = new System.Collections.Generic.List<ActivityInfo>();
+            IDataReader reader = DatabaseProvider.GetInstance().GetTaoActivities();
+            while (reader.Read())
+            {
+                actlist.Add(LoadSingleActivityInfo(reader));
+            }
+            reader.Close();
+            return actlist;
         }
     }
 }

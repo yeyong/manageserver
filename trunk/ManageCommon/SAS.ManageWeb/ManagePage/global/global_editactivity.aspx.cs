@@ -99,6 +99,10 @@ namespace SAS.ManageWeb.ManagePage
                 activityInfo.Enabled = TypeConverter.StrToInt(act_status.SelectedValue, 0);
 
                 AdminActivities.UpdateActivityInfo(activityInfo);
+                if (TypeConverter.StrToInt(typeid.SelectedValue, 0) == Convert.ToInt16(ActivityType.TaobaoActivity))
+                {
+                    SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoActivities", true);
+                }
                 SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/Activity");
                 //记录日志
                 AdminVistLogs.InsertLog(this.userid, this.username, this.usergroupid, this.grouptitle, this.ip, "更新活动", "更新活动,标题为:" + act_title.Text);

@@ -22,12 +22,17 @@
 	<div class="hpin mar_top">
 		<strong>最新活动</strong>
 		<ul class="hpinnr">
-			<li>[<em>2010-07-22</em>] <a title="" href="shop_show.shtml">Michelle 美包专卖</a></li>
-			<li>[<em>2010-07-20</em>] <a title="" href="shop_show.shtml">杜拉拉 时尚潮流 风向标</a></li>
-			<li>[<em>2010-07-19</em>] <a title="" href="shop_show.shtml">NOKIE 数码专卖</a></li>
-			<li>[<em>2010-07-18</em>] <a title="" href="shop_show.shtml">时尚潮流 日用专卖</a></li>
-			<li>[<em>2010-07-17</em>] <a title="" href="shop_show.shtml">想吃就吃 不怕胖</a></li>
-			<li>[<em>2010-07-17</em>] <a title="" href="shop_show.shtml">瘦身美体 Michelle</a></li>
+		<%
+            int ainfo__id = 1;    
+            foreach (ActivityInfo ainfo in taoactlist)
+            {
+                if (ainfo__id > 6) break;
+		%>
+			<li>[<em><%=SAS.Common.Utils.GetStandardDate(ainfo.Begintime)%></em>] <a title="<%=ainfo.Atitle%>" href="actshow-<%=ainfo.Id%>.html"><%=ainfo.Atitle%></a></li>
+		<%
+                ainfo__id++;
+            }
+		%>
 		</ul>
 		<p class="onead mar_top_5"><a title="" href="#"><img alt="" src="images/ad/223x95.gif" /></a></p>
 	</div>

@@ -30,10 +30,6 @@ public partial class itemlist : TaoBaoPage
     public string keyword = SASRequest.GetString("keyword");
     public int startmoney = SASRequest.GetInt("startmoney",0);
     public int endmoney = SASRequest.GetInt("endmoney", 0);
-    public string startcredit = SASRequest.GetString("startcredit");
-    public string endcredit = SASRequest.GetString("endcredit");
-    public string startnum = SASRequest.GetString("startnum");
-    public string endnum = SASRequest.GetString("endnum");
     public int sortid = SASRequest.GetInt("sortid", 0);
     public int viewtype = SASRequest.GetInt("viewtype", 1);
     public string searchkey = "";
@@ -69,6 +65,7 @@ public partial class itemlist : TaoBaoPage
     /// 页码链接
     /// </summary>
     public string pagenumbers = "";
+    protected string currentcategoryname = "";
 
     protected override void ShowPage()
     {
@@ -111,7 +108,8 @@ public partial class itemlist : TaoBaoPage
             AddErrLine("您的信息错误！");
             return;
         }
-
+        string tempstr = "," + parentcategory.Cg_relateclass;
+        currentcategoryname = Utils.CutString(tempstr, tempstr.IndexOf('|', tempstr.IndexOf("," + cid + "|", 0)) + 1, tempstr.IndexOf(',', tempstr.IndexOf('|', tempstr.IndexOf("," + cid + "|", 0))) - tempstr.IndexOf('|', tempstr.IndexOf("," + cid + "|", 0)) - 1);
         itemlistcategories = TaoBaos.GetCategoryListByParentID(rootcategory.Cid);
         itemlistgoodsbrands = TaoBaos.GetGoodsBrandListByClass(rootcategory.Cid);
 
@@ -134,7 +132,7 @@ public partial class itemlist : TaoBaoPage
         }
         string startmoneystr = startmoney > 0 ? startmoney.ToString() : "";
         string endmoneystr = endmoney > 0 ? endmoney.ToString() : "";
-        itemlistitems = TaoBaos.GetItemList(cid, Utils.RemoveHtml(keyword.Trim()), startmoneystr, endmoneystr, startcredit, endcredit, "", "", startnum, endnum, pagesize, pageid, sortstr, out itemcount);
+        itemlistitems = TaoBaos.GetItemList(cid, Utils.RemoveHtml(keyword.Trim()), startmoneystr, endmoneystr, "", "", "", "", "", "", pagesize, pageid, sortstr, out itemcount);
         SetConditionAndPage();
     }
 

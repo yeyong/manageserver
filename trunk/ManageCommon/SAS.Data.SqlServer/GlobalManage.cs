@@ -2292,6 +2292,14 @@ namespace SAS.Data.SqlServer
             int rows = DbHelper.ExecuteNonQuery(CommandType.Text, string.Format("UPDATE [{0}activity] SET [atype]={1} WHERE [id] IN ({2})", BaseConfigs.GetTablePrefix, typeid, idlist));
             return rows > 0 ? true : false;
         }
+        /// <summary>
+        /// 获取淘之购活动信息
+        /// </summary>
+        public IDataReader GetTaoActivities()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}activity] WHERE ([atype] = 0 OR [atype] = {2}) AND [enabled] = 1", DbFields.ACTIVITY, BaseConfigs.GetTablePrefix, Convert.ToInt16(ActivityType.TaobaoActivity));
+            return DbHelper.ExecuteReader(CommandType.Text, commandText);
+        }
         #endregion
 
         #region 评论操作

@@ -83,6 +83,21 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 淘之购相关活动
+        /// </summary>
+        public static System.Collections.Generic.List<ActivityInfo> GetTaoActivities()
+        {
+            System.Collections.Generic.List<ActivityInfo> actlist = new System.Collections.Generic.List<ActivityInfo>();
+            actlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/TaoActivities") as System.Collections.Generic.List<ActivityInfo>;
+            if (actlist == null)
+            {
+                actlist = SAS.Data.DataProvider.Activities.GetTaoActivities();
+                SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/TaoActivities", actlist);
+            }
+            return actlist;
+        }
+
+        /// <summary>
         /// 根据ID集合获取活动信息集合
         /// </summary>
         /// <param name="idlist"></param>

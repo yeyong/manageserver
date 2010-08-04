@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="main.master.cs" Inherits="main" %>
+﻿<%@ Master Language="C#" CodeFile="main.master.cs" Inherits="main" %>
 <%@ Import Namespace="SAS.Entity"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -76,7 +76,7 @@
                             }
                              %>
                                 </em>
-								<%if (subcinfo__id < 2){%><i class="line"></i><%}%>
+								<%if (subcinfo__id < 3){%><i class="line"></i><%}%>
 								<%
                             subcinfo__id++;
                         }
@@ -103,9 +103,9 @@
 				<p class="other"><a title="" href="category.html">所有商品分类&gt;&gt;</a></p>
 				<i class="lt"></i><i class="rt"></i>
 			</div>
-			<form name="form1" id="form1" method="post" class="soso">
-				<p><input name="" type="text" class="input_soout" value="输入搜索的关键字" onblur="if(this.value==''||this.value=='输入搜索的关键字'){this.value='输入搜索的关键字';this.className='input_soout';}" onfocus="if(this.value=='输入搜索的关键字'){this.value='';this.className='input_soon';}" /></p>
-				<p><input name="" type="button" class="so" value="" /></p>
+			<form name="form1" id="form1" method="post" class="soso" onsubmit="if(this.searchvalue.value!=''&&this.searchvalue.value!='输入搜索的关键字'){window.location.href='goodssearch-s-' + encodeURIComponent(this.searchvalue.value).replace('\'','%27') + '.html'};return false;">
+				<p><input name="searchvalue" type="text" class="input_soout" value="输入搜索的关键字" onblur="if(this.value==''||this.value=='输入搜索的关键字'){this.value='输入搜索的关键字';this.className='input_soout';}" onfocus="if(this.value=='输入搜索的关键字'){this.value='';this.className='input_soon';}" /></p>
+				<p><input type="submit" class="so" value=""/></p>
 			</form>
 			<p class="tdrec">
 				<strong>今日推荐：</strong>

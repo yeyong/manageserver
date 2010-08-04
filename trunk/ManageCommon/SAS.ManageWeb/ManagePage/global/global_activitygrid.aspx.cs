@@ -90,6 +90,10 @@ namespace SAS.ManageWeb.ManagePage
                             AdminActivities.DeleteActivities(idlist);
                             break;
                     }
+                    if (TypeConverter.StrToInt(typeid.SelectedValue, 0) == Convert.ToInt16(ActivityType.TaobaoActivity))
+                    {
+                        SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoActivities", true);
+                    }
                     base.RegisterStartupScript("PAGE", "window.location.href='global_activitygrid.aspx';");
                 }
                 else
