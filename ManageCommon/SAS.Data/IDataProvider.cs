@@ -2123,11 +2123,11 @@ namespace SAS.Data
         /// <param name="endtdate">活动结束时间</param>
         /// <param name="status">状态</param>
         string GetActivitiesSearchConditions(int atype, string title, string keyword, DateTime startdate, DateTime endtdate, int status);
-         /// <summary>
+        /// <summary>
         /// 根据条件获取活动信息
         /// </summary>
         DataTable GetActivitiesByConditions(string conditions);
-         /// <summary>
+        /// <summary>
         /// 获取活动信息实体
         /// </summary>
         IDataReader GetActivityInfoReader(int id);
@@ -2139,6 +2139,10 @@ namespace SAS.Data
         /// 批量设置活动类型
         /// </summary>
         bool SetActivityType(string idlist, int typeid);
+        /// <summary>
+        /// 获取淘之购活动信息
+        /// </summary>
+        IDataReader GetTaoActivities();
         #endregion
 
         #region 帮助文档操作 help

@@ -10,7 +10,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="mainbody" Runat="Server">
 <!--内容开始-->
 <div class="cot">
-	<p class="site">您现在的位置：<a title="" href="index.html">淘之购</a> &gt; <a title="" href="chanels_<%=rootcategory.Cid%>.html"><%=rootcategory.Name%></a> &gt; <%=parentcategory.Name%></p>
+	<p class="site">您现在的位置：<a title="" href="index.html">淘之购</a> &gt; <a title="" href="chanels_<%=rootcategory.Cid%>.html"><%=rootcategory.Name%></a> &gt; <a title="" href="goodslist-p-<%=parentcategory.Cid%>.html"><%=parentcategory.Name%></a> &gt; <%=currentcategoryname%></p>
 	<div class="listlt">
 		<div class="listlt1" id="listmu">
 			<h3><%=rootcategory.Name%></h3>
@@ -184,15 +184,6 @@
     }
 
     jQuery(document).ready(function() {
-        jQuery("#list").find(".listt3").click(function() {
-            jQuery("#list").find(".listt4").removeClass().addClass("listt3");
-            jQuery("#list").find(".listt6").removeClass().addClass("listt5");
-            jQuery(this).removeClass().addClass("listt4");
-        });
-        jQuery("#list").find(".listt5").click(function() {
-            jQuery("#list").find(".listt4").removeClass().addClass("listt3");
-            jQuery(this).removeClass().addClass("listt6");
-        });
         jQuery("#listmu").find("ul").hide();
         jQuery("#listmu").find("ul:first").show();
         jQuery("#listmu").find("strong").css("cursor", "pointer").click(function() {

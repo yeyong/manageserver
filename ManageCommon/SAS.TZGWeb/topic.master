@@ -1,0 +1,41 @@
+﻿<%@ Master Language="C#" CodeFile="topic.master.cs" Inherits="mastertopic" %>
+<%@ Import Namespace="SAS.Entity"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="SAS 1.0.0" />
+<meta name="author" content="Sirius Studio Team and Studio sirius UI Team" />
+<meta name="copyright" content="2009-2010 Sirius Studio." />
+<meta name="google-site-verification" content="gfHzZ6zVYWWe5gfJBo_IybOnPbQvFmawfOjw8g4Pi-4" />
+<meta http-equiv="x-ua-compatible" content="ie=7" />
+<title>首页</title>
+<link href="css/comm.css" rel="stylesheet" type="text/css" />
+<asp:ContentPlaceHolder id="styles" runat="server">
+</asp:ContentPlaceHolder>
+<asp:ContentPlaceHolder id="scripts" runat="server">
+</asp:ContentPlaceHolder>
+</head>
+<body>
+<div class="xcot">
+	<p class="xhd">
+		<strong><a target="_blank" title="淘之购" href="<%=therooturl%>"><img alt="淘之购" src="images/logo.gif" /></a></strong>
+		<span>
+			<em>
+			<a target="_blank" class="l_fff" title="" href="<%=mainsiteurl%>">浙商黄页</a> |  <%foreach (System.Data.DataRow dr in subnavs){%><a target="_blank" class="l_fff" title="<%=dr["title"]%>" href="<%=dr["url"]%>"><%=dr["name"]%></a> | <%}%>
+			</em>
+		</span>
+	</p>
+	<div class="xtopic">
+	<!--可放入阿里妈妈专题推广页-->
+	<asp:ContentPlaceHolder id="mainbody" runat="server">
+    </asp:ContentPlaceHolder>
+	</div>
+	<p class="xft mar_top">
+		<span><a class="l_999" title="" href="#">关于淘之购</a> | <a class="l_999" title="" href="#">法律声明</a> | <a class="l_999" title="" href="#">联系我们</a> | <a class="l_999" title="" href="#">网站地图</a> | <a class="l_999" title="" href="#">友情链接</a></span>
+		<span>经营性网站备案号：<%=configinfo.Icp%> Copyright @ 2010 <a class="l_999" title="" href="#">天狼星</a> All Rights Reserved</span>
+	</p>
+</div>
+</body>
+<asp:ContentPlaceHolder id="footer" runat="server"></asp:ContentPlaceHolder>
+</html>

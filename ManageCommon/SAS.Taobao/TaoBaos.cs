@@ -114,8 +114,11 @@ namespace SAS.Taobao
             TaobaokeItemsGetRequest tgr = new TaobaokeItemsGetRequest();
             tgr.Fields = "iid,num_iid,title,nick,pic_url,price,click_url,commission,commission_rate,commission_num,commission_volume,shop_click_url,seller_credit_score,item_location,keyword_click_url";
             tgr.Nick = SAS_USERNICK;
-            tgr.Cid = cid;
             tgr.Keyword = keyword;
+            if (cid >= 0)
+            {
+                tgr.Cid = cid;
+            }            
 
             if (!string.IsNullOrEmpty(startmoney) && !string.IsNullOrEmpty(endmoney))
             {

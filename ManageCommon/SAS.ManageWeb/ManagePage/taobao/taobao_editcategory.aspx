@@ -83,7 +83,7 @@
 	<tr><td class="item_title" colspan="2">相关淘宝类别</td></tr>
 	<tr>
 		<td class="vtop" colspan="2">
-			<div style="overflow: auto;height: 200px;width:70%;border: 1px double #ccc">
+			<div style="overflow: auto;height: 400px;width:70%;border: 1px double #ccc">
 				<yy1:TaoBaoItemCatTree id="TargetFID"  runat="server" HintTitle="提示" HintInfo="设置相关淘宝类别" PageName="advertisement"></yy1:TaoBaoItemCatTree>
 			</div>										
 		</td>
