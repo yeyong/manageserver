@@ -17,7 +17,6 @@ namespace SAS.Logic
     /// </summary>
     public class Advertisements
     {
-
         /// <summary>
         /// 按查询字符串得到广告列表
         /// </summary>
@@ -46,6 +45,91 @@ namespace SAS.Logic
                 adarray[i].Parameters = drs[i]["parameters"].ToString().Trim();
             }
             return adarray;
+        }
+
+        /// <summary>
+        /// 按查询字符串得到广告列表
+        /// </summary>
+        /// <param name="selectstr">查询字符串</param>
+        /// <returns>广告列表</returns>
+        private static AdShowInfo[] GetTaoAdsTable(string selectstr)
+        {
+            DataTable dt = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/TaoAdvertisements") as DataTable;
+
+            if (dt == null)
+            {
+                dt = SAS.Data.DataProvider.Advertisenments.GetAdsTable();
+                SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/TaoAdvertisements", dt);
+            }
+
+            DataRow[] drs = dt.Select(selectstr);
+            AdShowInfo[] adarray = new AdShowInfo[drs.Length];
+
+            for (int i = 0; i < drs.Length; i++)
+            {
+                adarray[i] = new AdShowInfo();
+                adarray[i].Advid = Utils.StrToInt(drs[i]["advid"].ToString(), 0);
+                adarray[i].Displayorder = Utils.StrToInt(drs[i]["addisplayorder"].ToString(), 0);
+                adarray[i].Code = drs[i]["code"].ToString().Trim();
+                adarray[i].Parameters = drs[i]["parameters"].ToString().Trim();
+            }
+            return adarray;
+        }
+        /// <summary>
+        /// 随机获取淘头部广告
+        /// </summary>
+        public static string GetTaoHeaderAd()
+        {
+            string result = "";
+
+            AdShowInfo[] adshowArray = GetAdsTable(GetSelectStr(0, AdType.TaoIndexHeaderAD));
+            if (adshowArray.Length > 0)
+            {
+                int number = new Random().Next(0, adshowArray.Length);
+                result = adshowArray[number].Parameters;
+            }
+            return result;
+        }
+        /// <summary>
+        /// 随机获取淘广告
+        /// </summary>
+        public static string GetTaoRandomAd(int displayorder, AdType adtype)
+        {
+            string result = "";
+
+            AdShowInfo[] adshowArray = GetAdsTable(GetSelectStr(displayorder, adtype));
+            if (adshowArray.Length > 0)
+            {
+                int number = new Random().Next(0, adshowArray.Length);
+                result = adshowArray[number].Parameters;
+            }
+            return result;
+        }
+        /// <summary>
+        /// 获取广告组信息（根据广告类）
+        /// </summary>
+        public static AdShowInfo[] GetAdsByType(int displayorder, AdType adtype)
+        {
+            return GetTaoAdsTable(GetSelectStr(displayorder, adtype));
+        }
+        /// <summary>
+        /// 根据参数生成查询字符串
+        /// </summary>
+        /// <param name="displayorder">广告顺序</param>
+        /// <param name="adtype">广告类型</param>
+        private static string GetSelectStr(int displayorder, AdType adtype)
+        {
+            string typestr = Convert.ToInt16(adtype).ToString();
+            string selectstr = "";
+            if (displayorder >= 0)
+            {
+                selectstr = "adtype='" + typestr + "' AND addisplayorder=" + displayorder;
+            }
+            else
+            {
+                selectstr = "adtype='" + typestr + "'";
+            }
+            return selectstr;
         }
 
         /// <summary>
@@ -462,6 +546,7 @@ namespace SAS.Logic
             SAS.Data.DataProvider.Advertisenments.CreateAd(available, type, displayorder, title, targets, parameters, code, startTime.IndexOf("1900") >= 0 ? "1900-1-1" : startTime, endTime.IndexOf("1900") >= 0 ? "2555-1-1" : endTime);
 
             SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/Advertisements");
+            SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoAdvertisements", true);
         }
 
         /// <summary>
@@ -483,6 +568,7 @@ namespace SAS.Logic
             {
                 SAS.Data.DataProvider.Advertisenments.DeleteAdvertisementList(advIdList);
                 SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/Advertisements");
+                SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoAdvertisements", true);
             }
         }
 
@@ -498,6 +584,7 @@ namespace SAS.Logic
             {
                 int result = SAS.Data.DataProvider.Advertisenments.UpdateAdvertisementAvailable(aidList, available);
                 SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/Advertisements");
+                SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoAdvertisements", true);
                 return result;
             }
             else
@@ -527,6 +614,7 @@ namespace SAS.Logic
 
                 Data.DataProvider.Advertisenments.UpdateAdvertisement(adId, available, type, displayorder, title, targets, parameters, code, startTime, endTime);
                 SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/Advertisements");
+                SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoAdvertisements", true);
             }
         }
 

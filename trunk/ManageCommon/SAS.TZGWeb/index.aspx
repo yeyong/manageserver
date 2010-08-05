@@ -12,11 +12,21 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="mainbody" Runat="Server">
 <div class="cot">
 	<div class="ban mar_top" id="banner">
-		<p class="bantu"><a title="广告一" href="www.zheshangonline.com"><img alt="广告一" src="images/ad/380x260.gif" /></a></p>
+		<p class="bantu"><%if(adlist1.Length>0){if(adlist1[0].Parameters.Split('|').Length>=8){%><a target="_blank" title="<%=adlist1[0].Parameters.Split('|')[5]%>" href="<%=adlist1[0].Parameters.Split('|')[4]%>"><img alt="<%=adlist1[0].Parameters.Split('|')[5]%>" src="<%=adlist1[0].Parameters.Split('|')[1]%>" /></a><%}}%></p>
 		<ul class="banxtu">
-			<li><img rel="www.wumeiwang.com" alt="广告二" src="images/ad/126x86.gif" /></li>
-			<li><img rel="www.baidu.com" alt="广告三" src="images/ad/380x260.gif" /></li>
-			<li><img rel="www.google.com" alt="广告四" src="images/ad/126x86.gif" /></li>
+		<%
+            int adinfo__id = 1;    
+            foreach (AdShowInfo adinfo in adlist1)
+            {
+                if (adinfo__id > 3) break;
+                string[] astr = adinfo.Parameters.Split('|');
+                if (astr.Length < 8) continue;
+		%>
+			<li><img rel="<%=astr[4]%>" alt="<%=astr[5]%>" src="<%=astr[1]%>" /></li>
+			<%
+                adinfo__id++;
+            }
+            %>
 		</ul>
 	</div>
 	<div class="hpin mar_top">
@@ -28,13 +38,13 @@
             {
                 if (ainfo__id > 6) break;
 		%>
-			<li>[<em><%=SAS.Common.Utils.GetStandardDate(ainfo.Begintime)%></em>] <a title="<%=ainfo.Atitle%>" href="actshow-<%=ainfo.Id%>.html"><%=ainfo.Atitle%></a></li>
+			<li>[<em><%=SAS.Common.Utils.GetStandardDate(ainfo.Begintime)%></em>] <a target="_blank" title="<%=ainfo.Atitle%>" href="actshow-<%=ainfo.Id%>.html"><%=ainfo.Atitle%></a></li>
 		<%
                 ainfo__id++;
             }
 		%>
 		</ul>
-		<p class="onead mar_top_5"><a title="" href="#"><img alt="" src="images/ad/223x95.gif" /></a></p>
+		<p class="onead mar_top_5"><%string[] indexad2 = adlist2.Split('|');if(indexad2.Length >=8){%><a target="_blank" title="<%=indexad2[5]%>" href="<%=indexad2[4]%>"><img alt="<%=indexad2[5]%>" src="<%=indexad2[1]%>" /></a><%}%></p>
 	</div>
 </div>
 <div class="cot">
@@ -42,16 +52,16 @@
 		<strong><img alt="优惠活动场" src="images/index_tit1.gif" /></strong>
 		<em><a title="" href="topics.html">查看更多专题&gt;&gt;</a></em>
 		<div class="prefnr">
-			<p><a title="" href="#"><img alt="" src="images/ad/156x243.gif" /></a></p>
-			<p><a title="" href="#"><img alt="" src="images/ad/203x243.gif" /></a></p>
-			<p><a title="" href="#"><img alt="" src="images/ad/192x243.gif" /></a></p>
+			<p><%string[] indexad3 = adlist3.Split('|');if(indexad3.Length >=8){%><a target="_blank" title="<%=indexad3[5]%>" href="<%=indexad3[4]%>"><img alt="<%=indexad3[5]%>" src="<%=indexad3[1]%>" /></a><%}%></p>
+			<p><%string[] indexad4 = adlist4.Split('|');if(indexad4.Length >=8){%><a target="_blank" title="<%=indexad4[5]%>" href="<%=indexad4[4]%>"><img alt="<%=indexad4[5]%>" src="<%=indexad4[1]%>" /></a><%}%></p>
+			<p><%string[] indexad5 = adlist5.Split('|');if(indexad5.Length >=8){%><a target="_blank" title="<%=indexad5[5]%>" href="<%=indexad5[4]%>"><img alt="<%=indexad5[5]%>" src="<%=indexad5[1]%>" /></a><%}%></p>
 			<ul class="prefzi">
 			<%
                 int indextopicinfo__id = 1;	    
                 foreach (TaoBaoTopicInfo indextopicinfo in indextopiclist)
                 {	    
 		    %>
-				<li><a title="<%=indextopicinfo.Title%>" href="topicshow-<%=indextopicinfo.Tid%>.html"><%=indextopicinfo.Title%></a></li>
+				<li><a target="_blank" title="<%=indextopicinfo.Title%>" href="topicshow-<%=indextopicinfo.Tid%>.html"><%=indextopicinfo.Title%></a></li>
 				<%if (indextopicinfo__id % 3 == 0){%><li></li><%}%>
 				<%
                     indextopicinfo__id++;
@@ -62,14 +72,22 @@
 	</div>
 	<div class="twoad" id="twoad">
 		<div id="twoadnr">
-			<div class="con"><a title="" href="#"><img alt="" src="images/ad/218x271.gif" /></a></div>
-			<div class="con"><a title="" href="#"><img alt="" src="images/ad/220x287.gif" /></a></div>
-			<div class="con"><a title="" href="#"><img alt="" src="images/ad/218x271.gif" /></a></div>
+		<%
+		    int adinfo6__id = 1;
+            foreach (AdShowInfo adinfo6 in adlist6)
+            {
+                if (adinfo6__id > 3) break;
+                string[] astr = adinfo6.Parameters.Split('|');
+                if (astr.Length < 8) continue;
+		%>
+			<div class="con"><a target="_blank" title="<%=astr[5]%>" href="<%=astr[4]%>"><img alt="<%=astr[5]%>" src="<%=astr[1]%>" /></a></div>
+		<%
+            adinfo6__id++;
+            }
+		%>
 		</div>
 		<ul id="twoadtit">
-			<li></li>
-			<li></li>
-			<li></li>
+		    <%for(int sumi = adinfo6__id-1;sumi>0;sumi--){%><li></li><%}%>
 		</ul>
 	</div>
 </div>
@@ -86,43 +104,83 @@
 	</div>
 	<div id="likenr">
 		<div class="con">
-			<p class="mar1"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
-			<p class="mar2"><a title="" href="#"><img alt="" src="images/ad/175x340x2.gif" /></a></p>
-			<p class="mar3"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
-			<p class="mar4"><a title="" href="#"><img alt="" src="images/ad/175x340x2.gif" /></a></p>
-			<p class="mar5"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
+		    <%
+		    int adinfo7__id = 1;
+            foreach (AdShowInfo adinfo7 in adlist7)
+            {
+                if (adinfo7__id > 5) break;
+                string[] astr = adinfo7.Parameters.Split('|');
+                if (astr.Length < 8) continue;      
+		    %>
+			<p class="mar<%=adinfo7__id%>"><a target="_blank" title="<%=astr[5]%>" href="<%=astr[4]%>"><img alt="<%=astr[5]%>" src="<%=astr[1]%>" /></a></p>
+			<%
+                adinfo7__id++;
+            }
+			%>
 			<span></span>
 		</div>
 		<div class="con">
-			<p class="mar1"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
-			<p class="mar2"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
-			<p class="mar3"><a title="" href="#"><img alt="" src="images/ad/175x340x2.gif" /></a></p>
-			<p class="mar4"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
-			<p class="mar5"><a title="" href="#"><img alt="" src="images/ad/175x340x2.gif" /></a></p>
+			<%
+		    int adinfo8__id = 1;
+            foreach (AdShowInfo adinfo8 in adlist8)
+            {
+                if (adinfo8__id > 5) break;
+                string[] astr = adinfo8.Parameters.Split('|');
+                if (astr.Length < 8) continue;      
+		    %>
+			<p class="mar<%=adinfo8__id%>"><a target="_blank" title="<%=astr[5]%>" href="<%=astr[4]%>"><img alt="<%=astr[5]%>" src="<%=astr[1]%>" /></a></p>
+			<%
+                adinfo8__id++;
+            }
+			%>
 			<span></span>
 		</div>
 		<div class="con">
-			<p class="mar1"><a title="" href="#"><img alt="" src="images/ad/175x340x2.gif" /></a></p>
-			<p class="mar2"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
-			<p class="mar3"><a title="" href="#"><img alt="" src="images/ad/175x340x2.gif" /></a></p>
-			<p class="mar4"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
-			<p class="mar5"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
+			<%
+		    int adinfo9__id = 1;
+            foreach (AdShowInfo adinfo9 in adlist9)
+            {
+                if (adinfo9__id > 5) break;
+                string[] astr = adinfo9.Parameters.Split('|');
+                if (astr.Length < 8) continue;      
+		    %>
+			<p class="mar<%=adinfo9__id%>"><a target="_blank" title="<%=astr[5]%>" href="<%=astr[4]%>"><img alt="<%=astr[5]%>" src="<%=astr[1]%>" /></a></p>
+			<%
+                adinfo9__id++;
+            }
+			%>
 			<span></span>
 		</div>
 		<div class="con">
-			<p class="mar1"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
-			<p class="mar2"><a title="" href="#"><img alt="" src="images/ad/175x340x2.gif" /></a></p>
-			<p class="mar3"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
-			<p class="mar4"><a title="" href="#"><img alt="" src="images/ad/175x340x2.gif" /></a></p>
-			<p class="mar5"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
+			<%
+		    int adinfo10__id = 1;
+            foreach (AdShowInfo adinfo10 in adlist10)
+            {
+                if (adinfo10__id > 5) break;
+                string[] astr = adinfo10.Parameters.Split('|');
+                if (astr.Length < 8) continue;      
+		    %>
+			<p class="mar<%=adinfo10__id%>"><a target="_blank" title="<%=astr[5]%>" href="<%=astr[4]%>"><img alt="<%=astr[5]%>" src="<%=astr[1]%>" /></a></p>
+			<%
+                adinfo10__id++;
+            }
+			%>
 			<span></span>
 		</div>
 		<div class="con">
-			<p class="mar1"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
-			<p class="mar2"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
-			<p class="mar3"><a title="" href="#"><img alt="" src="images/ad/175x340x2.gif" /></a></p>
-			<p class="mar4"><a title="" href="#"><img alt="" src="images/ad/175x340.gif" /></a></p>
-			<p class="mar5"><a title="" href="#"><img alt="" src="images/ad/175x340x2.gif" /></a></p>
+			<%
+		    int adinfo11__id = 1;
+            foreach (AdShowInfo adinfo11 in adlist11)
+            {
+                if (adinfo11__id > 5) break;
+                string[] astr = adinfo11.Parameters.Split('|');
+                if (astr.Length < 8) continue;      
+		    %>
+			<p class="mar<%=adinfo11__id%>"><a target="_blank" title="<%=astr[5]%>" href="<%=astr[4]%>"><img alt="<%=astr[5]%>" src="<%=astr[1]%>" /></a></p>
+			<%
+                adinfo11__id++;
+            }
+			%>
 			<span></span>
 		</div>
 	</div>
@@ -156,7 +214,7 @@
                     {		    
 			    %>
 					<li>
-						<a title="<%=sinfo.title%>" href="shop_show.shtml">
+						<a target="_blank" title="<%=sinfo.title%>" href="storeshow-<%=sinfo.sid%>.html">
 						<p><img alt="<%=sinfo.title%>" src="<%=shoppic_path + sinfo.pic_path%>" /></p>
 						<span><%=sinfo.title%></span>
 						</a>
@@ -177,20 +235,25 @@
 		</div>
 	</div>
 	<ul class="brand mar_top" id="brand">
-		<li style="background:url(images/ad/218x70.gif) no-repeat; "><a title="" href="list.shtml"></a></li>
-		<li style="background:url(images/ad/218x70.gif) no-repeat; "><a title="" href="list.shtml"></a></li>
-		<li style="background:url(images/ad/218x70.gif) no-repeat; "><a title="" href="list.shtml"></a></li>
-		<li style="background:url(images/ad/218x70.gif) no-repeat; "><a title="" href="list.shtml"></a></li>
-		<li style="background:url(images/ad/218x70.gif) no-repeat; "><a title="" href="list.shtml"></a></li>
-		<li style="background:url(images/ad/218x70.gif) no-repeat; "><a title="" href="list.shtml"></a></li>
-		<li style="background:url(images/ad/218x70.gif) no-repeat; "><a title="" href="list.shtml"></a></li>
-		<li style="background:url(images/ad/218x70.gif) no-repeat; "><a title="" href="list.shtml"></a></li>
+	    <%
+		    int adinfo12__id = 1;
+            foreach (AdShowInfo adinfo12 in adlist11)
+            {
+                if (adinfo12__id > 5) break;
+                string[] astr = adinfo12.Parameters.Split('|');
+                if (astr.Length < 8) continue;      
+		%>
+		<li style="background:url(<%=astr[1]%>) no-repeat; "><a target="_blank" title="<%=astr[5]%>" href="<%=astr[4]%>"></a></li>
+		<%
+                adinfo12__id++;
+            }
+		%>
 	</ul>
 </div>
 <div class="cot">
 	<p class="link mar_top">
 		<strong>友 情链 接</strong>
-		<span><a class="l_666" title="" href="#">浙商黄页</a> | <a class="l_666" title="" href="#">淘宝皇冠店</a> | <a class="l_666" title="" href="#">团购网站大全</a> | <a class="l_666" title="" href="#">浙商黄页</a> | <a class="l_666" title="" href="#">淘宝皇冠店</a> | <a class="l_666" title="" href="#">团购网站大全</a> | <a class="l_666" title="" href="#">浙商黄页</a> | <a class="l_666" title="" href="#">淘宝皇冠店</a> | <a class="l_666" title="" href="#">团购网站大全</a> | <a class="l_666" title="" href="#">浙商黄页</a> | <a class="l_666" title="" href="#">淘宝皇冠店</a> | <a class="l_666" title="" href="#">团购网站大全</a> | <a class="l_666" title="" href="#">浙商黄页</a> | <a class="l_666" title="" href="#">淘宝皇冠店</a> | <a class="l_666" title="" href="#">团购网站大全</a></span>
+		<span><%foreach(FriendLinkInfo finfo in flinklist){%><a class="l_666" target="_blank" title="<%=finfo.name%>" href="<%=finfo.linkurl%>"><%=finfo.name%></a> | <%}%></span>
 		<em></em>
 	</p>
 </div>

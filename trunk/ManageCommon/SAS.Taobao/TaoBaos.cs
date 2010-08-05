@@ -446,9 +446,9 @@ namespace SAS.Taobao
             sinfo.cid = long.Parse(shopinfo.Cid.Trim());
             sinfo.nick = shopinfo.Nick;
             sinfo.title = shopinfo.Title;
-            sinfo.item_score = TypeConverter.ObjectToInt(shopscore.ItemScore, 0);
-            sinfo.service_score = TypeConverter.ObjectToInt(shopscore.ServiceScore, 0);
-            sinfo.delivery_score = TypeConverter.ObjectToInt(shopscore.DeliveryScore, 0);
+            sinfo.item_score = shopscore.ItemScore;
+            sinfo.service_score = shopscore.ServiceScore;
+            sinfo.delivery_score = shopscore.DeliveryScore;
             sinfo.shop_desc = shopinfo.Desc == null ? "" : shopinfo.Desc;
             sinfo.bulletin = shopinfo.Bulletin == null ? "" : shopinfo.Bulletin;
             sinfo.pic_path = shopinfo.PicPath == null ? "" : shopinfo.PicPath;

@@ -126,7 +126,7 @@ namespace SAS.ManageWeb.ManagePage
                     result = "htmlcode|||||||";
                     break;
                 case "word":
-                    result = string.Format("word| | | | {0}|{1}|{2}|", wordlink.Text.Trim(), wordcontent.Text.Trim(), wordfont.Text);
+                    result = string.Format("word| | | |{0}|{1}|{2}|", wordlink.Text.Trim(), wordcontent.Text.Trim(), wordfont.Text);
                     break;
                 case "image":
                     result = string.Format("image|{0}|{1}|{2}|{3}|{4}||", imgsrc.Text.Trim(), imgwidth.Text.Trim(), imgheight.Text.Trim(), imglink.Text.Trim(), imgtitle.Text.Trim());

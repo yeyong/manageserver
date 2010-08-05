@@ -119,9 +119,9 @@ namespace SAS.Taobao.Data
                 sinfo.cid = long.Parse(reader["cid"].ToString());
                 sinfo.nick = reader["nick"].ToString();
                 sinfo.title = reader["title"].ToString();
-                sinfo.item_score = TypeConverter.ObjectToInt(reader["item_score"].ToString());
-                sinfo.service_score = TypeConverter.ObjectToInt(reader["service_score"].ToString());
-                sinfo.delivery_score = TypeConverter.ObjectToInt(reader["delivery_score"].ToString());
+                sinfo.item_score = reader["item_score"].ToString();
+                sinfo.service_score = reader["service_score"].ToString();
+                sinfo.delivery_score = reader["delivery_score"].ToString();
                 sinfo.shop_desc = reader["shop_desc"].ToString();
                 sinfo.bulletin = reader["bulletin"].ToString();
                 sinfo.pic_path = reader["pic_path"].ToString();
@@ -159,9 +159,9 @@ namespace SAS.Taobao.Data
                 sinfo.cid = long.Parse(reader["cid"].ToString());
                 sinfo.nick = reader["nick"].ToString();
                 sinfo.title = reader["title"].ToString();
-                sinfo.item_score = TypeConverter.ObjectToInt(reader["item_score"].ToString());
-                sinfo.service_score = TypeConverter.ObjectToInt(reader["service_score"].ToString());
-                sinfo.delivery_score = TypeConverter.ObjectToInt(reader["delivery_score"].ToString());
+                sinfo.item_score = reader["item_score"].ToString();
+                sinfo.service_score = reader["service_score"].ToString();
+                sinfo.delivery_score = reader["delivery_score"].ToString();
                 sinfo.shop_desc = reader["shop_desc"].ToString();
                 sinfo.bulletin = reader["bulletin"].ToString();
                 sinfo.pic_path = reader["pic_path"].ToString();

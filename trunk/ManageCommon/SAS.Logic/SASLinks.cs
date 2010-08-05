@@ -1,5 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 
+using SAS.Entity;
+
 namespace SAS.Logic
 {
     /// <summary>
@@ -19,7 +21,7 @@ namespace SAS.Logic
         public static int CreateSASLink(int displayOrder, string name, string url, string note, string logo)
         {
             SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/SASLinkList");
-
+            SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/LinkList", true);
             return Data.DataProvider.SASLinks.CreateSASLink(displayOrder, name, url, note, logo);
         }
 
@@ -51,6 +53,20 @@ namespace SAS.Logic
             return Data.DataProvider.SASLinks.UpdateSASLink(id, displayorder, name, url, note, logo);
         }
 
+        /// <summary>
+        /// 获取全部友情链接
+        /// </summary>
+        public static System.Collections.Generic.List<FriendLinkInfo> GetFriendLinks()
+        {
+            System.Collections.Generic.List<FriendLinkInfo> flinks = new System.Collections.Generic.List<FriendLinkInfo>();
+            flinks = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/LinkList") as System.Collections.Generic.List<FriendLinkInfo>;
+            if (flinks == null)
+            {
+                flinks = Data.DataProvider.SASLinks.GetAllLinks();
+                SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/LinkList", flinks);
+            }
+            return flinks;
+        }
 
         /// <summary>
         /// 删除友情链接
@@ -60,7 +76,7 @@ namespace SAS.Logic
         public static int DeleteSASLink(string SASlinkidlist)
         {
             SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/SASLinkList");
-
+            SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/LinkList", true);
             return Data.DataProvider.SASLinks.DeleteSASLink(SASlinkidlist);
         }
     }

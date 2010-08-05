@@ -26,5 +26,9 @@ public partial class activetyshow : TaoBaoPage
             SetMetaRefresh(2, LogicUtils.GetReUrl());
             return;
         }
+
+        pagetitle = ainfo.Seotitle;
+        seokeyword = ainfo.Seokeyword;
+        seodescription = ainfo.Seodesc;
     }
 }

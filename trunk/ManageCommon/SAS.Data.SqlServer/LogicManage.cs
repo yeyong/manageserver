@@ -561,6 +561,14 @@ namespace SAS.Data.SqlServer
                                                 BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
         }
+        /// <summary>
+        /// 获得所有友情链接
+        /// </summary>
+        public IDataReader GetAllLinks()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}frendlink]", DbFields.FRIENDLINK, BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text,commandText);
+        }
         #endregion
     }
 }

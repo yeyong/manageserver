@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.master" CodeFile="goodscategory.aspx.cs" Inherits="goodscategory" %>
 <%@ Import Namespace="SAS.Entity" %>
+<%@ Import Namespace="SAS.Common" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="styles" Runat="Server">
 <link href="css/channels.css" rel="stylesheet" type="text/css" />
 </asp:Content>
@@ -20,16 +21,17 @@
 				<strong><%=subcinfo.Name%></strong>				
 				<p>
 				<%
-                    foreach (string subsubcinfo in subcinfo.Cg_relateclass.Split(','))
+                    foreach (string subsubcinfo in Utils.CutString(subcinfo.Cg_relateclass,0,206).Split(','))
                     {
-                        if (subsubcinfo != "")
-                        {
+                        if (subsubcinfo == "") continue;
+                        string[] thesubstr = subsubcinfo.Split('|');
+                        if (thesubstr.Length < 2) continue;
 				 %>
-				    <a title="<%=subsubcinfo.Split('|')[1]%>" href="goodslist-<%=subsubcinfo.Split('|')[0]%>.html"><%=subsubcinfo.Split('|')[1]%></a>  
+				    <a title="<%=thesubstr[1]%>" href="goodslist-<%=thesubstr[0]%>.html"><%=thesubstr[1]%></a>  
 				 <%
-                        } 
+                         
                     }
-                 %>
+                 %><a title="<%=subcinfo.Name%>" href="goodslist-p-<%=subcinfo.Cid%>.html">更多...</a>
 				 </p>
 			</li>
 			<%

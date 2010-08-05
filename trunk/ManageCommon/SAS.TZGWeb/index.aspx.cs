@@ -29,13 +29,67 @@ public partial class index : TaoBaoPage
     /// 活动列表
     /// </summary>
     protected List<ActivityInfo> taoactlist = new List<ActivityInfo>();
+    /// <summary>
+    /// 友情链接列表
+    /// </summary>
+    protected List<FriendLinkInfo> flinklist = new List<FriendLinkInfo>();
+    /// <summary>
+    /// 1号广告
+    /// </summary>
+    protected AdShowInfo[] adlist1 = Advertisements.GetAdsByType(1, AdType.TaoIndexAD);
+    /// <summary>
+    /// 2号广告
+    /// </summary>
+    protected string adlist2 = Advertisements.GetTaoRandomAd(2, AdType.TaoIndexAD);
+    /// <summary>
+    /// 3号广告
+    /// </summary>
+    protected string adlist3 = Advertisements.GetTaoRandomAd(3, AdType.TaoIndexAD);
+    /// <summary>
+    /// 4号广告
+    /// </summary>
+    protected string adlist4 = Advertisements.GetTaoRandomAd(4, AdType.TaoIndexAD);
+    /// <summary>
+    /// 5号广告
+    /// </summary>
+    protected string adlist5 = Advertisements.GetTaoRandomAd(5, AdType.TaoIndexAD);
+    /// <summary>
+    /// 6号广告
+    /// </summary>
+    protected AdShowInfo[] adlist6 = Advertisements.GetAdsByType(6, AdType.TaoIndexAD);
+    /// <summary>
+    /// 7号广告
+    /// </summary>
+    protected AdShowInfo[] adlist7 = Advertisements.GetAdsByType(7, AdType.TaoIndexAD);
+    /// <summary>
+    /// 8号广告
+    /// </summary>
+    protected AdShowInfo[] adlist8 = Advertisements.GetAdsByType(8, AdType.TaoIndexAD);
+    /// <summary>
+    /// 9号广告
+    /// </summary>
+    protected AdShowInfo[] adlist9 = Advertisements.GetAdsByType(9, AdType.TaoIndexAD);
+    /// <summary>
+    /// 10号广告
+    /// </summary>
+    protected AdShowInfo[] adlist10 = Advertisements.GetAdsByType(10, AdType.TaoIndexAD);
+    /// <summary>
+    /// 11号广告
+    /// </summary>
+    protected AdShowInfo[] adlist11 = Advertisements.GetAdsByType(11, AdType.TaoIndexAD);
+    /// <summary>
+    /// 12号广告
+    /// </summary>
+    protected AdShowInfo[] adlist12 = Advertisements.GetAdsByType(12, AdType.TaoIndexAD);
 
     protected override void ShowPage()
     {
-        pagetitle = "商之源";
+        pagetitle = "淘之源-淘之购导购平台首页";
+        seodescription = "淘之购，浙商黄页旗下购物导航站，提供专业的淘宝购物导航。";
         ginfolist = TaoBaos.GetGoodsBrandList(Convert.ToInt16(TaoChanel.Index), 0);
         shoplist = TaoBaos.GetTaoBaoShopListByRecommend(Convert.ToInt16(TaoChanel.Index), 0);
         indextopiclist = TaoBaos.GetTaoBaoTopicList(Convert.ToInt16(TaoChanel.Index));
         taoactlist = Activities.GetTaoActivities();
+        flinklist = SASLinks.GetFriendLinks();
     }
 }

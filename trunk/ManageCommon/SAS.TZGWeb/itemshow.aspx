@@ -13,21 +13,24 @@
     {
 %>
 <div class="cot">
-	<p class="site">您现在的位置：<a title="淘之购" href="index.html">淘之购</a> &gt; <a title="<%=rootinfo.Name%>" href="chanels_<%=rootinfo.Cid%>.html"><%=rootinfo.Name%></a> &gt; <a title="<%=subcinfo.Name%>" href="goodslist-p-<%=subcinfo.Cid%>.html"><%=subcinfo.Name%></a> &gt; <%=iteminfo.Title%></p>
+	<p class="site">您现在的位置：<a title="淘之购" href="index.html">淘之购</a> &gt; <%if(subcinfo!=null){%><a title="<%=rootinfo.Name%>" href="chanels_<%=rootinfo.Cid%>.html"><%=rootinfo.Name%></a> &gt; <a title="<%=subcinfo.Name%>" href="goodslist-p-<%=subcinfo.Cid%>.html"><%=subcinfo.Name%></a> &gt; <%}%><%=iteminfo.Title%></p>
 	<div class="listlt">
 		<div class="listlt1">
 			<h3>相关类别</h3>
 			<ul class="listlt1nr">
 			<%
-    foreach (string subcate in subcinfo.Cg_relateclass.Split(','))
-    {
-        if (subcate == "") continue;
-        string[] substr = subcate.Split('|');
-        if (substr.Length < 2) continue;    
+                if (subcinfo != null)
+                {
+                    foreach (string subcate in subcinfo.Cg_relateclass.Split(','))
+                    {
+                        if (subcate == "") continue;
+                        string[] substr = subcate.Split('|');
+                        if (substr.Length < 2) continue;    
 		    %>
 				<li><a title="<%=substr[0]%>" href="goodslist-<%=substr[0]%>.html"><%=substr[1]%></a></li>
 			<%
-    }
+                }
+                }
 			%>
 			</ul>
 		</div>
@@ -56,7 +59,7 @@
 		</div>
 		<div class="showcon mar_top">
 			<strong class="showcont">商品介绍</strong>
-			<%=iteminfo.Desc%>
+			<div class="showcon2"><%=iteminfo.Desc%></div>
 		</div>
 		<div class="shownr mar_top">
 			<strong>商品所在店铺的其他商品</strong>

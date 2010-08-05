@@ -135,6 +135,7 @@ namespace SAS.Data.DataProvider
             {
                 list.Add(LoadSingleNoticeInfo(reader));
             }
+            reader.Close();
             return list.ToArray();
 
         }

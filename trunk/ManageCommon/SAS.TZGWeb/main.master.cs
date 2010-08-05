@@ -30,6 +30,14 @@ public partial class main : System.Web.UI.MasterPage
     /// </summary>
     protected DataRow[] subnavs = Navs.GetNavigationByPid(4);
     /// <summary>
+    /// 头部广告
+    /// </summary>
+    protected string taoindexheadad = Advertisements.GetTaoHeaderAd();
+    /// <summary>
+    /// 淘头部广告
+    /// </summary>
+    protected AdShowInfo[] ainfolist = Advertisements.GetAdsByType(1, AdType.TaoIndexHeaderAD);
+    /// <summary>
     /// 当前页面名称
     /// </summary>
     protected string currentpagename = "";

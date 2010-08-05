@@ -63,14 +63,16 @@ public partial class itemshow : TaoBaoPage
 
         subcinfo = TaoBaos.GetCategoryInfoByCache(iteminfo.Cid.ToString());
 
-        if (subcinfo == null)
+        if (subcinfo != null)
         {
-            AddErrLine("您的页面正在跳转，请稍等！");
-            SetMetaRefresh(2, tkitem.ClickUrl);
-            return;
-        }
+            //AddErrLine("您的页面正在跳转，请稍等！");
+            //SetMetaRefresh(2, tkitem.ClickUrl);
+            //return;
 
-        rootinfo = TaoBaos.GetCategoryInfoByCache(subcinfo.Parentid);
+
+            rootinfo = TaoBaos.GetCategoryInfoByCache(subcinfo.Parentid);
+            sameclassproducts = TaoBaos.GetRecommendProduct(Convert.ToInt16(TaoChanel.Detail), subcinfo.Cid);
+        }
         shopname = iteminfo.Nick;
         shopscore = "100";
         shopurl = tkitem.ShopClickUrl;
@@ -82,7 +84,7 @@ public partial class itemshow : TaoBaoPage
             shopname = sdinfo.title;
             shopproducts = sdinfo.relategoods;
             shopscore = (decimal.Round(decimal.Parse((((double)sdinfo.good_num / (double)sdinfo.total_num) * 100).ToString()), 2)).ToString();
-            shopurl = "shopshow-" + sdinfo.sid + ".html";
+            shopurl = "storeshow-" + sdinfo.sid + ".html";
             shopaddress = sdinfo.shop_province + sdinfo.shop_city;
         }
 
@@ -91,9 +93,7 @@ public partial class itemshow : TaoBaoPage
             AddErrLine("商品详请错误！");
             SetMetaRefresh(2, LogicUtils.GetReUrl());
             return;
-        }
-
-        sameclassproducts = TaoBaos.GetRecommendProduct(Convert.ToInt16(TaoChanel.Detail), subcinfo.Cid);
+        }        
 
         string viewinfo = iid + "|" + Utils.UrlEncode(iteminfo.Title) + "|" + iteminfo.Price + "|" + iteminfo.PicUrl;
         string lastviewids = "," + Utils.GetCookie("goodviews") + ",";

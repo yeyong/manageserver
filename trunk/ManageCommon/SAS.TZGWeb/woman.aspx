@@ -10,9 +10,19 @@
 <div class="cot">
 	<div class="trend mar_top_10" id="trend">
 		<div id="womnr">
-			<div class="con"><a title="" href="#"><img alt="" src="images/ad/960x260.gif" /></a></div>
-			<div class="con"><a title="" href="#"><img alt="" src="images/ad/960x260.gif" /></a></div>
-			<div class="con"><a title="" href="#"><img alt="" src="images/ad/960x260.gif" /></a></div>
+		    <%
+            int adinfo__id = 1;
+            foreach (AdShowInfo adinfo in adlist1)
+            {
+                if (adinfo__id > 3) break;
+                string[] astr = adinfo.Parameters.Split('|');
+                if (astr.Length < 8) continue;
+		    %>
+			<div class="con"><a title="<%=astr[5]%>" href="<%=astr[4]%>"><img alt="<%=astr[5]%>" src="<%=astr[1]%>" /></a></div>
+			<%
+                adinfo__id++;
+            }
+            %>
 		</div>
 		<ul id="womt">
 			<li></li>
@@ -21,12 +31,19 @@
 		</ul>
 	</div>
 	<ul class="woman2 mar_top">
-		<li><a title="" href="#"><img alt="" src="images/ad/167x305.gif" /></a></li>
-		<li><a title="" href="#"><img alt="" src="images/ad/157x305.gif" /></a></li>
-		<li><a title="" href="#"><img alt="" src="images/ad/156x305.gif" /></a></li>
-		<li><a title="" href="#"><img alt="" src="images/ad/162x305.gif" /></a></li>
-		<li><a title="" href="#"><img alt="" src="images/ad/155x305.gif" /></a></li>
-		<li><a title="" href="#"><img alt="" src="images/ad/161x305.gif" /></a></li>
+	    <%
+            int adinfo2__id = 1;
+            foreach (AdShowInfo adinfo2 in adlist2)
+            {
+                if (adinfo2__id > 6) break;
+                string[] astr = adinfo2.Parameters.Split('|');
+                if (astr.Length < 8) continue;
+		%>
+		<li><a title="<%=astr[5]%>" href="<%=astr[4]%>"><img alt="<%=astr[5]%>" src="<%=astr[1]%>" /></a></li>
+		<%
+            adinfo2__id++;
+            }
+		%>
 	</ul>
 	<div class="trdth mar_top" id="trdth">
 		<div class="trdtht">

@@ -14,9 +14,9 @@ namespace SAS.Entity
         private long _cid;
         private string _nick;
         private string _title;
-        private int _item_score;
-        private int _service_score;
-        private int _delivery_score;
+        private string _item_score;
+        private string _service_score;
+        private string _delivery_score;
         private string _shop_desc;
         private string _bulletin;
         private string _pic_path;
@@ -80,7 +80,7 @@ namespace SAS.Entity
         /// <summary>
         /// 商品描述评分
         /// </summary>
-        public int item_score
+        public string item_score
         {
             set { _item_score = value; }
             get { return _item_score; }
@@ -88,7 +88,7 @@ namespace SAS.Entity
         /// <summary>
         /// 服务态度评分
         /// </summary>
-        public int service_score
+        public string service_score
         {
             set { _service_score = value; }
             get { return _service_score; }
@@ -96,7 +96,7 @@ namespace SAS.Entity
         /// <summary>
         /// 发货速度评分
         /// </summary>
-        public int delivery_score
+        public string delivery_score
         {
             set { _delivery_score = value; }
             get { return _delivery_score; }

@@ -248,7 +248,11 @@
 .star9{ background-position:0 -132px;}
 .star10{ background-position:0 -148px;}
 .star11{ background-position:0 -164px;}
-.shopcard{ width:330px; height:205px; margin-left:30px; border:1px solid #000; display:inline; float:right;}
+.shopcard{ width:310px; height:160px; margin-right:10px; border:1px solid #eee; display:inline; float:right;}
+.shopcard img{ width:310px; height:160px; float:left;}
+.shopcot{ width:928px; height:auto; border:1px solid #eee; padding:15px; overflow:hidden; float:left;}
+.shopcont{ width:928px; height:30px; line-height:30px; font-size:14px; text-align:left; border-bottom:1px solid #eee; margin-bottom:10px; display:inline; float:left;}
+.shopcon{ width:928px; height:auto; overflow:hidden; float:left;}
 /*商品详细*/
 .showtu{ width:310px; height:310px; float:left;}
 .showtu img{ width:310px; height:310px; float:left;}
@@ -277,8 +281,9 @@
 .showcot2 li img{ width:120px; height:120px; float:left;}
 .showcot2 li span{ width:120px; height:40px; line-height:20px; overflow:hidden; float:left;}
 .showcot2 li b{ width:120px; height:20px; line-height:20px; color:#e00; font-weight:normal; float:left;}
-.showcon{ width:740px; height:auto; padding:10px 0; border-top:1px solid #eee; float:left;}
+.showcon{ width:740px; height:auto; padding:10px 0; border-top:1px solid #eee; overflow:hidden; float:left;}
 .showcont{ width:740px; height:25px; line-height:25px; font-size:14px; float:left;}
+.showcon2{ width:740px; height:auto; overflow:hidden; float:left;}
 /*品牌详细*/
 .brdswl{ width:750px; height:auto; float:left;}
 .brdswnr{ width:708px; height:auto; border:1px solid #eee; padding:15px; float:left;}
