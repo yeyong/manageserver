@@ -1,5 +1,6 @@
 ﻿<%@ Master Language="C#" CodeFile="main.master.cs" Inherits="main" %>
 <%@ Import Namespace="SAS.Entity"%>
+<%@ Import Namespace="SAS.Common"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -35,7 +36,7 @@
             }
               %>
 		<li class="nav3"><img alt="new" src="images/new.gif" /></li>
-		<li class="nav_tipic"><a title="" href="topicshow.shtml"><img alt="七夕节" src="images/ad/145x60.gif" /></a></li>
+		<li class="nav_tipic"><%string[] indexadstr = taoindexheadad.Split('|');if(indexadstr.Length >=8){%><a target="_blank" title="<%=indexadstr[5]%>" href="<%=indexadstr[4]%>"><img alt="<%=indexadstr[5]%>" src="<%=indexadstr[1]%>" /></a><%}%></li>
 	</ul>
 	<div class="hd2">
 		<div class="hd2nr" id="menu">
@@ -55,7 +56,7 @@
 						</a>
 						<p class="cot">
 							<span class="cotlt">
-								<b class="tit"><i class="titlt">选择分类：</i><i class="titrt"><a title="" href="chanels_<%=parentcinfo.Cid%>.html">进入频道&gt;&gt;</a></i></b>
+								<b class="tit"><i class="titlt">选择分类：</i><i class="titrt"><a title="<%=parentcinfo.Name%>" href="chanels_<%=parentcinfo.Cid%>.html">进入频道&gt;&gt;</a></i></b>
 								<%
                         int subcinfo__id = 1;
                         foreach (CategoryInfo subcinfo in SAS.Taobao.TaoBaos.GetCategoryListByParentID(parentcinfo.Cid))
@@ -65,16 +66,18 @@
 								<b class="tit1"><%=subcinfo.Name%></b>
 								<em class="type">
 							<%
-                            foreach (string subsubcinfo in subcinfo.Cg_relateclass.Split(','))
-                            {
-                                if (subsubcinfo != "")
+                                int cutnum = 104;
+                                if (subcinfo__id == 3) cutnum = 175;
+                                foreach (string subsubcinfo in Utils.CutString(subcinfo.Cg_relateclass, 0, cutnum).Split(','))
                                 {
+                                    if (subsubcinfo == "") continue;
+                                    string[] subsubstr = subsubcinfo.Split('|');
+                                    if (subsubstr.Length < 2) continue;
 				             %>
-				                <a title="<%=subsubcinfo.Split('|')[1]%>" href="goodslist-<%=subsubcinfo.Split('|')[0]%>.html"><%=subsubcinfo.Split('|')[1]%></a> | 
+				                <a title="<%=subsubstr[1]%>" href="goodslist-<%=subsubstr[0]%>.html"><%=subsubstr[1]%></a> | 
 				             <%
                                 }
-                            }
-                             %>
+                             %><a title="<%=subcinfo.Name%>" href="goodslist-p-<%=subcinfo.Cid%>.html">更多...</a>
                                 </em>
 								<%if (subcinfo__id < 3){%><i class="line"></i><%}%>
 								<%
@@ -109,7 +112,16 @@
 			</form>
 			<p class="tdrec">
 				<strong>今日推荐：</strong>
-				<a class="l_fcc556" title="打造森女系低碳美人" href="show.shtml">打造森女系低碳美人</a>
+				<%
+                    foreach (AdShowInfo ainfo in ainfolist)
+                    {
+                        string[] adinfostr = ainfo.Parameters.Split('|');
+                        if (adinfostr.Length < 8) continue;
+				%>
+				<a class="l_fcc556" target="_blank" title="<%=adinfostr[5]%>" href="<%=adinfostr[4]%>"><%=adinfostr[5]%></a>
+				<%
+                    }
+				%>
 			</p>
 		</div>
 	</div>
@@ -129,6 +141,7 @@
     var pagename = '<%=currentpagename%>';
     if(pagename == "index")jQuery("#menu").menudrop(1);
     else jQuery("#menu").menudrop();
+    <%=configinfo.Statcode%>
 </script>
 <asp:ContentPlaceHolder id="footer" runat="server"></asp:ContentPlaceHolder>
 

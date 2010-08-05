@@ -15,6 +15,10 @@ public partial class credit : TaoBaoPage
 {
     protected List<CategoryInfo> classlist = TaoBaos.GetCategoryListByParentID(0);
     protected int classcount = 0;
+    /// <summary>
+    /// 1号广告
+    /// </summary>
+    protected AdShowInfo[] adlist1 = Advertisements.GetAdsByType(1, AdType.TaoCredit);
 
     protected override void ShowPage()
     {

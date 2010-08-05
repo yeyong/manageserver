@@ -2097,6 +2097,10 @@ namespace SAS.Data
         /// <param name="logo"></param>
         /// <returns></returns>
         int UpdateSASLink(int id, int displayOrder, string name, string url, string note, string logo);
+        /// <summary>
+        /// 获取全部友情链接
+        /// </summary>
+        IDataReader GetAllLinks();
         #endregion
 
         #region 活动专题操作

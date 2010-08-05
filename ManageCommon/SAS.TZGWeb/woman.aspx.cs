@@ -15,6 +15,14 @@ using SAS.Entity.Domain;
 public partial class woman : TaoBaoPage
 {
     protected List<RecommendWithProduct> rwplist = new List<RecommendWithProduct>();
+    /// <summary>
+    /// 1号广告
+    /// </summary>
+    protected AdShowInfo[] adlist1 = Advertisements.GetAdsByType(1, AdType.TaoWomen);
+    /// <summary>
+    /// 2号广告
+    /// </summary>
+    protected AdShowInfo[] adlist2 = Advertisements.GetAdsByType(2, AdType.TaoWomen);
 
     protected override void ShowPage()
     {

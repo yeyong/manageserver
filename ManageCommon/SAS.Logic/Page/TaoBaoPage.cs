@@ -755,10 +755,12 @@ namespace SAS.Logic
                 m_processtime = 0;
             }
 
-            Page.Title = pagetitle + taobaoconfig.SeoTitle;
+            Page.Title = pagetitle + "-" + taobaoconfig.SeoTitle;
             HtmlMeta keywords = new HtmlMeta();
             keywords.Name = "keywords";
-            keywords.Content = seokeyword + taobaoconfig.SeoKeyword;
+            if (seokeyword == "") seokeyword = taobaoconfig.SeoKeyword;
+            else seokeyword = seokeyword + "," + taobaoconfig.SeoKeyword;
+            keywords.Content = seokeyword;
             Page.Header.Controls.AddAt(0, keywords);
             HtmlMeta description = new HtmlMeta();
             description.Name = "description";

@@ -15,6 +15,22 @@ using SAS.Entity.Domain;
 public partial class trend : TaoBaoPage
 {
     protected List<RecommendWithProduct> rwplist = new List<RecommendWithProduct>();
+    /// <summary>
+    /// 1号广告
+    /// </summary>
+    protected AdShowInfo[] adlist1 = Advertisements.GetAdsByType(1, AdType.TaoTrend);
+    /// <summary>
+    /// 2号广告
+    /// </summary>
+    protected string adlist2 = Advertisements.GetTaoRandomAd(2, AdType.TaoTrend);
+    /// <summary>
+    /// 3号广告
+    /// </summary>
+    protected AdShowInfo[] adlist3 = Advertisements.GetAdsByType(3, AdType.TaoTrend);
+    /// <summary>
+    /// 4号广告
+    /// </summary>
+    protected string adlist4 = Advertisements.GetTaoRandomAd(4, AdType.TaoTrend);
 
     protected override void ShowPage()
     {

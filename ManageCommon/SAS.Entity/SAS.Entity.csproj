@@ -115,6 +115,7 @@
     <Compile Include="EnTypeEnum.cs" />
     <Compile Include="ForumInfo.cs" />
     <Compile Include="ForumSpecialUserPower.cs" />
+    <Compile Include="FriendLinkInfo.cs" />
     <Compile Include="Goods\CategoryInfo.cs" />
     <Compile Include="Goods\GoodsBrandInfo.cs" />
     <Compile Include="Goods\RecommendInfo.cs" />

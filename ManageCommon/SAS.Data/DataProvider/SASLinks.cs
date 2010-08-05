@@ -60,5 +60,27 @@ namespace SAS.Data.DataProvider
         {
             return DatabaseProvider.GetInstance().DeleteSASLink(SASlinkidlist);
         }
+
+        /// <summary>
+        /// 获取全部友情链接
+        /// </summary>
+        public static System.Collections.Generic.List<FriendLinkInfo> GetAllLinks()
+        {
+            System.Collections.Generic.List<FriendLinkInfo> flist = new System.Collections.Generic.List<FriendLinkInfo>();
+            IDataReader reader = DatabaseProvider.GetInstance().GetAllLinks();
+            while (reader.Read())
+            {
+                FriendLinkInfo finfo = new FriendLinkInfo();
+                finfo.id = TypeConverter.ObjectToInt(reader["id"]);
+                finfo.displayorder = TypeConverter.ObjectToInt(reader["displayorder"]);
+                finfo.name = reader["name"].ToString();
+                finfo.linkurl = reader["linkurl"].ToString();
+                finfo.note = reader["note"].ToString();
+                finfo.logo = reader["logo"].ToString();
+                flist.Add(finfo);
+            }
+            reader.Close();
+            return flist;
+        }
     }
 }

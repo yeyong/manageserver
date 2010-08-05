@@ -47,6 +47,7 @@ namespace SAS.Data.DataProvider
                 reader.Close();
                 return _cataloginfo;
             }
+            reader.Close();
             return null;
         }
 

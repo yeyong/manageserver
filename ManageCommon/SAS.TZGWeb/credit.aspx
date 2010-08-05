@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.master" CodeFile="credit.aspx.cs" Inherits="credit" %>
-
+<%@ Import Namespace="SAS.Entity"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="styles" Runat="Server">
 <link href="css/channels.css" rel="stylesheet" type="text/css" />
 </asp:Content>
@@ -8,20 +8,19 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="mainbody" Runat="Server">
 <div class="cot">
 	<ul class="credit">
-		<li class="cred1"><a title="" href="#"><img src="images/ad/232x110.gif" /></a></li>
-		<li class="cred2"></li>
-		<li class="cred1"><a title="" href="#"><img src="images/ad/232x110.gif" /></a></li>
-		<li class="cred2"></li>
-		<li class="cred1"><a title="" href="#"><img src="images/ad/232x110.gif" /></a></li>
-		<li class="cred2"></li>
-		<li class="cred1"><a title="" href="#"><img src="images/ad/232x110.gif" /></a></li>
-		<li class="cred1"><a title="" href="#"><img src="images/ad/232x110.gif" /></a></li>
-		<li class="cred2"></li>
-		<li class="cred1"><a title="" href="#"><img src="images/ad/232x110.gif" /></a></li>
-		<li class="cred2"></li>
-		<li class="cred1"><a title="" href="#"><img src="images/ad/232x110.gif" /></a></li>
-		<li class="cred2"></li>
-		<li class="cred1"><a title="" href="#"><img src="images/ad/232x110.gif" /></a></li>
+	 <%
+            int adinfo__id = 1;
+            foreach (AdShowInfo adinfo in adlist1)
+            {
+                string[] astr = adinfo.Parameters.Split('|');
+                if (astr.Length < 8) continue;
+     %>
+		<li class="cred1"><a title="<%=astr[5]%>" href="<%=astr[4]%>"><img alt="<%=astr[5]%>" src="<%=astr[1]%>" /></a></li>
+		<%if(adinfo__id%3>0){%><li class="cred2"></li><%}%>		
+	<%
+            adinfo__id++;
+         }
+	%>
 	</ul>
 	<%
         int cinfo__id = 1;
@@ -37,7 +36,7 @@
                 {
             %>
 			<li class="<%=sinfo__id==1?"credcot2":"credcot1"%>">
-				<a title="<%=sinfo.title%>" href="shop_show.shtml">
+				<a target="_blank" title="<%=sinfo.title%>" href="storeshow-<%=sinfo.sid%>.html">
 				<em class="tu"><%=sinfo__id%></em>
 				<b><img alt="<%=sinfo.title%>" src="<%=shoppic_path + sinfo.pic_path%>"/></b>
 				<strong><%=sinfo.title%></strong>

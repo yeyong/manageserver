@@ -10,25 +10,42 @@
 <div class="cot">
 	<div class="trend mar_top_10" id="trend">
 		<div id="trendnr">
-			<div class="con"><a title="" href="#"><img alt="" src="images/ad/960x260.gif" /></a></div>
-			<div class="con"><a title="" href="#"><img alt="" src="images/ad/960x260.gif" /></a></div>
-			<div class="con"><a title="" href="#"><img alt="" src="images/ad/960x260.gif" /></a></div>
+		    <%
+            int adinfo__id = 1;
+            foreach (AdShowInfo adinfo in adlist1)
+            {
+                if (adinfo__id > 3) break;
+                string[] astr = adinfo.Parameters.Split('|');
+                if (astr.Length < 8) continue;
+		    %>
+			<div class="con"><a title="<%=astr[5]%>" href="<%=astr[4]%>"><img alt="<%=astr[5]%>" src="<%=astr[1]%>" /></a></div>
+			<%
+                adinfo__id++;
+            }
+            %>
 		</div>
 		<ul id="trendt">
-			<li></li>
-			<li></li>
-			<li></li>
+			<%for(int sumi = adinfo__id-1;sumi>0;sumi--){%><li></li><%}%>
 		</ul>
 	</div>
 	<div class="trdtwo mar_top">
-		<p class="trdtlt"><a title="" href="#"><img alt="" src="images/ad/313x275.gif" /></a></p>
+		<p class="trdtlt"><%string[] indexad2 = adlist2.Split('|');if(indexad2.Length >=8){%><a title="<%=indexad2[5]%>" href="<%=indexad2[4]%>"><img alt="<%=indexad2[5]%>" src="<%=indexad2[1]%>" /></a><%}%></p>
 		<ul class="trdtrt">
-			<li><a title="" href="#"><img alt="" src="images/ad/199x137.gif" /></a></li>
-			<li><a title="" href="#"><img alt="" src="images/ad/199x137.gif" /></a></li>
-			<li><a title="" href="#"><img alt="" src="images/ad/199x137.gif" /></a></li>
-			<li><a title="" href="#"><img alt="" src="images/ad/199x137.gif" /></a></li>
+		<%
+            int adinfo3__id = 1;
+            foreach (AdShowInfo adinfo3 in adlist3)
+            {
+                if (adinfo3__id > 4) break;
+                string[] astr = adinfo3.Parameters.Split('|');
+                if (astr.Length < 8) continue;
+		    %>
+			<li><a title="<%=astr[5]%>" href="<%=astr[4]%>"><img alt="<%=astr[5]%>" src="<%=astr[1]%>" /></a></li>
+			<%
+                adinfo3__id++;
+            }
+			%>
 		</ul>
-		<p class="trdtrt2"><a title="" href="#"><img alt="" src="images/ad/230x275.gif" /></a></p>
+		<p class="trdtrt2"><%string[] indexad4 = adlist4.Split('|');if(indexad4.Length >=8){%><a title="<%=indexad4[5]%>" href="<%=indexad4[4]%>"><img alt="<%=indexad4[5]%>" src="<%=indexad4[1]%>" /></a><%}%></p>
 	</div>
 	<div class="trdth mar_top" id="trdth">
 		<div class="trdtht">
