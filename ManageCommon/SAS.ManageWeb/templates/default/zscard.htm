@@ -1,4 +1,4 @@
-﻿<%template _comheader%>
+<%template _comheader%>
 <div class="cot">
 	<!--左边 begin-->
 	<div class="zshylt mar_top_8">
@@ -10,7 +10,7 @@
 			<dt><b>按行业类别选择：</b></dt>
 			<dd>
 				<%loop (DataRow) catainfo cataloglist%>
-				<span class="zshy1zt"><a href="zsmp-{catainfo[id]}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-{ordertype}-{keyword}.html" class="l_666" title="{catainfo[name]}"><%getsubstring({catainfo[name]},16,"")%>({catainfo[companycount]})</a></span>
+				<span class="zshy1zt"><a href="zscard-{catainfo[id]}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-{ordertype}-{keyword}.html" class="l_666" title="{catainfo[name]}"><%getsubstring({catainfo[name]},16,"")%>({catainfo[companycount]})</a></span>
 				<%/loop%>
 			</dd>
 		</dl>
@@ -25,7 +25,7 @@
 					<span class="zshynrt2">
 						<em class="zshynrt6">共 <b class="f_e00101">{companycount}</b> 条 {pageid}/{pagecount}</em>
 						<em class="zshynrt6">
-							<a title="上一页" href="zsmp-{prevpage}-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-{ordertype}-{keyword}.html" class="l_666"><i><img src="templates/{templatepath}/images/icon/arrow6.gif" /></i></a>
+							<a title="上一页" href="zscard-{prevpage}-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-{ordertype}-{keyword}.html" class="l_666"><i><img src="templates/{templatepath}/images/icon/arrow6.gif" /></i></a>
 							<a title="下一页" href="zsmp-{nextpage}-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-{ordertype}-{keyword}.html" class="l_666">
 							<i>下一页</i>
 							<i><img src="templates/{templatepath}/images/icon/arrow1.gif" /></i>

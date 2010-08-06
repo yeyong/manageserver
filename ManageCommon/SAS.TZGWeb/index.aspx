@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.master" CodeFile="index.aspx.cs" Inherits="index" %>
 <%@ Import Namespace="SAS.Entity"%>
+<%@ Import Namespace="SAS.Common" %>
 <asp:Content ID="Content0" ContentPlaceHolderID="styles" runat="server">
 <link href="css/index.css" rel="stylesheet" type="text/css" />
 </asp:Content>
@@ -191,7 +192,7 @@
         foreach (GoodsBrandInfo ginfo in ginfolist)
         {
 	%>
-		<li><a title="<%=ginfo.bname%>" href="<%=ginfo.id%>"><img alt="<%=ginfo.bname%>" src="<%=ginfo.logo%>" /></a></li>
+		<li><a title="<%=ginfo.bname%>" href="goodssearch-s-<%=Utils.UrlEncode(ginfo.bname)%>.html"><img alt="<%=ginfo.bname%>" src="<%=ginfo.logo%>" /></a></li>
 	<%
         }
     %>
@@ -199,7 +200,7 @@
 </div>
 <div class="cot">
 	<div class="three">
-		<p class="threead mar_top"><a title="" href="#"><img alt="" src="images/ad/220x287.gif" /></a></p>
+		<p class="threead mar_top"><%string[] indexad12 = adlist12.Split('|');if(indexad12.Length >=8){%><a target="_blank" title="<%=indexad12[5]%>" href="<%=indexad12[4]%>"><img alt="<%=indexad12[5]%>" src="<%=indexad12[1]%>" /></a><%}%></p>
 		<div class="crown mar_top mar_left">
 			<p class="crowntit">
 				<strong><img alt="皇冠店铺" src="images/index_tit3.gif" /></strong>
@@ -236,16 +237,16 @@
 	</div>
 	<ul class="brand mar_top" id="brand">
 	    <%
-		    int adinfo12__id = 1;
-            foreach (AdShowInfo adinfo12 in adlist11)
+		    int adinfo13__id = 1;
+            foreach (AdShowInfo adinfo13 in adlist11)
             {
-                if (adinfo12__id > 5) break;
-                string[] astr = adinfo12.Parameters.Split('|');
+                if (adinfo13__id > 5) break;
+                string[] astr = adinfo13.Parameters.Split('|');
                 if (astr.Length < 8) continue;      
 		%>
 		<li style="background:url(<%=astr[1]%>) no-repeat; "><a target="_blank" title="<%=astr[5]%>" href="<%=astr[4]%>"></a></li>
 		<%
-                adinfo12__id++;
+                adinfo13__id++;
             }
 		%>
 	</ul>

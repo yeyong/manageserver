@@ -27,5 +27,8 @@ public partial class woman : TaoBaoPage
     protected override void ShowPage()
     {
         rwplist = TaoBaos.GetProductWithRecommend(Convert.ToInt16(TaoChanel.Woman));
+        pagetitle = "女人馆-女人购物天堂";
+        seokeyword = "女人馆,女人购物,潮流女人";
+        seodescription = "女人馆，淘之购特色导购栏目，荟萃时下流行新品。";
     }
 }

@@ -507,6 +507,13 @@ namespace SAS.Taobao
             return Data.DbProvider.GetInstance().GetTaoBaoShopCondition(shoptitle, shopnick, province, city, startscore, endscore, startcredit, endcredit, startrate, endrate);
         }
         /// <summary>
+        /// 获取全部淘宝店铺
+        /// </summary>
+        public static SAS.Common.Generic.List<ShopDetailInfo> GetAllTaoBaoShops()
+        {
+            return DTOProvider.GetTaoBaoShopList(Data.DbProvider.GetInstance().GetAllTaoBaoShop());
+        }
+        /// <summary>
         /// 根据条件获取淘宝店铺数量
         /// </summary>
         public static int GetTaoBaoShopCountByCondition(string conditions)

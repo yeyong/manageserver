@@ -75,9 +75,22 @@ public partial class itemsearch : TaoBaoPage
         }
 
         string startmoneystr = startmoney > 0 ? startmoney.ToString() : "";
-        string endmoneystr = endmoney > 0 ? endmoney.ToString() : ""; 
-        itemlistitems = TaoBaos.GetItemList(-1, Utils.RemoveHtml(keyword.Trim()), startmoneystr, endmoneystr, "", "", "", "", "", "", pagesize, pageid, sortstr, out itemcount);
+        string endmoneystr = endmoney > 0 ? endmoney.ToString() : "";
+        try
+        {
+            itemlistitems = TaoBaos.GetItemList(-1, Utils.RemoveHtml(keyword.Trim()), startmoneystr, endmoneystr, "", "", "", "", "", "", pagesize, pageid, sortstr, out itemcount);
+        }
+        catch
+        {
+            AddErrLine("您的页面正在跳转！");
+            SetMetaRefresh(2, string.Format("http://search8.taobao.com/browse/search_auction.htm?q={0}&pid={1}&search_type=auction&commend=all&at_topsearch=1&unid={2}", searchkey, taobaoconfig.UserID, taobaoconfig.AppKey));
+            return;
+        }
         SetConditionAndPage();
+
+        pagetitle = string.Format("{0}-{0}商品搜索结果{1}", keyword, pageid > 0 ? pageid.ToString() : "");
+        seokeyword = string.Format("{0}商品搜索,{0}商品列表,{0}商品集合,{0}", keyword);
+        seodescription = string.Format("{0}商品搜索结果,{0}商品导购与推荐。", keyword);
     }
 
     /// <summary>

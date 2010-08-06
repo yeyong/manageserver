@@ -35,5 +35,8 @@ public partial class trend : TaoBaoPage
     protected override void ShowPage()
     {
         rwplist = TaoBaos.GetProductWithRecommend(Convert.ToInt16(TaoChanel.Trend));
+        pagetitle = "潮货汇-潮流时尚新品";
+        seokeyword = "潮货汇,时尚新品,潮流新品";
+        seodescription = "潮货汇，淘之购特色导购栏目，荟萃时下流行新品。";
     }
 }

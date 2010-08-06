@@ -27,6 +27,27 @@ public partial class chanelinfo : TaoBaoPage
     protected List<GoodsBrandInfo> cbrandlist = new List<GoodsBrandInfo>();
     protected List<CategoryInfo> csubclasslist = new List<CategoryInfo>();
 
+    /// <summary>
+    /// 1号广告
+    /// </summary>
+    protected string adlist1 = "";
+    /// <summary>
+    /// 2号广告
+    /// </summary>
+    protected string adlist2 = "";
+    /// <summary>
+    /// 3号广告
+    /// </summary>
+    protected string adlist3 = "";
+    /// <summary>
+    /// 4号广告
+    /// </summary>
+    protected string adlist4 = "";
+    /// <summary>
+    /// 5号广告
+    /// </summary>
+    protected string adlist5 = "";
+
     protected override void ShowPage()
     {
         crootinfo = TaoBaos.GetChanelInfoByCache(chanelid);
@@ -40,5 +61,15 @@ public partial class chanelinfo : TaoBaoPage
 
         cbrandlist = TaoBaos.GetGoodsBrandListByClass(chanelid);
         csubclasslist = TaoBaos.GetCategoryListByParentID(chanelid);
+
+        adlist1 = Advertisements.GetTaoRandomAd(chanelid * 10 + 1, AdType.TaoChanelAd);
+        adlist2 = Advertisements.GetTaoRandomAd(chanelid * 10 + 2, AdType.TaoChanelAd);
+        adlist3 = Advertisements.GetTaoRandomAd(chanelid * 10 + 3, AdType.TaoChanelAd);
+        adlist4 = Advertisements.GetTaoRandomAd(chanelid * 10 + 4, AdType.TaoChanelAd);
+        adlist5 = Advertisements.GetTaoRandomAd(chanelid * 10 + 5, AdType.TaoChanelAd);
+
+        pagetitle = crootinfo.Name + "频道-" + crootinfo.Name + "类型商品导购";
+        seokeyword = string.Format("{0}频道,{0}类别,{0}商品,{0}导购,{0}类目,{0}搜索", crootinfo.Name);
+        seodescription = string.Format("{0}频道，淘之购提供专业的{0}淘宝商品导购与商品推荐。", crootinfo.Name);
     }
 }

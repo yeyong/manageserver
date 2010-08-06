@@ -41,6 +41,7 @@ namespace SAS.Entity
                 case 16: return "淘之购女人馆广告";
                 case 17: return "淘之购商品列表页广告";
                 case 18: return "淘之购商品详细页广告";
+                case 19: return "淘之购类别频道广告";
                 default: return "";
             }
         }
@@ -348,7 +349,11 @@ namespace SAS.Entity
         /// <summary>
         /// 淘之购商品详细页广告
         /// </summary>
-        TaoItemDetail = 18
+        TaoItemDetail = 18,
+        /// <summary>
+        /// 淘之购类别频道广告
+        /// </summary>
+        TaoChanelAd = 19
     }
     /// <summary>
     /// 淘之购相关频道

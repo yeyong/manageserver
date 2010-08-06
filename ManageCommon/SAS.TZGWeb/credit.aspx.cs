@@ -22,7 +22,9 @@ public partial class credit : TaoBaoPage
 
     protected override void ShowPage()
     {
-        pagetitle = "信誉店铺导购";
+        pagetitle = "信誉铺-信誉店铺导购";
+        seokeyword = "信誉,淘之购信誉铺,淘宝店铺,淘宝信誉店铺,网上商铺,皇冠店铺";
+        seodescription = "淘宝店铺导购，提供高信誉高信用等级的店铺推荐。";
         classcount = classlist.Count;
     }
 

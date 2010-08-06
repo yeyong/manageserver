@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.master" CodeFile="itemlist.aspx.cs" Inherits="itemlist" %>
+<%@ Import Namespace="SAS.Common"%>
 <%@ Import Namespace="SAS.Entity" %>
 <%@ Import Namespace="SAS.Entity.Domain" %>
 <%@ Register TagPrefix="sas" TagName="viewgood" Src="~/usercontrol/viewgoods.ascx"%>
@@ -65,7 +66,7 @@
                     foreach (GoodsBrandInfo ginfo in itemlistgoodsbrands)
                     {        
 			    %>
-				<li><a title="<%=ginfo.bname%>" href="list.shtml"><%=ginfo.bname%>/<%=ginfo.spell%></a></li>
+				<li><a title="<%=ginfo.bname%>" href="goodssearch-s-<%=Utils.UrlEncode(ginfo.bname)%>.html"><%=ginfo.bname%>/<%=ginfo.spell%></a></li>
 				<%
                     }
                 %>
@@ -152,7 +153,7 @@
 				<em class="listnrtu"><img alt="" src="<%=tkinfo.PicUrl%>_b.jpg" /></em>
 				<em class="listnrt"><%=tkinfo.Title%></em>
 				</a>
-				<p>已售出：<i class="zi"><%=tkinfo.CommissionNum%></i>件</p>
+				<p>本月售出：<i class="zi"><%=tkinfo.CommissionNum%></i>件</p>
 				<strong>￥<%=tkinfo.Price%></strong>
 				<b>所在地：<%=tkinfo.ItemLocation%><br/>掌柜：<a title="<%=tkinfo.Nick%>" href="<%=tkinfo.ShopClickUrl%>"><%=tkinfo.Nick%></a></b>
 				<ins>所属店铺信誉度：<br />

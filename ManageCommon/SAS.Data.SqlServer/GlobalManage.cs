@@ -2297,7 +2297,7 @@ namespace SAS.Data.SqlServer
         /// </summary>
         public IDataReader GetTaoActivities()
         {
-            string commandText = string.Format("SELECT {0} FROM [{1}activity] WHERE ([atype] = 0 OR [atype] = {2}) AND [enabled] = 1", DbFields.ACTIVITY, BaseConfigs.GetTablePrefix, Convert.ToInt16(ActivityType.TaobaoActivity));
+            string commandText = string.Format("SELECT {0} FROM [{1}activity] WHERE ([atype] = 0 OR [atype] = {2}) AND [enabled] = 1 ORDER BY [begintime] DESC", DbFields.ACTIVITY, BaseConfigs.GetTablePrefix, Convert.ToInt16(ActivityType.TaobaoActivity));
             return DbHelper.ExecuteReader(CommandType.Text, commandText);
         }
         #endregion

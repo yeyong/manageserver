@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 
 using SAS.Config;
+using SAS.Data;
 
 namespace SAS.Cache
 {
@@ -98,11 +99,18 @@ namespace SAS.Cache
         private void UpdateCacheDependency(string key)
         {
             SqlCommand cmd = this.GetUpdateCommand(key);
-            using (cmd.Connection)
+            try
             {
-                cmd.Connection.Open();
-                cmd.Prepare();
-                cmd.ExecuteNonQuery();
+                using (cmd.Connection)
+                {
+                    cmd.Connection.Open();
+                    cmd.Prepare();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch
+            {
+                GC.Collect();
             }
         }
 
@@ -115,11 +123,18 @@ namespace SAS.Cache
         {
             SqlCommand cmd = this.GetSelectCommand(key);
             SqlCacheDependency sqlCacheDependency = new SqlCacheDependency(cmd);
-            using (cmd.Connection)
+            try
             {
-                cmd.Connection.Open();
-                cmd.Prepare();
-                cmd.ExecuteNonQuery();
+                using (cmd.Connection)
+                {
+                    cmd.Connection.Open();
+                    cmd.Prepare();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch
+            {
+                GC.Collect();
             }
             return sqlCacheDependency;
         }
