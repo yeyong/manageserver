@@ -80,12 +80,17 @@ public partial class index : TaoBaoPage
     /// <summary>
     /// 12号广告
     /// </summary>
-    protected AdShowInfo[] adlist12 = Advertisements.GetAdsByType(12, AdType.TaoIndexAD);
+    protected string adlist12 = Advertisements.GetTaoRandomAd(12, AdType.TaoIndexAD);
+    /// <summary>
+    /// 13号广告
+    /// </summary>
+    protected AdShowInfo[] adlist13 = Advertisements.GetAdsByType(13, AdType.TaoIndexAD);
 
     protected override void ShowPage()
     {
         pagetitle = "淘之源-淘之购导购平台首页";
-        seodescription = "淘之购，浙商黄页旗下购物导航站，提供专业的淘宝购物导航。";
+        seokeyword = "淘之源,商品导购";
+        seodescription = "";
         ginfolist = TaoBaos.GetGoodsBrandList(Convert.ToInt16(TaoChanel.Index), 0);
         shoplist = TaoBaos.GetTaoBaoShopListByRecommend(Convert.ToInt16(TaoChanel.Index), 0);
         indextopiclist = TaoBaos.GetTaoBaoTopicList(Convert.ToInt16(TaoChanel.Index));

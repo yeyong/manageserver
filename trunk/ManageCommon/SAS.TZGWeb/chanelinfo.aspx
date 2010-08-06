@@ -51,12 +51,12 @@
     %>
 	</ul>
 	<div class="chalad mar_top">
-		<p class="chalad1"><a title="" href="list.shtml"><img alt="" src="images/ad/220x287.gif" /></a></p>
+		<p class="chalad1"><%string[] indexad1 = adlist1.Split('|');if(indexad1.Length >=8){%><a target="_blank" title="<%=indexad1[5]%>" href="<%=indexad1[4]%>"><img alt="<%=indexad1[5]%>" src="<%=indexad1[1]%>" /></a><%}%></p>
 		<ul class="chalad2">
-			<li><a title="" href="list.shtml"><img alt="" src="images/ad/196x268.gif" /></a></li>
-			<li><a title="" href="list.shtml"><img alt="" src="images/ad/195x268.gif" /></a></li>
-			<li><a title="" href="list.shtml"><img alt="" src="images/ad/177x268.gif" /></a></li>
-			<li><a title="" href="list.shtml"><img alt="" src="images/ad/176x268.gif" /></a></li>
+			<li><%string[] indexad2 = adlist2.Split('|');if(indexad2.Length >=8){%><a target="_blank" title="<%=indexad2[5]%>" href="<%=indexad2[4]%>"><img alt="<%=indexad2[5]%>" src="<%=indexad2[1]%>" /></a><%}%></li>
+			<li><%string[] indexad3 = adlist3.Split('|');if(indexad3.Length >=8){%><a target="_blank" title="<%=indexad3[5]%>" href="<%=indexad3[4]%>"><img alt="<%=indexad3[5]%>" src="<%=indexad3[1]%>" /></a><%}%></li>
+			<li><%string[] indexad4 = adlist4.Split('|');if(indexad4.Length >=8){%><a target="_blank" title="<%=indexad4[5]%>" href="<%=indexad4[4]%>"><img alt="<%=indexad4[5]%>" src="<%=indexad4[1]%>" /></a><%}%></li>
+			<li><%string[] indexad5 = adlist5.Split('|');if(indexad5.Length >=8){%><a target="_blank" title="<%=indexad5[5]%>" href="<%=indexad5[4]%>"><img alt="<%=indexad5[5]%>" src="<%=indexad5[1]%>" /></a><%}%></li>
 		</ul>
 	</div>
 	<div class="trdth mar_top" id="chalprd">

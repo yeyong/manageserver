@@ -162,6 +162,11 @@ namespace SAS.ManageWeb.ManagePage
             Response.Redirect("../global/global_usergrid.aspx?username=" + Username.Text.Trim());
         }
 
+        private void UpdateTaoSiteMap_Click(object sender, EventArgs e)
+        {
+            SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoSiteMap", true);
+        }
+
         #region Web 窗体设计器生成的代码
 
         protected override void OnInit(EventArgs e)
@@ -178,6 +183,7 @@ namespace SAS.ManageWeb.ManagePage
             this.UpdateCache.Click += new EventHandler(this.UpdateCache_Click);
             this.CreateTemplate.Click += new EventHandler(this.CreateTemplate_Click);
             this.UpdateForumStatistics.Click += new EventHandler(this.UpdateForumStatistics_Click);
+            this.UpdateTaoSiteMap.Click += new EventHandler(UpdateTaoSiteMap_Click);
             //装入有效的模板信息项
             foreach (DataRow dr in AdminTemplates.GetAllTemplateList(Utils.GetMapPath(@"..\..\templates\")).Rows)
             {

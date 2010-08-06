@@ -26,6 +26,10 @@ public partial class shopshow : TaoBaoPage
             SetMetaRefresh(2, LogicUtils.GetReUrl());
             return;
         }
+
+        pagetitle = string.Format("{0}-{0}店铺详细介绍", sinfo.title);
+        seokeyword = string.Format("{0}介绍,{0},{1}", sinfo.title, sinfo.nick);
+        seodescription = string.Format("{0}店铺详细介绍。{1}。", sinfo.title, Utils.CutString(Utils.RemoveHtml(sinfo.shop_desc), 60));
     }
 
     protected string Resore(string scores)

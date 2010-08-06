@@ -11,7 +11,7 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="mainbody" Runat="Server">
 <div class="cot">
 	<sas:viewgood runat="server" ID="viewgoods" />
-	<div class="listrt mar_top" id="list">
+	<div class="listrt mar_top" id="list" <%if(itemcount==0){%>style="display:none;"<%}%>>
 		<strong class="listrtit">约有 <em class="f_f00"><%=itemcount%></em> 件商品符合“<em class="f_f00"><%=keyword%></em>”的查询结果</strong>
 		<div class="listtit">
 			<div class="listtnr">
@@ -47,7 +47,7 @@
 				<em class="listnrtu"><img alt="" src="<%=tkinfo.PicUrl%>_b.jpg" /></em>
 				<em class="listnrt"><%=Utils.RemoveHtml(tkinfo.Title)%></em>
 				</a>
-				<p>已售出：<i class="zi"><%=tkinfo.CommissionNum%></i>件</p>
+				<p>本月售出：<i class="zi"><%=tkinfo.CommissionNum%></i>件</p>
 				<strong>￥<%=tkinfo.Price%></strong>
 				<b>所在地：<%=tkinfo.ItemLocation%><br/>掌柜：<a title="<%=tkinfo.Nick%>" href="<%=tkinfo.ShopClickUrl%>"><%=tkinfo.Nick%></a></b>
 				<ins>所属店铺信誉度：<br />
@@ -61,11 +61,11 @@
 			<%=pagenumbers%>
 		</p>
 	</div>
-	<div class="listrt" style="display:none;">
-		<strong class="listrtit">约有 <em class="f_f00">0</em> 件商品符合“<em class="f_f00">T恤</em>”的查询结果</strong>
+	<div class="listrt" <%if(itemcount!=0){%>style="display:none;"<%}%>>
+		<strong class="listrtit">约有 <em class="f_f00">0</em> 件商品符合“<em class="f_f00"><%=keyword%></em>”的查询结果</strong>
 		<p class="seachlt"><img alt="" src="images/soso_tu1.gif" /></p>
 		<p class="seachrt">
-			<strong>很抱歉，没有找到与“<em class="f_f00">T恤</em>”相关的宝贝</strong>
+			<strong>很抱歉，没有找到与“<em class="f_f00"><%=keyword%></em>”相关的宝贝</strong>
 			<span class="mar_top">建议您：</span>
 			<span>1. 看看输入的文字是否有误</span>
 			<span>2. 去掉可能不必要的字词，如“的”、“什么”等</span>

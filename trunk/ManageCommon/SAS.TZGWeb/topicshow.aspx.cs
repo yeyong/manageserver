@@ -28,5 +28,8 @@ public partial class topicshow : TaoBaoPage
         }
 
         pagetitle = tinfo.Title;
+        pagetitle = string.Format("{0}", tinfo.Title);
+        seokeyword = string.Format("{0}介绍,{0}", tinfo.Title);
+        seodescription = string.Format("{0}商品展区。", tinfo.Title);
     }
 }

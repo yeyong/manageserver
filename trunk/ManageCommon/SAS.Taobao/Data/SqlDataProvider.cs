@@ -364,6 +364,14 @@ namespace SAS.Taobao.Data
             return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText), 0);
         }
         /// <summary>
+        /// 获取全部淘宝店铺
+        /// </summary>
+        public IDataReader GetAllTaoBaoShop()
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}taobaoshop]", DbFields.SHOPDETAIL, BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText);
+        }
+        /// <summary>
         /// 根据店铺ID集合获取店铺信息集合
         /// </summary>
         public IDataReader GetTaoBaoShopList(string ids)

@@ -42,6 +42,7 @@ public partial class main : System.Web.UI.MasterPage
     /// </summary>
     protected string currentpagename = "";
     protected GeneralConfigInfo configinfo = GeneralConfigs.GetConfig();
+    protected List<HelpInfo> helplist = Helps.GetTaoIndexHelp();
 
     protected void Page_Load(object sender, EventArgs e)
     {

@@ -125,8 +125,8 @@
         <tr>
             <td colspan="3">
                 <asp:LinkButton ID="UpdateCache" CssClass="ManagerButton" runat="server" Text="<span>更新缓存</span>"></asp:LinkButton>
-                <asp:LinkButton ID="UpdateForumStatistics" CssClass="ManagerButton" runat="server"
-                    Text="<span>更新站点统计</span>"></asp:LinkButton>
+                <asp:LinkButton ID="UpdateForumStatistics" CssClass="ManagerButton" runat="server" Text="<span>更新站点统计</span>"></asp:LinkButton>
+                <asp:LinkButton ID="UpdateTaoSiteMap" CssClass="ManagerButton" runat="server" Text="<span>更新淘之购站点地图</span>"></asp:LinkButton>
             </td>
         </tr>
     </table>

@@ -91,7 +91,7 @@
                                     foreach (GoodsBrandInfo goodbinfo in SAS.Taobao.TaoBaos.GetGoodsBrandListByClass(parentcinfo.Cid))
                                     {
                                 %>
-								<em class="bra"><a title="<%=goodbinfo.bname%>" href="list.shtml"><%=goodbinfo.spell%></a></em>
+								<em class="bra"><a title="<%=goodbinfo.bname%>" href='goodssearch-s-<%=Utils.UrlEncode(goodbinfo.bname)%>.html'><%=goodbinfo.spell%></a></em>
 								<%
                                     }
                                 %>
@@ -132,8 +132,8 @@
 	<div class="ftnr">
 		<strong><a title="" href="#"><img alt="" src="images/foot_logo.gif" /></a></strong>
 		<span class="line"></span>
-		<p><a class="l_fff" title="" href="#">关于淘之购</a> | <a class="l_fff" title="" href="#">法律声明</a> | <a class="l_fff" title="" href="#">联系我们</a> | <a class="l_fff" title="" href="#">网站地图</a> | <a class="l_fff" title="" href="#">友情链接</a></p>
-		<p>网站备案号：浙<%=configinfo.Icp%> Copyright @ 2010 <a class="l_fff" title="" href="#">天狼星</a> All Rights Reserved</p>
+		<p><%foreach(HelpInfo helpinfo in helplist){%><a class="l_fff" title="<%=helpinfo.Title%>" href="<%=mainsiteurl%>help-<%=helpinfo.Id%>.html"><%=helpinfo.Title%></a> | <%}%><a target="_blank" class="l_fff" title="" href="<%=mainsiteurl%>/sitemap.html">网站地图</a></p>
+		<p>网站备案号：<%=configinfo.Icp%> Copyright @ 2010 <a class="l_fff" title="" href="#">天狼星</a> All Rights Reserved</p>
 	</div>
 </div>
 </body>

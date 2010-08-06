@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.master" AutoEventWireup="true" CodeFile="brand.aspx.cs" Inherits="brand" %>
-
+<%@ Import Namespace="SAS.Common"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="styles" Runat="Server">
 <link href="css/channels.css" rel="stylesheet" type="text/css" />
 </asp:Content>
@@ -29,7 +29,7 @@
                 foreach (SAS.Entity.GoodsBrandInfo ginfo in SAS.Taobao.TaoBaos.GetGoodsBrandListByClass(cinfo.Cid))
                 {
             %>
-			<li class="xbrdnr1"><a title="<%=ginfo.bname%>" href="list.shtml"><img alt="<%=ginfo.bname%>" src="<%=ginfo.logo%>" /></a></li>
+			<li class="xbrdnr1"><a title="<%=ginfo.bname%>" href="goodssearch-s-<%=Utils.UrlEncode(ginfo.bname)%>.html"><img alt="<%=ginfo.bname%>" src="<%=ginfo.logo%>" /></a></li>
 			<%
                     if (ginfo__id % 11 > 0)
                     {

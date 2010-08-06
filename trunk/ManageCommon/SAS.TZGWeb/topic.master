@@ -32,7 +32,7 @@
     </asp:ContentPlaceHolder>
 	</div>
 	<p class="xft mar_top">
-		<span><a class="l_999" title="" href="#">关于淘之购</a> | <a class="l_999" title="" href="#">法律声明</a> | <a class="l_999" title="" href="#">联系我们</a> | <a class="l_999" title="" href="#">网站地图</a> | <a class="l_999" title="" href="#">友情链接</a></span>
+		<span><a class="l_999" title="" href="#">关于淘之购</a> | <a class="l_999" title="" href="#">法律声明</a> | <a class="l_999" title="" href="#">联系我们</a> | <a class="l_999" title="" href="#">网站地图</a></span>
 		<span>经营性网站备案号：<%=configinfo.Icp%> Copyright @ 2010 <a class="l_999" title="" href="#">天狼星</a> All Rights Reserved</span>
 	</p>
 </div>
