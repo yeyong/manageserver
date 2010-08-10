@@ -52,6 +52,7 @@
     <Compile Include="Comments.cs" />
     <Compile Include="Companies.cs" />
     <Compile Include="CompaniesStats.cs" />
+    <Compile Include="Feeds.cs" />
     <Compile Include="Helps.cs" />
     <Compile Include="Page\AdminPage.cs">
       <SubType>ASPXCodeBehind</SubType>

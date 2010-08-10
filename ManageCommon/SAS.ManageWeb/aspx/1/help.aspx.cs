@@ -45,6 +45,9 @@ namespace SAS.ManageWeb
             helptype.PrimaryKey = new DataColumn[] { helptype.Columns["id"] };
             helpindex = helptype.Rows.IndexOf(helptype.Rows.Find(helpindex));
 
+            pagetitle = currenthelp.Title;
+            UpdateMetaInfo(currenthelp.Title + ",浙商帮助", Utils.CutString(Utils.RemoveHtml(currenthelp.Message), 0, 60), "");
+
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
 
             string loadscript = "\r\n " + "jQuery(document).ready(function() {"

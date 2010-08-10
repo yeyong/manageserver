@@ -29,6 +29,9 @@ namespace SAS.ManageWeb
                 return;
             }
 
+            pagetitle = announceinfo.Title;
+            UpdateMetaInfo(announceinfo.Title, config.Seodescription + Utils.CutString(Utils.RemoveHtml(announceinfo.Message), 0, 60), "");
+
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
 
             string loadscript = "\r\n " + "jQuery(document).ready(function() {"

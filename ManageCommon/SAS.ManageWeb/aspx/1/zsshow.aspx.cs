@@ -49,8 +49,8 @@ namespace SAS.ManageWeb
             if (page_err > 0) return;
 
             pagetitle = "浙商黄页|" + companyshowinfo.En_name;
-            string m_keyword = companyshowinfo.ProvinceName + "," + companyshowinfo.CityName + "," + companyshowinfo.DistrictName + "," + companyshowinfo.En_name + "," + companyshowinfo.En_mail + "," + companyshowinfo.En_main.Trim(',') + "," + config.Seokeywords;
-            string m_desc = config.Seodescription + Utils.CutString(Utils.RemoveHtml(companyshowinfo.En_desc), 0, 60);
+            string m_keyword = companyshowinfo.En_main.Trim(',');
+            string m_desc = Utils.CutString(Utils.RemoveHtml(companyshowinfo.En_desc), 0, 60);
             UpdateMetaInfo(m_keyword.Trim().Trim(','), m_desc.Trim().Trim(','), "");
 
             if (ispost)
