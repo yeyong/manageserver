@@ -68,6 +68,7 @@ namespace SAS.ManageWeb
 
         protected override void ShowPage()
         {
+            pagetitle = "企业状态查询";
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
             getParm = Utils.RemoveHtml(getParm.Trim());
             SetConditionAndPage();

@@ -38,6 +38,7 @@ namespace SAS.ManageWeb
         protected override void ShowPage()
         {
             pagetitle = "企业图片式名片";
+            
             if (qycardid == -1)
             {
                 AddErrLine("无效的企业名片ID");
@@ -50,7 +51,7 @@ namespace SAS.ManageWeb
                 AddErrLine("不存在的企业名片");
                 return;
             }
-
+            UpdateMetaInfo(companyinfo.En_name + "," + companyinfo.En_phone, Utils.CutString(Utils.RemoveHtml(companyinfo.En_desc), 0, 60), "");
             if (companyinfo.Configid == 0) cardconfigid = 1;
 
             CardConfigInfo cci = CardConfigs.GetCardConfigCacheInfo(cardconfigid);

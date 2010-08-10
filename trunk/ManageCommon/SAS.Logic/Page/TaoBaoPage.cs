@@ -760,7 +760,7 @@ namespace SAS.Logic
             keywords.Name = "keywords";
             if (seokeyword == "") seokeyword = taobaoconfig.SeoKeyword;
             else seokeyword = seokeyword + "," + taobaoconfig.SeoKeyword;
-            keywords.Content = seokeyword;
+            keywords.Content = seokeyword.Replace("\"", " ");
             Page.Header.Controls.AddAt(0, keywords);
             HtmlMeta description = new HtmlMeta();
             description.Name = "description";

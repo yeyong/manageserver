@@ -88,7 +88,7 @@ public partial class itemsearch : TaoBaoPage
         }
         SetConditionAndPage();
 
-        pagetitle = string.Format("{0}-{0}商品搜索结果{1}", keyword, pageid > 0 ? pageid.ToString() : "");
+        pagetitle = string.Format("{0}-{0}商品搜索结果{1}", keyword, pageid > 1 ? "(" + pageid.ToString() + ")" : "");
         seokeyword = string.Format("{0}商品搜索,{0}商品列表,{0}商品集合,{0}", keyword);
         seodescription = string.Format("{0}商品搜索结果,{0}商品导购与推荐。", keyword);
     }

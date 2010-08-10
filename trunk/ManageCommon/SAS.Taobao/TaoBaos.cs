@@ -306,7 +306,7 @@ namespace SAS.Taobao
         /// </summary>
         public static CategoryInfo GetCategoryInfoByCache(string sid)
         {
-            return GetVaildCategoryList().Find(new Predicate<CategoryInfo>(delegate(CategoryInfo cinfo) { return cinfo.Cg_relateclass.Contains(sid + "|"); }));
+            return GetVaildCategoryList().Find(new Predicate<CategoryInfo>(delegate(CategoryInfo cinfo) { return ("," + cinfo.Cg_relateclass).Contains("," + sid + "|"); }));
         }
         /// <summary>
         /// 获取有效类别集合（根据父级）

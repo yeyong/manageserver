@@ -109,7 +109,7 @@ public partial class itemlist : TaoBaoPage
             return;
         }
         string tempstr = "," + parentcategory.Cg_relateclass;
-        currentcategoryname = Utils.CutString(tempstr, tempstr.IndexOf('|', tempstr.IndexOf("," + cid + "|", 0)) + 1, tempstr.IndexOf(',', tempstr.IndexOf('|', tempstr.IndexOf("," + cid + "|", 0))) - tempstr.IndexOf('|', tempstr.IndexOf("," + cid + "|", 0)) - 1);
+        if (tempstr.Trim().Trim(',').Length > 2) currentcategoryname = Utils.CutString(tempstr, tempstr.IndexOf('|', tempstr.IndexOf("," + cid + "|", 0)) + 1, tempstr.IndexOf(',', tempstr.IndexOf('|', tempstr.IndexOf("," + cid + "|", 0))) - tempstr.IndexOf('|', tempstr.IndexOf("," + cid + "|", 0)) - 1);
         itemlistcategories = TaoBaos.GetCategoryListByParentID(rootcategory.Cid);
         itemlistgoodsbrands = TaoBaos.GetGoodsBrandListByClass(rootcategory.Cid);
 
@@ -145,7 +145,7 @@ public partial class itemlist : TaoBaoPage
         SetConditionAndPage();
 
         string takestr = pid > 0 ? parentcategory.Name : currentcategoryname;
-        pagetitle = string.Format("{0}-{0}商品列表{1}", takestr, pageid > 0 ? pageid.ToString() : "");
+        pagetitle = string.Format("{0}-{0}商品列表{1}", takestr, pageid > 1 ? "(" + pageid.ToString() + ")" : "");
         seokeyword = string.Format("{0}商品搜索,{0}商品列表,{0}商品集合,{0}", takestr);
         seodescription = string.Format("{0}商品列表,{0}商品导购与推荐。", takestr);
     }

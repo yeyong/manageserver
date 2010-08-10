@@ -91,4 +91,17 @@ namespace SAS.Web.UI
             return sitemapstr;
         }
     }
+
+    public class ZheSitemapPage : Page
+    {
+        private GeneralConfigInfo config = GeneralConfigs.GetConfig();
+
+        public ZheSitemapPage()
+        {
+            System.Web.HttpContext.Current.Response.ContentType = "application/xml";
+            System.Web.HttpContext.Current.Response.AppendHeader("Last-Modified", DateTime.Now.ToString("r"));
+            System.Web.HttpContext.Current.Response.Write(Feeds.GetSASSitemap(config.Sitemapttl));
+            System.Web.HttpContext.Current.Response.End();
+        }
+    }
 }
