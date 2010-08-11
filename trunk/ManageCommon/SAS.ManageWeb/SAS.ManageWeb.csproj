@@ -1795,6 +1795,7 @@
     <Content Include="templates\default\images\an2.jpg" />
     <Content Include="templates\default\images\an3.jpg" />
     <Content Include="templates\default\images\an4.jpg" />
+    <Content Include="templates\default\images\banner.gif" />
     <Content Include="templates\default\images\bg1.gif" />
     <Content Include="templates\default\images\bg1.jpg" />
     <Content Include="templates\default\images\bg2.gif" />
