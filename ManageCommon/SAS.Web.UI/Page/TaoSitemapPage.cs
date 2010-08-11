@@ -39,8 +39,13 @@ namespace SAS.Web.UI
                 {
                     sitemapBuilder.Append("  <url>");
                     sitemapBuilder.AppendFormat("    <loc>{0}</loc>", taoconfig.TaoDomain + dr["url"]);
+                    sitemapBuilder.Append("    <priority>1.0</priority>");
                     sitemapBuilder.Append("  </url>");
                 }
+
+                sitemapBuilder.Append("  <url>");
+                sitemapBuilder.AppendFormat("    <loc>{0}</loc>", taoconfig.TaoDomain + "category.html");
+                sitemapBuilder.Append("  </url>");
 
                 List<CategoryInfo> clist = TaoBaos.GetCategoryListByParentID(0);
                 foreach (CategoryInfo cinfo in clist)

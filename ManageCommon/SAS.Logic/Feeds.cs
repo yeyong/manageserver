@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Data;
+using System.Collections.Generic;
 
 using SAS.Common;
 using SAS.Data;
@@ -32,16 +33,32 @@ namespace SAS.Logic
                 sitemapBuilder.Append("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">");
 
                 sitemapBuilder.Append("  <url>");
-                sitemapBuilder.AppendFormat("    <loc>{0}</loc>", config.Weburl + "index.html");
+                sitemapBuilder.AppendFormat("    <loc>{0}</loc>", config.Weburl + "/index.html");
+                sitemapBuilder.Append("    <priority>1.0</priority>");
                 sitemapBuilder.Append("  </url>");
                 sitemapBuilder.Append("  <url>");
-                sitemapBuilder.AppendFormat("    <loc>{0}</loc>", config.Weburl + "zshy.html");
+                sitemapBuilder.AppendFormat("    <loc>{0}</loc>", config.Weburl + "/zshy.html");
+                sitemapBuilder.Append("    <priority>1.0</priority>");
                 sitemapBuilder.Append("  </url>");
                 sitemapBuilder.Append("  <url>");
-                sitemapBuilder.AppendFormat("    <loc>{0}</loc>", config.Weburl + "zscard.html");
+                sitemapBuilder.AppendFormat("    <loc>{0}</loc>", config.Weburl + "/zscard.html");
                 sitemapBuilder.Append("  </url>");
 
+                foreach (DataRow dr in Catalogs.GetAllCatalog().Rows)
+                {
+                    sitemapBuilder.Append("  <url>");
+                    sitemapBuilder.AppendFormat("    <loc>{0}</loc>", config.Weburl + "/zshy-" + dr["id"] + ".html");
+                    sitemapBuilder.Append("  </url>");
+                }
 
+                foreach (DataRow dr in Activities.GetActivitiesCache().Rows)
+                {
+                    sitemapBuilder.Append("  <url>");
+                    sitemapBuilder.AppendFormat("    <loc>{0}</loc>", config.Weburl + "/activity-" + dr["id"] + ".html");
+                    sitemapBuilder.Append("  </url>");
+                }
+
+                sitemapBuilder.Append("</urlset>");
                 sitemap = sitemapBuilder.ToString();
                 //声明新的缓存策略接口
                 SAS.Cache.ICacheStrategy ics = new SitemapCacheStrategy();
