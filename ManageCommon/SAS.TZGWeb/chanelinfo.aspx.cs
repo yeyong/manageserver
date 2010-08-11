@@ -26,7 +26,7 @@ public partial class chanelinfo : TaoBaoPage
     /// </summary>
     protected List<GoodsBrandInfo> cbrandlist = new List<GoodsBrandInfo>();
     protected List<CategoryInfo> csubclasslist = new List<CategoryInfo>();
-
+    protected List<RecommendWithProduct> rproductlist = new List<RecommendWithProduct>();
     /// <summary>
     /// 1号广告
     /// </summary>
@@ -61,6 +61,7 @@ public partial class chanelinfo : TaoBaoPage
 
         cbrandlist = TaoBaos.GetGoodsBrandListByClass(chanelid);
         csubclasslist = TaoBaos.GetCategoryListByParentID(chanelid);
+        //rproductlist = 
 
         adlist1 = Advertisements.GetTaoRandomAd(chanelid * 10 + 1, AdType.TaoChanelAd);
         adlist2 = Advertisements.GetTaoRandomAd(chanelid * 10 + 2, AdType.TaoChanelAd);

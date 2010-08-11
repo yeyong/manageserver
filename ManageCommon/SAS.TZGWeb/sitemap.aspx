@@ -1,1 +1,1 @@
-﻿<%@ Page Language="C#" Inherits="SAS.Web.UI.ZheSitemapPage" %>
+﻿<%@ Page Language="C#" Inherits="SAS.Web.UI.TaoSitemapPage" %>
