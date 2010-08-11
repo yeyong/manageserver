@@ -18,7 +18,7 @@
                 foreach (SAS.Entity.GoodsBrandInfo ginfo in SAS.Taobao.TaoBaos.GetGoodsBrandListByClass(cinfo.Cid))
                 {
             %>
-		    <a class="l_999" title="<%=ginfo.bname%>" href="list.shtml"><%=ginfo.bname%>/<%=ginfo.spell%></a> | 
+		    <a class="l_999" title="<%=ginfo.bname%>" href="goodssearch-s-<%=Utils.UrlEncode(ginfo.bname)%>.html"><%=ginfo.bname%>/<%=ginfo.spell%></a> | 
 		    <%
                 }
             %>

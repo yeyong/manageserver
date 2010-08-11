@@ -238,9 +238,9 @@
 	<ul class="brand mar_top" id="brand">
 	    <%
 		    int adinfo13__id = 1;
-            foreach (AdShowInfo adinfo13 in adlist11)
+            foreach (AdShowInfo adinfo13 in adlist13)
             {
-                if (adinfo13__id > 5) break;
+                if (adinfo13__id > 8) break;
                 string[] astr = adinfo13.Parameters.Split('|');
                 if (astr.Length < 8) continue;      
 		%>

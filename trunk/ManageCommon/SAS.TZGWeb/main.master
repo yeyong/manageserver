@@ -66,18 +66,20 @@
 								<b class="tit1"><%=subcinfo.Name%></b>
 								<em class="type">
 							<%
-                                int cutnum = 104;
-                                if (subcinfo__id == 3) cutnum = 175;
-                                foreach (string subsubcinfo in Utils.CutString(subcinfo.Cg_relateclass, 0, cutnum).Split(','))
+                                int cutnum = 0;
+                                foreach (string subsubcinfo in subcinfo.Cg_relateclass.Split(','))
                                 {
+                                    if (subcinfo__id != 3 && cutnum > 77) break;
+                                    else if (cutnum > 122) break;
                                     if (subsubcinfo == "") continue;
                                     string[] subsubstr = subsubcinfo.Split('|');
                                     if (subsubstr.Length < 2) continue;
 				             %>
 				                <a title="<%=subsubstr[1]%>" href="goodslist-<%=subsubstr[0]%>.html"><%=subsubstr[1]%></a> | 
 				             <%
+                                cutnum += Utils.GetStringLength(subsubstr[1]) + 3;
                                 }
-                             %><a title="<%=subcinfo.Name%>" href="goodslist-p-<%=subcinfo.Cid%>.html">更多...</a>
+                             %><a title="<%=subcinfo.Name%>" href="goodslist-p-<%=subcinfo.Cid%>.html">更多</a>
                                 </em>
 								<%if (subcinfo__id < 3){%><i class="line"></i><%}%>
 								<%
@@ -91,7 +93,7 @@
                                     foreach (GoodsBrandInfo goodbinfo in SAS.Taobao.TaoBaos.GetGoodsBrandListByClass(parentcinfo.Cid))
                                     {
                                 %>
-								<em class="bra"><a title="<%=goodbinfo.bname%>" href='goodssearch-s-<%=Utils.UrlEncode(goodbinfo.bname)%>.html'><%=goodbinfo.spell%></a></em>
+								<em class="bra"><a title="<%=goodbinfo.bname%>" href='goodssearch-s-<%=Utils.UrlEncode(goodbinfo.bname)%>.html'><%=goodbinfo.bname%></a></em>
 								<%
                                     }
                                 %>

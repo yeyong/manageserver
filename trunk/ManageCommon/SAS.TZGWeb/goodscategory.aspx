@@ -21,15 +21,17 @@
 				<strong><%=subcinfo.Name%></strong>				
 				<p>
 				<%
-                    foreach (string subsubcinfo in Utils.CutString(subcinfo.Cg_relateclass,0,206).Split(','))
+                    int subsubnum = 0;
+                    foreach (string subsubcinfo in subcinfo.Cg_relateclass.Split(','))
                     {
+                        if (subsubnum > 119) break;
                         if (subsubcinfo == "") continue;
                         string[] thesubstr = subsubcinfo.Split('|');
                         if (thesubstr.Length < 2) continue;
 				 %>
-				    <a title="<%=thesubstr[1]%>" href="goodslist-<%=thesubstr[0]%>.html"><%=thesubstr[1]%></a>  
+				    <a title="<%=thesubstr[1]%>" href="goodslist-<%=thesubstr[0]%>.html"><%=thesubstr[1]%></a> 
 				 <%
-                         
+                     subsubnum += Utils.GetStringLength(thesubstr[1])+1;
                     }
                  %><a title="<%=subcinfo.Name%>" href="goodslist-p-<%=subcinfo.Cid%>.html">更多...</a>
 				 </p>
