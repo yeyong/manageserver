@@ -37,12 +37,11 @@ namespace SAS.Data.DataProvider
         }
 
         /// <summary>
-        /// 获取全部广告列表
+        /// 根据条件获取全部广告列表
         /// </summary>
-        /// <returns></returns>
-        public static DataTable GetAdvertisements()
+        public static DataTable GetAdvertisements(string condition)
         {
-            return DatabaseProvider.GetInstance().GetAdvertisements();
+            return DatabaseProvider.GetInstance().GetAdvertisements(condition);
         }
 
         /// <summary>
@@ -91,6 +90,19 @@ namespace SAS.Data.DataProvider
         public static DataTable GetAdvertisement(int aid)
         {
             return DatabaseProvider.GetInstance().GetAdvertisement(aid);
+        }
+
+        /// <summary>
+        /// 广告搜索条件获取
+        /// </summary>
+        /// <param name="atype">广告类型</param>
+        /// <param name="title">广告标题</param>
+        /// <param name="startdate">开始时间</param>
+        /// <param name="endtdate">结束时间</param>
+        /// <param name="status">状态</param>
+        public static string GetAdvsSearchConditions(int atype, string title, DateTime startdate, DateTime endtdate, int status)
+        {
+            return DatabaseProvider.GetInstance().GetAdvsCondition(atype, title, startdate, endtdate, status);
         }
     }
 }

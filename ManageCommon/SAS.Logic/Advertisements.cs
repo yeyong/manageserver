@@ -552,10 +552,30 @@ namespace SAS.Logic
         /// <summary>
         /// 获取全部广告列表
         /// </summary>
-        /// <returns></returns>
         public static DataTable GetAdvertisements()
         {
-            return SAS.Data.DataProvider.Advertisenments.GetAdvertisements();
+            return SAS.Data.DataProvider.Advertisenments.GetAdvertisements("");
+        }
+
+        /// <summary>
+        /// 根据条件获取全部广告列表
+        /// </summary>
+        public static DataTable GetAdvertisements(string condition)
+        {
+            return SAS.Data.DataProvider.Advertisenments.GetAdvertisements(condition);
+        }
+
+        /// <summary>
+        /// 广告搜索条件获取
+        /// </summary>
+        /// <param name="atype">广告类型</param>
+        /// <param name="title">广告标题</param>
+        /// <param name="startdate">开始时间</param>
+        /// <param name="endtdate">结束时间</param>
+        /// <param name="status">状态</param>
+        public static string GetAdvertisementsSearchConditions(int atype, string title, DateTime startdate, DateTime endtdate, int status)
+        {
+            return SAS.Data.DataProvider.Advertisenments.GetAdvsSearchConditions(atype, title, startdate, endtdate, status);
         }
 
         /// <summary>

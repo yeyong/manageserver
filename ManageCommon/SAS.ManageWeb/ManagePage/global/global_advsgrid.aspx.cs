@@ -16,16 +16,29 @@ namespace SAS.ManageWeb.ManagePage
 {
     public partial class global_advsgrid : AdminPage
     {
+        public string condition = null;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
+            {
+                if (Session["advswhere"] != null)
+                {
+                    condition = Session["advswhere"].ToString();
+                }
+                else
+                {
+                    Response.Redirect("global_searchadvs.aspx");
+                    return;
+                }
                 BindData();
+            }
         }
 
         public void BindData()
         {
             DataGrid1.AllowCustomPaging = false;
-            DataGrid1.BindData(Advertisements.GetAdvertisements());
+            DataGrid1.BindData(Advertisements.GetAdvertisements(condition));
         }
 
         protected void Sort_Grid(Object sender, DataGridSortCommandEventArgs e)

@@ -1547,7 +1547,6 @@ namespace SAS.Data
         /// </summary>
         /// <returns>广告列表</returns>
         DataTable GetAdsTable();
-
         /// <summary>
         /// 添加广告信息
         /// </summary>
@@ -1561,19 +1560,15 @@ namespace SAS.Data
         /// <param name="startDateTime">起始日期</param>
         /// <param name="endDateTime">结束日期</param>
         void AddAdInfo(int available, string type, int displayOrder, string title, string targets, string parameters, string code, string startTime, string endTime);
-
         /// <summary>
-        /// 获取广告
+        /// 根据条件获取广告
         /// </summary>
-        /// <returns></returns>
-        DataTable GetAdvertisements();
-
+        DataTable GetAdvertisements(string condition);
         /// <summary>
         /// 删除广告列表            
         /// </summary>
         /// <param name="aidList">广告列表Id</param>
         void DeleteAdvertisement(string aidList);
-
         /// <summary>
         /// 更新广告可用状态
         /// </summary>
@@ -1581,7 +1576,6 @@ namespace SAS.Data
         /// <param name="available"></param>
         /// <returns></returns>
         int UpdateAdvertisementAvailable(string aidList, int available);
-
         /// <summary>
         /// 更新广告
         /// </summary>
@@ -1603,7 +1597,15 @@ namespace SAS.Data
         /// <param name="aId">广告Id</param>
         /// <returns></returns>
         DataTable GetAdvertisement(int aid);
-
+        /// <summary>
+        /// 广告搜索条件获取
+        /// </summary>
+        /// <param name="atype">广告类型</param>
+        /// <param name="title">广告标题</param>
+        /// <param name="startdate">开始时间</param>
+        /// <param name="endtdate">结束时间</param>
+        /// <param name="status">状态</param>
+        string GetAdvsCondition(int atype, string title, DateTime startdate, DateTime endtdate, int status);
         #endregion
 
         #region 数据库databases操作

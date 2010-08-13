@@ -106,42 +106,25 @@
 			</div>
 		</div>
 		<ul class="<%=viewtype == 1 ? "listnr" : "listnr2"%> listbg">
+		<%
+            foreach (TaobaokeItem putitem in putitemlist)
+            {    
+		%>
 			<li>
-				<a title="" href="show.shtml">
-				<em class="listnrtu"><img alt="" src="images/ad/380x260.gif" /></em>
-				<em class="listnrt">josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</em>
+				<a target="_blank" title="<%=putitem.Title%>" href="productshow-<%=putitem.NumIid%>.html">
+				<em class="listnrtu"><img alt="<%=putitem.Title%>" src="<%=putitem.PicUrl%>_b.jpg" /></em>
+				<em class="listnrt"><%=putitem.Title%></em>
 				<span></span>
 				</a>
-				<p>已售出：<i class="zi">201</i>件</p>
-				<strong>￥158.00</strong>
-				<b>运费：8.00</b>
+				<p>30天内售出：<i class="zi"><%=putitem.Volume%></i>件</p>
+				<strong>￥<%=putitem.Price%></strong>
+				<b>所在地：<%=putitem.ItemLocation%><br/>掌柜：<a title="<%=putitem.Nick%>" href="<%=putitem.ShopClickUrl%>"><%=putitem.Nick%></a></b>
 				<ins>所属店铺信誉度：<br />
-				<i class="zi2 rankbg rank5 rankw2"></i></ins>
+				<i class="zi2 rankbg rank<%=System.Math.Ceiling((double)putitem.SellerCreditScore / 5)%> rankw<%=putitem.SellerCreditScore % 5==0?5:putitem.SellerCreditScore % 5%>"></i></ins>
 			</li>
-			<li>
-				<a title="" href="show.shtml">
-				<em class="listnrtu"><img alt="" src="images/ad/380x260.gif" /></em>
-				<em class="listnrt">josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</em>
-				<span></span>
-				</a>
-				<p>已售出：<i class="zi">201</i>件</p>
-				<strong>￥158.00</strong>
-				<b>运费：8.00</b>
-				<ins>所属店铺信誉度：<br />
-				<i class="zi2 rankbg rank6 rankw5"></i></ins>
-			</li>
-			<li>
-				<a title="" href="show.shtml">
-				<em class="listnrtu"><img alt="" src="images/ad/380x260.gif" /></em>
-				<em class="listnrt">josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</em>
-				<span></span>
-				</a>
-				<p>已售出：<i class="zi">201</i>件</p>
-				<strong>￥158.00</strong>
-				<b>运费：8.00</b>
-				<ins>所属店铺信誉度：<br />
-				<i class="zi2 rankbg rank5 rankw4"></i></ins>
-			</li>
+			<%
+            }
+            %>
 		</ul>
 		<ul class="<%=viewtype == 1 ? "listnr" : "listnr2"%>">
 		<%
@@ -150,10 +133,10 @@
 		%>
 			<li>
 				<a target="_blank" title="<%=tkinfo.Title%>" href="productshow-<%=tkinfo.NumIid%>.html">
-				<em class="listnrtu"><img alt="" src="<%=tkinfo.PicUrl%>_b.jpg" /></em>
+				<em class="listnrtu"><img alt="<%=tkinfo.Title%>" src="<%=tkinfo.PicUrl%>_b.jpg" /></em>
 				<em class="listnrt"><%=tkinfo.Title%></em>
 				</a>
-				<p>本月售出：<i class="zi"><%=tkinfo.CommissionNum%></i>件</p>
+				<p>30天内售出：<i class="zi"><%=tkinfo.Volume%></i>件</p>
 				<strong>￥<%=tkinfo.Price%></strong>
 				<b>所在地：<%=tkinfo.ItemLocation%><br/>掌柜：<a title="<%=tkinfo.Nick%>" href="<%=tkinfo.ShopClickUrl%>"><%=tkinfo.Nick%></a></b>
 				<ins>所属店铺信誉度：<br />

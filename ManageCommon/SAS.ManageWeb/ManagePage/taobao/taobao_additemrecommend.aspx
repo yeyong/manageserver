@@ -62,7 +62,7 @@
 
         if (errmsg != "") alert(errmsg);
         else {
-            AjaxHelper.Updater("../usercontrols/ajaxtaobaoitems.ascx", "taobaoitemlistgrid", "load=true&keyword=" + objform.keyword.value + "&cid=" + $("rcategory").value + parems);
+            AjaxHelper.Updater("../usercontrols/ajaxtaobaoitems.ascx", "taobaoitemlistgrid", "load=true&sortstr=" + $("sortstr").value + "&keyword=" + objform.keyword.value + "&cid=" + $("rcategory").value + parems);
         }
     }
 
@@ -249,7 +249,17 @@
             </td>
         </tr>
     </table>
-<div class="Navbutton"><input type="button" class="ManagerButton" value="查找符合条件的商品" onclick="searchitem(this.form)"/></div>	
+    <div class="Navbutton">
+        <span style="padding-right: 4px;">排序方式</span>
+        <select name="sortstr" id="sortstr" style="margin-right: 8px;">
+            <option value="price_desc">价格从高到低</option>
+            <option value="price_asc">价格从低到高</option>
+            <option value="credit_desc">信用等级从高到低</option>
+            <option value="commissionRate_desc">佣金比率从高到底</option>
+            <option value="commissionRate_asc">佣金比率从低到高</option>
+        </select>
+        <input type="button" class="ManagerButton" value="查找符合条件的商品" onclick="searchitem(this.form)" />
+    </div>
 </fieldset>
 <cc1:Hint id="Hint1" runat="server" HintImageUrl="../images"></cc1:Hint>
 </div>

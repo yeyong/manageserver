@@ -37,7 +37,7 @@
                     <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tkiteminfo.Price%></td>
                     <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tkiteminfo.Commission%></td>
                     <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=SAS.Common.TypeConverter.ObjectToFloat(tkiteminfo.CommissionRate)/100%>%</td>
-                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tkiteminfo.CommissionNum%></td>                    
+                    <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tkiteminfo.Volume%></td>
                     <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tkiteminfo.CommissionVolume%></td>
                     <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tkiteminfo.SellerCreditScore%></td>
                     <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><%=tkiteminfo.ItemLocation%></td>

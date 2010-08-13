@@ -1434,14 +1434,24 @@ namespace SAS.Data.SqlServer
         }
 
         /// <summary>
-        /// 获取广告
+        /// 根据条件获取广告
         /// </summary>
         /// <returns></returns>
-        public DataTable GetAdvertisements()
+        public DataTable GetAdvertisements(string condition)
         {
-            string commandText = string.Format("SELECT {0} FROM [{1}advertisements] ORDER BY [advid] ASC",
-                                                DbFields.ADVERTISEMENTS,
-                                                BaseConfigs.GetTablePrefix);
+            string commandText = "";
+            if (condition == "")
+            {
+                commandText = string.Format("SELECT {0} FROM [{1}advertisements] ORDER BY [advid] ASC",
+                                                    DbFields.ADVERTISEMENTS,
+                                                    BaseConfigs.GetTablePrefix);
+            }
+            else
+            {
+                commandText = string.Format("SELECT {0} FROM [{1}advertisements] WHERE {2} ORDER BY [advid] ASC",
+                                                    DbFields.ADVERTISEMENTS,
+                                                    BaseConfigs.GetTablePrefix, condition);
+            }
             return DbHelper.ExecuteDataset(commandText).Tables[0];
         }
 
@@ -1520,6 +1530,27 @@ namespace SAS.Data.SqlServer
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
         }
 
+        /// <summary>
+        /// 广告搜索条件获取
+        /// </summary>
+        /// <param name="atype">广告类型</param>
+        /// <param name="title">广告标题</param>
+        /// <param name="startdate">开始时间</param>
+        /// <param name="endtdate">结束时间</param>
+        /// <param name="status">状态</param>
+        public string GetAdvsCondition(int atype, string title, DateTime startdate, DateTime endtdate, int status)
+        {
+            StringBuilder sqlBuilder = new StringBuilder(" [advid]>0 ");
+
+            if (atype > 0) sqlBuilder.AppendFormat(" AND [adtype] = '{0}'", atype);
+            if (!Utils.StrIsNullOrEmpty(title)) sqlBuilder.AppendFormat(" AND [title] like '%{0}%'", RegEsc(title));
+
+            if (!Utils.StrIsNullOrEmpty(startdate.ToString())) sqlBuilder.AppendFormat(" AND [starttime]>='{0}'", startdate.ToString("yyyy-MM-dd HH:mm:ss"));
+            if (!Utils.StrIsNullOrEmpty(endtdate.ToString())) sqlBuilder.AppendFormat(" AND [starttime]<='{0}'", endtdate.ToString("yyyy-MM-dd HH:mm:ss"));
+            if (status > -1) sqlBuilder.AppendFormat(" AND [adavailable] = {0}", status);
+
+            return sqlBuilder.ToString();
+        }
         #endregion
 
         #region 数据库databases操作
