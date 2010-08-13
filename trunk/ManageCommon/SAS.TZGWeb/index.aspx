@@ -12,7 +12,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="mainbody" Runat="Server">
 <div class="cot">
-	<div class="ban mar_top" id="banner">
+	<div class="ban mar_top_10" id="banner">
 		<p class="bantu"><%if(adlist1.Length>0){if(adlist1[0].Parameters.Split('|').Length>=8){%><a target="_blank" title="<%=adlist1[0].Parameters.Split('|')[5]%>" href="<%=adlist1[0].Parameters.Split('|')[4]%>"><img alt="<%=adlist1[0].Parameters.Split('|')[5]%>" src="<%=adlist1[0].Parameters.Split('|')[1]%>" /></a><%}}%></p>
 		<ul class="banxtu">
 		<%
@@ -30,7 +30,7 @@
             %>
 		</ul>
 	</div>
-	<div class="hpin mar_top">
+	<div class="hpin mar_top_10">
 		<strong>最新活动</strong>
 		<ul class="hpinnr">
 		<%

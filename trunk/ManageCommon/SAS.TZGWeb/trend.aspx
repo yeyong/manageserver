@@ -78,7 +78,7 @@
 						<img alt="<%=tkinfo.Title%>" src="<%=tkinfo.PicUrl%>_160x160.jpg" />
 						<span><%=tkinfo.Title%></span>
 						</a>
-						<em>已售出：<ins><%=tkinfo.CommissionNum%></ins>件</em>
+						<em>30成交量：<ins><%=tkinfo.Volume%></ins>件</em>
 						<b>￥<%=tkinfo.Price%></b>
 					</li>
 					<%if(tkinfo__id%5 > 0){%><li class="trdcot2"></li><%}%>

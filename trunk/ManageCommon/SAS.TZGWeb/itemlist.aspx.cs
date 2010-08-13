@@ -17,6 +17,7 @@ public partial class itemlist : TaoBaoPage
     protected List<TaobaokeItem> itemlistitems = new List<TaobaokeItem>();
     protected List<CategoryInfo> itemlistcategories = new List<CategoryInfo>();
     protected List<GoodsBrandInfo> itemlistgoodsbrands = new List<GoodsBrandInfo>();
+    protected List<TaobaokeItem> putitemlist = new List<TaobaokeItem>();
     /// <summary>
     /// 根类别
     /// </summary>
@@ -112,6 +113,7 @@ public partial class itemlist : TaoBaoPage
         if (tempstr.Trim().Trim(',').Length > 2) currentcategoryname = Utils.CutString(tempstr, tempstr.IndexOf('|', tempstr.IndexOf("," + cid + "|", 0)) + 1, tempstr.IndexOf(',', tempstr.IndexOf('|', tempstr.IndexOf("," + cid + "|", 0))) - tempstr.IndexOf('|', tempstr.IndexOf("," + cid + "|", 0)) - 1);
         itemlistcategories = TaoBaos.GetCategoryListByParentID(rootcategory.Cid);
         itemlistgoodsbrands = TaoBaos.GetGoodsBrandListByClass(rootcategory.Cid);
+        putitemlist = TaoBaos.GetRecommendProduct(Convert.ToInt16(TaoChanel.List), parentcategory.Cid);
 
         string sortstr = "commissionNum_desc";
 

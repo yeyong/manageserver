@@ -47,7 +47,7 @@
 				<em class="listnrtu"><img alt="" src="<%=tkinfo.PicUrl%>_b.jpg" /></em>
 				<em class="listnrt"><%=Utils.RemoveHtml(tkinfo.Title)%></em>
 				</a>
-				<p>本月售出：<i class="zi"><%=tkinfo.CommissionNum%></i>件</p>
+				<p>30天内售出：<i class="zi"><%=tkinfo.Volume%></i>件</p>
 				<strong>￥<%=tkinfo.Price%></strong>
 				<b>所在地：<%=tkinfo.ItemLocation%><br/>掌柜：<a title="<%=tkinfo.Nick%>" href="<%=tkinfo.ShopClickUrl%>"><%=tkinfo.Nick%></a></b>
 				<ins>所属店铺信誉度：<br />

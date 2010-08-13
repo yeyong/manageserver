@@ -112,7 +112,7 @@ namespace SAS.Taobao
         {
             itemcount = 0;
             TaobaokeItemsGetRequest tgr = new TaobaokeItemsGetRequest();
-            tgr.Fields = "iid,num_iid,title,nick,pic_url,price,click_url,commission,commission_rate,commission_num,commission_volume,shop_click_url,seller_credit_score,item_location,keyword_click_url";
+            tgr.Fields = "iid,num_iid,title,nick,pic_url,price,click_url,commission,commission_rate,commission_num,commission_volume,shop_click_url,seller_credit_score,item_location,keyword_click_url,volume";
             tgr.Nick = SAS_USERNICK;
             tgr.Keyword = keyword;
             if (cid >= 0)
@@ -176,7 +176,7 @@ namespace SAS.Taobao
         public static List<TaobaokeItem> GetTaoBaoKeItemList(string numiidlist)
         {
             TaobaokeItemsConvertRequest tgr = new TaobaokeItemsConvertRequest();
-            tgr.Fields = "iid,num_iid,title,nick,pic_url,price,click_url,commission,commission_rate,commission_num,commission_volume,shop_click_url,seller_credit_score,item_location,keyword_click_url";
+            tgr.Fields = "iid,num_iid,title,nick,pic_url,price,click_url,commission,commission_rate,commission_num,commission_volume,shop_click_url,seller_credit_score,item_location,keyword_click_url,volume";
             tgr.Nick = SAS_USERNICK;
             tgr.NumIids = numiidlist;
             PageList<TaobaokeItem> pageitems = client.TaobaokeItemsConvert(tgr);
@@ -784,7 +784,7 @@ namespace SAS.Taobao
 
                 if (itemlistid.Trim().Trim(',') == "") return new List<TaobaokeItem>();
                 TaobaokeItemsConvertRequest tcr = new TaobaokeItemsConvertRequest();
-                tcr.Fields = "iid,num_iid,title,nick,pic_url,price,click_url,commission,commission_rate,commission_num,commission_volume,shop_click_url,seller_credit_score,item_location,keyword_click_url";
+                tcr.Fields = "iid,num_iid,title,nick,pic_url,price,click_url,commission,commission_rate,commission_num,commission_volume,shop_click_url,seller_credit_score,item_location,keyword_click_url,volume";
                 tcr.Nick = SAS_USERNICK;
                 tcr.NumIids = itemlistid;
 
@@ -796,24 +796,31 @@ namespace SAS.Taobao
             return taobaoitemlist;
         }
         /// <summary>
-        /// 根据推荐获取商品信息集合（推荐信息与商品信息联合）
+        /// 频道根据推荐获取商品信息集合（推荐信息与商品信息联合）
         /// </summary>
         public static List<RecommendWithProduct> GetProductWithRecommend(int chanel)
         {
+            return GetProductWithRecommend(chanel, 0);
+        }
+        /// <summary>
+        /// 频道、类别根据推荐获取商品信息集合（推荐信息与商品信息联合）
+        /// </summary>
+        public static List<RecommendWithProduct> GetProductWithRecommend(int chanel, int classid)
+        {
             List<RecommendWithProduct> recommendlist = new List<RecommendWithProduct>();
-            recommendlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/RecommendItem/Chanel_" + chanel) as List<RecommendWithProduct>;
+            recommendlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/RecommendWithItem/Chanel_" + chanel + "/Class_" + classid) as List<RecommendWithProduct>;
 
             if (recommendlist == null)
             {
                 recommendlist = new List<RecommendWithProduct>();
-                List<RecommendInfo> rlist = GetRecommendList(1, chanel);
+                List<RecommendInfo> rlist = GetRecommendList(1, chanel, classid);
 
                 foreach (RecommendInfo rinfo in rlist)
                 {
                     RecommendWithProduct rpinfo = new RecommendWithProduct();
                     if (rinfo.ccontent.Trim().Trim(',') == "") continue;
                     TaobaokeItemsConvertRequest tcr = new TaobaokeItemsConvertRequest();
-                    tcr.Fields = "iid,num_iid,title,nick,pic_url,price,click_url,commission,commission_rate,commission_num,commission_volume,shop_click_url,seller_credit_score,item_location,keyword_click_url";
+                    tcr.Fields = "iid,num_iid,title,nick,pic_url,price,click_url,commission,commission_rate,commission_num,commission_volume,shop_click_url,seller_credit_score,item_location,keyword_click_url,volume";
                     tcr.Nick = SAS_USERNICK;
                     tcr.NumIids = rinfo.ccontent.Trim().Trim(',');
                     PageList<TaobaokeItem> pageitems = client.TaobaokeItemsConvert(tcr);
@@ -823,7 +830,7 @@ namespace SAS.Taobao
                     recommendlist.Add(rpinfo);
                 }
 
-                SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/RecommendItem/Chanel_" + chanel, recommendlist);
+                SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/RecommendWithItem/Chanel_" + chanel + "/Class_" + classid, recommendlist);
             }
             return recommendlist;
         }

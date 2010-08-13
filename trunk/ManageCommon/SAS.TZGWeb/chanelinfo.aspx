@@ -66,10 +66,10 @@
 			<strong><img alt="潮我喜欢" src="images/index_tit2.gif" /></strong>
 			<ul id="chalprdrt">
 			<%
-                foreach (CategoryInfo subcinfo in csubclasslist)
+                foreach (RecommendWithProduct rpinfo in rproductlist)
                 {
             %>
-				<li><%=subcinfo.Name%></li>
+				<li><%=rpinfo.ctitle%></li>
 			<%
                 }
             %>
@@ -77,14 +77,14 @@
 		</div>
 		<div id="chalprdnr">
 		    <%
-                foreach (CategoryInfo subcinfo in csubclasslist)
+                foreach (RecommendWithProduct rpinfo in rproductlist)
                 {
             %>
 			<div class="con">
 				<ul class="trdcot">
 				    <%
                         int tkiteminfo__id = 1;
-                        foreach (SAS.Entity.Domain.TaobaokeItem tkiteminfo in SAS.Taobao.TaoBaos.GetRecommendProduct(Convert.ToInt16(TaoChanel.Chanel), subcinfo.Cid))
+                        foreach (SAS.Entity.Domain.TaobaokeItem tkiteminfo in rpinfo.item)
                         {
                     %>
 					<li class="trdcot1">
