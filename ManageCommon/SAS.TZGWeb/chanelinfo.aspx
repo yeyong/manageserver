@@ -88,8 +88,8 @@
                         {
                     %>
 					<li class="trdcot1">
-						<a title="<%=tkiteminfo.Title%>" href="productshow-<%=tkiteminfo.NumIid%>.html">
-						<img alt="<%=tkiteminfo.Title%>" src="<%=tkiteminfo.PicUrl%>_120x120.jpg" />
+						<a target="_blank" title="<%=tkiteminfo.Title%>" href="productshow-<%=tkiteminfo.NumIid%>.html">
+						<img alt="<%=tkiteminfo.Title%>" src="<%=tkiteminfo.PicUrl%>_160x160.jpg" />
 						<span><%=tkiteminfo.Title%></span>
 						</a>
 						<em>已售出：<ins><%=tkiteminfo.CommissionNum%></ins>件</em>

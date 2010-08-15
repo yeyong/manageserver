@@ -15,7 +15,7 @@
                 string[] astr = adinfo.Parameters.Split('|');
                 if (astr.Length < 8) continue;
      %>
-		<li class="cred1"><a title="<%=astr[5]%>" href="<%=astr[4]%>"><img alt="<%=astr[5]%>" src="<%=astr[1]%>" /></a></li>
+		<li class="cred1"><a target="_blank" title="<%=astr[5]%>" href="<%=astr[4]%>"><img alt="<%=astr[5]%>" src="<%=astr[1]%>" /></a></li>
 		<%if(adinfo__id%3>0){%><li class="cred2"></li><%}%>		
 	<%
             adinfo__id++;

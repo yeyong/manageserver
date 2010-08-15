@@ -167,7 +167,7 @@ namespace SAS.ManageWeb.ManagePage
 
                     HttpCookie cookie = new HttpCookie("sasadmin");
                     cookie.Values["key"] = LogicUtils.SetCookiePassword(userInfo.Ps_password + userInfo.Ps_secques + userInfo.Ps_id, config.Passwordkey);
-                    cookie.Expires = DateTime.Now.AddMinutes(30);
+                    cookie.Expires = DateTime.Now.AddMinutes(90);
                     HttpContext.Current.Response.AppendCookie(cookie);
 
                     AdminVistLogs.InsertLog(userInfo.Ps_id, userInfo.Ps_name, userInfo.Ps_ug_id, userGroupInfo.ug_name, SASRequest.GetIP(), "后台管理员登陆", "");

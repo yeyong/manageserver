@@ -10,6 +10,7 @@
 <meta name="google-site-verification" content="gfHzZ6zVYWWe5gfJBo_IybOnPbQvFmawfOjw8g4Pi-4" />
 <meta http-equiv="x-ua-compatible" content="ie=7" />
 <title>首页</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
 <link href="css/comm.css" rel="stylesheet" type="text/css" />
 <asp:ContentPlaceHolder id="styles" runat="server">
 </asp:ContentPlaceHolder>
@@ -22,7 +23,7 @@
 		<strong><a target="_blank" title="淘之购" href="<%=therooturl%>"><img alt="淘之购" src="images/logo.gif" /></a></strong>
 		<span>
 			<em>
-			<a target="_blank" class="l_fff" title="" href="<%=mainsiteurl%>">浙商黄页</a> |  <%foreach (System.Data.DataRow dr in subnavs){%><a target="_blank" class="l_fff" title="<%=dr["title"]%>" href="<%=dr["url"]%>"><%=dr["name"]%></a> | <%}%>
+			<a target="_blank" class="l_fff" title="浙商黄页" href="<%=mainsiteurl%>">浙商黄页</a> |  <%foreach (System.Data.DataRow dr in subnavs){%><a target="_blank" class="l_fff" title="<%=dr["title"]%>" href="<%=dr["url"]%>"><%=dr["name"]%></a> | <%}%>
 			</em>
 		</span>
 	</p>
@@ -32,10 +33,13 @@
     </asp:ContentPlaceHolder>
 	</div>
 	<p class="xft mar_top">
-		<span><a class="l_999" title="" href="#">关于淘之购</a> | <a class="l_999" title="" href="#">法律声明</a> | <a class="l_999" title="" href="#">联系我们</a> | <a class="l_999" title="" href="#">网站地图</a></span>
+		<span><%foreach(HelpInfo helpinfo in helplist){%><a class="l_999" title="<%=helpinfo.Title%>" href="<%=mainsiteurl%>/help-<%=helpinfo.Id%>.html"><%=helpinfo.Title%></a> | <%}%><a class="l_999" title="网站地图" href="<%=mainsiteurl%>/sitemap.html">网站地图</a></span>
 		<span>经营性网站备案号：<%=configinfo.Icp%> Copyright @ 2010 <a class="l_999" title="" href="#">天狼星</a> All Rights Reserved</span>
 	</p>
 </div>
 </body>
+<script type="text/javascript">
+    <%=configinfo.Statcode%>
+</script>
 <asp:ContentPlaceHolder id="footer" runat="server"></asp:ContentPlaceHolder>
 </html>

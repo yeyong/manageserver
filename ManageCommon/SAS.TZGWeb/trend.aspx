@@ -18,7 +18,7 @@
                 string[] astr = adinfo.Parameters.Split('|');
                 if (astr.Length < 8) continue;
 		    %>
-			<div class="con"><a title="<%=astr[5]%>" href="<%=astr[4]%>"><img alt="<%=astr[5]%>" src="<%=astr[1]%>" /></a></div>
+			<div class="con"><a target="_blank" title="<%=astr[5]%>" href="<%=astr[4]%>"><img alt="<%=astr[5]%>" src="<%=astr[1]%>" /></a></div>
 			<%
                 adinfo__id++;
             }
@@ -29,7 +29,7 @@
 		</ul>
 	</div>
 	<div class="trdtwo mar_top">
-		<p class="trdtlt"><%string[] indexad2 = adlist2.Split('|');if(indexad2.Length >=8){%><a title="<%=indexad2[5]%>" href="<%=indexad2[4]%>"><img alt="<%=indexad2[5]%>" src="<%=indexad2[1]%>" /></a><%}%></p>
+		<p class="trdtlt"><%string[] indexad2 = adlist2.Split('|');if(indexad2.Length >=8){%><a target="_blank" title="<%=indexad2[5]%>" href="<%=indexad2[4]%>"><img alt="<%=indexad2[5]%>" src="<%=indexad2[1]%>" /></a><%}%></p>
 		<ul class="trdtrt">
 		<%
             int adinfo3__id = 1;
@@ -39,13 +39,13 @@
                 string[] astr = adinfo3.Parameters.Split('|');
                 if (astr.Length < 8) continue;
 		    %>
-			<li><a title="<%=astr[5]%>" href="<%=astr[4]%>"><img alt="<%=astr[5]%>" src="<%=astr[1]%>" /></a></li>
+			<li><a target="_blank" title="<%=astr[5]%>" href="<%=astr[4]%>"><img alt="<%=astr[5]%>" src="<%=astr[1]%>" /></a></li>
 			<%
                 adinfo3__id++;
             }
 			%>
 		</ul>
-		<p class="trdtrt2"><%string[] indexad4 = adlist4.Split('|');if(indexad4.Length >=8){%><a title="<%=indexad4[5]%>" href="<%=indexad4[4]%>"><img alt="<%=indexad4[5]%>" src="<%=indexad4[1]%>" /></a><%}%></p>
+		<p class="trdtrt2"><%string[] indexad4 = adlist4.Split('|');if(indexad4.Length >=8){%><a target="_blank" title="<%=indexad4[5]%>" href="<%=indexad4[4]%>"><img alt="<%=indexad4[5]%>" src="<%=indexad4[1]%>" /></a><%}%></p>
 	</div>
 	<div class="trdth mar_top" id="trdth">
 		<div class="trdtht">
@@ -74,11 +74,11 @@
                     {
 				%>
 					<li class="trdcot1">
-						<a title="<%=tkinfo.Title%>" href="productshow-<%=tkinfo.NumIid%>.html">
+						<a target="_blank" title="<%=tkinfo.Title%>" href="productshow-<%=tkinfo.NumIid%>.html">
 						<img alt="<%=tkinfo.Title%>" src="<%=tkinfo.PicUrl%>_160x160.jpg" />
 						<span><%=tkinfo.Title%></span>
 						</a>
-						<em>30成交量：<ins><%=tkinfo.Volume%></ins>件</em>
+						<em>30天成交量：<ins><%=tkinfo.Volume%></ins>件</em>
 						<b>￥<%=tkinfo.Price%></b>
 					</li>
 					<%if(tkinfo__id%5 > 0){%><li class="trdcot2"></li><%}%>
