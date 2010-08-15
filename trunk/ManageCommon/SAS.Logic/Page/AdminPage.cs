@@ -123,7 +123,7 @@ namespace SAS.Logic
                 HttpCookie cookie = HttpContext.Current.Request.Cookies["sasadmin"];
                 cookie.Values["key"] = LogicUtils.SetCookiePassword(oluserinfo.Ol_password + secques + oluserinfo.Ol_ps_id.ToString(), config.Passwordkey);
                 cookie.Values["userid"] = oluserinfo.Ol_ps_id.ToString();
-                cookie.Expires = DateTime.Now.AddMinutes(30);
+                cookie.Expires = DateTime.Now.AddMinutes(90);
                 HttpContext.Current.Response.AppendCookie(cookie);
 
             }

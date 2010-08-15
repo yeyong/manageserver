@@ -41,7 +41,7 @@
 		<div class="showrt">
 			<h1><%=iteminfo.Title%></h1>
 			<p>价格：<em class="zi">￥<%=iteminfo.Price%></em></p>
-			<p>已售出：<em class="f_f00">10<%=iteminfo.Volume%></em> 件</p>
+			<p>有效期：<em class="f_f00"><%=iteminfo.ValidThru%></em> 天</p>
 			<p>
 				<span>商品数：<%=iteminfo.Num%></span>
 			</p>

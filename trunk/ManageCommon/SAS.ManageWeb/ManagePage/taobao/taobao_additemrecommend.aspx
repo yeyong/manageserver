@@ -257,6 +257,8 @@
             <option value="credit_desc">信用等级从高到低</option>
             <option value="commissionRate_desc">佣金比率从高到底</option>
             <option value="commissionRate_asc">佣金比率从低到高</option>
+            <option value="commissionNum_desc">成交量从高到低</option>
+            <option value="commissionVolume_desc">总支出佣金从高到底</option>
         </select>
         <input type="button" class="ManagerButton" value="查找符合条件的商品" onclick="searchitem(this.form)" />
     </div>

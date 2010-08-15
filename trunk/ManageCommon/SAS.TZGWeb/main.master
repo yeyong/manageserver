@@ -11,6 +11,7 @@
 <meta name="google-site-verification" content="gfHzZ6zVYWWe5gfJBo_IybOnPbQvFmawfOjw8g4Pi-4" />
 <meta http-equiv="x-ua-compatible" content="ie=7" />
 <title>首页</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
 <link href="css/comm.css" rel="stylesheet" type="text/css" />
 <asp:ContentPlaceHolder id="styles" runat="server">
 </asp:ContentPlaceHolder>
@@ -90,11 +91,14 @@
 							<span class="cotrt">
 								<b class="tit"><i class="titlt">选择品牌：</i><i class="titrt"><a title="" href="brand.html">更多&gt;&gt;</a></i></b>
 								<%
+                                    int topgoodbrandnum = 1;
                                     foreach (GoodsBrandInfo goodbinfo in SAS.Taobao.TaoBaos.GetGoodsBrandListByClass(parentcinfo.Cid))
                                     {
+                                        if (topgoodbrandnum > 20) break;
                                 %>
 								<em class="bra"><a title="<%=goodbinfo.bname%>" href='goodssearch-s-<%=Utils.UrlEncode(goodbinfo.bname)%>.html'><%=goodbinfo.bname%></a></em>
 								<%
+                                    topgoodbrandnum++;
                                     }
                                 %>
 							</span>
@@ -134,7 +138,7 @@
 	<div class="ftnr">
 		<strong><a title="" href="#"><img alt="" src="images/foot_logo.gif" /></a></strong>
 		<span class="line"></span>
-		<p><%foreach(HelpInfo helpinfo in helplist){%><a class="l_fff" title="<%=helpinfo.Title%>" href="<%=mainsiteurl%>/help-<%=helpinfo.Id%>.html"><%=helpinfo.Title%></a> | <%}%><a target="_blank" class="l_fff" title="" href="<%=mainsiteurl%>/sitemap.html">网站地图</a></p>
+		<p><%foreach(HelpInfo helpinfo in helplist){%><a class="l_fff" title="<%=helpinfo.Title%>" href="<%=mainsiteurl%>/help-<%=helpinfo.Id%>.html"><%=helpinfo.Title%></a> | <%}%><a target="_blank" class="l_fff" title="网站地图" href="<%=mainsiteurl%>/sitemap.html">网站地图</a></p>
 		<p>网站备案号：<%=configinfo.Icp%> Copyright @ 2010 <a class="l_fff" title="" href="#">天狼星</a> All Rights Reserved</p>
 	</div>
 </div>

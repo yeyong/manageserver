@@ -18,7 +18,7 @@
                 string[] astr = adinfo.Parameters.Split('|');
                 if (astr.Length < 8) continue;
 		    %>
-			<div class="con"><a title="<%=astr[5]%>" href="<%=astr[4]%>"><img alt="<%=astr[5]%>" src="<%=astr[1]%>" /></a></div>
+			<div class="con"><a target="_blank" title="<%=astr[5]%>" href="<%=astr[4]%>"><img alt="<%=astr[5]%>" src="<%=astr[1]%>" /></a></div>
 			<%
                 adinfo__id++;
             }
@@ -39,7 +39,7 @@
                 string[] astr = adinfo2.Parameters.Split('|');
                 if (astr.Length < 8) continue;
 		%>
-		<li><a title="<%=astr[5]%>" href="<%=astr[4]%>"><img alt="<%=astr[5]%>" src="<%=astr[1]%>" /></a></li>
+		<li><a target="_blank" title="<%=astr[5]%>" href="<%=astr[4]%>"><img alt="<%=astr[5]%>" src="<%=astr[1]%>" /></a></li>
 		<%
             adinfo2__id++;
             }
@@ -72,7 +72,7 @@
                     {
 				%>
 					<li class="trdcot1">
-						<a title="<%=tkinfo.Title%>" href="productshow-<%=tkinfo.NumIid%>.html">
+						<a target="_blank" title="<%=tkinfo.Title%>" href="productshow-<%=tkinfo.NumIid%>.html">
 						<img alt="<%=tkinfo.Title%>" src="<%=tkinfo.PicUrl%>_160x160.jpg" />
 						<span><%=tkinfo.Title%></span>
 						</a>
