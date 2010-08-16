@@ -17,6 +17,13 @@
 			    <%loop (AnnouncementInfo) announcement announcementlist%>
 			    <li>▪&nbsp;<a title="{announcement.title}" href="nouncedetail-{announcement.id}.html">{announcement.title}</a></li>
 			    <%/loop%>
+			    <%if {announcement__loop__id}<5%>
+			    <%while (5-{announcement__loop__id}>0)%>
+			    <li>▪&nbsp;</li>
+			    <%set {announcement__loop__id}={announcement__loop__id}+1%>
+			    <%/while%>
+			    <%/if%>
+			    {announcement__loop__id}
 			</ul>
 		</div>
 		<div class="onelt2 mar_top_8" id="tao">
