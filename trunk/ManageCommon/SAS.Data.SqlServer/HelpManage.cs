@@ -55,7 +55,7 @@ namespace SAS.Data.SqlServer
         /// </summary>
         public IDataReader GetHelpList()
         {
-            string commandText = string.Format("SELECT {0} FROM [{1}help]", DbFields.HELP, BaseConfigs.GetTablePrefix);
+            string commandText = string.Format("SELECT {0} FROM [{1}help] ORDER BY [orderby]", DbFields.HELP, BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteReader(CommandType.Text, commandText);
         }
         /// <summary>
