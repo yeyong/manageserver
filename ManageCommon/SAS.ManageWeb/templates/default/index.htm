@@ -6,24 +6,17 @@
 		<div class="onelt1 f_333" id="bulletin">
 		    <p class="onelt1tit1">最新活动</p>
 			<ul class="onelt1nr">
-				<li>▪&nbsp;<a title="1688开业注册赢金" href="#">1688开业"注册赢金币"...</a></li>
-				<li>▪&nbsp;<a title="阿里集团开通智利地震专项" href="#" style="color:#f00;">阿里集团开通智利地震专项...</a></li>
-				<li>▪&nbsp;<a title="精选爆款" href="#">精选爆款...</a></li>
-				<li>▪&nbsp;<a title="特色礼品盛宴 正在进行" href="#">特色礼品盛宴 正在进行...</a></li>
-				<li>▪&nbsp;<a title="厂家清仓1件不留" href="#" style="color:#f00;">厂家清仓1件不留...</a></li>
+			<%loop (ActivityInfo) indexactinfo indexactlist%>
+				<li>▪&nbsp;<a target="_blank" title="{indexactinfo.atitle}" href="activity-{indexactinfo.id}.html">{indexactinfo.atitle}</a></li>
+			<%/loop%>
+			<%if {indexactinfo__loop__id}<5%><%repeat("<li>▪&nbsp;</li>", 5-{indexactinfo__loop__id})%><%/if%>
 			</ul>
 			<p class="onelt1tit1">公告栏</p>
 			<ul class="onelt1nr">
 			    <%loop (AnnouncementInfo) announcement announcementlist%>
-			    <li>▪&nbsp;<a title="{announcement.title}" href="nouncedetail-{announcement.id}.html">{announcement.title}</a></li>
+			    <li>▪&nbsp;<a target="_blank" title="{announcement.title}" href="nouncedetail-{announcement.id}.html">{announcement.title}</a></li>
 			    <%/loop%>
-			    <%if {announcement__loop__id}<5%>
-			    <%while (5-{announcement__loop__id}>0)%>
-			    <li>▪&nbsp;</li>
-			    <%set {announcement__loop__id}={announcement__loop__id}+1%>
-			    <%/while%>
-			    <%/if%>
-			    {announcement__loop__id}
+			    <%if {announcement__loop__id}<5%><%repeat("<li>▪&nbsp;</li>", 5-{announcement__loop__id})%><%/if%>
 			</ul>
 		</div>
 		<div class="onelt2 mar_top_8" id="tao">
@@ -130,7 +123,7 @@
 			<span>最新加入企业：</span>
 			<ul class="onecomp" id="listcomp">
 			<%loop (Companys) cinfo newcompanylist%>
-			    <li><a title="{cinfo.en_name}" href="{cinfo.en_id}.html" target="_blank">{cinfo.en_name}</a></li>
+			    <li><a title="{cinfo.en_name}" href="{cinfo.en_id}.html" target="_blank"><%getsubstring({cinfo.en_name},24,"...")%></a></li>
 			<%/loop%>				
 			</ul>
 		</div>
@@ -168,7 +161,7 @@
 <div class="cot">
 	<div class="type typew1 mar_top_8">
 		<p class="type1 type1w1">
-			<em></em><strong>行业市场</strong><span><a class="l_f00_u" title="" href="companypost.aspx">免费发布企业信息</a></span>
+			<em></em><strong>行业市场</strong><span><a class="l_f00_u" title="" href="{forumurl}index.html">免费发布企业信息</a></span>
 		</p>
 		<%loop (DataRow) cataloginfo cataloglist1%>
 		<div class="type2">

@@ -2146,6 +2146,10 @@ namespace SAS.Data
         /// </summary>
         bool SetActivityType(string idlist, int typeid);
         /// <summary>
+        /// 首页活动信息
+        /// </summary>
+        IDataReader GetIndexActvities();
+        /// <summary>
         /// 获取淘之购活动信息
         /// </summary>
         IDataReader GetTaoActivities();

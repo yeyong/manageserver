@@ -104,6 +104,7 @@ namespace SAS.ManageWeb.ManagePage
                     SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoActivities", true);
                 }
                 SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/Activity");
+                SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/IndexAct");
                 //记录日志
                 AdminVistLogs.InsertLog(this.userid, this.username, this.usergroupid, this.grouptitle, this.ip, "更新活动", "更新活动,标题为:" + act_title.Text);
                 base.RegisterStartupScript("PAGE", "window.location.href='global_searchactivity.aspx';");

@@ -66,7 +66,6 @@ namespace SAS.Logic
         /// <summary>
         /// 缓存有效活动信息
         /// </summary>
-        /// <returns></returns>
         public static DataTable GetActivitiesCache()
         {
             SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
@@ -77,6 +76,25 @@ namespace SAS.Logic
                 activelist = GetEnableActivities();
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 1440;
+                cache.AddObject(cachekey, activelist);
+            }
+            return activelist;
+        }
+
+        /// <summary>
+        /// 获取首页活动
+        /// </summary>
+        public static List<ActivityInfo> GetIndexActivities()
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            string cachekey = "/SAS/IndexAct";
+            List<ActivityInfo> activelist = new List<ActivityInfo>();
+            activelist = cache.RetrieveObject(cachekey) as List<ActivityInfo>;
+            if (activelist == null)
+            {
+                activelist = Data.DataProvider.Activities.GetIndexActivities();
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 300;
                 cache.AddObject(cachekey, activelist);
             }
             return activelist;
