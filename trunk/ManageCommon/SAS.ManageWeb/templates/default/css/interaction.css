@@ -20,6 +20,7 @@ body{ background:#f7f7eb;}
 .tjp1 span{ width:28px; height:28px; line-height:28px; text-align:center; color:#fff; font-size:16px; font-weight:bold; background:url(../images/quan-1.gif) no-repeat; margin:0 7px 0 0; display:inline; float:left;}
 .tjp2 span{ width:28px; height:28px; line-height:28px; text-align:center; color:#b0b0b0; font-size:16px; font-weight:bold; background:url(../images/quan-2.gif) no-repeat; margin:0 7px 0 0; display:inline; float:left;}
 .tijiao2nr1{ width:708px; height:30px; line-height:30px; font-size:14px; padding:0 10px; margin:20px 0 0 0; text-align:center; display:inline; float:left;}
+.tjcot{ width:490px; height:378px; border:1px solid #7f9db9; overflow-y:auto; padding:5px; float:left;}
 .tj2nrbg{ text-align:left; background:#f8f6f6; border-top:1px solid #ccc;}
 .tdtj{ width:100%; float:left;}
 .tdtj td{ color:#666; padding:10px 5px; line-height:20px; vertical-align:top;}

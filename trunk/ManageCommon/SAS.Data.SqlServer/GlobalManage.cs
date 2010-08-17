@@ -2324,11 +2324,19 @@ namespace SAS.Data.SqlServer
             return rows > 0 ? true : false;
         }
         /// <summary>
+        /// 首页活动信息
+        /// </summary>
+        public IDataReader GetIndexActvities()
+        {
+            string commandText = string.Format("SELECT TOP 5 {0} FROM [{1}activity] WHERE ([atype] = 0 OR [atype] = {2}) AND [enabled] = 1 ORDER BY [begintime] DESC", DbFields.ACTIVITY, BaseConfigs.GetTablePrefix, Convert.ToInt16(ActivityType.IndexActivity));
+            return DbHelper.ExecuteReader(CommandType.Text, commandText);
+        }
+        /// <summary>
         /// 获取淘之购活动信息
         /// </summary>
         public IDataReader GetTaoActivities()
         {
-            string commandText = string.Format("SELECT {0} FROM [{1}activity] WHERE ([atype] = 0 OR [atype] = {2}) AND [enabled] = 1 ORDER BY [begintime] DESC", DbFields.ACTIVITY, BaseConfigs.GetTablePrefix, Convert.ToInt16(ActivityType.TaobaoActivity));
+            string commandText = string.Format("SELECT TOP 5 {0} FROM [{1}activity] WHERE ([atype] = 0 OR [atype] = {2}) AND [enabled] = 1 ORDER BY [begintime] DESC", DbFields.ACTIVITY, BaseConfigs.GetTablePrefix, Convert.ToInt16(ActivityType.TaobaoActivity));
             return DbHelper.ExecuteReader(CommandType.Text, commandText);
         }
         #endregion

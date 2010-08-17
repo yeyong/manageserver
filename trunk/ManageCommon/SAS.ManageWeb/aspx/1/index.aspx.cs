@@ -50,6 +50,10 @@ namespace SAS.ManageWeb
         /// </summary>
         protected List<Companys> selcompanylist = Companies.GetCompanyListByType(EnTypeEnum.Dealers);
         /// <summary>
+        /// 首页活动信息集合
+        /// </summary>
+        protected List<ActivityInfo> indexactlist = Activities.GetIndexActivities();
+        /// <summary>
         /// 帮助列表
         /// </summary>
         protected List<HelpInfo> helplist = Helps.GetIndexHelpList();

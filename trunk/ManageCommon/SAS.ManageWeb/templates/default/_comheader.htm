@@ -8,7 +8,7 @@
 		</ul>
 		<p class="toprt">
 		<%loop (HelpInfo) commonhelpinfo commonhelplist%>
-		    <a title="{commonhelpinfo.title}" href="{rooturl}help-{commonhelpinfo.id}.html">{commonhelpinfo.title}</a> | 
+		<%if {commonhelpinfo.orderby}==1%><a title="{commonhelpinfo.title}" href="{rooturl}help-{commonhelpinfo.id}.html">{commonhelpinfo.title}</a> | <%/if%>
 		<%/loop%>
 		<a title="帮助中心" href="help.html">帮助中心</a> | <a title="提交企业信息" href="{rooturl}agreement.html" class="l_e00101">提交企业信息</a>
 		</p>

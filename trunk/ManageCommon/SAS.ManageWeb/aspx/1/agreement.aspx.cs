@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Data;
-using System.Text.RegularExpressions;
+using System.Web;
 
 using SAS.Logic;
 using SAS.Common;
@@ -19,8 +19,7 @@ namespace SAS.ManageWeb
             {
                 if (agreestatus == 1)
                 {
-                    AddMsgLine("感谢您的理解和支持！页面3秒钟后自动转到提交页面。");
-                    SetMetaRefresh(3, rooturl + "companypost.aspx");
+                    HttpContext.Current.Response.Redirect("companypost.aspx");
                 }
                 else
                 {
