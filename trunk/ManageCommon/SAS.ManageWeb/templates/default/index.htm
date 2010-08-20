@@ -21,37 +21,39 @@
 		</div>
 		<div class="onelt2 mar_top_8" id="tao">
 			<ul id="onelt2tit">
-				<li>淘宝热卖</li>
-				<li>人气店铺</li>
+				<li>精选商品</li>
+				<li>人气单品</li>
 			</ul>
 			<div id="onelt2con">
 				<div class="con">
 					<ul class="onelt2nr">
 						<li>
-							<p class="onelt2nrtu"><a title="" href="#" style="color:#f00;"><img alt="" src="templates/{templatepath}/images/aa/aa8.jpg" /></a></p>
-							<p class="onelt2nrzi line"><a title="socool女包" href="#">socool女包全场包邮,买二件socool女包全场包邮,买二件socool女包全场包邮,买二件</a></p>
+						<%if {indexad1}.Length>=8%>
+							<p class="onelt2nrtu"><a target="_blank" title="{indexad1[5]}" href="{indexad1[4]}" style="color:#f00;"><img alt="{indexad1[5]}" src="{indexad1[1]}" /></a></p>
+							<p class="onelt2nrzi line"><a target="_blank" title="{indexad1[5]}" href="{indexad1[4]}">{indexad1[5]}</a></p>
+						<%/if%>
 						</li>
 						<li>
-							<p class="onelt2nrtu"><a title="" href="#" style="color:#f00;"><img alt="" src="templates/{templatepath}/images/aa/aa8.jpg" /></a></p>
-							<p class="onelt2nrzi line"><a title="socool女包" href="#">socool女包全场包邮,买二件</a></p>
+						<%if {indexad2}.Length>=8%>
+							<p class="onelt2nrtu"><a target="_blank" title="{indexad2[5]}" href="{indexad2[4]}" style="color:#f00;"><img alt="{indexad2[5]}" src="{indexad2[1]}" /></a></p>
+							<p class="onelt2nrzi line"><a target="_blank" title="{indexad2[5]}" href="{indexad2[4]}">{indexad2[5]}</a></p>
+						<%/if%>
 						</li>
 					</ul>
 				</div>
 				<div class="con">
 					<ul class="onelt2nr">
 						<li>
-							<p class="onelt2nrtu"><a title="" href="#" style="color:#f00;"><img alt="" src="templates/{templatepath}/images/aa/aa8.jpg" /></a></p>
-							<p class="onelt2nrzi">
-								<span class="onelt2nrzi1 line"><a title="socool女包" href="#">socool女包全场包邮,买二件</a></span>
-								<span class="onelt2nrzi2" style="width:17px; background-position:top left;"></span>
-							</p>
+						<%if {indexad3}.Length>=8%>
+							<p class="onelt2nrtu"><a target="_blank" title="{indexad3[5]}" href="{indexad3[4]}" style="color:#f00;"><img alt="{indexad3[5]}" src="{indexad3[1]}" /></a></p>
+							<p class="onelt2nrzi line"><a target="_blank" title="{indexad3[5]}" href="{indexad3[4]}">{indexad3[5]}</a></p>
+						<%/if%>
 						</li>
 						<li>
-							<p class="onelt2nrtu"><a title="" href="#" style="color:#f00;"><img alt="" src="templates/{templatepath}/images/aa/aa8.jpg" /></a></p>
-							<p class="onelt2nrzi">
-								<span class="onelt2nrzi1 line"><a title="socool女包" href="#">socool女包全场包邮,买二件</a></span>
-								<span class="onelt2nrzi2" style="width:34px; background-position:bottom left;"></span>
-							</p>
+						<%if {indexad4}.Length>=8%>
+							<p class="onelt2nrtu"><a target="_blank" title="{indexad4[5]}" href="{indexad4[4]}" style="color:#f00;"><img alt="{indexad4[5]}" src="{indexad4[1]}" /></a></p>
+							<p class="onelt2nrzi line"><a target="_blank" title="{indexad4[5]}" href="{indexad4[4]}">{indexad4[5]}</a></p>
+						<%/if%>
 						</li>
 					</ul>
 				</div>

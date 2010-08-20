@@ -58,6 +58,11 @@ public partial class itemshow : TaoBaoPage
     protected override void ShowPage()
     {
         tkitem = TaoBaos.GetTaoBaoKeItemDetail(iid);
+        if (tkitem == null)
+        {
+            AddErrLine("商品已过期或已下架！");
+            return;
+        }
         iteminfo = tkitem.Item;
         tklocation = iteminfo.Location;
 
@@ -86,13 +91,6 @@ public partial class itemshow : TaoBaoPage
             shopscore = (decimal.Round(decimal.Parse((((double)sdinfo.good_num / (double)sdinfo.total_num) * 100).ToString()), 2)).ToString();
             shopurl = "storeshow-" + sdinfo.sid + ".html";
             shopaddress = sdinfo.shop_province + sdinfo.shop_city;
-        }
-
-        if (tkitem == null)
-        {
-            AddErrLine("商品详请错误！");
-            SetMetaRefresh(2, LogicUtils.GetReUrl());
-            return;
         }
 
         pagetitle = string.Format("{0}-{0}商品详细介绍", iteminfo.Title);

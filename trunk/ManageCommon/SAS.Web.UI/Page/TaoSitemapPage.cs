@@ -109,4 +109,17 @@ namespace SAS.Web.UI
             System.Web.HttpContext.Current.Response.End();
         }
     }
+
+    public class ShowSitemapPage : Page
+    {
+        private GeneralConfigInfo config = GeneralConfigs.GetConfig();
+
+        public ShowSitemapPage()
+        {
+            System.Web.HttpContext.Current.Response.ContentType = "application/xml";
+            System.Web.HttpContext.Current.Response.AppendHeader("Last-Modified", DateTime.Now.ToString("r"));
+            System.Web.HttpContext.Current.Response.Write(Feeds.GetShowSitemap(config.Sitemapttl));
+            System.Web.HttpContext.Current.Response.End();
+        }
+    }
 }

@@ -152,7 +152,7 @@ namespace SAS.ManageWeb
                     pagenav += String.Format(" &gt; <a href=\"zscard-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}.html\" title=\"{0}\" class=\"l_666\">{0}</a>", subcli.name, subcli.id, provinceid, cityid, areaid, entypeid, regyear, ordertype, keyword);
                 }
                 pagenav += " &gt; " + _cli.name;
-                pagetitle = pagetitle + "-" + _cli.name + "企业信息";
+                pagetitle = pagetitle + "-" + _cli.name + "企业信息" + (pageid > 1 ? "(" + pageid + ")" : "");
                 m_keyword += string.Format(m_keyword, _cli.name);
                 m_content += string.Format(m_content, _cli.name);
             }
