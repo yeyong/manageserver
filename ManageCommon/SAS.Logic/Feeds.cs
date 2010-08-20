@@ -18,10 +18,9 @@ namespace SAS.Logic
     {
         private static GeneralConfigInfo config = GeneralConfigs.GetConfig();
         /// <summary>
-        /// 获得百度论坛收录协议xml
+        /// 获得Google收录协议xml
         /// </summary>
         /// <param name="ttl">TTL数值</param>
-        /// <returns></returns>
         public static string GetSASSitemap(int ttl)
         {
             SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
@@ -51,6 +50,13 @@ namespace SAS.Logic
                     sitemapBuilder.Append("  </url>");
                 }
 
+                foreach (DataRow dr in Companies.GetCompanyTableList().Select("[en_status] = 2 AND [en_visble] = 1"))
+                {
+                    sitemapBuilder.Append("  <url>");
+                    sitemapBuilder.AppendFormat("    <loc>{0}</loc>", config.Weburl + "/" + dr["en_id"] + ".html");
+                    sitemapBuilder.Append("  </url>");
+                }
+
                 foreach (DataRow dr in Activities.GetActivitiesCache().Rows)
                 {
                     sitemapBuilder.Append("  <url>");
@@ -65,6 +71,36 @@ namespace SAS.Logic
                 ics.TimeOut = ttl * 60;
                 cache.LoadCacheStrategy(ics);
                 cache.AddObject("/SAS/Sitemap", sitemap);
+                cache.LoadDefaultCacheStrategy();
+            }
+            return sitemap;
+        }
+        /// <summary>
+        /// 获得企业展示收录协议xml
+        /// </summary>
+        public static string GetShowSitemap(int ttl)
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            string sitemap = cache.RetrieveObject("/SAS/ShowSitemap") as string;
+            if (sitemap == null)
+            {
+                StringBuilder sitemapBuilder = new StringBuilder("<?xml version=\"1.0\" encoding=\"utf-8\" ?>\r\n");
+                sitemapBuilder.Append("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">");
+
+                foreach (DataRow dr in Companies.GetCompanyTableList().Select("[en_status] = 2 AND [en_visble] = 1"))
+                {
+                    sitemapBuilder.Append("  <url>");
+                    sitemapBuilder.AppendFormat("    <loc>{0}</loc>", config.Weburl + "/" + dr["en_id"] + ".html");
+                    sitemapBuilder.Append("  </url>");
+                }
+
+                sitemapBuilder.Append("</urlset>");
+                sitemap = sitemapBuilder.ToString();
+                //声明新的缓存策略接口
+                SAS.Cache.ICacheStrategy ics = new SitemapCacheStrategy();
+                ics.TimeOut = ttl * 60;
+                cache.LoadCacheStrategy(ics);
+                cache.AddObject("/SAS/ShowSitemap", sitemap);
                 cache.LoadDefaultCacheStrategy();
             }
             return sitemap;

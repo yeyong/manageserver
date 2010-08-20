@@ -82,7 +82,7 @@ namespace SAS.Logic
         {
             string result = "";
 
-            AdShowInfo[] adshowArray = GetAdsTable(GetSelectStr(0, AdType.TaoIndexHeaderAD));
+            AdShowInfo[] adshowArray = GetTaoAdsTable(GetSelectStr(0, AdType.TaoIndexHeaderAD));
             if (adshowArray.Length > 0)
             {
                 int number = new Random().Next(0, adshowArray.Length);
@@ -97,7 +97,7 @@ namespace SAS.Logic
         {
             string result = "";
 
-            AdShowInfo[] adshowArray = GetAdsTable(GetSelectStr(displayorder, adtype));
+            AdShowInfo[] adshowArray = GetTaoAdsTable(GetSelectStr(displayorder, adtype));
             if (adshowArray.Length > 0)
             {
                 int number = new Random().Next(0, adshowArray.Length);
@@ -111,6 +111,28 @@ namespace SAS.Logic
         public static AdShowInfo[] GetAdsByType(int displayorder, AdType adtype)
         {
             return GetTaoAdsTable(GetSelectStr(displayorder, adtype));
+        }
+        /// <summary>
+        /// 随机获取浙商广告
+        /// </summary>
+        public static string GetZSRandomAd(int displayorder, AdType adtype)
+        {
+            string result = "";
+
+            AdShowInfo[] adshowArray = GetAdsTable(GetSelectStr(displayorder, adtype));
+            if (adshowArray.Length > 0)
+            {
+                int number = new Random().Next(0, adshowArray.Length);
+                result = adshowArray[number].Parameters;
+            }
+            return result;
+        }
+        /// <summary>
+        /// 获取浙商广告组信息（根据广告类）
+        /// </summary>
+        public static AdShowInfo[] GetZSAdsByType(int displayorder, AdType adtype)
+        {
+            return GetAdsTable(GetSelectStr(displayorder, adtype));
         }
         /// <summary>
         /// 根据参数生成查询字符串

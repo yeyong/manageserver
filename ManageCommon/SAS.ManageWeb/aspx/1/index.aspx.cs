@@ -61,6 +61,22 @@ namespace SAS.ManageWeb
         /// 首页城市
         /// </summary>
         protected DataRow[] indexcity;
+        /// <summary>
+        /// 广告位1
+        /// </summary>
+        protected string[] indexad1 = Advertisements.GetZSRandomAd(1, AdType.IndexImageAd).Split('|');
+        /// <summary>
+        /// 广告位2
+        /// </summary>
+        protected string[] indexad2 = Advertisements.GetZSRandomAd(2, AdType.IndexImageAd).Split('|');
+        /// <summary>
+        /// 广告位3
+        /// </summary>
+        protected string[] indexad3 = Advertisements.GetZSRandomAd(3, AdType.IndexImageAd).Split('|');
+        /// <summary>
+        /// 广告位4
+        /// </summary>
+        protected string[] indexad4 = Advertisements.GetZSRandomAd(4, AdType.IndexImageAd).Split('|');
 
         protected override void ShowPage()
         {
