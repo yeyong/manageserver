@@ -1861,6 +1861,7 @@
     <Content Include="tools\flashcomm.aspx" />
     <Content Include="config\taobao.config" />
     <Content Include="tools\zsmap.aspx" />
+    <Content Include="tools\rss.aspx" />
     <None Include="ManagePage\images\admin-gif\Thumbs.db" />
     <None Include="ManagePage\images\ad\Thumbs.db" />
     <None Include="ManagePage\images\Thumbs.db" />
