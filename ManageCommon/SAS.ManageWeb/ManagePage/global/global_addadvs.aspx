@@ -377,12 +377,7 @@
                 }
             case "6":
                 {
-                    $('paramselect').style.display = 'none';
                     $('adtype7').style.display = '';
-                    $('htmlcode').style.display = 'none';
-                    $('word').style.display = 'none';
-                    $('image').style.display = 'none';
-                    $('flash').style.display = 'none';
                     break;
                 }
             case "7":

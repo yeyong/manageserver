@@ -369,13 +369,7 @@ function validate(theForm)
 			}
 			case "6":
 			{
-				$('paramselect').style.display = 'none';
 				$('adtype7').style.display='';
-				$('htmlcode').style.display='none';
-				$('word').style.display='none';
-				$('image').style.display='none';
-				$('flash').style.display='none';
-				//$('silverlight').style.display='';
 				break;
 			}
 			case "7":

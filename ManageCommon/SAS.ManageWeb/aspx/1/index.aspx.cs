@@ -77,6 +77,14 @@ namespace SAS.ManageWeb
         /// 广告位4
         /// </summary>
         protected string[] indexad4 = Advertisements.GetZSRandomAd(4, AdType.IndexImageAd).Split('|');
+        /// <summary>
+        /// 首页对联广告1
+        /// </summary>
+        protected string[] indexdouble1 = Advertisements.GetZSRandomAd(1, AdType.DoubleAd).Split('|');
+        /// <summary>
+        /// 首页对联广告2
+        /// </summary>
+        protected string[] indexdouble2 = Advertisements.GetZSRandomAd(2, AdType.DoubleAd).Split('|');
 
         protected override void ShowPage()
         {
@@ -86,6 +94,17 @@ namespace SAS.ManageWeb
             script += "\r\n<script src=\"" + forumpath + "javascript/jquery-exchange.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/ScrollText.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/jquery.capSlide.js\" type=\"text/javascript\"></script>";
+
+            string adtempstr = "";
+            if (indexdouble1.Length >= 8)
+            {
+                adtempstr += "\r\n " + "jQuery(this).Couplet({closeicon:\"templates/" + templatepath + "/images/cross.png\",layout:\"left\",distance:20,objsrc:\"" + indexdouble1[1] + "\",objhref:\"" + indexdouble1[4] + "\"})";
+            }
+            if (indexdouble2.Length >= 8)
+            {
+                adtempstr += "\r\n " + "jQuery(this).Couplet({closeicon:\"templates/" + templatepath + "/images/cross.png\",layout:\"right\",distance:20,objsrc:\"" + indexdouble2[1] + "\",objhref:\"" + indexdouble2[4] + "\"})";
+            }
+
             string loadscript = "\r\n " + "jQuery(document).ready(function() {"
                     + "\r\n " + "jQuery(\"#bulletin\").find(\"ul:last\").hide();"
                     + "\r\n " + "jQuery(\"#bulletin\").find(\"p:first\").mouseover(function() {"
@@ -104,7 +123,7 @@ namespace SAS.ManageWeb
                     + "\r\n " + "scrollup.LineHeight = 30;"
                     + "\r\n " + "scrollup.Amount = 2;"
                     + "\r\n " + "scrollup.Start();"
-                    + "\r\n " + "jQuery(this).gettop({objsrc:\"templates/" + templatepath + "/images/top.gif\",objhref:\"javascript:scrollTo(0,0)\"});"
+                    + "\r\n " + "jQuery(this).gettop({objsrc:\"templates/" + templatepath + "/images/top.gif\",objhref:\"javascript:scrollTo(0,0)\"});" + adtempstr
                     + "\r\n " + "});";
             AddfootScript(loadscript);
 
