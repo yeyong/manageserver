@@ -1194,6 +1194,7 @@
     <Content Include="Global.asax" />
     <Content Include="images\common\clipboard.swf" />
     <Content Include="images\logo.gif" />
+    <Content Include="images\rss.png" />
     <Content Include="javascript\jquery.ratingmin.js" />
     <Content Include="javascript\jqueryCommon.js" />
     <Content Include="javascript\template_showcompany.js" />

@@ -129,8 +129,7 @@ namespace SAS.Web.UI
         public RssXMLPage()
         {
             System.Web.HttpContext.Current.Response.ContentType = "application/xml";
-            System.Web.HttpContext.Current.Response.AppendHeader("Last-Modified", DateTime.Now.ToString("r"));
-            System.Web.HttpContext.Current.Response.Write(Feeds.GetRssXML(config.Sitemapttl));
+            System.Web.HttpContext.Current.Response.Write(Feeds.GetRssXML(config.Rssttl));
             System.Web.HttpContext.Current.Response.End();
         }
     }
