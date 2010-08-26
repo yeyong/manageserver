@@ -138,7 +138,7 @@
 	<div class="ftnr">
 		<strong><a title="" href="#"><img alt="" src="images/foot_logo.gif" /></a></strong>
 		<span class="line"></span>
-		<p><%foreach(HelpInfo helpinfo in helplist){%><a class="l_fff" title="<%=helpinfo.Title%>" href="<%=mainsiteurl%>/help-<%=helpinfo.Id%>.html"><%=helpinfo.Title%></a> | <%}%><a target="_blank" class="l_fff" title="网站地图" href="<%=mainsiteurl%>/sitemap.html">网站地图</a></p>
+		<p><%foreach(HelpInfo helpinfo in helplist){%><a class="l_fff" title="<%=helpinfo.Title%>" href="<%=mainsiteurl%>/help-<%=helpinfo.Id%>.html"><%=helpinfo.Title%></a> | <%}%><a target="_blank" class="l_fff" title="网站地图" href="<%=mainsiteurl%>/sitemap.html">网站地图</a> | <a title="sitemap" href="<%=mainsiteurl%>/sitemap.aspx" class="l_fff">Sitemap</a></p>
 		<p>网站备案号：<%=configinfo.Icp%> Copyright @ 2010 <a class="l_fff" title="" href="#">天狼星</a> All Rights Reserved</p>
 	</div>
 </div>

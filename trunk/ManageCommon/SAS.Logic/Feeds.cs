@@ -29,7 +29,7 @@ namespace SAS.Logic
             if (sitemap == null)
             {
                 StringBuilder sitemapBuilder = new StringBuilder("<?xml version=\"1.0\" encoding=\"utf-8\" ?>\r\n");
-                sitemapBuilder.Append("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">");
+                sitemapBuilder.Append("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:image=\"http://www.google.com/schemas/sitemap-image/1.1\">");
 
                 sitemapBuilder.Append("  <url>");
                 sitemapBuilder.AppendFormat("    <loc>{0}</loc>", config.Weburl + "/index.html");
@@ -54,6 +54,10 @@ namespace SAS.Logic
                 {
                     sitemapBuilder.Append("  <url>");
                     sitemapBuilder.AppendFormat("    <loc>{0}</loc>", config.Weburl + "/" + dr["en_id"] + ".html");
+                    sitemapBuilder.Append("    <image:image>");
+                    sitemapBuilder.AppendFormat("      <image:title>{0}</image:title>", dr["en_name"]);
+                    sitemapBuilder.AppendFormat("      <image:loc>{0}</image:loc>", config.Weburl + "/showcardimg_" + dr["en_id"] + ".html");
+                    sitemapBuilder.Append("    </image:image>");
                     sitemapBuilder.Append("  </url>");
                 }
 
@@ -68,7 +72,7 @@ namespace SAS.Logic
                 sitemap = sitemapBuilder.ToString();
                 //声明新的缓存策略接口
                 SAS.Cache.ICacheStrategy ics = new SitemapCacheStrategy();
-                ics.TimeOut = ttl * 60;
+                ics.TimeOut = ttl;
                 cache.LoadCacheStrategy(ics);
                 cache.AddObject("/SAS/Sitemap", sitemap);
                 cache.LoadDefaultCacheStrategy();
@@ -128,8 +132,26 @@ namespace SAS.Logic
                 rssBuilder.Append("    <description>\r\n");
                 rssBuilder.Append("      <![CDATA[ 浙商黄页 -- 浙商 网络名片 天狼星 自助推广 ]]>\r\n");
                 rssBuilder.Append("    </description>\r\n");
+                rssBuilder.AppendFormat("    <ttl>{0}</ttl>\r\n", ttl.ToString());
 
-                foreach (Companys cominfo in SAS.Data.DataProvider.Companies.GetCompanyListByOrder(20, "en_createdate", true))
+                int actdr__id = 1;
+                foreach (DataRow actdr in SAS.Data.DataProvider.Activities.GetEnableActivities().Select("", "createdate desc"))
+                {
+                    if (actdr__id > 10) break;
+                    rssBuilder.Append("    <item>\r\n");
+                    rssBuilder.AppendFormat("      <link>{0}</link>\r\n", config.Weburl.EndsWith("/") ? config.Weburl + "activity-" + actdr["id"] + ".html" : config.Weburl + "/" + "activity-" + actdr["id"] + ".html");
+                    rssBuilder.AppendFormat("      <title><![CDATA[ {0} ]]></title>\r\n", actdr["atitle"]);
+                    rssBuilder.Append("    <author>浙商黄页</author>\r\n");
+                    rssBuilder.Append("    <category>www.zheshangonline.com浙商黄页宣传活动</category>\r\n");
+                    rssBuilder.AppendFormat("    <guid>{0}</guid>\r\n", config.Weburl.EndsWith("/") ? config.Weburl + "activity-" + actdr["id"] + ".html" : config.Weburl + "/" + "activity-" + actdr["id"] + ".html");
+                    rssBuilder.AppendFormat("    <pubDate>{0}</pubDate>\r\n", Utils.HtmlEncode(Convert.ToDateTime(actdr["createdate"]).ToString("r").Trim()));
+                    rssBuilder.Append("    <description>\r\n");
+                    rssBuilder.AppendFormat("      <![CDATA[ {0} ]]>\r\n", Utils.GetTextFromHTML(Utils.ClearUBB(actdr["desccode"].ToString())).Trim());
+                    rssBuilder.Append("    </description>\r\n");
+                    rssBuilder.Append("    </item>\r\n");
+                }
+
+                foreach (Companys cominfo in SAS.Data.DataProvider.Companies.GetCompanyListByOrder(20, "en_update", true))
                 {
                     rssBuilder.Append("    <item>\r\n");
                     rssBuilder.AppendFormat("      <link>{0}</link>\r\n", config.Weburl.EndsWith("/") ? config.Weburl + cominfo.En_id + ".html" : config.Weburl + "/" + cominfo.En_id + ".html");

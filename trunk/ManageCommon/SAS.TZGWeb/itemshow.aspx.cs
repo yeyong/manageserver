@@ -61,6 +61,7 @@ public partial class itemshow : TaoBaoPage
         if (tkitem == null)
         {
             AddErrLine("商品已过期或已下架！");
+            SetMetaRefresh(2, rooturl);
             return;
         }
         iteminfo = tkitem.Item;

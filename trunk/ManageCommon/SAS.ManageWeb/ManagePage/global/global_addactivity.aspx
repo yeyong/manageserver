@@ -120,7 +120,7 @@
             </tr>
             <tr>
                 <td class="vtop rowform">
-                    <sas:TextBox id="act_title" runat="server" CanBeNull="必填" RequiredFieldType="暂无校验" MaxLength="20" HintInfo="设置活动标题，最多20个字"></sas:TextBox>
+                    <sas:TextBox id="act_title" runat="server" CanBeNull="必填" RequiredFieldType="暂无校验" MaxLength="100" HintInfo="设置活动标题，最多50个字"></sas:TextBox>
                 </td>
                 <td class="vtop">
                 </td>
@@ -176,7 +176,7 @@
             </tr>
             <tr>
                 <td class="vtop rowform">
-                    <sas:TextBox id="seotitle" runat="server" RequiredFieldType="暂无校验" MaxLength="20" HintInfo="设置SEO标题，最多20个字"></sas:TextBox>
+                    <sas:TextBox id="seotitle" runat="server" RequiredFieldType="暂无校验" MaxLength="100" HintInfo="设置SEO标题，最多50个字"></sas:TextBox>
                 </td>
                 <td class="vtop">
                 </td>

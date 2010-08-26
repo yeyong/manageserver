@@ -60,7 +60,7 @@ jQuery.fn.Couplet = function(parmsObj) {
         var right = parmarray.distance;
     }
 
-    var objdiv = jQuery(this).floatdiv({ objsrc: parmarray.objsrc, objhref: parmarray.objhref, distance: parmarray.top, right: right });
+    var objdiv = jQuery(this).floatdiv({ objsrc: parmarray.objsrc, objhref: parmarray.objhref, distance: parmarray.top, right: right, opentype: "_blank" });
     var objspan = jQuery("<span><img /></span>").css({ position: "absolute", right: 0 });
     var objfile = "";
 
