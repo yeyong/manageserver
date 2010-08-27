@@ -47,7 +47,7 @@
         foreach (GoodsBrandInfo cbrandinfo in cbrandlist)
         {
     %>
-		<li class="barli1"><a title="<%=cbrandinfo.bname%>" href="showbrand-<%=cbrandinfo.id%>.html"><img alt="<%=cbrandinfo.bname%>" src="<%=cbrandinfo.logo%>" /></a></li>
+		<li class="barli1"><a title="<%=cbrandinfo.bname%>" href="goodssearch-s-<%=Utils.UrlEncode(cbrandinfo.bname)%>.html"><img alt="<%=cbrandinfo.bname%>" src="<%=cbrandinfo.logo%>" /></a></li>
 	<%
         }
     %>
