@@ -146,7 +146,7 @@ namespace SAS.Logic
                     rssBuilder.AppendFormat("    <guid>{0}</guid>\r\n", config.Weburl.EndsWith("/") ? config.Weburl + "activity-" + actdr["id"] + ".html" : config.Weburl + "/" + "activity-" + actdr["id"] + ".html");
                     rssBuilder.AppendFormat("    <pubDate>{0}</pubDate>\r\n", Utils.HtmlEncode(Convert.ToDateTime(actdr["createdate"]).ToString("r").Trim()));
                     rssBuilder.Append("    <description>\r\n");
-                    rssBuilder.AppendFormat("      <![CDATA[ {0} ]]>\r\n", Utils.GetTextFromHTML(Utils.ClearUBB(actdr["desccode"].ToString())).Trim());
+                    rssBuilder.AppendFormat("      <![CDATA[ <a title=\"{0}\" href=\"activity-{1}.html\"><img style=\"border:0\" alt=\"{0}\" src=\"{2}\"/></a> ]]>\r\n", actdr["atitle"], actdr["id"], actdr["rssimg"]);
                     rssBuilder.Append("    </description>\r\n");
                     rssBuilder.Append("    </item>\r\n");
                 }

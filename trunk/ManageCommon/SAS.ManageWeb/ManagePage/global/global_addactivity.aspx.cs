@@ -80,6 +80,7 @@ namespace SAS.ManageWeb.ManagePage
             aif.Seokeyword = Utils.RemoveHtml(seokeyword.Text);
             aif.Seodesc = Utils.RemoveHtml(seodesc.Text);
             aif.Enabled = TypeConverter.StrToInt(act_status.SelectedValue, 0);
+            aif.RssImg = Utils.RemoveHtml(act_rssimg.Text);
             return aif;
         }
 

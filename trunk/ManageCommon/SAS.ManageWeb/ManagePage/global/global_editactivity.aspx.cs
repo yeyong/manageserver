@@ -43,6 +43,7 @@ namespace SAS.ManageWeb.ManagePage
             seokeyword.Text = actInfo.Seokeyword;
             seodesc.Text = actInfo.Seodesc;
             act_status.SelectedValue = actInfo.Enabled.ToString();
+            act_rssimg.Text = actInfo.RssImg;
 
             ActivityType ate = new ActivityType();
             typeid.Items.Clear();
@@ -97,6 +98,7 @@ namespace SAS.ManageWeb.ManagePage
                 activityInfo.Seokeyword = Utils.RemoveHtml(seokeyword.Text);
                 activityInfo.Seodesc = Utils.RemoveHtml(seodesc.Text);
                 activityInfo.Enabled = TypeConverter.StrToInt(act_status.SelectedValue, 0);
+                activityInfo.RssImg = Utils.RemoveHtml(act_rssimg.Text);
 
                 AdminActivities.UpdateActivityInfo(activityInfo);
                 if (TypeConverter.StrToInt(typeid.SelectedValue, 0) == Convert.ToInt16(ActivityType.TaobaoActivity))

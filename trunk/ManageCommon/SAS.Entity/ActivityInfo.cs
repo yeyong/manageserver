@@ -22,6 +22,7 @@ namespace SAS.Entity
         private string _seodesc = "";
         private string _seokeyword = "";
         private string _createdate;
+        private string _rssimg = "";
 
         public ActivityInfo Clone()
         {
@@ -130,6 +131,14 @@ namespace SAS.Entity
         {
             set { _createdate = value; }
             get { return _createdate; }
+        }
+        /// <summary>
+        /// rss图片
+        /// </summary>
+        public string RssImg
+        {
+            set { _rssimg = value; }
+            get { return _rssimg; }
         }
         #endregion Model
     }

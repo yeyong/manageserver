@@ -9,7 +9,7 @@ namespace SAS.Data
         /// <summary>
         /// 活动专题
         /// </summary>
-        public const string ACTIVITY = "[id],[atitle],[stylecode],[desccode],[scriptcode],[begintime],[endtime],[atype],[enabled],[seotitle],[seodesc],[seokeyword],[createdate]";
+        public const string ACTIVITY = "[id],[atitle],[stylecode],[desccode],[scriptcode],[begintime],[endtime],[atype],[enabled],[seotitle],[seodesc],[seokeyword],[createdate],[rssimg]";
         /// <summary>
         /// 管理组admingroup personGroup表字段
         /// </summary>

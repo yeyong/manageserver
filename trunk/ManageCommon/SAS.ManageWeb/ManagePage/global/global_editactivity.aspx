@@ -120,7 +120,17 @@
             </tr>
             <tr>
                 <td class="vtop rowform">
-                    <sas:TextBox id="act_title" runat="server" CanBeNull="必填" RequiredFieldType="暂无校验" MaxLength="100" HintInfo="设置活动标题，最多50个字"></sas:TextBox>
+                    <sas:TextBox id="act_title" runat="server" CanBeNull="必填" RequiredFieldType="暂无校验" MaxLength="100" Size="50" HintInfo="设置活动标题，最多50个字"></sas:TextBox>
+                </td>
+                <td class="vtop">
+                </td>
+            </tr>
+            <tr>
+                <td class="item_title" colspan="2">活动图片</td>
+            </tr>
+            <tr>
+                <td class="vtop rowform">
+                    <sas:TextBox id="act_rssimg" runat="server" CanBeNull="可为空" RequiredFieldType="暂无校验" MaxLength="100" HintInfo="设置活动标题，最多50个字" Size="60"></sas:TextBox>
                 </td>
                 <td class="vtop">
                 </td>
