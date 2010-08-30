@@ -2214,10 +2214,11 @@ namespace SAS.Data.SqlServer
                                       DbHelper.MakeInParam("@enabled",(DbType)SqlDbType.SmallInt,2,aif.Enabled),
                                       DbHelper.MakeInParam("@seotitle",(DbType)SqlDbType.NVarChar,50,aif.Seotitle),
                                       DbHelper.MakeInParam("@seodesc",(DbType)SqlDbType.NVarChar,200,aif.Seodesc),
-                                      DbHelper.MakeInParam("@seokeyword",(DbType)SqlDbType.NVarChar,100,aif.Seokeyword)
+                                      DbHelper.MakeInParam("@seokeyword",(DbType)SqlDbType.NVarChar,100,aif.Seokeyword),
+                                      DbHelper.MakeInParam("@rssimg",(DbType)SqlDbType.VarChar,200,aif.RssImg)
                                   };
-            string commandText = string.Format("INSERT INTO [{0}activity]([atitle],[stylecode],[desccode],[scriptcode],[begintime],[endtime],[atype],[enabled],[seotitle],[seodesc],[seokeyword])"
-                               + " VALUES(@atitle,@stylecode,@desccode,@scriptcode,@begintime,@endtime,@atype,@enabled,@seotitle,@seodesc,@seokeyword)",BaseConfigs.GetTablePrefix);
+            string commandText = string.Format("INSERT INTO [{0}activity]([atitle],[stylecode],[desccode],[scriptcode],[begintime],[endtime],[atype],[enabled],[seotitle],[seodesc],[seokeyword],[rssimg])"
+                               + " VALUES(@atitle,@stylecode,@desccode,@scriptcode,@begintime,@endtime,@atype,@enabled,@seotitle,@seodesc,@seokeyword,@rssimg)", BaseConfigs.GetTablePrefix);
             DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
         }
         /// <summary>
@@ -2239,10 +2240,11 @@ namespace SAS.Data.SqlServer
                                       DbHelper.MakeInParam("@enabled",(DbType)SqlDbType.SmallInt,2,aif.Enabled),
                                       DbHelper.MakeInParam("@seotitle",(DbType)SqlDbType.NVarChar,50,aif.Seotitle),
                                       DbHelper.MakeInParam("@seodesc",(DbType)SqlDbType.NVarChar,200,aif.Seodesc),
-                                      DbHelper.MakeInParam("@seokeyword",(DbType)SqlDbType.NVarChar,100,aif.Seokeyword)
+                                      DbHelper.MakeInParam("@seokeyword",(DbType)SqlDbType.NVarChar,100,aif.Seokeyword),
+                                      DbHelper.MakeInParam("@rssimg",(DbType)SqlDbType.VarChar,200,aif.RssImg)
                                   };
             string commandText = string.Format("UPDATE [{0}activity] SET [atitle] = @atitle,[stylecode] = @stylecode,[desccode] = @desccode,[scriptcode] = @scriptcode,[begintime] = @begintime,"
-                               + "[endtime] = @endtime,[atype] = @atype,[enabled] = @enabled,[seotitle] = @seotitle,[seodesc] = @seodesc,[seokeyword] = @seokeyword	WHERE id=@id",BaseConfigs.GetTablePrefix);
+                               + "[endtime] = @endtime,[atype] = @atype,[enabled] = @enabled,[seotitle] = @seotitle,[seodesc] = @seodesc,[seokeyword] = @seokeyword,[rssimg]=@rssimg WHERE id=@id", BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
         }
          /// <summary>
