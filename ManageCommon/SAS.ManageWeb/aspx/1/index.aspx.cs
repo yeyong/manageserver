@@ -88,12 +88,10 @@ namespace SAS.ManageWeb
 
         protected override void ShowPage()
         {
-            pagetitle = "浙商黄页-商之源-首页";
+            pagetitle = "浙商黄页-商之源";
 
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/main.css");
-            script += "\r\n<script src=\"" + forumpath + "javascript/jquery-exchange.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/ScrollText.js\" type=\"text/javascript\"></script>";
-            script += "\r\n<script src=\"" + forumpath + "javascript/jquery.capSlide.js\" type=\"text/javascript\"></script>";
 
             string adtempstr = "";
             if (indexdouble1.Length >= 8)
