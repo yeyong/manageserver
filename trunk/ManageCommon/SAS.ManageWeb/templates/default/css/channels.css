@@ -1,5 +1,85 @@
 @charset "utf-8";
-/* 浙商黄业 */
+/* 黄页首页 */
+/* 第一屏 */
+.hylt{ height:223px; border:1px solid #eee6e3;}
+.hyltw1{ width:218px; float:left;}
+.hyltit{ width:218px; height:28px; background:url(../images/line-bg2.jpg) repeat-x; position:relative; float:left;}
+#hyltit1{ width:165px; height:28px; background:url(../images/line-bg2.jpg) repeat-x; position:relative; float:left;}
+.hyltit2{ width:57px; height:28px; position:absolute; border-bottom:1px solid #eee6e3; right:0; top:0;}
+#hyltit1 li{ width:80px; height:28px; line-height:28px; color:#92665e; font-size:14px; text-align:center; background:url(../images/line-bg2.jpg) repeat-x; border-bottom:1px solid #eee6e3; border-right:1px solid #eee6e3; cursor:pointer; float:left;}
+#hyltit1 li.current{ color:#92665e; font-weight:bold; background:#fff; border-bottom:0px; border-right:1px solid #eee6e3;}
+#hyltit1 li.usual{ color:#92665e; background:url(../images/line-bg2.jpg) repeat-x; border-bottom:1px solid #e7e7e9; border-right:1px solid #e7e7e9;}
+#hyltcon{ width:218px; height:auto; float:left;}
+#hyltcon .con{ width:218px; height:auto; display:none; float:left;}
+.hyltnr{ width:198px; height:auto; padding:7px 10px 0; float:left;}
+.hyltnr li{ width:198px; height:23px; line-height:23px; overflow:hidden; float:left;}
+.hyce{ width:430px; height:auto; float:left; overflow:hidden;}
+.hyce1{ width:430px; height:180px; float:left;}
+#hyce1t{ width:60px; height:20px; z-index:1; position:relative; margin:-25px 8px 0 0; display:inline; float:right;}
+#hyce1t li{ width:15px; height:15px; line-height:14px; color:#fff; margin-right:3px; text-align:center; background:#a48b87; border:1px solid #e7dad8; cursor:pointer; float:left;}
+#hyce1t li.current{ color:#fff; background:#b10101; border:1px solid #e7dad8;}
+#hyce1t li.usual{ color:#333; background:#a48b87; border:1px solid #e7dad8;}
+#hyce1con{ width:430px; height:180px; float:left;}
+#hyce1con .con{ width:430px; height:180px; display:none; float:left;}
+#hyce1con img{ width:430px; height:180px; float:left;}
+.hyce2{ width:400px; height:36px; background:#f7f3f2; margin-top:3px; display:inline; padding:3px 15px; float:left;}
+.hyce2 strong{ width:64px; height:23px; margin:6px 0 0 0; display:inline; float:left;}
+.hyce2nr{ width:300px; height:36px; float:right;}
+.hyce2nr li{ width:150px; height:18px; line-height:20px; color:#666; float:left;}
+.hyce2nr li .col_red{ color:#f00;}
+.hyce2nr li .col_gre{ color:#0cae00;}
+.hyce2nr li .col_yel{ color:#ff8a00;}
+.hyce2nr li .col_blu{ color:#0096ff;}
+.hyrt{ width:288px; float:right;}
+.hyrtit{ width:268px; height:28px; background:url(../images/line-bg2.jpg) repeat-x; border-bottom:1px solid #eee6e3; padding:0 10px; position:relative; float:left;}
+.hyrtit strong{ width:auto; height:28px; line-height:28px; font-size:14px; color:#92665e; float:left;}
+.hyrtit span{ width:auto; height:14px; padding:7px 0; float:right;}
+#hyrtnr{ width:268px; height:184px; padding:0 10px 0; margin-top:7px; display:inline; float:left; overflow:hidden;}
+#hyrtnr li{ width:268px; height:23px; line-height:23px; overflow:hidden; float:left;}
+/* 第二屏 */
+.hytlt{ width:660px; height:auto; float:left;}
+.hytlt strong, .hytrt strong{ height:25px; line-height:25px; font-size:14px; color:#92665e; padding:0 10px; float:left;}
+.hytlt strong{ width:640px;}
+.hytrt strong{ width:270px;}
+.hytltnr{ width:658px; height:209px; border:1px solid #eee6e3; padding:10px 0; float:left;}
+.hytltcot{ width:305px; height:auto; color:#666; margin-left:12px; display:inline; float:left;}
+.hytltcot1{ width:305px; height:58px; float:left;}
+.hytltcot1 p{ width:305px; height:25px; line-height:25px; font-size:14px; font-weight:bold; float:left;}
+.hytltcot1 span{ width:auto; height:25px; line-height:25px; color:#fe8f00; float:left;}
+.hytltcot1 em{ width:auto; height:23px; line-height:23px; float:right;}
+.hytltcot2{ width:305px; height:23px; float:left;}
+.hytltcot2 p{ width:230px; height:23px; float:left;}
+.hytltcot2 em{ width:auto; height:23px; float:right;}
+.hytltline{ width:12px; height:209px; border-right:1px solid #eee; float:left;}
+.hytrt{ width:290px; height:auto; float:right;}
+.hytrtnr{ width:290px; height:auto; float:left;}
+.hytrtnr1, .hytrtnr1 img{ width:290px; height:110px; float:left;}
+.hytrtnr2{ width:290px; height:10px; float:left;}
+/* 第三屏 */
+.hyindy{ width:958px; height:auto; border:1px solid #eee6e3; float:left;}
+.hyindyt{ width:938px; height:28px; background:url(../images/line-bg2.jpg) repeat-x; border-bottom:1px solid #eee6e3; padding:0 10px; position:relative; float:left;}
+.hyindyt strong{ width:142px; height:36px; position:absolute; left:0; top:-7px; float:left;}
+.hyindyt em{ width:auto; height:28px; line-height:28px; float:right;}
+.hyindy1{ width:535px; height:255px; padding:0 10px; float:left;}
+#hyindy1t, #hyindy2t, #hyindy3t, #hyindy4t{ width:33px; height:auto; float:left;}
+#hyindy1t li, #hyindy2t li, #hyindy3t li, #hyindy4t li{ width:17px; height:53px; line-height:18px; color:#92665e; margin-right:3px; text-align:center; background:url(../images/hy_bg1.gif) no-repeat; font-size:14px; font-weight:bold; cursor:pointer; padding:8px 8px; margin:12px 0 0 0; display:inline; float:left;}
+#hyindy1t li.current, #hyindy2t li.current, #hyindy3t li.current, #hyindy4t li.current{ color:#92665e; background:url(../images/hy_bg2.gif) no-repeat;}
+#hyindy1t li.usual, #hyindy2t li.usual, #hyindy3t li.usual, #hyindy4t li.usual{ color:#666; background:url(../images/hy_bg1.gif) no-repeat;}
+#hyindy1con, #hyindy2con, #hyindy3con, #hyindy4con{ width:490px; height:auto; padding:8px 0; float:right;}
+#hyindy1con .con, #hyindy2con .con, #hyindy3con .con, #hyindy4con .con{ width:490px; height:auto; display:none; float:left;}
+.hyindynr{ width:490px; height:auto; float:left;}
+.hyindynr li{ width:245px; height:24px; line-height:24px; color:#666; float:left;}
+.hyindy2{ width:403px; height:255px; background:url(../images/hy_bg.gif) repeat-x; position:relative; float:left;}
+.hyindy2 .lt, .hyindy2 .rt{ width:26px; height:40px; position:absolute; top:110px;}
+.hyindy2 .lt{ left:2px;}
+.hyindy2 .rt{ right:2px}
+#hyindy2c1, #hyindy2c2, #hyindy2c3, #hyindy2c4{ width:338px; height:213px; position:absolute; left:32px; top:20px; float:left; overflow:hidden;}
+.hyindy2nr{ width:1690px; height:213px; float:left;}
+.hyindy2nr li{ width:330px; height:205px; padding:3px; border:1px solid #ccc; background:#fff; margin-right:10px; display:inline; float:left;}
+.hyindy2nr li img{ width:330px; height:205px; float:left;}
+.hyad, .hyad img{ width:960px; height:70px; float:left;}
+
+/* 浙商黄页 */
 /* 左边 */
 .zshylt{ width:740px; height:auto; float:left;}
 .zshy1{ width:740px; height:auto; float:left;}
@@ -251,4 +331,3 @@
 .about1{ width:714px; height:1px; background:#e5e5e5; border: solid #fff; border-width:0 1px; float:left;}
 .about1t{ width:664px; height:35px; line-height:35px; font-size:14px; border: solid #e5e5e5; border-width:0 1px; padding:10px 25px; float:left;}
 .aboutcot{ width:664px; height:auto; line-height:25px; border: solid #e5e5e5; border-width:0 1px; padding:0 25px 20px; float:left;}
-

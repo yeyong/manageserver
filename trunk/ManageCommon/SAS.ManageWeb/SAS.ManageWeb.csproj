@@ -115,6 +115,9 @@
     <Compile Include="aspx\1\zshy.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="aspx\1\zspage.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="aspx\1\zsshow.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -1813,6 +1816,14 @@
     <Content Include="templates\default\images\cross.png" />
     <Content Include="templates\default\images\diaocha.gif" />
     <Content Include="templates\default\images\here.gif" />
+    <Content Include="templates\default\images\hy_bg.gif" />
+    <Content Include="templates\default\images\hy_bg1.gif" />
+    <Content Include="templates\default\images\hy_bg2.gif" />
+    <Content Include="templates\default\images\hy_data.gif" />
+    <Content Include="templates\default\images\hy_tit1.gif" />
+    <Content Include="templates\default\images\hy_tit2.gif" />
+    <Content Include="templates\default\images\hy_tit3.gif" />
+    <Content Include="templates\default\images\hy_tit4.gif" />
     <Content Include="templates\default\images\icon-arrow.gif" />
     <Content Include="templates\default\images\icon\arrow-icon2.gif" />
     <Content Include="templates\default\images\icon\arrow6.gif" />
@@ -1856,6 +1867,7 @@
     <Content Include="templates\default\tipmsg.htm" />
     <Content Include="templates\default\todayviews.htm" />
     <Content Include="templates\default\zscard.htm" />
+    <Content Include="templates\default\zspage.htm" />
     <Content Include="templates\default\zsshow.htm" />
     <Content Include="config\datacache.config" />
     <Content Include="templates\default\_actheader.htm" />
