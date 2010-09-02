@@ -125,6 +125,7 @@ namespace SAS.Data.DataProvider
             activityInfo.Seodesc = reader["seodesc"].ToString();
             activityInfo.Seokeyword = reader["seokeyword"].ToString();
             activityInfo.Createdate = reader["createdate"].ToString();
+            activityInfo.RssImg = reader["rssimg"].ToString();
             return activityInfo;
         }
         #endregion
@@ -137,26 +138,14 @@ namespace SAS.Data.DataProvider
             return GetActivitiesByConditions("[enabled] = 1");
         }
         /// <summary>
-        /// 首页活动信息
+        /// 根据类型获取活动信息
         /// </summary>
-        public static List<ActivityInfo> GetIndexActivities()
+        /// <param name="nums"></param>
+        /// <param name="atype"></param>
+        public static List<ActivityInfo> GetActvitiesByType(int nums, ActivityType atype)
         {
             List<ActivityInfo> actlist = new List<ActivityInfo>();
-            IDataReader reader = DatabaseProvider.GetInstance().GetIndexActvities();
-            while (reader.Read())
-            {
-                actlist.Add(LoadSingleActivityInfo(reader));
-            }
-            reader.Close();
-            return actlist;
-        }
-        /// <summary>
-        /// 淘之购活动信息
-        /// </summary>
-        public static System.Collections.Generic.List<ActivityInfo> GetTaoActivities()
-        {
-            System.Collections.Generic.List<ActivityInfo> actlist = new System.Collections.Generic.List<ActivityInfo>();
-            IDataReader reader = DatabaseProvider.GetInstance().GetTaoActivities();
+            IDataReader reader = DatabaseProvider.GetInstance().GetActvitiesByType(nums, atype);
             while (reader.Read())
             {
                 actlist.Add(LoadSingleActivityInfo(reader));

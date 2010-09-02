@@ -92,7 +92,7 @@ namespace SAS.Logic
             activelist = cache.RetrieveObject(cachekey) as List<ActivityInfo>;
             if (activelist == null)
             {
-                activelist = Data.DataProvider.Activities.GetIndexActivities();
+                activelist = Data.DataProvider.Activities.GetActvitiesByType(5, ActivityType.IndexActivity);
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 300;
                 cache.AddObject(cachekey, activelist);
@@ -109,10 +109,46 @@ namespace SAS.Logic
             actlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/TaoActivities") as System.Collections.Generic.List<ActivityInfo>;
             if (actlist == null)
             {
-                actlist = SAS.Data.DataProvider.Activities.GetTaoActivities();
+                actlist = SAS.Data.DataProvider.Activities.GetActvitiesByType(5, ActivityType.TaobaoActivity);
                 SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/TaoActivities", actlist);
             }
             return actlist;
+        }
+        /// <summary>
+        /// 获取黄页活动
+        /// </summary>
+        public static List<ActivityInfo> GetHYActivities()
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            string cachekey = "/SAS/HYAct";
+            List<ActivityInfo> activelist = new List<ActivityInfo>();
+            activelist = cache.RetrieveObject(cachekey) as List<ActivityInfo>;
+            if (activelist == null)
+            {
+                activelist = Data.DataProvider.Activities.GetActvitiesByType(8, ActivityType.IndexActivity);
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 300;
+                cache.AddObject(cachekey, activelist);
+            }
+            return activelist;
+        }
+        /// <summary>
+        /// 获取黄页活动
+        /// </summary>
+        public static List<ActivityInfo> GetHYTaoActivities()
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            string cachekey = "/SAS/HYTaoAct";
+            List<ActivityInfo> activelist = new List<ActivityInfo>();
+            activelist = cache.RetrieveObject(cachekey) as List<ActivityInfo>;
+            if (activelist == null)
+            {
+                activelist = Data.DataProvider.Activities.GetActvitiesByType(8, ActivityType.TaobaoActivity);
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 300;
+                cache.AddObject(cachekey, activelist);
+            }
+            return activelist;
         }
 
         /// <summary>

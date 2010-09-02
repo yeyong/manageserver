@@ -681,6 +681,10 @@ namespace SAS.Taobao
         #endregion
 
         #region 淘宝专题操作
+        static int CompareTopicOrder(TaoBaoTopicInfo x, TaoBaoTopicInfo y)
+        {
+            return System.Collections.Generic.Comparer<decimal>.Default.Compare(x.Order, y.Order);
+        }
         /// <summary>
         /// 获取淘宝专题列表
         /// </summary>
@@ -714,6 +718,7 @@ namespace SAS.Taobao
                     ttinfo.Height = TypeConverter.StrToInt(topicinfo[6]);
                     tbtlist.Add(ttinfo);
                 }
+                tbtlist.Sort(CompareTopicOrder);
                 SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/TopicList", tbtlist);
             }
             return tbtlist;
@@ -758,6 +763,7 @@ namespace SAS.Taobao
                     ttinfo.Height = TypeConverter.StrToInt(topicinfo[6]);
                     tbtlist.Add(ttinfo);
                 }
+                tbtlist.Sort(CompareTopicOrder);
                 SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/TopicList_" + chanel, tbtlist);
             }
             return tbtlist;

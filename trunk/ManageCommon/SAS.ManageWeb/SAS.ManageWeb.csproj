@@ -1797,6 +1797,7 @@
     <Content Include="templates\default\announcelist.htm" />
     <Content Include="templates\default\help.htm" />
     <Content Include="templates\default\images\aa\aa11.jpg" />
+    <Content Include="templates\default\images\aa\aa12.jpg" />
     <Content Include="templates\default\images\aa\tianqi.png" />
     <Content Include="templates\default\images\aa\zhuti.png" />
     <Content Include="templates\default\images\agree1.gif" />
@@ -1826,8 +1827,12 @@
     <Content Include="templates\default\images\hy_tit4.gif" />
     <Content Include="templates\default\images\icon-arrow.gif" />
     <Content Include="templates\default\images\icon\arrow-icon2.gif" />
+    <Content Include="templates\default\images\icon\arrow10.gif" />
+    <Content Include="templates\default\images\icon\arrow11.gif" />
     <Content Include="templates\default\images\icon\arrow6.gif" />
     <Content Include="templates\default\images\icon\arrow7.gif" />
+    <Content Include="templates\default\images\icon\arrow8.gif" />
+    <Content Include="templates\default\images\icon\arrow9.gif" />
     <Content Include="templates\default\images\icon\delete.gif" />
     <Content Include="templates\default\images\icon\star.gif" />
     <Content Include="templates\default\images\inquiry-bg1.gif" />

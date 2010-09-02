@@ -194,9 +194,14 @@ namespace SAS.Data.DataProvider
         /// <summary>
         /// 企业信息实体化
         /// </summary>
-        /// <param name="reader"></param>
-        /// <returns></returns>
         public static Companys LoadCompanyInfoWithoutCity(IDataReader reader)
+        {
+            return LoadCompanyInfoWithoutCity(reader, false);
+        }
+        /// <summary>
+        /// 企业信息实体化
+        /// </summary>
+        public static Companys LoadCompanyInfoWithoutCity(IDataReader reader,bool isscored)
         {
             Companys _companyInfo = new Companys();
             _companyInfo.En_id = TypeConverter.StrToInt(reader["en_id"].ToString(), 0);
@@ -235,13 +240,12 @@ namespace SAS.Data.DataProvider
             _companyInfo.En_createdate = Utils.GetStandardDateTime(reader["en_createdate"].ToString());
             _companyInfo.En_cataloglist = reader["en_cataloglist"].ToString();
             _companyInfo.Configid = TypeConverter.StrToInt(reader["configid"].ToString());
+            if (isscored) _companyInfo.EnScored = reader["en_scored"].ToString();
             return _companyInfo;
         }
         /// <summary>
         /// 企业信息实体化
         /// </summary>
-        /// <param name="reader"></param>
-        /// <returns></returns>
         public static Companys LoadCompanyInfo(DataRow reader)
         {
             Companys _companyInfo = new Companys();
@@ -510,6 +514,27 @@ namespace SAS.Data.DataProvider
 
             reader.Close();
             return companylist;
+        }
+        /// <summary>
+        /// 根据评分获取企业信息
+        /// </summary>
+        public static List<Companys> GetCompanyByScored()
+        {
+            IDataReader reader = DatabaseProvider.GetInstance().GetScoredCompany(8);
+            List<Companys> companylist = new List<Companys>();
+            while (reader.Read())
+            {
+                companylist.Add(LoadCompanyInfoWithoutCity(reader, true));
+            }
+            reader.Close();
+            return companylist;
+        }
+        /// <summary>
+        /// 获取企业信息统计数量
+        /// </summary>
+        public static DataTable GetCompanyCountSum()
+        {
+            return DatabaseProvider.GetInstance().GetCompanyCountSum();
         }
     }
 }
