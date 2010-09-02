@@ -26,6 +26,10 @@ namespace SAS.Cache
         /// </summary>
         public const string SAS_COMPANY_INDEX_NEW = "/SAS/CompanyIndex/NEW";
         /// <summary>
+        /// 最新审核企业信息缓存键值
+        /// </summary>
+        public const string SAS_COMPANY_INDEX_ENUPDATE = "/SAS/CompanyIndex/ENUPDATE";
+        /// <summary>
         /// 最多访问的企业缓存键值
         /// </summary>
         public const string SAS_COMPANY_INDEX_ACCESSES = "/SAS/CompanyIndex/ACCESSES";

@@ -2031,6 +2031,14 @@ namespace SAS.Data
         /// 根据类型获取企业信息
         /// </summary>
         IDataReader GetCompanyListByType(int entype, int nums);
+        /// <summary>
+        /// 积分企业信息获取
+        /// </summary>
+        IDataReader GetScoredCompany(int nums);
+        /// <summary>
+        /// 获取企业信息统计数量
+        /// </summary>
+        DataTable GetCompanyCountSum();
         #endregion
 
         #region 行业类别操作
@@ -2146,13 +2154,11 @@ namespace SAS.Data
         /// </summary>
         bool SetActivityType(string idlist, int typeid);
         /// <summary>
-        /// 首页活动信息
+        /// 根据类型获取活动信息
         /// </summary>
-        IDataReader GetIndexActvities();
-        /// <summary>
-        /// 获取淘之购活动信息
-        /// </summary>
-        IDataReader GetTaoActivities();
+        /// <param name="nums"></param>
+        /// <param name="atype"></param>
+        IDataReader GetActvitiesByType(int nums, ActivityType atype);
         #endregion
 
         #region 帮助文档操作 help

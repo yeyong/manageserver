@@ -60,7 +60,8 @@
 			<%
                 int indextopicinfo__id = 1;	    
                 foreach (TaoBaoTopicInfo indextopicinfo in indextopiclist)
-                {	    
+                {
+                    if (indextopicinfo__id > 9) break;
 		    %>
 				<li><a target="_blank" title="<%=indextopicinfo.Title%>" href="topicshow-<%=indextopicinfo.Tid%>.html"><%=indextopicinfo.Title%></a></li>
 				<%if (indextopicinfo__id % 3 == 0){%><li></li><%}%>

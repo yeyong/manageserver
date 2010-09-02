@@ -238,6 +238,37 @@ namespace SAS.Logic
             }
             return companylist;
         }
+        /// <summary>
+        /// 黄页最新审核企业
+        /// </summary>
+        /// <returns></returns>
+        public static List<Companys> GetUpdateCompanyList()
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            string cachekey = CacheKeys.SAS_COMPANY_INDEX_ENUPDATE;
+            List<Companys> companylist = cache.RetrieveObject(cachekey) as List<Companys>;
+            if (companylist == null)
+            {
+                companylist = new List<Companys>();
+                List<Companys> tempcompanylist = SAS.Data.DataProvider.Companies.GetCompanyListByOrder(16, "en_update", true);
+
+                foreach (Companys compinfo in tempcompanylist)
+                {
+                    if (compinfo.En_cataloglist.Length > 0)
+                    {
+                        compinfo.TempCatalogID = TypeConverter.StrToInt(compinfo.En_cataloglist.Split(',')[0]);
+                        CatalogInfo _catalog = Catalogs.GetCatalogCacheInfo(compinfo.TempCatalogID);
+                        if (_catalog != null) compinfo.CatalogName = _catalog.name;
+                    }
+                    companylist.Add(compinfo);
+                }
+
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 30;
+                cache.AddObject(cachekey, companylist);
+            }
+            return companylist;
+        }
 
         /// <summary>
         /// 根据企业类型获取企业信息
@@ -346,6 +377,23 @@ namespace SAS.Logic
             }
             return companylist;
         }
+        /// <summary>
+        /// 根据评分获取企业信息
+        /// </summary>
+        public static List<Companys> GetScoredCompanyList()
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            string cachekey = "/SAS/ENScored";
+            List<Companys> companylist = cache.RetrieveObject(cachekey) as List<Companys>;
+            if (companylist == null)
+            {
+                companylist = SAS.Data.DataProvider.Companies.GetCompanyByScored();
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 30;
+                cache.AddObject(cachekey, companylist);
+            }
+            return companylist;
+        }
 
         /// <summary>
         /// 企业搜索条件（审核通过状态下）
@@ -386,6 +434,47 @@ namespace SAS.Logic
         public static void UpdateCompanyCommentCount(int qyid, int counts)
         {
             SAS.Data.DataProvider.Companies.UpdateCompanyCommentCount(qyid, counts);
+        }
+
+        /// <summary>
+        /// 获取企业信息统计数量
+        /// </summary>
+        public static DataTable GetCompanyCount()
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            string cachekey = "/SAS/ENCount";
+            DataTable companylist = cache.RetrieveObject(cachekey) as DataTable;
+            if (companylist == null || companylist.Rows.Count == 0)
+            {
+                companylist = SAS.Data.DataProvider.Companies.GetCompanyCountSum();
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 30;
+                cache.AddObject(cachekey, companylist);
+            }
+            return companylist;
+        }
+        /// <summary>
+        /// 获取企业信息统计数量
+        /// </summary>
+        /// <param name="allcount"></param>
+        /// <param name="passcount"></param>
+        /// <param name="todaycount"></param>
+        /// <param name="waitcount"></param>
+        public static void GetCompanyCountSum(out int allcount, out int passcount, out int todaycount, out int waitcount)
+        {
+            allcount = 0;
+            passcount = 0;
+            todaycount = 0;
+            waitcount = 0;
+
+            DataTable dt = GetCompanyCount();
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                allcount = TypeConverter.StrToInt(dt.Rows[0]["allcount"].ToString(),0);
+                passcount = TypeConverter.StrToInt(dt.Rows[0]["passcount"].ToString(), 0);
+                todaycount = TypeConverter.StrToInt(dt.Rows[0]["todaycount"].ToString(), 0);
+                waitcount = TypeConverter.StrToInt(dt.Rows[0]["waitcount"].ToString(), 0);
+            }
         }
     }
 }

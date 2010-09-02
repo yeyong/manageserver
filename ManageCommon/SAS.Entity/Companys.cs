@@ -50,6 +50,7 @@ namespace SAS.Entity
         private string _districtName = "";
         private string _catalogname = "";
         private int _tempcatalogid = 0;
+        private string _enscored = "";
         /// <summary>
         /// 企业ID
         /// </summary>
@@ -377,6 +378,14 @@ namespace SAS.Entity
         {
             set { _tempcatalogid = value; }
             get { return _tempcatalogid; }
+        }
+        /// <summary>
+        /// 积分
+        /// </summary>
+        public string EnScored
+        {
+            set { _enscored = value; }
+            get { return _enscored; }
         }
         #endregion Model
     }

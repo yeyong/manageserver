@@ -2448,6 +2448,21 @@ namespace SAS.Data.SqlServer
             };
             return DbHelper.ExecuteReader(CommandType.Text, string.Format("SELECT TOP {1} * FROM {0}company WHERE [en_status] = 2 AND [en_visble] = 1 AND [en_type] = @entype ORDER BY [en_credits] desc,[en_createdate] desc", BaseConfigs.GetTablePrefix, nums), parms);
         }
+        /// <summary>
+        /// 积分企业信息获取
+        /// </summary>
+        public IDataReader GetScoredCompany(int nums)
+        {
+            return DbHelper.ExecuteReader(CommandType.Text, string.Format("SELECT TOP {1} *,(SELECT CAST((SELECT SUM(scored)*1.0 FROM dbo.{0}comment WHERE dbo.{0}company.en_id = {0}comment.objid)/en_sell as DECIMAL(18,1))) AS en_scored FROM {0}company WHERE [en_status] = 2 AND [en_visble] = 1 ORDER BY [en_scored] desc", BaseConfigs.GetTablePrefix, nums));
+        }
+        /// <summary>
+        /// 获取企业信息统计数量
+        /// </summary>
+        public DataTable GetCompanyCountSum()
+        {
+            string commandText = string.Format("SELECT (SELECT COUNT(en_id) FROM dbo.{0}company) AS allcount,(SELECT COUNT(en_id) FROM dbo.{0}company WHERE en_status = 2 AND en_visble = 1) AS passcount,(SELECT COUNT(en_id) FROM dbo.{0}company WHERE Convert(varchar(10),[en_createdate],120) = Convert(varchar(10),getDate(),120)) AS todaycount,(SELECT COUNT(en_id) FROM dbo.{0}company WHERE en_status = 1 AND en_visble = 1) AS waitcount", BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
         #endregion
 
         #region 行业信息操作
