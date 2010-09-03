@@ -94,14 +94,14 @@
 			<%if {creditcompanyinfo__loop__id}>8%><%break%><%/if%>
 			<%if {creditcompanyinfo__loop__id}==1%>
 				<li class="hytltcot1">
-					<p><a title="{creditcompanyinfo.en_name}" href="{creditcompanyinfo.en_id}.html">{creditcompanyinfo.en_name}</a></p>
+					<p><a title="{creditcompanyinfo.en_name}" href="{creditcompanyinfo.en_id}.html" target="_blank">{creditcompanyinfo.en_name}</a></p>
 					<span>企业信誉：{creditcompanyinfo.en_credits}</span>
-					<em>[<a class="l_f00" title="{creditcompanyinfo.en_name}" href="promotion-{creditcompanyinfo.en_id}.html">立即推广</a>]</em>
+					<em>[<a class="l_f00" title="{creditcompanyinfo.en_name}" href="promotion-{creditcompanyinfo.en_id}.html" target="_blank">立即推广</a>]</em>
 				</li>
 			<%else%>
 				<li class="hytltcot2">
-					<p><a title="{creditcompanyinfo.en_name}" href="{creditcompanyinfo.en_id}.html">{creditcompanyinfo.en_name}</a></p>
-					<em>[<a class="l_f00" title="{creditcompanyinfo.en_name}" href="promotion-{creditcompanyinfo.en_id}.html">立即推广</a>]</em>
+					<p><a title="{creditcompanyinfo.en_name}" href="{creditcompanyinfo.en_id}.html" target="_blank">{creditcompanyinfo.en_name}</a></p>
+					<em>[<a class="l_f00" title="{creditcompanyinfo.en_name}" href="promotion-{creditcompanyinfo.en_id}.html" target="_blank">立即推广</a>]</em>
 				</li>
 			<%/if%>
 			<%/loop%>
@@ -111,420 +111,64 @@
 	<div class="hytrt mar_top_8">
 		<strong>主题企业</strong>
 		<ul class="hytrtnr">
-			<li class="hytrtnr1"><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa4.jpg" /></a></li>
+			<li class="hytrtnr1"><a title="" href="#" target="_blank"><img alt="" src="templates/{templatepath}/images/aa/aa4.jpg" /></a></li>
 			<li class="hytrtnr2"></li>
-			<li class="hytrtnr1"><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa4.jpg" /></a></li>
+			<li class="hytrtnr1"><a title="" href="#" target="_blank"><img alt="" src="templates/{templatepath}/images/aa/aa4.jpg" /></a></li>
 		</ul>
 	</div>
 </div>
 <!--第二屏 end-->
 <!--第三屏 begin-->
 <div class="cot">
-	<div class="hyindy mar_top_18">
+    <%loop (DataRow) cataloginfo cataloglist1%>
+	<div class="hyindy mar_top_18">	
 		<p class="hyindyt">
-			<strong><img alt="工业区" src="templates/{templatepath}/images/hy_tit1.gif" /></strong>
-			<em><a title="" href="#">更多&gt;&gt;</a></em>
+			<strong><img alt="{cataloginfo[name]}" src="templates/{templatepath}/images/hy_tit{cataloginfo__loop__id}.gif" /></strong>
+			<em><a title="{cataloginfo[name]}" href="zshy-{cataloginfo[id]}.html">更多&gt;&gt;</a></em>
 		</p>
-		<div class="hyindy1" id="hyindy1">
-			<ul id="hyindy1t">
-				<li>杭州市</li>
-				<li>嘉兴市</li>
-				<li>宁波市</li>
+		<div class="hyindy1" id="hyindy{cataloginfo__loop__id}">
+			<ul id="hyindy{cataloginfo__loop__id}t">
+			<%loop (DataRow) cityinfo indexcity%>
+				<%if {cityinfo__loop__id}>3%>
+				<%break%>
+				<%/if%>
+				<li>{cityinfo[CityName]}</li>
+			<%/loop%>
 			</ul>
-			<div id="hyindy1con">
+			<div id="hyindy{cataloginfo__loop__id}con">
+			    <%loop (DataRow) cityinfo1 indexcity%>
+				    <%if {cityinfo1__loop__id}>3%>
+				    <%break%>
+				    <%/if%>
 				<div class="con">
 					<ul class="hyindynr">
-						<li>·<a title="" href="#">1香港普菲特服饰有限公司</a></li>
-						<li>·<a title="" href="#">1佛山市南海区金钰轩傢俬厂</a></li>
-						<li>·<a title="" href="#">1河南华泰特种电缆有限公司</a></li>
-						<li>·<a title="" href="#">1郑州锦水实业有限公司</a></li>
-						<li>·<a title="" href="#">1青岛昊坤重型机械技术有限公司</a></li>
-						<li>·<a title="" href="#">1河南黎明路桥重工有限公司</a></li>
-						<li>·<a title="" href="#">1浙江浦江瑞博工艺饰品有限公司</a></li>
-						<li>·<a title="" href="#">1北京医模科技有限公司</a></li>
-						<li>·<a title="" href="#">1点意空间展览展示有限公司</a></li>
-						<li>·<a title="" href="#">1北京中全清茂展览展示</a></li>
-						<li>·<a title="" href="#">1上海巨臣展览展示服务有限公司</a></li>
-						<li>·<a title="" href="#">1北京天陛展览展示有限公司</a></li>
-						<li>·<a title="" href="#">1西安视创展览装饰有限公司</a></li>
-						<li>·<a title="" href="#">1香港普菲特服饰有限公司</a></li>
-						<li>·<a title="" href="#">1点意空间展览展示有限公司</a></li>
-						<li>·<a title="" href="#">1北京中全清茂展览展示</a></li>
-						<li>·<a title="" href="#">1上海巨臣展览展示服务有限公司</a></li>
-						<li>·<a title="" href="#">1北京天陛展览展示有限公司</a></li>
-						<li>·<a title="" href="#">1西安视创展览装饰有限公司</a></li>
-						<li>·<a title="" href="#">1浙江浦江瑞博工艺饰品有限公司</a></li>
+					<%set {hycitycompanylist}=Companies.GetCompanyListByCityAndCatalog({strtoint({cityinfo1[CityID]})},{strtoint({cataloginfo[id]})},20)%>
+					<%loop (Companys) hycitycompanyinfo hycitycompanylist%>
+						<li>·<a title="{hycitycompanyinfo.en_name}" href="{hycitycompanyinfo.en_id}.html" target="_blank"><%getsubstring({hycitycompanyinfo.en_name},34,"...")%></a></li>
+					<%/loop%>
 					</ul>
 				</div>
-				<div class="con">
-					<ul class="hyindynr">
-						<li>·<a title="" href="#">2香港普菲特服饰有限公司</a></li>
-						<li>·<a title="" href="#">2佛山市南海区金钰轩傢俬厂</a></li>
-						<li>·<a title="" href="#">2河南华泰特种电缆有限公司</a></li>
-						<li>·<a title="" href="#">2郑州锦水实业有限公司</a></li>
-						<li>·<a title="" href="#">2青岛昊坤重型机械技术有限公司</a></li>
-						<li>·<a title="" href="#">2河南黎明路桥重工有限公司</a></li>
-						<li>·<a title="" href="#">2浙江浦江瑞博工艺饰品有限公司</a></li>
-						<li>·<a title="" href="#">2北京医模科技有限公司</a></li>
-						<li>·<a title="" href="#">2点意空间展览展示有限公司</a></li>
-						<li>·<a title="" href="#">2北京中全清茂展览展示</a></li>
-						<li>·<a title="" href="#">2上海巨臣展览展示服务有限公司</a></li>
-						<li>·<a title="" href="#">2北京天陛展览展示有限公司</a></li>
-						<li>·<a title="" href="#">2西安视创展览装饰有限公司</a></li>
-						<li>·<a title="" href="#">2香港普菲特服饰有限公司</a></li>
-						<li>·<a title="" href="#">2点意空间展览展示有限公司</a></li>
-						<li>·<a title="" href="#">2北京中全清茂展览展示</a></li>
-						<li>·<a title="" href="#">2上海巨臣展览展示服务有限公司</a></li>
-						<li>·<a title="" href="#">2北京天陛展览展示有限公司</a></li>
-						<li>·<a title="" href="#">2西安视创展览装饰有限公司</a></li>
-						<li>·<a title="" href="#">2浙江浦江瑞博工艺饰品有限公司</a></li>
-					</ul>
-				</div>
-				<div class="con">
-					<ul class="hyindynr">
-						<li>·<a title="" href="#">3香港普菲特服饰有限公司</a></li>
-						<li>·<a title="" href="#">3佛山市南海区金钰轩傢俬厂</a></li>
-						<li>·<a title="" href="#">3河南华泰特种电缆有限公司</a></li>
-						<li>·<a title="" href="#">3郑州锦水实业有限公司</a></li>
-						<li>·<a title="" href="#">3青岛昊坤重型机械技术有限公司</a></li>
-						<li>·<a title="" href="#">3河南黎明路桥重工有限公司</a></li>
-						<li>·<a title="" href="#">3浙江浦江瑞博工艺饰品有限公司</a></li>
-						<li>·<a title="" href="#">3北京医模科技有限公司</a></li>
-						<li>·<a title="" href="#">3点意空间展览展示有限公司</a></li>
-						<li>·<a title="" href="#">3北京中全清茂展览展示</a></li>
-						<li>·<a title="" href="#">3上海巨臣展览展示服务有限公司</a></li>
-						<li>·<a title="" href="#">3北京天陛展览展示有限公司</a></li>
-						<li>·<a title="" href="#">3西安视创展览装饰有限公司</a></li>
-						<li>·<a title="" href="#">3香港普菲特服饰有限公司</a></li>
-						<li>·<a title="" href="#">3点意空间展览展示有限公司</a></li>
-						<li>·<a title="" href="#">3北京中全清茂展览展示</a></li>
-						<li>·<a title="" href="#">3上海巨臣展览展示服务有限公司</a></li>
-						<li>·<a title="" href="#">3北京天陛展览展示有限公司</a></li>
-						<li>·<a title="" href="#">3西安视创展览装饰有限公司</a></li>
-						<li>·<a title="" href="#">3浙江浦江瑞博工艺饰品有限公司</a></li>
-					</ul>
-				</div>
+				<%/loop%>
 			</div>
 		</div>
+		<%set (int) {btn1num}={cataloginfo__loop__id}*2-1%>
+		<%set (int) {btn2num}={cataloginfo__loop__id}*2%>
 		<div class="hyindy2">
-			<p class="lt"><img id="btn1" alt="左边" src="templates/{templatepath}/images/icon/arrow10.gif" /></p>
-			<div id="hyindy2c1">
+			<p class="lt"><img id="btn{btn1num}" alt="左边" src="templates/{templatepath}/images/icon/arrow10.gif" /></p>
+			<div id="hyindy2c{cataloginfo__loop__id}">
 				<ul class="hyindy2nr">
-					<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa12.jpg" /></a></li>
-					<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa11.jpg" /></a></li>
-					<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa5.jpg" /></a></li>
-					<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa4.jpg" /></a></li>
-					<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa3.jpg" /></a></li>
-					<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa2.jpg" /></a></li>
+				<%set {hycardcompanylist}=Companies.GetCompanyListByCityAndCatalog(0,{strtoint({cataloginfo[id]})},6)%>
+				<%loop (Companys) hycordcompanyinfo hycardcompanylist%>
+					<li><a title="{hycordcompanyinfo.en_name}" href="{hycordcompanyinfo.en_id}.html"><img alt="{hycordcompanyinfo.en_name}" src="showcardimg_{hycordcompanyinfo.en_id}.html" /></a></li>
+				<%/loop%>
 				</ul>
 			</div>
-			<p class="rt"><img id="btn2" alt="右边" src="templates/{templatepath}/images/icon/arrow11.gif" /></p>
+			<p class="rt"><img id="btn{btn2num}" alt="右边" src="templates/{templatepath}/images/icon/arrow11.gif" /></p>
 		</div>
 	</div>
-	<div class="hyindy mar_top_18">
-		<p class="hyindyt">
-			<strong><img alt="商业服务" src="templates/{templatepath}/images/hy_tit2.gif" /></strong>
-			<em><a title="" href="#">更多&gt;&gt;</a></em>
-		</p>
-		<div class="hyindy1" id="hyindy2">
-			<ul id="hyindy2t">
-				<li>杭州市</li>
-				<li>嘉兴市</li>
-				<li>宁波市</li>
-			</ul>
-			<div id="hyindy2con">
-				<div class="con">
-					<ul class="hyindynr">
-						<li>·<a title="" href="#">1香港普菲特服饰有限公司</a></li>
-						<li>·<a title="" href="#">1佛山市南海区金钰轩傢俬厂</a></li>
-						<li>·<a title="" href="#">1河南华泰特种电缆有限公司</a></li>
-						<li>·<a title="" href="#">1郑州锦水实业有限公司</a></li>
-						<li>·<a title="" href="#">1青岛昊坤重型机械技术有限公司</a></li>
-						<li>·<a title="" href="#">1河南黎明路桥重工有限公司</a></li>
-						<li>·<a title="" href="#">1浙江浦江瑞博工艺饰品有限公司</a></li>
-						<li>·<a title="" href="#">1北京医模科技有限公司</a></li>
-						<li>·<a title="" href="#">1点意空间展览展示有限公司</a></li>
-						<li>·<a title="" href="#">1北京中全清茂展览展示</a></li>
-						<li>·<a title="" href="#">1上海巨臣展览展示服务有限公司</a></li>
-						<li>·<a title="" href="#">1北京天陛展览展示有限公司</a></li>
-						<li>·<a title="" href="#">1西安视创展览装饰有限公司</a></li>
-						<li>·<a title="" href="#">1香港普菲特服饰有限公司</a></li>
-						<li>·<a title="" href="#">1点意空间展览展示有限公司</a></li>
-						<li>·<a title="" href="#">1北京中全清茂展览展示</a></li>
-						<li>·<a title="" href="#">1上海巨臣展览展示服务有限公司</a></li>
-						<li>·<a title="" href="#">1北京天陛展览展示有限公司</a></li>
-						<li>·<a title="" href="#">1西安视创展览装饰有限公司</a></li>
-						<li>·<a title="" href="#">1浙江浦江瑞博工艺饰品有限公司</a></li>
-					</ul>
-				</div>
-				<div class="con">
-					<ul class="hyindynr">
-						<li>·<a title="" href="#">2香港普菲特服饰有限公司</a></li>
-						<li>·<a title="" href="#">2佛山市南海区金钰轩傢俬厂</a></li>
-						<li>·<a title="" href="#">2河南华泰特种电缆有限公司</a></li>
-						<li>·<a title="" href="#">2郑州锦水实业有限公司</a></li>
-						<li>·<a title="" href="#">2青岛昊坤重型机械技术有限公司</a></li>
-						<li>·<a title="" href="#">2河南黎明路桥重工有限公司</a></li>
-						<li>·<a title="" href="#">2浙江浦江瑞博工艺饰品有限公司</a></li>
-						<li>·<a title="" href="#">2北京医模科技有限公司</a></li>
-						<li>·<a title="" href="#">2点意空间展览展示有限公司</a></li>
-						<li>·<a title="" href="#">2北京中全清茂展览展示</a></li>
-						<li>·<a title="" href="#">2上海巨臣展览展示服务有限公司</a></li>
-						<li>·<a title="" href="#">2北京天陛展览展示有限公司</a></li>
-						<li>·<a title="" href="#">2西安视创展览装饰有限公司</a></li>
-						<li>·<a title="" href="#">2香港普菲特服饰有限公司</a></li>
-						<li>·<a title="" href="#">2点意空间展览展示有限公司</a></li>
-						<li>·<a title="" href="#">2北京中全清茂展览展示</a></li>
-						<li>·<a title="" href="#">2上海巨臣展览展示服务有限公司</a></li>
-						<li>·<a title="" href="#">2北京天陛展览展示有限公司</a></li>
-						<li>·<a title="" href="#">2西安视创展览装饰有限公司</a></li>
-						<li>·<a title="" href="#">2浙江浦江瑞博工艺饰品有限公司</a></li>
-					</ul>
-				</div>
-				<div class="con">
-					<ul class="hyindynr">
-						<li>·<a title="" href="#">3香港普菲特服饰有限公司</a></li>
-						<li>·<a title="" href="#">3佛山市南海区金钰轩傢俬厂</a></li>
-						<li>·<a title="" href="#">3河南华泰特种电缆有限公司</a></li>
-						<li>·<a title="" href="#">3郑州锦水实业有限公司</a></li>
-						<li>·<a title="" href="#">3青岛昊坤重型机械技术有限公司</a></li>
-						<li>·<a title="" href="#">3河南黎明路桥重工有限公司</a></li>
-						<li>·<a title="" href="#">3浙江浦江瑞博工艺饰品有限公司</a></li>
-						<li>·<a title="" href="#">3北京医模科技有限公司</a></li>
-						<li>·<a title="" href="#">3点意空间展览展示有限公司</a></li>
-						<li>·<a title="" href="#">3北京中全清茂展览展示</a></li>
-						<li>·<a title="" href="#">3上海巨臣展览展示服务有限公司</a></li>
-						<li>·<a title="" href="#">3北京天陛展览展示有限公司</a></li>
-						<li>·<a title="" href="#">3西安视创展览装饰有限公司</a></li>
-						<li>·<a title="" href="#">3香港普菲特服饰有限公司</a></li>
-						<li>·<a title="" href="#">3点意空间展览展示有限公司</a></li>
-						<li>·<a title="" href="#">3北京中全清茂展览展示</a></li>
-						<li>·<a title="" href="#">3上海巨臣展览展示服务有限公司</a></li>
-						<li>·<a title="" href="#">3北京天陛展览展示有限公司</a></li>
-						<li>·<a title="" href="#">3西安视创展览装饰有限公司</a></li>
-						<li>·<a title="" href="#">3浙江浦江瑞博工艺饰品有限公司</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="hyindy2">
-			<p class="lt"><img id="btn3" alt="左边" src="templates/{templatepath}/images/icon/arrow10.gif" /></p>
-			<div id="hyindy2c2">
-				<ul class="hyindy2nr">
-					<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa12.jpg" /></a></li>
-					<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa11.jpg" /></a></li>
-					<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa5.jpg" /></a></li>
-					<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa4.jpg" /></a></li>
-					<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa3.jpg" /></a></li>
-					<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa2.jpg" /></a></li>
-				</ul>
-			</div>
-			<p class="rt"><img id="btn4" alt="右边" src="templates/{templatepath}/images/icon/arrow11.gif" /></p>
-		</div>
-	</div>
-	<div class="hyad mar_top_8"><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa6.jpg" /></a></div>
-	<div class="hyindy mar_top_18">
-		<p class="hyindyt">
-			<strong><img alt="公共服务" src="templates/{templatepath}/images/hy_tit3.gif" /></strong>
-			<em><a title="" href="#">更多&gt;&gt;</a></em>
-		</p>
-		<div class="hyindy1" id="hyindy3">
-			<ul id="hyindy3t">
-				<li>杭州市</li>
-				<li>嘉兴市</li>
-				<li>宁波市</li>
-			</ul>
-			<div id="hyindy3con">
-				<div class="con">
-					<ul class="hyindynr">
-						<li>·<a title="" href="#">1香港普菲特服饰有限公司</a></li>
-						<li>·<a title="" href="#">1佛山市南海区金钰轩傢俬厂</a></li>
-						<li>·<a title="" href="#">1河南华泰特种电缆有限公司</a></li>
-						<li>·<a title="" href="#">1郑州锦水实业有限公司</a></li>
-						<li>·<a title="" href="#">1青岛昊坤重型机械技术有限公司</a></li>
-						<li>·<a title="" href="#">1河南黎明路桥重工有限公司</a></li>
-						<li>·<a title="" href="#">1浙江浦江瑞博工艺饰品有限公司</a></li>
-						<li>·<a title="" href="#">1北京医模科技有限公司</a></li>
-						<li>·<a title="" href="#">1点意空间展览展示有限公司</a></li>
-						<li>·<a title="" href="#">1北京中全清茂展览展示</a></li>
-						<li>·<a title="" href="#">1上海巨臣展览展示服务有限公司</a></li>
-						<li>·<a title="" href="#">1北京天陛展览展示有限公司</a></li>
-						<li>·<a title="" href="#">1西安视创展览装饰有限公司</a></li>
-						<li>·<a title="" href="#">1香港普菲特服饰有限公司</a></li>
-						<li>·<a title="" href="#">1点意空间展览展示有限公司</a></li>
-						<li>·<a title="" href="#">1北京中全清茂展览展示</a></li>
-						<li>·<a title="" href="#">1上海巨臣展览展示服务有限公司</a></li>
-						<li>·<a title="" href="#">1北京天陛展览展示有限公司</a></li>
-						<li>·<a title="" href="#">1西安视创展览装饰有限公司</a></li>
-						<li>·<a title="" href="#">1浙江浦江瑞博工艺饰品有限公司</a></li>
-					</ul>
-				</div>
-				<div class="con">
-					<ul class="hyindynr">
-						<li>·<a title="" href="#">2香港普菲特服饰有限公司</a></li>
-						<li>·<a title="" href="#">2佛山市南海区金钰轩傢俬厂</a></li>
-						<li>·<a title="" href="#">2河南华泰特种电缆有限公司</a></li>
-						<li>·<a title="" href="#">2郑州锦水实业有限公司</a></li>
-						<li>·<a title="" href="#">2青岛昊坤重型机械技术有限公司</a></li>
-						<li>·<a title="" href="#">2河南黎明路桥重工有限公司</a></li>
-						<li>·<a title="" href="#">2浙江浦江瑞博工艺饰品有限公司</a></li>
-						<li>·<a title="" href="#">2北京医模科技有限公司</a></li>
-						<li>·<a title="" href="#">2点意空间展览展示有限公司</a></li>
-						<li>·<a title="" href="#">2北京中全清茂展览展示</a></li>
-						<li>·<a title="" href="#">2上海巨臣展览展示服务有限公司</a></li>
-						<li>·<a title="" href="#">2北京天陛展览展示有限公司</a></li>
-						<li>·<a title="" href="#">2西安视创展览装饰有限公司</a></li>
-						<li>·<a title="" href="#">2香港普菲特服饰有限公司</a></li>
-						<li>·<a title="" href="#">2点意空间展览展示有限公司</a></li>
-						<li>·<a title="" href="#">2北京中全清茂展览展示</a></li>
-						<li>·<a title="" href="#">2上海巨臣展览展示服务有限公司</a></li>
-						<li>·<a title="" href="#">2北京天陛展览展示有限公司</a></li>
-						<li>·<a title="" href="#">2西安视创展览装饰有限公司</a></li>
-						<li>·<a title="" href="#">2浙江浦江瑞博工艺饰品有限公司</a></li>
-					</ul>
-				</div>
-				<div class="con">
-					<ul class="hyindynr">
-						<li>·<a title="" href="#">3香港普菲特服饰有限公司</a></li>
-						<li>·<a title="" href="#">3佛山市南海区金钰轩傢俬厂</a></li>
-						<li>·<a title="" href="#">3河南华泰特种电缆有限公司</a></li>
-						<li>·<a title="" href="#">3郑州锦水实业有限公司</a></li>
-						<li>·<a title="" href="#">3青岛昊坤重型机械技术有限公司</a></li>
-						<li>·<a title="" href="#">3河南黎明路桥重工有限公司</a></li>
-						<li>·<a title="" href="#">3浙江浦江瑞博工艺饰品有限公司</a></li>
-						<li>·<a title="" href="#">3北京医模科技有限公司</a></li>
-						<li>·<a title="" href="#">3点意空间展览展示有限公司</a></li>
-						<li>·<a title="" href="#">3北京中全清茂展览展示</a></li>
-						<li>·<a title="" href="#">3上海巨臣展览展示服务有限公司</a></li>
-						<li>·<a title="" href="#">3北京天陛展览展示有限公司</a></li>
-						<li>·<a title="" href="#">3西安视创展览装饰有限公司</a></li>
-						<li>·<a title="" href="#">3香港普菲特服饰有限公司</a></li>
-						<li>·<a title="" href="#">3点意空间展览展示有限公司</a></li>
-						<li>·<a title="" href="#">3北京中全清茂展览展示</a></li>
-						<li>·<a title="" href="#">3上海巨臣展览展示服务有限公司</a></li>
-						<li>·<a title="" href="#">3北京天陛展览展示有限公司</a></li>
-						<li>·<a title="" href="#">3西安视创展览装饰有限公司</a></li>
-						<li>·<a title="" href="#">3浙江浦江瑞博工艺饰品有限公司</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="hyindy2">
-			<p class="lt"><img id="btn5" alt="左边" src="templates/{templatepath}/images/icon/arrow10.gif" /></p>
-			<div id="hyindy2c3">
-				<ul class="hyindy2nr">
-					<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa12.jpg" /></a></li>
-					<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa11.jpg" /></a></li>
-					<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa5.jpg" /></a></li>
-					<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa4.jpg" /></a></li>
-					<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa3.jpg" /></a></li>
-					<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa2.jpg" /></a></li>
-				</ul>
-			</div>
-			<p class="rt"><img id="btn6" alt="右边" src="templates/{templatepath}/images/icon/arrow11.gif" /></p>
-		</div>
-	</div>
-	<div class="hyindy mar_top_18">
-		<p class="hyindyt">
-			<strong><img alt="社会组织" src="templates/{templatepath}/images/hy_tit4.gif" /></strong>
-			<em><a title="" href="#">更多&gt;&gt;</a></em>
-		</p>
-		<div class="hyindy1" id="hyindy4">
-			<ul id="hyindy4t">
-				<li>杭州市</li>
-				<li>嘉兴市</li>
-				<li>宁波市</li>
-			</ul>
-			<div id="hyindy4con">
-				<div class="con">
-					<ul class="hyindynr">
-						<li>·<a title="" href="#">1香港普菲特服饰有限公司</a></li>
-						<li>·<a title="" href="#">1佛山市南海区金钰轩傢俬厂</a></li>
-						<li>·<a title="" href="#">1河南华泰特种电缆有限公司</a></li>
-						<li>·<a title="" href="#">1郑州锦水实业有限公司</a></li>
-						<li>·<a title="" href="#">1青岛昊坤重型机械技术有限公司</a></li>
-						<li>·<a title="" href="#">1河南黎明路桥重工有限公司</a></li>
-						<li>·<a title="" href="#">1浙江浦江瑞博工艺饰品有限公司</a></li>
-						<li>·<a title="" href="#">1北京医模科技有限公司</a></li>
-						<li>·<a title="" href="#">1点意空间展览展示有限公司</a></li>
-						<li>·<a title="" href="#">1北京中全清茂展览展示</a></li>
-						<li>·<a title="" href="#">1上海巨臣展览展示服务有限公司</a></li>
-						<li>·<a title="" href="#">1北京天陛展览展示有限公司</a></li>
-						<li>·<a title="" href="#">1西安视创展览装饰有限公司</a></li>
-						<li>·<a title="" href="#">1香港普菲特服饰有限公司</a></li>
-						<li>·<a title="" href="#">1点意空间展览展示有限公司</a></li>
-						<li>·<a title="" href="#">1北京中全清茂展览展示</a></li>
-						<li>·<a title="" href="#">1上海巨臣展览展示服务有限公司</a></li>
-						<li>·<a title="" href="#">1北京天陛展览展示有限公司</a></li>
-						<li>·<a title="" href="#">1西安视创展览装饰有限公司</a></li>
-						<li>·<a title="" href="#">1浙江浦江瑞博工艺饰品有限公司</a></li>
-					</ul>
-				</div>
-				<div class="con">
-					<ul class="hyindynr">
-						<li>·<a title="" href="#">2香港普菲特服饰有限公司</a></li>
-						<li>·<a title="" href="#">2佛山市南海区金钰轩傢俬厂</a></li>
-						<li>·<a title="" href="#">2河南华泰特种电缆有限公司</a></li>
-						<li>·<a title="" href="#">2郑州锦水实业有限公司</a></li>
-						<li>·<a title="" href="#">2青岛昊坤重型机械技术有限公司</a></li>
-						<li>·<a title="" href="#">2河南黎明路桥重工有限公司</a></li>
-						<li>·<a title="" href="#">2浙江浦江瑞博工艺饰品有限公司</a></li>
-						<li>·<a title="" href="#">2北京医模科技有限公司</a></li>
-						<li>·<a title="" href="#">2点意空间展览展示有限公司</a></li>
-						<li>·<a title="" href="#">2北京中全清茂展览展示</a></li>
-						<li>·<a title="" href="#">2上海巨臣展览展示服务有限公司</a></li>
-						<li>·<a title="" href="#">2北京天陛展览展示有限公司</a></li>
-						<li>·<a title="" href="#">2西安视创展览装饰有限公司</a></li>
-						<li>·<a title="" href="#">2香港普菲特服饰有限公司</a></li>
-						<li>·<a title="" href="#">2点意空间展览展示有限公司</a></li>
-						<li>·<a title="" href="#">2北京中全清茂展览展示</a></li>
-						<li>·<a title="" href="#">2上海巨臣展览展示服务有限公司</a></li>
-						<li>·<a title="" href="#">2北京天陛展览展示有限公司</a></li>
-						<li>·<a title="" href="#">2西安视创展览装饰有限公司</a></li>
-						<li>·<a title="" href="#">2浙江浦江瑞博工艺饰品有限公司</a></li>
-					</ul>
-				</div>
-				<div class="con">
-					<ul class="hyindynr">
-						<li>·<a title="" href="#">3香港普菲特服饰有限公司</a></li>
-						<li>·<a title="" href="#">3佛山市南海区金钰轩傢俬厂</a></li>
-						<li>·<a title="" href="#">3河南华泰特种电缆有限公司</a></li>
-						<li>·<a title="" href="#">3郑州锦水实业有限公司</a></li>
-						<li>·<a title="" href="#">3青岛昊坤重型机械技术有限公司</a></li>
-						<li>·<a title="" href="#">3河南黎明路桥重工有限公司</a></li>
-						<li>·<a title="" href="#">3浙江浦江瑞博工艺饰品有限公司</a></li>
-						<li>·<a title="" href="#">3北京医模科技有限公司</a></li>
-						<li>·<a title="" href="#">3点意空间展览展示有限公司</a></li>
-						<li>·<a title="" href="#">3北京中全清茂展览展示</a></li>
-						<li>·<a title="" href="#">3上海巨臣展览展示服务有限公司</a></li>
-						<li>·<a title="" href="#">3北京天陛展览展示有限公司</a></li>
-						<li>·<a title="" href="#">3西安视创展览装饰有限公司</a></li>
-						<li>·<a title="" href="#">3香港普菲特服饰有限公司</a></li>
-						<li>·<a title="" href="#">3点意空间展览展示有限公司</a></li>
-						<li>·<a title="" href="#">3北京中全清茂展览展示</a></li>
-						<li>·<a title="" href="#">3上海巨臣展览展示服务有限公司</a></li>
-						<li>·<a title="" href="#">3北京天陛展览展示有限公司</a></li>
-						<li>·<a title="" href="#">3西安视创展览装饰有限公司</a></li>
-						<li>·<a title="" href="#">3浙江浦江瑞博工艺饰品有限公司</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="hyindy2">
-			<p class="lt"><img id="btn7" alt="左边" src="templates/{templatepath}/images/icon/arrow10.gif" /></p>
-			<div id="hyindy2c4">
-				<ul class="hyindy2nr">
-					<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa12.jpg" /></a></li>
-					<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa11.jpg" /></a></li>
-					<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa5.jpg" /></a></li>
-					<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa4.jpg" /></a></li>
-					<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa3.jpg" /></a></li>
-					<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa2.jpg" /></a></li>
-				</ul>
-			</div>
-			<p class="rt"><img id="btn8" alt="右边" src="templates/{templatepath}/images/icon/arrow11.gif" /></p>
-		</div>
-	</div>
+	<%if {cataloginfo__loop__id}==2%><div class="hyad mar_top_8"><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa6.jpg" /></a></div><%/if%>
+	<%set %>
+	<%/loop%>
 </div>
 <!--第三屏 end-->
 <%template _comcopyright%>
