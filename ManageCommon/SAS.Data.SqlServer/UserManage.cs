@@ -2463,6 +2463,18 @@ namespace SAS.Data.SqlServer
             string commandText = string.Format("SELECT (SELECT COUNT(en_id) FROM dbo.{0}company) AS allcount,(SELECT COUNT(en_id) FROM dbo.{0}company WHERE en_status = 2 AND en_visble = 1) AS passcount,(SELECT COUNT(en_id) FROM dbo.{0}company WHERE Convert(varchar(10),[en_createdate],120) = Convert(varchar(10),getDate(),120)) AS todaycount,(SELECT COUNT(en_id) FROM dbo.{0}company WHERE en_status = 1 AND en_visble = 1) AS waitcount", BaseConfigs.GetTablePrefix);
             return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
         }
+        /// <summary>
+        /// 根据城市、类别获取企业信息
+        /// </summary>
+        public IDataReader GetCompanyByCityCatalog(int city, int cid, int nums)
+        {
+            DbParameter[] parms = {
+                                      DbHelper.MakeInParam("@cityid", (DbType)SqlDbType.Int, 4, city),
+                                      DbHelper.MakeInParam("@catalogid", (DbType)SqlDbType.Int, 4, cid),
+                                      DbHelper.MakeInParam("@nums", (DbType)SqlDbType.Int, 4, nums)
+            };
+            return DbHelper.ExecuteReader(CommandType.StoredProcedure, string.Format("{0}getcompanylistbycatalogcity", BaseConfigs.GetTablePrefix), parms);
+        }
         #endregion
 
         #region 行业信息操作

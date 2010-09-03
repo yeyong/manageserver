@@ -34,6 +34,22 @@ namespace SAS.ManageWeb
         /// </summary>
         protected List<Companys> hycreditcompanylist = Companies.GetCompanyListCredits();
         /// <summary>
+        /// 杭州城市企业信息
+        /// </summary>
+        protected List<Companys> hycitycompanylist = new List<Companys>();
+        /// <summary>
+        /// 名片信息
+        /// </summary>
+        protected List<Companys> hycardcompanylist = new List<Companys>();
+        /// <summary>
+        /// 首页城市
+        /// </summary>
+        protected DataRow[] indexcity;
+        /// <summary>
+        /// 行业类别列表
+        /// </summary>
+        protected DataRow[] cataloglist1 = Catalogs.GetAllCatalogBySort(0);
+        /// <summary>
         /// 收录总数
         /// </summary>
         protected int allcount = 0;
@@ -78,6 +94,7 @@ namespace SAS.ManageWeb
             AddfootScript(loadscript);
 
             Companies.GetCompanyCountSum(out allcount, out passcount, out todaycount, out waitcount);
+            indexcity = areas.GetIndexCity();
         }
     }
 }

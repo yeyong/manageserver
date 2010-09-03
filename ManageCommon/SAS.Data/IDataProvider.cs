@@ -2039,6 +2039,10 @@ namespace SAS.Data
         /// 获取企业信息统计数量
         /// </summary>
         DataTable GetCompanyCountSum();
+        /// <summary>
+        /// 根据城市、类别获取企业信息
+        /// </summary>
+        IDataReader GetCompanyByCityCatalog(int city, int cid, int nums);
         #endregion
 
         #region 行业类别操作

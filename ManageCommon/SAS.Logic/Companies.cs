@@ -378,6 +378,23 @@ namespace SAS.Logic
             return companylist;
         }
         /// <summary>
+        /// 黄页根据市级信息、行业类别获取企业信息
+        /// </summary>
+        public static List<Companys> GetCompanyListByCityAndCatalog(int cityid, int cid, int nums)
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            string cachekey = "/SAS/HYCompanylist/City_" + cityid + "_Catalog_" + cid;
+            List<Companys> companylist = cache.RetrieveObject(cachekey) as List<Companys>;
+            if (companylist == null)
+            {
+                companylist = SAS.Data.DataProvider.Companies.GetCompanyByCityCatalog(cityid, cid, nums);
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 300;
+                cache.AddObject(cachekey, companylist);
+            }
+            return companylist;
+        }
+        /// <summary>
         /// 根据评分获取企业信息
         /// </summary>
         public static List<Companys> GetScoredCompanyList()

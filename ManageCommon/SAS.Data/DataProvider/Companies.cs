@@ -536,5 +536,19 @@ namespace SAS.Data.DataProvider
         {
             return DatabaseProvider.GetInstance().GetCompanyCountSum();
         }
+        /// <summary>
+        /// 根据城市、类别获取企业信息
+        /// </summary>
+        public static List<Companys> GetCompanyByCityCatalog(int city, int cid, int nums)
+        {
+            IDataReader reader = DatabaseProvider.GetInstance().GetCompanyByCityCatalog(city, cid, nums);
+            List<Companys> companylist = new List<Companys>();
+            while (reader.Read())
+            {
+                companylist.Add(LoadCompanyInfoWithoutCity(reader));
+            }
+            reader.Close();
+            return companylist;
+        }
     }
 }
