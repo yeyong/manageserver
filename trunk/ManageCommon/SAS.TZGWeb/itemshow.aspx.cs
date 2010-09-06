@@ -74,8 +74,6 @@ public partial class itemshow : TaoBaoPage
             //AddErrLine("您的页面正在跳转，请稍等！");
             //SetMetaRefresh(2, tkitem.ClickUrl);
             //return;
-
-
             rootinfo = TaoBaos.GetCategoryInfoByCache(subcinfo.Parentid);
             sameclassproducts = TaoBaos.GetRecommendProduct(Convert.ToInt16(TaoChanel.Detail), subcinfo.Cid);
         }

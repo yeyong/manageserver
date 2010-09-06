@@ -53,7 +53,7 @@ namespace SAS.Logic
                 foreach (DataRow dr in Companies.GetCompanyTableList().Select("[en_status] = 2 AND [en_visble] = 1"))
                 {
                     sitemapBuilder.Append("  <url>");
-                    sitemapBuilder.AppendFormat("    <loc>{0}</loc>", config.Weburl + "/" + dr["en_id"] + ".html");
+                    sitemapBuilder.AppendFormat("    <loc>{0}</loc>", config.Weburl + "/company-" + dr["en_id"] + ".html");
                     sitemapBuilder.Append("    <image:image>");
                     sitemapBuilder.AppendFormat("      <image:title>{0}</image:title>", dr["en_name"]);
                     sitemapBuilder.AppendFormat("      <image:loc>{0}</image:loc>", config.Weburl + "/showcardimg_" + dr["en_id"] + ".html");
@@ -94,7 +94,7 @@ namespace SAS.Logic
                 foreach (DataRow dr in Companies.GetCompanyTableList().Select("[en_status] = 2 AND [en_visble] = 1"))
                 {
                     sitemapBuilder.Append("  <url>");
-                    sitemapBuilder.AppendFormat("    <loc>{0}</loc>", config.Weburl + "/" + dr["en_id"] + ".html");
+                    sitemapBuilder.AppendFormat("    <loc>{0}</loc>", config.Weburl + "/company-" + dr["en_id"] + ".html");
                     sitemapBuilder.Append("  </url>");
                 }
 
@@ -154,14 +154,14 @@ namespace SAS.Logic
                 foreach (Companys cominfo in SAS.Data.DataProvider.Companies.GetCompanyListByOrder(20, "en_update", true))
                 {
                     rssBuilder.Append("    <item>\r\n");
-                    rssBuilder.AppendFormat("      <link>{0}</link>\r\n", config.Weburl.EndsWith("/") ? config.Weburl + cominfo.En_id + ".html" : config.Weburl + "/" + cominfo.En_id + ".html");
+                    rssBuilder.AppendFormat("      <link>{0}</link>\r\n", config.Weburl.EndsWith("/") ? config.Weburl + "company-" + cominfo.En_id + ".html" : config.Weburl + "/" + "company-" + cominfo.En_id + ".html");
                     rssBuilder.AppendFormat("      <title><![CDATA[ {0} ]]></title>\r\n", cominfo.En_name);
                     rssBuilder.Append("    <author>浙商黄页</author>\r\n");
                     rssBuilder.Append("    <category>www.zheshangonline.com浙商黄页企业信息</category>\r\n");
-                    rssBuilder.AppendFormat("    <guid>{0}</guid>\r\n", config.Weburl.EndsWith("/") ? config.Weburl + cominfo.En_id + ".html" : config.Weburl + "/" + cominfo.En_id + ".html");
+                    rssBuilder.AppendFormat("    <guid>{0}</guid>\r\n", config.Weburl.EndsWith("/") ? config.Weburl + "company-" + cominfo.En_id + ".html" : config.Weburl + "/" + "company-" + cominfo.En_id + ".html");
                     rssBuilder.AppendFormat("    <pubDate>{0}</pubDate>\r\n", Utils.HtmlEncode(Convert.ToDateTime(cominfo.En_update).ToString("r").Trim()));
                     rssBuilder.Append("    <description>\r\n");
-                    rssBuilder.AppendFormat("      <![CDATA[ <p><a title=\"{0}\" href=\"{1}\"><img style=\"border:0\" alt=\"{0}\" src=\"{2}\"/></a></p>\r\n{3} ]]>\r\n", cominfo.En_name, config.Weburl.EndsWith("/") ? config.Weburl + cominfo.En_id + ".html" : config.Weburl + "/" + cominfo.En_id + ".html", config.Weburl.EndsWith("/") ? config.Weburl + "showcardimg_" + cominfo.En_id + ".html" : config.Weburl + "/showcardimg_" + cominfo.En_id + ".html", Utils.HtmlEncode(Utils.ClearUBB(cominfo.En_desc)).Trim());
+                    rssBuilder.AppendFormat("      <![CDATA[ <p><a title=\"{0}\" href=\"{1}\"><img style=\"border:0\" alt=\"{0}\" src=\"{2}\"/></a></p>\r\n{3} ]]>\r\n", cominfo.En_name, config.Weburl.EndsWith("/") ? config.Weburl + "company-" + cominfo.En_id + ".html" : config.Weburl + "/" + "company-" + cominfo.En_id + ".html", config.Weburl.EndsWith("/") ? config.Weburl + "showcardimg_" + cominfo.En_id + ".html" : config.Weburl + "/showcardimg_" + cominfo.En_id + ".html", Utils.HtmlEncode(Utils.ClearUBB(cominfo.En_desc)).Trim());
                     rssBuilder.Append("    </description>\r\n");
                     rssBuilder.Append("    </item>\r\n");
                 }

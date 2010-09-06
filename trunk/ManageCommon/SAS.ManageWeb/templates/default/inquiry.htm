@@ -30,7 +30,7 @@
 		</p>
 		<%loop (Companys) incompanyinfo companylist%>
 	    <p class="inq3">
-		    <span class="inq3t1"><a title="{incompanyinfo.en_name}" class="l_333" href="{incompanyinfo.en_id}.html">{incompanyinfo.en_name}</a></span>
+		    <span class="inq3t1"><a title="{incompanyinfo.en_name}" class="l_333" href="company-{incompanyinfo.en_id}.html">{incompanyinfo.en_name}</a></span>
 		    <%if {incompanyinfo.en_status}==0%>
 		    <span class="inq3t2 f_e00101">审核未通过</span>
 		    <span class="inq3t3">{incompanyinfo.en_reason}</span>
@@ -71,7 +71,7 @@
 		    <%loop (Companys) creditcompanyinfo creditcompanylist%>
 		    <li>
 				<em class="<%if {creditcompanyinfo__loop__id}<4%>zstopem1<%else%>zstopem2<%/if%>">{creditcompanyinfo__loop__id}</em>
-				<p><a title="{creditcompanyinfo.en_name}" href="{creditcompanyinfo.en_id}.html">{creditcompanyinfo.en_name}</a></p>
+				<p><a title="{creditcompanyinfo.en_name}" href="company-{creditcompanyinfo.en_id}.html">{creditcompanyinfo.en_name}</a></p>
 			</li>
 		    <%/loop%>
 		</ul>

@@ -187,13 +187,21 @@ namespace SAS.Taobao
         /// </summary>
         public static TaobaokeItemDetail GetTaoBaoKeItemDetail(long numiid)
         {
+           
             TaobaokeItemsDetailGetRequest ttg = new TaobaokeItemsDetailGetRequest();
             ttg.Fields = "iid,num_iid,title,nick,type,cid,desc,pic_url,num,location,price,score,volume,click_url,shop_click_url,seller_credit_score,valid_thru";
             ttg.NumIids = numiid.ToString();
             ttg.Nick = SAS_USERNICK;
-            PageList<TaobaokeItemDetail> pagetd = client.TaobaokeItemsDetailGet(ttg);
-            if (pagetd.Content.Count == 0) return null;
-            return pagetd.Content[0];
+            try
+            {
+                PageList<TaobaokeItemDetail> pagetd = client.TaobaokeItemsDetailGet(ttg);
+                if (pagetd.Content.Count == 0) return null;
+                return pagetd.Content[0];
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         /// <summary>

@@ -102,10 +102,10 @@
 					    <%set (string) {companyinfoname}={companyinfobycity.en_name}%>
 					    <%if {companyinfolength}>28%>
 					    <%set {companyinfoname}=Utils.CutString({companyinfoname},0,28-{companyinfolength}+{companyinfobycity.en_name}.Length)%>
-					    <a title="{companyinfobycity.en_name}" href="{companyinfobycity.en_id}.html" target="_blank">{companyinfoname}</a>
+					    <a title="{companyinfobycity.en_name}" href="company-{companyinfobycity.en_id}.html" target="_blank">{companyinfoname}</a>
 				        <%break%>
 				        <%else%>
-				        <a title="{companyinfobycity.en_name}" href="{companyinfobycity.en_id}.html" target="_blank">{companyinfoname}</a>
+				        <a title="{companyinfobycity.en_name}" href="company-{companyinfobycity.en_id}.html" target="_blank">{companyinfoname}</a>
 				        <%/if%>
 					<%/loop%>
 				</li>
@@ -125,7 +125,7 @@
 			<span>最新加入企业：</span>
 			<ul class="onecomp" id="listcomp">
 			<%loop (Companys) cinfo newcompanylist%>
-			    <li><a title="{cinfo.en_name}" href="{cinfo.en_id}.html" target="_blank"><%getsubstring({cinfo.en_name},24,"...")%></a></li>
+			    <li><a title="{cinfo.en_name}" href="company-{cinfo.en_id}.html" target="_blank"><%getsubstring({cinfo.en_name},24,"...")%></a></li>
 			<%/loop%>				
 			</ul>
 		</div>
@@ -142,7 +142,7 @@
 					<ul class="onert3nr">
 					<%loop (Companys) mancompanyinfo mancompanylist%>
 					<%set (string){mancatalogname}=Utils.CutString({mancompanyinfo.catalogName},0,6)%>
-						<li>[<a class="l_f00" title="{mancompanyinfo.catalogName}" href="zshy-{mancompanyinfo.tempCatalogID}.html">{mancatalogname}</a>] <a title="{mancompanyinfo.en_name}" href="{mancompanyinfo.en_id}.html" target="_blank">{mancompanyinfo.en_name}</a></li>
+						<li>[<a class="l_f00" title="{mancompanyinfo.catalogName}" href="zshy-{mancompanyinfo.tempCatalogID}.html">{mancatalogname}</a>] <a title="{mancompanyinfo.en_name}" href="company-{mancompanyinfo.en_id}.html" target="_blank">{mancompanyinfo.en_name}</a></li>
 					<%/loop%>
 					</ul>
 				</div>
@@ -150,7 +150,7 @@
 					<ul class="onert3nr">
 					<%loop (Companys) selcompanyinfo selcompanylist%>
 					<%set (string){selcatalogname}=Utils.CutString({selcompanyinfo.catalogName},0,6)%>
-						<li>[<a class="l_f00" title="{selcompanyinfo.catalogName}" href="zshy-{selcompanyinfo.tempCatalogID}.html">{selcompanyinfo.catalogName}</a>] <a title="{selcompanyinfo.en_name}" href="{selcompanyinfo.en_id}.html" target="_blank">{selcompanyinfo.en_name}</a></li>
+						<li>[<a class="l_f00" title="{selcompanyinfo.catalogName}" href="zshy-{selcompanyinfo.tempCatalogID}.html">{selcompanyinfo.catalogName}</a>] <a title="{selcompanyinfo.en_name}" href="company-{selcompanyinfo.en_id}.html" target="_blank">{selcompanyinfo.en_name}</a></li>
 					<%/loop%>
 					</ul>
 				</div>
@@ -207,7 +207,7 @@
 			</p>
 			<ul class="catop2">
 			<%loop (Companys) creditcompanyinfo creditcompanylist%>
-			    <li><a title="{creditcompanyinfo.en_name}" href="{creditcompanyinfo.en_id}.html">{creditcompanyinfo.en_name}</a></li>
+			    <li><a title="{creditcompanyinfo.en_name}" href="company-{creditcompanyinfo.en_id}.html" target="_blank">{creditcompanyinfo.en_name}</a></li>
 			<%/loop%>
 			</ul>
 		</div>
@@ -220,7 +220,7 @@
 			<%loop (Companys) commentcompanyinfo commentcompanylist%>
 			    <li>
 					<em class="<%if {commentcompanyinfo__loop__id}<4%>catopem1<%else%>catopem2<%/if%>">{commentcompanyinfo__loop__id}</em>
-					<p><a title="{commentcompanyinfo.en_name}" href="{commentcompanyinfo.en_id}.html">{commentcompanyinfo.en_name}</a></p>
+					<p><a title="{commentcompanyinfo.en_name}" href="company-{commentcompanyinfo.en_id}.html" target="_blank">{commentcompanyinfo.en_name}</a></p>
 					<span>{commentcompanyinfo.en_sell}</span>
 				</li>
 			<%/loop%>
