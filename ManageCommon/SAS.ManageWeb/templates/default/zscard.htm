@@ -98,7 +98,7 @@
 					<span class="ic_text">网址：{zshycompanyinfo.en_web}</span>
 					<span class="ic_text">经营模式：<%set (string){zscardentype}=EnumCatch.GetCompanyType({zshycompanyinfo.en_type})%>{zscardentype}</span>
 					<span class="ic_text">
-						<em class="zscard2nr1"><a title="详细信息" href="{zshycompanyinfo.en_id}.html" class="l_000" target="_blank">详细信息</a></em>
+						<em class="zscard2nr1"><a title="详细信息" href="company-{zshycompanyinfo.en_id}.html" class="l_000" target="_blank">详细信息</a></em>
 						<em class="zscard2nr2"><a title="我要推广" href="promotion-{zshycompanyinfo.en_id}.html" target="_blank" class="l_000">我要推广</a></em>
 					</span>
 				</p>
@@ -135,7 +135,7 @@
 				<%else%>
 				    <em class="zstopem2">{accesscompanyinfo__loop__id}</em>
 				<%/if%>
-					<p><a title="{accesscompanyinfo.en_name}" href="{accesscompanyinfo.en_id}.html" class="l_666" target="_blank">{accesscompanyinfo.en_name}</a></p>
+					<p><a title="{accesscompanyinfo.en_name}" href="company-{accesscompanyinfo.en_id}.html" class="l_666" target="_blank">{accesscompanyinfo.en_name}</a></p>
 				</li>
 			<%/loop%>
 			</ul>
@@ -147,7 +147,7 @@
 			</p>
 			<ul class="zstop2">
 			<%loop (Companys) newcompanyinfo companynewlist%>
-			    <li>▪&nbsp;<a title="{newcompanyinfo.en_name}" href="{newcompanyinfo.en_id}.html" class="l_666">{newcompanyinfo.en_name}</a></li>
+			    <li>▪&nbsp;<a title="{newcompanyinfo.en_name}" href="company-{newcompanyinfo.en_id}.html" class="l_666">{newcompanyinfo.en_name}</a></li>
 			<%/loop%>
 			</ul>
 		</div>

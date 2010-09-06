@@ -20,7 +20,7 @@
 		</div>
 		<div class="pmtnrrt">
 			<strong>企业介绍</strong>
-			<p><%getsubstring(Utils.GetSpacesString(2)+Utils.GetTextFromHTML({companyshowinfo.en_desc}),395,"...")%>[<a title="查看详情" href="{companyshowinfo.en_id}.html" target="_blank" class="l_e00101">查看详情</a>]</p>
+			<p><%getsubstring(Utils.GetSpacesString(2)+Utils.GetTextFromHTML({companyshowinfo.en_desc}),395,"...")%>[<a title="查看详情" href="company-{companyshowinfo.en_id}.html" target="_blank" class="l_e00101">查看详情</a>]</p>
 			<i class="lt"></i><i class="rt"></i>
 		</div>
 	</div>
@@ -47,10 +47,10 @@
 			</ul>
 			<div id="pmt1rt2">
 				<div class="con">
-				<textarea class="input2_soout" style="width:510px; height:160px;" id="html_pro1">{rooturl}{companyshowinfo.en_id}.html</textarea>
+				<textarea class="input2_soout" style="width:510px; height:160px;" id="html_pro1">{rooturl}company-{companyshowinfo.en_id}.html</textarea>
 				</div>
 				<div class="con">
-				<textarea class="input2_soout" style="width:510px; height:160px;" id="forum_pro1">[url={rooturl}{companyshowinfo.en_id}.html]{rooturl}{companyshowinfo.en_id}.html[/url]</textarea>
+				<textarea class="input2_soout" style="width:510px; height:160px;" id="forum_pro1">[url={rooturl}company-{companyshowinfo.en_id}.html]{rooturl}company-{companyshowinfo.en_id}.html[/url]</textarea>
 				</div>
 			</div>
 			<p class="pmt1rt3 mar_top_8"><a title="" href="javascript:void(0)" onclick="copyToClipboard(promotion_1)"></a></p>
