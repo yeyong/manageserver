@@ -87,7 +87,9 @@ namespace SAS.Logic
                 dt = Data.DataProvider.Announcements.GetAnnouncementIndex(5);
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 30;
+                cache.LoadCacheStrategy(ica);
                 cache.AddObject("/SAS/AnnouncementIndex", dt);
+                cache.LoadDefaultCacheStrategy();
             }
             return dt;
         }

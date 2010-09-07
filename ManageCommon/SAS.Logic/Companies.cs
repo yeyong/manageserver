@@ -215,7 +215,9 @@ namespace SAS.Logic
                 companylist = SAS.Data.DataProvider.Companies.GetCompanyListByCatalog(catalogid);
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 1440;
+                cache.LoadCacheStrategy(ica);
                 cache.AddObject(cachekey, companylist);
+                cache.LoadDefaultCacheStrategy();
             }
             return companylist;
         }
@@ -234,7 +236,9 @@ namespace SAS.Logic
                 companylist = SAS.Data.DataProvider.Companies.GetCompanyListByOrder(10, "en_createdate", true);
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 30;
+                cache.LoadCacheStrategy(ica);
                 cache.AddObject(cachekey, companylist);
+                cache.LoadDefaultCacheStrategy();
             }
             return companylist;
         }
@@ -265,7 +269,9 @@ namespace SAS.Logic
 
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 30;
+                cache.LoadCacheStrategy(ica);
                 cache.AddObject(cachekey, companylist);
+                cache.LoadDefaultCacheStrategy();
             }
             return companylist;
         }
@@ -296,7 +302,9 @@ namespace SAS.Logic
                 }
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 300;
+                cache.LoadCacheStrategy(ica);
                 cache.AddObject(cachekey, companylist);
+                cache.LoadDefaultCacheStrategy();
             }
             return companylist;
         }
@@ -315,7 +323,9 @@ namespace SAS.Logic
                 companylist = SAS.Data.DataProvider.Companies.GetCompanyListByOrder(10, "en_accesses", true);
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 300;
+                cache.LoadCacheStrategy(ica);
                 cache.AddObject(cachekey, companylist);
+                cache.LoadDefaultCacheStrategy();
             }
             return companylist;
         }
@@ -334,7 +344,9 @@ namespace SAS.Logic
                 companylist = SAS.Data.DataProvider.Companies.GetCompanyListByOrder(10, "en_sell", true);
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 300;
+                cache.LoadCacheStrategy(ica);
                 cache.AddObject(cachekey, companylist);
+                cache.LoadDefaultCacheStrategy();
             }
             return companylist;
         }
@@ -353,7 +365,9 @@ namespace SAS.Logic
                 companylist = SAS.Data.DataProvider.Companies.GetCompanyListByOrder(10, "en_credits", true);
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 300;
+                cache.LoadCacheStrategy(ica);
                 cache.AddObject(cachekey, companylist);
+                cache.LoadDefaultCacheStrategy();
             }
             return companylist;
         }
@@ -373,7 +387,9 @@ namespace SAS.Logic
                 companylist = SAS.Data.DataProvider.Companies.GetCompanyListByCity(cityid, 4);
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 300;
+                cache.LoadCacheStrategy(ica);
                 cache.AddObject(cachekey, companylist);
+                cache.LoadDefaultCacheStrategy();
             }
             return companylist;
         }
@@ -390,7 +406,9 @@ namespace SAS.Logic
                 companylist = SAS.Data.DataProvider.Companies.GetCompanyByCityCatalog(cityid, cid, nums);
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 300;
+                cache.LoadCacheStrategy(ica);
                 cache.AddObject(cachekey, companylist);
+                cache.LoadDefaultCacheStrategy();
             }
             return companylist;
         }
@@ -407,7 +425,9 @@ namespace SAS.Logic
                 companylist = SAS.Data.DataProvider.Companies.GetCompanyByScored();
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 30;
+                cache.LoadCacheStrategy(ica);
                 cache.AddObject(cachekey, companylist);
+                cache.LoadDefaultCacheStrategy();
             }
             return companylist;
         }
@@ -466,7 +486,9 @@ namespace SAS.Logic
                 companylist = SAS.Data.DataProvider.Companies.GetCompanyCountSum();
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 30;
+                cache.LoadCacheStrategy(ica);
                 cache.AddObject(cachekey, companylist);
+                cache.LoadDefaultCacheStrategy();
             }
             return companylist;
         }
