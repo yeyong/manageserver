@@ -22,7 +22,7 @@
 			<div class="con">
 				<ul class="hyltnr">
 				<%loop (ActivityInfo) hytaoactinfo hytaoactlist%>
-				    <li>▪&nbsp;<a target="_blank" title="{hytaoactinfo.atitle}" href="activity-{hytaoactinfo.id}.html">{hytaoactinfo.atitle}</a></li>
+				    <li>▪&nbsp;<a target="_blank" title="{hytaoactinfo.atitle}" href="{tbconfig.taoDomain}actshow-{hytaoactinfo.id}.html">{hytaoactinfo.atitle}</a></li>
 			    <%/loop%>
 			    <%if {hytaoactinfo__loop__id}<8%><%repeat("<li>▪&nbsp;</li>", 8-{hytaoactinfo__loop__id})%><%/if%>
 				</ul>

@@ -94,7 +94,7 @@ public partial class itemshow : TaoBaoPage
 
         pagetitle = string.Format("{0}-{0}商品详细介绍", iteminfo.Title);
         seokeyword = string.Format("{0}介绍,{0},{1}", iteminfo.Title, shopname);
-        seodescription = string.Format("{0}商品详细介绍。{1}。", iteminfo.Title, Utils.CutString(Utils.RemoveHtml(iteminfo.Desc), 60));
+        seodescription = string.Format("{0}商品详细介绍。{1}。", iteminfo.Title, Utils.CutString(Utils.RemoveHtml(Utils.StrFormat(iteminfo.Desc)).Trim(), 0, 60));
 
         string viewinfo = iid + "|" + Utils.UrlEncode(iteminfo.Title) + "|" + iteminfo.Price + "|" + iteminfo.PicUrl;
         string lastviewids = "," + Utils.GetCookie("goodviews") + ",";

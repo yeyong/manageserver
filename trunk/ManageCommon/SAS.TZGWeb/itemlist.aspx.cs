@@ -149,7 +149,7 @@ public partial class itemlist : TaoBaoPage
         string takestr = pid > 0 ? parentcategory.Name : currentcategoryname;
         pagetitle = string.Format("{0}-{0}商品列表{1}", takestr, pageid > 1 ? "(" + pageid.ToString() + ")" : "");
         seokeyword = string.Format("{0}商品搜索,{0}商品列表,{0}商品集合,{0}", takestr);
-        seodescription = string.Format("{0}商品列表,{0}商品导购与推荐。", takestr);
+        seodescription = string.Format("{0}商品列表,{0}商品导购与推荐。{1}", takestr, pageid > 1 ? "(" + pageid.ToString() + ")" : "");
     }
 
     /// <summary>

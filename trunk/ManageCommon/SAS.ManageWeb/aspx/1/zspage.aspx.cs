@@ -65,6 +65,7 @@ namespace SAS.ManageWeb
         /// 待审核数
         /// </summary>
         protected int waitcount = 0;
+        protected TaoBaoConfigInfo tbconfig = TaoBaoConfigs.GetConfig();
 
         protected override void ShowPage()
         {

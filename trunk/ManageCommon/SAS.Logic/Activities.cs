@@ -76,7 +76,9 @@ namespace SAS.Logic
                 activelist = GetEnableActivities();
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 1440;
+                cache.LoadCacheStrategy(ica);
                 cache.AddObject(cachekey, activelist);
+                cache.LoadDefaultCacheStrategy();
             }
             return activelist;
         }
@@ -95,7 +97,9 @@ namespace SAS.Logic
                 activelist = Data.DataProvider.Activities.GetActvitiesByType(5, ActivityType.IndexActivity);
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 300;
+                cache.LoadCacheStrategy(ica);
                 cache.AddObject(cachekey, activelist);
+                cache.LoadDefaultCacheStrategy();
             }
             return activelist;
         }
@@ -128,7 +132,9 @@ namespace SAS.Logic
                 activelist = Data.DataProvider.Activities.GetActvitiesByType(8, ActivityType.IndexActivity);
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 300;
+                cache.LoadCacheStrategy(ica);
                 cache.AddObject(cachekey, activelist);
+                cache.LoadDefaultCacheStrategy();
             }
             return activelist;
         }
@@ -146,7 +152,9 @@ namespace SAS.Logic
                 activelist = Data.DataProvider.Activities.GetActvitiesByType(8, ActivityType.TaobaoActivity);
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 300;
+                cache.LoadCacheStrategy(ica);
                 cache.AddObject(cachekey, activelist);
+                cache.LoadDefaultCacheStrategy();
             }
             return activelist;
         }

@@ -115,7 +115,9 @@ namespace SAS.Logic
                 helplist = SAS.Data.DataProvider.Help.GetHelpList();
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 1440;
+                cache.LoadCacheStrategy(ica);
                 cache.AddObject("/SAS/helplist", helplist);
+                cache.LoadDefaultCacheStrategy();
             }
 
             return helplist;
@@ -134,7 +136,9 @@ namespace SAS.Logic
                 helplist = SAS.Data.DataProvider.Help.GetIndexHelpList(5);
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 1440;
+                cache.LoadCacheStrategy(ica);
                 cache.AddObject("/SAS/helpindex", helplist);
+                cache.LoadDefaultCacheStrategy();
             }
 
             return helplist;
