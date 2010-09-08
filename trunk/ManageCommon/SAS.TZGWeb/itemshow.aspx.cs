@@ -17,7 +17,7 @@ public partial class itemshow : TaoBaoPage
     /// <summary>
     /// 商品ID
     /// </summary>
-    protected long iid = long.Parse(SASRequest.GetString("iid"));
+    protected long iid = 0;
     /// <summary>
     /// 商品信息
     /// </summary>
@@ -57,6 +57,10 @@ public partial class itemshow : TaoBaoPage
 
     protected override void ShowPage()
     {
+        if (!string.IsNullOrEmpty(SASRequest.GetString("iid")))
+        {
+            iid = long.Parse(SASRequest.GetString("iid"));
+        }
         tkitem = TaoBaos.GetTaoBaoKeItemDetail(iid);
         if (tkitem == null)
         {
