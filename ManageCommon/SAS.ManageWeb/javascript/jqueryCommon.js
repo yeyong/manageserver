@@ -43,7 +43,7 @@ jQuery.fn.Couplet = function(parmsObj) {
     var parmarray = {
         closeicon: "images/cross.png",
         objsrc: "images/aa/aa2.jpg",
-        objhref: "www.zheshangonline.com/",
+        objhref: "www.cnzshy.com/",
         layout: "right",
         top: 100,
         distance: 100,
@@ -89,7 +89,7 @@ jQuery.fn.Couplet = function(parmsObj) {
 jQuery.fn.floatdiv = function(locobj) {
     var locsty = {
         objsrc: "images/diaocha.gif",
-        objhref: "www.zheshangonline.com/",
+        objhref: "www.cnzshy.com/",
         position: "fixed",
         floattype: "right",
         right: 0,

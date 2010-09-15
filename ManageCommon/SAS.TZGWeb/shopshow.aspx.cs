@@ -18,6 +18,13 @@ public partial class shopshow : TaoBaoPage
 
     protected override void ShowPage()
     {
+        if (string.IsNullOrEmpty(sid))
+        {
+            AddErrLine("店铺信息展示错误！");
+            SetMetaRefresh(2, LogicUtils.GetReUrl());
+            return;
+        }
+
         sinfo = TaoBaos.GetTaoBaoShopInfo(sid);
 
         if (sinfo == null)
