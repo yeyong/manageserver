@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("淘宝插件开发")]
 [assembly: AssemblyDescription("淘宝数据相关操作")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("www.zheshangonline.com")]
+[assembly: AssemblyCompany("www.cnzshy.com")]
 [assembly: AssemblyProduct("淘宝插件")]
-[assembly: AssemblyCopyright("Copyright © zheshangonline.com 2010")]
+[assembly: AssemblyCopyright("Copyright © cnzshy.com 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

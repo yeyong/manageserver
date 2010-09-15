@@ -117,7 +117,7 @@ namespace SAS.ManageWeb
         protected override void ShowPage()
         {
             string m_keyword = "浙商名片,{0}行业,{0}企业,{0}生产商,{0}销售商,{0}供应商,{0},{0}商机,{0}名片";  //meta关键字
-            string m_content = "浙商名片(www.zheshangonline.com)浙商企业信息检索。大力扶持中小企业，中小型企业的摇篮，免费的{0}企业展示平台、{0}企业推广平台，让所有的网站都成为您企业的展示平台，更多服务尽在浙商黄页展示平台！";  //meta内容描述
+            string m_content = "浙商名片(www.cnzshy.com)浙商企业信息检索。大力扶持中小企业，中小型企业的摇篮，免费的{0}企业展示平台、{0}企业推广平台，让所有的网站都成为您企业的展示平台，更多服务尽在浙商黄页展示平台！";  //meta内容描述
             pagetitle = "浙商名片|浙商企业另类展示" + (pageid > 1 ? "(" + pageid + ")" : "");
             searchkey = keyword;
             keyword = Utils.UrlEncode(keyword).Replace("'", "%27");

@@ -128,7 +128,7 @@ namespace SAS.Logic
                 rssBuilder.AppendFormat("    <link>{0}</link>", config.Weburl);
                 rssBuilder.Append("    <language>en</language>\r\n");
                 rssBuilder.Append("    <docs>http://blogs.law.harvard.edu/tech/rss</docs>\r\n");
-                rssBuilder.Append("    <generator>www.zheshangonline.com</generator>\r\n");
+                rssBuilder.Append("    <generator>www.cnzshy.com</generator>\r\n");
                 rssBuilder.Append("    <description>\r\n");
                 rssBuilder.Append("      <![CDATA[ 浙商黄页 -- 浙商 网络名片 天狼星 自助推广 ]]>\r\n");
                 rssBuilder.Append("    </description>\r\n");
@@ -142,7 +142,7 @@ namespace SAS.Logic
                     rssBuilder.AppendFormat("      <link>{0}</link>\r\n", config.Weburl.EndsWith("/") ? config.Weburl + "activity-" + actdr["id"] + ".html" : config.Weburl + "/" + "activity-" + actdr["id"] + ".html");
                     rssBuilder.AppendFormat("      <title><![CDATA[ {0} ]]></title>\r\n", actdr["atitle"]);
                     rssBuilder.Append("    <author>浙商黄页</author>\r\n");
-                    rssBuilder.Append("    <category>www.zheshangonline.com浙商黄页宣传活动</category>\r\n");
+                    rssBuilder.Append("    <category>www.cnzshy.com浙商黄页宣传活动</category>\r\n");
                     rssBuilder.AppendFormat("    <guid>{0}</guid>\r\n", config.Weburl.EndsWith("/") ? config.Weburl + "activity-" + actdr["id"] + ".html" : config.Weburl + "/" + "activity-" + actdr["id"] + ".html");
                     rssBuilder.AppendFormat("    <pubDate>{0}</pubDate>\r\n", Utils.HtmlEncode(Convert.ToDateTime(actdr["createdate"]).ToString("r").Trim()));
                     rssBuilder.Append("    <description>\r\n");
@@ -157,7 +157,7 @@ namespace SAS.Logic
                     rssBuilder.AppendFormat("      <link>{0}</link>\r\n", config.Weburl.EndsWith("/") ? config.Weburl + "company-" + cominfo.En_id + ".html" : config.Weburl + "/" + "company-" + cominfo.En_id + ".html");
                     rssBuilder.AppendFormat("      <title><![CDATA[ {0} ]]></title>\r\n", cominfo.En_name);
                     rssBuilder.Append("    <author>浙商黄页</author>\r\n");
-                    rssBuilder.Append("    <category>www.zheshangonline.com浙商黄页企业信息</category>\r\n");
+                    rssBuilder.Append("    <category>www.cnzshy.com浙商黄页企业信息</category>\r\n");
                     rssBuilder.AppendFormat("    <guid>{0}</guid>\r\n", config.Weburl.EndsWith("/") ? config.Weburl + "company-" + cominfo.En_id + ".html" : config.Weburl + "/" + "company-" + cominfo.En_id + ".html");
                     rssBuilder.AppendFormat("    <pubDate>{0}</pubDate>\r\n", Utils.HtmlEncode(Convert.ToDateTime(cominfo.En_update).ToString("r").Trim()));
                     rssBuilder.Append("    <description>\r\n");

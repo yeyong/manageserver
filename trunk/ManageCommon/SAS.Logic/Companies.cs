@@ -405,7 +405,7 @@ namespace SAS.Logic
             {
                 companylist = SAS.Data.DataProvider.Companies.GetCompanyByCityCatalog(cityid, cid, nums);
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
-                ica.TimeOut = 300;
+                ica.TimeOut = 1440;
                 cache.LoadCacheStrategy(ica);
                 cache.AddObject(cachekey, companylist);
                 cache.LoadDefaultCacheStrategy();
