@@ -16,8 +16,8 @@ public partial class amoy : TaoBaoPage
 {
     protected override void ShowPage()
     {
-        pagetitle = "淘清凉-夏日必备单品";
-        seokeyword = "淘之购泡沫之夏,泡沫之夏,夏日单品,妆容,美妆,配饰,美装";
-        seodescription = "泡沫之夏，炎炎夏日提供淘宝清凉单品推荐。";
+        pagetitle = "魅惑初秋 － 淘之购";
+        seokeyword = "秋装，单品，韩版，英伦，西装，马夹，针织衫，单鞋，皮鞋";
+        seodescription = "2010淘之购推荐秋季单品，特色品牌推荐，秋之惑。";
     }
 }
