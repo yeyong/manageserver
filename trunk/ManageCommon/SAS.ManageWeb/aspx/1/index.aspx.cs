@@ -78,6 +78,10 @@ namespace SAS.ManageWeb
         /// </summary>
         protected string[] indexad4 = Advertisements.GetZSRandomAd(4, AdType.IndexImageAd).Split('|');
         /// <summary>
+        /// 广告位5
+        /// </summary>
+        protected AdShowInfo[] indexad5 = Advertisements.GetZSAdsByType(5, AdType.IndexImageAd);
+        /// <summary>
         /// 首页对联广告1
         /// </summary>
         protected string[] indexdouble1 = Advertisements.GetZSRandomAd(1, AdType.DoubleAd).Split('|');

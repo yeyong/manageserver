@@ -66,14 +66,19 @@
 	<div class="onece mar_left_10 mar_top_8">
 		<div class="onece1" id="bill">
 			<div id="onece1con">
-				<div class="con"><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa3.jpg" /></a></div>
-				<div class="con"><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa3.jpg" /></a></div>
-				<div class="con"><a title="" href="#"><img alt="" src="templates/{templatepath}/images/aa/aa3.jpg" /></a></div>
+			    <%set (int){ad5count}=0%>
+			    <%loop (AdShowInfo) ad5info indexad5%>
+			    <%csharp%>
+			        string[] ad5infoparm = ad5info.Parameters.Split('|');
+			    <%/csharp%>
+			    <%if ad5infoparm.Length<8%><%continue%><%/if%>
+				<div class="con"><a title="{ad5infoparm[5]}" href="{ad5infoparm[4]}"><img alt="{ad5infoparm[5]}" src="{ad5infoparm[1]}" /></a></div>
+				<%set {ad5count}={ad5count}+1%>
+				<%/loop%>
 			</div>
 			<ul id="onece1t">
-				<li>1</li>
-				<li>2</li>
-				<li>3</li>
+			    <%set (int){ad5order}=0%>
+			    <%repeat("<li>"+({i}+1)+"</li>", {ad5count})%>
 			</ul>
 		</div>
 		<div class="onece2 mar_top_8">
