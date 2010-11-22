@@ -26,6 +26,8 @@ namespace SAS.ManageWeb
         protected Companys tipmsgeninfo;
         protected override void ShowPage()
         {
+            AddMetaInfo("", "", "<meta name=\"robots\" content=\"nofollow\" />\r\n");
+
             if (enid > 0)
             {
                 tipmsgeninfo = Companies.GetCompanyCacheInfo(enid);
