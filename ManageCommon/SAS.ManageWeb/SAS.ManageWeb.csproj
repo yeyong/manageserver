@@ -812,6 +812,10 @@
       <Project>{9145299A-21C2-4558-A956-2DBDCBF477DE}</Project>
       <Name>SAS.Logic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SAS.NETCMS\SAS.NETCMS.csproj">
+      <Project>{A8B7801B-4BCB-4663-B014-3452D99DEA44}</Project>
+      <Name>SAS.NETCMS</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SAS.Plugin\SAS.Plugin.csproj">
       <Project>{2EA29B20-569F-421C-B359-7E7F8C7045CD}</Project>
       <Name>SAS.Plugin</Name>
