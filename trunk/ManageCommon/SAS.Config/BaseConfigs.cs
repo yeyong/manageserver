@@ -62,6 +62,17 @@ namespace SAS.Config
         }
 
         /// <summary>
+        /// 返回文章系统数据库连接串
+        /// </summary>
+        public static string GetNETCMSConnectString
+        {
+            get
+            {
+                return GetBaseConfig().NTWCMSDbconnectstring;
+            }
+        }
+
+        /// <summary>
         /// 返回表前缀
         /// </summary>
         public static string GetTablePrefix
