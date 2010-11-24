@@ -193,7 +193,7 @@
                         </td>
                         <td>
                             <select name="rcategory">
-                                <option value="0">请选择类别</option>
+                                <option value="-1">请选择类别</option>
                                 <%
                                     foreach (SAS.Entity.Domain.ItemCat iteminfo in icatlist)
                                     {
