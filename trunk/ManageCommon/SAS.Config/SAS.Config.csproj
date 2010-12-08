@@ -40,6 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIConfigFileManager.cs" />
+    <Compile Include="APIConfigInfo.cs" />
+    <Compile Include="APIConfigs.cs" />
+    <Compile Include="ApplicationInfo.cs" />
+    <Compile Include="ApplicationInfoCollection.cs" />
     <Compile Include="BaseConfigFileManager.cs" />
     <Compile Include="BaseConfigInfo.cs" />
     <Compile Include="BaseConfigInfoCollection.cs" />

@@ -436,6 +436,13 @@
     <Compile Include="ManagePage\global\global_navigationmanage.aspx.designer.cs">
       <DependentUpon>global_navigationmanage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\global\global_passportmanage.aspx.cs">
+      <DependentUpon>global_passportmanage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_passportmanage.aspx.designer.cs">
+      <DependentUpon>global_passportmanage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\global\global_searchactivity.aspx.cs">
       <DependentUpon>global_searchactivity.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1244,6 +1251,7 @@
     <Content Include="ManagePage\global\global_helplist.aspx" />
     <Content Include="ManagePage\global\global_logandshrinkdb.aspx" />
     <Content Include="ManagePage\global\global_navigationmanage.aspx" />
+    <Content Include="ManagePage\global\global_passportmanage.aspx" />
     <Content Include="ManagePage\global\global_searchactivity.aspx" />
     <Content Include="ManagePage\global\global_searchadvs.aspx" />
     <Content Include="ManagePage\global\global_searchengine.aspx" />
@@ -1884,6 +1892,7 @@
     <Content Include="config\taobao.config" />
     <Content Include="tools\zsmap.aspx" />
     <Content Include="tools\rss.aspx" />
+    <Content Include="config\api.config" />
     <None Include="ManagePage\images\admin-gif\Thumbs.db" />
     <None Include="ManagePage\images\ad\Thumbs.db" />
     <None Include="ManagePage\images\Thumbs.db" />

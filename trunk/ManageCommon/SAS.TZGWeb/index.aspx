@@ -37,7 +37,7 @@
             int ainfo__id = 1;    
             foreach (ActivityInfo ainfo in taoactlist)
             {
-                if (ainfo__id > 6) break;
+                if (ainfo__id > 7) break;
 		%>
 			<li>[<em><%=SAS.Common.Utils.GetStandardDate(ainfo.Begintime)%></em>] <a target="_blank" title="<%=ainfo.Atitle%>" href="actshow-<%=ainfo.Id%>.html"><%=ainfo.Atitle%></a></li>
 		<%
