@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace SAS.Web.Services.API
 {
-    [XmlRoot("error_response", IsNullable = false)]
+    [XmlRoot("error_response", Namespace = "http://www.cnzshy.com/api/", IsNullable = false)]
     public class Error
     {
         [JsonProperty("error_code")]
