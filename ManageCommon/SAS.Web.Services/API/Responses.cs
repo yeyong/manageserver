@@ -6,14 +6,14 @@ using SAS.Entity;
 namespace SAS.Web.Services.API
 {
     #region auth
-    [XmlRoot("auth_createToken_response", Namespace = "http://nt.discuz.net/api/", IsNullable = false)]
+    [XmlRoot("auth_createToken_response", Namespace = "http://www.cnzshy.com/api/", IsNullable = false)]
     public class TokenInfo
     {
         [XmlElement("session_key")]
         public string Token;
     }
 
-    [XmlRoot("auth_getSession_response", Namespace = "http://nt.discuz.net/api/", IsNullable = false)]
+    [XmlRoot("auth_getSession_response", Namespace = "http://www.cnzshy.com/api/", IsNullable = false)]
     public class SessionInfo
     {
         [XmlElement("session_key")]
@@ -47,7 +47,7 @@ namespace SAS.Web.Services.API
         }
     }
 
-    [XmlRoot("auth_register_response", Namespace = "http://nt.discuz.net/api/", IsNullable = false)]
+    [XmlRoot("auth_register_response", Namespace = "http://www.cnzshy.com/api/", IsNullable = false)]
     public class RegisterResponse
     {
         [XmlText]
@@ -57,7 +57,7 @@ namespace SAS.Web.Services.API
         //public bool List;
     }
 
-    [XmlRoot("auth_encodePassword_response", Namespace = "http://nt.discuz.net/api/", IsNullable = false)]
+    [XmlRoot("auth_encodePassword_response", Namespace = "http://www.cnzshy.com/api/", IsNullable = false)]
     public class EncodePasswordResponse
     {
         [XmlText]

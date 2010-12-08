@@ -44,10 +44,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\Actions\ActionBase.cs" />
+    <Compile Include="API\Actions\Auth.cs" />
     <Compile Include="API\Arg.cs" />
+    <Compile Include="API\Enums.cs" />
     <Compile Include="API\Error.cs" />
+    <Compile Include="API\ErrorDetails.cs" />
     <Compile Include="API\Responses.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="API\SASException.cs" />
+    <Compile Include="API\SASParam.cs" />
+    <Compile Include="RESTServer.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
