@@ -113,7 +113,7 @@ namespace SAS.Logic
             actlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/TaoActivities") as System.Collections.Generic.List<ActivityInfo>;
             if (actlist == null)
             {
-                actlist = SAS.Data.DataProvider.Activities.GetActvitiesByType(5, ActivityType.TaobaoActivity);
+                actlist = SAS.Data.DataProvider.Activities.GetActvitiesByType(6, ActivityType.TaobaoActivity);
                 SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/TaoActivities", actlist);
             }
             return actlist;
