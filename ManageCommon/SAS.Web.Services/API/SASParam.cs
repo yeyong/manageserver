@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Web;
 
 namespace SAS.Web.Services.API
 {
@@ -31,6 +32,20 @@ namespace SAS.Web.Services.API
             }
         }
 
+        /// <summary>
+        /// 获取参数值
+        /// </summary>
+        public string EncodedValue
+        {
+            get
+            {
+                if (value is Array)
+                    return HttpUtility.UrlEncode(ConvertArrayToString(value as Array));
+                else
+                    return HttpUtility.UrlEncode(value.ToString());
+            }
+        }
+
         protected SASParam(string name, object value)
         {
             this.name = name;
@@ -40,6 +55,15 @@ namespace SAS.Web.Services.API
         public override string ToString()
         {
             return string.Format("{0}={1}", Name, Value);
+        }
+
+        /// <summary>
+        /// 生成encode字符串
+        /// </summary>
+        /// <returns></returns>
+        public string ToEncodedString()
+        {
+            return string.Format("{0}={1}", Name, EncodedValue);
         }
 
         /// <summary>
