@@ -65,6 +65,20 @@ namespace SAS.Web.Services.API
     }
     #endregion
 
+    #region 企业信息操作
+    [XmlRoot("company_getlist", Namespace = "http://www.cnzshy.com/api/", IsNullable = false)]
+    public class CompanyGetListResponse
+    {
+        [XmlElement("cnums")]
+        [JsonProperty("cnums")]
+        public int Cnums;
+
+        [XmlElement("companylist")]
+        [JsonProperty("companylist")]
+        public CompanyInfo[] CompanyList;
+    }
+    #endregion
+
     public class ArgResponse
     {
         [XmlElement("arg")]

@@ -443,6 +443,13 @@
     <Compile Include="ManagePage\global\global_passportmanage.aspx.designer.cs">
       <DependentUpon>global_passportmanage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\global\global_passportsetting.aspx.cs">
+      <DependentUpon>global_passportsetting.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\global\global_passportsetting.aspx.designer.cs">
+      <DependentUpon>global_passportsetting.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\global\global_searchactivity.aspx.cs">
       <DependentUpon>global_searchactivity.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1252,6 +1259,7 @@
     <Content Include="ManagePage\global\global_logandshrinkdb.aspx" />
     <Content Include="ManagePage\global\global_navigationmanage.aspx" />
     <Content Include="ManagePage\global\global_passportmanage.aspx" />
+    <Content Include="ManagePage\global\global_passportsetting.aspx" />
     <Content Include="ManagePage\global\global_searchactivity.aspx" />
     <Content Include="ManagePage\global\global_searchadvs.aspx" />
     <Content Include="ManagePage\global\global_searchengine.aspx" />
