@@ -135,7 +135,7 @@ namespace SAS.Web.Services.API.Actions
             foreach (byte b in md5_result)
                 sessionkey_builder.Append(b.ToString("x2"));
 
-            string sessionkey = string.Format("{0}-{1}", sessionkey_builder.ToString(), oluser.Userid.ToString());
+            string sessionkey = string.Format("{0}-{1}", sessionkey_builder.ToString(), oluser.Ol_ps_id.ToString());
             SessionInfo session = new SessionInfo();
             session.SessionKey = sessionkey;
             session.UId = oluser.Ol_ps_id;
