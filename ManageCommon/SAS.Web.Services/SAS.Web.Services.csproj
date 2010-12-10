@@ -81,6 +81,10 @@
       <Project>{9145299A-21C2-4558-A956-2DBDCBF477DE}</Project>
       <Name>SAS.Logic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SAS.Plugin.PasswordMode\SAS.Plugin.PasswordMode.csproj">
+      <Project>{D2DA07DC-6CB2-435B-BD95-5D624F239DCC}</Project>
+      <Name>SAS.Plugin.PasswordMode</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
