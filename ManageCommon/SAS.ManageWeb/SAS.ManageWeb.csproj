@@ -838,6 +838,10 @@
       <Project>{B096ACF0-E4BD-4EE9-9084-9B728598AF59}</Project>
       <Name>SAS.Taobao</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SAS.Web.Services\SAS.Web.Services.csproj">
+      <Project>{9EC20563-4EB0-404F-B0B9-C229A79F95B2}</Project>
+      <Name>SAS.Web.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SAS.Web.UI\SAS.Web.UI.csproj">
       <Project>{15188167-C7FB-4A1B-9AC0-480A26825AAF}</Project>
       <Name>SAS.Web.UI</Name>
@@ -1775,6 +1779,7 @@
     <Content Include="ManagePage\UserControls\usergrouppowersetting.ascx" />
     <Content Include="ManagePage\xml\backup\2009-09-24 09_20_17.config" />
     <Content Include="ManagePage\xml\navmenu.config" />
+    <Content Include="services\restserver.aspx" />
     <Content Include="templates\default\activities.htm" />
     <Content Include="templates\default\agreement.htm" />
     <Content Include="templates\default\album\album.css" />

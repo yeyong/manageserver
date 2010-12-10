@@ -1,0 +1,1 @@
+﻿<%@ Page Inherits="SAS.Web.Services.RESTServer,SAS.Web.Services" %>
