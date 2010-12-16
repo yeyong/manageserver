@@ -38,5 +38,19 @@ namespace SAS.Web.Services.API
         [JsonPropertyAttribute("encredits")]
         [XmlElement("encredits")]
         public int Encredits;
+
+        /// <summary>
+        /// 企业类别ID
+        /// </summary>
+        [JsonPropertyAttribute("encatalogid")]
+        [XmlElement("encatalogid")]
+        public int Encatalogid = 0;
+
+        /// <summary>
+        /// 企业类别名称
+        /// </summary>
+        [JsonPropertyAttribute("encatalogname")]
+        [XmlElement("encatalogname")]
+        public string Encatalogname = string.Empty;
     }
 }
