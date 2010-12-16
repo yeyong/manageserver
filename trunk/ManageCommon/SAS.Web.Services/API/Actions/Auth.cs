@@ -61,7 +61,7 @@ namespace SAS.Web.Services.API.Actions
                     returnStr = SerializationHelper.Serialize(token);
                 return returnStr;
             }
-            expires = System.Web.HttpContext.Current.Request.Cookies["dnt"]["expires"].ToString();
+            expires = System.Web.HttpContext.Current.Request.Cookies["sas"]["expires"].ToString();
             ShortUserInfo userinfo = SAS.Logic.Users.GetShortUserInfo(oluserinfo.Ol_ps_id);
             expireUTCTime = DateTime.Parse(userinfo.Ps_lastactivity).ToUniversalTime().AddSeconds(Convert.ToDouble(expires));
             expires = Utils.ConvertToUnixTimestamp(expireUTCTime).ToString();
