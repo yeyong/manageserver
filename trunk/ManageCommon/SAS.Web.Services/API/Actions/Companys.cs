@@ -72,6 +72,14 @@ namespace SAS.Web.Services.API.Actions
                 cinfo.Ename = cmodel.En_name;
                 cinfo.Enaccesses = cmodel.En_accesses;
                 cinfo.Encredits = cmodel.En_credits;
+
+                if (cmodel.En_cataloglist.Split(',').Length > 0)
+                {
+                    cinfo.Encatalogid = Utils.StrToInt(cmodel.En_cataloglist.Split(',')[0], 0);
+                }
+
+                SAS.Entity.CatalogInfo catainfo = Catalogs.GetCatalogCacheInfo(cinfo.Encatalogid);
+                cinfo.Encatalogname = catainfo == null ? string.Empty:catainfo.name;
                 cilist.Add(cinfo);
             }
 
