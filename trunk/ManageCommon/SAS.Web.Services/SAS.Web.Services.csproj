@@ -45,8 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\Actions\ActionBase.cs" />
+    <Compile Include="API\Actions\Activitys.cs" />
     <Compile Include="API\Actions\Auth.cs" />
     <Compile Include="API\Actions\Companys.cs" />
+    <Compile Include="API\ActivityInfo.cs" />
     <Compile Include="API\Arg.cs" />
     <Compile Include="API\CompanyInfo.cs" />
     <Compile Include="API\Enums.cs" />

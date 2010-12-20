@@ -79,6 +79,20 @@ namespace SAS.Web.Services.API
     }
     #endregion
 
+    #region 专题信息操作
+    [XmlRoot("activity_getlist", Namespace = "http://www.cnzshy.com/api/", IsNullable = false)]
+    public class ActivityGetListResponse
+    {
+        [XmlElement("anums")]
+        [JsonProperty("anums")]
+        public int Anums;
+
+        [XmlElement("activitylist")]
+        [JsonProperty("activitylist")]
+        public ActivityInfo[] ActivityList;
+    }
+    #endregion
+
     public class ArgResponse
     {
         [XmlElement("arg")]
