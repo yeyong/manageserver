@@ -29,10 +29,10 @@ namespace SAS.ManageWeb
                 AddErrLine("该活动不存在！");
                 return;
             }
-            if (System.DateTime.Parse(actinfo.Endtime) < System.DateTime.Now)
-            {
-                AddErrLine("该活动已结束！");
-            }
+            //if (System.DateTime.Parse(actinfo.Endtime) < System.DateTime.Now)
+            //{
+            //    AddErrLine("该活动已结束！");
+            //}
             if (actinfo.Enabled == 0)
             {
                 AddErrLine("该活动已关闭！");
