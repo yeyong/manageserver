@@ -59,6 +59,7 @@ namespace SAS.Web.Services.API.Actions
                     clist = SAS.Data.DataProvider.Companies.GetCompanyListByOrder(cnums, "en_credits", true);
                     break;
                 default:
+                    clist = SAS.Data.DataProvider.Companies.GetCompanyListByOrder(cnums, "en_createdate", true);
                     break;
             }
 
