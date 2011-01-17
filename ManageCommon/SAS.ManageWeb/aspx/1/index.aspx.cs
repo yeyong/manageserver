@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using SAS.Logic;
 using SAS.Common;
 using SAS.Common.Generic;
+using SAS.Entity;
 using SAS.Config;
 using SAS.Entity;
 
@@ -89,6 +90,10 @@ namespace SAS.ManageWeb
         /// 首页对联广告2
         /// </summary>
         protected string[] indexdouble2 = Advertisements.GetZSRandomAd(2, AdType.DoubleAd).Split('|');
+        /// <summary>
+        /// 每日资讯
+        /// </summary>
+        protected List<NewsContent> newslist = News.GetHourNews(5);
 
         protected override void ShowPage()
         {

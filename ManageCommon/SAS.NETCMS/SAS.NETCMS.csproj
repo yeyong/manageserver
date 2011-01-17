@@ -36,7 +36,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\DbBase.cs" />
     <Compile Include="Data\DbProvider.cs" />
+    <Compile Include="Data\DTOProvider.cs" />
+    <Compile Include="Data\IDbBase.cs" />
+    <Compile Include="Data\NewsDbHelper.cs" />
     <Compile Include="Data\SqlDataProvider.cs" />
     <Compile Include="NETCMS.cs" />
     <Compile Include="NETCMSPlugin.cs" />
