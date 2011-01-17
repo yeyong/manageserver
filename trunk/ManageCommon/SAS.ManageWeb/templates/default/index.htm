@@ -4,7 +4,7 @@
 	<!--左边 begin-->
 	<div class="onelt mar_top_8">
 		<div class="onelt1 f_333" id="bulletin">
-		    <p class="onelt1tit1">最新活动</p>
+		    <p class="onelt1tit1">最新活动<%loop (NewsContent) newsinfo newslist%>{newsinfo.NewsTitle}<%/loop%></p>
 			<ul class="onelt1nr">
 			<%loop (ActivityInfo) indexactinfo indexactlist%>
 				<li>▪&nbsp;<a target="_blank" title="{indexactinfo.atitle}" href="activity-{indexactinfo.id}.html">{indexactinfo.atitle}</a></li>
