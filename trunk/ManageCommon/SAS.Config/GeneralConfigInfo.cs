@@ -214,6 +214,7 @@ namespace SAS.Config
         private int m_quickforward = 0;//是否开启跳转
 
         private int m_cardtemplateid = 1;//默认名片模板ID
+        private string m_netcmsurl = "http://news.cnzshy.com/";//新闻站点域名设置
         #endregion
 
         #region 属性
@@ -1796,6 +1797,15 @@ namespace SAS.Config
         {
             get { return m_cardtemplateid; }
             set { m_cardtemplateid = value; }
+        }
+
+        /// <summary>
+        /// 新闻链接地址
+        /// </summary>
+        public string NETCMSUrl
+        {
+            get { return m_netcmsurl; }
+            set { m_netcmsurl = value; }
         }
         #endregion
     }

@@ -126,6 +126,7 @@
     <Compile Include="IpInfo.cs" />
     <Compile Include="NavInfo.cs" />
     <Compile Include="NETCMS\NewsContent.cs" />
+    <Compile Include="NETCMS\PubClassInfo.cs" />
     <Compile Include="NoticeInfo.cs" />
     <Compile Include="NoticeinfoCollection.cs" />
     <Compile Include="OnlineUserInfo.cs" />
