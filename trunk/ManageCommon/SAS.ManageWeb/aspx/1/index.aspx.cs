@@ -43,13 +43,17 @@ namespace SAS.ManageWeb
         /// </summary>
         protected List<Companys> commentcompanylist = Companies.GetCompanyListComments();
         /// <summary>
+        /// 企业访问排行
+        /// </summary>
+        protected List<Companys> clickcompanylist = Companies.GetCompanyListViews();
+        /// <summary>
         /// 生产型企业
         /// </summary>
-        protected List<Companys> mancompanylist = Companies.GetCompanyListByType(EnTypeEnum.Manufacturer);
+        protected List<Companys> mancompanylist = new List<Companys>();
         /// <summary>
         /// 销售型企业
         /// </summary>
-        protected List<Companys> selcompanylist = Companies.GetCompanyListByType(EnTypeEnum.Dealers);
+        protected List<Companys> selcompanylist = new List<Companys>();
         /// <summary>
         /// 首页活动信息集合
         /// </summary>
@@ -93,7 +97,15 @@ namespace SAS.ManageWeb
         /// <summary>
         /// 每日资讯
         /// </summary>
-        protected List<NewsContent> newslist = News.GetHourNews(5);
+        protected List<NewsContent> newslist = News.GetHourNews();
+        /// <summary>
+        /// 栏目资讯
+        /// </summary>
+        protected List<NewsContent> newslistbyclass = new List<NewsContent>();
+        /// <summary>
+        /// 栏目信息
+        /// </summary>
+        protected PubClassInfo pclassinfo = new PubClassInfo();
 
         protected override void ShowPage()
         {
@@ -112,29 +124,59 @@ namespace SAS.ManageWeb
                 adtempstr += "\r\n " + "jQuery(this).Couplet({closeicon:\"templates/" + templatepath + "/images/cross.png\",layout:\"right\",distance:20,objsrc:\"" + indexdouble2[1] + "\",objhref:\"" + indexdouble2[4] + "\"})";
             }
 
-            string loadscript = "\r\n " + "jQuery(document).ready(function() {"
-                    + "\r\n " + "jQuery(\"#bulletin\").find(\"ul:last\").hide();"
-                    + "\r\n " + "jQuery(\"#bulletin\").find(\"p:first\").mouseover(function() {"
-                    + "\r\n " + "	jQuery(\"#bulletin\").find(\"ul:first\").show();"
-                    + "\r\n " + "	jQuery(\"#bulletin\").find(\"ul:last\").hide();"
-                    + "\r\n " + "});"
-                    + "\r\n " + "jQuery(\"#bulletin\").find(\"p:last\").mouseover(function() {"
-                    + "\r\n " + "	jQuery(\"#bulletin\").find(\"ul:last\").show();"
-                    + "\r\n " + "	jQuery(\"#bulletin\").find(\"ul:first\").hide();"
-                    + "\r\n " + "});"
-                    + "\r\n " + "jQuery(\"#tao\").Exchange({ MIDS: \"onelt2tit\", CIDS: \"onelt2con\", count: 5, mousetype: 1 });"
-                    + "\r\n " + "jQuery(\"#bill\").Exchange({ MIDS: \"onece1t\", CIDS: \"onece1con\", timer: 5000, count: 5, mousetype: 1 });"
-                    + "\r\n " + "jQuery(\"#prod\").Exchange({ MIDS: \"onert3t\", CIDS: \"onert3con\", count: 5, mousetype: 1 });"
-                    + "\r\n " + "jQuery(\"#mcd\").find(\"li\").capslide({ caption_color: 'black', caption_bgcolor: 'white', overlay_bgcolor: '#e7dad8', border: '2px solid #e7dad8', showcaption: true });"
-                    + "\r\n " + "var scrollup = new ScrollText(\"listcomp\");"
-                    + "\r\n " + "scrollup.LineHeight = 30;"
-                    + "\r\n " + "scrollup.Amount = 2;"
-                    + "\r\n " + "scrollup.Start();"
-                    + "\r\n " + "jQuery(this).gettop({objsrc:\"templates/" + templatepath + "/images/top.gif\",objhref:\"javascript:scrollTo(0,0)\"});" + adtempstr
-                    + "\r\n " + "});";
+            string loadscript = "\r\n " + "jQuery(document).ready(function() {";
+            if (templateid == 1)
+            {
+                loadscript += "\r\n " + "jQuery(\"#bulletin\").find(\"ul:last\").hide();";
+                loadscript += "\r\n " + "jQuery(\"#bulletin\").find(\"p:first\").mouseover(function() {";
+                loadscript += "\r\n " + "	jQuery(\"#bulletin\").find(\"ul:first\").show();";
+                loadscript += "\r\n " + "	jQuery(\"#bulletin\").find(\"ul:last\").hide();";
+                loadscript += "\r\n " + "});";
+                loadscript += "\r\n " + "jQuery(\"#bulletin\").find(\"p:last\").mouseover(function() {";
+                loadscript += "\r\n " + "	jQuery(\"#bulletin\").find(\"ul:last\").show();";
+                loadscript += "\r\n " + "	jQuery(\"#bulletin\").find(\"ul:first\").hide();";
+                loadscript += "\r\n " + "});";
+                loadscript += "\r\n " + "jQuery(\"#tao\").Exchange({ MIDS: \"onelt2tit\", CIDS: \"onelt2con\", count: 5, mousetype: 1 });";
+                loadscript += "\r\n " + "jQuery(\"#bill\").Exchange({ MIDS: \"onece1t\", CIDS: \"onece1con\", timer: 5000, count: 5, mousetype: 1 });";
+                loadscript += "\r\n " + "jQuery(\"#prod\").Exchange({ MIDS: \"onert3t\", CIDS: \"onert3con\", count: 5, mousetype: 1 });";
+                loadscript += "\r\n " + "jQuery(\"#mcd\").find(\"li\").capslide({ caption_color: 'black', caption_bgcolor: 'white', overlay_bgcolor: '#e7dad8', border: '2px solid #e7dad8', showcaption: true });";
+                loadscript += "\r\n " + "var scrollup = new ScrollText(\"listcomp\");";
+                loadscript += "\r\n " + "scrollup.LineHeight = 30;";
+                loadscript += "\r\n " + "scrollup.Amount = 2;";
+                loadscript += "\r\n " + "scrollup.Start();";
+            }
+            else
+            {
+                loadscript += "\r\n " + "jQuery(\"#ocead\").Exchange({ MIDS: \"oceadt\", CIDS: \"oceadc\", timer: 5000, count: 5, mousetype: 1 });";
+                loadscript += "\r\n " + "jQuery(\"#ort2\").Exchange({ MIDS: \"ortit\", CIDS: \"ortnr\", timer: 5000, count: 5, mousetype: 1 });";
+                loadscript += "\r\n " + "jQuery(\"#hot\").Exchange({ MIDS: \"hotit\", CIDS: \"hotnr\", timer: 5000, count: 5, mousetype: 1 });";
+                loadscript += "\r\n " + "jQuery(\"#rank\").Exchange({ MIDS: \"ranktit\", CIDS: \"ranknr\", timer: 5000, count: 5, mousetype: 1 });";
+                loadscript += "\r\n " + "jQuery(\"#ocetu\").Scroll({line:1,speed:800,left:\"btn2\",right:\"btn1\",timer:\"3000\"});";
+                loadscript += "\r\n " + "jQuery(\"#card\").find(\"li\").mouseover(function(){";
+                loadscript += "\r\n " + "	jQuery(\"#card\").find(\"li\").removeClass().addClass(\"tcdli1\");";
+                loadscript += "\r\n " + "	jQuery(this).removeClass().addClass(\"tcdli2\");";
+                loadscript += "\r\n " + "});";
+                loadscript += "\r\n " + "jQuery(\"#card\").find(\"li\").mouseout(function(){";
+                loadscript += "\r\n " + "	jQuery(this).removeClass().addClass(\"tcdli1\");";
+                loadscript += "\r\n " + "});";
+                loadscript += "\r\n " + "jQuery(\"#type\").find(\"div\").mouseover(function(){";
+                loadscript += "\r\n " + "	jQuery(\"#type\").find(\"div\").removeClass().addClass(\"typnr\");";
+                loadscript += "\r\n " + "	jQuery(this).removeClass().addClass(\"typnrb\");";
+                loadscript += "\r\n " + "});";
+                loadscript += "\r\n " + "jQuery(\"#type\").find(\"div\").mouseout(function(){";
+                loadscript += "\r\n " + "	jQuery(this).removeClass().addClass(\"typnr\");";
+                loadscript += "\r\n " + "});";
+            }
+            loadscript += "\r\n " + "jQuery(this).gettop({objsrc:\"templates/" + templatepath + "/images/top.gif\",objhref:\"javascript:scrollTo(0,0)\"});" + adtempstr;
+            loadscript += "\r\n " + "});";
             AddfootScript(loadscript);
 
             indexcity = areas.GetIndexCity();
+            if (templateid == 1)
+            {
+                mancompanylist = Companies.GetCompanyListByType(EnTypeEnum.Manufacturer);
+                selcompanylist = Companies.GetCompanyListByType(EnTypeEnum.Dealers);
+            }
         }
     }
 }

@@ -1,0 +1,383 @@
+﻿<%template _comheader%>
+<!--第一屏 begin-->
+<div class="cot">
+    <div class="olt ow1 mar_top">
+		<p class="o1tit olbg olw2">
+			<strong>今日企业</strong>
+			<span>更新：<font class="f_c00">{todaycount}</font></span>
+			<em><a class="l_666" href="zshy.html" target="_blank">更多&gt;&gt;</a></em>
+		</p>
+		<ul class="olnr">
+		    <%loop (Companys) newcompanyinfo newcompanylist%>
+		    <%if {newcompanyinfo__loop__id}>5%><%break%><%/if%>
+		    <li>▪&nbsp;<a title="{newcompanyinfo.en_name}" href="company-{newcompanyinfo.en_id}.html" target="_blank"><%getsubstring({newcompanyinfo.en_name},30,"")%></a></li>
+		    <%/loop%>
+		</ul>
+		<p class="oline"></p>
+		<p class="o1tit olw2">
+			<strong>资讯头条</strong>
+			<span>更新：<font class="f_c00">4521</font></span>
+			<em><a title="" class="l_666" href="{newsurl}">更多&gt;&gt;</a></em>
+		</p>
+		<ul class="olnr">
+		<%loop (NewsContent) newsinfo newslist%>
+			<li>▪&nbsp;<a title="{newsinfo.NewsTitle}" href="{newsinfo.NewsUrl}"><%getsubstring({newsinfo.NewsTitle},30,"...")%></a></li>
+		<%/loop%>
+		</ul>
+	</div>
+	<div class="oce">
+		<div class="ocead mar_lt mar_top" id="ocead">
+			<div id="oceadc">
+			    <%set (int){ad5count}=0%>
+			    <%loop (AdShowInfo) ad5info indexad5%>
+			    <%csharp%>
+			        string[] ad5infoparm = ad5info.Parameters.Split('|');
+			    <%/csharp%>
+			    <%if ad5infoparm.Length<8%><%continue%><%/if%>
+			    <div class="con"><a title="{ad5infoparm[5]}" href="{ad5infoparm[4]}"><img alt="{ad5infoparm[5]}" src="{ad5infoparm[1]}" /></a></div>
+				<%set {ad5count}={ad5count}+1%>
+				<%/loop%>
+			</div>
+			<ul id="oceadt">
+				<%set (int){ad5order}=0%>
+			    <%repeat("<li>"+({i}+1)+"</li>", {ad5count})%>
+			</ul>
+		</div>
+		<div class="oce2 mar_lt mar_top">
+			<strong><img alt="图说新闻" src="{rooturl}templates/{templatepath}/images/ts-an.gif" /></strong>
+			<div class="oce2cot" id="ocetu">
+				<ul class="oce2nr">
+					<li><a title="" href="#"><img alt="" src="images/ad/210x110.gif" /></a></li>
+					<li><a title="" href="#"><img alt="" src="images/ad/210x110.gif" /></a></li>
+					<li><a title="" href="#"><img alt="" src="images/ad/210x110.gif" /></a></li>
+					<li><a title="" href="#"><img alt="" src="images/ad/210x110.gif" /></a></li>
+				</ul>
+			</div>
+			<p class="oce2rt">
+				<span class="lt" id="btn1"></span>
+				<span class="rt" id="btn2"></span>
+			</p>
+		</div>
+	</div>
+	<div class="ort mar_top">
+		<ul class="ort1">
+			<li class="ort1z"><a title="" target="_blank" href="agreement.html""></a></li>
+			<li class="ort1y"><a title="" target="_blank" href="inquiry.aspx"></a></li>
+		</ul>
+		<div class="olt ow2 mar_top" id="ort2">
+			<ul class="olbg" id="ortit">
+				<li>活 动</li>
+				<li>公 告</li>
+			</ul>
+			<div id="ortnr">
+				<div class="con">
+					<ul class="ortcot nrw1">
+					<%loop (ActivityInfo) indexactinfo indexactlist%>
+				        <li>▪&nbsp;<a target="_blank" title="{indexactinfo.atitle}" href="activity-{indexactinfo.id}.html">{indexactinfo.atitle}</a></li>
+			        <%/loop%>
+					</ul>
+				</div>
+				<div class="con">
+					<ul class="ortcot nrw1">
+					<%loop (AnnouncementInfo) announcement announcementlist%>
+			            <li>▪&nbsp;<a target="_blank" title="{announcement.title}" href="nouncedetail-{announcement.id}.html">{announcement.title}</a></li>
+			        <%/loop%>
+					</ul>
+				</div>
+			</div>
+			<p class="orline"></p>
+		</div>
+	</div>
+</div>
+<div class="cot">
+	<ul class="tcd mar_top" id="card">
+	    <%loop (Companys) cardcompanyinfo creditcompanylist%>
+	    <%if {cardcompanyinfo__loop__id}>6%><%break%><%/if%>
+		<li class="tcdli1"><a title="{cardcompanyinfo.en_name}" href="company-{cardcompanyinfo.en_id}.html" target="_blank"><img alt="{cardcompanyinfo.en_name}" src="showcardimg_{cardcompanyinfo.en_id}.html" /></a></li>
+		<%/loop%>
+	</ul>
+</div>
+<div class="cot">
+	<div class="olt ow3 mar_top">
+		<p class="o1tit olbg2 olw3">
+			<em></em>
+			<strong class="tit1">行业市场</strong>
+			<span><a title="" class="l_c00_u" href="agreement.html" target="_blank">立即发布企业信息</a></span>
+		</p>
+		<div class="typ" id="type">
+		<%loop (DataRow) cataloginfo cataloglist1%>
+			<div class="typnr">
+				<strong>{cataloginfo[name]}</strong>
+				<ul class="typcot">
+					<%set (int) {computenum}=0%>
+			        <%set (int) {computetimes}=0%>
+			        <%csharp%>
+			            DataRow[] cataloglist2 = Catalogs.GetAllCatalogByPid(TypeConverter.ObjectToInt(cataloginfo["id"]));
+			        <%/csharp%>
+			        <%loop (DataRow) subcata cataloglist2%>
+				<li <%if {computetimes}%2==1%>class="bg"<%/if%>>
+				        <%if {computenum}%2==1%>
+			                <%set {computetimes}={computetimes}+1%>
+			            <%/if%>
+						<b><a class="l_c00" title="{subcata[name]}" href="zshy-{subcata[id]}.html">{subcata[name]}</a></b>
+						<span>
+						<%set (int){catastrlength} = 0%>
+					    <%csharp%>
+			                DataRow[] cataloglist3 = Catalogs.GetAllCatalogByPidAndSub(TypeConverter.ObjectToInt(subcata["id"]));
+			            <%/csharp%>
+					    <%loop (DataRow) subsubcata cataloglist3%>
+					    <%set {catastrlength}={catastrlength}+{subsubcata[name]}.Length+3%>
+					    <%if {catastrlength}>54%>
+					        <%break%>
+					    <%/if%>
+					<a class="l_666" title="{subsubcata[name]}" href="zshy-{subsubcata[id]}.html">{subsubcata[name]}</a>&nbsp; | &nbsp;
+					    <%/loop%>
+					<a class="l_c00" title="{subcata[name]}" href="zshy-{subcata[id]}.html">更多&gt;&gt;</a></p>
+						</span>
+					</li>
+			        <%set {computenum}={computenum}+1%>
+			        <%/loop%>
+				</ul>
+			</div>
+		<%/loop%>
+		</div>
+	</div>
+	<div class="trt">
+		<div class="olt ow2 mar_top">
+			<p class="o1tit olbg olw4">
+				<strong>区域市场</strong>
+				<em><a title="" class="l_666" href="zshy-11-0-0.html" target="_blank">更多&gt;&gt;</a></em>
+			</p>
+			<ul class="area">
+			    <%loop (DataRow) cityinfo indexcity%>
+				<%if {cityinfo__loop__id}>6%>
+				<%break%>
+				<%/if%>
+				<li>
+					<b>{cityinfo[CityName]}</b>
+					<%set {companylistbycity}=Companies.GetCompanyListByCity({strtoint({cityinfo[CityID]})})%>
+					<%loop (Companys) companyinfobycity companylistbycity%>
+					<%if {companyinfobycity__loop__id}>4%>
+				    <%break%>
+				    <%/if%>
+					<p><a title="{companyinfobycity.catalogName}" class="l_c00" href="zshy-{companyinfobycity.tempCatalogID}.html" target="_blank">[<%getsubstring({companyinfobycity.catalogName},6,"")%>]</a> <a title="{companyinfobycity.en_name}" href="company-{companyinfobycity.en_id}.html" target="_blank"><%getsubstring({companyinfobycity.en_name},28,"")%></a></p>
+					<%/loop%>
+				</li>
+				<%/loop%>
+			</ul>
+		</div>
+		<p class="aread mar_top">
+		<%if {indexad1}.Length>=8%>
+		    <a title="{indexad1[5]}" href="{indexad1[4]}" target="_blank"><img alt="{indexad1[5]}" src="{indexad1[1]}" /></a>
+		<%/if%>
+		</p>
+	</div>
+	<p class="inxad mar_top">
+	<%if {indexad2}.Length>=8%>
+		<a title="{indexad2[5]}" href="{indexad2[4]}" target="_blank"><img alt="{indexad2[5]}" src="{indexad2[1]}" /></a>
+	<%/if%>
+	</p>
+</div>
+<!--第二屏 begin-->
+<div class="cot">
+	<div class="olt ow3 mar_top">
+		<p class="o1tit olbg2 olw3 infline">
+			<strong class="tit2">行业资讯</strong>
+			<span><a target="_blank" class="l_666" href="{newsurl}">更多&gt;&gt;</a></span>
+		</p>
+		<div class="inf">
+			<div class="infnr inw1">
+				<p class="inft int1">
+				    <%set {pclassinfo} = News.GetNewsClassInfo("060057025098")%>
+					<b>{pclassinfo.ClassCName}</b><span><a title="{pclassinfo.ClassCName}" class="l_666" href="{pclassinfo.ClassUrl}" target="_blank">更多&gt;&gt;</a></span>
+				</p>
+				<ul class="infcot">
+				<%set {newslistbyclass}=News.GetNewsByClass("060057025098")%>
+				<%loop (NewsContent) classnewsinfo1 newslistbyclass%>
+					<li>▪&nbsp;<a target="_blank" title="{classnewsinfo1.NewsTitle}" href="{classnewsinfo1.NewsUrl}"><%getsubstring({classnewsinfo1.NewsTitle},34,"")%></a></li>
+				<%/loop%>
+				</ul>
+			</div>
+			<div class="infnr inw1">
+				<p class="inft int1">
+				    <%set {pclassinfo} = News.GetNewsClassInfo("871599573494")%>
+					<b>{pclassinfo.ClassCName}</b><span><a title="{pclassinfo.ClassCName}" class="l_666" href="{pclassinfo.ClassUrl}" target="_blank">更多&gt;&gt;</a></span>
+				</p>
+				<ul class="infcot">
+					<%set {newslistbyclass}=News.GetNewsByClass("871599573494")%>
+				    <%loop (NewsContent) classnewsinfo2 newslistbyclass%>
+					    <li>▪&nbsp;<a target="_blank" title="{classnewsinfo2.NewsTitle}" href="{classnewsinfo2.NewsUrl}"><%getsubstring({classnewsinfo2.NewsTitle},34,"")%></a></li>
+				    <%/loop%>
+				</ul>
+			</div>
+			<div class="infnr inw1">
+				<p class="inft int1">
+					<%set {pclassinfo} = News.GetNewsClassInfo("105376361575")%>
+					<b>{pclassinfo.ClassCName}</b><span><a title="{pclassinfo.ClassCName}" class="l_666" href="{pclassinfo.ClassUrl}" target="_blank">更多&gt;&gt;</a></span>
+				</p>
+				<ul class="infcot">
+					<%set {newslistbyclass}=News.GetNewsByClass("105376361575")%>
+				    <%loop (NewsContent) classnewsinfo3 newslistbyclass%>
+					    <li>▪&nbsp;<a target="_blank" title="{classnewsinfo3.NewsTitle}" href="{classnewsinfo3.NewsUrl}"><%getsubstring({classnewsinfo3.NewsTitle},34,"")%></a></li>
+				    <%/loop%>
+				</ul>
+			</div>
+		</div>
+		<p class="infad">
+		<%if {indexad3}.Length>=8%>
+		    <a title="{indexad3[5]}" href="{indexad3[4]}" target="_blank"><img alt="{indexad3[5]}" src="{indexad3[1]}" /></a>
+	    <%/if%>
+		</p>
+		<div class="inf">
+			<div class="infnr inw1">
+				<p class="inft int1">
+				    <%set {pclassinfo} = News.GetNewsClassInfo("167681906525")%>
+					<b>{pclassinfo.ClassCName}</b><span><a title="{pclassinfo.ClassCName}" class="l_666" href="{pclassinfo.ClassUrl}" target="_blank">更多&gt;&gt;</a></span>
+				</p>
+				<ul class="infcot">
+					<%set {newslistbyclass}=News.GetNewsByClass("167681906525")%>
+				    <%loop (NewsContent) classnewsinfo4 newslistbyclass%>
+					    <li>▪&nbsp;<a target="_blank" title="{classnewsinfo4.NewsTitle}" href="{classnewsinfo4.NewsUrl}"><%getsubstring({classnewsinfo4.NewsTitle},34,"")%></a></li>
+				    <%/loop%>
+				</ul>
+			</div>
+			<div class="infnr inw1">
+				<p class="inft int1">
+					<%set {pclassinfo} = News.GetNewsClassInfo("250846114252")%>
+					<b>{pclassinfo.ClassCName}</b><span><a title="{pclassinfo.ClassCName}" class="l_666" href="{pclassinfo.ClassUrl}" target="_blank">更多&gt;&gt;</a></span>
+				</p>
+				<ul class="infcot">
+					<%set {newslistbyclass}=News.GetNewsByClass("250846114252")%>
+				    <%loop (NewsContent) classnewsinfo5 newslistbyclass%>
+					    <li>▪&nbsp;<a target="_blank" title="{classnewsinfo5.NewsTitle}" href="{classnewsinfo5.NewsUrl}"><%getsubstring({classnewsinfo5.NewsTitle},34,"")%></a></li>
+				    <%/loop%>
+				</ul>
+			</div>
+			<div class="infnr inw1">
+				<p class="inft int1">
+					<%set {pclassinfo} = News.GetNewsClassInfo("619128150758")%>
+					<b>{pclassinfo.ClassCName}</b><span><a title="{pclassinfo.ClassCName}" class="l_666" href="{pclassinfo.ClassUrl}" target="_blank">更多&gt;&gt;</a></span>
+				</p>
+				<ul class="infcot">
+					<%set {newslistbyclass}=News.GetNewsByClass("619128150758")%>
+				    <%loop (NewsContent) classnewsinfo6 newslistbyclass%>
+					    <li>▪&nbsp;<a target="_blank" title="{classnewsinfo6.NewsTitle}" href="{classnewsinfo6.NewsUrl}"><%getsubstring({classnewsinfo6.NewsTitle},34,"")%></a></li>
+				    <%/loop%>
+				</ul>
+			</div>
+		</div>
+		<div class="inf">
+			<div class="infnr inw1">
+				<p class="inft int1">
+					<%set {pclassinfo} = News.GetNewsClassInfo("382032510445")%>
+					<b>{pclassinfo.ClassCName}</b><span><a title="{pclassinfo.ClassCName}" class="l_666" href="{pclassinfo.ClassUrl}" target="_blank">更多&gt;&gt;</a></span>
+				</p>
+				<ul class="infcot">
+					<%set {newslistbyclass}=News.GetNewsByClass("382032510445")%>
+				    <%loop (NewsContent) classnewsinfo7 newslistbyclass%>
+					    <li>▪&nbsp;<a target="_blank" title="{classnewsinfo7.NewsTitle}" href="{classnewsinfo7.NewsUrl}"><%getsubstring({classnewsinfo7.NewsTitle},34,"")%></a></li>
+				    <%/loop%>
+				</ul>
+			</div>
+			<div class="infnr inw2">
+				<p class="inft int2">
+					<%set {pclassinfo} = News.GetNewsClassInfo("144785272071")%>
+					<b>{pclassinfo.ClassCName}</b><span><a title="{pclassinfo.ClassCName}" class="l_666" href="{pclassinfo.ClassUrl}" target="_blank">更多&gt;&gt;</a></span>
+				</p>
+				<ul class="inftu">
+				    <%set {newslistbyclass}=News.GetNewsByClass("144785272071")%>
+				    <%loop (NewsContent) classnewsinfo8 newslistbyclass%>
+				    <li><a title="{classnewsinfo8.NewsTitle}" href="{classnewsinfo8.NewsUrl}" target="_blank"><img alt="{classnewsinfo8.NewsTitle}" src="{classnewsinfo8.NewsSPic}" /></a></li>
+				    <%/loop%>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="trt">
+		<div class="olt ow2 mar_top" id="rank">
+			<div class="rank olbg">
+				<strong>企业排行</strong>
+				<ul id="ranktit">
+					<li>信誉</li>
+					<li>点击</li>
+					<li>评论</li>
+				</ul>
+			</div>
+			<div id="ranknr">
+				<div class="con">
+					<ul class="rankc">
+					<%loop (Companys) creditcompanyinfo creditcompanylist%>
+			            <li><em>{creditcompanyinfo__loop__id}</em><p><a title="{creditcompanyinfo.en_name}" href="company-{creditcompanyinfo.en_id}.html" target="_blank">{creditcompanyinfo.en_name}</a></p><span><font class="f_c00">{creditcompanyinfo.en_credits}</font></span></li>
+			        <%/loop%>					
+					</ul>
+				</div>
+				<div class="con">
+					<ul class="rankc">
+					<%loop (Companys) clickcompanyinfo clickcompanylist%>
+			            <li><em>{clickcompanyinfo__loop__id}</em><p><a title="{clickcompanyinfo.en_name}" href="company-{clickcompanyinfo.en_id}.html" target="_blank">{clickcompanyinfo.en_name}</a></p><span><font class="f_c00">{clickcompanyinfo.en_accesses}</font></span></li>
+			        <%/loop%>
+					</ul>
+				</div>
+				<div class="con">
+					<ul class="rankc">
+					<%loop (Companys) commentcompanyinfo commentcompanylist%>
+			            <li><em>{commentcompanyinfo__loop__id}</em><p><a title="{commentcompanyinfo.en_name}" href="company-{commentcompanyinfo.en_id}.html" target="_blank">{commentcompanyinfo.en_name}</a></p><span><font class="f_c00">{commentcompanyinfo.en_sell}</font></span></li>
+			        <%/loop%>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="olt ow2 mar_top" id="hot">
+			<ul class="olbg" id="hotit">
+				<li>热 卖</li>
+				<li>推 荐</li>
+			</ul>
+			<div id="hotnr">
+				<div class="con">
+					<ul class="hot">
+						<li class="hotli1"><a title="" href="#"><img alt="" src="images/ad/218x70.gif" /></a></li>
+						<li class="hotli2"></li>
+						<li class="hotli1"><a title="" href="#"><img alt="" src="images/ad/218x70.gif" /></a></li>
+						<li class="hotli2"></li>
+						<li class="hotli1"><a title="" href="#"><img alt="" src="images/ad/218x70.gif" /></a></li>
+					</ul>
+				</div>
+				<div class="con">
+					<ul class="hot">
+						<li class="hotli1"><a title="" href="#"><img alt="" src="images/ad/218x70.gif" /></a></li>
+						<li class="hotli2"></li>
+						<li class="hotli1"><a title="" href="#"><img alt="" src="images/ad/218x70.gif" /></a></li>
+						<li class="hotli2"></li>
+						<li class="hotli1"><a title="" href="#"><img alt="" src="images/ad/218x70.gif" /></a></li>
+					</ul>
+				</div>
+			</div>
+			<p class="orline2"></p>
+		</div>
+		<p class="hotad mar_top">
+		<%if {indexad4}.Length>=8%>
+		    <a title="{indexad4[5]}" href="{indexad4[4]}" target="_blank"><img alt="{indexad4[5]}" src="{indexad4[1]}" /></a>
+	    <%/if%>
+		</p>
+		<div class="olt ow2 mar_top">
+			<p class="o1tit olbg olw4">
+				<strong>帮助中心</strong>
+				<em><a title="帮助中心" class="l_666" href="help.html">更多&gt;&gt;</a></em>
+			</p>
+			<ul class="help">
+			<%loop (HelpInfo) helpinfos helplist%>
+			<%if {helpinfos__loop__id}>4%>
+				<%break%>
+			<%/if%>
+				<li>▪&nbsp;<a title="{helpinfos.title}" href="help-{helpinfos.id}.html" target="_blank">{helpinfos.title}</a></li>
+			<%/loop%>
+			</ul>
+		</div>
+	</div>
+</div>
+<!--第二屏 end-->
+<div class="cot">
+	<p class="link mar_top"><b class="f_c00">友情链接：</b><%loop friendlink friendlinklist%>{friendlink[note]}<%/loop%><p>
+</div>
+<%template _comcopyright%>
+<%template _comfooter%>

@@ -228,6 +228,14 @@ namespace SAS.Logic
         /// </summary>
         public string rooturl = Utils.GetRootUrl(BaseConfigs.GetSitePath);
         /// <summary>
+        /// 淘之购域名
+        /// </summary>
+        public string taogouurl = TaoBaoConfigs.GetTaoBaoUrl;
+        /// <summary>
+        /// 新闻链接
+        /// </summary>
+        public string newsurl = GeneralConfigs.GetNEWCMSUrl();
+        /// <summary>
         /// 用户头像
         /// </summary>
         public string useravatar = "";
@@ -239,6 +247,22 @@ namespace SAS.Logic
         /// 浮动窗体
         /// </summary>
         public int infloat = SASRequest.GetInt("infloat", 0);
+        /// <summary>
+        /// 收录总数
+        /// </summary>
+        public int allcount = 0;
+        /// <summary>
+        /// 审核通过
+        /// </summary>
+        public int passcount = 0;
+        /// <summary>
+        /// 今日收录
+        /// </summary>
+        public int todaycount = 0;
+        /// <summary>
+        /// 待审核数
+        /// </summary>
+        public int waitcount = 0;
 #if DEBUG
         public string querydetail = "";
 #endif
@@ -575,6 +599,8 @@ namespace SAS.Logic
 
             //newtopicminute = config.Viewnewtopicminute;
             m_starttick = DateTime.Now;
+
+            Companies.GetCompanyCountSum(out allcount, out passcount, out todaycount, out waitcount);
 
             ShowPage();
 

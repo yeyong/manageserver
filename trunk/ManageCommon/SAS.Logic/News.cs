@@ -18,9 +18,55 @@ namespace SAS.Logic
         /// </summary>
         /// <param name="count"></param>
         /// <returns></returns>
-        public static List<NewsContent> GetHourNews(int count)
+        public static List<NewsContent> GetHourNews()
         {
-            return NETCMSPluginProvider.GetInstance().GetNewsList(count, "id", "desc");
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            string cachekey = "SAS_TodayNews";
+            List<NewsContent> newslist = cache.RetrieveObject(cachekey) as List<NewsContent>;
+
+            if (newslist == null)
+            {
+                newslist = NETCMSPluginProvider.GetInstance().GetNewsList("", 5, "id", "desc");
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 60;
+                cache.LoadCacheStrategy(ica);
+                cache.AddObject(cachekey, newslist);
+                cache.LoadDefaultCacheStrategy();
+            }
+
+            return newslist == null ? new List<NewsContent>() : newslist;
+        }
+
+        /// <summary>
+        /// 根据栏目获取资讯信息
+        /// </summary>
+        public static List<NewsContent> GetNewsByClass(string classid)
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            string cachekey = "SAS_News_" + classid;
+            List<NewsContent> newslist = cache.RetrieveObject(cachekey) as List<NewsContent>;
+
+            if (newslist == null)
+            {
+                newslist = NETCMSPluginProvider.GetInstance().GetNewsList(classid, 8, "id", "desc");
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 60;
+                cache.LoadCacheStrategy(ica);
+                cache.AddObject(cachekey, newslist);
+                cache.LoadDefaultCacheStrategy();
+            }
+
+            return newslist == null ? new List<NewsContent>() : newslist;
+        }
+
+        /// <summary>
+        /// 获取栏目访问路径
+        /// </summary>
+        /// <param name="classid"></param>
+        /// <returns></returns>
+        public static PubClassInfo GetNewsClassInfo(string classid)
+        {
+            return NETCMSPluginProvider.GetInstance().GetClassUrl(classid);
         }
     }
 }

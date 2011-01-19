@@ -1,0 +1,49 @@
+﻿<%template _compageheader%>
+<body onkeydown="if(event.keyCode==27) return false;">
+<div class="top">
+	<div class="cot">
+		<ul class="toplt">
+			<li><a title="设为首页" href="{rooturl}" onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('{rooturl}');return(false);"><img alt="设为首页" src="{rooturl}templates/{templatepath}/images/home.gif" />设为首页111</a></li>
+			<li><a title="收藏本站" href="javascript:window.external.AddFavorite('{rooturl}','浙商黄页-网络名片，免费网络展示平台')"><img alt="收藏本站" src="{rooturl}templates/{templatepath}/images/favorites.gif" />收藏本站</a></li>
+			<li><a title="订阅本站" href="{rooturl}rss.html"><img alt="订阅本站" src="{rooturl}images/rss.png" />订阅本站</a></li>
+		</ul>
+		<p class="toprt">
+		<%loop (HelpInfo) commonhelpinfo commonhelplist%>
+		<%if {commonhelpinfo.orderby}==1%><a title="{commonhelpinfo.title}" href="{rooturl}help-{commonhelpinfo.id}.html">{commonhelpinfo.title}</a> | <%/if%>
+		<%/loop%>
+		<a title="帮助中心" href="help.html">帮助中心</a> | <a title="提交企业信息" href="{rooturl}agreement.html" class="l_e00101">提交企业信息</a>
+		</p>
+	</div>
+</div>
+<div class="cot">
+	<div class="top2">
+		<p class="logo"><a title="浙江黄页" href="{rooturl}index.html"><img alt="浙江黄页" src="{rooturl}templates/{templatepath}/images/logo.gif" /></a></p>
+		<div class="topban">
+			<a title="浙江黄页" href="{rooturl}zscard.html"><img alt="自助推广 个性名片 跨越平台 站点互通" src="{rooturl}templates/{templatepath}/images/banner.gif" /></a>
+		</div>
+	</div>
+	<div class="top3">
+		<ul class="nav">
+			<li class="navli2"><a title="商之源" href="/">商之源</a></li>
+			<li class="navline"></li>
+			<li class="navli1"><a title="浙商黄页" href="zscard.html">浙商黄页</a></li>
+			<li class="navline"></li>
+			<li class="navli1"><a title="浙商名片" href="zscard.html">浙商名片</a></li>
+		</ul>
+		<ul class="nav2">
+			<li class="nav2li"><a target="_blank" title="淘之购" href="{taogouurl}">淘之购</a></li>
+			<li class="nav2line"></li>
+			<li class="nav2li"><a target="_blank" title="浙商资讯" href="{newsurl}">浙商资讯</a></li>
+		</ul>
+	</div>
+</div>
+<%template _comsearch%>
+<%else%>
+<%csharp%>
+Response.Clear();
+Response.ContentType = "Text/XML";
+Response.Expires = 0;
+Response.Cache.SetNoStore();
+<%/csharp%>
+<?xml version="1.0" encoding="utf-8"?><root><![CDATA[
+<%/if%>

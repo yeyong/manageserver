@@ -94,7 +94,7 @@ namespace SAS.Logic
             activelist = cache.RetrieveObject(cachekey) as List<ActivityInfo>;
             if (activelist == null)
             {
-                activelist = Data.DataProvider.Activities.GetActvitiesByType(5, ActivityType.IndexActivity);
+                activelist = Data.DataProvider.Activities.GetActvitiesByType(9, ActivityType.IndexActivity);
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 300;
                 cache.LoadCacheStrategy(ica);

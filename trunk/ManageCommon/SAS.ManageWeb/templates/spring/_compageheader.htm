@@ -1,0 +1,27 @@
+﻿<%if {infloat}!=1%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<%if pagetitle=="首页"%>
+<title>{config.sitetitle} {config.seotitle} - Powered by Sirius Studio.</title>
+<%else%>
+<title>{pagetitle} - {config.sitetitle} {config.seotitle} - Powered by  Sirius Studio.</title>
+<%/if%>
+{meta}
+<meta name="generator" content="SAS 1.0.0" />
+<meta name="author" content="Sirius Studio Team and Studio sirius UI Team" />
+<meta name="copyright" content="2009-2011 Sirius Studio." />
+<meta name="google-site-verification" content="gfHzZ6zVYWWe5gfJBo_IybOnPbQvFmawfOjw8g4Pi-4" />
+<meta http-equiv="x-ua-compatible" content="ie=7" />
+<link rel="icon" href="{forumurl}favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="{forumurl}favicon.ico" type="image/x-icon" />
+<link href="{rooturl}templates/{templatepath}/css/comm.css" rel="stylesheet" type="text/css" media="all">
+<link href="{rooturl}templates/{templatepath}/css/default/bgcolor.css" rel="stylesheet" type="text/css">
+{link}
+{stylecodes}
+<script type="text/javascript" src="{rooturl}javascript/jquery.js"></script>
+<script type="text/javascript" src="{rooturl}javascript/jqueryCommon.js"></script>
+<script type="text/javascript" src="{rooturl}javascript/company_utils.js"></script>
+{script}
+</head>

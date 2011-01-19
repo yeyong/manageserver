@@ -16,9 +16,14 @@ namespace SAS.Plugin.NETCMS
         /// <summary>
         /// 活得新闻信息列表
         /// </summary>
+        /// <param name="classid">所在类别ID</param>
         /// <param name="newscount">新闻数量</param>
         /// <param name="ordercol">排序字段</param>
         /// <param name="ordertype">排序类型</param>
-        public abstract List<NewsContent> GetNewsList(int newscount, string ordercol, string ordertype);
+        public abstract List<NewsContent> GetNewsList(string classid, int newscount, string ordercol, string ordertype);
+        /// <summary>
+        /// 获得新闻栏目
+        /// </summary>
+        public abstract PubClassInfo GetClassUrl(string classid);
     }
 }

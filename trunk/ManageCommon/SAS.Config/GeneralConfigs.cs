@@ -62,6 +62,15 @@ namespace SAS.Config
         }
 
         /// <summary>
+        /// 获取新闻页域名
+        /// </summary>
+        /// <returns></returns>
+        public static string GetNEWCMSUrl()
+        {
+            return GetConfig().NETCMSUrl;
+        }
+
+        /// <summary>
         /// 获得设置项信息
         /// </summary>
         /// <returns>设置项</returns>
