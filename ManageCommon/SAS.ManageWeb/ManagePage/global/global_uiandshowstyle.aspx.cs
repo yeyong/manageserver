@@ -28,7 +28,7 @@ namespace SAS.ManageWeb.ManagePage
             //templateid.SelectedValue = configInfo.Templateid.ToString();
             stylejump.SelectedValue = configInfo.Stylejump.ToString();
             browsecreatetemplate.SelectedValue = configInfo.BrowseCreateTemplate.ToString();
-            templateid.AddTableData(Templates.GetValidTemplateList(), "name", "templateid");
+            templateid.AddTableData(Templates.GetValidTemplateList(), "tp_name", "tp_id");
 
 
             templateid.SelectedValue = configInfo.Templateid.ToString();

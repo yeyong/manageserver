@@ -46,9 +46,9 @@ namespace SAS.NETCMS.Data
         /// <summary>
         /// 获取新闻集合
         /// </summary>       
-        public IDataReader GetNewsList(int newscount, string ordercol, string ordertype)
+        public IDataReader GetNewsList(string classid, int newscount, string ordercol, string ordertype)
         {
-            string commandText = String.Format("SELECT TOP {0} [Id],[NewsID],[NewsTitle],[ClassID],[SavePath],[FileName],[FileEXName] FROM {1}News WHERE [isLock] = 0 AND [isRecyle] = 0 ORDER BY {2} {3}", newscount, newpre, ordercol == "" ? "[id]" : ordercol, ordertype == "desc" ? ordertype : "");
+            string commandText = String.Format("SELECT TOP {0} [Id],[NewsID],[NewsTitle],[ClassID],[SavePath],[FileName],[FileEXName],[SPicURL] FROM {1}News WHERE [isLock] = 0 AND [isRecyle] = 0 {4} ORDER BY {2} {3}", newscount, newpre, ordercol == "" ? "[id]" : ordercol, ordertype == "desc" ? ordertype : "", classid == "" ? "" : "AND [ClassID] = '" + classid + "'");
             return NewsDbHelper.ExecuteReader(CommandType.Text, commandText);
         }
         /// <summary>
@@ -56,7 +56,7 @@ namespace SAS.NETCMS.Data
         /// </summary>   
         public IDataReader GetNewsClassList()
         {
-            string commandText = String.Format("SELECT [Id],[ClassID],[ClassCName],[ClassEName],[ParentID],[SavePath],[SaveClassframe] FROM {0}news_Class WHERE [isRecyle]=0 and [isLock]=0", newpre);
+            string commandText = String.Format("SELECT [Id],[ClassID],[ClassCName],[ClassEName],[ParentID],[SavePath],[SaveClassframe],[ClassSaveRule] FROM {0}news_Class WHERE [isRecyle]=0 and [isLock]=0", newpre);
             return NewsDbHelper.ExecuteReader(CommandType.Text, commandText);
         }
 

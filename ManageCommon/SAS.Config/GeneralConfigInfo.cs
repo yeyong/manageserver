@@ -215,6 +215,7 @@ namespace SAS.Config
 
         private int m_cardtemplateid = 1;//默认名片模板ID
         private string m_netcmsurl = "http://news.cnzshy.com/";//新闻站点域名设置
+        private string m_netcmsdirfile = "files";//新闻站点文件路径
         #endregion
 
         #region 属性
@@ -1806,6 +1807,14 @@ namespace SAS.Config
         {
             get { return m_netcmsurl; }
             set { m_netcmsurl = value; }
+        }
+        /// <summary>
+        /// 新闻文件路径
+        /// </summary>
+        public string NETCMSDirFile
+        {
+            get { return m_netcmsdirfile; }
+            set { m_netcmsdirfile = value; }
         }
         #endregion
     }

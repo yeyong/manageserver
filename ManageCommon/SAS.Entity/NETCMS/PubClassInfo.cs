@@ -17,6 +17,8 @@ namespace SAS.Entity
         private string _parentID = "";
         private string _savePath = "";
         private string _saveClassframe = "";
+        private string _classSaveRule = "";
+        private string _classurl = "";
 
         /// <summary>
         /// 自增ID
@@ -73,6 +75,22 @@ namespace SAS.Entity
         {
             set { _saveClassframe = value; }
             get { return _saveClassframe; }
+        }
+        /// <summary>
+        /// 栏目保存规则
+        /// </summary>
+        public string ClassSaveRule
+        {
+            set { _classSaveRule = value; }
+            get { return _classSaveRule; }
+        }
+        /// <summary>
+        /// 栏目访问路径
+        /// </summary>
+        public string ClassUrl
+        {
+            set { _classurl = value; }
+            get { return _classurl; }
         }
     }
 }

@@ -84,7 +84,7 @@ namespace SAS.Logic
 
             if (dt == null)
             {
-                dt = Data.DataProvider.Announcements.GetAnnouncementIndex(5);
+                dt = Data.DataProvider.Announcements.GetAnnouncementIndex(9);
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 30;
                 cache.LoadCacheStrategy(ica);

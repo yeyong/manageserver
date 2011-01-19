@@ -384,7 +384,7 @@ namespace SAS.Logic
             List<Companys> companylist = cache.RetrieveObject(cachekey) as List<Companys>;
             if (companylist == null)
             {
-                companylist = SAS.Data.DataProvider.Companies.GetCompanyListByCity(cityid, 4);
+                companylist = GetCompanyListWithCity(cityid, 4);
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 300;
                 cache.LoadCacheStrategy(ica);
@@ -393,6 +393,31 @@ namespace SAS.Logic
             }
             return companylist;
         }
+
+        /// <summary>
+        /// 区域行业信息
+        /// </summary>
+        /// <param name="cityid"></param>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public static List<Companys> GetCompanyListWithCity(int cityid, int count)
+        {
+            IDataReader reader = DatabaseProvider.GetInstance().GetCompanyListByCity(cityid, count);
+            List<Companys> companylist = new List<Companys>();
+            while (reader.Read())
+            {
+                Companys _companyInfo = new Companys();
+                _companyInfo = SAS.Data.DataProvider.Companies.LoadCompanyInfoWithoutCity(reader);
+                _companyInfo.TempCatalogID = TypeConverter.StrToInt(_companyInfo.En_cataloglist.Split(',')[0]);
+                CatalogInfo _catalog = Catalogs.GetCatalogCacheInfo(_companyInfo.TempCatalogID);
+                _companyInfo.CatalogName = _catalog != null ? _catalog.name : "";
+                companylist.Add(_companyInfo);
+            }
+
+            reader.Close();
+            return companylist;
+        }
+
         /// <summary>
         /// 黄页根据市级信息、行业类别获取企业信息
         /// </summary>

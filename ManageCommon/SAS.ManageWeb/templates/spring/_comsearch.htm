@@ -1,0 +1,33 @@
+﻿<div class="cot">
+    <div class="sonr">
+		<div class="sj">
+			<strong><img alt="数据动态" src="{rooturl}templates/{templatepath}/images/sj-tit.gif" /></a></strong>
+			<ul class="sjnr">
+				<li>收录企业  <font class="col_b">{allcount}</font></li>
+				<li>审核通过  <font class="col_g">{passcount}</font></li>
+				<li>今日收录  <font class="col_y">{todaycount}</font></li>
+			</ul>
+		</div>
+		<div class="so">
+			<ul class="sot" id="so">
+				<li class="sotli1">企业</li>
+				<li class="sotli2">资讯</li>
+			</ul>
+			<div class="socot">
+				<p class="soclt"></p>
+				<div class="socnr">
+					<input name="" type="text" class="soout" onblur="if(this.value==''||this.value=='请输入搜索内容'){ this.value='请输入搜索内容';this.className='soout'; }" onfocus="if(this.value=='请输入搜索内容'){ this.value='';this.className='soon'; }" value="请输入搜索内容" />
+				</div>
+				<p class="socan"><a title="点击搜索" href="#"><img alt="搜索" src="{rooturl}templates/{templatepath}/images/defulat/so-an.gif" /></a></p>
+			</div>
+		</div>
+		<p class="tipic">
+		<%if {indexheadad}.Length>0%>
+		<%csharp%>
+		string[] indexheadadarray = indexheadad.Split('|');
+		<%/csharp%>
+			<a href="{indexheadadarray[4]}" title="{indexheadadarray[5]}" target="_blank"><p style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=scale, src='{indexheadadarray[1]}'); background:url({indexheadadarray[1]}) center top no-repeat;*background:none;"></p></a>
+		<%/if%>
+		</p>
+	</div>
+</div>

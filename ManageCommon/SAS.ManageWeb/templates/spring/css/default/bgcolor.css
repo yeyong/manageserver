@@ -1,0 +1,12 @@
+@charset "utf-8";
+.top3{ background:url(../../images/defulat/nav-bg.gif) no-repeat;}
+.navli1 a:hover, .navli2 a, .navli2 a:hover, .navli2 a:visited{ color:#c00;}
+.nav2li a, .nav2li a:hover, .nav2li a:visited{ color:#c00;}
+.sonr{ background:url(../../images/defulat/so-bg.gif) no-repeat;}
+.soclt{ background:url(../../images/defulat/so-lt.gif) no-repeat;}
+.socnr{ border-top:1px solid #8a0600; border-bottom:1px solid #8a0600;}
+.olbg{ background:url(../../images/defulat/tit-bg1.gif) right center no-repeat;}
+.olbg2{ background:url(../../images/defulat/tit-bg2.gif) right center no-repeat;}
+.tcd{ background:#fefefc url(../../images/defulat/nr-bg.gif) no-repeat; 
+
+

@@ -13,6 +13,7 @@ namespace SAS.Entity
         private string _newsid = "";
         private string _newstitle = "";
         private string _newsurl = "";
+        private string _newsspic = "";
 
         /// <summary>
         /// 新闻自增ID
@@ -48,6 +49,15 @@ namespace SAS.Entity
         {
             set { _newsurl = value; }
             get { return _newsurl; }
+        }
+
+        /// <summary>
+        /// 新闻缩略图
+        /// </summary>
+        public string NewsSPic
+        {
+            set { _newsspic = value; }
+            get { return _newsspic; }
         }
     }
 }
