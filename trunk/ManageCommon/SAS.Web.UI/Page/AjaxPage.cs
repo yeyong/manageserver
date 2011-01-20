@@ -69,7 +69,18 @@ namespace SAS.Web.UI
                 case "getcompanyinfobyflash":
                     GetCompanyInfoByFlash(SASRequest.GetInt("objid", 0));
                     break;
+                case "advredirect":
+                    GetAdvRedirect(SASRequest.GetString("url"));
+                    break;
             }
+        }
+
+        /// <summary>
+        /// 广告跳转
+        /// </summary>
+        private void GetAdvRedirect(string url)
+        {
+            HttpContext.Current.Response.Redirect(url);
         }
 
         /// <summary>
