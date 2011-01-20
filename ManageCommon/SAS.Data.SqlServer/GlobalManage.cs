@@ -1545,8 +1545,8 @@ namespace SAS.Data.SqlServer
             if (atype > 0) sqlBuilder.AppendFormat(" AND [adtype] = '{0}'", atype);
             if (!Utils.StrIsNullOrEmpty(title)) sqlBuilder.AppendFormat(" AND [title] like '%{0}%'", RegEsc(title));
 
-            if (!Utils.StrIsNullOrEmpty(startdate.ToString())) sqlBuilder.AppendFormat(" AND [starttime]>='{0}'", startdate.ToString("yyyy-MM-dd HH:mm:ss"));
-            if (!Utils.StrIsNullOrEmpty(endtdate.ToString())) sqlBuilder.AppendFormat(" AND [starttime]<='{0}'", endtdate.ToString("yyyy-MM-dd HH:mm:ss"));
+            if (!Utils.StrIsNullOrEmpty(startdate.ToString())) sqlBuilder.AppendFormat(" AND [starttime]>='{0}'", startdate.ToString("yyyy-MM-dd HH:mm:ss").IndexOf("1900") >= 0 ? "1900-1-1" : startdate.ToString("yyyy-MM-dd HH:mm:ss"));
+            if (!Utils.StrIsNullOrEmpty(endtdate.ToString())) sqlBuilder.AppendFormat(" AND [endtime]<='{0}'", endtdate.ToString("yyyy-MM-dd HH:mm:ss").IndexOf("1900") >= 0 ? "2555-1-1" : endtdate.ToString("yyyy-MM-dd HH:mm:ss"));
             if (status > -1) sqlBuilder.AppendFormat(" AND [adavailable] = {0}", status);
 
             return sqlBuilder.ToString();

@@ -121,6 +121,9 @@
     <Compile Include="aspx\1\zsshow.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="aspx\1\zswall.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1221,7 +1224,10 @@
     <Content Include="images\logo.gif" />
     <Content Include="images\navli-bg.png" />
     <Content Include="images\rss.png" />
+    <Content Include="javascript\jquery-ui.min.js" />
+    <Content Include="javascript\jquery.animate-shadow-min.js" />
     <Content Include="javascript\jquery.ratingmin.js" />
+    <Content Include="javascript\jquery.transform-0.6.2.min.js" />
     <Content Include="javascript\jqueryCommon.js" />
     <Content Include="javascript\template_showcompany.js" />
     <Content Include="javascript\sascommon.js" />
@@ -1955,6 +1961,8 @@
     <Content Include="templates\spring\images\zs-arrow-rt1.gif" />
     <Content Include="templates\spring\index.htm" />
     <Content Include="templates\spring\sas.css" />
+    <Content Include="templates\spring\zswall.htm" />
+    <Content Include="templates\spring\zspage.htm" />
     <Content Include="templates\spring\_comcopyright.htm" />
     <Content Include="templates\spring\_comfooter.htm" />
     <Content Include="templates\spring\_comheader.htm" />

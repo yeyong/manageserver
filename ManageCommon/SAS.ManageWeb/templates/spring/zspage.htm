@@ -1,0 +1,187 @@
+﻿<%template _comheader%>
+<div class="cot">
+	<div class="ozso mar_top">
+		<div class="ozsolt" id="ozso">
+			<div id="ozsoc">
+			    <%set (int){ad1count}=0%>
+			    <%loop (AdShowInfo) ad1info cardad1%>
+			    <%csharp%>
+			        string[] ad1infoparm = ad1info.Parameters.Split('|');
+			    <%/csharp%>
+			    <%if ad1infoparm.Length<8%><%continue%><%/if%>
+			    <div class="con"><a title="{ad1infoparm[5]}" href="tools/ajax.aspx?t=advredirect&url=<%urlencode({ad1infoparm[4]})%>" rel="nofollow" target="_blank"><img alt="{ad1infoparm[5]}" src="{ad1infoparm[1]}"/></a></div>
+				<%set {ad1count}={ad1count}+1%>
+				<%/loop%>
+			</div>
+			<ul id="ozsot">
+				<%set (int){ad1order}=0%>
+			    <%repeat("<li>"+({i}+1)+"</li>", {ad1count})%>
+			</ul>
+		</div>
+		<div class="ozsort">
+			<strong class="olbg">最新审核通过企业</strong>
+			<ul class="ozsrtc nrw3">
+			<%loop (Companys) hyupdatecompanyinfo hyupdatecompanylist%>
+			<%if {hyupdatecompanyinfo__loop__id}>10%><%break%><%/if%>
+		    <%set (string){mancatalogname}=Utils.CutString({hyupdatecompanyinfo.catalogName},0,10)%>
+				<li><a class="l_c00" title="{hyupdatecompanyinfo.catalogName}" href="zshy-{hyupdatecompanyinfo.tempCatalogID}.html">[{mancatalogname}]</a> <a title="{hyupdatecompanyinfo.en_name}" href="company-{hyupdatecompanyinfo.en_id}.html" target="_blank">{hyupdatecompanyinfo.en_name}</a></li>
+			<%/loop%>
+			</ul>
+		</div>
+	</div>
+	<div class="ozs ozw1 mar_top" id="ozs">
+		<ul class="olbg" id="ozstit">
+			<li>浙 商</li>
+			<li>淘 购</li>
+		</ul>
+		<div id="ozsnr">
+			<div class="con">
+				<ul class="ortcot nrw1">
+				<%loop (ActivityInfo) hyactinfo hyactlist%>
+				    <li>▪&nbsp;<a target="_blank" title="{hyactinfo.atitle}" href="activity-{hyactinfo.id}.html">{hyactinfo.atitle}</a></li>
+			    <%/loop%>
+			    <%if {hyactinfo__loop__id}<10%><%repeat("<li>▪&nbsp;</li>", 10-{hyactinfo__loop__id})%><%/if%>
+				</ul>
+			</div>
+			<div class="con">
+				<ul class="ortcot nrw1">
+				<%loop (ActivityInfo) hytaoactinfo hytaoactlist%>
+				    <li>▪&nbsp;<a target="_blank" title="{hytaoactinfo.atitle}" href="{tbconfig.taoDomain}actshow-{hytaoactinfo.id}.html">{hytaoactinfo.atitle}</a></li>
+			    <%/loop%>
+			    <%if {hytaoactinfo__loop__id}<10%><%repeat("<li>▪&nbsp;</li>", 10-{hytaoactinfo__loop__id})%><%/if%>
+				</ul>
+			</div>
+		</div>
+		<p class="orline"></p>
+	</div>
+</div>
+<div class="cot">
+	<div class="ozs ozw2 mar_top" id="pinf">
+		<div class="pinf olbg2">
+			<strong>活跃企业展示区</strong>
+			<span><a class="l_666" href="zshy-0-0-0-0-0-0-2.html" target="_blank">更多&gt;&gt;</a></span>
+			<ul id="pinftit">
+				<li>网络评分</li>
+				<li>企业信誉</li>
+			</ul>
+		</div>
+		<div id="pinfnr">
+			<div class="con">
+				<ul class="pinfc" id="wlpf">
+				<%loop (Companys) scoredcompanyinfo hyscoredcompanylist%>
+				<%if {scoredcompanyinfo__loop__id}>7%><%break%><%/if%>
+				<%set (string){scoredclass}="pinfc1"%>
+				<%if {scoredcompanyinfo__loop__id}==1%><%set {scoredclass}="pinfc2"%><%/if%>
+				    <li class="{scoredclass}">
+						<p class="tit"><a title="{scoredcompanyinfo.en_name}" href="company-{scoredcompanyinfo.en_id}.html" target="_blank">{scoredcompanyinfo.en_name}</a></p>
+						<span class="pf">网络评分：{scoredcompanyinfo.enScored}分</span>
+						<span class="lj">[<a title="{scoredcompanyinfo.en_name}" class="l_c00" href="promotion-{scoredcompanyinfo.en_id}.html" target="_blank">立即推广</a>]</span>
+						<p class="mp"><a title="{scoredcompanyinfo.en_name}" href="company-{scoredcompanyinfo.en_id}.html" target="_blank"><img src="showcardimg_{scoredcompanyinfo.en_id}.html" /></a></p>
+					</li>
+			    <%/loop%>
+				</ul>
+			</div>
+			<div class="con">
+				<ul class="pinfc" id="qyxy">
+				<%loop (Companys) creditcompanyinfo hycreditcompanylist%>
+			    <%if {creditcompanyinfo__loop__id}>7%><%break%><%/if%>
+			    <%set (string){creditclass}="pinfc1"%>
+				<%if {creditcompanyinfo__loop__id}==1%><%set {creditclass}="pinfc2"%><%/if%>
+					<li class="{creditclass}">
+						<p class="tit"><a title="{creditcompanyinfo.en_name}" href="company-{creditcompanyinfo.en_id}.html" target="_blank">{creditcompanyinfo.en_name}</a></p>
+						<span class="pf">企业信誉：{creditcompanyinfo.en_credits}</span>
+						<span class="lj">[<a title="{creditcompanyinfo.en_name}" class="l_c00" href="company-{creditcompanyinfo.en_id}.html" target="_blank">立即推广</a>]</span>
+						<p class="mp"><a title="{creditcompanyinfo.en_name}" href="company-{creditcompanyinfo.en_id}.html" target="_blank"><img src="showcardimg_{creditcompanyinfo.en_id}.html" /></a></p>
+					</li>
+				<%/loop%>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="ozs ozw1 mar_top">
+		<strong class="olbg">主题企业</strong>
+		<ul class="otic">
+		<%if {cardad2}.Length>=8%>
+		    <li><a title="{cardad2[5]}" href="tools/ajax.aspx?t=advredirect&url=<%urlencode({cardad2[4]})%>" target="_blank" rel="nofollow"><img alt="{cardad2[5]}" src="{cardad2[1]}" /></a></li>
+	    <%/if%>
+		<%if {cardad3}.Length>=8%>
+		    <li><a title="{cardad3[5]}" href="tools/ajax.aspx?t=advredirect&url=<%urlencode({cardad3[4]})%>" target="_blank" rel="nofollow"><img alt="{cardad3[5]}" src="{cardad3[1]}" /></a></li>
+	    <%/if%>
+		</ul>
+	</div>
+	<p class="inxad mar_top">
+	    <%if {cardad4}.Length>=8%>
+		    <a title="{cardad4[5]}" href="tools/ajax.aspx?t=advredirect&url=<%urlencode({cardad4[4]})%>" target="_blank" rel="nofollow"><img alt="{cardad4[5]}" src="{cardad4[1]}" /></a>
+	    <%/if%>
+	</p>
+</div>
+<div class="cot">
+    <%loop (DataRow) cataloginfo cataloglist1%>
+	<div class="ozs ozw3 mar_top">
+		<p class="ozst olbg2 zsw4">
+			<em></em>
+			<strong class="tit1">{cataloginfo[name]}</strong>
+			<span><a title="{cataloginfo[name]}" href="zshy-{cataloginfo[id]}.html" class="l_666" target="_blank">更多&gt;&gt;</a></span>
+		</p>
+		<div class="zsqy">
+			<div class="zstp">
+				<strong>热点类别</strong>
+				<p>
+				<%csharp%>
+			        DataRow[] cataloglist2 = Catalogs.GetAllCatalogByPidAndSub(TypeConverter.ObjectToInt(cataloginfo["id"]));
+			    <%/csharp%>
+			    <%set (int){classlength}=0%>
+				<%loop (DataRow) hotclass cataloglist2%>
+				<a title="{hotclass[name]}" class="l_666" href="zshy-{hotclass[id]}.html" target="_blank">{hotclass[name]}</a> | 
+				<%set {classlength}={classlength}+{hotclass[name]}.Length%>
+				<%if {classlength}+({hotclass__loop__id}*3)>138%><%break%><%/if%>
+				<%/loop%>
+				<a class="l_c00" href="zshy-{cataloginfo[id]}.html">更多&gt;&gt;</a>
+				</p>
+			</div>
+			<div class="zsar" id="zsarea{cataloginfo__loop__id}">
+				<ul class="zsart" id="zsart{cataloginfo__loop__id}">
+				<%loop (DataRow) cityinfo indexcity%>
+				    <%if {cityinfo__loop__id}>5%><%break%><%/if%>
+				    <li>{cityinfo[CityName]}</li>
+				<%/loop%>
+				</ul>
+				<div  class="zsarc"id="zsarc{cataloginfo__loop__id}">
+				<%loop (DataRow) cityinfo1 indexcity%>
+				    <%if {cityinfo1__loop__id}>5%><%break%><%/if%>
+					<div class="con">
+						<ul class="ozsrtc nrw2">
+						<%set {hycitycompanylist}=Companies.GetCompanyListByCityAndCatalog({strtoint({cityinfo1[CityID]})},{strtoint({cataloginfo[id]})},9)%>
+					    <%loop (Companys) hycitycompanyinfo hycitycompanylist%>
+						    <li><a title="{hycitycompanyinfo.catalogName}" class="l_c00" href="zshy-{hycitycompanyinfo.tempCatalogID}.html" target="_blank">[<%getsubstring({hycitycompanyinfo.catalogName},10,"")%>]</a> <a title="{hycitycompanyinfo.en_name}" href="company-{hycitycompanyinfo.en_id}.html" target="_blank"><%getsubstring({hycitycompanyinfo.en_name},34,"")%></a></li>
+					    <%/loop%>
+						</ul>
+					</div>
+				<%/loop%>
+				</div>
+			</div>
+			<div class="zscrd crdw1" id="card{cataloginfo__loop__id}">
+				<p class="zscrdlt" id="btn{cataloginfo__loop__id}1"></p>
+				<div class="zscrdcot cotw1">
+					<ul class="zscrdnr nrw1">
+					<%set {hycardcompanylist}=Companies.GetCompanyListByCityAndCatalog(0,{strtoint({cataloginfo[id]})},5)%>
+				    <%loop (Companys) hycordcompanyinfo hycardcompanylist%>
+					    <li class="zsm1"><a title="{hycordcompanyinfo.en_name}" href="company-{hycordcompanyinfo.en_id}.html" target="_blank"><img alt="{hycordcompanyinfo.en_name}" src="showcardimg_{hycordcompanyinfo.en_id}.html" /></a></li>
+				    <%/loop%>
+					</ul>
+				</div>
+				<p class="zscrdrt" id="btn{cataloginfo__loop__id}2"></p>
+			</div>
+		</div>
+	</div>
+	<%if {cataloginfo__loop__id}==2%>
+	<p class="inxad mar_top">
+	<%if {cardad5}.Length>=8%>
+		<a title="{cardad5[5]}" href="tools/ajax.aspx?t=advredirect&url=<%urlencode({cardad5[4]})%>" target="_blank" rel="nofollow"><img alt="{cardad5[5]}" src="{cardad5[1]}" /></a>
+	<%/if%>
+	</p>
+	<%/if%>
+	<%/loop%>
+</div>
+<%template _comcopyright%>
+<%template _comfooter%>

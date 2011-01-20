@@ -34,7 +34,7 @@
 			        string[] ad5infoparm = ad5info.Parameters.Split('|');
 			    <%/csharp%>
 			    <%if ad5infoparm.Length<8%><%continue%><%/if%>
-			    <div class="con"><a title="{ad5infoparm[5]}" href="{ad5infoparm[4]}"><img alt="{ad5infoparm[5]}" src="{ad5infoparm[1]}" /></a></div>
+			    <div class="con"><a title="{ad5infoparm[5]}" href="tools/ajax.aspx?t=advredirect&url=<%urlencode({ad5infoparm[4]})%>" rel="nofollow" target="_blank"><img alt="{ad5infoparm[5]}" src="{ad5infoparm[1]}"/></a></div>
 				<%set {ad5count}={ad5count}+1%>
 				<%/loop%>
 			</div>
@@ -47,10 +47,10 @@
 			<strong><img alt="图说新闻" src="{rooturl}templates/{templatepath}/images/ts-an.gif" /></strong>
 			<div class="oce2cot" id="ocetu">
 				<ul class="oce2nr">
-					<li><a title="" href="#"><img alt="" src="images/ad/210x110.gif" /></a></li>
-					<li><a title="" href="#"><img alt="" src="images/ad/210x110.gif" /></a></li>
-					<li><a title="" href="#"><img alt="" src="images/ad/210x110.gif" /></a></li>
-					<li><a title="" href="#"><img alt="" src="images/ad/210x110.gif" /></a></li>
+				<%set {newslistbyclass}=News.GetNewsByClass("510092708030")%>
+				<%loop (NewsContent) picnewsinfo newslistbyclass%>
+				    <li><a title="{picnewsinfo.NewsTitle}" href="{picnewsinfo.NewsUrl}" target="_blank"><img alt="{picnewsinfo.NewsTitle}" src="{picnewsinfo.NewsSPic}" /></a></li>
+				<%/loop%>
 				</ul>
 			</div>
 			<p class="oce2rt">
@@ -61,8 +61,8 @@
 	</div>
 	<div class="ort mar_top">
 		<ul class="ort1">
-			<li class="ort1z"><a title="" target="_blank" href="agreement.html""></a></li>
-			<li class="ort1y"><a title="" target="_blank" href="inquiry.aspx"></a></li>
+			<li class="ort1z"><a target="_blank" href="agreement.html""></a></li>
+			<li class="ort1y"><a target="_blank" href="inquiry.aspx"></a></li>
 		</ul>
 		<div class="olt ow2 mar_top" id="ort2">
 			<ul class="olbg" id="ortit">
@@ -107,7 +107,7 @@
 		<div class="typ" id="type">
 		<%loop (DataRow) cataloginfo cataloglist1%>
 			<div class="typnr">
-				<strong>{cataloginfo[name]}</strong>
+				<strong><a title="{cataloginfo[name]}" class="l_ff7e00" href="zshy-{cataloginfo[id]}.html" target="_blank">{cataloginfo[name]}</a></strong>
 				<ul class="typcot">
 					<%set (int) {computenum}=0%>
 			        <%set (int) {computetimes}=0%>
@@ -119,7 +119,7 @@
 				        <%if {computenum}%2==1%>
 			                <%set {computetimes}={computetimes}+1%>
 			            <%/if%>
-						<b><a class="l_c00" title="{subcata[name]}" href="zshy-{subcata[id]}.html">{subcata[name]}</a></b>
+						<b><a class="l_c00" title="{subcata[name]}" href="zshy-{subcata[id]}.html" target="_blank">{subcata[name]}</a></b>
 						<span>
 						<%set (int){catastrlength} = 0%>
 					    <%csharp%>
@@ -130,9 +130,9 @@
 					    <%if {catastrlength}>54%>
 					        <%break%>
 					    <%/if%>
-					<a class="l_666" title="{subsubcata[name]}" href="zshy-{subsubcata[id]}.html">{subsubcata[name]}</a>&nbsp; | &nbsp;
+					<a class="l_666" title="{subsubcata[name]}" href="zshy-{subsubcata[id]}.html target="_blank"">{subsubcata[name]}</a>&nbsp; | &nbsp;
 					    <%/loop%>
-					<a class="l_c00" title="{subcata[name]}" href="zshy-{subcata[id]}.html">更多&gt;&gt;</a></p>
+					<a class="l_c00" title="{subcata[name]}" href="zshy-{subcata[id]}.html" target="_blank">更多&gt;&gt;</a></p>
 						</span>
 					</li>
 			        <%set {computenum}={computenum}+1%>
@@ -168,13 +168,13 @@
 		</div>
 		<p class="aread mar_top">
 		<%if {indexad1}.Length>=8%>
-		    <a title="{indexad1[5]}" href="{indexad1[4]}" target="_blank"><img alt="{indexad1[5]}" src="{indexad1[1]}" /></a>
+		    <a title="{indexad1[5]}" href="tools/ajax.aspx?t=advredirect&url=<%urlencode({indexad1[4]})%>" target="_blank" rel="nofollow"><img alt="{indexad1[5]}" src="{indexad1[1]}" /></a>
 		<%/if%>
 		</p>
 	</div>
 	<p class="inxad mar_top">
 	<%if {indexad2}.Length>=8%>
-		<a title="{indexad2[5]}" href="{indexad2[4]}" target="_blank"><img alt="{indexad2[5]}" src="{indexad2[1]}" /></a>
+		<a title="{indexad2[5]}" href="tools/ajax.aspx?t=advredirect&url=<%urlencode({indexad2[4]})%>" target="_blank" rel="nofollow"><img alt="{indexad2[5]}" src="{indexad2[1]}" /></a>
 	<%/if%>
 	</p>
 </div>
@@ -225,7 +225,7 @@
 		</div>
 		<p class="infad">
 		<%if {indexad3}.Length>=8%>
-		    <a title="{indexad3[5]}" href="{indexad3[4]}" target="_blank"><img alt="{indexad3[5]}" src="{indexad3[1]}" /></a>
+		    <a title="{indexad3[5]}" href="tools/ajax.aspx?t=advredirect&url=<%urlencode({indexad3[4]})%>" target="_blank" rel="nofollow"><img alt="{indexad3[5]}" src="{indexad3[1]}"/></a>
 	    <%/if%>
 		</p>
 		<div class="inf">
@@ -356,7 +356,7 @@
 		</div>
 		<p class="hotad mar_top">
 		<%if {indexad4}.Length>=8%>
-		    <a title="{indexad4[5]}" href="{indexad4[4]}" target="_blank"><img alt="{indexad4[5]}" src="{indexad4[1]}" /></a>
+		    <a title="{indexad4[5]}" href="tools/ajax.aspx?t=advredirect&url=<%urlencode({indexad4[4]})%>" target="_blank" rel="nofollow"><img alt="{indexad4[5]}" src="{indexad4[1]}" /></a>
 	    <%/if%>
 		</p>
 		<div class="olt ow2 mar_top">

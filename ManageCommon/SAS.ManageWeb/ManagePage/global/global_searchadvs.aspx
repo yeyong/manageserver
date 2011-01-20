@@ -27,8 +27,8 @@
 	<tr><td class="item_title" colspan="2">广告创建时间范围</td></tr>
 	<tr>
 		<td class="vtop rowform">
-			起始日期:<sas:Calendar id="postdatetimeStart" runat="server" ReadOnly="True" ScriptPath="../js/calendar.js"></sas:Calendar><br />
-			结束日期:<sas:Calendar id="postdatetimeEnd" runat="server" ReadOnly="True" ScriptPath="../js/calendar.js"></sas:Calendar>
+			起始日期:<sas:Calendar id="postdatetimeStart" runat="server" ReadOnly="false" ScriptPath="../js/calendar.js"></sas:Calendar><br />
+			结束日期:<sas:Calendar id="postdatetimeEnd" runat="server" ReadOnly="false" ScriptPath="../js/calendar.js"></sas:Calendar>
 		</td>
 		<td class="vtop"></td>
 	</tr>
