@@ -1,0 +1,55 @@
+﻿<div class="rtnr">
+    <p class="rtnrad1 mar_top">
+    <%if {listad1}.Length>=8%>
+		<a title="{listad1[5]}" href="tools/ajax.aspx?t=advredirect&url=<%urlencode({listad1[4]})%>" target="_blank" rel="nofollow"><img alt="{listad1[5]}" src="{listad1[1]}" /></a>
+	<%/if%>
+    </p>
+    <ul class="rtnr1 mar_top">
+        <li class="rtnr1lt"><a title="提交企业信息" href="agreement.html"></a></li>
+        <li class="rtnr1rt"><a title="查询提交状态" href="inquiry.html"></a></li>
+    </ul>
+    <div class="ozs ozw1 mar_top" id="ozs">
+        <strong class="olbg">企业排行</strong>
+        <ul class="olbg" id="lttit">
+            <li>信誉度</li>
+            <li>点击率</li>
+            <li>评 论</li>
+        </ul>
+        <div id="ozsnr">
+            <div class="con">
+                <ul class="rankc">
+                <%loop (Companys) creditcompanyinfo creditcompanylist%>
+			       <li><em>{creditcompanyinfo__loop__id}</em><p><a title="{creditcompanyinfo.en_name}" href="company-{creditcompanyinfo.en_id}.html" target="_blank">{creditcompanyinfo.en_name}</a></p><span><font class="f_c00">{creditcompanyinfo.en_credits}</font></span></li>
+			    <%/loop%>
+                </ul>
+            </div>
+            <div class="con">
+                <ul class="rankc">
+                   <%loop (Companys) clickcompanyinfo companyaccesseslist%>
+			           <li><em>{clickcompanyinfo__loop__id}</em><p><a title="{clickcompanyinfo.en_name}" href="company-{clickcompanyinfo.en_id}.html" target="_blank">{clickcompanyinfo.en_name}</a></p><span><font class="f_c00">{clickcompanyinfo.en_accesses}</font></span></li>
+			       <%/loop%>
+                </ul>
+            </div>
+            <div class="con">
+                <ul class="rankc">
+                    <%loop (Companys) commentcompanyinfo commentcompanylist%>
+			            <li><em>{commentcompanyinfo__loop__id}</em><p><a title="{commentcompanyinfo.en_name}" href="company-{commentcompanyinfo.en_id}.html" target="_blank">{commentcompanyinfo.en_name}</a></p><span><font class="f_c00">{commentcompanyinfo.en_sell}</font></span></li>
+			        <%/loop%>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <p class="rtnrad2 mar_top">
+        <a title="" href="#">
+            <img alt="" src="images/ad/466x182.jpg" /></a></p>
+    <div class="ozs ozw1 mar_top">
+        <strong class="olbg">最新发布企业信息</strong>
+        <ul class="ortcot nrw1">
+        <%loop (Companys) hyupdatecompanyinfo companynewlist%>
+        <%if {hyupdatecompanyinfo__loop__id}>10%><%break%><%/if%>
+		    <%set (string){mancatalogname}=Utils.CutString({hyupdatecompanyinfo.catalogName},0,10)%>
+            <li><a class="l_c00" title="{hyupdatecompanyinfo.catalogName}" href="zshy-{hyupdatecompanyinfo.tempCatalogID}.html">[{mancatalogname}]</a> <a title="{hyupdatecompanyinfo.en_name}" href="company-{hyupdatecompanyinfo.en_id}.html" target="_blank">{hyupdatecompanyinfo.en_name}</a></li>
+        <%/loop%>
+        </ul>
+    </div>
+</div>

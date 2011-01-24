@@ -373,6 +373,27 @@ namespace SAS.Logic
         }
 
         /// <summary>
+        /// 获得企业墙企业
+        /// </summary>
+        /// <returns></returns>
+        public static List<Companys> GetCompanyListWall()
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            string cachekey = "ZSWall_Company";
+            List<Companys> companylist = cache.RetrieveObject(cachekey) as List<Companys>;
+            if (companylist == null)
+            {
+                companylist = SAS.Data.DataProvider.Companies.GetCompanyListByOrder(40, "en_credits", true);
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 1440;
+                cache.LoadCacheStrategy(ica);
+                cache.AddObject(cachekey, companylist);
+                cache.LoadDefaultCacheStrategy();
+            }
+            return companylist;
+        }
+
+        /// <summary>
         /// 根据市级信息获取企业信息
         /// </summary>
         /// <param name="cityid"></param>

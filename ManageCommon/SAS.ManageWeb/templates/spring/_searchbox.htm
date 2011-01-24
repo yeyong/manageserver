@@ -1,0 +1,73 @@
+﻿<div class="ltnr1 mar_top">
+    <b>按行业类别选择：</b>
+    <p class="ltnr2">
+        <%loop (DataRow) catainfo cataloglist%>
+			<span><a href="{pagelink}-{catainfo[id]}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-{ordertype}-{keyword}.html" class="l_666" title="{catainfo[name]}"><%getsubstring({catainfo[name]},16,"")%>({catainfo[companycount]})</a></span>
+		<%/loop%>
+    </p>
+</div>
+<p class="ltit mar_top">
+    <%if {pagelink}=="zshy"%>
+    <span class="ltit1">按信息展示</span> <span class="ltit2"><a href="{pagelink}-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-{ordertype}-{keyword}.html">按名片展示</a></span>    
+    <%else%>
+    <span class="ltit2"><a href="{pagelink}-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-{ordertype}-{keyword}.html">按信息展示</a></span> <span class="ltit1">按名片展示</span>
+    <%/if%>
+    <span class="ltit3"><em>
+        <input name="" type="text" class="input1" id="zshykeyword" style="width: 180px" /></em> <em class="mtp">
+            <a onclick="window.location='{pagelink}-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-{ordertype}-'+getsearchvalue(document.getElementById('zshykeyword').value)+'.html';">
+                <img src="{rooturl}templates/{templatepath}/images/so-an.gif" /></a></em> </span><span class="ltit4"><em>共<b class="f_c00">{companycount}</b>条</em>
+                    <em>{pageid}/{pagecount}</em> <em class="lt"><a title="上一页" href="{pagelink}-{prevpage}-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-{ordertype}-{keyword}.html"></a></em><em class="rt"><a title=""
+                        href="{pagelink}-{nextpage}-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-{ordertype}-{keyword}.html">下一页</a></em> </span>
+</p>
+<div class="ltnr3" id="thelocation">
+   <p class="w1" id="views">
+		<span class="tit" id="viewsnr">默认顺序</span>
+		<span class="nr" id="views1">
+		    <em onclick="window.location='{pagelink}-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-0-{keyword}.html';"><i></i>恢复默认排序</em>
+		    <em onclick="window.location='{pagelink}-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-1-{keyword}.html';"><i class="bg2"></i>浏览量从低到高</em>
+			<em onclick="window.location='{pagelink}-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-2-{keyword}.html';"><i class="bg1"></i>浏览量从高到低</em>
+			<em onclick="window.location='{pagelink}-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-3-{keyword}.html';"><i class="bg4"></i>评论数从低到高</em>
+			<em onclick="window.location='{pagelink}-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-4-{keyword}.html';"><i class="bg3"></i>评论数从高到低</em>			
+			<em onclick="window.location='{pagelink}-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-5-{keyword}.html';"><i class="bg5"></i>最新发布</em>
+			<em onclick="window.location='{pagelink}-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-{regyear}-6-{keyword}.html';"><i class="bg6"></i>最早发布</em>
+		</span>
+	</p>
+    <p class="w2">
+        <select name="province" style="width: 104px;">
+            <option>请选择省份</option>
+        </select>
+    </p>
+    <p class="w2">
+        <select name="city" style="width: 104px;">
+            <option>请选择城市</option>
+        </select>
+    </p>
+    <p class="w2">
+        <select name="areas" style="width: 104px;">
+            <option>请选择地区</option>
+        </select>
+    </p>
+    <p class="w2">
+        <select onchange="window.location='{pagelink}-{catalogid}-{provinceid}-{cityid}-{areaid}-'+this.value+'-{regyear}-{ordertype}-{keyword}.html';" name="" style="width: 104px;">
+            <option value="0">所有业务类型</option>
+			<%loop (string) zshytypestr Enum.GetNames(entype_enum.GetType())%>
+		    <%set (int) {zshytypevalue}=Convert.ToInt16(Enum.Parse(entype_enum.GetType(), zshytypestr))%>
+	        <%set (string) {zshytypetext}=EnumCatch.GetCompanyType({zshytypevalue})%>
+	        <%set (string) {zshyselectstatus}=""%>
+	        <%if {entypeid}=={zshytypevalue}%>
+	        <%set {zshyselectstatus}="selected"%>
+	        <%/if%>
+	        <option value="{zshytypevalue}" {zshyselectstatus}>{zshytypetext}</option>
+	        <%/loop%>
+        </select>
+    </p>
+    <p class="w2">
+       <select name="regyear" onchange="window.location='{pagelink}-{catalogid}-{provinceid}-{cityid}-{areaid}-{entypeid}-'+this.value+'-{ordertype}-{keyword}.html';" style="width:104px;">
+			<option value="0">所有注册年份</option>
+			<option value="5" <%if {regyear}==5%>selected<%/if%>>超过5年</option>
+			<option value="3" <%if {regyear}==3%>selected<%/if%>>超过3年</option>
+			<option value="2" <%if {regyear}==2%>selected<%/if%>>超过2年</option>
+			<option value="1" <%if {regyear}==1%>selected<%/if%>>1年以下</option>
+		</select>
+    </p>
+</div>

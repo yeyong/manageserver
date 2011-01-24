@@ -5,6 +5,7 @@ using System.Data;
 
 using SAS.Logic;
 using SAS.Common;
+using SAS.Common.Generic;
 using SAS.Config;
 using SAS.Entity;
 
@@ -12,6 +13,8 @@ namespace SAS.ManageWeb
 {
     public class zswall : CompanyPage
     {
+        protected List<Companys> wallcompany = Companies.GetCompanyListWall();
+
         protected override void ShowPage()
         {
             string m_keyword = "浙商黄页,名片夹,名片墙";  //meta关键字
@@ -23,6 +26,7 @@ namespace SAS.ManageWeb
             script += "\r\n<script src=\"" + forumpath + "javascript/jquery-ui.min.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/jquery.transform-0.6.2.min.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/jquery.animate-shadow-min.js\" type=\"text/javascript\"></script>";
+            script += "\r\n<script src=\"" + forumpath + "javascript/zswall.js\" type=\"text/javascript\"></script>";
         }
     }
 }

@@ -1232,6 +1232,7 @@
     <Content Include="javascript\template_showcompany.js" />
     <Content Include="javascript\sascommon.js" />
     <Content Include="javascript\template_showphoto.js" />
+    <Content Include="javascript\zswall.js" />
     <Content Include="ManagePage\ajax.aspx" />
     <Content Include="ManagePage\company\global_ajaxcall.aspx" />
     <Content Include="ManagePage\forum\forum_addforums.aspx" />
@@ -1914,10 +1915,19 @@
     <Content Include="templates\spring\css\channels.css" />
     <Content Include="templates\spring\css\comm.css" />
     <Content Include="templates\spring\css\default\bgcolor.css" />
+    <Content Include="templates\spring\css\jquery.cluetip.css" />
     <Content Include="templates\spring\css\main.css" />
     <Content Include="templates\spring\editor.css" />
     <Content Include="templates\spring\float.css" />
     <Content Include="templates\spring\images\banner.gif" />
+    <Content Include="templates\spring\images\card\an-1.gif" />
+    <Content Include="templates\spring\images\card\an-2.gif" />
+    <Content Include="templates\spring\images\card\an-3.gif" />
+    <Content Include="templates\spring\images\card\an-4.gif" />
+    <Content Include="templates\spring\images\card\close.gif" />
+    <Content Include="templates\spring\images\card\loading.gif" />
+    <Content Include="templates\spring\images\card\next.gif" />
+    <Content Include="images\paperball.gif" />
     <Content Include="templates\spring\images\close.gif" />
     <Content Include="templates\spring\images\cx-an.gif" />
     <Content Include="templates\spring\images\cx-an2.gif" />
@@ -1961,6 +1971,7 @@
     <Content Include="templates\spring\images\zs-arrow-rt1.gif" />
     <Content Include="templates\spring\index.htm" />
     <Content Include="templates\spring\sas.css" />
+    <Content Include="templates\spring\zshy.htm" />
     <Content Include="templates\spring\zswall.htm" />
     <Content Include="templates\spring\zspage.htm" />
     <Content Include="templates\spring\_comcopyright.htm" />
@@ -1968,6 +1979,8 @@
     <Content Include="templates\spring\_comheader.htm" />
     <Content Include="templates\spring\_compageheader.htm" />
     <Content Include="templates\spring\_comsearch.htm" />
+    <Content Include="templates\spring\_searchbox.htm" />
+    <Content Include="templates\spring\_listright.htm" />
     <Content Include="tools\flashcomm.aspx" />
     <Content Include="config\taobao.config" />
     <Content Include="tools\zsmap.aspx" />
