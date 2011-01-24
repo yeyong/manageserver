@@ -9,8 +9,8 @@ img{ border:0px;}
 .f_c00{ color:#c00;}
 .f_999{ color:#999;}
 
-
 .mar_top{ margin-top:14px;}
+.mar_top2{ margin-top:24px;}
 .mar_lt{ margin-left:14px; display:inline;}
 
 /*link*/
@@ -24,26 +24,41 @@ a:hover{ color:#c00; text-decoration:underline;}
 .l_c00:hover{ color:#c00; text-decoration:underline;}
 .l_c00_u:link, .l_c00_u:visited{ color:#f00; text-decoration:underline;}
 .l_c00_u:hover{ color:#c00; text-decoration:underline;}
+.l_ff7e00:link, .l_ff7e00:visited{ color:#ff7e00; text-decoration:none;}
+.l_ff7e00:hover{ color:#c00; text-decoration:underline;}
 
 /*input*/
-input, select{ background:#fff;}
+input, select, textarea{ background:#fff;}
 .soon{ width:372px; height:27px; line-height:27px; color:#333; border:0; padding:0 2px;}
 .soout{ width:372px; height:27px; line-height:27px; color:#ccc; border:0; padding:0 2px;}
-
 .input1{ height:18px; line-height:18px; color:#000; border:1px solid #ccc; padding:0 2px;}
-.input2{ height:20px; line-height:20px; color:#000; border:1px solid #999; padding:0 2px;}
+.input2, .input3{ height:20px; line-height:20px; border:1px solid #999; padding:0 2px;}
+.input2{ color:#000;}
+.input3{ color:#ccc;}
+.input4{ height:25px; line-height:25px; color:#333; border:1px solid #c00; padding:0 2px;}
 
+/*评分选星*/
+div.rating-cancel,div.star-rating{float:left;width:17px;height:15px;text-indent:-999em;cursor:pointer;display:block;background:transparent;overflow:hidden}
+div.rating-cancel,div.rating-cancel a{background:url(../images/delete.gif) no-repeat 0 -16px}
+div.star-rating,div.star-rating a{background:url(../images/star.gif) no-repeat 0 0px}
+div.rating-cancel a,div.star-rating a{display:block;width:16px;height:100%;background-position:0 0px;border:0}
+div.star-rating-on a{background-position:0 -16px!important}
+div.star-rating-hover a{background-position:0 -32px}
+div.star-rating-readonly a{cursor:default !important}
+div.star-rating{background:transparent!important;overflow:hidden!important}
 
 /*按钮*/
 input.login{ width:37px; height:18px; line-height:18px; text-align:center; background:#f6f6f6; color:#000; border:1px solid #ccc; cursor:pointer;}
 input.soso{ width:41px; height:21px; line-height:21px; text-align:center; color:#000; background:url(../images/an_1.gif) no-repeat; border:0; cursor:pointer;}
 input.jian{ width:83px; height:20px; line-height:20px; text-align:center; color:#000; background:url(../images/an_3.gif) no-repeat; border:0; cursor:pointer;}
+input.plan{ width:95px; height:33px; background:url(../images/pl-an2.gif) no-repeat; border:0; cursor:pointer;}
+input.agree{ width:51px; height:20px; background:url(../images/agree-an.gif) no-repeat; border:0; cursor:pointer;}
+input.tjan{ width:95px; height:33px; line-height:33px; font-size:14px; color:#fff; font-weight:bold; background:url(../images/an.gif) no-repeat; border:0; cursor:pointer;}
 
 /*内容部分*/
 .cot{ width:960px; height:auto; margin:0 auto;}
 /*通栏广告*/
 .inxad, .inxad img{ width:960px; height:90px; float:left;}
-
 /*site*/
 .bd_site{ width:938px; height:26px; line-height:26px; border: solid #ccc; border-width:1px 0 1px 0; text-align:left; padding:0 0 0 20px; float:left; background:url(../images/list-arrow-rt.gif) 10px 9px no-repeat; position:relative;}
 .bd_site .lt, .bd_site .rt{ width:1px; height:26px; background:#ccc; position:absolute; top:0;}
@@ -52,7 +67,6 @@ input.jian{ width:83px; height:20px; line-height:20px; text-align:center; color:
 
 /*友情链接*/
 .link{ width:928px; height:auto; background:#faf5ee; border:1px solid #ccc; padding:12px 15px; float:left;}
-
 
 /* 分页 */
 .page{ width:auto; height:22px; line-height:22px; text-align:left; float:right;}

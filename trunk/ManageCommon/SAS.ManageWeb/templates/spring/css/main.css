@@ -47,9 +47,9 @@
 #ortit li, #hotit li{ width:55px; height:27px; line-height:27px; text-align:center; cursor:pointer; margin-top:-2px; float:left; overflow:hidden; border-bottom:1px solid #ccc;}
 #ortit li.current, #hotit li.current{ height:27px; line-height:26px; background:#fff; font-weight:bold; border-top:1px solid #c00; border-left:1px solid #ccc; border-right:1px solid #ccc; z-index:2; position:relative; border-bottom:0;}
 #ortit li.usual, #hotit li.usual{ height:27px; line-height:27px; float:left;}
-.orline, .orline2{ width:128px; height:1px; background:#ccc; float:right; overflow:hidden; z-index:2; position:relative;}
-.orline{ margin-top:-213px;}
-.orline2{ margin-top:-259px;}
+.orline, .orline2{ height:1px; background:#ccc; float:right; overflow:hidden; z-index:2; position:relative;}
+.orline{ width:128px; margin-top:-213px;}
+.orline2{ width:73px; margin-top:-259px;}
 #ortnr, #hotnr{ width:238px; height:auto; background:#fff; float:left;}
 #ortnr .con, #hotnr .con{ width:238px; height:auto; display:none; float:left;}
 .ortcot{ height:auto; margin:0 10px; display:inline; padding:7px 0; float:left;}
@@ -105,7 +105,7 @@
 .rank{ width:218px; height:30px; line-height:30px; padding:0 10px; border-bottom:1px solid #ccc; float:left; *overflow:hidden;}
 .rank strong{ width:auto; height:30px; float:left;}
 #ranktit{ width:auto; height:30px; position:relative; margin-left:10px; z-index:1; float:left;}
-#ranktit li{ width:55px; height:30px; line-height:30px; text-align:center; cursor:pointer; margin-top:-2px; float:left; overflow:hidden;}
+#ranktit li{ width:48px; height:30px; line-height:30px; text-align:center; cursor:pointer; margin-top:-2px; float:left; overflow:hidden;}
 #ranktit li.current{ height:32px; line-height:32px; background:#fff; font-weight:bold; border-top:1px solid #c00; border-left:1px solid #ccc; border-right:1px solid #ccc; z-index:2; position:relative; border-bottom:0;}
 #ranktit li.usual{ height:31px; line-height:31px; float:left;}
 #ranknr{ width:238px; height:auto; background:#fff; float:left;}

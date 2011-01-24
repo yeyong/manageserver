@@ -5,6 +5,7 @@ using System.Data;
 
 using SAS.Logic;
 using SAS.Common;
+using SAS.Common.Generic;
 using SAS.Config;
 using SAS.Entity;
 
@@ -23,15 +24,23 @@ namespace SAS.ManageWeb
         /// <summary>
         /// 点击企业排行
         /// </summary>
-        protected SAS.Common.Generic.List<Companys> companyaccesseslist = Companies.GetCompanyListViews();
+        protected List<Companys> companyaccesseslist = Companies.GetCompanyListViews();
+        /// <summary>
+        /// 企业信誉排行
+        /// </summary>
+        protected List<Companys> creditcompanylist = Companies.GetCompanyListCredits();
+        /// <summary>
+        /// 企业评论排行
+        /// </summary>
+        protected List<Companys> commentcompanylist = Companies.GetCompanyListComments();
         /// <summary>
         /// 最新企业排行
         /// </summary>
-        protected SAS.Common.Generic.List<Companys> companynewlist = Companies.GetNewCompanyList();
+        protected List<Companys> companynewlist = Companies.GetUpdateCompanyList();
         /// <summary>
         /// 企业信息列表
         /// </summary>
-        protected SAS.Common.Generic.List<Companys> companylist = new SAS.Common.Generic.List<Companys>();
+        protected List<Companys> companylist = new List<Companys>();
         /// <summary>
         /// 类别ID
         /// </summary>
@@ -112,6 +121,11 @@ namespace SAS.ManageWeb
         /// 页面导航
         /// </summary>
         protected string pagenav = " &gt; 浙商黄页";
+        protected string pagelink = "zshy";
+        /// <summary>
+        /// 广告位1
+        /// </summary>
+        protected string[] listad1 = Advertisements.GetZSRandomAd(1, AdType.ListPicAd).Split('|');
         #endregion
 
         protected override void ShowPage()
@@ -127,16 +141,24 @@ namespace SAS.ManageWeb
             script += "\r\n<script src=\"" + forumpath + "javascript/jquery.cluetip-min.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/template_catalogadmin.js\" type=\"text/javascript\"></script>";
 
-            string loadscript = "\r\n " + "jQuery(document).ready(function() {"
-                    + "\r\n " + "jQuery(\"#thelocation\").LoadLocation({provinceid:" + provinceid + ",cityid:" + cityid + ",areaid:" + areaid + ",urlparms:'zshy-" + catalogid + "-{1}-{2}-{3}-" + entypeid + "-" + regyear + "-" + ordertype + "-" + keyword + ".html'});"
-                    + "\r\n " + "jQuery(\"#views\").ExtendClick(\"views1\",\"viewsnr\",\"i\"," + ordertype + ");"
-                    + "\r\n " + "jQuery('#put').find(\".zshynr2rt2\").find(\"a\").cluetip({ activation: 'click', sticky: true, width: 350, positionBy: 'bottomTop', closePosition: 'title', closeText: '<img src=\"" + forumpath + "images/cross.png\" alt=\"close\" />',cursor: 'pointer', dropShadow: false});"
-                    + "\r\n " + "jQuery('#put').find(\"input[type=text],textarea\").each(function(){"
-                    + "\r\n " + "  jQuery(this).blur(function(){jQuery(this).attr(\"class\",\"input2_soout\");});"
-                    + "\r\n " + "  jQuery(this).focus(function(){jQuery(this).attr(\"class\",\"input2_soon\");});"
-                    + "\r\n " + "});"
-                    + "\r\n " + "jQuery(this).gettop({objsrc:\"templates/" + templatepath + "/images/top.gif\",objhref:\"javascript:scrollTo(0,0)\"});"
-                    + "\r\n " + "});\r\n";
+            string loadscript = "\r\n " + "jQuery(document).ready(function() {";
+            loadscript += "\r\n " + "jQuery(\"#thelocation\").LoadLocation({provinceid:" + provinceid + ",cityid:" + cityid + ",areaid:" + areaid + ",urlparms:'zshy-" + catalogid + "-{1}-{2}-{3}-" + entypeid + "-" + regyear + "-" + ordertype + "-" + keyword + ".html'});";
+            loadscript += "\r\n " + "jQuery(\"#views\").ExtendClick(\"views1\",\"viewsnr\",\"em\"," + ordertype + ");";
+            if (templateid == 1)
+            {
+                loadscript += "\r\n " + "jQuery('#put').find(\".zshynr2rt2\").find(\"a\").cluetip({ activation: 'click', sticky: true, width: 350, positionBy: 'bottomTop', closePosition: 'title', closeText: '<img src=\"" + forumpath + "images/cross.png\" alt=\"close\" />',cursor: 'pointer', dropShadow: false});";
+                loadscript += "\r\n " + "jQuery('#put').find(\"input[type=text],textarea\").each(function(){";
+                loadscript += "\r\n " + "  jQuery(this).blur(function(){jQuery(this).attr(\"class\",\"input2_soout\");});";
+                loadscript += "\r\n " + "  jQuery(this).focus(function(){jQuery(this).attr(\"class\",\"input2_soon\");});";
+                loadscript += "\r\n " + "});";
+            }
+            else
+            {
+                loadscript += "\r\n" + "jQuery(\"#ozs\").Exchange({ MIDS: \"lttit\", CIDS: \"ozsnr\", timer: 5000, count: 5, mousetype: 1 });";
+                loadscript += "\r\n " + "jQuery('#put').find(\".lt3\").find(\"a\").cluetip({ activation: 'click', sticky: true, width: 350, positionBy: 'bottomTop', closePosition: 'title', closeText: '<img src=\"" + forumpath + "images/cross.png\" alt=\"close\" />',cursor: 'pointer', dropShadow: false});";
+            }
+            loadscript += "\r\n " + "jQuery(this).gettop({objsrc:\"templates/" + templatepath + "/images/top.gif\",objhref:\"javascript:scrollTo(0,0)\"});";
+            loadscript += "\r\n " + "});\r\n";
             AddfootScript(loadscript);
             SetConditionAndPage();
 
@@ -144,15 +166,30 @@ namespace SAS.ManageWeb
             CatalogInfo _cli = Catalogs.GetCatalogCacheInfo(catalogid);
             if (_cli != null)
             {
-                pagenav = " &gt; <a href=\"zshy.html\" title=\"浙商黄页\" class=\"l_666\">浙商黄页</a>";
-                foreach (string str in _cli.parentlist.Split(','))
+                if (templateid == 1)
                 {
-                    CatalogInfo subcli = Catalogs.GetCatalogCacheInfo(TypeConverter.StrToInt(str, 0));
-                    if (subcli == null) continue;
-                    //if (subcli.parentid == 0) continue;
-                    pagenav += String.Format(" &gt; <a href=\"zshy-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}.html\" title=\"{0}\" class=\"l_666\">{0}</a>", subcli.name, subcli.id, provinceid, cityid, areaid, entypeid, regyear, ordertype, keyword);
+                    pagenav = " &gt; <a href=\"zshy.html\" title=\"浙商黄页\" class=\"l_666\">浙商黄页</a>";
+                    foreach (string str in _cli.parentlist.Split(','))
+                    {
+                        CatalogInfo subcli = Catalogs.GetCatalogCacheInfo(TypeConverter.StrToInt(str, 0));
+                        if (subcli == null) continue;
+                        //if (subcli.parentid == 0) continue;
+                        pagenav += String.Format(" &gt; <a href=\"zshy-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}.html\" title=\"{0}\" class=\"l_666\">{0}</a>", subcli.name, subcli.id, provinceid, cityid, areaid, entypeid, regyear, ordertype, keyword);
+                    }
+                    pagenav += " &gt; " + _cli.name;
                 }
-                pagenav += " &gt; " + _cli.name;
+                else
+                {
+                    pagenav = " &gt; <a href=\"zshy.html\" title=\"浙商黄页\">浙商黄页</a>";
+                    foreach (string str in _cli.parentlist.Split(','))
+                    {
+                        CatalogInfo subcli = Catalogs.GetCatalogCacheInfo(TypeConverter.StrToInt(str, 0));
+                        if (subcli == null) continue;
+                        //if (subcli.parentid == 0) continue;
+                        pagenav += String.Format(" &gt; <a href=\"zshy-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}.html\" title=\"{0}\">{0}</a>", subcli.name, subcli.id, provinceid, cityid, areaid, entypeid, regyear, ordertype, keyword);
+                    }
+                    pagenav += " &gt; <font class=\"f_c00\">" + _cli.name + "</font>";
+                }
                 pagetitle = pagetitle + "-" + _cli.name + "企业信息" + (pageid > 1 ? "(" + pageid + ")" : "");
                 m_keyword = String.Format(m_keyword, _cli.name);
                 m_content = String.Format(m_content, _cli.name);
@@ -185,7 +222,7 @@ namespace SAS.ManageWeb
             pageid = pageid < 1 ? 1 : pageid;
             pageid = pageid > pagecount ? pagecount : pageid;
 
-            pagenumbers = Utils.GetCompanyPageNumbers(pageid, pagecount, string.Format("zshy-{0}-{1}-{2}-{3}-{4}-{5}-{6}-{7}.html", catalogid, provinceid, cityid, areaid, entypeid, regyear, ordertype, keyword), 10);
+            pagenumbers = Utils.GetCompanyPageNumbers(pageid, pagecount, string.Format("zshy-{0}-{1}-{2}-{3}-{4}-{5}-{6}-{7}.html", catalogid, provinceid, cityid, areaid, entypeid, regyear, ordertype, keyword), 10, templateid);
 
             prevpage = pageid - 1 > 0 ? pageid - 1 : pageid;
             nextpage = pageid + 1 > pagecount ? pagecount : pageid + 1;

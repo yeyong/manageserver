@@ -1,0 +1,63 @@
+﻿<%template _comheader%>
+<div class="cot">
+	<p class="bd_site mar_top">
+		您当前的位置：<a href="/">商之源</a>{pagenav}
+		<i class="lt"></i><i class="rt"></i>
+	</p>
+</div>
+<div class="cot">
+	<div class="ltnr">
+		<%template _searchbox%>
+		<!--按信息展示开始-->
+		<ul class="ltnr5" id="put">
+		<%loop (Companys) zshycompanyinfo companylist%>
+		<%set (string) {zshycompanystatus}="未审核"%>
+		<%if {zshycompanyinfo.en_status}==1%>
+		<%set {zshycompanystatus}="审核中"%>
+		<%else if {zshycompanyinfo.en_status}==2%>
+		<%set {zshycompanystatus}="已审核"%>
+		<%/if%>
+			<li <%if {zshycompanyinfo__loop__id}%2==0%>class="bg"<%/if%>>
+				<p class="tit"><strong><a title="{zshycompanyinfo.en_name}" class="l_c00" href="show.html" target="_blank">{zshycompanyinfo.en_name}</a></strong> [{zshycompanystatus}]</p>
+				<p class="nr">
+					<span class="lt te"><%getsubstring(Utils.RemoveHtml({zshycompanyinfo.en_desc}),100,".")%>[<a class="l_c00" href="company-{zshycompanyinfo.en_id}.html">查看详情</a>] </span>
+					<span class="zi ziw1">
+						<em>注册日期</em>
+						<em><%datetostr({zshycompanyinfo.en_builddate},"yyyy-MM-dd")%></em>
+					</span>
+					<span class="zi ziw2">
+						<em>浏览量</em>
+						<em class="f_c00">{zshycompanyinfo.en_accesses}</em>
+					</span>
+					<span class="zi ziw1">
+						<em>发布时间</em>
+						<em class="f_999"><%datetostr({zshycompanyinfo.en_createdate},"yyyy-MM-dd")%></em>
+					</span>
+					<span class="zi ziw2">
+						<em>评论数</em>
+						<em class="f_c00">{zshycompanyinfo.en_sell}</em>
+					</span>
+				</p>
+				<p class="nr2">
+					<span class="lt">
+						<em class="lt1"><a title="" class="l_c00" href="#">查看该公司资质证书</a></em>
+						<em class="lt2">[{zshycompanyinfo.provinceName}{zshycompanyinfo.cityName}{zshycompanyinfo.districtName}]</em>
+					</span>
+					<span class="lt3"><a title="查看联系方式" class="l_c00" href="tipmsg.aspx?msgenid={zshycompanyinfo.en_id}" rel="tipmsg.aspx?msgenid={zshycompanyinfo.en_id}">查看联系方式</a></span>
+				</p>
+				<p class="nr2">
+					<span class="lt1"><b>经营模式：</b><a href="{pagelink}-{catalogid}-{provinceid}-{cityid}-{areaid}-{zshycompanyinfo.en_type}-{regyear}-{ordertype}-{keyword}.html"><%set (string) {zshycompanyinfotype}=EnumCatch.GetCompanyType({zshycompanyinfo.en_type})%>{zshycompanyinfotype}</a></span>
+					<span class="lt1 mar_lt"><b>主营：</b><%getsubstring({zshycompanyinfo.en_main}.Trim(','),85,"...")%></span>
+				</p>
+			</li>
+		<%/loop%>
+		</ul>
+		<!--按信息展示结束-->
+		<p class="page mar_top">
+		{pagenumbers}
+		</p>
+	</div>
+	<%template _listright%>
+</div>
+<%template _comcopyright%>
+<%template _comfooter%>

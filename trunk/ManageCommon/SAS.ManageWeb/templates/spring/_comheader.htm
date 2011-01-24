@@ -3,7 +3,7 @@
 <div class="top">
 	<div class="cot">
 		<ul class="toplt">
-			<li><a title="设为首页" href="{rooturl}" onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('{rooturl}');return(false);"><img alt="设为首页" src="{rooturl}templates/{templatepath}/images/home.gif" />设为首页111</a></li>
+			<li><a title="设为首页" href="{rooturl}" onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('{rooturl}');return(false);"><img alt="设为首页" src="{rooturl}templates/{templatepath}/images/home.gif" />设为首页</a></li>
 			<li><a title="收藏本站" href="javascript:window.external.AddFavorite('{rooturl}','浙商黄页-网络名片，免费网络展示平台')"><img alt="收藏本站" src="{rooturl}templates/{templatepath}/images/favorites.gif" />收藏本站</a></li>
 			<li><a title="订阅本站" href="{rooturl}rss.html"><img alt="订阅本站" src="{rooturl}images/rss.png" />订阅本站</a></li>
 		</ul>
@@ -28,7 +28,7 @@
 			<li class="navline"></li>
 			<li class="<%if {pagename}=="zspage.aspx"%>navli2<%else%>navli1<%/if%>"><a title="浙商黄页" href="zspage.html">浙商黄页</a></li>
 			<li class="navline"></li>
-			<li class="navli1"><a title="浙商名片" href="zscard.html">浙商名片</a></li>
+			<li class="<%if {pagename}=="zswall.aspx"%>navli2<%else%>navli1<%/if%>"><a title="浙商名片" href="zswall.html">浙商名片</a></li>
 		</ul>
 		<ul class="nav2">
 			<li class="nav2li"><a target="_blank" title="淘之购" href="{taogouurl}">淘之购</a></li>

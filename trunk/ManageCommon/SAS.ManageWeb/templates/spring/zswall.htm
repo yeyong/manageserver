@@ -5,92 +5,19 @@
 			<a id="pd_loading" href="#" class="pd_loading"></a>
 		</p>
 		<p id="pd_options_bar" class="pd_options_bar">
-			<a title="更多名片信息" href="list.html" class="more"><img alt="更多名片信息" src="images/card/an-4.gif" /></a>
-			<a title="重新排列" href="#" class="shuffle"><img alt="重新排列" src="images/card/an-3.gif" /></a>
-			<a title="随机排列" href="#" class="backdesk" style="display:none;"><img alt="随机排列" src="images/card/an-2.gif" /></a>
-			<a title="顺序查看" href="#" class="viewall"><img alt="顺序查看" src="images/card/an-1.gif" /></a>
+			<a title="更多名片信息" href="list.html" class="more"><img alt="更多名片信息" src="{rooturl}templates/{templatepath}/images/card/an-4.gif" /></a>
+			<a title="重新排列" href="#" class="shuffle"><img alt="重新排列" src="{rooturl}templates/{templatepath}/images/card/an-3.gif" /></a>
+			<a title="随机排列" href="#" class="backdesk" style="display:none;"><img alt="随机排列" src="{rooturl}templates/{templatepath}/images/card/an-2.gif" /></a>
+			<a title="顺序查看" href="#" class="viewall"><img alt="顺序查看" src="{rooturl}templates/{templatepath}/images/card/an-1.gif" /></a>
 		</p>
 		<ul id="pd_container" class="pd_container">
+		<%loop (Companys) companyinfo wallcompany%>
 			<li class="pd_photo">
-				<p class="pd_hold"><img src="images/ad/330x205.gif" alt=""/></p>
+				<p class="pd_hold"><img src="showcardimg_{companyinfo.en_id}.html"/></p>
 				<span class="delete"></span>
+				<span class="more"><a title="{companyinfo.en_name}" href="company-{companyinfo.en_id}.html" class="l_c00">详情</a></span>
 			</li>
-			<li class="pd_photo">
-				<p class="pd_hold"><img src="images/ad/330x205.gif" alt=""/></p>
-				<span class="delete"></span>
-			</li>
-			<li class="pd_photo">
-				<p class="pd_hold"><img src="images/ad/330x205.gif" alt=""/></p>
-				<span class="delete"></span>
-			</li>
-			<li class="pd_photo">
-				<p class="pd_hold"><img src="images/ad/330x205.gif" alt=""/></p>
-				<span class="delete"></span>
-			</li>
-			<li class="pd_photo">
-				<p class="pd_hold"><img src="images/ad/330x205.gif" alt=""/></p>
-				<span class="delete"></span>
-			</li>
-			<li class="pd_photo">
-				<p class="pd_hold"><img src="images/ad/330x205.gif" alt=""/></p>
-				<span class="delete"></span>
-			</li>
-			<li class="pd_photo">
-				<p class="pd_hold"><img src="images/ad/330x205.gif" alt=""/></p>
-				<span class="delete"></span>
-			</li>
-			<li class="pd_photo">
-				<p class="pd_hold"><img src="images/ad/330x205.gif" alt=""/></p>
-				<span class="delete"></span>
-			</li>
-			<li class="pd_photo">
-				<p class="pd_hold"><img src="images/ad/330x205.gif" alt=""/></p>
-				<span class="delete"></span>
-			</li>
-			<li class="pd_photo">
-				<p class="pd_hold"><img src="images/ad/330x205.gif" alt=""/></p>
-				<span class="delete"></span>
-			</li>
-			<li class="pd_photo">
-				<p class="pd_hold"><img src="images/ad/330x205.gif" alt=""/></p>
-				<span class="delete"></span>
-			</li>
-			<li class="pd_photo">
-				<p class="pd_hold"><img src="images/ad/330x205.gif" alt=""/></p>
-				<span class="delete"></span>
-			</li>
-			<li class="pd_photo">
-				<p class="pd_hold"><img src="images/ad/330x205.gif" alt=""/></p>
-				<span class="delete"></span>
-			</li>
-			<li class="pd_photo">
-				<p class="pd_hold"><img src="images/ad/330x205.gif" alt=""/></p>
-				<span class="delete"></span>
-			</li>
-			<li class="pd_photo">
-				<p class="pd_hold"><img src="images/ad/330x205.gif" alt=""/></p>
-				<span class="delete"></span>
-			</li>
-			<li class="pd_photo">
-				<p class="pd_hold"><img src="images/ad/330x205.gif" alt=""/></p>
-				<span class="delete"></span>
-			</li>
-			<li class="pd_photo">
-				<p class="pd_hold"><img src="images/ad/330x205.gif" alt=""/></p>
-				<span class="delete"></span>
-			</li>
-			<li class="pd_photo">
-				<p class="pd_hold"><img src="images/ad/330x205.gif" alt=""/></p>
-				<span class="delete"></span>
-			</li>
-			<li class="pd_photo">
-				<p class="pd_hold"><img src="images/ad/330x205.gif" alt=""/></p>
-				<span class="delete"></span>
-			</li>
-			<li class="pd_photo">
-				<p class="pd_hold"><img src="images/ad/330x205.gif" alt=""/></p>
-				<span class="delete"></span>
-			</li>
+		<%/loop%>
 		</ul>
 	</div>
 </div>
