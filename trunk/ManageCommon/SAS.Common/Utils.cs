@@ -1430,7 +1430,12 @@ namespace SAS.Common
         /// <returns>页码html</returns>
         public static string GetSASPageNumbers(int curPage, int countPage, string url, int extendPage, string pagetag)
         {
-            return GetSASPageNumbers(curPage, countPage, url, extendPage, pagetag, null);
+            return GetSASPageNumbers(curPage, countPage, url, extendPage, pagetag, null, 0);
+        }
+
+        public static string GetSASPageNumbers(int curPage, int countPage, string url, int extendPage, string pagetag, int tempid)
+        {
+            return GetSASPageNumbers(curPage, countPage, url, extendPage, pagetag, null, tempid);
         }
 
         /// <summary>
@@ -1443,7 +1448,7 @@ namespace SAS.Common
         /// <param name="pagetag">页码标记</param>
         /// <param name="anchor">锚点</param>
         /// <returns>页码html</returns>
-        public static string GetSASPageNumbers(int curPage, int countPage, string url, int extendPage, string pagetag, string anchor)
+        public static string GetSASPageNumbers(int curPage, int countPage, string url, int extendPage, string pagetag, string anchor, int tempid)
         {
             if (pagetag == "")
                 pagetag = "page";
@@ -1456,7 +1461,9 @@ namespace SAS.Common
                 url = url + "?";
 
             string t1 = string.Format("<span class=\"page1\"><a title=\"首  页\" href=\"" + url + pagetag + "={0}\" class=\"l_666\">首  页</a></span>", startPage);
+            if (tempid == 2) t1 = string.Format("<a title=\"首  页\" href=\"" + url + pagetag + "={0}\">首  页</a>", startPage);
             string t2 = string.Format("<span class=\"page1\"><a title=\"末  页\" href=\"" + url + pagetag + "={0}\" class=\"l_666\">末  页</a></span>", countPage);
+            if (tempid == 2) t2 = string.Format("<a title=\"末  页\" href=\"" + url + pagetag + "={0}\">末  页</a>", countPage);
             if (anchor != null)
             {
                 t1 += anchor;
@@ -1496,24 +1503,33 @@ namespace SAS.Common
 
             StringBuilder s = new StringBuilder("");
             s.Append(t1);
-            if (curPage > 1) s.AppendFormat("<span class=\"page1\"><a title=\"上一页\" href=\"" + url + pagetag + "={0}\" class=\"l_666\">上一页</a></span>", curPage - 1);
+            if (curPage > 1)
+            {
+                if (tempid == 2) s.AppendFormat("<a title=\"上一页\" href=\"" + url + pagetag + "={0}\">上一页</a>", curPage - 1);
+                else s.AppendFormat("<span class=\"page1\"><a title=\"上一页\" href=\"" + url + pagetag + "={0}\" class=\"l_666\">上一页</a></span>", curPage - 1);
+            }
             for (int i = startPage; i <= endPage; i++)
             {
                 if (i == curPage)
                 {
-                    s.Append("<span class=\"page2\">");
+                    if (tempid == 2) s.Append("<span class=\"page1\">");
+                    else s.Append("<span class=\"page2\">");
                     s.Append(i);
                     s.Append("</span>");
                 }
                 else
                 {
-                    s.Append("<span class=\"page1\">");
+                    if (tempid == 2) { }else s.Append("<span class=\"page1\">");
                     s.AppendFormat("<a title=\"{0}\" href=\"" + url + pagetag + "={0}\" class=\"l_666\">{0}</a>", i);
-                    s.Append("</span>");
+                    if (tempid == 2) { } else s.Append("</span>");
                 }
             }
 
-            if (curPage < countPage) s.AppendFormat("<span class=\"page1\"><a title=\"下一页\" href=\"" + url + pagetag + "={0}\" class=\"l_666\">下一页</a></span>", curPage + 1);
+            if (curPage < countPage)
+            {
+                if (tempid == 2) s.AppendFormat("<a title=\"下一页\" href=\"" + url + pagetag + "={0}\">下一页</a>", curPage + 1);
+                else s.AppendFormat("<span class=\"page1\"><a title=\"下一页\" href=\"" + url + pagetag + "={0}\" class=\"l_666\">下一页</a></span>", curPage + 1);
+            }
             s.Append(t2);
 
             return s.ToString();

@@ -5,6 +5,7 @@ using System.Data;
 
 using SAS.Logic;
 using SAS.Common;
+using SAS.Common.Generic;
 using SAS.Config;
 using SAS.Entity;
 
@@ -23,15 +24,23 @@ namespace SAS.ManageWeb
         /// <summary>
         /// 点击企业排行
         /// </summary>
-        protected SAS.Common.Generic.List<Companys> companyaccesseslist = Companies.GetCompanyListViews();
+        protected List<Companys> companyaccesseslist = Companies.GetCompanyListViews();
+        /// <summary>
+        /// 企业信誉排行
+        /// </summary>
+        protected List<Companys> creditcompanylist = Companies.GetCompanyListCredits();
+        /// <summary>
+        /// 企业评论排行
+        /// </summary>
+        protected List<Companys> commentcompanylist = Companies.GetCompanyListComments();
         /// <summary>
         /// 最新企业排行
         /// </summary>
-        protected SAS.Common.Generic.List<Companys> companynewlist = Companies.GetNewCompanyList();
+        protected List<Companys> companynewlist = Companies.GetUpdateCompanyList();
         /// <summary>
         /// 企业信息列表
         /// </summary>
-        protected SAS.Common.Generic.List<Companys> companylist = new SAS.Common.Generic.List<Companys>();
+        protected List<Companys> companylist = new List<Companys>();
         /// <summary>
         /// 类别ID
         /// </summary>
@@ -112,6 +121,15 @@ namespace SAS.ManageWeb
         /// 页面导航
         /// </summary>
         protected string pagenav = " &gt; 浙商名片";
+        protected string pagelink = "zscard";
+        /// <summary>
+        /// 广告位1
+        /// </summary>
+        protected string[] listad1 = Advertisements.GetZSRandomAd(1, AdType.ListPicAd).Split('|');
+        /// <summary>
+        /// 广告位2
+        /// </summary>
+        protected string[] listad2 = Advertisements.GetZSRandomAd(2, AdType.ListPicAd).Split('|');
         #endregion
 
         protected override void ShowPage()
@@ -126,16 +144,24 @@ namespace SAS.ManageWeb
             script += "\r\n<script src=\"" + forumpath + "javascript/jquery.capSlide.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/template_catalogadmin.js\" type=\"text/javascript\"></script>";
 
-            string loadscript = "\r\n " + "jQuery(document).ready(function() {"
-                    + "\r\n " + "jQuery(\"#thelocation\").LoadLocation({provinceid:" + provinceid + ",cityid:" + cityid + ",areaid:" + areaid + ",urlparms:'zscard-" + catalogid + "-{1}-{2}-{3}-" + entypeid + "-" + regyear + "-" + ordertype + "-" + keyword + ".html'});"
-                    + "\r\n " + "jQuery(\"#views\").ExtendClick(\"views1\",\"viewsnr\",\"i\"," + ordertype + ");"
-                    + "\r\n " + "jQuery('#zscard').find(\"dd\").capslide({ caption_color: 'black', caption_bgcolor: 'white', overlay_bgcolor: '#eee9e8', border: '0px solid #e7dad8', showcaption: true });"
-                    + "\r\n " + "jQuery('#zscard').find(\"input[type=text],textarea\").each(function(){"
-                    + "\r\n " + "  jQuery(this).blur(function(){jQuery(this).attr(\"class\",\"input2_soout\");});"
-                    + "\r\n " + "  jQuery(this).focus(function(){jQuery(this).attr(\"class\",\"input2_soon\");});"
-                    + "\r\n " + "});"
-                    + "\r\n " + "jQuery(this).gettop({objsrc:\"templates/" + templatepath + "/images/top.gif\",objhref:\"javascript:scrollTo(0,0)\"});"
-                    + "\r\n " + "});\r\n";
+            string loadscript = "\r\n " + "jQuery(document).ready(function() {";
+            loadscript += "\r\n " + "jQuery(\"#thelocation\").LoadLocation({provinceid:" + provinceid + ",cityid:" + cityid + ",areaid:" + areaid + ",urlparms:'zscard-" + catalogid + "-{1}-{2}-{3}-" + entypeid + "-" + regyear + "-" + ordertype + "-" + keyword + ".html'});";
+            loadscript += "\r\n " + "jQuery(\"#views\").ExtendClick(\"views1\",\"viewsnr\",\"" + (templateid == 1 ? "i" : "em") + "\"," + ordertype + ");";
+            if (templateid == 1)
+            {
+                loadscript += "\r\n " + "jQuery('#zscard').find(\"dd\").capslide({ caption_color: 'black', caption_bgcolor: 'white', overlay_bgcolor: '#eee9e8', border: '0px solid #e7dad8', showcaption: true });";
+                loadscript += "\r\n " + "jQuery('#zscard').find(\"input[type=text],textarea\").each(function(){";
+                loadscript += "\r\n " + "  jQuery(this).blur(function(){jQuery(this).attr(\"class\",\"input2_soout\");});";
+                loadscript += "\r\n " + "  jQuery(this).focus(function(){jQuery(this).attr(\"class\",\"input2_soon\");});";
+                loadscript += "\r\n " + "});";
+            }
+            else
+            {
+                loadscript += "\r\n" + "jQuery(\"#ozs\").Exchange({ MIDS: \"lttit\", CIDS: \"ozsnr\", timer: 5000, count: 5, mousetype: 1 });";
+                loadscript += "\r\n " + "jQuery('#zscard').find(\"li\").capslide({ caption_color: 'black', caption_bgcolor: 'white', overlay_bgcolor: '#eee9e8', border: '0px solid #e7dad8', showcaption: true });";
+            }
+            loadscript += "\r\n " + "jQuery(this).gettop({objsrc:\"templates/" + templatepath + "/images/top.gif\",objhref:\"javascript:scrollTo(0,0)\"});";
+            loadscript += "\r\n " + "});\r\n";
             AddfootScript(loadscript);
             SetConditionAndPage();
 
@@ -182,7 +208,7 @@ namespace SAS.ManageWeb
             pageid = pageid < 1 ? 1 : pageid;
             pageid = pageid > pagecount ? pagecount : pageid;
 
-            pagenumbers = Utils.GetCompanyPageNumbers(pageid, pagecount, string.Format("zscard-{0}-{1}-{2}-{3}-{4}-{5}-{6}-{7}.html", catalogid, provinceid, cityid, areaid, entypeid, regyear, ordertype, keyword), 10);
+            pagenumbers = Utils.GetCompanyPageNumbers(pageid, pagecount, string.Format("zscard-{0}-{1}-{2}-{3}-{4}-{5}-{6}-{7}.html", catalogid, provinceid, cityid, areaid, entypeid, regyear, ordertype, keyword), 10, templateid);
 
             prevpage = pageid - 1 > 0 ? pageid - 1 : pageid;
             nextpage = pageid + 1 > pagecount ? pagecount : pageid + 1;

@@ -126,6 +126,10 @@ namespace SAS.ManageWeb
         /// 广告位1
         /// </summary>
         protected string[] listad1 = Advertisements.GetZSRandomAd(1, AdType.ListPicAd).Split('|');
+        /// <summary>
+        /// 广告位2
+        /// </summary>
+        protected string[] listad2 = Advertisements.GetZSRandomAd(2, AdType.ListPicAd).Split('|');
         #endregion
 
         protected override void ShowPage()
@@ -143,7 +147,7 @@ namespace SAS.ManageWeb
 
             string loadscript = "\r\n " + "jQuery(document).ready(function() {";
             loadscript += "\r\n " + "jQuery(\"#thelocation\").LoadLocation({provinceid:" + provinceid + ",cityid:" + cityid + ",areaid:" + areaid + ",urlparms:'zshy-" + catalogid + "-{1}-{2}-{3}-" + entypeid + "-" + regyear + "-" + ordertype + "-" + keyword + ".html'});";
-            loadscript += "\r\n " + "jQuery(\"#views\").ExtendClick(\"views1\",\"viewsnr\",\"em\"," + ordertype + ");";
+            loadscript += "\r\n " + "jQuery(\"#views\").ExtendClick(\"views1\",\"viewsnr\",\"" + (templateid == 1 ? "i" : "em") + "\"," + ordertype + ");";
             if (templateid == 1)
             {
                 loadscript += "\r\n " + "jQuery('#put').find(\".zshynr2rt2\").find(\"a\").cluetip({ activation: 'click', sticky: true, width: 350, positionBy: 'bottomTop', closePosition: 'title', closeText: '<img src=\"" + forumpath + "images/cross.png\" alt=\"close\" />',cursor: 'pointer', dropShadow: false});";

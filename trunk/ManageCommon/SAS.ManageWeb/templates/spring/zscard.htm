@@ -1,0 +1,39 @@
+﻿<%template _comheader%>
+<div class="cot">
+	<p class="bd_site mar_top">
+		您当前的位置：<a href="/">商之源</a>{pagenav}
+		<i class="lt"></i><i class="rt"></i>
+	</p>
+</div>
+<div class="cot">
+	<div class="ltnr">
+		<%template _searchbox%>
+		<!--按名片展示开始-->		
+		<ul class="ltnr4" id="zscard">
+		<%set (int){cardnum}=1%>
+		<%loop (Companys) zshycompanyinfo companylist%>
+		<%if {cardnum}>4%><%set {cardnum}=1%><%/if%>
+			<li>
+				<img src="{rooturl}templates/{templatepath}/images/hycard/hycard{cardnum}.gif" />
+				<p class="overlay" style="display:none;"></p>
+				<p class="ic_caption">
+					<b class="ic_category"><a title="{zshycompanyinfo.en_name}" class="l_c00" href="company-{zshycompanyinfo.en_id}.html">{zshycompanyinfo.en_name}</a></b>
+					<span class="ic_zi">联系人：{zshycompanyinfo.en_contact}</span>
+					<span class="ic_zi">联系电话：{zshycompanyinfo.en_phone}</span>
+					<span class="ic_zi">详细地址：{zshycompanyinfo.en_address}</span>
+					<span class="ic_text">网址：{zshycompanyinfo.en_web}</span>
+					<span class="ic_text">经营模式：<%set (string){zscardentype}=EnumCatch.GetCompanyType({zshycompanyinfo.en_type})%>{zscardentype}</span>
+				</p>
+			</li>
+		<%set {cardnum}={cardnum}+1%>
+		<%/loop%>
+		</ul>
+		<!--按名片展结束始-->
+		<p class="page mar_top">
+		{pagenumbers}
+		</p>
+	</div>
+	<%template _listright%>
+</div>
+<%template _comcopyright%>
+<%template _comfooter%>

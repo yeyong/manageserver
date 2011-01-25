@@ -1,0 +1,146 @@
+﻿<%template _comheader%>
+<%if {page_err}==0%>
+<div class="cot">
+	<p class="bd_site mar_top">
+		您当前的位置：您当前的位置：<a href="{forumurl}index.html" class="l_666" title="商之源">商之源</a> &gt; <a href="{forumurl}zshy.html">浙商黄页</a> &gt; <font class="f_c00">{companyshowinfo.provinceName} {companyshowinfo.cityName} {companyshowinfo.en_name}</font>
+		<i class="lt"></i><i class="rt"></i>
+	</p>
+</div>
+<div class="cot">
+	<!--企业信息开始-->
+	<div class="sw1 mar_top>
+		<h1>{companyshowinfo.en_name}</h1>
+		<div class="swlt">
+		    <div class="sw1lt">
+		        <p class="zi"><span class="lt">手&nbsp;&nbsp;&nbsp;&nbsp;机：</span><span class="rt">{companyshowinfo.en_mobile}</span></p>
+			    <p class="zi"><span class="lt">传&nbsp;&nbsp;&nbsp;&nbsp;真：</span><span class="rt">{companyshowinfo.en_fax}</span></p>
+			    <p class="zi"><span class="lt">邮&nbsp;&nbsp;&nbsp;&nbsp;编：</span><span class="rt">{companyshowinfo.en_post}</span></p>
+			    <p class="zi"><span class="lt">电子邮箱：</span><span class="rt">{companyshowinfo.en_mail}</span></p>
+			    <p class="zi"><span class="lt">网&nbsp;&nbsp;&nbsp;&nbsp;址：</span><span class="rt">{companyshowinfo.en_web}</span></p>
+			    <p class="zi"><span class="lt">主营商品：</span><span class="rt"><%set {companyshowinfo.En_main}=Utils.ReplaceString({companyshowinfo.en_main},",,",",",false).Trim(',')%>{companyshowinfo.en_main}</span></p>
+			    <p class="zi2" id="put"><a title="查看工商注册信息" href="tipmsg.aspx?msgenid={companyshowinfo.en_id}&msgtype=1" rel="tipmsg.aspx?msgenid={companyshowinfo.en_id}&msgtype=1" class="l_c00">工商注册信息查看</a></p>
+			    <p class="zi3">网络评分：<em id="commentscored">4.5</em> 分</p>
+			</div>		
+		    
+		    <div class="swlt2 mar_top">
+			    <p class="swlt2lt">
+				    评论：<font class="f_c00">{companyshowinfo.en_sell}</font> | 阅读次数：{companyviews}
+				    发布时间：{companyshowinfo.en_createdate} | 更新时间：{companyshowinfo.en_update}
+			    </p>
+			    <p class="swlt2rt"><a title="点击我要评论" href="#plnr"></a></p>
+		    </div>
+		</div>
+		<div class="swrt">
+		    <p class="sw1rt"><img src="showcardimg_{companyshowinfo.en_id}.html" /></p>
+		    <p class="sw2rt mar_top"><a title="点击进入推广" href="promotion-{companyshowinfo.en_id}.html"></a></p>
+		</div>
+	</div>
+	<!--企业信息结束-->
+	<!--企业简介开始-->
+	<div class="sw1 swbt mar_top" id="swinf">
+		<b>企业简介</b>
+		<div class="sw1nr2" id="swinfcot">{companyshowinfo.en_desc}</div>
+		<p class="an"><em class="tu2"></em><span>点击查看全部介绍</span></p>
+	</div>
+	<!--企业简介结束-->
+	<!--企业证书开始-->
+	<div class="ozs ozw3 mar_top">
+		<p class="ozst olbg2 zsw4">
+			<em></em><strong class="tit2">企业证书</strong>
+		</p>
+		<ul class="swzs">
+		    <li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/ad/210x110.gif" /></a></li>
+			<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/ad/210x110.gif" /></a></li>
+			<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/ad/210x110.gif" /></a></li>
+			<li><a title="" href="#"><img alt="" src="templates/{templatepath}/images/ad/210x110.gif" /></a></li>
+		</ul>
+	</div>
+	<!--企业证书结束-->
+	<!--最新评论开始-->
+	<form class="ozs ozw3 mar_top" id="form1" name="form1" onsubmit="return validate(this);" method="post">
+		<p class="ozst olbg2 zsw4">
+			<em></em>
+			<strong class="tit2">最新评论</strong>
+		</p>
+		<div class="swplnr">
+			<ul class="swpl" id="commentlist">
+				<li>
+					<p>
+						<span class="lt">网络评分：<em>3</em> 分</span>
+						<span class="rt">小优 发表于 2010-05-12 12:12:12</span>
+					</p>
+					<p class="fswnr2zt">因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure</p>
+				</li>
+				<li>
+					<p>
+						<span class="lt">网络评分：<em>3</em> 分</span>
+						<span class="rt">小优 发表于 2010-05-12 12:12:12</span>
+					</p>
+					<p>因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure的文章。</p>
+				</li>
+				<li>
+					<p>
+						<span class="lt">网络评分：<em>3</em> 分</span>
+						<span class="rt">小优 发表于 2010-05-12 12:12:12</span>
+					</p>
+					<p>因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure的文章因为在BAIDU搜索一些关于Axure的文章。</p>
+				</li>
+			</ul>
+			<p class="page mar_top" id="commentlist_page">
+				<a title="上一页" href="#">上一页</a>
+				<a title="1" href="#">1</a>
+				<span class="page1">2</span>
+				<a title="3" href="#">3</a>
+				<a title="4" href="#">4</a>
+				<a title="5" href="#">5</a>
+				<a title="6" href="#">6</a>
+				<a title="7" href="#">7</a>
+				<a title="5" href="#">8</a>
+				<a title="6" href="#">9</a>
+				<a title="7" href="#">10</a>
+				<a title="下一页" href="#">下一页</a>
+				共100页　到第
+				<input type="text" name="textfield" class="input2_soout" style="width:25px;" />
+				页
+				<input type="button" name="button1" class="agree1" value="确 定" />
+			</p>
+		</div>
+		<b class="swtit mar_top">发表评论</b>
+		<div class="swplnr">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="fsw3">
+				<tr>
+					<td>网络评分：</td>
+					<td>
+					<input name="star1" type="radio" value="1" class="starshow"/>
+					<input name="star1" type="radio" value="2" class="starshow"/>
+				    <input name="star1" type="radio" value="3" class="starshow"/>
+				    <input name="star1" type="radio" value="4" class="starshow"/>
+				    <input name="star1" type="radio" value="5" class="starshow"/>
+					<span class="fsw3zi">(<em>0</em>分)</span>
+					</td>
+				</tr>
+				<tr>
+					<td>用户昵称：</td>
+					<td><input type="text" name="nickname" class="input3" style="width:150px;" /></td>
+				</tr>
+				<tr>
+					<td>评论内容：</td>
+					<td><textarea class="input2" style="width:700px; height:120px;" name="commentmsg" cols="" rows=""></textarea></td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td><input type="submit" name="Submit" class="plan" value="" /><input type="hidden" name="scores" id="scores" value="0"/></td>
+				</tr>
+			</table>
+		</div>
+		
+	</form>
+	<!--最新评论结束-->
+</div>
+<%else%>
+<div class="cot">
+	<%template _commsgbox%>
+</div>
+<%/if%>
+<%template _comcopyright%>
+<%template _comfooter%>
