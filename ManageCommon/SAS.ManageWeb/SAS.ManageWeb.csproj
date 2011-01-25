@@ -1221,6 +1221,9 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="images\common\clipboard.swf" />
+    <Content Include="images\kuang-1.png" />
+    <Content Include="images\kuang-2.png" />
+    <Content Include="images\kuang-bg.png" />
     <Content Include="images\logo.gif" />
     <Content Include="images\navli-bg.png" />
     <Content Include="images\rss.png" />
@@ -1919,6 +1922,8 @@
     <Content Include="templates\spring\css\main.css" />
     <Content Include="templates\spring\editor.css" />
     <Content Include="templates\spring\float.css" />
+    <Content Include="templates\spring\images\agree-an.gif" />
+    <Content Include="templates\spring\images\an.gif" />
     <Content Include="templates\spring\images\banner.gif" />
     <Content Include="templates\spring\images\card\an-1.gif" />
     <Content Include="templates\spring\images\card\an-2.gif" />
@@ -1931,6 +1936,8 @@
     <Content Include="templates\spring\images\close.gif" />
     <Content Include="templates\spring\images\cx-an.gif" />
     <Content Include="templates\spring\images\cx-an2.gif" />
+    <Content Include="templates\spring\images\cx-an3.gif" />
+    <Content Include="templates\spring\images\defulat\bg.gif" />
     <Content Include="templates\spring\images\defulat\nav-bg.gif" />
     <Content Include="templates\spring\images\defulat\nr-bg.gif" />
     <Content Include="templates\spring\images\defulat\so-an.gif" />
@@ -1938,13 +1945,21 @@
     <Content Include="templates\spring\images\defulat\so-lt.gif" />
     <Content Include="templates\spring\images\defulat\tit-bg1.gif" />
     <Content Include="templates\spring\images\defulat\tit-bg2.gif" />
+    <Content Include="templates\spring\images\delete.gif" />
     <Content Include="templates\spring\images\favorites.gif" />
     <Content Include="templates\spring\images\fb-s.gif" />
     <Content Include="templates\spring\images\fb-x.gif" />
     <Content Include="templates\spring\images\home.gif" />
+    <Content Include="templates\spring\images\hycard\hycard1.gif" />
+    <Content Include="templates\spring\images\hycard\hycard2.gif" />
+    <Content Include="templates\spring\images\hycard\hycard3.gif" />
+    <Content Include="templates\spring\images\hycard\hycard4.gif" />
     <Content Include="templates\spring\images\icon.gif" />
     <Content Include="templates\spring\images\inx-arrow-lt.gif" />
     <Content Include="templates\spring\images\inx-arrow-rt.gif" />
+    <Content Include="templates\spring\images\kuang-1.png" />
+    <Content Include="templates\spring\images\kuang-2.png" />
+    <Content Include="templates\spring\images\kuang-bg.png" />
     <Content Include="templates\spring\images\list-arrow-bot.gif" />
     <Content Include="templates\spring\images\list-arrow-rt.gif" />
     <Content Include="templates\spring\images\list-arrow-rt2.gif" />
@@ -1955,12 +1970,22 @@
     <Content Include="templates\spring\images\nr-bg.gif" />
     <Content Include="templates\spring\images\nr-bg2.gif" />
     <Content Include="templates\spring\images\nr-bg3.gif" />
+    <Content Include="templates\spring\images\pl-an.gif" />
+    <Content Include="templates\spring\images\pl-an2.gif" />
     <Content Include="templates\spring\images\pl-s.gif" />
     <Content Include="templates\spring\images\pl-x.gif" />
+    <Content Include="templates\spring\images\quan-1.gif" />
+    <Content Include="templates\spring\images\quan-2.gif" />
     <Content Include="templates\spring\images\rss.gif" />
     <Content Include="templates\spring\images\sj-tit.gif" />
     <Content Include="templates\spring\images\so-an.gif" />
     <Content Include="templates\spring\images\soli-bg.gif" />
+    <Content Include="templates\spring\images\star.gif" />
+    <Content Include="templates\spring\images\sw-arrow-bt.gif" />
+    <Content Include="templates\spring\images\sw-arrow-down.gif" />
+    <Content Include="templates\spring\images\sw-arrow-up.gif" />
+    <Content Include="templates\spring\images\tg-an.gif" />
+    <Content Include="templates\spring\images\tg-an2.gif" />
     <Content Include="templates\spring\images\tit-bg.gif" />
     <Content Include="templates\spring\images\tj-an.gif" />
     <Content Include="templates\spring\images\tj-an2.gif" />
@@ -1970,8 +1995,11 @@
     <Content Include="templates\spring\images\zs-arrow-rt.gif" />
     <Content Include="templates\spring\images\zs-arrow-rt1.gif" />
     <Content Include="templates\spring\index.htm" />
+    <Content Include="templates\spring\css\interaction.css" />
+    <Content Include="templates\spring\inquiry.htm" />
     <Content Include="templates\spring\sas.css" />
     <Content Include="templates\spring\zshy.htm" />
+    <Content Include="templates\spring\zsshow.htm" />
     <Content Include="templates\spring\zswall.htm" />
     <Content Include="templates\spring\zspage.htm" />
     <Content Include="templates\spring\_comcopyright.htm" />
@@ -1981,6 +2009,7 @@
     <Content Include="templates\spring\_comsearch.htm" />
     <Content Include="templates\spring\_searchbox.htm" />
     <Content Include="templates\spring\_listright.htm" />
+    <Content Include="templates\spring\zscard.htm" />
     <Content Include="tools\flashcomm.aspx" />
     <Content Include="config\taobao.config" />
     <Content Include="tools\zsmap.aspx" />
@@ -1993,7 +2022,7 @@
     <None Include="templates\default\images\fla\hycard.fla" />
     <None Include="templates\default\images\hycard\Thumbs.db" />
     <None Include="templates\default\images\icon\Thumbs.db" />
-    <None Include="templates\spring\images\defulat\Thumbs.db" />
+    <None Include="templates\spring\images\hycard\Thumbs.db" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -58,6 +58,14 @@ namespace SAS.ManageWeb
         /// </summary>
         protected List<Companys> creditcompanylist = Companies.GetCompanyListCredits();
         /// <summary>
+        /// 点击企业排行
+        /// </summary>
+        protected List<Companys> companyaccesseslist = Companies.GetCompanyListViews();
+        /// <summary>
+        /// 企业评论排行
+        /// </summary>
+        protected List<Companys> commentcompanylist = Companies.GetCompanyListComments();
+        /// <summary>
         /// 企业信息列表
         /// </summary>
         protected List<Companys> companylist = new List<Companys>();
@@ -70,6 +78,13 @@ namespace SAS.ManageWeb
         {
             pagetitle = "企业状态查询";
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
+            if (templateid == 2)
+            {
+                string loadscript = "\r\n " + "jQuery(document).ready(function() {";
+                loadscript += "\r\n" + "jQuery(\"#ozs\").Exchange({ MIDS: \"lttit\", CIDS: \"ozsnr\", timer: 5000, count: 5, mousetype: 1 });";
+                loadscript += "\r\n " + "});\r\n";
+                AddfootScript(loadscript);
+            }
             getParm = Utils.RemoveHtml(getParm.Trim());
             SetConditionAndPage();
             companylist = Companies.GetCompanyPageList(0, pageid, pagesize, 0, condition);
@@ -89,7 +104,7 @@ namespace SAS.ManageWeb
             pageid = pageid < 1 ? 1 : pageid;
             pageid = pageid > pagecount ? pagecount : pageid;
 
-            pagenumbers = Utils.GetSASPageNumbers(pageid, pagecount, "inquiry.aspx?inqyname=" + Utils.UrlEncode(getParm), 10);
+            pagenumbers = Utils.GetSASPageNumbers(pageid, pagecount, "inquiry.aspx?inqyname=" + Utils.UrlEncode(getParm), 10, "page", templateid);
 
             prevpage = pageid - 1 > 0 ? pageid - 1 : pageid;
             nextpage = pageid + 1 > pagecount ? pagecount : pageid + 1;

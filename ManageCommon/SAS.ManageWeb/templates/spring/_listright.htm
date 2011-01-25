@@ -6,7 +6,7 @@
     </p>
     <ul class="rtnr1 mar_top">
         <li class="rtnr1lt"><a title="提交企业信息" href="agreement.html"></a></li>
-        <li class="rtnr1rt"><a title="查询提交状态" href="inquiry.html"></a></li>
+        <li class="rtnr1rt"><a title="查询提交状态" href="inquiry.aspx"></a></li>
     </ul>
     <div class="ozs ozw1 mar_top" id="ozs">
         <strong class="olbg">企业排行</strong>
@@ -40,8 +40,10 @@
         </div>
     </div>
     <p class="rtnrad2 mar_top">
-        <a title="" href="#">
-            <img alt="" src="images/ad/466x182.jpg" /></a></p>
+     <%if {listad2}.Length>=8%>
+		<a title="{listad2[5]}" href="tools/ajax.aspx?t=advredirect&url=<%urlencode({listad2[4]})%>" target="_blank" rel="nofollow"><img alt="{listad2[5]}" src="{listad2[1]}" /></a>
+	<%/if%>
+    </p>
     <div class="ozs ozw1 mar_top">
         <strong class="olbg">最新发布企业信息</strong>
         <ul class="ortcot nrw1">

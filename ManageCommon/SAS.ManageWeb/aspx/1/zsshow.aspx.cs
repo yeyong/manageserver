@@ -109,40 +109,41 @@ namespace SAS.ManageWeb
             script += "\r\n<script src=\"" + forumpath + "javascript/template_showcompany.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/jquery.cluetip-min.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/jquery.ratingmin.js\" type=\"text/javascript\"></script>";
-            string loadscript = "\r\n " + "var page_qyid = " + showenid + ";"
-                    + "\r\n " + "var comment_page_recordcount = " + commentcount + ";"
-                    + "\r\n " + "var comment_page_pagesize = 10;"
-                    + "\r\n " + "var comment_page_currentpage = 1;"
-                    + "\r\n " + "jQuery(document).ready(function() {"
-                    + "\r\n " + "jQuery('#put').find(\"span\").find(\"a\").cluetip({ activation: 'click', sticky: true, width: 350, positionBy: 'bottomTop', closePosition: 'title', closeText: '<img src=\"" + forumpath + "images/cross.png\" alt=\"close\" />',cursor: 'pointer', dropShadow: false});"
-                    + "\r\n " + "jQuery('#form1').find(\"input[type=text],textarea\").each(function(){"
-                    + "\r\n " + "  jQuery(this).blur(function(){jQuery(this).attr(\"class\",\"input2_soout\");});"
-                    + "\r\n " + "  jQuery(this).focus(function(){jQuery(this).attr(\"class\",\"input2_soon\");});"
-                    + "\r\n " + "});"
-                    + "\r\n " + "jQuery('.starshow').rating({"
-                    + "\r\n " + "  callback: function(value, link){"
-                    + "\r\n " + "    if(typeof value == 'undefined'){jQuery('.fsw3').find('em').html(0);jQuery('input[name=scores]').val(0);}"
-                    + "\r\n " + "    else{jQuery('.fsw3').find('em').html(value);jQuery('input[name=scores]').val(value);}"
-                    + "\r\n " + "}});"
-                    + "\r\n " + "jQuery('#swinf').find(\".tswan\").click(function(){"
-                    + "\r\n " + "   var cssname = jQuery('#swinf').find(\"#swinfcot\").attr(\"class\");"
-                    + "\r\n " + "   var arrowicon = 'arrow-icon2.gif';"
-                    + "\r\n " + "   var showcss = 'tswnrxin';"
-                    + "\r\n " + "   var showzi = '点击隐藏部分介绍';"
-                    + "\r\n " + "   if (cssname == 'tswnrxin') {showcss = 'tswnr';arrowicon = 'arrow-icon1.gif';showzi = '点击查看全部介绍';}"
-                    + "\r\n " + "   jQuery(this).html(\"<em><img src='templates/" + templatepath + "/images/icon/\"+arrowicon+\"'/></em>\"+showzi);"
-                    + "\r\n " + "   jQuery('#swinf').find(\"#swinfcot\").removeClass().addClass(showcss);"
-                    + "\r\n " + "});"
-                    + "\r\n " + "jQuery(this).gettop({objsrc:\"templates/" + templatepath + "/images/top.gif\",objhref:\"javascript:scrollTo(0,0)\"});"
-                    + "\r\n " + "});\r\n"
-                    + "\r\n " + "ajaxgetcommentscored(page_qyid);"
-                    + "\r\n " + "ajaxgetcomment(page_qyid,comment_page_pagesize,comment_page_currentpage);"
-                    + "\r\n " + "function validate(form){"
-                    + "\r\n " + "   if(form.nickname.value==''){alert(\"请输入您的昵称！\");return false;}"
-                    + "\r\n " + "   if(form.commentmsg.value==''){alert(\"请输入您的评论！\");return false;}"
-                    + "\r\n " + "   if(form.commentmsg.value.length > 200){alert(\"评论在200字以内！\");return false;}"
-                    + "\r\n " + "   if(form.commentmsg.value.length < 10){alert(\"评论至少要10字以上！\");return false;}"
-                    + "\r\n " + "}";
+
+            string loadscript = "\r\n " + "var page_qyid = " + showenid + ";";
+            loadscript += "\r\n " + "var comment_page_recordcount = " + commentcount + ";";
+            loadscript += "\r\n " + "var comment_page_pagesize = 10;";
+            loadscript += "\r\n " + "var comment_page_currentpage = 1;";
+            loadscript += "\r\n " + "jQuery(document).ready(function() {";
+            loadscript += "\r\n " + "jQuery('#put').find(\"span\").find(\"a\").cluetip({ activation: 'click', sticky: true, width: 350, positionBy: 'bottomTop', closePosition: 'title', closeText: '<img src=\"" + forumpath + "images/cross.png\" alt=\"close\" />',cursor: 'pointer', dropShadow: false});";
+            loadscript += "\r\n " + "jQuery('#form1').find(\"input[type=text],textarea\").each(function(){";
+            loadscript += "\r\n " + "  jQuery(this).blur(function(){jQuery(this).attr(\"class\",\"input2_soout\");});";
+            loadscript += "\r\n " + "  jQuery(this).focus(function(){jQuery(this).attr(\"class\",\"input2_soon\");});";
+            loadscript += "\r\n " + "});";
+            loadscript += "\r\n " + "jQuery('.starshow').rating({";
+            loadscript += "\r\n " + "  callback: function(value, link){";
+            loadscript += "\r\n " + "    if(typeof value == 'undefined'){jQuery('.fsw3').find('em').html(0);jQuery('input[name=scores]').val(0);}";
+            loadscript += "\r\n " + "    else{jQuery('.fsw3').find('em').html(value);jQuery('input[name=scores]').val(value);}";
+            loadscript += "\r\n " + "}});";
+            loadscript += "\r\n " + "jQuery('#swinf').find(\".tswan\").click(function(){";
+            loadscript += "\r\n " + "   var cssname = jQuery('#swinf').find(\"#swinfcot\").attr(\"class\");";
+            loadscript += "\r\n " + "   var arrowicon = 'arrow-icon2.gif';";
+            loadscript += "\r\n " + "   var showcss = 'tswnrxin';";
+            loadscript += "\r\n " + "   var showzi = '点击隐藏部分介绍';";
+            loadscript += "\r\n " + "   if (cssname == 'tswnrxin') {showcss = 'tswnr';arrowicon = 'arrow-icon1.gif';showzi = '点击查看全部介绍';}";
+            loadscript += "\r\n " + "   jQuery(this).html(\"<em><img src='templates/" + templatepath + "/images/icon/\"+arrowicon+\"'/></em>\"+showzi);";
+            loadscript += "\r\n " + "   jQuery('#swinf').find(\"#swinfcot\").removeClass().addClass(showcss);";
+            loadscript += "\r\n " + "});";
+            loadscript += "\r\n " + "jQuery(this).gettop({objsrc:\"templates/" + templatepath + "/images/top.gif\",objhref:\"javascript:scrollTo(0,0)\"});";
+            loadscript += "\r\n " + "});\r\n";
+            loadscript += "\r\n " + "ajaxgetcommentscored(page_qyid);";
+            loadscript += "\r\n " + "ajaxgetcomment(page_qyid,comment_page_pagesize,comment_page_currentpage);";
+            loadscript += "\r\n " + "function validate(form){";
+            loadscript += "\r\n " + "   if(form.nickname.value==''){alert(\"请输入您的昵称！\");return false;}";
+            loadscript += "\r\n " + "   if(form.commentmsg.value==''){alert(\"请输入您的评论！\");return false;}";
+            loadscript += "\r\n " + "   if(form.commentmsg.value.length > 200){alert(\"评论在200字以内！\");return false;}";
+            loadscript += "\r\n " + "   if(form.commentmsg.value.length < 10){alert(\"评论至少要10字以上！\");return false;}";
+            loadscript += "\r\n " + "}";
             AddfootScript(loadscript);
 
             CompaniesStats.Track(showenid, 1);
@@ -153,7 +154,7 @@ namespace SAS.ManageWeb
             {
                 Utils.WriteCookie("lastviews", Utils.GetCookie("lastviews") + "," + showenid, 1440);
             }
-            
+
         }
     }
 }
