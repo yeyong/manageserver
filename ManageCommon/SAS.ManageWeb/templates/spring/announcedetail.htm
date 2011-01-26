@@ -1,0 +1,92 @@
+﻿<%template _comheader%>
+<%if {page_err}==0%>
+<div class="cot">
+	<p class="bd_site mar_top">
+		您当前的位置：<a href="{forumurl}index.html" title="商之源">商之源</a> &gt; <a href="{forumurl}nouncelist.html">公告列表</a> &gt; <font class="f_c00">{announceinfo.title}</font>
+		<i class="lt"></i><i class="rt"></i>
+	</p>
+</div>
+<div class="cot">
+	<div class="ncelt">
+		<p class="rtnrad1 mar_top">
+		<%if {annad1}.Length>=8%>
+		    <a title="{annad1[5]}" href="tools/ajax.aspx?t=advredirect&url=<%urlencode({annad1[4]})%>" target="_blank" rel="nofollow"><img alt="{annad1[5]}" src="{annad1[1]}" /></a>
+	    <%/if%>
+		</p>
+		<div class="ozs ozw1 mar_top">
+			<strong class="olbg">热门标签</strong>
+			<div class="ortcot nrw1">
+			<table border="0" cellpadding="0" cellspacing="1" class="tbbq">
+				 <tr>
+					<td width="33%"><a title="保健食品" href="#">保健食品</a></td>
+					<td width="33%"><a title="食品加工方便食品" href="#">食品加工方便食品</a></td>
+					<td><a title="食用菌" href="#">食用菌</a></td>
+				 </tr>
+				 <tr>
+					<td width="33%"><a title="食品添加剂" href="#">食品添加剂</a></td>
+					<td width="33%"><a title="茶叶" href="#">茶叶</a></td>
+					<td><a title="调味品" href="#">调味品</a></td>
+				 </tr>
+				 <tr>
+					<td width="33%"><a title="保健食品" href="#">保健食品</a></td>
+					<td width="33%"><a title="食品加工方便食品" href="#">食品加工方便食品</a></td>
+					<td><a title="食用菌" href="#">食用菌</a></td>
+				 </tr>
+				 <tr>
+					<td width="33%"><a title="食品添加剂" href="#">食品添加剂</a></td>
+					<td width="33%"><a title="茶叶" href="#">茶叶</a></td>
+					<td><a title="调味品" href="#">调味品</a></td>
+				 </tr>
+			</table>
+			</div>
+		</div>
+		<div class="ozs ozw1 mar_top">
+			<strong class="olbg">相关活动</strong>
+			<ul class="ortcot nrw1">
+			<%loop (DataRow) annouceactiveinfo activelist%>
+			    <li>
+					<p>▪&nbsp;<a title="{annouceactiveinfo[atitle]}" href="#">{annouceactiveinfo[atitle]}</a></p>
+					<span><%datetostr({annouceactiveinfo[createdate]},"[yyyy-MM-dd]")%></span>
+				</li>
+			<%/loop%>
+			</ul>
+		</div>
+		<p class="rtnrad1 mar_top">
+		<%if {annad2}.Length>=8%>
+		    <a title="{annad2[5]}" href="tools/ajax.aspx?t=advredirect&url=<%urlencode({annad1[4]})%>" target="_blank" rel="nofollow"><img alt="{annad2[5]}" src="{annad2[1]}" /></a>
+	    <%/if%>
+		</p>
+	</div>
+	<div class="ncesw mar_top">
+		<h2>{announceinfo.title}</h2>
+		<p class="tit">有效期：{announceinfo.starttime}至{announceinfo.endtime}&nbsp;&nbsp;&nbsp;&nbsp;相关活动：<a href="{curactiveid}" class="l_999">{curactivetitle}</a></p>
+		<div class="nr">{announceinfo.message}</div>
+		<p class="ad mar_top">
+		<%if {annad3}.Length>=8%>
+		    <a title="{annad3[5]}" href="tools/ajax.aspx?t=advredirect&url=<%urlencode({annad3[4]})%>" target="_blank" rel="nofollow"><img alt="{annad3[5]}" src="{annad3[1]}" /></a>
+	    <%/if%>
+		</p>
+		<div class="ncenr mar_top">
+			<b>近期热点推荐：</b>
+			<ul class="ncecot">
+			<%loop (Companys) creditcompanyinfo creditcompanylist%>
+				<li>▪&nbsp;<a title="{creditcompanyinfo.en_name}" href="company-{creditcompanyinfo.en_id}.html" target="_blank">{creditcompanyinfo.en_name}</a></li>
+			<%/loop%>
+			</ul>
+		</div>
+		<div class="ncenr mar_top">
+			<b>文本标签：<a title="" class="l_c00" href="#">服装</a>  <a title="" class="l_c00" href="#">生产加工</a>  <a title="" class="l_c00" href="#">外贸</a></b>
+			<form class="ncenr2" onsubmit="return search(this);">
+				<span class="t">找企业：</span>
+				<span><input name="searchcontent" type="text" class="input4" style=" width:480px;" /></span>
+				<span class="an mar_lt"><a title="查询" href="#" onclick="return search(this.form);"></a></span>
+			</form>
+		</div>
+</div>
+<%else%>
+<div class="cot">
+	<%template _commsgbox%>
+</div>
+<%/if%>
+<%template _comcopyright%>
+<%template _comfooter%>

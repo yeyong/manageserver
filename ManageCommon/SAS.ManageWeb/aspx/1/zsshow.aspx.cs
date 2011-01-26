@@ -115,29 +115,46 @@ namespace SAS.ManageWeb
             loadscript += "\r\n " + "var comment_page_pagesize = 10;";
             loadscript += "\r\n " + "var comment_page_currentpage = 1;";
             loadscript += "\r\n " + "jQuery(document).ready(function() {";
-            loadscript += "\r\n " + "jQuery('#put').find(\"span\").find(\"a\").cluetip({ activation: 'click', sticky: true, width: 350, positionBy: 'bottomTop', closePosition: 'title', closeText: '<img src=\"" + forumpath + "images/cross.png\" alt=\"close\" />',cursor: 'pointer', dropShadow: false});";
-            loadscript += "\r\n " + "jQuery('#form1').find(\"input[type=text],textarea\").each(function(){";
-            loadscript += "\r\n " + "  jQuery(this).blur(function(){jQuery(this).attr(\"class\",\"input2_soout\");});";
-            loadscript += "\r\n " + "  jQuery(this).focus(function(){jQuery(this).attr(\"class\",\"input2_soon\");});";
-            loadscript += "\r\n " + "});";
+            if (templateid == 1)
+            {
+                loadscript += "\r\n " + "jQuery('#put').find(\"span\").find(\"a\").cluetip({ activation: 'click', sticky: true, width: 350, positionBy: 'bottomTop', closePosition: 'title', closeText: '<img src=\"" + forumpath + "images/cross.png\" alt=\"close\" />',cursor: 'pointer', dropShadow: false});";
+                loadscript += "\r\n " + "jQuery('#form1').find(\"input[type=text],textarea\").each(function(){";
+                loadscript += "\r\n " + "  jQuery(this).blur(function(){jQuery(this).attr(\"class\",\"input2_soout\");});";
+                loadscript += "\r\n " + "  jQuery(this).focus(function(){jQuery(this).attr(\"class\",\"input2_soon\");});";
+                loadscript += "\r\n " + "});";
+                loadscript += "\r\n " + "jQuery('#swinf').find(\".tswan\").click(function(){";
+                loadscript += "\r\n " + "   var cssname = jQuery('#swinf').find(\"#swinfcot\").attr(\"class\");";
+                loadscript += "\r\n " + "   var arrowicon = 'arrow-icon2.gif';";
+                loadscript += "\r\n " + "   var showcss = 'tswnrxin';";
+                loadscript += "\r\n " + "   var showzi = '点击隐藏部分介绍';";
+                loadscript += "\r\n " + "   if (cssname == 'tswnrxin') {showcss = 'tswnr';arrowicon = 'arrow-icon1.gif';showzi = '点击查看全部介绍';}";
+                loadscript += "\r\n " + "   jQuery(this).html(\"<em><img src='templates/" + templatepath + "/images/icon/\"+arrowicon+\"'/></em>\"+showzi);";
+                loadscript += "\r\n " + "   jQuery('#swinf').find(\"#swinfcot\").removeClass().addClass(showcss);";
+                loadscript += "\r\n " + "});";
+            }
+            else
+            {
+                loadscript += "\r\n " + "jQuery('#put').find(\"a\").cluetip({ activation: 'click', sticky: true, width: 350, positionBy: 'bottomTop', closePosition: 'title', closeText: '<img src=\"" + forumpath + "images/cross.png\" alt=\"close\" />',cursor: 'pointer', dropShadow: false});";
+                loadscript += "\r\n " + "jQuery('#swinf').find(\".an\").click(function(){";
+                loadscript += "\r\n " + "   var cssname = jQuery('#swinf').find(\"#swinfcot\").attr(\"class\");";
+                loadscript += "\r\n " + "   var arrowicon = 'tu1';";
+                loadscript += "\r\n " + "   var showcss = 'sw1nr1';";
+                loadscript += "\r\n " + "   var showzi = '点击隐藏部分介绍';";
+                loadscript += "\r\n " + "   if (cssname == 'sw1nr1') {showcss = 'sw1nr2';arrowicon = 'tu2';showzi = '点击查看全部介绍';}";
+                loadscript += "\r\n " + "   jQuery('#swinf').find(\"em\").removeClass().addClass(arrowicon)";
+                loadscript += "\r\n " + "   jQuery('#swinf').find(\"#swinfcot\").removeClass().addClass(showcss);";
+                loadscript += "\r\n " + "   jQuery('#swinf').find(\"span\").html(showzi);";
+                loadscript += "\r\n " + "});";
+            }
             loadscript += "\r\n " + "jQuery('.starshow').rating({";
             loadscript += "\r\n " + "  callback: function(value, link){";
             loadscript += "\r\n " + "    if(typeof value == 'undefined'){jQuery('.fsw3').find('em').html(0);jQuery('input[name=scores]').val(0);}";
             loadscript += "\r\n " + "    else{jQuery('.fsw3').find('em').html(value);jQuery('input[name=scores]').val(value);}";
             loadscript += "\r\n " + "}});";
-            loadscript += "\r\n " + "jQuery('#swinf').find(\".tswan\").click(function(){";
-            loadscript += "\r\n " + "   var cssname = jQuery('#swinf').find(\"#swinfcot\").attr(\"class\");";
-            loadscript += "\r\n " + "   var arrowicon = 'arrow-icon2.gif';";
-            loadscript += "\r\n " + "   var showcss = 'tswnrxin';";
-            loadscript += "\r\n " + "   var showzi = '点击隐藏部分介绍';";
-            loadscript += "\r\n " + "   if (cssname == 'tswnrxin') {showcss = 'tswnr';arrowicon = 'arrow-icon1.gif';showzi = '点击查看全部介绍';}";
-            loadscript += "\r\n " + "   jQuery(this).html(\"<em><img src='templates/" + templatepath + "/images/icon/\"+arrowicon+\"'/></em>\"+showzi);";
-            loadscript += "\r\n " + "   jQuery('#swinf').find(\"#swinfcot\").removeClass().addClass(showcss);";
-            loadscript += "\r\n " + "});";
             loadscript += "\r\n " + "jQuery(this).gettop({objsrc:\"templates/" + templatepath + "/images/top.gif\",objhref:\"javascript:scrollTo(0,0)\"});";
             loadscript += "\r\n " + "});\r\n";
             loadscript += "\r\n " + "ajaxgetcommentscored(page_qyid);";
-            loadscript += "\r\n " + "ajaxgetcomment(page_qyid,comment_page_pagesize,comment_page_currentpage);";
+            loadscript += "\r\n " + "ajaxgetcomment(page_qyid,comment_page_pagesize,comment_page_currentpage," + templateid + ");";
             loadscript += "\r\n " + "function validate(form){";
             loadscript += "\r\n " + "   if(form.nickname.value==''){alert(\"请输入您的昵称！\");return false;}";
             loadscript += "\r\n " + "   if(form.commentmsg.value==''){alert(\"请输入您的评论！\");return false;}";

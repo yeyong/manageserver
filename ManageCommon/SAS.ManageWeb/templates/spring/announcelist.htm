@@ -1,0 +1,79 @@
+﻿<%template _comheader%>
+<div class="cot">
+	<p class="bd_site mar_top">
+		您当前的位置：您当前的位置：<a href="{forumurl}index.html" title="商之源">商之源</a> &gt; <font class="f_c00">公告列表</font>
+		<i class="lt"></i><i class="rt"></i>
+	</p>
+</div>
+<div class="cot">
+	<div class="ncelt">
+		<p class="rtnrad1 mar_top"><a title="" href="#"><img alt="企业广告" src="images/aa/aa2.jpg" /></a></p>
+		<div class="ozs ozw1 mar_top">
+			<strong class="olbg">热门标签</strong>
+			<div class="ortcot nrw1">
+			<table border="0" cellpadding="0" cellspacing="1" class="tbbq">
+				 <tr>
+					<td width="33%"><a title="保健食品" href="#">保健食品</a></td>
+					<td width="33%"><a title="食品加工方便食品" href="#">食品加工方便食品</a></td>
+					<td><a title="食用菌" href="#">食用菌</a></td>
+				 </tr>
+				 <tr>
+					<td width="33%"><a title="食品添加剂" href="#">食品添加剂</a></td>
+					<td width="33%"><a title="茶叶" href="#">茶叶</a></td>
+					<td><a title="调味品" href="#">调味品</a></td>
+				 </tr>
+				 <tr>
+					<td width="33%"><a title="保健食品" href="#">保健食品</a></td>
+					<td width="33%"><a title="食品加工方便食品" href="#">食品加工方便食品</a></td>
+					<td><a title="食用菌" href="#">食用菌</a></td>
+				 </tr>
+				 <tr>
+					<td width="33%"><a title="食品添加剂" href="#">食品添加剂</a></td>
+					<td width="33%"><a title="茶叶" href="#">茶叶</a></td>
+					<td><a title="调味品" href="#">调味品</a></td>
+				 </tr>
+			</table>
+			</div>
+		</div>
+		<div class="ozs ozw1 mar_top">
+			<strong class="olbg">相关活动</strong>
+			<ul class="ortcot nrw1">
+				<li>▪&nbsp;<a title="" href="#">天颂建设集团有限公司天颂建设集团有限公司</a></li>
+				<li>▪&nbsp;<a title="" href="#">浙江诺力机械股份有限公司</a></li>
+				<li>▪&nbsp;<a title="" href="#">浙江东杭控股集团有限公司</a></li>
+				<li>▪&nbsp;<a title="" href="#">浙江广博集团</a></li>
+				<li>▪&nbsp;<a title="" href="#">浙江诺力机械股份有限公司</a></li>
+				<li>▪&nbsp;<a title="" href="#">浙江东杭控股集团有限公司</a></li>
+				<li>▪&nbsp;<a title="" href="#">浙江诺力机械股份有限公司</a></li>
+				<li>▪&nbsp;<a title="" href="#">浙江广博集团</a></li>
+				<li>▪&nbsp;<a title="" href="#">浙江东杭控股集团有限公司</a></li>
+				<li>▪&nbsp;<a title="" href="#">浙江诺力机械股份有限公司</a></li>
+			</ul>
+		</div>
+		<p class="rtnrad1 mar_top"><a title="" href="#"><img alt="" src="images/ad/466x182.jpg" /></a></p>
+	</div>
+	<div class="ncert mar_top">
+		<p class="tit olbg2">
+			<strong>浙商公告</strong>
+		</p>
+		<div class="nr">
+			<ul class="xw">
+		    <%loop (AnnouncementInfo) curannounceinfo curannouncelist%>
+		        <li>
+				    <p>▪&nbsp;<a title="{curannounceinfo.title}" href="nouncedetail-{curannounceinfo.id}.html">{curannounceinfo.title}</a></p>
+				    <span><%datetostr({curannounceinfo.starttime},"[yyyy-MM-dd]")%></span>
+			    </li>
+		    <%/loop%>
+		    </ul>
+		    <p class="page mar_top">
+			    {pagenumbers}
+			    共{pagecount}页　到第
+			    <input type="text" name="textfield" id="gopage" class="input2" style="width:30px;" />
+			    页
+			    <input type="button" name="button1" class="agree" value="确 定" onclick="window.location='nouncelist-'+document.getElementById('gopage').value+'.html';"/>
+		    </p>
+		</div>
+	</div>
+</div>
+<%template _comcopyright%>
+<%template _comfooter%>

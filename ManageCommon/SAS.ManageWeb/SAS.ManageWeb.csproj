@@ -1219,7 +1219,9 @@
     <Content Include="tools\ajax.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="404.html" />
     <Content Include="Global.asax" />
+    <Content Include="images\bg2.gif" />
     <Content Include="images\common\clipboard.swf" />
     <Content Include="images\kuang-1.png" />
     <Content Include="images\kuang-2.png" />
@@ -1914,6 +1916,8 @@
     <Content Include="templates\default\_actheader.htm" />
     <Content Include="templates\spring\about.png" />
     <Content Include="templates\spring\about.xml" />
+    <Content Include="templates\spring\announcedetail.htm" />
+    <Content Include="templates\spring\announcelist.htm" />
     <Content Include="templates\spring\css\card.css" />
     <Content Include="templates\spring\css\channels.css" />
     <Content Include="templates\spring\css\comm.css" />
@@ -1922,6 +1926,7 @@
     <Content Include="templates\spring\css\main.css" />
     <Content Include="templates\spring\editor.css" />
     <Content Include="templates\spring\float.css" />
+    <Content Include="templates\spring\help.htm" />
     <Content Include="templates\spring\images\agree-an.gif" />
     <Content Include="templates\spring\images\an.gif" />
     <Content Include="templates\spring\images\banner.gif" />
@@ -1997,6 +2002,7 @@
     <Content Include="templates\spring\index.htm" />
     <Content Include="templates\spring\css\interaction.css" />
     <Content Include="templates\spring\inquiry.htm" />
+    <Content Include="templates\spring\promotion.htm" />
     <Content Include="templates\spring\sas.css" />
     <Content Include="templates\spring\zshy.htm" />
     <Content Include="templates\spring\zsshow.htm" />
