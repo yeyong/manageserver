@@ -18,6 +18,22 @@ namespace SAS.ManageWeb
         protected DataRow[] activelist;
         protected string curactivetitle = "";
         protected int curactiveid = 0;
+        /// <summary>
+        /// 企业信誉排行
+        /// </summary>
+        protected List<Companys> creditcompanylist = Companies.GetCompanyListCredits();
+        /// <summary>
+        /// 广告位1
+        /// </summary>
+        protected string[] annad1 = Advertisements.GetZSRandomAd(1, AdType.InPostAd).Split('|');
+        /// <summary>
+        /// 广告位2
+        /// </summary>
+        protected string[] annad2 = Advertisements.GetZSRandomAd(2, AdType.InPostAd).Split('|');
+        /// <summary>
+        /// 广告位3
+        /// </summary>
+        protected string[] annad3 = Advertisements.GetZSRandomAd(3, AdType.InPostAd).Split('|');
 
         protected override void ShowPage()
         {
@@ -34,12 +50,15 @@ namespace SAS.ManageWeb
 
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
 
-            string loadscript = "\r\n " + "jQuery(document).ready(function() {"
-                    + "\r\n " + "jQuery(\"input[type=text],textarea\").each(function(){"
-                    + "\r\n " + "  jQuery(this).blur(function(){jQuery(this).attr(\"class\",\"input5_soout\");});"
-                    + "\r\n " + "  jQuery(this).focus(function(){jQuery(this).attr(\"class\",\"input5_soon\");});"
-                    + "\r\n " + "});"
-                    + "\r\n " + "});\r\n";
+            string loadscript = "\r\n " + "jQuery(document).ready(function() {";
+            if (templateid == 1)
+            {
+                loadscript += "\r\n " + "jQuery(\"input[type=text],textarea\").each(function(){";
+                loadscript += "\r\n " + "  jQuery(this).blur(function(){jQuery(this).attr(\"class\",\"input5_soout\");});";
+                loadscript += "\r\n " + "  jQuery(this).focus(function(){jQuery(this).attr(\"class\",\"input5_soon\");});";
+                loadscript += "\r\n " + "});";
+            }
+            loadscript += "\r\n " + "});\r\n";
             AddfootScript(loadscript);
 
             activelist = Activities.GetActivityByIds(announceinfo.Relateactive);

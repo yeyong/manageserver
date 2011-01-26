@@ -71,7 +71,7 @@ namespace SAS.ManageWeb
             if (pagecount == 0) pagecount = 1;
             pageid = pageid < 1 ? 1 : pageid;
             pageid = pageid > pagecount ? pagecount : pageid;
-            pagenumbers = Utils.GetCompanyPageNumbers(pageid, pagecount, "nouncelist.html", 10, '.');
+            pagenumbers = Utils.GetCompanyPageNumbers(pageid, pagecount, "nouncelist.html", 10, '.', templateid);
 
             prevpage = pageid - 1 > 0 ? pageid - 1 : pageid;
             nextpage = pageid + 1 > pagecount ? pagecount : pageid + 1;

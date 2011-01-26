@@ -52,27 +52,30 @@ namespace SAS.ManageWeb
             if (page_err > 0) return;
 
             pagetitle = "浙商黄页|企业推广页面|" + companyshowinfo.En_name;
-            string m_keyword =  companyshowinfo.En_name + "," + companyshowinfo.En_main.Trim(',');
+            string m_keyword = companyshowinfo.En_name + "," + companyshowinfo.En_main.Trim(',');
             string m_desc = config.Seodescription + companyshowinfo.ProvinceName + "," + companyshowinfo.CityName + "," + companyshowinfo.DistrictName + "。" + Utils.CutString(Utils.RemoveHtml(companyshowinfo.En_desc), 0, 60);
             UpdateMetaInfo(m_keyword.Trim().Trim(','), m_desc.Trim().Trim(','), "");
 
             AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
             script += "\r\n<script src=\"" + forumpath + "javascript/sascommon.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/jquery-exchange.js\" type=\"text/javascript\"></script>";
-            string loadscript = "\r\n " + "jQuery(document).ready(function() {"
-                     + "\r\n " + "promotion_0 = document.getElementById('html_pro1').innerHTML;"
-                     + "\r\n " + "promotion_1 = document.getElementById('html_pro1').innerHTML;"
-                     + "\r\n " + "promotion_2 = document.getElementById('html_pro2').innerHTML;"
-                     + "\r\n " + "promotion_3 = document.getElementById('html_pro3').innerHTML;"
-                     + "\r\n " + "jQuery(\"#prom1\").Exchange({ MIDS: \"pmt1rt1\", CIDS: \"pmt1rt2\", count: 5, mousetype: 0 });"
-                     + "\r\n " + "jQuery(\"#prom2\").Exchange({ MIDS: \"pmt1rt3\", CIDS: \"pmt1rt4\", count: 5, mousetype: 0 });"
-                     + "\r\n " + "jQuery(\"#prom3\").Exchange({ MIDS: \"pmt1rt5\", CIDS: \"pmt1rt6\", count: 5, mousetype: 0 });"
-                     + "\r\n " + "jQuery(\"#prom4\").Exchange({ MIDS: \"pmt1rt7\", CIDS: \"pmt1rt8\", count: 5, mousetype: 0 });"
-                     + "\r\n " + "jQuery('#promotioncontent').find(\"input[type=text],textarea\").each(function(){"
-                     + "\r\n " + "  jQuery(this).blur(function(){jQuery(this).attr(\"class\",\"input2_soout\");});"
-                     + "\r\n " + "  jQuery(this).focus(function(){jQuery(this).attr(\"class\",\"input2_soon\");});"
-                     + "\r\n " + "});"
-                     + "\r\n " + "});\r\n";
+            string loadscript = "\r\n " + "jQuery(document).ready(function() {";
+            loadscript += "\r\n " + "promotion_0 = document.getElementById('html_pro1').innerHTML;";
+            loadscript += "\r\n " + "promotion_1 = document.getElementById('html_pro1').innerHTML;";
+            loadscript += "\r\n " + "promotion_2 = document.getElementById('html_pro2').innerHTML;";
+            loadscript += "\r\n " + "promotion_3 = document.getElementById('html_pro3').innerHTML;";
+            loadscript += "\r\n " + "jQuery(\"#prom1\").Exchange({ MIDS: \"pmt1rt1\", CIDS: \"pmt1rt2\", count: 5, mousetype: 0 });";
+            loadscript += "\r\n " + "jQuery(\"#prom2\").Exchange({ MIDS: \"pmt1rt3\", CIDS: \"pmt1rt4\", count: 5, mousetype: 0 });";
+            loadscript += "\r\n " + "jQuery(\"#prom3\").Exchange({ MIDS: \"pmt1rt5\", CIDS: \"pmt1rt6\", count: 5, mousetype: 0 });";
+            loadscript += "\r\n " + "jQuery(\"#prom4\").Exchange({ MIDS: \"pmt1rt7\", CIDS: \"pmt1rt8\", count: 5, mousetype: 0 });";
+            if (templateid == 1)
+            {
+                loadscript += "\r\n " + "jQuery('#promotioncontent').find(\"input[type=text],textarea\").each(function(){";
+                loadscript += "\r\n " + "  jQuery(this).blur(function(){jQuery(this).attr(\"class\",\"input2_soout\");});";
+                loadscript += "\r\n " + "  jQuery(this).focus(function(){jQuery(this).attr(\"class\",\"input2_soon\");});";
+                loadscript += "\r\n " + "});";
+            }
+            loadscript += "\r\n " + "});\r\n";
             AddfootScript(loadscript);
 
             if (companyshowinfo.Configid == 0) cardconfigid = 1;

@@ -1,6 +1,6 @@
 ﻿/*************************************************分页函数****************************************************/
 
-function ajaxpagination(ajaxfunction, recordcount, pagesize, currentpage, divname) {
+function ajaxpagination(ajaxfunction, recordcount, pagesize, currentpage, divname,tempid) {
 
     var allcurrentpage = 0;
     var next = 0;
@@ -39,19 +39,19 @@ function ajaxpagination(ajaxfunction, recordcount, pagesize, currentpage, divnam
     }
 
     if (startcount > 1) {
-        currentpagestr += currentpage > 1 ? '<a href="###"  onclick="javascript:' + ajaxfunction + '(' + page_qyid + ',' + pagesize + ', ' + currentpage + ');" title="上一页">上一页</a>' : '';
+        currentpagestr += currentpage > 1 ? '<a href="###"  onclick="javascript:' + ajaxfunction + '(' + page_qyid + ',' + pagesize + ', ' + currentpage + ','+tempid+');" title="上一页">上一页</a>' : '';
     }
 
     //当页码数大于1时, 则显示页码
     if (endcount > 1) {
         //中间页处理, 这个增加时间复杂度，减小空间复杂度
         for (i = startcount; i <= endcount; i++) {
-            currentpagestr += currentpage == i ? '<span class="page2">' + i + '</span>' : '<a href="###"  onclick="javascript:' + ajaxfunction + '(' + page_qyid + ',' + pagesize + ', ' + i + ');">' + i + '</a>';
+            currentpagestr += currentpage == i ? '<span class="' + (tempid == 1 ? 'page2' : 'page1') + '">' + i + '</span>' : '<a href="###"  onclick="javascript:' + ajaxfunction + '(' + page_qyid + ',' + pagesize + ', ' + i + ',' + tempid + ');">' + i + '</a>';
         }
     }
 
     if (endcount < allcurrentpage) {
-        currentpagestr += currentpage != allcurrentpage ? '<a href="###" onclick="javascript:' + ajaxfunction + '(' + page_qyid + ',' + pagesize + ', ' + next + ');" title="下一页">下一页</a>' : '';
+        currentpagestr += currentpage != allcurrentpage ? '<a href="###" onclick="javascript:' + ajaxfunction + '(' + page_qyid + ',' + pagesize + ', ' + next + ',' + tempid + ');" title="下一页">下一页</a>' : '';
     }
 
     if (allcurrentpage > 1) {
@@ -64,12 +64,12 @@ function ajaxpagination(ajaxfunction, recordcount, pagesize, currentpage, divnam
 }
 /*************************************************AJAX加载留言列表****************************************************/
 
-function ajaxgetcomment(qyid, pagesize, pageindex) {
+function ajaxgetcomment(qyid, pagesize, pageindex,tempid) {
     $('commentlist').innerHTML = '加载数据中...';
     comment_page_currentpage = pageindex;
     _sendRequest('tools/ajax.aspx?t=getcompanycomment&qyid=' + qyid + '&pagesize=' + pagesize + '&pageindex=' + pageindex, function(d) {
         try {
-            eval('leaveword_callback(' + d + ')');
+            eval('leaveword_callback(' + d + ',' + tempid + ')');
         } catch (e) { alert(e.message); };
     });
 }
@@ -86,20 +86,31 @@ function leavewordmessage_callback(data) {
     $("commentscored").innerHTML = data;
 }
 
-function leaveword_callback(data) {
+function leaveword_callback(data,tempid) {
     var leaveword_html = '';
-
-    for (var i in data) {
-        leaveword_html += '<li>';
-        leaveword_html += '<p class="fswnr2zi">';
-        leaveword_html += '<span class="fswnr2zi1">网络评分：<b class="f_f60_24">' + data[i].scored + '</b> 分</span>';
-        leaveword_html += '<span class="fswnr2zi2">' + data[i].username + ' 发表于 ' + data[i].commentdate + '</span>';
-        leaveword_html += '</p>';
-        leaveword_html += '<p class="fswnr2zt">' + data[i].content + '</p>';
-        leaveword_html += '</li>';
+    if (tempid == 1) {
+        for (var i in data) {
+            leaveword_html += '<li>';
+            leaveword_html += '<p class="fswnr2zi">';
+            leaveword_html += '<span class="fswnr2zi1">网络评分：<b class="f_f60_24">' + data[i].scored + '</b> 分</span>';
+            leaveword_html += '<span class="fswnr2zi2">' + data[i].username + ' 发表于 ' + data[i].commentdate + '</span>';
+            leaveword_html += '</p>';
+            leaveword_html += '<p class="fswnr2zt">' + data[i].content + '</p>';
+            leaveword_html += '</li>';
+        }
+    } else {
+        for (var i in data) {
+            leaveword_html += '<li>';
+            leaveword_html += '<p>';
+            leaveword_html += '<span class="lt">网络评分：<em>' + data[i].scored + '</em> 分</span>';
+            leaveword_html += '<span class="rt">' + data[i].username + ' 发表于 ' + data[i].commentdate + '</span>';
+            leaveword_html += '</p>';
+            leaveword_html += '<p>' + data[i].content + '</p>';
+            leaveword_html += '</li>';
+        }
     }
     //alert(leaveword_html);
-    
+
     $('commentlist').innerHTML = leaveword_html;
-    ajaxpagination('ajaxgetcomment', comment_page_recordcount, comment_page_pagesize, comment_page_currentpage, "commentlist_page");
+    ajaxpagination('ajaxgetcomment', comment_page_recordcount, comment_page_pagesize, comment_page_currentpage, "commentlist_page", tempid);
 }

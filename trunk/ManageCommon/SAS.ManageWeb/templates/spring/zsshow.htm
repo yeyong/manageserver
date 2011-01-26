@@ -2,13 +2,13 @@
 <%if {page_err}==0%>
 <div class="cot">
 	<p class="bd_site mar_top">
-		您当前的位置：您当前的位置：<a href="{forumurl}index.html" class="l_666" title="商之源">商之源</a> &gt; <a href="{forumurl}zshy.html">浙商黄页</a> &gt; <font class="f_c00">{companyshowinfo.provinceName} {companyshowinfo.cityName} {companyshowinfo.en_name}</font>
+		您当前的位置：您当前的位置：<a href="{forumurl}index.html" title="商之源">商之源</a> &gt; <a href="{forumurl}zspage.html">浙商黄页</a> &gt; <font class="f_c00">{companyshowinfo.provinceName} {companyshowinfo.cityName} {companyshowinfo.en_name}</font>
 		<i class="lt"></i><i class="rt"></i>
 	</p>
 </div>
 <div class="cot">
 	<!--企业信息开始-->
-	<div class="sw1 mar_top>
+	<div class="sw1 mar_top">
 		<h1>{companyshowinfo.en_name}</h1>
 		<div class="swlt">
 		    <div class="sw1lt">
@@ -20,14 +20,13 @@
 			    <p class="zi"><span class="lt">主营商品：</span><span class="rt"><%set {companyshowinfo.En_main}=Utils.ReplaceString({companyshowinfo.en_main},",,",",",false).Trim(',')%>{companyshowinfo.en_main}</span></p>
 			    <p class="zi2" id="put"><a title="查看工商注册信息" href="tipmsg.aspx?msgenid={companyshowinfo.en_id}&msgtype=1" rel="tipmsg.aspx?msgenid={companyshowinfo.en_id}&msgtype=1" class="l_c00">工商注册信息查看</a></p>
 			    <p class="zi3">网络评分：<em id="commentscored">4.5</em> 分</p>
-			</div>		
-		    
+			</div>
 		    <div class="swlt2 mar_top">
 			    <p class="swlt2lt">
-				    评论：<font class="f_c00">{companyshowinfo.en_sell}</font> | 阅读次数：{companyviews}
+				    评论：<font class="f_c00">{companyshowinfo.en_sell}</font> | 阅读次数：{companyviews}<br />
 				    发布时间：{companyshowinfo.en_createdate} | 更新时间：{companyshowinfo.en_update}
 			    </p>
-			    <p class="swlt2rt"><a title="点击我要评论" href="#plnr"></a></p>
+			    <p class="swlt2rt"><a title="点击我要评论" href="#pinglun"></a></p>
 		    </div>
 		</div>
 		<div class="swrt">
@@ -105,7 +104,7 @@
 				<input type="button" name="button1" class="agree1" value="确 定" />
 			</p>
 		</div>
-		<b class="swtit mar_top">发表评论</b>
+		<b class="swtit mar_top" id="pinglun">发表评论</b>
 		<div class="swplnr">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="fsw3">
 				<tr>

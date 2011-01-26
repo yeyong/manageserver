@@ -1,0 +1,61 @@
+﻿<%template _compageheader%>
+<body>
+<!--head begin-->
+<div class="top">
+	<div class="cot">
+		<ul class="toplt">
+			<li><a title="设为首页" href="{rooturl}" onclick="this.style.behavior='url(#default#homepage)';this.setHomePage('{rooturl}');return(false);"><img alt="设为首页" src="{rooturl}templates/{templatepath}/images/home.gif" />设为首页</a></li>
+			<li><a title="收藏本站" href="javascript:window.external.AddFavorite('{rooturl}','浙商黄页-网络名片，免费网络展示平台')"><img alt="收藏本站" src="{rooturl}templates/{templatepath}/images/favorites.gif" />收藏本站</a></li>
+		</ul>
+		<p class="toprt">
+		<a title="提交企业信息" href="{rooturl}agreement.html" class="l_e00101">提交企业信息</a>
+		</p>
+	</div>
+</div>
+<div class="cot">
+	<div class="top2">
+		<p class="logo"><a title="浙江黄页" href="{forumurl}"><img alt="浙江黄页" src="{rooturl}templates/{templatepath}/images/logo.gif" /></a></p>
+		<p class="hdhelp">帮助中心</p>
+	</div>
+</div>
+<!--head end-->
+<div class="cot">
+	<p class="bd_site mar_top">
+		您当前的位置：<a href="{forumurl}index.html" class="l_666" title="商之源">商之源</a> &gt; <a href="help.html">帮助中心</a> &gt; <font class="f_c00">{currenthelp.title}</font>
+		<i class="lt"></i><i class="rt"></i>
+	</p>
+</div>
+<!--第一屏 begin-->
+<div class="cot">
+	<div class="helpcot">
+		<!--左边 begin-->
+		<div class="helplt mar_top">
+			<strong>在线帮助</strong>
+			<div class="helpltnr" id="help">
+			<%loop helpinfos helptype%>
+			    <b class="hpltnrt"><em><%if {helpid}=={strtoint({helpinfos[id]})}||{currenthelp.pid}=={strtoint({helpinfos[id]})}%>-<%else%>+<%/if%></em>{helpinfos[title]}</b>
+			    <ul class="hpltcot">
+			    <%loop (HelpInfo) subhelp helplist%>
+			        <%if {subhelp.pid}=={strtoint({helpinfos[id]})}%>
+			        <li>▪&nbsp;<a title="{subhelp.title}" href="help-{subhelp.id}.html">{subhelp.title}</a></li>
+			        <%/if%>
+			    <%/loop%>
+				</ul>
+			<%/loop%>
+			</div>
+		</div>
+		<!--左边 end-->
+		<!--右边 begin-->
+		<div class="helprt mar_top">
+			<strong>{currenthelp.title}</strong>
+			<div class="helprtnr f_333">
+				{currenthelp.message}
+			</div>
+		</div>
+		<!--右边 end-->
+	</div>
+</div>
+<!--第一屏 end-->
+<%/if%>
+<%template _comcopyright%>
+<%template _comfooter%>
