@@ -117,11 +117,11 @@ namespace SAS.ManageWeb
             string adtempstr = "";
             if (indexdouble1.Length >= 8)
             {
-                adtempstr += "\r\n " + "jQuery(this).Couplet({closeicon:\"templates/" + templatepath + "/images/cross.png\",layout:\"left\",distance:20,objsrc:\"" + indexdouble1[1] + "\",objhref:\"" + indexdouble1[4] + "\"})";
+                adtempstr += "\r\n " + "jQuery(this).Couplet({closeicon:\"templates/" + templatepath + "/images/cross.png\",layout:\"left\",distance:20,objsrc:\"" + indexdouble1[1] + "\",objhref:\"tools/ajax.aspx?t=advredirect&url=" + Utils.UrlEncode(indexdouble1[4]) + "\"})";
             }
             if (indexdouble2.Length >= 8)
             {
-                adtempstr += "\r\n " + "jQuery(this).Couplet({closeicon:\"templates/" + templatepath + "/images/cross.png\",layout:\"right\",distance:20,objsrc:\"" + indexdouble2[1] + "\",objhref:\"" + indexdouble2[4] + "\"})";
+                adtempstr += "\r\n " + "jQuery(this).Couplet({closeicon:\"templates/" + templatepath + "/images/cross.png\",layout:\"right\",distance:20,objsrc:\"" + indexdouble2[1] + "\",objhref:\"tools/ajax.aspx?t=advredirect&url=" + Utils.UrlEncode(indexdouble2[4]) + "\"})";
             }
 
             string loadscript = "\r\n " + "jQuery(document).ready(function() {";

@@ -10,7 +10,8 @@
 		<ul class="olnr">
 		    <%loop (Companys) newcompanyinfo newcompanylist%>
 		    <%if {newcompanyinfo__loop__id}>5%><%break%><%/if%>
-		    <li>▪&nbsp;<a title="{newcompanyinfo.en_name}" href="company-{newcompanyinfo.en_id}.html" target="_blank"><%getsubstring({newcompanyinfo.en_name},30,"")%></a></li>
+		    <%set (string){companyname}=Utils.GetSubString({newcompanyinfo.en_name},30,"")%>
+		    <li>▪&nbsp;<a title="{newcompanyinfo.en_name}" href="company-{newcompanyinfo.en_id}.html" target="_blank">{companyname}</a></li>
 		    <%/loop%>
 		</ul>
 		<p class="oline"></p>
@@ -21,7 +22,8 @@
 		</p>
 		<ul class="olnr">
 		<%loop (NewsContent) newsinfo newslist%>
-			<li>▪&nbsp;<a title="{newsinfo.NewsTitle}" href="{newsinfo.NewsUrl}"><%getsubstring({newsinfo.NewsTitle},30,"...")%></a></li>
+		    <%set (string){newsinfotitle}=Utils.GetSubString({newsinfo.NewsTitle},30,"")%>
+			<li>▪&nbsp;<a title="{newsinfo.NewsTitle}" href="{newsinfo.NewsUrl}">{newsinfotitle}</a></li>
 		<%/loop%>
 		</ul>
 	</div>
@@ -75,6 +77,7 @@
 					<%loop (ActivityInfo) indexactinfo indexactlist%>
 				        <li>▪&nbsp;<a target="_blank" title="{indexactinfo.atitle}" href="activity-{indexactinfo.id}.html">{indexactinfo.atitle}</a></li>
 			        <%/loop%>
+			        <%if {indexactinfo__loop__id}<9%><%repeat("<li>▪&nbsp;</li>", 9-{indexactinfo__loop__id})%><%/if%>
 					</ul>
 				</div>
 				<div class="con">
@@ -82,6 +85,7 @@
 					<%loop (AnnouncementInfo) announcement announcementlist%>
 			            <li>▪&nbsp;<a target="_blank" title="{announcement.title}" href="nouncedetail-{announcement.id}.html">{announcement.title}</a></li>
 			        <%/loop%>
+			        <%if {announcement__loop__id}<9%><%repeat("<li>▪&nbsp;</li>", 9-{announcement__loop__id})%><%/if%>
 					</ul>
 				</div>
 			</div>
@@ -122,15 +126,17 @@
 						<b><a class="l_c00" title="{subcata[name]}" href="zshy-{subcata[id]}.html" target="_blank">{subcata[name]}</a></b>
 						<span>
 						<%set (int){catastrlength} = 0%>
+						<%set (int){catastrnum} = 0%>
 					    <%csharp%>
 			                DataRow[] cataloglist3 = Catalogs.GetAllCatalogByPidAndSub(TypeConverter.ObjectToInt(subcata["id"]));
 			            <%/csharp%>
 					    <%loop (DataRow) subsubcata cataloglist3%>
-					    <%set {catastrlength}={catastrlength}+{subsubcata[name]}.Length+3%>
-					    <%if {catastrlength}>54%>
+					    <%set {catastrlength}={catastrlength}+{subsubcata[name]}.Length%>
+					    <%if {catastrlength}+{catastrnum}*3>54%>
 					        <%break%>
 					    <%/if%>
-					<a class="l_666" title="{subsubcata[name]}" href="zshy-{subsubcata[id]}.html target="_blank"">{subsubcata[name]}</a>&nbsp; | &nbsp;
+					<a class="l_666" title="{subsubcata[name]}" href="zshy-{subsubcata[id]}.html target="_blank"">{subsubcata[name]}</a> | 
+					    <%set {catastrnum} = {catastrnum} + 1%>
 					    <%/loop%>
 					<a class="l_c00" title="{subcata[name]}" href="zshy-{subcata[id]}.html" target="_blank">更多&gt;&gt;</a></p>
 						</span>
@@ -331,8 +337,18 @@
 			<ul class="olbg" id="hotit">
 				<li>热 卖</li>
 				<li>推 荐</li>
+				<li>精 品</li>
 			</ul>
 			<div id="hotnr">
+				<div class="con">
+					<ul class="hot">
+						<li class="hotli1"><a title="" href="#"><img alt="" src="images/ad/218x70.gif" /></a></li>
+						<li class="hotli2"></li>
+						<li class="hotli1"><a title="" href="#"><img alt="" src="images/ad/218x70.gif" /></a></li>
+						<li class="hotli2"></li>
+						<li class="hotli1"><a title="" href="#"><img alt="" src="images/ad/218x70.gif" /></a></li>
+					</ul>
+				</div>
 				<div class="con">
 					<ul class="hot">
 						<li class="hotli1"><a title="" href="#"><img alt="" src="images/ad/218x70.gif" /></a></li>
