@@ -1,0 +1,74 @@
+﻿<%template _comheader%>
+<div class="cot">
+	<p class="bd_site mar_top">
+		您当前的位置：<a title="商之源" href="{forumurl}">商之源</a> &gt; <font class="f_c00">网站地图</font>
+		<i class="lt"></i><i class="rt"></i>
+	</p>
+</div>
+<div class="cot">
+	<div class="mapt mar_top">
+		<p class="maptit">
+			<em></em><strong>浙商黄页服务项</strong>
+		</p>
+	</div>
+	<ul class="mapnr">
+		<li>
+			<strong>网站导航</strong>
+			<p>
+			<%loop (DataRow) mapnavinfo1 mapnavlist1%>
+			<%if {mapnavinfo1__loop__id}>1%> | <%/if%><a title="{mapnavinfo1[title]}" class="l_2d0b00_u" href="{mapnavinfo1[url]}">{mapnavinfo1[name]}</a>
+			<%/loop%>			
+			</p>
+		</li>
+		<li>
+			<strong>企业类别</strong>
+			<p>
+			<%loop (DataRow) mapcataloginfo mapcataloglist%>
+			<%if {mapcataloginfo__loop__id}>1%> | <%/if%><a title="{mapcataloginfo[name]}" class="l_2d0b00_u" href="zshy-{mapcataloginfo[id]}.html">{mapcataloginfo[name]}</a>
+			<%/loop%>
+			</p>
+		</li>
+	</ul>
+	<div class="mapt mar_top">
+		<p class="maptit">
+			<em></em><strong>浙商资讯服务项</strong>
+		</p>
+	</div>
+	<ul class="mapnr">
+		<li>
+			<strong>网站导航</strong>
+			<p>
+			<%loop (string) newsnav newsclass%>
+			<%set (PubClassInfo) {pclassinfo}=News.GetNewsClassInfo({newsnav})%>
+			<a title="{pclassinfo.ClassCName}" class="l_2d0b00_u" href="{pclassinfo.ClassUrl}">{pclassinfo.ClassCName}</a> | 
+			<%/loop%>
+			<a title="" class="l_2d0b00_u" href="#">浙商资讯专题</a></p>
+		</li>
+	</ul>
+	<div class="mapt mar_top">
+		<p class="maptit">
+			<em></em><strong>淘之购服务项</strong>
+		</p>
+	</div>
+	<ul class="mapnr">
+		<li>
+			<strong>网站导航</strong>
+			<p>
+			<%loop (DataRow) mapnavinfo2 mapnavlist2%>
+			<%if {mapnavinfo2__loop__id}>1%> | <%/if%><a target="_blank" title="{mapnavinfo2[title]}" class="l_2d0b00_u" href="{tbconfig.taoDomain}{mapnavinfo2[url]}">{mapnavinfo2[name]}</a>
+			<%/loop%>			
+			</p>
+		</li>
+		<%loop (CategoryInfo) taocategoryinfo categorylist%>
+		<li>
+			<strong>{taocategoryinfo.name}</strong>
+			<%csharp%>
+			    System.Collections.Generic.List<CategoryInfo> templist = GetCategoryList(taocategoryinfo.Cid);
+			<%/csharp%>
+			<p><%loop (CategoryInfo) subtaocategoryinfo templist%><a target="_blank" title="{subtaocategoryinfo.name}" class="l_2d0b00_u" href="{tbconfig.taoDomain}goodslist-p-{subtaocategoryinfo.cid}.html">{subtaocategoryinfo.name}</a> | <%/loop%></p>
+		</li>
+		<%/loop%>
+	</ul>
+</div>
+<%template _comcopyright%>
+<%template _comfooter%>

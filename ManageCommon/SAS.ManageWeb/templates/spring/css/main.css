@@ -81,7 +81,7 @@
 .area{ width:218px; height:auto; padding:0 10px; float:left;}
 .area li{ width:218px; height:auto; border-top:1px dashed #ccc; padding:8px 0 5px; float:left;}
 .area li b{ width:218px; height:22px; line-height:22px; float:left;}
-.area li p{ width:218px; height:24px; line-height:24px; float:left;}
+.area li p{ width:218px; height:24px; line-height:24px; float:left; overflow:hidden;}
 .aread, .aread img{ width:240px; height:116px; float:left;}
 /*资讯*/
 .infline{ border-bottom:1px solid #ccc;}

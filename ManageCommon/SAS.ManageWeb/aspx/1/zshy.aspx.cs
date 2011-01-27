@@ -108,7 +108,7 @@ namespace SAS.ManageWeb
         /// <summary>
         /// 搜索关键字
         /// </summary>
-        private string searchkey = "";
+        protected string searchkey = "";
         /// <summary>
         /// 地区列表
         /// </summary>

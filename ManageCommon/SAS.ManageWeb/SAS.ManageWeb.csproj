@@ -1916,8 +1916,11 @@
     <Content Include="templates\default\_actheader.htm" />
     <Content Include="templates\spring\about.png" />
     <Content Include="templates\spring\about.xml" />
+    <Content Include="templates\spring\agreement.htm" />
     <Content Include="templates\spring\announcedetail.htm" />
     <Content Include="templates\spring\announcelist.htm" />
+    <Content Include="templates\spring\companypost.htm" />
+    <Content Include="templates\spring\companypostreg.htm" />
     <Content Include="templates\spring\css\card.css" />
     <Content Include="templates\spring\css\channels.css" />
     <Content Include="templates\spring\css\comm.css" />
@@ -1929,6 +1932,7 @@
     <Content Include="templates\spring\help.htm" />
     <Content Include="templates\spring\images\agree-an.gif" />
     <Content Include="templates\spring\images\an.gif" />
+    <Content Include="templates\spring\images\an2.gif" />
     <Content Include="templates\spring\images\banner.gif" />
     <Content Include="templates\spring\images\card\an-1.gif" />
     <Content Include="templates\spring\images\card\an-2.gif" />
@@ -1951,6 +1955,7 @@
     <Content Include="templates\spring\images\defulat\tit-bg1.gif" />
     <Content Include="templates\spring\images\defulat\tit-bg2.gif" />
     <Content Include="templates\spring\images\delete.gif" />
+    <Content Include="templates\spring\images\error.jpg" />
     <Content Include="templates\spring\images\favorites.gif" />
     <Content Include="templates\spring\images\fb-s.gif" />
     <Content Include="templates\spring\images\fb-x.gif" />
@@ -1971,6 +1976,7 @@
     <Content Include="templates\spring\images\ll-s.gif" />
     <Content Include="templates\spring\images\ll-x.gif" />
     <Content Include="templates\spring\images\logo.gif" />
+    <Content Include="templates\spring\images\mapbg.gif" />
     <Content Include="templates\spring\images\navli-bg.png" />
     <Content Include="templates\spring\images\nr-bg.gif" />
     <Content Include="templates\spring\images\nr-bg2.gif" />
@@ -1981,6 +1987,7 @@
     <Content Include="templates\spring\images\pl-x.gif" />
     <Content Include="templates\spring\images\quan-1.gif" />
     <Content Include="templates\spring\images\quan-2.gif" />
+    <Content Include="templates\spring\images\right.jpg" />
     <Content Include="templates\spring\images\rss.gif" />
     <Content Include="templates\spring\images\sj-tit.gif" />
     <Content Include="templates\spring\images\so-an.gif" />
@@ -2004,6 +2011,8 @@
     <Content Include="templates\spring\inquiry.htm" />
     <Content Include="templates\spring\promotion.htm" />
     <Content Include="templates\spring\sas.css" />
+    <Content Include="templates\spring\sitemap.htm" />
+    <Content Include="templates\spring\todayviews.htm" />
     <Content Include="templates\spring\zshy.htm" />
     <Content Include="templates\spring\zsshow.htm" />
     <Content Include="templates\spring\zswall.htm" />
@@ -2011,6 +2020,7 @@
     <Content Include="templates\spring\_comcopyright.htm" />
     <Content Include="templates\spring\_comfooter.htm" />
     <Content Include="templates\spring\_comheader.htm" />
+    <Content Include="templates\spring\_commsgbox.htm" />
     <Content Include="templates\spring\_compageheader.htm" />
     <Content Include="templates\spring\_comsearch.htm" />
     <Content Include="templates\spring\_searchbox.htm" />

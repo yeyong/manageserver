@@ -23,6 +23,8 @@ namespace SAS.ManageWeb
         protected DataRow[] mapnavlist2 = Navs.GetNavigationByPid(4);
         protected List<CategoryInfo> categorylist = new List<CategoryInfo>();
 
+        protected string[] newsclass = { "060057025098", "250846114252", "382032510445", "167681906525", "105376361575", "619128150758", "871599573494", "144785272071" };
+
         protected override void ShowPage()
         {
             pagetitle = "站点地图-浙商站点地图";

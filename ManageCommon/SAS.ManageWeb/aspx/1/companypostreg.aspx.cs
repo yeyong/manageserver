@@ -17,13 +17,16 @@ namespace SAS.ManageWeb
         protected override void ShowPage()
         {
             AddLinkCss(forumpath + "images/validator.css");
-            string loadscript = "\r\n " + "jQuery(document).ready(function() {"
-                    + "\r\n " + "var theprifix = \"v2_\";"
-                    + "\r\n " + "jQuery(\"#form1\").FormValidFunc(theprifix,1,1);"
-                    + "\r\n " + "jQuery(\"input[type=text],textarea\").each("
-                    + "\r\n " + "  function(){jQuery(this).blur(function(){jQuery(this).attr(\"class\",\"input2_soout\");});jQuery(this).focus(function(){jQuery(this).attr(\"class\",\"input2_soon\");});"
-                    + "\r\n " + "});"
-                    + "\r\n " + "});";
+            string loadscript = "\r\n " + "jQuery(document).ready(function() {";
+            loadscript += "\r\n " + "var theprifix = \"v2_\";";
+            loadscript += "\r\n " + "jQuery(\"#form1\").FormValidFunc(theprifix,1,1);";
+            if (templateid == 1)
+            {
+                loadscript += "\r\n " + "jQuery(\"input[type=text],textarea\").each(";
+                loadscript += "\r\n " + "  function(){jQuery(this).blur(function(){jQuery(this).attr(\"class\",\"input2_soout\");});jQuery(this).focus(function(){jQuery(this).attr(\"class\",\"input2_soon\");});";
+                loadscript += "\r\n " + "});";
+            }
+            loadscript += "\r\n " + "});";
             AddfootScript(loadscript);
 
             enid = SASRequest.GetInt("companyid", 0);

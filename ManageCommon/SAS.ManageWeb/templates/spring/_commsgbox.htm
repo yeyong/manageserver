@@ -1,0 +1,19 @@
+﻿<div class="cot">
+    <div class="tishi">
+        <%if {page_err}>0%>
+		<p class="tstu"><img alt="错误提示" src="templates/{templatepath}/images/error.jpg" /></p>
+		<p class="tszi">
+			<strong>错误提示！出现{page_err}个错误。</strong>
+			<span>{msgbox_text}</span>
+			<span><a href="{msgbox_backlink}" class="l_c00">返回上一页</a>|<a href="{forumpath}" class="l_c00">返回首页</a></span>
+		</p>
+		<%else%>
+		<p class="tstu"><img alt="成功提示" src="templates/{templatepath}/images/right.jpg" /></p>
+		<p class="tszi">
+			<strong>提交成功！</strong>
+			<span>{msgbox_text}</span>
+			<span><a href="{forumpath}" class="l_c00">返回首页</a></span>
+		</p>
+		<%/if%>
+	</div>
+</div>

@@ -18,39 +18,42 @@ namespace SAS.ManageWeb
             script += "\r\n<script src=\"" + forumpath + "javascript/companycategories.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/locations.js\" type=\"text/javascript\"></script>";
             script += "\r\n<script src=\"" + forumpath + "javascript/template_catalogadmin.js\" type=\"text/javascript\"></script>";
-            string loadscript = "\r\n " + "jQuery(document).ready(function() {"
-                    + "\r\n " + "jQuery(\"#moveup\").click(function() { jQuery(this).CatalogMoveUp(\"zyhy\", \"selecthy\"); });"
-                    + "\r\n " + "jQuery(\"#movedown\").click(function() { jQuery(this).CatalogMoveDown(\"selecthy\"); });"
-                    + "\r\n " + "initCategory(\"zyhy\");"
-                    + "\r\n " + "jQuery(\"#thelocation\").InitLocation();"
-                    + "\r\n " + "var theprifix = \"v2_\";"
-                    + "\r\n " + "jQuery(\"#form1\").FormValidFunc(theprifix);"
-                    + "\r\n " + "jQuery(\"input[type=text],textarea\").each("
-                    + "\r\n " + "  function(){jQuery(this).blur(function(){jQuery(this).attr(\"class\",\"input2_soout\");});jQuery(this).focus(function(){jQuery(this).attr(\"class\",\"input2_soon\");});"
-                    + "\r\n " + "});"
-                    + "\r\n " + "});"
-                    + "\r\n " + "function validate(theform){"
-                    + "\r\n " + "  if (form1.selecthy.options.length == 0) {"
-                    + "\r\n " + "    document.getElementById(\"nextsub\").disabled = false;"
-                    + "\r\n " + "    alert(\"请选择公司主营行业类别！\");"
-                    + "\r\n " + "    return false;"
-                    + "\r\n " + "  }"
-                    + "\r\n " + "  if (document.getElementById(\"district\").value == \"\" || document.getElementById(\"district\").value == \"0\") {"
-                    + "\r\n " + "    document.getElementById(\"nextsub\").disabled = false;"
-                    + "\r\n " + "    alert(\"请准确选择公司所在地区！\");"
-                    + "\r\n " + "    return false;"
-                    + "\r\n " + "  }"
-                    + "\r\n " + "  var hylist = \"\";"
-                    + "\r\n " + "  for (var i = 0; i < form1.selecthy.options.length; i++) {"
-                    + "\r\n " + "    if (i == 0) {"
-                    + "\r\n " + "      hylist = form1.selecthy.options[i].value;"
-                    + "\r\n " + "    } else {"
-                    + "\r\n " + "      hylist += \",\" + form1.selecthy.options[i].value;"
-                    + "\r\n " + "    }"
-                    + "\r\n " + "  }"
-                    + "\r\n " + "  document.getElementById(\"hyidlist\").value = hylist;"
-                    + "\r\n " + "  return true;"
-                    + "\r\n " + "}";
+            string loadscript = "\r\n " + "jQuery(document).ready(function() {";
+            loadscript += "\r\n " + "jQuery(\"#moveup\").click(function() { jQuery(this).CatalogMoveUp(\"zyhy\", \"selecthy\"); });";
+            loadscript += "\r\n " + "jQuery(\"#movedown\").click(function() { jQuery(this).CatalogMoveDown(\"selecthy\"); });";
+            loadscript += "\r\n " + "initCategory(\"zyhy\");";
+            loadscript += "\r\n " + "jQuery(\"#thelocation\").InitLocation();";
+            loadscript += "\r\n " + "var theprifix = \"v2_\";";
+            loadscript += "\r\n " + "jQuery(\"#form1\").FormValidFunc(theprifix);";
+            if (templateid == 1)
+            {
+                loadscript += "\r\n " + "jQuery(\"input[type=text],textarea\").each(";
+                loadscript += "\r\n " + "  function(){jQuery(this).blur(function(){jQuery(this).attr(\"class\",\"input2_soout\");});jQuery(this).focus(function(){jQuery(this).attr(\"class\",\"input2_soon\");});";
+                loadscript += "\r\n " + "});";
+            }
+            loadscript += "\r\n " + "});";
+            loadscript += "\r\n " + "function validate(theform){";
+            loadscript += "\r\n " + "  if (form1.selecthy.options.length == 0) {";
+            loadscript += "\r\n " + "    document.getElementById(\"nextsub\").disabled = false;";
+            loadscript += "\r\n " + "    alert(\"请选择公司主营行业类别！\");";
+            loadscript += "\r\n " + "    return false;";
+            loadscript += "\r\n " + "  }";
+            loadscript += "\r\n " + "  if (document.getElementById(\"district\").value == \"\" || document.getElementById(\"district\").value == \"0\") {";
+            loadscript += "\r\n " + "    document.getElementById(\"nextsub\").disabled = false;";
+            loadscript += "\r\n " + "    alert(\"请准确选择公司所在地区！\");";
+            loadscript += "\r\n " + "    return false;";
+            loadscript += "\r\n " + "  }";
+            loadscript += "\r\n " + "  var hylist = \"\";";
+            loadscript += "\r\n " + "  for (var i = 0; i < form1.selecthy.options.length; i++) {";
+            loadscript += "\r\n " + "    if (i == 0) {";
+            loadscript += "\r\n " + "      hylist = form1.selecthy.options[i].value;";
+            loadscript += "\r\n " + "    } else {";
+            loadscript += "\r\n " + "      hylist += \",\" + form1.selecthy.options[i].value;";
+            loadscript += "\r\n " + "    }";
+            loadscript += "\r\n " + "  }";
+            loadscript += "\r\n " + "  document.getElementById(\"hyidlist\").value = hylist;";
+            loadscript += "\r\n " + "  return true;";
+            loadscript += "\r\n " + "}";
             AddfootScript(loadscript);
 
             if (ispost)

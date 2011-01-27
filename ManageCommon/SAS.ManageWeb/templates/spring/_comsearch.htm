@@ -10,15 +10,15 @@
 		</div>
 		<div class="so">
 			<ul class="sot" id="so">
-				<li class="sotli1">企业</li>
-				<li class="sotli2">资讯</li>
+				<li class="sotli1" id="so_qy">企业</li>
+				<li class="sotli2" id="so_zx">资讯</li>
 			</ul>
 			<div class="socot">
 				<p class="soclt"></p>
 				<div class="socnr">
-					<input name="" type="text" class="soout" onblur="if(this.value==''||this.value=='请输入搜索内容'){ this.value='请输入搜索内容';this.className='soout'; }" onfocus="if(this.value=='请输入搜索内容'){ this.value='';this.className='soon'; }" value="请输入搜索内容" />
+					<input name="sokey" id="sokey" type="text" class="soout" onblur="if(this.value==''||this.value=='请输入搜索内容'){ this.value='请输入搜索内容';this.className='soout'; }" onfocus="if(this.value=='请输入搜索内容'){ this.value='';this.className='soon'; }" value="请输入搜索内容" />
 				</div>
-				<p class="socan"><a title="点击搜索" href="#"><img alt="搜索" src="{rooturl}templates/{templatepath}/images/defulat/so-an.gif" /></a></p>
+				<p class="socan"><a title="点击搜索" href="#" id="searchconfirm"><img alt="搜索" src="{rooturl}templates/{templatepath}/images/defulat/so-an.gif" /></a></p>
 			</div>
 		</div>
 		<p class="tipic">
