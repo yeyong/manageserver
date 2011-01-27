@@ -1,0 +1,156 @@
+﻿<%template _compostheader%>
+<div class="tijiao">
+    <p class="tijiao1">
+    </p>
+    <form id="form1" name="form1" method="post" class="tijiao2" action="">
+        <%if {page_err}==0%>
+            <%if {msgbox_text}!="" %>
+                <%template _commsgbox%>
+            <%else%>
+        <div class="tijiao2nr">
+            <p class="tjp2">
+                <span>1</span>提交企业基本信息</p>
+            <p class="tjp1">
+                <span>2</span>提交企业注册信息</p>
+        </div>
+        <b class="tijiao2nr1 tj2nrbg">企业注册信息</b>
+        <table border="0" cellspacing="0" cellpadding="0" class="tdtj mar_top">
+            <tr>
+                <td width="20%" class="tdtj1">
+                    公司注册时间：<span class="f_e00101">*</span>
+                </td>
+                <td class="tdtj2" colspan="3">
+                    <input name="regdate" id="regdate" type="text" class="v2_builddate input3" style="width: 118px;" maxlength="20"/>
+                    <span id="regdateTip" class="f_999"></span>
+                </td>
+            </tr>
+            <tr>
+                <td width="20%" class="tdtj1">
+                    经营模式：<span class="f_c00">*</span>
+                </td>
+                <td width="30%" class="tdtj2">
+                    <select name="postentype">
+                    <%loop (string) posttypestr Enum.GetNames(entype_enum.GetType())%>
+				    <%set (int) {posttypevalue}=Convert.ToInt16(Enum.Parse(entype_enum.GetType(), posttypestr))%>
+				    <%set (string) {posttypetext}=EnumCatch.GetCompanyType({posttypevalue})%>
+				        <option value="{posttypevalue}">{posttypetext}</option>
+				    <%/loop%>
+                    </select>
+                </td>
+                <td class="tdtj1">
+                    企业经济类型：<span class="f_c00">*</span>
+                </td>
+                <td class="tdtj2">
+                    <select name="postcommtype">
+                    <%loop (string) postcommtypestr Enum.GetNames(commtype_enum.GetType())%>
+                    <%set (int) {postcommvalue}=Convert.ToInt16(Enum.Parse(commtype_enum.GetType(),postcommtypestr))%>
+                    <%set (string) {postcommtext}=EnumCatch.GetEnCommType({postcommvalue})%>
+                        <option value="{postcommvalue}">{postcommtext}</option>
+                    <%/loop%>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdtj1">
+                    注册资本：<span class="f_c00">*</span>
+                </td>
+                <td class="tdtj2" colspan="3">
+                    <input name="regcapital" id="regcapital" type="text" class="v2_money input3" style="width: 40px;" maxlength="6"/>
+                    万元
+                    <span id="regcapitalTip" class="f_999"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdtj1">
+                    注册号：<span class="f_c00">*</span>
+                </td>
+                <td class="tdtj2" colspan="3">
+                    <input name="regsign" id="regsign" type="text" class="v2_noemptysign input3" style="width: 118px;" maxlength="50"/>
+                    <span id="regsignTip" class="f_999"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdtj1">
+                    注册机关：<span class="f_c00">*</span>
+                </td>
+                <td class="tdtj2" colspan="3">
+                    <input name="regorgan" id="regorgan" type="text" class="v2_noemptysign input3" style="width: 170px;" maxlength="200"/>
+                    <span id="regorganTip" class="f_999"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdtj1">
+                    最近年检时间：<span class="f_c00">*</span>
+                </td>
+                <td class="tdtj2" colspan="3">
+                    <input name="lastdate" id="lastdate" type="text" class="v2_builddate input3" style="width: 118px;" maxlength="20"/>
+                    <span id="lastdateTip" class="f_999"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdtj1">
+                    营业期限：<span class="f_c00">*</span>
+                </td>
+                <td class="tdtj2" colspan="3">
+                    <input name="limitdate" id="limitdate" type="text" class="v2_noemptyhtml input3" style="width: 170px;" maxlength="40"/>
+                    <span id="limitdateTip" class="f_999"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdtj1">
+                    注册地址：<span class="f_c00">*</span>
+                </td>
+                <td class="tdtj2" colspan="3">
+                    <input name="regaddress" id="regaddress" type="text" class="v2_noemptyhtml input3" style="width: 300px;" maxlength="200"/>
+                    <span id="regaddressTip" class="f_999"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdtj1">
+                    主营商品范围：
+                </td>
+                <td class="tdtj2" colspan="3">
+                    <span class="tdtjnr f_999">每空限填1种产品名称，建议10个字以下，如：钮扣</span> 
+                    <span class="tdtjnr">
+                        <input name="regmain" type="text" class="input3" style="width: 70px;" maxlength="15"/>
+                        <input name="regmain" type="text" class="input3" style="width: 70px;" maxlength="15"/>
+                        <input name="regmain" type="text" class="input3" style="width: 70px;" maxlength="15"/>
+                        <input name="regmain" type="text" class="input3" style="width: 70px;" maxlength="15"/>
+                        <input name="regmain" type="text" class="input3" style="width: 70px;" maxlength="15"/>
+                        <input name="regmain" type="text" class="input3" style="width: 70px;" maxlength="15"/>
+                        <input name="regmain" type="text" class="input3" style="width: 70px;" maxlength="15"/>
+                        <input name="regmain" type="text" class="input3" style="width: 70px;" maxlength="15"/>
+                        <input name="regmain" type="text" class="input3" style="width: 70px;" maxlength="15"/>
+                        <input name="regmain" type="text" class="input3" style="width: 70px;" maxlength="15"/>
+                        <input name="regmain" type="text" class="input3" style="width: 70px;" maxlength="15"/>
+                        <input name="regmain" type="text" class="input3" style="width: 70px;" maxlength="15"/>
+                    </span>
+                    <em class="tdtjnr1" style="cursor: pointer;" onclick="javascript:document.getElementById('over').style.display=(document.getElementById('over').style.display=='none'?'block':'none')">
+                        <img alt="更多" src="{forumpath}templates/{templatepath}/images/sw-arrow-down.gif" />
+                        更多</em> 
+                        <span class="tdtjnr" style="display: none;" id="over">
+                        <input name="regmain" type="text" class="input3" style="width: 70px;" maxlength="15"/>
+                        <input name="regmain" type="text" class="input3" style="width: 70px;" maxlength="15"/>
+                        <input name="regmain" type="text" class="input3" style="width: 70px;" maxlength="15"/>
+                        <input name="regmain" type="text" class="input3" style="width: 70px;" maxlength="15"/>
+                        <input name="regmain" type="text" class="input3" style="width: 70px;" maxlength="15"/>
+                        <input name="regmain" type="text" class="input3" style="width: 70px;" maxlength="15"/>
+                        <input name="regmain" type="text" class="input3" style="width: 70px;" maxlength="15"/>
+                        <input name="regmain" type="text" class="input3" style="width: 70px;" maxlength="15"/>
+                        </span>
+                </td>
+            </tr>
+        </table>
+        <p class="tijiao2nr1">
+            <input name="submit" type="submit" class="tjan" value="确 定" />
+        </p>
+            <%/if%>
+        <%else%>
+            <%template _commsgbox%>
+        <%/if%>
+    </form>
+    <p class="tijiao3">
+    </p>
+
+</div>
+<%template _companypostfooter%>

@@ -11,6 +11,7 @@ img{ border:0px;}
 
 .mar_top{ margin-top:14px;}
 .mar_top2{ margin-top:24px;}
+.mar_top3{ margin-top:5px;}
 .mar_lt{ margin-left:14px; display:inline;}
 
 /*link*/
@@ -54,6 +55,7 @@ input.jian{ width:83px; height:20px; line-height:20px; text-align:center; color:
 input.plan{ width:95px; height:33px; background:url(../images/pl-an2.gif) no-repeat; border:0; cursor:pointer;}
 input.agree{ width:51px; height:20px; background:url(../images/agree-an.gif) no-repeat; border:0; cursor:pointer;}
 input.tjan{ width:95px; height:33px; line-height:33px; font-size:14px; color:#fff; font-weight:bold; background:url(../images/an.gif) no-repeat; border:0; cursor:pointer;}
+input.ntjan{ width:95px; height:33px; line-height:33px; font-size:14px; color:#fff; font-weight:bold; background:url(../images/an2.gif) no-repeat; border:0; cursor:pointer;}
 
 /*内容部分*/
 .cot{ width:960px; height:auto; margin:0 auto;}
@@ -70,9 +72,10 @@ input.tjan{ width:95px; height:33px; line-height:33px; font-size:14px; color:#ff
 
 /* 分页 */
 .page{ width:auto; height:22px; line-height:22px; text-align:left; float:right;}
-.page a{ width:auto; height:20px; line-height:20px; padding:0 7px; border:1px solid #999; margin:0 0 0 7px; display:inline; float:left}
-.page1{ width:auto; height:20px; line-height:20px; text-align:center; color:#c00; background:#fff; border:1px solid #c00; padding:0 7px; margin:0 0 0 7px; display:inline; float:left;}
-
+.page a{ width:auto; height:20px; line-height:20px; padding:0 7px; border:1px solid #999; margin:0 7px 0 0; display:inline; float:left}
+.page1{ width:auto; height:20px; line-height:20px; text-align:center; color:#c00; background:#fff; border:1px solid #c00; padding:0 7px; margin:0 7px 0 0; display:inline; float:left;}
+/*帮助中心*/
+.hdhelp{ width:300px; height:50px; line-height:50px; text-align:right; font-weight:bold; font-size:38px; margin:10px 10px 0 0; display:inline; float:right;}
 /*header*/
 .top{ width:100%; height:26px; background:#eee; color:#666; float:left; overflow:hidden;}
 .toplt{ width:auto; height:26px; float:left;}
@@ -116,10 +119,9 @@ input.tjan{ width:95px; height:33px; line-height:33px; font-size:14px; color:#ff
 .socan{ width:66px; height:31px; float:left;}
 .tipic{ width:170px; height:73px; padding:3px 0 4px; float:right;}
 .tipic a, .tipic span{ width:170px; height:73px; float:left;}
-/*error*/
-.error{ width:100%; height:300px; margin-top:150px; float:left;}
-.er{ width:505px; height:120px; margin:0 auto;}
-.erlt{ width:44px; height:43px; float:left;}
-.errt{ width:440px; height:auto; float:right; margin-top:5px;}
-.errt1{ width:440px; text-align:left; line-height:35px; font-size:24px; color:#f00; font-weight:bold; letter-spacing:1px;}
-.errt2{ width:440px; text-align:left; line-height:35px; color:#666; letter-spacing:1px; font-size:14px;}
+/*提示*/
+.tishi{ width:400px; height:auto; margin:0 auto;}
+.tstu{ width:48px; height:48px; margin:152px 10px 0 0; padding:0 0 150px 0; display:inline; float:left;}
+.tszi{ width:342px; height:auto; margin:150px 0 0 0; padding:0 0 150px 0; display:inline; float:left;}
+.tszi strong{ font-size:22px; color:#be002f; line-height:25px; margin:12px 0; display:block;}
+.tszi span{ font-size:14px; line-height:30px; display:block;}

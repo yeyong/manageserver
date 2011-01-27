@@ -1,14 +1,23 @@
-</body>
+﻿</body>
 {footscript}
 <script language="javascript" type="text/javascript">
-/*<![CDATA[*/
+    /*<![CDATA[*/
+    var so_mode = "qy";
     jQuery(document).ready(function() {
 
         jQuery("#so").find("li").mouseover(function() {
             jQuery("#so").find("li").removeClass().addClass("sotli2");
             jQuery(this).removeClass().addClass("sotli1");
+            if (jQuery(this).attr("id") == "so_zx") {
+                so_mode = "zx";
+            }
         });
-
+        jQuery("#searchconfirm").click(function() {
+            var sokey = jQuery.trim(jQuery("#sokey").val());
+            if (sokey == "undefined" || sokey == "" || sokey == "请输入搜索内容") return false;
+            else if (so_mode == "qy") window.location.href = "zshy-0-0-0-0-0-0-0-" + encodeURIComponent(sokey).replace("'", "%27") + ".html";
+            else if (so_mode == "zx") window.location.href = "{newsurl}Search.aspx?type=news&tags=" + escape(sokey);
+        });
     });
 {config.statcode}
 /*]]>*/

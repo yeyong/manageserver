@@ -1,0 +1,167 @@
+﻿<%template _compostheader%>
+<div class="tijiao">
+    <p class="tijiao1">
+    </p>
+    <form id="form1" name="form1" method="post" class="tijiao2" action="">
+    <%if {page_err}==0%>
+    <div class="tijiao2nr">
+        <p class="tjp1">
+            <span>1</span>提交企业基本信息</p>
+        <p class="tjp2">
+            <span>2</span>提交企业注册信息</p>
+    </div>
+    <b class="tijiao2nr1 tj2nrbg">企业基本信息</b>
+    <table border="0" cellspacing="0" cellpadding="0" class="tdtj mar_top">
+        <tr>
+            <td width="20%" class="tdtj1">
+                企业名称：<span class="f_e00101">*</span>
+            </td>
+            <td class="tdtj2">
+                <input name="qyname" id="qyname" type="text" class="v2_ennamecheck input2" style="width: 260px;" maxlength="200" />
+            </td>
+        </tr>
+        <tr>
+            <td class="tdtj1">
+                企业成立时间：<span class="f_e00101">*</span>
+            </td>
+            <td class="tdtj2">
+                <input name="builddate" id="builddate" type="text" class="v2_builddate input2" style="width: 160px;" maxlength="20" />
+            </td>
+        </tr>
+        <tr>
+            <td class="tdtj1">
+                选择主营行业：<span class="f_c00">*</span>
+            </td>
+            <td class="tdtj2">
+                <span class="f_b5b5b5">请选择完整的行业大类和子类，并添加为主营行业，最多可添加 4 个！</span>
+                <span class="tdtjnr2" id="zyhy">
+                    <select id="cata1" name="cata1" size="8" style="width: 110px" onchange="loadCategory('zyhy',1);">
+                    </select>
+                    <select id="cata2" name="cata2" size="8" style="width: 110px" onchange="loadCategory('zyhy',2);">
+                    </select>
+                    <select id="cata3" name="cata3" size="8" style="width: 110px" onchange="loadCategory('zyhy',3);">
+                    </select>
+                    <select id="cata4" name="cata4" size="8" style="width: 110px">
+                    </select>
+                </span>
+                <span class="tdtjnr mar_top_3">
+                    <input type="button" name="moveup" id="moveup" class="agree" value="添加↓" />
+                    <input type="button" name="movedown" id="movedown" class="agree" value="×删除" />
+                </span>
+                <span class="tdtjnr mar_top3 f_999">以下是您已选的主营行业</span> <span class="tdtjnr mar_top_3">
+                    <select name="selecthy" size="6" style="width: 460px;" id="selecthy"></select>
+                    <input type="hidden" name="hyidlist" id="hyidlist" />
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td class="tdtj1">
+                企业法人：<span class="f_c00">*</span>
+            </td>
+            <td class="tdtj2">
+                <input name="corpname" id="corpname" type="text" class="v2_chinesename input2" style="width: 170px;" />
+            </td>
+        </tr>
+        <tr>
+            <td class="tdtj1">
+                主要联系人：<span class="f_c00">*</span>
+            </td>
+            <td class="tdtj2">
+                <input name="contactor" id="contactor" type="text" class="v2_chinesename input2" style="width: 170px;" />
+            </td>
+        </tr>
+        <tr>
+            <td class="tdtj1">
+                固定电话：<span class="f_c00">*</span>
+            </td>
+            <td class="tdtj2">
+                <input name="phone" id="phone" type="text" class="v2_phone input2" style="width: 170px;" />
+            </td>
+        </tr>
+        <tr>
+            <td class="tdtj1">
+                移动电话：<span class="f_c00"></span>
+            </td>
+            <td class="tdtj2">
+                <input name="mobile" id="mobile" type="text" class="v2_mobile input2" style="width: 170px;" />
+            </td>
+        </tr>
+        <tr>
+            <td class="tdtj1">
+                传 真：<span class="f_c00"></span>
+            </td>
+            <td class="tdtj2">
+                <input name="fax" id="fax" type="text" class="v2_fax input2" style="width: 170px;" />
+            </td>
+        </tr>
+        <tr>
+            <td class="tdtj1">
+                电子邮箱：<span class="f_c00"></span>
+            </td>
+            <td wclass="tdtj2">
+                <input name="email" id="email" type="text" class="v2_email input2" style="width: 170px;" />
+            </td>
+        </tr>
+        <tr>
+            <td class="tdtj1">
+                公司网址：<span class="f_c00"></span>
+            </td>
+            <td class="tdtj2">
+                <input name="enweb" id="enweb" type="text" class="v2_enweb input2" style="width: 300px;" />
+            </td>
+        </tr>
+        <tr>
+            <td class="tdtj1">
+                联系地址：<span class="f_c00">*</span>
+            </td>
+            <td class="tdtj2">
+                <span id="thelocation">
+                    <select name="">
+                        <option>浙江省</option>
+                    </select>
+                    <select name="">
+                        <option>杭州市</option>
+                    </select>
+                    <select name="district" id="district">
+                        <option>拱墅区</option>
+                    </select>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td class="tdtj1">
+                企业联系地址：<span class="f_c00">*</span>
+            </td>
+            <td class="tdtj2">
+                <input name="address" id="address" type="text" class="v2_noemptyhtml input2" style="width: 300px;" maxlength="300" />
+        </tr>
+        <tr>
+            <td class="tdtj1">
+                邮 编：<span class="f_c00">*</span>
+            </td>
+            <td class="tdtj2">
+                <input name="zipcode" id="zipcode" type="text" class="v2_zipcode input2" style="width: 50px;" maxlength="6" />
+            </td>
+        </tr>
+        <tr>
+            <td class="tdtj1">
+                公司整体概述：<span class="f_c00">*</span>
+            </td>
+            <td class="tdtj2">
+                <span class="f_b5b5b5">请用中文详细说明贵公司的成立历史、主营产品、品牌、服务等权势；<br />
+                    如果内容过于简单或仅填写单纯的产品介绍，将有可能无法通过审核。</span>
+                <textarea name="desc" id="desc" class="v2_nonull input2" style="width: 450px;height: 90px;"></textarea>
+            </td>
+        </tr>
+    </table>
+    <p class="tijiao2nr1">
+        <input name="nextsub" id="nextsub" type="submit" class="tjan" value="下一步" onclick="return validate(this.form);" />
+    </p>
+    <%else%>
+        <%template _commsgbox%>
+    <%/if%>
+    </form>
+    <p class="tijiao3">
+    </p>
+</div>
+<%template _companypostfooter%>
