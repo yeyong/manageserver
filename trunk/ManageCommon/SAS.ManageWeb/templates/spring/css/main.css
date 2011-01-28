@@ -113,7 +113,7 @@
 .rankc{ width:218px; height:auto; padding:10px; float:left;}
 .rankc li{ width:218px; height:24px; line-height:24px; float:left;}
 .rankc li em{ width:15px; height:13px; line-height:13px; text-align:center; color:#e57100; background:url(../images/icon.gif) no-repeat; margin:4px 8px 0 0; display:inline; float:left;}
-.rankc li p{ width:160px; height:24px; float:left;}
+.rankc li p{ width:160px; height:24px; float:left; overflow:hidden;}
 .rankc li span{ width:35px; height:24px; text-align:right; float:right;}
 /*热卖*/
 .hot{ width:218px; height:auto; padding:9px 10px; float:left;}
