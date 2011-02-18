@@ -53,6 +53,7 @@ namespace SAS.ManageWeb
             }
             UpdateMetaInfo(companyinfo.En_name + "," + companyinfo.En_phone, Utils.CutString(Utils.RemoveHtml(companyinfo.En_desc), 0, 60), "");
             if (companyinfo.Configid == 0) cardconfigid = 1;
+            else cardconfigid = companyinfo.Configid;
 
             CardConfigInfo cci = CardConfigs.GetCardConfigCacheInfo(cardconfigid);
             if (cci == null) cci = CardConfigs.GetCardConfigCacheInfo(1);

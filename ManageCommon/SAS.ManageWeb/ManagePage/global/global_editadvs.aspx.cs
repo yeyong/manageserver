@@ -74,6 +74,7 @@ namespace SAS.ManageWeb.ManagePage
                 flashsrc.Text = parameter[1].Trim();
                 flashwidth.Text = parameter[2].Trim();
                 flashheight.Text = parameter[3].Trim();
+                flashurl.Text = parameter[4].Trim();
 
                 if (type.SelectedValue == Convert.ToInt16(AdType.InPostAd).ToString())
                 {
@@ -214,7 +215,7 @@ namespace SAS.ManageWeb.ManagePage
                     result = "image|" + imgsrc.Text.Trim() + "|" + imgwidth.Text.Trim() + "|" + imgheight.Text.Trim() + "|" + imglink.Text.Trim() + "|" + imgtitle.Text.Trim() + "||";
                     break;
                 case "flash":
-                    result = "flash|" + flashsrc.Text.Trim() + "|" + flashwidth.Text.Trim() + "|" + flashheight.Text + "||||";
+                    result = "flash|" + flashsrc.Text.Trim() + "|" + flashwidth.Text.Trim() + "|" + flashheight.Text + "|" + flashurl.Text.Trim() + "|||";
                     break;
             }
             //if (type.SelectedValue == Convert.ToInt16(AdType.MediaAd).ToString())

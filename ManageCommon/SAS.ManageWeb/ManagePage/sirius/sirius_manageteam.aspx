@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="SAS.Sirius.Admin.manageteam" %>
+﻿<%@ Page Language="C#" Inherits="SAS.ManageWeb.ManagePage.sirius_manageteam" CodeBehind="sirius_manageteam.aspx.cs" AutoEventWireup="True" %>
 <%@ Register TagPrefix="cc1" Namespace="SAS.Control" Assembly="SAS.Control" %>
 <%@ Register Src="../UserControls/PageInfo.ascx" TagName="PageInfo" TagPrefix="uc1" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >

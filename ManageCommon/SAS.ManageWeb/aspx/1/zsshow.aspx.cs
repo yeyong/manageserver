@@ -37,6 +37,7 @@ namespace SAS.ManageWeb
                 AddErrLine("该企业信息不存在或已删除！");
                 return;
             }
+            companyshowinfo.En_desc = Utils.StrFormat(companyshowinfo.En_desc);
             commentcount = companyshowinfo.En_sell;
             if (companyshowinfo.En_status != 2)
             {

@@ -135,10 +135,10 @@
 					    <%if {catastrlength}+{catastrnum}*3>54%>
 					        <%break%>
 					    <%/if%>
-					<a class="l_666" title="{subsubcata[name]}" href="zshy-{subsubcata[id]}.html target="_blank"">{subsubcata[name]}</a> | 
+					<a class="l_666" title="{subsubcata[name]}" href="zshy-{subsubcata[id]}.html" target="_blank">{subsubcata[name]}</a> | 
 					    <%set {catastrnum} = {catastrnum} + 1%>
 					    <%/loop%>
-					<a class="l_c00" title="{subcata[name]}" href="zshy-{subcata[id]}.html" target="_blank">更多&gt;&gt;</a></p>
+					<a class="l_c00" title="{subcata[name]}" href="zshy-{subcata[id]}.html" target="_blank">更多&gt;&gt;</a>
 						</span>
 					</li>
 			        <%set {computenum}={computenum}+1%>
@@ -342,29 +342,38 @@
 			<div id="hotnr">
 				<div class="con">
 					<ul class="hot">
-						<li class="hotli1"><a title="" href="#"><img alt="" src="images/ad/218x70.gif" /></a></li>
-						<li class="hotli2"></li>
-						<li class="hotli1"><a title="" href="#"><img alt="" src="images/ad/218x70.gif" /></a></li>
-						<li class="hotli2"></li>
-						<li class="hotli1"><a title="" href="#"><img alt="" src="images/ad/218x70.gif" /></a></li>
+					<%loop (AdShowInfo) ad6info indexad6%>
+			        <%csharp%>
+			            string[] ad6infoparm = ad6info.Parameters.Split('|');
+			        <%/csharp%>
+			        <%if ad6infoparm.Length<8%><%continue%><%/if%>
+						<li class="hotli1"><a title="{ad6infoparm[5]}" href="tools/ajax.aspx?t=advredirect&url=<%urlencode({ad6infoparm[4]})%>" rel="nofollow" target="_blank"><img alt="{ad6infoparm[5]}" src="{ad6infoparm[1]}" /></a></li>
+					<%if {ad6info__loop__id}<3%><li class="hotli2"></li><%/if%>
+					<%/loop%>
 					</ul>
 				</div>
 				<div class="con">
 					<ul class="hot">
-						<li class="hotli1"><a title="" href="#"><img alt="" src="images/ad/218x70.gif" /></a></li>
-						<li class="hotli2"></li>
-						<li class="hotli1"><a title="" href="#"><img alt="" src="images/ad/218x70.gif" /></a></li>
-						<li class="hotli2"></li>
-						<li class="hotli1"><a title="" href="#"><img alt="" src="images/ad/218x70.gif" /></a></li>
+					<%loop (AdShowInfo) ad7info indexad7%>
+			        <%csharp%>
+			            string[] ad7infoparm = ad7info.Parameters.Split('|');
+			        <%/csharp%>
+			        <%if ad7infoparm.Length<8%><%continue%><%/if%>
+						<li class="hotli1"><a title="{ad7infoparm[5]}" href="tools/ajax.aspx?t=advredirect&url=<%urlencode({ad7infoparm[4]})%>" rel="nofollow" target="_blank"><img alt="{ad7infoparm[5]}" src="{ad7infoparm[1]}" /></a></li>
+					<%if {ad7info__loop__id}<3%><li class="hotli2"></li><%/if%>
+					<%/loop%>
 					</ul>
 				</div>
 				<div class="con">
 					<ul class="hot">
-						<li class="hotli1"><a title="" href="#"><img alt="" src="images/ad/218x70.gif" /></a></li>
-						<li class="hotli2"></li>
-						<li class="hotli1"><a title="" href="#"><img alt="" src="images/ad/218x70.gif" /></a></li>
-						<li class="hotli2"></li>
-						<li class="hotli1"><a title="" href="#"><img alt="" src="images/ad/218x70.gif" /></a></li>
+					<%loop (AdShowInfo) ad8info indexad8%>
+			        <%csharp%>
+			            string[] ad8infoparm = ad8info.Parameters.Split('|');
+			        <%/csharp%>
+			        <%if ad8infoparm.Length<8%><%continue%><%/if%>
+						<li class="hotli1"><a title="{ad8infoparm[5]}" href="tools/ajax.aspx?t=advredirect&url=<%urlencode({ad8infoparm[4]})%>" rel="nofollow" target="_blank"><img alt="{ad8infoparm[5]}" src="{ad8infoparm[1]}" /></a></li>
+					<%if {ad8info__loop__id}<3%><li class="hotli2"></li><%/if%>
+					<%/loop%>
 					</ul>
 				</div>
 			</div>

@@ -10,15 +10,14 @@ using SAS.Common;
 using SAS.Logic;
 using SAS.Config;
 using SAS.Entity;
+using SAS.Plugin.Sirius;
 
-namespace SAS.Sirius.Admin
+namespace SAS.ManageWeb.ManagePage
 {
-    /// <summary>
-    /// add team
-    /// </summary>
-    public partial class addteam : AdminPage
+    public partial class sirius_addteam : AdminPage
     {
         protected string root = Utils.GetRootUrl(BaseConfigs.GetBaseConfig().Sitepath);
+        private SiriusPluginBase spb = SiriusPluginProvider.GetInstance();
 
         public void InitInfo()
         {
@@ -50,7 +49,7 @@ namespace SAS.Sirius.Admin
 
                 TeamInfo teaminfo = CreateTeamInfo();
                 string results = "";
-                Sirius.CreateTeam(teaminfo,out results);
+                spb.CreateTeamInfo(teaminfo, out results);
 
                 if (results == "")
                 {
@@ -108,6 +107,6 @@ namespace SAS.Sirius.Admin
             InitInfo();
         }
 
-        #endregion        
+        #endregion      
     }
 }

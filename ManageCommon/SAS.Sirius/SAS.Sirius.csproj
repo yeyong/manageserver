@@ -37,37 +37,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\addteam.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\addteam.aspx.designer.cs">
-      <DependentUpon>addteam.aspx.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\editteam.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\editteam.aspx.designer.cs" />
-    <Compile Include="Admin\manageteam.aspx.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\manageteam.aspx.designer.cs">
-      <DependentUpon>manageteam.aspx.cs</DependentUpon>
-    </Compile>
     <Compile Include="Config\SiriusConfigFileManager.cs" />
     <Compile Include="Config\SiriusConfigInfo.cs" />
     <Compile Include="Config\SiriusConfigs.cs" />
     <Compile Include="Data\DbProvider.cs" />
     <Compile Include="Data\DTOProvider.cs" />
     <Compile Include="Data\SqlDataProvider.cs" />
-    <Compile Include="Pages\personindex.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\StudioBasePage.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Pages\studioindex.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sirius.cs" />
     <Compile Include="SiriusPlugin.cs" />
@@ -85,10 +60,6 @@
       <Project>{5325F618-33FA-4B03-9A3E-96ED8C554F6C}</Project>
       <Name>SAS.Config</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SAS.Control\SAS.Control.csproj">
-      <Project>{B16EF345-37D9-43FE-B371-8627BC6F3E43}</Project>
-      <Name>SAS.Control</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SAS.Data\SAS.Data.csproj">
       <Project>{E15BF13F-EC22-47A3-ACF4-AA79738FB7E8}</Project>
       <Name>SAS.Data</Name>
@@ -96,14 +67,6 @@
     <ProjectReference Include="..\SAS.Entity\SAS.Entity.csproj">
       <Project>{F6CFD248-E9E3-480A-B518-526298AAF81E}</Project>
       <Name>SAS.Entity</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SAS.Logic\SAS.Logic.csproj">
-      <Project>{9145299A-21C2-4558-A956-2DBDCBF477DE}</Project>
-      <Name>SAS.Logic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SAS.ManageWeb\SAS.ManageWeb.csproj">
-      <Project>{766EFDCA-D4D9-461A-A07C-7A3A00893ED9}</Project>
-      <Name>SAS.ManageWeb</Name>
     </ProjectReference>
     <ProjectReference Include="..\SAS.Plugin\SAS.Plugin.csproj">
       <Project>{2EA29B20-569F-421C-B359-7E7F8C7045CD}</Project>

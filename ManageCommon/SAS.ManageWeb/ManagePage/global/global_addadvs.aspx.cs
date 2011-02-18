@@ -132,7 +132,7 @@ namespace SAS.ManageWeb.ManagePage
                     result = string.Format("image|{0}|{1}|{2}|{3}|{4}||", imgsrc.Text.Trim(), imgwidth.Text.Trim(), imgheight.Text.Trim(), imglink.Text.Trim(), imgtitle.Text.Trim());
                     break;
                 case "flash":
-                    result = string.Format("flash|{0}|{1}|{2}||||", flashsrc.Text.Trim(), flashwidth.Text.Trim(), flashheight.Text);
+                    result = string.Format("flash|{0}|{1}|{2}|{3}|||", flashsrc.Text.Trim(), flashwidth.Text.Trim(), flashheight.Text, flashurl.Text.Trim());
                     break;
             }
 

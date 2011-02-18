@@ -18,9 +18,9 @@ namespace SAS.Plugin.Sirius
         /// 创建团队信息
         /// </summary>
         /// <param name="teaminfo">信息实体</param>
-        /// <param name="members">成员信息反馈</param>
+        /// <param name="result">返回成员信息</param>
         /// <returns></returns>
-        public abstract int CreateTeamInfo(TeamInfo teaminfo, out string members);
+        public abstract int CreateTeamInfo(TeamInfo teaminfo, out string result);
 
         /// <summary>
         /// 获得所有团队信息
@@ -40,6 +40,6 @@ namespace SAS.Plugin.Sirius
         /// </summary>
         /// <param name="teaminfo"></param>
         /// <returns></returns>
-        public abstract bool UpdateTeamInfo(TeamInfo teaminfo, out string members);
+        public abstract bool UpdateTeamInfo(TeamInfo teaminfo,out string result);
     }
 }

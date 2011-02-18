@@ -368,6 +368,14 @@
                                         </cc2:textbox>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>
+                                        企业名片配置:
+                                    </td>
+                                    <td>
+                                        <cc2:DropDownList runat="server" ID="enconfig"></cc2:DropDownList>
+                                    </td>
+                                </tr>
                             </table>
                         </td>
                     </tr>

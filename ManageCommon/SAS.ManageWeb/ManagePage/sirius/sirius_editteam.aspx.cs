@@ -10,17 +10,19 @@ using SAS.Common;
 using SAS.Logic;
 using SAS.Config;
 using SAS.Entity;
+using SAS.Plugin.Sirius;
 
-namespace SAS.Sirius.Admin
+namespace SAS.ManageWeb.ManagePage
 {
-    public partial class editteam : AdminPage
+    public partial class sirius_editteam : AdminPage
     {
         public TeamInfo teamin = new TeamInfo();
+        private SiriusPluginBase spb = SiriusPluginProvider.GetInstance();
 
         public void LoadTeamInfo(int tid)
         {
-            teamin = Sirius.GetTeamInfoByTeamID(tid);
-            
+            teamin = spb.GetTeamByTeamID(tid);
+
             templateid.AddTableData(Templates.GetValidTemplateList(), "tp_name", "tp_id");
             templateid.SelectedValue = teamin.Templateid.ToString();
 
@@ -57,7 +59,7 @@ namespace SAS.Sirius.Admin
 
             if (this.CheckCookie())
             {
-                teamin = Sirius.GetTeamInfoByTeamID(SASRequest.GetInt("teamID", 0));
+                teamin = spb.GetTeamByTeamID(SASRequest.GetInt("teamID", 0));
 
                 teamin.Name = name.Text.Trim();
                 teamin.Teamdomain = teamurl.Text.Trim();
@@ -75,7 +77,7 @@ namespace SAS.Sirius.Admin
                 teamin.Seokeywords = seokeywords.Text.Trim();
 
                 string message = "";
-                if (Sirius.UpdateTeamInfo(teamin, out message))
+                if (spb.UpdateTeamInfo(teamin,out message))
                 {
                     if (message == "")
                     {
@@ -109,9 +111,9 @@ namespace SAS.Sirius.Admin
             {
                 Response.Redirect("sirius_manageteam.aspx");
             }
-            
+
         }
 
-        #endregion      
+        #endregion     
     }
 }
