@@ -125,6 +125,9 @@ namespace SAS.Entity
                 case 7:
                     ecname = "私营";
                     break;
+                case 8:
+                    ecname = "集体经营";
+                    break;
             }
             return ecname;
         }
@@ -258,7 +261,11 @@ namespace SAS.Entity
         /// <summary>
         /// 私营
         /// </summary>
-        CoPrivate = 7
+        CoPrivate = 7,
+        /// <summary>
+        /// 集体经营
+        /// </summary>
+        CoCollect = 8
     }
     /// <summary>
     /// 活动类型

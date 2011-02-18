@@ -6,7 +6,6 @@ using System.Data;
 
 using SAS.Plugin.Sirius;
 using SAS.Common;
-using SAS.Logic;
 using SAS.Entity;
 using SAS.Config;
 
@@ -21,16 +20,10 @@ namespace SAS.Sirius
         /// 创建团队信息
         /// </summary>
         /// <param name="teaminfo">信息实体</param>
-        /// <param name="members">成员信息反馈</param>
-        /// <param name="adminUid">管理员ID</param>
-        /// <param name="adminUserName">管理员姓名</param>
-        /// <param name="adminUserGruopId">管理组</param>
-        /// <param name="adminUserGroupTitle">管理组名称</param>
-        /// <param name="adminIp">管理员IP</param>
         /// <returns></returns>
-        public override int CreateTeamInfo(TeamInfo teaminfo, out string members)
+        public override int CreateTeamInfo(TeamInfo teaminfo,out string result)
         {
-            return Sirius.CreateTeam(teaminfo, out  members);
+            return Sirius.CreateTeam(teaminfo, out result);
         }
 
         /// <summary>
@@ -52,9 +45,9 @@ namespace SAS.Sirius
             return Sirius.GetTeamInfoByTeamID(teamID);
         }
 
-        public override bool UpdateTeamInfo(TeamInfo teaminfo, out string members)
+        public override bool UpdateTeamInfo(TeamInfo teaminfo, out string result)
         {
-            return Sirius.UpdateTeamInfo(teaminfo, out members);
+            return Sirius.UpdateTeamInfo(teaminfo, out result);
         }
     }
 }

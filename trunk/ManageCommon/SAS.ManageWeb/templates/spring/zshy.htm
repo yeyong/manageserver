@@ -19,9 +19,9 @@
 		<%set {zshycompanystatus}="已审核"%>
 		<%/if%>
 			<li <%if {zshycompanyinfo__loop__id}%2==0%>class="bg"<%/if%>>
-				<p class="tit"><strong><a title="{zshycompanyinfo.en_name}" class="l_c00" href="show.html" target="_blank">{zshycompanyinfo.en_name}</a></strong> [{zshycompanystatus}]</p>
+				<p class="tit"><strong><a title="{zshycompanyinfo.en_name}" class="l_c00" href="company-{zshycompanyinfo.en_id}.html" target="_blank">{zshycompanyinfo.en_name}</a></strong> [{zshycompanystatus}]</p>
 				<p class="nr">
-					<span class="lt te"><%getsubstring(Utils.RemoveHtml({zshycompanyinfo.en_desc}),100,".")%>[<a class="l_c00" href="company-{zshycompanyinfo.en_id}.html">查看详情</a>] </span>
+					<span class="lt te"><%getsubstring(Utils.RemoveHtml({zshycompanyinfo.en_desc}),100,".")%>[<a target="_blank" class="l_c00" href="company-{zshycompanyinfo.en_id}.html">查看详情</a>] </span>
 					<span class="zi ziw1">
 						<em>注册日期</em>
 						<em><%datetostr({zshycompanyinfo.en_builddate},"yyyy-MM-dd")%></em>

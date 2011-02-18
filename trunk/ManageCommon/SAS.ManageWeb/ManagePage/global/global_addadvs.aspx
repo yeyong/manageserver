@@ -305,6 +305,12 @@
 		</td>
 		<td class="vtop">请输入 Flash 广告的调用地址, 以http://开头</td>
 	</tr>
+	<tr>
+	    <td class="vtop rowform">
+			<yy:TextBox id="flashurl" runat="server" RequiredFieldType="暂无校验"  CanBeNull="可为空" Text=""></yy:TextBox>
+		</td>
+		<td class="vtop">请输入 Flash 广告的链接地址, 以http://开头</td>
+	</tr>
 	</tbody>
 	</table>
 	<yy:Hint id="Hint1" runat="server" HintImageUrl="../images"></yy:Hint>

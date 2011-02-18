@@ -8,7 +8,6 @@ using SAS.Common.Generic;
 using SAS.Entity;
 using SAS.Common;
 using SAS.Config;
-using SAS.Logic;
 using SAS.Cache;
 using SAS.Sirius.Data;
 
@@ -30,47 +29,15 @@ namespace SAS.Sirius
         /// <param name="adminUserGroupTitle">管理组名称</param>
         /// <param name="adminIp">管理员IP</param>
         /// <returns>团队ID</returns>
-        public static int CreateTeam(TeamInfo teaminfo, out string members)
+        public static int CreateTeam(TeamInfo teaminfo, out string result)
         {
             int teamID = 0;
-            string relmembers = "";
-            members = CheckMemberInfo(teaminfo.TeamMember, out relmembers);
-            teaminfo.TeamMember = relmembers;
+            string teammember = teaminfo.TeamMember;
+            teaminfo.TeamMember = "";
             teamID = Data.DbProvider.GetInstance().CreateTeams(teaminfo);
+            result = SetTeamMember(teamID, teammember);
             SASCache.GetCacheService().RemoveObject("/Sirius/TeamInfoList");
             return teamID;
-        }
-
-        /// <summary>
-        /// 核查团队人员信息
-        /// </summary>
-        /// <param name="members"></param>
-        /// <returns></returns>
-        private static string CheckMemberInfo(string members,out string relmembers)
-        {
-            string novmemebers = "";
-            members = members == null ? "" : members;
-            relmembers = "";
-
-            foreach (string mem in members.Split(','))
-            {
-                if (mem != "")
-                {
-                    UserInfo userInfo = Users.GetUserInfo(mem);
-
-                    if (userInfo != null && userInfo.Ps_ug_id != 7)
-                    {
-                        if (userInfo.Ps_ug_id <= 3 && userInfo.Ps_ug_id > 0)
-                        {
-                            relmembers += mem + ",";
-                            continue;
-                        }
-                    }
-                    novmemebers += mem + ",";
-                }
-            }
-
-            return novmemebers;
         }
 
         /// <summary>
@@ -107,18 +74,27 @@ namespace SAS.Sirius
         /// </summary>
         /// <param name="team"></param>
         /// <returns></returns>
-        public static bool UpdateTeamInfo(TeamInfo team, out string members)
+        public static bool UpdateTeamInfo(TeamInfo team, out string result)
         {
-            string realmembers = "";
-            members = CheckMemberInfo(team.TeamMember, out realmembers);
-            team.TeamMember = realmembers;
-
             if (!Data.DbProvider.GetInstance().UpdateTeamInfo(team))
             {
+                result = "";
                 return false;
             }
+            result = SetTeamMember(team.TeamID, team.TeamMember);
             SASCache.GetCacheService().RemoveObject("/Sirius/TeamInfoList");
             return true;
+        }
+
+        /// <summary>
+        /// 设置团队成员
+        /// </summary>
+        /// <param name="tid"></param>
+        /// <param name="members"></param>
+        /// <returns></returns>
+        public static string SetTeamMember(int tid, string members)
+        {
+            return Data.DbProvider.GetInstance().SetTeamMemberList(members, tid);
         }
     }
 }

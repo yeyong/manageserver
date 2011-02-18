@@ -10,11 +10,14 @@ using SAS.Common;
 using SAS.Logic;
 using SAS.Config;
 using SAS.Entity;
+using SAS.Plugin.Sirius;
 
-namespace SAS.Sirius.Admin
+namespace SAS.ManageWeb.ManagePage
 {
-    public partial class manageteam : AdminPage
+    public partial class sirius_manageteam : AdminPage
     {
+        private SiriusPluginBase spb = SiriusPluginProvider.GetInstance();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -30,7 +33,7 @@ namespace SAS.Sirius.Admin
             DataGrid1.TableHeaderName = "团队列表";
             DataGrid1.Attributes.Add("borderStyle", "2");
             DataGrid1.DataKeyField = "teamID";
-            DataGrid1.BindData(Sirius.GetAllTeamInfoList());
+            DataGrid1.BindData(spb.GetAllTeamList());
             DataGrid1.Sort = "createDate";
             #endregion
         }
@@ -53,7 +56,7 @@ namespace SAS.Sirius.Admin
             foreach (object o in DataGrid1.GetKeyIDArray())
             {
                 int tID = int.Parse(o.ToString());
-                TeamInfo team = Sirius.GetTeamInfoByTeamID(tID);
+                TeamInfo team = spb.GetTeamByTeamID(tID);
 
                 string tName = DataGrid1.GetControlValue(row, "name");
 
@@ -90,7 +93,7 @@ namespace SAS.Sirius.Admin
                 team.Displayorder = int.Parse(tOrder);
 
                 string members = "";
-                Sirius.UpdateTeamInfo(team,out members);
+                spb.UpdateTeamInfo(team, out members);
                 base.RegisterStartupScript("PAGE", "window.location.href='sirius_manageteam.aspx';");
             }
 
@@ -106,7 +109,7 @@ namespace SAS.Sirius.Admin
         }
 
         private void InitializeComponent()
-        {            
+        {
             DataGrid1.DataKeyField = "teamID";
             DataGrid1.ColumnSpan = 12;
             this.EditUserGroup.Click += new EventHandler(EditUserGroup_Click);

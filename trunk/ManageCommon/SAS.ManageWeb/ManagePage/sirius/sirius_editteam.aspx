@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="SAS.Sirius.Admin.editteam" %>
+﻿<%@ Page Language="C#" Inherits="SAS.ManageWeb.ManagePage.sirius_editteam" CodeBehind="sirius_editteam.aspx.cs"%>
 <%@ Register TagPrefix="uc1" TagName="TextareaResize" Src="../UserControls/TextareaResize.ascx" %>
 <%@ Register TagPrefix="cc2" Namespace="SAS.Control" Assembly="SAS.Control" %>
 <%@ Register TagPrefix="cc3" Namespace="SAS.Control" Assembly="SAS.Control" %>

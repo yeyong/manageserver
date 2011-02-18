@@ -60,7 +60,8 @@ input.ntjan{ width:95px; height:33px; line-height:33px; font-size:14px; color:#f
 /*内容部分*/
 .cot{ width:960px; height:auto; margin:0 auto;}
 /*通栏广告*/
-.inxad, .inxad img{ width:960px; height:90px; float:left;}
+.inxad{ width:960px; height:auto; float:left;}
+.inxad img{ width:960px; height:90px; float:left;}
 /*site*/
 .bd_site{ width:938px; height:26px; line-height:26px; border: solid #ccc; border-width:1px 0 1px 0; text-align:left; padding:0 0 0 20px; float:left; background:url(../images/list-arrow-rt.gif) 10px 9px no-repeat; position:relative;}
 .bd_site .lt, .bd_site .rt{ width:1px; height:26px; background:#ccc; position:absolute; top:0;}

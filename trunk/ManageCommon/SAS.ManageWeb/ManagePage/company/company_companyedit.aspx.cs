@@ -50,6 +50,8 @@ namespace SAS.ManageWeb.ManagePage
                 string s_text = EnumCatch.GetEnCommType(s_value);
                 enco.Items.Add(new ListItem(s_text, s_value.ToString()));
             }
+
+            enconfig.AddTableData(CardConfigs.GetCardConfigList(), "ccname", "id");
         }
 
         /// <summary>
@@ -87,6 +89,7 @@ namespace SAS.ManageWeb.ManagePage
             enlevels.SelectedValue = _companyInfos.En_level.ToString();
             encredit.Text = _companyInfos.En_credits.ToString();
             defaultcata = _companyInfos.En_cataloglist;
+            enconfig.SelectedValue = _companyInfos.Configid.ToString();
         }
 
         private void UpdateCompanyInfo_Click(object sender, EventArgs e)
@@ -153,6 +156,7 @@ namespace SAS.ManageWeb.ManagePage
                 _companyInfo.En_sell = 0;
                 _companyInfo.En_logo = "";
                 _companyInfo.En_music = "";
+                _companyInfo.Configid = Convert.ToInt32(enconfig.SelectedValue);
 
                 if (!AdminCompanies.UpdateCompanyInfo(_companyInfo))
                 {

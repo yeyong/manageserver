@@ -163,5 +163,15 @@ namespace SAS.Sirius.Data
             return true;
 
         }
+
+        public string SetTeamMemberList(string members, int tid)
+        {
+            DbParameter[] parms = 
+            {
+                DbHelper.MakeInParam("@tid",(DbType)SqlDbType.Int,4,tid),
+                DbHelper.MakeInParam("@members",(DbType)SqlDbType.VarChar,500,members)
+            };
+            return DbHelper.ExecuteScalarToStr(CommandType.StoredProcedure, string.Format("[{0}setteammemberlist]", BaseConfigs.GetTablePrefix), parms);
+        }
     }
 }

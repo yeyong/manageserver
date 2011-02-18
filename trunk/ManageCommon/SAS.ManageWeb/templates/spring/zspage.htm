@@ -111,7 +111,16 @@
 	</div>
 	<p class="inxad mar_top">
 	    <%if {cardad4}.Length>=8%>
-		    <a title="{cardad4[5]}" href="tools/ajax.aspx?t=advredirect&url=<%urlencode({cardad4[4]})%>" target="_blank" rel="nofollow"><img alt="{cardad4[5]}" src="{cardad4[1]}" /></a>
+	        <%if {cardad4[0]}=="flash"%>
+		    <object rel="nofollow" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="{cardad4[2]}" height="{cardad4[3]}">
+              <param name="movie" value="{cardad4[1]}" />
+              <param name="quality" value="high" />
+              <param name="wmode" value="opaque"/>
+              <embed wmode="opaque" src="{cardad4[1]}" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="{cardad4[2]}" height="{cardad4[3]}"></embed>
+            </object>
+            <%else%>
+		    <a title="{cardad4[5]}" href="tools/ajax.aspx?t=advredirect&url=<%urlencode({cardad3[4]})%>" target="_blank" rel="nofollow"><img alt="{cardad4[5]}" src="{cardad4[1]}" /></a>
+		    <%/if%>
 	    <%/if%>
 	</p>
 </div>
@@ -177,7 +186,16 @@
 	<%if {cataloginfo__loop__id}==2%>
 	<p class="inxad mar_top">
 	<%if {cardad5}.Length>=8%>
+	    <%if {cardad5[0]}=="flash"%>
+		    <object rel="nofollow" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="{cardad5[2]}" height="{cardad5[3]}">
+              <param name="movie" value="{cardad5[1]}" />
+              <param name="quality" value="high" />
+              <param name="wmode" value="opaque"/>
+              <embed wmode="opaque" src="{cardad5[1]}" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="{cardad5[2]}" height="{cardad5[3]}"></embed>
+            </object>
+        <%else%>
 		<a title="{cardad5[5]}" href="tools/ajax.aspx?t=advredirect&url=<%urlencode({cardad5[4]})%>" target="_blank" rel="nofollow"><img alt="{cardad5[5]}" src="{cardad5[1]}" /></a>
+		<%/if%>
 	<%/if%>
 	</p>
 	<%/if%>

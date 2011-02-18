@@ -579,6 +579,27 @@
     <Compile Include="ManagePage\rapidset\systeminf.aspx.designer.cs">
       <DependentUpon>systeminf.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\sirius\sirius_addteam.aspx.cs">
+      <DependentUpon>sirius_addteam.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\sirius\sirius_addteam.aspx.designer.cs">
+      <DependentUpon>sirius_addteam.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\sirius\sirius_editteam.aspx.cs">
+      <DependentUpon>sirius_editteam.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\sirius\sirius_editteam.aspx.designer.cs">
+      <DependentUpon>sirius_editteam.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\sirius\sirius_manageteam.aspx.cs">
+      <DependentUpon>sirius_manageteam.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\sirius\sirius_manageteam.aspx.designer.cs">
+      <DependentUpon>sirius_manageteam.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\syslogin.aspx.cs">
       <DependentUpon>syslogin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -836,6 +857,10 @@
     <ProjectReference Include="..\SAS.Plugin\SAS.Plugin.csproj">
       <Project>{2EA29B20-569F-421C-B359-7E7F8C7045CD}</Project>
       <Name>SAS.Plugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SAS.Sirius\SAS.Sirius.csproj">
+      <Project>{49354E14-7767-40D0-98C3-5FD8F46F304E}</Project>
+      <Name>SAS.Sirius</Name>
     </ProjectReference>
     <ProjectReference Include="..\SAS.Taobao\SAS.Taobao.csproj">
       <Project>{B096ACF0-E4BD-4EE9-9084-9B728598AF59}</Project>

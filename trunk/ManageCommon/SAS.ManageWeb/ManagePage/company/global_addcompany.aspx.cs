@@ -38,6 +38,8 @@ namespace SAS.ManageWeb.ManagePage
                 string s_text = EnumCatch.GetEnCommType(s_value);
                 enco.Items.Add(new ListItem(s_text, s_value.ToString()));
             }
+
+            enconfig.AddTableData(CardConfigs.GetCardConfigList(), "ccname", "id");
         }
 
         private void AddCompanyInfo_Click(object sender, EventArgs e)
@@ -125,6 +127,7 @@ namespace SAS.ManageWeb.ManagePage
             comps.En_sell = 0;
             comps.En_logo = "";
             comps.En_music = "";
+            comps.Configid = Convert.ToInt32(enconfig.SelectedValue);
             return comps;
         }
 

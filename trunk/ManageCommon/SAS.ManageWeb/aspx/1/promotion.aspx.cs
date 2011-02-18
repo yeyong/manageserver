@@ -79,6 +79,7 @@ namespace SAS.ManageWeb
             AddfootScript(loadscript);
 
             if (companyshowinfo.Configid == 0) cardconfigid = 1;
+            else cardconfigid = companyshowinfo.Configid;
 
             CardConfigInfo cci = CardConfigs.GetCardConfigCacheInfo(cardconfigid);
             if (cci == null) cci = CardConfigs.GetCardConfigCacheInfo(1);

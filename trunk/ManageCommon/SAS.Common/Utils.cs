@@ -666,6 +666,7 @@ namespace SAS.Common
             {
                 str = str.Replace("\r\n", "<br />");
                 str = str.Replace("\n", "<br />");
+                str = str.Replace("\t", " ");
                 str2 = str;
             }
             return str2;
