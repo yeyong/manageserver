@@ -256,6 +256,7 @@ namespace SAS.ManageWeb.ManagePage
             lastip.Text = userInfo.Ps_loginIP.Trim();
             lastpost.Text = userInfo.Ps_lastChangePass.ToString();
             lastvisit.Text = userInfo.Ps_lastLogin;
+            job.Text = userInfo.Ps_company;
             newpm.SelectedValue = userInfo.Ps_newpm.ToString();
             switch (userInfo.Ps_newsletter)
             {
@@ -315,7 +316,7 @@ namespace SAS.ManageWeb.ManagePage
             yahoo.Text = userInfo.Pd_Yahoo;
             msn.Text = userInfo.Pd_MSN;
             skype.Text = userInfo.Pd_Skype;
-            location.Text = userInfo.Pd_address_1;
+            location.Text = userInfo.Tm_location;
             ////customstatus.Text = userInfo.Customstatus;
             //avatar.Text = userInfo.Avatar;
             //avatarheight.Text = userInfo.Avatarheight.ToString();
@@ -328,6 +329,22 @@ namespace SAS.ManageWeb.ManagePage
             phone.Text = userInfo.Pd_phone;
 
             givenusername.Text = userInfo.Ps_name;
+
+            tm_light.Text = userInfo.Tm_light.ToString();
+            tm_xl.Text = userInfo.Tm_education;
+            tm_zy.Text = userInfo.Tm_professional;
+            tm_ah.Text = userInfo.Tm_hobby;
+            tm_xz.Text = userInfo.Tm_constellation;
+            tm_sx.Text = userInfo.Tm_sx;
+            tm_age.Text = userInfo.Tm_teamage.ToString();
+            tm_img.Text = userInfo.Tm_image;
+            tm_imgbak.Text = userInfo.Tm_imgbak;
+            tm_imglist.Text = userInfo.Tm_smallimg;
+            tm_sc.Text = userInfo.Tm_figure;
+            tm_dz.Text = userInfo.Tm_location;
+            tm_sign.Text = userInfo.Tm_sign;
+            tm_selfdesc.Text = userInfo.Tm_selfdesc;
+            tm_selfthink.Text = userInfo.Tm_selfenjoy;
 
             ////if (userInfo.Medals.Trim() == "")
             ////{
@@ -681,6 +698,7 @@ namespace SAS.ManageWeb.ManagePage
                 userInfo.Ps_onlinetime = Convert.ToInt32(oltime.Text);
                 userInfo.Ps_pageviews = Convert.ToInt32(pageviews.Text);
                 userInfo.Ps_bdSound = Convert.ToInt32(pmsound.Text);
+                userInfo.Ps_company = job.Text;
                 ////userInfo.Posts = Convert.ToInt32(posts.Text);
                 ////userInfo.Ppp = Convert.ToInt32(ppp.Text);
                 userInfo.Ps_regIP = regip.Text;
@@ -782,7 +800,7 @@ namespace SAS.ManageWeb.ManagePage
                 userInfo.Pd_Yahoo = yahoo.Text;
                 userInfo.Pd_MSN = msn.Text;
                 userInfo.Pd_Skype = skype.Text;
-                userInfo.Pd_address_1 = location.Text;
+                userInfo.Tm_location = location.Text;
                 ////userInfo.Customstatus = customstatus.Text;
                 //userInfo.Avatar = avatar.Text;
                 //userInfo.Avatarheight = Convert.ToInt32(avatarheight.Text);
@@ -806,6 +824,21 @@ namespace SAS.ManageWeb.ManagePage
                 userInfo.Pd_idcard = idcard.Text;
                 userInfo.Pd_mobile = mobile.Text;
                 userInfo.Pd_phone = phone.Text;
+                userInfo.Tm_light = TypeConverter.StrToInt(tm_light.Text, 0);
+                userInfo.Tm_education = tm_xl.Text;
+                userInfo.Tm_professional = tm_zy.Text;
+                userInfo.Tm_hobby = tm_ah.Text;
+                userInfo.Tm_constellation = tm_xz.Text;
+                userInfo.Tm_sx = tm_sx.Text;
+                userInfo.Tm_teamage = TypeConverter.StrToInt(tm_age.Text, 0);
+                userInfo.Tm_image = tm_img.Text;
+                userInfo.Tm_imgbak = tm_imgbak.Text;
+                userInfo.Tm_smallimg = tm_imglist.Text;
+                userInfo.Tm_figure = tm_sc.Text;
+                userInfo.Tm_location = tm_dz.Text;
+                userInfo.Tm_sign = tm_sign.Text;
+                userInfo.Tm_selfdesc = tm_selfdesc.Text;
+                userInfo.Tm_selfenjoy = tm_selfthink.Text;
                 ////userInfo.Medals = SASRequest.GetString("medalid");
 
                 if (IsEditUserName.Checked)

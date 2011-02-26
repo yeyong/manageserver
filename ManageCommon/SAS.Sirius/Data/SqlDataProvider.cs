@@ -114,6 +114,12 @@ namespace SAS.Sirius.Data
             return tlist;
         }
 
+        public DataTable GetAllTeam()
+        {
+            string commandText = string.Format("SELECT * FROM [{0}teamInfo] ORDER BY [createdate]", BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteDataset(CommandType.Text, commandText).Tables[0];
+        }
+
         public IDataReader GetTeamInfoByID(int tid)
         {
             DbParameter[] parms = { DbHelper.MakeInParam("@teamID", (DbType)SqlDbType.Int, 4, tid) };
@@ -172,6 +178,56 @@ namespace SAS.Sirius.Data
                 DbHelper.MakeInParam("@members",(DbType)SqlDbType.VarChar,500,members)
             };
             return DbHelper.ExecuteScalarToStr(CommandType.StoredProcedure, string.Format("[{0}setteammemberlist]", BaseConfigs.GetTablePrefix), parms);
+        }
+
+        public int CreateAct(TeamActInfo tai)
+        {
+            DbParameter[] parms = {
+					                DbHelper.MakeInParam("@name",(DbType)SqlDbType.NVarChar,50,tai.Name),
+					                DbHelper.MakeInParam("@start",(DbType)SqlDbType.SmallDateTime,4,tai.Start),
+					                DbHelper.MakeInParam("@end",(DbType)SqlDbType.SmallDateTime,4,tai.End),
+					                DbHelper.MakeInParam("@shortdesc",(DbType)SqlDbType.VarChar,500,tai.Shortdesc),
+					                DbHelper.MakeInParam("@img",(DbType)SqlDbType.VarChar,200,tai.Img),
+					                DbHelper.MakeInParam("@imgbak",(DbType)SqlDbType.VarChar,200,tai.Imgbak),
+					                DbHelper.MakeInParam("@teamid",(DbType)SqlDbType.Int,4,tai.Teamid),
+					                DbHelper.MakeInParam("@atype",(DbType)SqlDbType.Int,4,tai.Atype),
+					                DbHelper.MakeInParam("@piccollect",(DbType)SqlDbType.Text,0,tai.Piccollect)
+                                  };
+            string commandText = String.Format("INSERT INTO [{0}teamactivity] ([name],[start],[end],[shortdesc],[img],[imgbak],[teamid],[atype],[piccollect]) VALUES (@name,@start,@end,@shortdesc,@img,@imgbak,@teamid,@atype,@piccollect);SELECT SCOPE_IDENTITY()", BaseConfigs.GetTablePrefix);
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText, parms));
+        }
+
+        public IDataReader GetTeamActListByTid(int tid)
+        {
+            DbParameter[] parms = { DbHelper.MakeInParam("@teamid", (DbType)SqlDbType.Int, 4, tid) };
+
+            string commandText = String.Format("SELECT * FROM [{0}teamactivity] WHERE [teamid] = @teamid", BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
+        }
+
+        public IDataReader GetTeamActInfo(int aid)
+        {
+            DbParameter[] parms = { DbHelper.MakeInParam("@aid", (DbType)SqlDbType.Int, 4, aid) };
+            string commmandText = String.Format("SELECT TOP 1 * FROM [{0}teamactivity] WHERE [id] = @aid", BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commmandText, parms);
+        }
+
+        public void UpdateTeamAct(TeamActInfo tinfo)
+        {
+            DbParameter[] parms = {
+                                    DbHelper.MakeInParam("@id",(DbType)SqlDbType.Int,4,tinfo.Id),
+					                DbHelper.MakeInParam("@name",(DbType)SqlDbType.NVarChar,50,tinfo.Name),
+					                DbHelper.MakeInParam("@start",(DbType)SqlDbType.SmallDateTime,4,tinfo.Start),
+					                DbHelper.MakeInParam("@end",(DbType)SqlDbType.SmallDateTime,4,tinfo.End),
+					                DbHelper.MakeInParam("@shortdesc",(DbType)SqlDbType.VarChar,500,tinfo.Shortdesc),
+					                DbHelper.MakeInParam("@img",(DbType)SqlDbType.VarChar,200,tinfo.Img),
+					                DbHelper.MakeInParam("@imgbak",(DbType)SqlDbType.VarChar,200,tinfo.Imgbak),
+					                DbHelper.MakeInParam("@teamid",(DbType)SqlDbType.Int,4,tinfo.Teamid),
+					                DbHelper.MakeInParam("@atype",(DbType)SqlDbType.Int,4,tinfo.Atype),
+					                DbHelper.MakeInParam("@piccollect",(DbType)SqlDbType.Text,0,tinfo.Piccollect)
+                                  };
+            string commandText = String.Format("UPDATE [{0}teamactivity] SET [name] = @name,[start] = @start,[end] = @end,[shortdesc] = @shortdesc,[img] = @img,[imgbak] = @imgbak,[teamid] = @teamid,[atype] = @atype,[piccollect] = @piccollect WHERE [id] = @id", BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
         }
     }
 }

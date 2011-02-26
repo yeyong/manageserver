@@ -93,6 +93,34 @@ namespace SAS.Web.Services.API
     }
     #endregion
 
+    #region 团队成员信息操作
+    [XmlRoot("member_getlist", Namespace = "http://www.cnzshy.com/api/", IsNullable = false)]
+    public class MemberGetListResponse
+    {
+        [XmlElement("mnums")]
+        [JsonProperty("mnums")]
+        public int Mnums;
+
+        [XmlElement("memberlist")]
+        [JsonProperty("memberlist")]
+        public MemberInfo[] MemberList;
+    }
+    /// <summary>
+    /// 获取团队活动信息
+    /// </summary>
+    [XmlRoot("TeamAct_getlist", Namespace = "http://www.cnzshy.com/api/", IsNullable = false)]
+    public class TeamActGetListResponse
+    {
+        [XmlElement("actnums")]
+        [JsonProperty("actnums")]
+        public int Actnums;
+
+        [XmlElement("teamactlist")]
+        [JsonProperty("teamactlist")]
+        public TeamActInfos[] TeamactList;
+    }
+    #endregion
+
     public class ArgResponse
     {
         [XmlElement("arg")]

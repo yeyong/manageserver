@@ -141,7 +141,8 @@
     <Compile Include="StatInfo.cs" />
     <Compile Include="StatVarInfo.cs" />
     <Compile Include="TagInfo.cs" />
-    <Compile Include="TeamInfo.cs" />
+    <Compile Include="Sirius\TeamActInfo.cs" />
+    <Compile Include="Sirius\TeamInfo.cs" />
     <Compile Include="TemplateAboutInfo.cs" />
     <Compile Include="TemplateInfo.cs" />
     <Compile Include="TopicInfo.cs" />

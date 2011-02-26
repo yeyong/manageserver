@@ -411,17 +411,25 @@ namespace SAS.Data.SqlServer
 					DbHelper.MakeInParam("@pd_phone", (DbType)SqlDbType.VarChar,50,userInfo.Pd_phone),
 					DbHelper.MakeInParam("@pd_mobile", (DbType)SqlDbType.VarChar,50,userInfo.Pd_mobile),
 					DbHelper.MakeInParam("@pd_website", (DbType)SqlDbType.VarChar,200,userInfo.Pd_website),
-					DbHelper.MakeInParam("@pd_ai_id_1", (DbType)SqlDbType.Int,4,userInfo.Pd_ai_id_1),
-					DbHelper.MakeInParam("@pd_address_1", (DbType)SqlDbType.VarChar,2000,userInfo.Pd_address_1),
-					DbHelper.MakeInParam("@pd_ai_id_2", (DbType)SqlDbType.Int,4,userInfo.Pd_ai_id_2),
-					DbHelper.MakeInParam("@pd_address_2", (DbType)SqlDbType.VarChar,2000,userInfo.Pd_address_2),
-					DbHelper.MakeInParam("@pd_ai_id_3", (DbType)SqlDbType.Int,4,userInfo.Pd_ai_id_3),
-					DbHelper.MakeInParam("@pd_address_3", (DbType)SqlDbType.VarChar,2000,userInfo.Pd_address_3),
-					DbHelper.MakeInParam("@pd_ai_id_temp", (DbType)SqlDbType.Int,4,userInfo.Pd_ai_id_temp),
-					DbHelper.MakeInParam("@pd_address_temp", (DbType)SqlDbType.VarChar,2000,userInfo.Pd_address_temp),
 					DbHelper.MakeInParam("@pd_authstr", (DbType)SqlDbType.VarChar,20,userInfo.Pd_authstr),
 					DbHelper.MakeInParam("@pd_idcard", (DbType)SqlDbType.VarChar,50,userInfo.Pd_idcard),
-					DbHelper.MakeInParam("@pd_bio", (DbType)SqlDbType.Text,0,userInfo.Pd_bio)
+					DbHelper.MakeInParam("@pd_bio", (DbType)SqlDbType.Text,0,userInfo.Pd_bio),
+
+                    DbHelper.MakeInParam("@tm_light", (DbType)SqlDbType.Int,4,userInfo.Tm_light),
+                    DbHelper.MakeInParam("@tm_sx", (DbType)SqlDbType.NVarChar,5,userInfo.Tm_sx),
+					DbHelper.MakeInParam("@tm_constellation", (DbType)SqlDbType.NVarChar,5,userInfo.Tm_constellation),
+					DbHelper.MakeInParam("@tm_education", (DbType)SqlDbType.NVarChar,10,userInfo.Tm_education),
+					DbHelper.MakeInParam("@tm_professional", (DbType)SqlDbType.NVarChar,20,userInfo.Tm_professional),
+					DbHelper.MakeInParam("@tm_specialty", (DbType)SqlDbType.NVarChar,100,userInfo.Tm_specialty),
+					DbHelper.MakeInParam("@tm_hobby", (DbType)SqlDbType.NVarChar,100,userInfo.Tm_hobby),
+					DbHelper.MakeInParam("@tm_teamage", (DbType)SqlDbType.Int,4,userInfo.Tm_teamage),
+					DbHelper.MakeInParam("@tm_image", (DbType)SqlDbType.VarChar,200,userInfo.Tm_image),
+					DbHelper.MakeInParam("@tm_imgbak", (DbType)SqlDbType.VarChar,200,userInfo.Tm_imgbak),
+					DbHelper.MakeInParam("@tm_smallimg", (DbType)SqlDbType.VarChar,200,userInfo.Tm_smallimg),
+					DbHelper.MakeInParam("@tm_sign", (DbType)SqlDbType.Text,0,userInfo.Tm_sign),
+					DbHelper.MakeInParam("@tm_selfdesc", (DbType)SqlDbType.Text,0,userInfo.Tm_selfdesc),
+					DbHelper.MakeInParam("@tm_figure", (DbType)SqlDbType.VarChar,50,userInfo.Tm_figure),
+                    DbHelper.MakeInParam("@tm_location", (DbType)SqlDbType.VarChar,200,userInfo.Tm_location)
 		    };
 
             return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.StoredProcedure, string.Format("{0}createuser", BaseConfigs.GetTablePrefix), parms), -1);
@@ -487,20 +495,28 @@ namespace SAS.Data.SqlServer
 					DbHelper.MakeInParam("@pd_phone", (DbType)SqlDbType.VarChar,50,userInfo.Pd_phone),
 					DbHelper.MakeInParam("@pd_mobile", (DbType)SqlDbType.VarChar,50,userInfo.Pd_mobile),
 					DbHelper.MakeInParam("@pd_website", (DbType)SqlDbType.VarChar,200,userInfo.Pd_website),
-					DbHelper.MakeInParam("@pd_ai_id_1", (DbType)SqlDbType.Int,4,userInfo.Pd_ai_id_1),
-					DbHelper.MakeInParam("@pd_address_1", (DbType)SqlDbType.VarChar,2000,userInfo.Pd_address_1),
-					DbHelper.MakeInParam("@pd_ai_id_2", (DbType)SqlDbType.Int,4,userInfo.Pd_ai_id_2),
-					DbHelper.MakeInParam("@pd_address_2", (DbType)SqlDbType.VarChar,2000,userInfo.Pd_address_2),
-					DbHelper.MakeInParam("@pd_ai_id_3", (DbType)SqlDbType.Int,4,userInfo.Pd_ai_id_3),
-					DbHelper.MakeInParam("@pd_address_3", (DbType)SqlDbType.VarChar,2000,userInfo.Pd_address_3),
-					DbHelper.MakeInParam("@pd_ai_id_temp", (DbType)SqlDbType.Int,4,userInfo.Pd_ai_id_temp),
-					DbHelper.MakeInParam("@pd_address_temp", (DbType)SqlDbType.VarChar,2000,userInfo.Pd_address_temp),
 					DbHelper.MakeInParam("@pd_authstr", (DbType)SqlDbType.VarChar,20,userInfo.Pd_authstr),
                     DbHelper.MakeInParam("@pd_authtime", (DbType)SqlDbType.SmallDateTime,4,userInfo.Pd_authtime),
 					DbHelper.MakeInParam("@pd_authflag", (DbType)SqlDbType.TinyInt,1,userInfo.Pd_authflag),
 					DbHelper.MakeInParam("@pd_idcard", (DbType)SqlDbType.VarChar,50,userInfo.Pd_idcard),
 					DbHelper.MakeInParam("@pd_bio", (DbType)SqlDbType.Text,0,userInfo.Pd_bio),
-                    DbHelper.MakeInParam("@ps_id", (DbType)SqlDbType.Int,4,userInfo.Ps_id)
+                    DbHelper.MakeInParam("@ps_id", (DbType)SqlDbType.Int,4,userInfo.Ps_id),
+
+                    DbHelper.MakeInParam("@tm_light", (DbType)SqlDbType.Int,4,userInfo.Tm_light),
+                    DbHelper.MakeInParam("@tm_sx", (DbType)SqlDbType.NVarChar,5,userInfo.Tm_sx),
+					DbHelper.MakeInParam("@tm_constellation", (DbType)SqlDbType.NVarChar,5,userInfo.Tm_constellation),
+					DbHelper.MakeInParam("@tm_education", (DbType)SqlDbType.NVarChar,10,userInfo.Tm_education),
+					DbHelper.MakeInParam("@tm_professional", (DbType)SqlDbType.NVarChar,20,userInfo.Tm_professional),
+					DbHelper.MakeInParam("@tm_specialty", (DbType)SqlDbType.NVarChar,100,userInfo.Tm_specialty),
+					DbHelper.MakeInParam("@tm_hobby", (DbType)SqlDbType.NVarChar,100,userInfo.Tm_hobby),
+					DbHelper.MakeInParam("@tm_teamage", (DbType)SqlDbType.Int,4,userInfo.Tm_teamage),
+					DbHelper.MakeInParam("@tm_image", (DbType)SqlDbType.VarChar,200,userInfo.Tm_image),
+					DbHelper.MakeInParam("@tm_imgbak", (DbType)SqlDbType.VarChar,200,userInfo.Tm_imgbak),
+					DbHelper.MakeInParam("@tm_smallimg", (DbType)SqlDbType.VarChar,200,userInfo.Tm_smallimg),
+					DbHelper.MakeInParam("@tm_sign", (DbType)SqlDbType.Text,0,userInfo.Tm_sign),
+					DbHelper.MakeInParam("@tm_selfdesc", (DbType)SqlDbType.Text,0,userInfo.Tm_selfdesc),
+					DbHelper.MakeInParam("@tm_figure", (DbType)SqlDbType.VarChar,50,userInfo.Tm_figure),
+                    DbHelper.MakeInParam("@tm_location", (DbType)SqlDbType.VarChar,200,userInfo.Tm_location)
                 };
 
             return TypeConverter.ObjectToInt(DbHelper.ExecuteNonQuery(CommandType.StoredProcedure,
@@ -549,16 +565,24 @@ namespace SAS.Data.SqlServer
 					                  DbHelper.MakeInParam("@pd_phone", (DbType)SqlDbType.VarChar,50,userInfo.Pd_phone),
 					                  DbHelper.MakeInParam("@pd_mobile", (DbType)SqlDbType.VarChar,50,userInfo.Pd_mobile),
 					                  DbHelper.MakeInParam("@pd_website", (DbType)SqlDbType.VarChar,200,userInfo.Pd_website),
-					                  DbHelper.MakeInParam("@pd_ai_id_1", (DbType)SqlDbType.Int,4,userInfo.Pd_ai_id_1),
-					                  DbHelper.MakeInParam("@pd_address_1", (DbType)SqlDbType.VarChar,2000,userInfo.Pd_address_1),
-					                  DbHelper.MakeInParam("@pd_ai_id_2", (DbType)SqlDbType.Int,4,userInfo.Pd_ai_id_2),
-					                  DbHelper.MakeInParam("@pd_address_2", (DbType)SqlDbType.VarChar,2000,userInfo.Pd_address_2),
-					                  DbHelper.MakeInParam("@pd_ai_id_3", (DbType)SqlDbType.Int,4,userInfo.Pd_ai_id_3),
-					                  DbHelper.MakeInParam("@pd_address_3", (DbType)SqlDbType.VarChar,2000,userInfo.Pd_address_3),
-					                  DbHelper.MakeInParam("@pd_ai_id_temp", (DbType)SqlDbType.Int,4,userInfo.Pd_ai_id_temp),
-					                  DbHelper.MakeInParam("@pd_address_temp", (DbType)SqlDbType.VarChar,2000,userInfo.Pd_address_temp),
 					                  DbHelper.MakeInParam("@pd_idcard", (DbType)SqlDbType.VarChar,50,userInfo.Pd_idcard),
-					                  DbHelper.MakeInParam("@pd_bio", (DbType)SqlDbType.Text,0,userInfo.Pd_bio)
+					                  DbHelper.MakeInParam("@pd_bio", (DbType)SqlDbType.Text,0,userInfo.Pd_bio),
+
+                                      DbHelper.MakeInParam("@tm_light", (DbType)SqlDbType.Int,4,userInfo.Tm_light),
+                                      DbHelper.MakeInParam("@tm_sx", (DbType)SqlDbType.NVarChar,5,userInfo.Tm_sx),
+				                      DbHelper.MakeInParam("@tm_constellation", (DbType)SqlDbType.NVarChar,5,userInfo.Tm_constellation),
+				                      DbHelper.MakeInParam("@tm_education", (DbType)SqlDbType.NVarChar,10,userInfo.Tm_education),
+				                      DbHelper.MakeInParam("@tm_professional", (DbType)SqlDbType.NVarChar,20,userInfo.Tm_professional),
+				                      DbHelper.MakeInParam("@tm_specialty", (DbType)SqlDbType.NVarChar,100,userInfo.Tm_specialty),
+				                      DbHelper.MakeInParam("@tm_hobby", (DbType)SqlDbType.NVarChar,100,userInfo.Tm_hobby),
+				                      DbHelper.MakeInParam("@tm_teamage", (DbType)SqlDbType.Int,4,userInfo.Tm_teamage),
+				                      DbHelper.MakeInParam("@tm_image", (DbType)SqlDbType.VarChar,200,userInfo.Tm_image),
+				                      DbHelper.MakeInParam("@tm_imgbak", (DbType)SqlDbType.VarChar,200,userInfo.Tm_imgbak),
+				                      DbHelper.MakeInParam("@tm_smallimg", (DbType)SqlDbType.VarChar,200,userInfo.Tm_smallimg),
+				                      DbHelper.MakeInParam("@tm_sign", (DbType)SqlDbType.Text,0,userInfo.Tm_sign),
+				                      DbHelper.MakeInParam("@tm_selfdesc", (DbType)SqlDbType.Text,0,userInfo.Tm_selfdesc),
+				                      DbHelper.MakeInParam("@tm_figure", (DbType)SqlDbType.VarChar,50,userInfo.Tm_figure),
+                                      DbHelper.MakeInParam("@tm_location", (DbType)SqlDbType.VarChar,200,userInfo.Tm_location)
 								   };
 
             DbHelper.ExecuteNonQuery(CommandType.StoredProcedure, string.Format("{0}updateuserprofile", BaseConfigs.GetTablePrefix), parms);
@@ -803,6 +827,15 @@ namespace SAS.Data.SqlServer
             string commandText = string.Format("UPDATE [{0}personInfo] SET [ps_pg_id]=@adminid WHERE [ps_ug_id]=@groupid",
                                                 BaseConfigs.GetTablePrefix);
             DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        public DataTable GetMemberList(string usernames)
+        {
+            string commandText = string.Format("SELECT {0} FROM [{1}personInfo] u LEFT JOIN [{1}personDetail] uf ON u.ps_id = uf.pd_id WHERE CHARINDEX([ps_name],'{2}') > 0 order by CHARINDEX([ps_name],'{2}')",
+                                                DbFields.USERS_JOIN_FIELDS,
+                                                BaseConfigs.GetTablePrefix,
+                                                usernames);
+            return DbHelper.ExecuteDataset(commandText).Tables[0];
         }
 
         #endregion
