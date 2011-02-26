@@ -579,12 +579,26 @@
     <Compile Include="ManagePage\rapidset\systeminf.aspx.designer.cs">
       <DependentUpon>systeminf.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\sirius\sirius_addactivity.aspx.cs">
+      <DependentUpon>sirius_addactivity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\sirius\sirius_addactivity.aspx.designer.cs">
+      <DependentUpon>sirius_addactivity.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\sirius\sirius_addteam.aspx.cs">
       <DependentUpon>sirius_addteam.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManagePage\sirius\sirius_addteam.aspx.designer.cs">
       <DependentUpon>sirius_addteam.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\sirius\sirius_editactivity.aspx.cs">
+      <DependentUpon>sirius_editactivity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\sirius\sirius_editactivity.aspx.designer.cs">
+      <DependentUpon>sirius_editactivity.aspx</DependentUpon>
     </Compile>
     <Compile Include="ManagePage\sirius\sirius_editteam.aspx.cs">
       <DependentUpon>sirius_editteam.aspx</DependentUpon>
@@ -593,12 +607,26 @@
     <Compile Include="ManagePage\sirius\sirius_editteam.aspx.designer.cs">
       <DependentUpon>sirius_editteam.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\sirius\sirius_manageactivity.aspx.cs">
+      <DependentUpon>sirius_manageactivity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\sirius\sirius_manageactivity.aspx.designer.cs">
+      <DependentUpon>sirius_manageactivity.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\sirius\sirius_manageteam.aspx.cs">
       <DependentUpon>sirius_manageteam.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManagePage\sirius\sirius_manageteam.aspx.designer.cs">
       <DependentUpon>sirius_manageteam.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\sirius\sirius_searchactivity.aspx.cs">
+      <DependentUpon>sirius_searchactivity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\sirius\sirius_searchactivity.aspx.designer.cs">
+      <DependentUpon>sirius_searchactivity.aspx</DependentUpon>
     </Compile>
     <Compile Include="ManagePage\syslogin.aspx.cs">
       <DependentUpon>syslogin.aspx</DependentUpon>
@@ -1771,9 +1799,13 @@
     <Content Include="ManagePage\rapidset\shortcut.aspx" />
     <Content Include="ManagePage\rapidset\systeminf.aspx" />
     <Content Include="ManagePage\sirius\photo.txt" />
+    <Content Include="ManagePage\sirius\sirius_addactivity.aspx" />
     <Content Include="ManagePage\sirius\sirius_addteam.aspx" />
+    <Content Include="ManagePage\sirius\sirius_editactivity.aspx" />
     <Content Include="ManagePage\sirius\sirius_editteam.aspx" />
+    <Content Include="ManagePage\sirius\sirius_manageactivity.aspx" />
     <Content Include="ManagePage\sirius\sirius_manageteam.aspx" />
+    <Content Include="ManagePage\sirius\sirius_searchactivity.aspx" />
     <Content Include="ManagePage\styles\calendar.css" />
     <Content Include="ManagePage\styles\colorpicker.css" />
     <Content Include="ManagePage\styles\datagrid.css" />

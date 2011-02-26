@@ -29,6 +29,53 @@ namespace SAS.Sirius.Data
             }
             return acic;
         }
+        /// <summary>
+        /// 团队活动信息实体列表
+        /// </summary>
+        public static List<TeamActInfo> GetTeamActInfoList(IDataReader reader)
+        {
+            List<TeamActInfo> tlist = new List<TeamActInfo>();
+            while (reader.Read())
+            {
+                TeamActInfo tinfo = new TeamActInfo();
+                tinfo.Id = TypeConverter.StrToInt(reader["id"].ToString());
+                tinfo.Name = reader["name"].ToString();
+                tinfo.Start = reader["start"].ToString();
+                tinfo.End = reader["end"].ToString();
+                tinfo.Shortdesc = reader["shortdesc"].ToString();
+                tinfo.Img = reader["img"].ToString();
+                tinfo.Imgbak = reader["imgbak"].ToString();
+                tinfo.Teamid = TypeConverter.StrToInt(reader["teamid"].ToString());
+                tinfo.Atype = TypeConverter.StrToInt(reader["atype"].ToString());
+                tinfo.Piccollect = reader["piccollect"].ToString();
+                tlist.Add(tinfo);
+            }
+            reader.Close();
+            return tlist;
+        }
+        /// <summary>
+        /// 团队活动信息实体列表
+        /// </summary>
+        public static TeamActInfo GetTeamActEntity(IDataReader reader)
+        {
+            if (reader.Read())
+            {
+                TeamActInfo tinfo = new TeamActInfo();
+                tinfo.Id = TypeConverter.StrToInt(reader["id"].ToString());
+                tinfo.Name = reader["name"].ToString();
+                tinfo.Start = reader["start"].ToString();
+                tinfo.End = reader["end"].ToString();
+                tinfo.Shortdesc = reader["shortdesc"].ToString();
+                tinfo.Img = reader["img"].ToString();
+                tinfo.Imgbak = reader["imgbak"].ToString();
+                tinfo.Teamid = TypeConverter.StrToInt(reader["teamid"].ToString());
+                tinfo.Atype = TypeConverter.StrToInt(reader["atype"].ToString());
+                tinfo.Piccollect = reader["piccollect"].ToString();
+                reader.Close();
+                return tinfo;
+            }
+            return null;
+        }
 
         /// <summary>
         /// 获取团队信息实体

@@ -62,7 +62,7 @@ namespace SAS.ManageWeb
                     userInfo.Pd_Yahoo = Utils.HtmlEncode(SASRequest.GetString("yahoo"));
                     userInfo.Pd_MSN = Utils.HtmlEncode(SASRequest.GetString("msn"));
                     userInfo.Pd_Skype = Utils.HtmlEncode(SASRequest.GetString("skype"));
-                    userInfo.Pd_address_1 = Utils.HtmlEncode(SASRequest.GetString("location"));
+                    userInfo.Tm_location = Utils.HtmlEncode(SASRequest.GetString("location"));
                     userInfo.Pd_bio = Utils.HtmlEncode(LogicUtils.BanWordFilter(SASRequest.GetString("bio")));
 
                     PostpramsInfo postPramsInfo = new PostpramsInfo();

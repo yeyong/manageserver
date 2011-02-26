@@ -455,20 +455,29 @@ namespace SAS.Entity
         private string _pd_phone;
         private string _pd_mobile;
         private string _pd_website;
-        private int _pd_ai_id_1;
-        private string _pd_address_1;
-        private int _pd_ai_id_2;
-        private string _pd_address_2;
-        private int _pd_ai_id_3;
-        private string _pd_address_3;
-        private int _pd_ai_id_temp;
-        private string _pd_address_temp;
 
         private string _pd_authstr;
         private string _pd_authtime;
         private int _pd_authflag;
         private string _pd_idcard;
         private string _pd_bio;
+
+        private int _tm_light;
+        private string _tm_sx;
+        private string _tm_constellation;
+        private string _tm_education;
+        private string _tm_professional;
+        private string _tm_specialty;
+        private string _tm_hobby;
+        private int _tm_teamage;
+        private string _tm_image;
+        private string _tm_imgbak;
+        private string _tm_smallimg;
+        private string _tm_sign;
+        private string _tm_selfdesc;
+        private string _tm_selfenjoy;
+        private string _tm_figure;
+        private string _tm_location;
 
         /// <summary>
         /// 用户ID
@@ -578,78 +587,6 @@ namespace SAS.Entity
         }
 
         /// <summary>
-        /// 所在城市（配送城市）1
-        /// </summary>
-        public int Pd_ai_id_1
-        {
-            set { _pd_ai_id_1 = value; }
-            get { return _pd_ai_id_1; }
-        }
-
-        /// <summary>
-        /// 详细地址（配送地址）1
-        /// </summary>
-        public string Pd_address_1
-        {
-            set { _pd_address_1 = value; }
-            get { return _pd_address_1; }
-        }
-
-        /// <summary>
-        /// 所在城市（配送城市）2
-        /// </summary>
-        public int Pd_ai_id_2
-        {
-            set { _pd_ai_id_2 = value; }
-            get { return _pd_ai_id_2; }
-        }
-
-        /// <summary>
-        /// 详细地址（配送地址）2
-        /// </summary>
-        public string Pd_address_2
-        {
-            set { _pd_address_2 = value; }
-            get { return _pd_address_2; }
-        }
-
-        /// <summary>
-        /// 所在城市（配送城市）3
-        /// </summary>
-        public int Pd_ai_id_3
-        {
-            set { _pd_ai_id_3 = value; }
-            get { return _pd_ai_id_3; }
-        }
-
-        /// <summary>
-        /// 详细地址（配送地址）3
-        /// </summary>
-        public string Pd_address_3
-        {
-            set { _pd_address_3 = value; }
-            get { return _pd_address_3; }
-        }
-
-        /// <summary>
-        /// 临时配送城市
-        /// </summary>
-        public int Pd_ai_id_temp
-        {
-            set { _pd_ai_id_temp = value; }
-            get { return _pd_ai_id_temp; }
-        }
-
-        /// <summary>
-        /// 临时配送地址
-        /// </summary>
-        public string Pd_address_temp
-        {
-            set { _pd_address_temp = value; }
-            get { return _pd_address_temp; }
-        }
-
-        /// <summary>
         /// 用户验证码
         /// </summary>
         public string Pd_authstr
@@ -692,6 +629,135 @@ namespace SAS.Entity
         {
             set { _pd_bio = value; }
             get { return _pd_bio; }
+        }
+
+        /// <summary>
+        /// 星光亮度
+        /// </summary>
+        public int Tm_light
+        {
+            set { _tm_light = value; }
+            get { return _tm_light; }
+        }
+        /// <summary>
+        /// 生肖
+        /// </summary>
+        public string Tm_sx
+        {
+            set { _tm_sx = value; }
+            get { return _tm_sx; }
+        }
+        /// <summary>
+        /// 星座
+        /// </summary>
+        public string Tm_constellation
+        {
+            set { _tm_constellation = value; }
+            get { return _tm_constellation; }
+        }
+        /// <summary>
+        /// 学历
+        /// </summary>
+        public string Tm_education
+        {
+            set { _tm_education = value; }
+            get { return _tm_education; }
+        }
+        /// <summary>
+        /// 专业
+        /// </summary>
+        public string Tm_professional
+        {
+            set { _tm_professional = value; }
+            get { return _tm_professional; }
+        }
+        /// <summary>
+        /// 特长
+        /// </summary>
+        public string Tm_specialty
+        {
+            set { _tm_specialty = value; }
+            get { return _tm_specialty; }
+        }
+        /// <summary>
+        /// 爱好
+        /// </summary>
+        public string Tm_hobby
+        {
+            set { _tm_hobby = value; }
+            get { return _tm_hobby; }
+        }
+        /// <summary>
+        /// 团队年龄
+        /// </summary>
+        public int Tm_teamage
+        {
+            set { _tm_teamage = value; }
+            get { return _tm_teamage; }
+        }
+        /// <summary>
+        /// 形象照片
+        /// </summary>
+        public string Tm_image
+        {
+            set { _tm_image = value; }
+            get { return _tm_image; }
+        }
+        /// <summary>
+        /// 形象背景
+        /// </summary>
+        public string Tm_imgbak
+        {
+            set { _tm_imgbak = value; }
+            get { return _tm_imgbak; }
+        }
+        /// <summary>
+        /// 列表图
+        /// </summary>
+        public string Tm_smallimg
+        {
+            set { _tm_smallimg = value; }
+            get { return _tm_smallimg; }
+        }
+        /// <summary>
+        /// 星系意义
+        /// </summary>
+        public string Tm_sign
+        {
+            set { _tm_sign = value; }
+            get { return _tm_sign; }
+        }
+        /// <summary>
+        /// 自我描述
+        /// </summary>
+        public string Tm_selfdesc
+        {
+            set { _tm_selfdesc = value; }
+            get { return _tm_selfdesc; }
+        }
+        /// <summary>
+        /// 自我畅享
+        /// </summary>
+        public string Tm_selfenjoy
+        {
+            set { _tm_selfenjoy = value; }
+            get { return _tm_selfenjoy; }
+        }
+        /// <summary>
+        /// 身材
+        /// </summary>
+        public string Tm_figure
+        {
+            set { _tm_figure = value; }
+            get { return _tm_figure; }
+        }
+        /// <summary>
+        /// 地址
+        /// </summary>
+        public string Tm_location
+        {
+            set { _tm_location = value; }
+            get { return _tm_location; }
         }
         #endregion Model
     }

@@ -48,6 +48,7 @@
     <Compile Include="API\Actions\Activitys.cs" />
     <Compile Include="API\Actions\Auth.cs" />
     <Compile Include="API\Actions\Companys.cs" />
+    <Compile Include="API\Actions\Members.cs" />
     <Compile Include="API\ActivityInfo.cs" />
     <Compile Include="API\Arg.cs" />
     <Compile Include="API\CompanyInfo.cs" />
@@ -57,6 +58,8 @@
     <Compile Include="API\Responses.cs" />
     <Compile Include="API\SASException.cs" />
     <Compile Include="API\SASParam.cs" />
+    <Compile Include="API\UserDetailInfo.cs" />
+    <Compile Include="API\TeamActInfos.cs" />
     <Compile Include="RESTServer.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -83,9 +86,25 @@
       <Project>{9145299A-21C2-4558-A956-2DBDCBF477DE}</Project>
       <Name>SAS.Logic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SAS.NETCMS\SAS.NETCMS.csproj">
+      <Project>{A8B7801B-4BCB-4663-B014-3452D99DEA44}</Project>
+      <Name>SAS.NETCMS</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SAS.Plugin.PasswordMode\SAS.Plugin.PasswordMode.csproj">
       <Project>{D2DA07DC-6CB2-435B-BD95-5D624F239DCC}</Project>
       <Name>SAS.Plugin.PasswordMode</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SAS.Plugin\SAS.Plugin.csproj">
+      <Project>{2EA29B20-569F-421C-B359-7E7F8C7045CD}</Project>
+      <Name>SAS.Plugin</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SAS.Sirius\SAS.Sirius.csproj">
+      <Project>{49354E14-7767-40D0-98C3-5FD8F46F304E}</Project>
+      <Name>SAS.Sirius</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SAS.Taobao\SAS.Taobao.csproj">
+      <Project>{B096ACF0-E4BD-4EE9-9084-9B728598AF59}</Project>
+      <Name>SAS.Taobao</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

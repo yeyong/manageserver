@@ -86,14 +86,22 @@ namespace SAS.Data.DataProvider
                 //userinfo.Ignorepm = reader["ignorepm"].ToString();
                 userinfo.Ps_salt = reader["ps_salt"].ToString().Trim();
                 userinfo.Pd_logo = TypeConverter.StrToInt(reader["pd_logo"].ToString().Trim(), 0);
-                userinfo.Pd_address_1 = reader["Pd_address_1"].ToString();
-                userinfo.Pd_address_2 = reader["Pd_address_2"].ToString();
-                userinfo.Pd_address_3 = reader["Pd_address_3"].ToString();
-                userinfo.Pd_address_temp = reader["Pd_address_temp"].ToString();
-                userinfo.Pd_ai_id_1 = TypeConverter.StrToInt(reader["Pd_ai_id_1"].ToString().Trim(), 0);
-                userinfo.Pd_ai_id_2 = TypeConverter.StrToInt(reader["Pd_ai_id_2"].ToString().Trim(), 0);
-                userinfo.Pd_ai_id_3 = TypeConverter.StrToInt(reader["Pd_ai_id_3"].ToString().Trim(), 0);
-                userinfo.Pd_ai_id_temp = TypeConverter.StrToInt(reader["Pd_ai_id_temp"].ToString().Trim(), 0);
+
+                userinfo.Tm_light = TypeConverter.StrToInt(reader["tm_light"].ToString(), 0);
+                userinfo.Tm_sx = reader["tm_sx"].ToString();
+                userinfo.Tm_constellation = reader["tm_constellation"].ToString();
+                userinfo.Tm_education = reader["tm_education"].ToString();
+                userinfo.Tm_professional = reader["tm_professional"].ToString();
+                userinfo.Tm_specialty = reader["tm_specialty"].ToString();
+                userinfo.Tm_hobby = reader["tm_hobby"].ToString();
+                userinfo.Tm_teamage = TypeConverter.StrToInt(reader["tm_teamage"].ToString(), 1);
+                userinfo.Tm_image = reader["tm_image"].ToString();
+                userinfo.Tm_imgbak = reader["tm_imgbak"].ToString();
+                userinfo.Tm_smallimg = reader["tm_smallimg"].ToString();
+                userinfo.Tm_sign = reader["tm_sign"].ToString();
+                userinfo.Tm_selfdesc = reader["tm_selfdesc"].ToString();
+                userinfo.Tm_figure = reader["tm_figure"].ToString();
+                userinfo.Tm_location = reader["tm_location"].ToString();
             }
             reader.Close();
             return userinfo;
@@ -986,6 +994,11 @@ namespace SAS.Data.DataProvider
         public static string GetUserListCondition(string getstring)
         {
             return DatabaseProvider.GetInstance().Global_UserGrid_GetCondition(getstring);
+        }
+
+        public static DataTable GetMemberList(string usernames)
+        {
+            return DatabaseProvider.GetInstance().GetMemberList(usernames);
         }
     }
 }

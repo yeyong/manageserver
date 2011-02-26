@@ -379,5 +379,14 @@ namespace SAS.Logic
         {
             SAS.Data.DataProvider.Users.UpdateUserAdminIdByGroupId(adminId, groupId);
         }
+
+        /// <summary>
+        /// 获取团队成员信息
+        /// </summary>
+        /// <param name="usernames"></param>
+        public static DataTable GetMemberListByUserName(string usernames)
+        {
+            return SAS.Data.DataProvider.Users.GetMemberList(usernames);
+        }
     }
 }

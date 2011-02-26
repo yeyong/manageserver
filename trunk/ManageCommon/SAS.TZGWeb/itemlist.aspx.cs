@@ -115,7 +115,7 @@ public partial class itemlist : TaoBaoPage
         itemlistgoodsbrands = TaoBaos.GetGoodsBrandListByClass(rootcategory.Cid);
         putitemlist = TaoBaos.GetRecommendProduct(Convert.ToInt16(TaoChanel.List), parentcategory.Cid);
 
-        string sortstr = "commissionNum_desc";
+        string sortstr = "commissionRate_desc";
 
         switch (sortid)
         {
@@ -129,7 +129,7 @@ public partial class itemlist : TaoBaoPage
                 sortstr = "price_asc";
                 break;
             default:
-                sortstr = "commissionNum_desc";
+                sortstr = "commissionRate_desc";
                 break;
         }
         string startmoneystr = startmoney > 0 ? startmoney.ToString() : "";

@@ -179,14 +179,6 @@ namespace SAS.ManageWeb.ManagePage
             //userInfo.Ignorepm = reader["ignorepm"].ToString();
             userInfo.Pd_birthday = "";
             userInfo.Pd_logo = 0;
-            userInfo.Pd_address_1 = "";
-            userInfo.Pd_address_2 = "";
-            userInfo.Pd_address_3 = "";
-            userInfo.Pd_address_temp = "";
-            userInfo.Pd_ai_id_1 = 0;
-            userInfo.Pd_ai_id_2 = 0;
-            userInfo.Pd_ai_id_3 = 0;
-            userInfo.Pd_ai_id_temp = 0;
            
             return userInfo;
         }

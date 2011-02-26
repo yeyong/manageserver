@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections;
 using System.Data;
-using System.Collections.Generic;
 using System.Text;
 using System.IO;
 
@@ -22,12 +22,6 @@ namespace SAS.Sirius
         /// 创建团队信息
         /// </summary>
         /// <param name="teaminfo">信息实体</param>
-        /// <param name="members">成员信息反馈</param>
-        /// <param name="adminUid">管理员ID</param>
-        /// <param name="adminUserName">管理员姓名</param>
-        /// <param name="adminUserGruopId">管理组</param>
-        /// <param name="adminUserGroupTitle">管理组名称</param>
-        /// <param name="adminIp">管理员IP</param>
         /// <returns>团队ID</returns>
         public static int CreateTeam(TeamInfo teaminfo, out string result)
         {
@@ -41,9 +35,16 @@ namespace SAS.Sirius
         }
 
         /// <summary>
+        /// 获取全部团队信息（非缓存类）
+        /// </summary>
+        public static DataTable GetAllTeam()
+        {
+            return Data.DbProvider.GetInstance().GetAllTeam();
+        }
+
+        /// <summary>
         /// 获取全部团队信息
         /// </summary>
-        /// <returns></returns>
         public static SAS.Common.Generic.List<TeamInfo> GetAllTeamInfoList()
         {
             return DTOProvider.GetAllTeamInfoList();
@@ -96,5 +97,63 @@ namespace SAS.Sirius
         {
             return Data.DbProvider.GetInstance().SetTeamMemberList(members, tid);
         }
+
+        #region 团队活动操作
+        /// <summary>
+        /// 创建团队活动
+        /// </summary>
+        public static int CreateAct(TeamActInfo tacinfo)
+        {
+            int aid = 0;
+            aid = Data.DbProvider.GetInstance().CreateAct(tacinfo);
+            SASCache.GetCacheService().RemoveObject("/Sirius/ActList_" + tacinfo.Teamid);
+            return aid;
+        }
+
+        /// <summary>
+        /// 团队活动获取
+        /// </summary>
+        /// <param name="tid">团队ID</param>
+        public static List<TeamActInfo> GetTeamActByTid(int tid)
+        {
+            return DTOProvider.GetTeamActInfoList(Data.DbProvider.GetInstance().GetTeamActListByTid(tid));
+        }
+        /// <summary>
+        /// 团队活动获取（带缓存）
+        /// </summary>
+        public static List<TeamActInfo> GetTeamActByTidWithCache(int tid)
+        {
+            SASCache cache = SASCache.GetCacheService();
+            string cachekey = "/Sirius/ActList_" + tid;
+            SAS.Common.Generic.List<TeamActInfo> acic = cache.RetrieveObject(cachekey) as SAS.Common.Generic.List<TeamActInfo>;
+
+            if (acic == null)
+            {
+                acic = new SAS.Common.Generic.List<TeamActInfo>();
+                acic = GetTeamActByTid(tid);
+                cache.AddObject(cachekey, (ICollection)acic);
+            }
+            return acic;
+        }
+
+        /// <summary>
+        /// 活动实体获得
+        /// </summary>
+        /// <param name="aid">活动ID</param>
+        public static TeamActInfo GetTeamActInfo(int aid)
+        {
+            return DTOProvider.GetTeamActEntity(Data.DbProvider.GetInstance().GetTeamActInfo(aid));
+        }
+
+        /// <summary>
+        /// 更新团队活动
+        /// </summary>
+        /// <param name="tinfo"></param>
+        public static void UpdateTeamAct(TeamActInfo tinfo)
+        {
+            Data.DbProvider.GetInstance().UpdateTeamAct(tinfo);
+            SASCache.GetCacheService().RemoveObject("/Sirius/ActList_" + tinfo.Teamid);
+        }
+        #endregion
     }
 }

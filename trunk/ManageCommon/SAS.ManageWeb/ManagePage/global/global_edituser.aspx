@@ -220,12 +220,12 @@
                                                     <cc1:TextBox ID="bday" runat="server" RequiredFieldType="暂无校验" MaxLength="10" Size="12"></cc1:TextBox>
                                                 </td>
                                             </tr>
-                                           <%-- <tr>
-                                                <td>每页主题数</td>
+                                            <tr>
+                                                <td>职务:</td>
                                                 <td>
-                                                    <cc1:TextBox ID="tpp" runat="server" Width="88px" HintInfo="论坛每页显示的主题数,0为论坛默认设置" RequiredFieldType="数据校验" MaxLength="4" CanBeNull="必填"></cc1:TextBox>
+                                                    <cc1:TextBox ID="job" runat="server" RequiredFieldType="暂无校验" MaxLength="20" Size="20"></cc1:TextBox>
                                                 </td>
-                                            </tr>--%>
+                                            </tr>
                                             <tr>
                                                 <td>风格:</td>
                                                 <td>
@@ -499,6 +499,172 @@
                             </table>
                             </td>
                             </tr>
+                            </table>
+                        </cc3:TabPage>
+                        <cc3:TabPage Caption="团队信息" ID="tabPage55">
+                            <table cellspacing="0" cellpadding="4" width="100%" align="center">
+                                <tr>
+                                    <td class="panelbox" width="50%" align="left">
+                                        <table width="100%">
+                                            <tr>
+                                                <td style="width: 120px">
+                                                    星光亮度:
+                                                </td>
+                                                <td>
+                                                    <cc1:TextBox ID="tm_light" runat="server" RequiredFieldType="数据校验" MaxLength="10"
+                                                        Size="10" Text="0"></cc1:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 130px">
+                                                    学历:
+                                                </td>
+                                                <td>
+                                                    <cc1:TextBox ID="tm_xl" runat="server" RequiredFieldType="暂无校验" MaxLength="20" Size="20"></cc1:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    专业:
+                                                </td>
+                                                <td>
+                                                    <cc1:TextBox ID="tm_zy" runat="server" RequiredFieldType="暂无校验" MaxLength="50" Size="50"></cc1:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    特长:
+                                                </td>
+                                                <td>
+                                                    <cc1:TextBox ID="tm_tc" runat="server" Size="50" RequiredFieldType="暂无校验" MaxLength="50"></cc1:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    爱好:
+                                                </td>
+                                                <td>
+                                                    <cc1:TextBox ID="tm_ah" runat="server" Size="50" RequiredFieldType="暂无校验" MaxLength="50"></cc1:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    联系地址:
+                                                </td>
+                                                <td>
+                                                    <cc1:TextBox ID="tm_dz" runat="server" Size="50" RequiredFieldType="暂无校验" MaxLength="100"></cc1:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    形象照片地址:
+                                                </td>
+                                                <td>
+                                                    <cc1:TextBox ID="tm_img" runat="server" Size="50" RequiredFieldType="网页地址"></cc1:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    形象背景地址:
+                                                </td>
+                                                <td>
+                                                    <cc1:TextBox ID="tm_imgbak" runat="server" Size="50" RequiredFieldType="网页地址"></cc1:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    形象列表地址:
+                                                </td>
+                                                <td>
+                                                    <cc1:TextBox ID="tm_imglist" runat="server" Size="50" RequiredFieldType="网页地址"></cc1:TextBox>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td class="panelbox" width="50%" align="right">
+                                        <table width="100%">
+                                            <tr>
+                                                <td>
+                                                    星座:
+                                                </td>
+                                                <td>
+                                                    <cc1:TextBox ID="tm_xz" runat="server" MaxLength="20" Size="20"></cc1:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    星年龄:
+                                                </td>
+                                                <td>
+                                                    <cc1:TextBox ID="tm_age" runat="server" RequiredFieldType="数据校验" MaxLength="10" Size="10"
+                                                        Text="1"></cc1:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    生肖:
+                                                </td>
+                                                <td>
+                                                    <cc1:TextBox ID="tm_sx" runat="server" RequiredFieldType="暂无校验" MaxLength="10" Size="10"></cc1:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    身材:
+                                                </td>
+                                                <td>
+                                                    <cc1:TextBox ID="tm_sc" runat="server" RequiredFieldType="暂无校验" MaxLength="20" Size="20"></cc1:TextBox>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="panelbox" colspan="2">
+                                        <table width="100%">
+                                            <tr>
+                                                <td style="width: 120px; height: 19px">
+                                                    星系意义:
+                                                </td>
+                                                <td>
+                                                    <cc1:TextBox ID="tm_sign" runat="server" Width="496px" RequiredFieldType="暂无校验"
+                                                        TextMode="MultiLine" Height="92px" IsReplaceInvertedComma="false"></cc1:TextBox>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="panelbox" colspan="2">
+                                        <table width="100%">
+                                            <tr>
+                                                <td style="width: 120px; height: 19px">
+                                                    自我描述:
+                                                </td>
+                                                <td>
+                                                    <cc1:TextBox ID="tm_selfdesc" runat="server" Width="496px" RequiredFieldType="暂无校验"
+                                                        TextMode="MultiLine" Height="92px" IsReplaceInvertedComma="false"></cc1:TextBox>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="panelbox" colspan="2">
+                                        <table width="100%">
+                                            <tr>
+                                                <td style="width: 120px; height: 19px">
+                                                    自我畅享:
+                                                </td>
+                                                <td>
+                                                    <cc1:TextBox ID="tm_selfthink" runat="server" Width="496px" RequiredFieldType="暂无校验"
+                                                        TextMode="MultiLine" Height="92px" IsReplaceInvertedComma="false"></cc1:TextBox>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                
                             </table>
                         </cc3:TabPage>
                     </cc3:TabControl>

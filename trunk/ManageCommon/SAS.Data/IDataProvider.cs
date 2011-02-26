@@ -476,6 +476,8 @@ namespace SAS.Data
         /// <returns></returns>
         string Global_UserGrid_GetCondition(string getString);
 
+        DataTable GetMemberList(string usernames);
+
         #endregion
 
         #region 用户组usergroup基本操作

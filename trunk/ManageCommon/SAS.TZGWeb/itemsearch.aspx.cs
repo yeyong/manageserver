@@ -56,7 +56,7 @@ public partial class itemsearch : TaoBaoPage
 
     protected override void ShowPage()
     {
-        string sortstr = "commissionNum_desc";
+        string sortstr = "commissionRate_desc";
 
         switch (sortid)
         {
@@ -70,7 +70,7 @@ public partial class itemsearch : TaoBaoPage
                 sortstr = "price_asc";
                 break;
             default:
-                sortstr = "commissionNum_desc";
+                sortstr = "commissionRate_desc";
                 break;
         }
 
