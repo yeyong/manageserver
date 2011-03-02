@@ -14,7 +14,7 @@ using SAS.Plugin.Sirius;
 
 namespace SAS.ManageWeb.ManagePage
 {
-    public partial class sirius_manageteam : AdminPage
+    public partial class sirius_managework : AdminPage
     {
         private SiriusPluginBase spb = SiriusPluginProvider.GetInstance();
         private int tid = SASRequest.GetInt("tid", 0);
@@ -22,6 +22,11 @@ namespace SAS.ManageWeb.ManagePage
         {
             if (!Page.IsPostBack)
             {
+                if (tid < 1)
+                {
+                    base.RegisterStartupScript("", "<script>alert('页面参数错误！');window.location.href='sirius_searchwork.aspx';</script>");
+                    return;
+                }
                 BindData();
             }
         }
@@ -30,11 +35,11 @@ namespace SAS.ManageWeb.ManagePage
         {
             #region 绑定用户组列表
             DataGrid1.AllowCustomPaging = false;
-            DataGrid1.TableHeaderName = "团队列表";
+            DataGrid1.TableHeaderName = "团队成果列表";
             DataGrid1.Attributes.Add("borderStyle", "2");
-            DataGrid1.DataKeyField = "teamID";
-            DataGrid1.BindData(spb.GetAllTeamList());
-            DataGrid1.Sort = "createDate";
+            DataGrid1.DataKeyField = "id";
+            DataGrid1.BindData(spb.GetTeamWorkByTid(tid));
+            DataGrid1.Sort = "id";
             #endregion
         }
 
@@ -56,45 +61,32 @@ namespace SAS.ManageWeb.ManagePage
             foreach (object o in DataGrid1.GetKeyIDArray())
             {
                 int tID = int.Parse(o.ToString());
-                TeamInfo team = spb.GetTeamByTeamID(tID);
+                TeamWorkInfo team = spb.GetWorkInfo(tID);
 
                 string tName = DataGrid1.GetControlValue(row, "name");
 
                 if (tName.Trim() == "")
                 {
-                    base.RegisterStartupScript("", "<script>alert('团队名称不可为空，请认真填写!');window.location.href='sirius_manageteam.aspx';</script>");
+                    base.RegisterStartupScript("", "<script>alert('团队成果名称不可为空，请认真填写!');window.location.href='sirius_managework.aspx?tid=" + team.Teamid + "';</script>");
                     return;
                 }
-                string tUrl = DataGrid1.GetControlValue(row, "teamdomain");
+                string tUrl = DataGrid1.GetControlValue(row, "url");
                 if (tUrl.Trim() == "")
                 {
-                    base.RegisterStartupScript("", "<script>alert('团队域名是团队的重要标识，不可为空，请认真填写!');window.location.href='sirius_manageteam.aspx';</script>");
+                    base.RegisterStartupScript("", "<script>alert('成果链接是成果的重要标识，不可为空，请认真填写!');window.location.href='sirius_managework.aspx?tid=" + team.Teamid + "';</script>");
                     return;
                 }
                 if (!Utils.IsURL(tUrl))
                 {
-                    base.RegisterStartupScript("", "<script>alert('团队域名是团队的重要标识，要符合格式要求，例:http://www.sirius.org.cn');window.location.href='sirius_manageteam.aspx';</script>");
-                    return;
-                }
-                string tOrder = DataGrid1.GetControlValue(row, "displayorder");
-                if (tOrder.Trim() == "")
-                {
-                    base.RegisterStartupScript("", "<script>alert('团队显示顺序不可为空，请认真填写!');window.location.href='sirius_manageteam.aspx';</script>");
-                    return;
-                }
-                if (!Utils.IsNumeric(tOrder))
-                {
-                    base.RegisterStartupScript("", "<script>alert('团队显示顺序应为数字，请认真填写!');window.location.href='sirius_manageteam.aspx';</script>");
+                    base.RegisterStartupScript("", "<script>alert('成果链接是成果的重要标识，要符合格式要求，例:http://www.sirius.org.cn');window.location.href='sirius_managework.aspx?tid=" + team.Teamid + "';</script>");
                     return;
                 }
 
                 team.Name = tName;
-                team.Teamdomain = tUrl;
-                team.Displayorder = int.Parse(tOrder);
-
-                string members = "";
-                spb.UpdateTeamInfo(team, out members);
-                base.RegisterStartupScript("PAGE", "window.location.href='sirius_manageteam.aspx';");
+                team.Url = tUrl;
+                string result = "";
+                spb.UpdateWorkInfo(team, out result);
+                base.RegisterStartupScript("PAGE", "window.location.href='sirius_managework.aspx?tid=" + team.Teamid + "';");
             }
 
             #endregion
@@ -110,7 +102,7 @@ namespace SAS.ManageWeb.ManagePage
 
         private void InitializeComponent()
         {
-            DataGrid1.DataKeyField = "teamID";
+            DataGrid1.DataKeyField = "id";
             DataGrid1.ColumnSpan = 12;
             this.EditUserGroup.Click += new EventHandler(EditUserGroup_Click);
         }

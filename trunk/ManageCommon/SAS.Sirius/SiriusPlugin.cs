@@ -26,6 +26,15 @@ namespace SAS.Sirius
         }
 
         /// <summary>
+        /// 创建团队成果信息
+        /// </summary>
+        /// <param name="workinfo">成果实体</param>
+        public override int CreateWork(TeamWorkInfo workinfo, out string result)
+        {
+            return Sirius.CreateWork(workinfo, out result);
+        }
+
+        /// <summary>
         /// 创建团队活动
         /// </summary>
         public override int CreateAct(TeamActInfo tacinfo)
@@ -81,6 +90,35 @@ namespace SAS.Sirius
         public override void UpdateTeamAct(TeamActInfo tinfo)
         {
             Sirius.UpdateTeamAct(tinfo);
+        }
+
+        public override SAS.Common.Generic.List<TeamWorkInfo> GetTeamWorkByTid(int tid)
+        {
+            return Sirius.GetTeamWorkByTid(tid);
+        }
+
+        /// <summary>
+        /// 成果信息
+        /// </summary>
+        public override TeamWorkInfo GetWorkInfo(int wid)
+        {
+            return Sirius.GetWorkInfo(wid);
+        }
+
+         /// <summary>
+        /// 成果信息更新
+        /// </summary>
+        public override void UpdateWorkInfo(TeamWorkInfo tinfo, out string result)
+        {
+            Sirius.UpdateWorkInfo(tinfo, out result);
+        }
+
+        /// <summary>
+        /// 成果信息获取(cache)
+        /// </summary>
+        public override List<TeamWorkInfo> GetTeamWorksWithCache(int tid)
+        {
+            return Sirius.GetTeamWorksWithCache(tid);
         }
     }
 }

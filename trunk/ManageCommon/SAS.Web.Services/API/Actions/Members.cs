@@ -19,6 +19,67 @@ namespace SAS.Web.Services.API.Actions
     {
         SiriusPluginBase spb = SiriusPluginProvider.GetInstance();
 
+        public string GetTeamWorkList()
+        {
+            if (Signature != GetParam("sig").ToString())
+            {
+                ErrorCode = (int)ErrorType.API_EC_SIGNATURE;
+                return "";
+            }
+
+            //如果是桌面程序则需要验证用户身份
+            if (this.App.ApplicationType == (int)ApplicationType.DESKTOP)
+            {
+                if (Uid < 1)
+                {
+                    ErrorCode = (int)ErrorType.API_EC_SESSIONKEY;
+                    return "";
+                }
+            }
+
+            if (CallId <= LastCallId)
+            {
+                ErrorCode = (int)ErrorType.API_EC_CALLID;
+                return "";
+            }
+
+            if (!CheckRequiredParams("tid"))
+            {
+                ErrorCode = (int)ErrorType.API_EC_PARAM;
+                return "";
+            }
+
+            int tid = GetIntParam("tid", 1);
+            List<SAS.Entity.TeamWorkInfo> actlist = spb.GetTeamWorksWithCache(tid);
+            TeamWorkGetListResponse tglr = new TeamWorkGetListResponse();
+            List<TeamWorkInfos> alist = new List<TeamWorkInfos>();
+
+            foreach (TeamWorkInfo tactinfo in actlist)
+            {
+                TeamWorkInfos tsinfo = new TeamWorkInfos();
+                tsinfo.Actid = tactinfo.Id;
+                tsinfo.Name = tactinfo.Name;
+                tsinfo.Start = tactinfo.Start;
+                tsinfo.End = tactinfo.End;
+                tsinfo.Listpic = tactinfo.Img;
+                tsinfo.Picbak = tactinfo.Imgbak;
+                tsinfo.Desc = tactinfo.Worddesc;
+                tsinfo.Teamid = tactinfo.Teamid;
+                tsinfo.Url = tactinfo.Url;
+                tsinfo.Members = tactinfo.Members;
+                alist.Add(tsinfo);
+            }
+
+            tglr.Wnums = alist.Count;
+            tglr.TeamWorkList = alist.ToArray();
+
+            if (Format == FormatType.JSON)
+            {
+                return JavaScriptConvert.SerializeObject(tglr);
+            }
+            return SerializationHelper.Serialize(tglr);
+        }
+
         public string GetTeamActList()
         {
             if (Signature != GetParam("sig").ToString())

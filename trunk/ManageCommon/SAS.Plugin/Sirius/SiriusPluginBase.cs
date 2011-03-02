@@ -22,6 +22,12 @@ namespace SAS.Plugin.Sirius
         public abstract int CreateTeamInfo(TeamInfo teaminfo, out string result);
 
         /// <summary>
+        /// 创建团队成果信息
+        /// </summary>
+        /// <param name="workinfo">成果实体</param>
+        public abstract int CreateWork(TeamWorkInfo workinfo, out string result);
+
+        /// <summary>
         /// 创建团队活动
         /// </summary>
         public abstract int CreateAct(TeamActInfo tacinfo);
@@ -62,11 +68,31 @@ namespace SAS.Plugin.Sirius
         /// </summary>
         /// <param name="aid">活动ID</param>
         public abstract TeamActInfo GetTeamActInfo(int aid);
-
         /// <summary>
         /// 更新团队活动
         /// </summary>
         /// <param name="tinfo"></param>
         public abstract void UpdateTeamAct(TeamActInfo tinfo);
+
+        /// <summary>
+        /// 成果信息获取
+        /// </summary>
+        /// <param name="tid">团队ID</param>
+        public abstract List<TeamWorkInfo> GetTeamWorkByTid(int tid);
+
+        /// <summary>
+        /// 成果信息
+        /// </summary>
+        public abstract TeamWorkInfo GetWorkInfo(int wid);
+
+         /// <summary>
+        /// 成果信息更新
+        /// </summary>
+        public abstract void UpdateWorkInfo(TeamWorkInfo tinfo, out string result);
+
+        /// <summary>
+        /// 成果信息获取(cache)
+        /// </summary>
+        public abstract List<TeamWorkInfo> GetTeamWorksWithCache(int tid);
     }
 }

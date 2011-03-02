@@ -628,6 +628,34 @@
     <Compile Include="ManagePage\sirius\sirius_searchactivity.aspx.designer.cs">
       <DependentUpon>sirius_searchactivity.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManagePage\sirius\sirius_searchwork.aspx.cs">
+      <DependentUpon>sirius_searchwork.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\sirius\sirius_searchwork.aspx.designer.cs">
+      <DependentUpon>sirius_searchwork.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\sirius\sirius_addwork.aspx.cs">
+      <DependentUpon>sirius_addwork.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\sirius\sirius_addwork.aspx.designer.cs">
+      <DependentUpon>sirius_addwork.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\sirius\sirius_managework.aspx.cs">
+      <DependentUpon>sirius_managework.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\sirius\sirius_managework.aspx.designer.cs">
+      <DependentUpon>sirius_managework.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManagePage\sirius\sirius_editwork.aspx.cs">
+      <DependentUpon>sirius_editwork.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManagePage\sirius\sirius_editwork.aspx.designer.cs">
+      <DependentUpon>sirius_editwork.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ManagePage\syslogin.aspx.cs">
       <DependentUpon>syslogin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1806,6 +1834,10 @@
     <Content Include="ManagePage\sirius\sirius_manageactivity.aspx" />
     <Content Include="ManagePage\sirius\sirius_manageteam.aspx" />
     <Content Include="ManagePage\sirius\sirius_searchactivity.aspx" />
+    <Content Include="ManagePage\sirius\sirius_searchwork.aspx" />
+    <Content Include="ManagePage\sirius\sirius_addwork.aspx" />
+    <Content Include="ManagePage\sirius\sirius_managework.aspx" />
+    <Content Include="ManagePage\sirius\sirius_editwork.aspx" />
     <Content Include="ManagePage\styles\calendar.css" />
     <Content Include="ManagePage\styles\colorpicker.css" />
     <Content Include="ManagePage\styles\datagrid.css" />

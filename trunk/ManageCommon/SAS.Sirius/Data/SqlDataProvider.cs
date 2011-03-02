@@ -79,6 +79,23 @@ namespace SAS.Sirius.Data
             return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText, parms));
         }
 
+        public int CreateWork(TeamWorkInfo workinfo)
+        {
+            DbParameter[] parms = {
+                                    DbHelper.MakeInParam("@name", (DbType)SqlDbType.NVarChar,50,workinfo.Name),
+				                    DbHelper.MakeInParam("@start", (DbType)SqlDbType.SmallDateTime,4,workinfo.Start),
+				                    DbHelper.MakeInParam("@end", (DbType)SqlDbType.SmallDateTime,4,workinfo.End),
+				                    DbHelper.MakeInParam("@worddesc", (DbType)SqlDbType.Text,0,workinfo.Worddesc),
+				                    DbHelper.MakeInParam("@url", (DbType)SqlDbType.VarChar,200,workinfo.Url),
+				                    DbHelper.MakeInParam("@img", (DbType)SqlDbType.VarChar,200,workinfo.Img),
+				                    DbHelper.MakeInParam("@imgbak", (DbType)SqlDbType.VarChar,200,workinfo.Imgbak),
+				                    DbHelper.MakeInParam("@teamid", (DbType)SqlDbType.Int,4,workinfo.Teamid),
+				                    DbHelper.MakeInParam("@members", (DbType)SqlDbType.VarChar,500,workinfo.Members)
+                                  };
+            string commandText = String.Format("INSERT INTO [{0}teamwork] ([name],[start],[end],[worddesc],[url],[img],[imgbak],[teamid],[members])VALUES(@name,@start,@end,@worddesc,@url,@img,@imgbak,@teamid,@members);SELECT SCOPE_IDENTITY()", BaseConfigs.GetTablePrefix);
+            return TypeConverter.ObjectToInt(DbHelper.ExecuteScalar(CommandType.Text, commandText, parms));
+        }
+
         public SAS.Common.Generic.List<TeamInfo> GetAllTeamList()
         {
             string commandText = string.Format("SELECT * FROM [{0}teamInfo] ORDER BY [createdate]", BaseConfigs.GetTablePrefix);
@@ -180,6 +197,16 @@ namespace SAS.Sirius.Data
             return DbHelper.ExecuteScalarToStr(CommandType.StoredProcedure, string.Format("[{0}setteammemberlist]", BaseConfigs.GetTablePrefix), parms);
         }
 
+        public string SetWorkMemberList(string members, int tid)
+        {
+            DbParameter[] parms = 
+            {
+                DbHelper.MakeInParam("@tid",(DbType)SqlDbType.Int,4,tid),
+                DbHelper.MakeInParam("@members",(DbType)SqlDbType.VarChar,500,members)
+            };
+            return DbHelper.ExecuteScalarToStr(CommandType.StoredProcedure, string.Format("[{0}setteamworkmemberlist]", BaseConfigs.GetTablePrefix), parms);
+        }
+
         public int CreateAct(TeamActInfo tai)
         {
             DbParameter[] parms = {
@@ -227,6 +254,38 @@ namespace SAS.Sirius.Data
 					                DbHelper.MakeInParam("@piccollect",(DbType)SqlDbType.Text,0,tinfo.Piccollect)
                                   };
             string commandText = String.Format("UPDATE [{0}teamactivity] SET [name] = @name,[start] = @start,[end] = @end,[shortdesc] = @shortdesc,[img] = @img,[imgbak] = @imgbak,[teamid] = @teamid,[atype] = @atype,[piccollect] = @piccollect WHERE [id] = @id", BaseConfigs.GetTablePrefix);
+            DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
+        }
+
+        public IDataReader GetWorksByTid(int tid)
+        {
+            DbParameter[] parms = { DbHelper.MakeInParam("@teamid", (DbType)SqlDbType.Int, 4, tid) };
+            string commandText = String.Format("SELECT * FROM [{0}teamwork] WHERE [teamid] = @teamid", BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commandText, parms);
+        }
+
+        public IDataReader GetWorkInfo(int wid)
+        {
+            DbParameter[] parms = { DbHelper.MakeInParam("@wid", (DbType)SqlDbType.Int, 4, wid) };
+            string commmandText = String.Format("SELECT TOP 1 * FROM [{0}teamwork] WHERE [id] = @wid", BaseConfigs.GetTablePrefix);
+            return DbHelper.ExecuteReader(CommandType.Text, commmandText, parms);
+        }
+
+        public void UpdateWorkInfo(TeamWorkInfo workinfo)
+        {
+            DbParameter[] parms = {
+                                    DbHelper.MakeInParam("@id", (DbType)SqlDbType.Int,4,workinfo.Id),
+                                    DbHelper.MakeInParam("@name", (DbType)SqlDbType.NVarChar,50,workinfo.Name),
+				                    DbHelper.MakeInParam("@start", (DbType)SqlDbType.SmallDateTime,4,workinfo.Start),
+				                    DbHelper.MakeInParam("@end", (DbType)SqlDbType.SmallDateTime,4,workinfo.End),
+				                    DbHelper.MakeInParam("@worddesc", (DbType)SqlDbType.Text,0,workinfo.Worddesc),
+				                    DbHelper.MakeInParam("@url", (DbType)SqlDbType.VarChar,200,workinfo.Url),
+				                    DbHelper.MakeInParam("@img", (DbType)SqlDbType.VarChar,200,workinfo.Img),
+				                    DbHelper.MakeInParam("@imgbak", (DbType)SqlDbType.VarChar,200,workinfo.Imgbak),
+				                    DbHelper.MakeInParam("@teamid", (DbType)SqlDbType.Int,4,workinfo.Teamid),
+				                    DbHelper.MakeInParam("@members", (DbType)SqlDbType.VarChar,500,workinfo.Members)
+                                  };
+            string commandText = String.Format("UPDATE [sas_teamwork] SET [name] = @name,[start] = @start,[end] = @end,[worddesc] = @worddesc,[url] = @url,[img] = @img,[imgbak] = @imgbak,[teamid] = @teamid,[members] = @members	WHERE id=@id", BaseConfigs.GetTablePrefix);
             DbHelper.ExecuteNonQuery(CommandType.Text, commandText, parms);
         }
     }

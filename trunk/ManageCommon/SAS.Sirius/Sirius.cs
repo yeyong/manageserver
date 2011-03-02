@@ -77,12 +77,14 @@ namespace SAS.Sirius
         /// <returns></returns>
         public static bool UpdateTeamInfo(TeamInfo team, out string result)
         {
+            string teammember = team.TeamMember;
+            team.TeamMember = "";
             if (!Data.DbProvider.GetInstance().UpdateTeamInfo(team))
             {
                 result = "";
                 return false;
             }
-            result = SetTeamMember(team.TeamID, team.TeamMember);
+            result = SetTeamMember(team.TeamID, teammember);
             SASCache.GetCacheService().RemoveObject("/Sirius/TeamInfoList");
             return true;
         }
@@ -153,6 +155,68 @@ namespace SAS.Sirius
         {
             Data.DbProvider.GetInstance().UpdateTeamAct(tinfo);
             SASCache.GetCacheService().RemoveObject("/Sirius/ActList_" + tinfo.Teamid);
+        }
+        #endregion
+
+        #region 成果操作
+        /// <summary>
+        /// 创建团队成果信息
+        /// </summary>
+        /// <param name="workinfo">成果实体</param>
+        public static int CreateWork(TeamWorkInfo workinfo, out string result)
+        {
+            int workid = 0;
+            string members = workinfo.Members;
+            workinfo.Members = "";
+            workid = Data.DbProvider.GetInstance().CreateWork(workinfo);
+            result = Data.DbProvider.GetInstance().SetWorkMemberList(members, workid);
+            SASCache.GetCacheService().RemoveObject("/Sirius/WorkList_" + workinfo.Teamid);
+            return workid;
+        }
+
+        /// <summary>
+        /// 成果信息获取
+        /// </summary>
+        /// <param name="tid">团队ID</param>
+        public static List<TeamWorkInfo> GetTeamWorkByTid(int tid)
+        {
+            return DTOProvider.GetTeamWorkInfoList(Data.DbProvider.GetInstance().GetWorksByTid(tid));
+        }
+        /// <summary>
+        /// 成果信息获取(cache)
+        /// </summary>
+        public static List<TeamWorkInfo> GetTeamWorksWithCache(int tid)
+        {
+            SASCache cache = SASCache.GetCacheService();
+            string cachekey = "/Sirius/WorkList_" + tid;
+            SAS.Common.Generic.List<TeamWorkInfo> acic = cache.RetrieveObject(cachekey) as SAS.Common.Generic.List<TeamWorkInfo>;
+
+            if (acic == null)
+            {
+                acic = new SAS.Common.Generic.List<TeamWorkInfo>();
+                acic = GetTeamWorkByTid(tid);
+                cache.AddObject(cachekey, (ICollection)acic);
+            }
+            return acic;
+        }
+
+        /// <summary>
+        /// 成果信息
+        /// </summary>
+        public static TeamWorkInfo GetWorkInfo(int wid)
+        {
+            return DTOProvider.GetWorkEntity(Data.DbProvider.GetInstance().GetWorkInfo(wid));
+        }
+        /// <summary>
+        /// 成果信息更新
+        /// </summary>
+        public static void UpdateWorkInfo(TeamWorkInfo tinfo,out string result)
+        {
+            string members = tinfo.Members;
+            tinfo.Members = "";
+            Data.DbProvider.GetInstance().UpdateWorkInfo(tinfo);
+            result = Data.DbProvider.GetInstance().SetWorkMemberList(members, tinfo.Id);
+            SASCache.GetCacheService().RemoveObject("/Sirius/WorkList_" + tinfo.Teamid);
         }
         #endregion
     }
