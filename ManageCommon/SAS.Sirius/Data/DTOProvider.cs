@@ -53,6 +53,53 @@ namespace SAS.Sirius.Data
             reader.Close();
             return tlist;
         }
+
+        /// <summary>
+        /// 团队成果信息实体列表
+        /// </summary>
+        public static List<TeamWorkInfo> GetTeamWorkInfoList(IDataReader reader)
+        {
+            List<TeamWorkInfo> tlist = new List<TeamWorkInfo>();
+            while (reader.Read())
+            {
+                TeamWorkInfo tinfo = new TeamWorkInfo();
+                tinfo.Id = TypeConverter.StrToInt(reader["id"].ToString());
+                tinfo.Name = reader["name"].ToString();
+                tinfo.Start = reader["start"].ToString();
+                tinfo.End = reader["end"].ToString();
+                tinfo.Worddesc = reader["worddesc"].ToString();
+                tinfo.Url = reader["url"].ToString();
+                tinfo.Img = reader["img"].ToString();
+                tinfo.Imgbak = reader["imgbak"].ToString();
+                tinfo.Teamid = TypeConverter.StrToInt(reader["teamid"].ToString());
+                tinfo.Members = reader["members"].ToString();
+                tlist.Add(tinfo);
+            }
+            reader.Close();
+            return tlist;
+        }
+
+        public static TeamWorkInfo GetWorkEntity(IDataReader reader)
+        {
+            if (reader.Read())
+            {
+                TeamWorkInfo tinfo = new TeamWorkInfo();
+                tinfo.Id = TypeConverter.StrToInt(reader["id"].ToString());
+                tinfo.Name = reader["name"].ToString();
+                tinfo.Start = reader["start"].ToString();
+                tinfo.End = reader["end"].ToString();
+                tinfo.Worddesc = reader["worddesc"].ToString();
+                tinfo.Url = reader["url"].ToString();
+                tinfo.Img = reader["img"].ToString();
+                tinfo.Imgbak = reader["imgbak"].ToString();
+                tinfo.Teamid = TypeConverter.StrToInt(reader["teamid"].ToString());
+                tinfo.Members = reader["members"].ToString();
+                reader.Close();
+                return tinfo;
+            }
+            return null;
+        }
+
         /// <summary>
         /// 团队活动信息实体列表
         /// </summary>

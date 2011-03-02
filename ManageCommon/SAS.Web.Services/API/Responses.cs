@@ -119,6 +119,20 @@ namespace SAS.Web.Services.API
         [JsonProperty("teamactlist")]
         public TeamActInfos[] TeamactList;
     }
+    /// <summary>
+    /// 获取团队成果信息
+    /// </summary>
+    [XmlRoot("TeamWork_getlist", Namespace = "http://www.cnzshy.com/api/", IsNullable = false)]
+    public class TeamWorkGetListResponse
+    {
+        [XmlElement("wnums")]
+        [JsonProperty("wnums")]
+        public int Wnums;
+
+        [XmlElement("teamworklist")]
+        [JsonProperty("teamworklist")]
+        public TeamWorkInfos[] TeamWorkList;
+    }
     #endregion
 
     public class ArgResponse
