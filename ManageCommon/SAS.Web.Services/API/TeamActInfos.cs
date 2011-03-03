@@ -7,6 +7,132 @@ using Newtonsoft.Json;
 namespace SAS.Web.Services.API
 {
     /// <summary>
+    /// 团队信息实体
+    /// </summary>
+    public class TeamInfos
+    {
+        /// <summary>
+        /// 团队ID
+        /// </summary>
+        [JsonPropertyAttribute("teamid")]
+        [XmlElement("teamid")]
+        public int TeamID;
+
+        /// <summary>
+        /// 团队名称
+        /// </summary>
+        [JsonPropertyAttribute("name")]
+        [XmlElement("name")]
+        public string Name = string.Empty;
+
+        /// <summary>
+        /// 团队域名
+        /// </summary>
+        [JsonPropertyAttribute("domain")]
+        [XmlElement("domain")]
+        public string Domain = string.Empty;
+
+        /// <summary>
+        /// 模板id
+        /// </summary>
+        [JsonPropertyAttribute("tempid")]
+        [XmlElement("tempid")]
+        public int TempID;
+
+        /// <summary>
+        /// 成立时间
+        /// </summary>
+        [JsonPropertyAttribute("builddate")]
+        [XmlElement("builddate")]
+        public string Builddate = string.Empty;
+
+        /// <summary>
+        /// 创建时间
+        /// </summary>
+        [JsonPropertyAttribute("createdate")]
+        [XmlElement("createdate")]
+        public string Createdate = string.Empty;
+        /// <summary>
+        /// 最后修改时间
+        /// </summary>
+        [JsonPropertyAttribute("lastdate")]
+        [XmlElement("lastdate")]
+        public string Lastdate = string.Empty;
+        /// <summary>
+        /// 团队图片地址
+        /// </summary>
+        [JsonPropertyAttribute("img")]
+        [XmlElement("img")]
+        public string Img = string.Empty;
+        /// <summary>
+        /// 团队简述
+        /// </summary>
+        [JsonPropertyAttribute("bio")]
+        [XmlElement("bio")]
+        public string Bio = string.Empty;
+        /// <summary>
+        /// 团队意义
+        /// </summary>
+        [JsonPropertyAttribute("sign")]
+        [XmlElement("sign")]
+        public string Sign = string.Empty;
+        /// <summary>
+        /// 团队工作方向和工作内容
+        /// </summary>
+        [JsonPropertyAttribute("teamwork")]
+        [XmlElement("teamwork")]
+        public string Teamwork = string.Empty;
+        /// <summary>
+        /// 人员职责和基本构成
+        /// </summary>
+        [JsonPropertyAttribute("constitute")]
+        [XmlElement("constitute")]
+        public string Constitute = string.Empty;
+        /// <summary>
+        /// 团队状态（默认1，正常；0，停用）
+        /// </summary>
+        [JsonPropertyAttribute("stutas")]
+        [XmlElement("stutas")]
+        public int Stutas;
+        /// <summary>
+        /// 查看次数
+        /// </summary>
+        [JsonPropertyAttribute("views")]
+        [XmlElement("views")]
+        public int Views;
+        /// <summary>
+        /// 显示顺序
+        /// </summary>
+        [JsonPropertyAttribute("order")]
+        [XmlElement("order")]
+        public int Order;
+        /// <summary>
+        /// 成员名（逗号分割）
+        /// </summary>
+        [JsonPropertyAttribute("members")]
+        [XmlElement("members")]
+        public string Members = string.Empty;
+        /// <summary>
+        /// 搜索优化关键字
+        /// </summary>
+        [JsonPropertyAttribute("seokey")]
+        [XmlElement("seokey")]
+        public string Seokey = string.Empty;
+        /// <summary>
+        /// 搜索优化描述信息
+        /// </summary>
+        [JsonPropertyAttribute("seodesc")]
+        [XmlElement("seodesc")]
+        public string Seodesc = string.Empty;
+        /// <summary>
+        /// 创建人（可以更改）拥有修改团队信息权限
+        /// </summary>
+        [JsonPropertyAttribute("creater")]
+        [XmlElement("creater")]
+        public string Creater = string.Empty;
+    }
+
+    /// <summary>
     /// 团队成果实体
     /// </summary>
     public class TeamWorkInfos

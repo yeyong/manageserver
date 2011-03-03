@@ -19,6 +19,70 @@ namespace SAS.Web.Services.API.Actions
     {
         SiriusPluginBase spb = SiriusPluginProvider.GetInstance();
 
+        public string GetTeamInfo()
+        {
+            if (Signature != GetParam("sig").ToString())
+            {
+                ErrorCode = (int)ErrorType.API_EC_SIGNATURE;
+                return "";
+            }
+
+            //如果是桌面程序则需要验证用户身份
+            if (this.App.ApplicationType == (int)ApplicationType.DESKTOP)
+            {
+                if (Uid < 1)
+                {
+                    ErrorCode = (int)ErrorType.API_EC_SESSIONKEY;
+                    return "";
+                }
+            }
+
+            if (CallId <= LastCallId)
+            {
+                ErrorCode = (int)ErrorType.API_EC_CALLID;
+                return "";
+            }
+
+            if (!CheckRequiredParams("tid"))
+            {
+                ErrorCode = (int)ErrorType.API_EC_PARAM;
+                return "";
+            }
+
+            int tid = GetIntParam("tid", 1);
+            TeamInfo tinfo = spb.GetTeamInfoCache(tid);
+            TeamGetResponse tgr = new TeamGetResponse();
+            TeamInfos tinfos = new TeamInfos();
+            if (tinfo != null)
+            {
+                tinfos.TeamID = tinfo.TeamID;
+                tinfos.Name = tinfo.Name;
+                tinfos.Domain = tinfo.Teamdomain;
+                tinfos.TempID = tinfo.Templateid;
+                tinfos.Builddate = tinfo.BuildDate;
+                tinfos.Createdate = tinfo.CreateDate;
+                tinfos.Lastdate = tinfo.UpdateDate;
+                tinfos.Img = tinfo.Imgs;
+                tinfos.Bio = tinfo.Bio;
+                tinfos.Sign = tinfo.Content1;
+                tinfos.Teamwork = tinfo.Content2;
+                tinfos.Constitute = tinfo.Content3;
+                tinfos.Stutas = tinfo.Stutas;
+                tinfos.Views = tinfo.Pageviews;
+                tinfos.Order = tinfo.Displayorder;
+                tinfos.Members = tinfo.TeamMember;
+                tinfos.Seokey = tinfo.Seokeywords;
+                tinfos.Seodesc = tinfo.Seodescription;
+                tinfos.Creater = tinfo.Creater;
+            }
+            tgr.Team = tinfos;
+            if (Format == FormatType.JSON)
+            {
+                return JavaScriptConvert.SerializeObject(tgr);
+            }
+            return SerializationHelper.Serialize(tgr);
+        }
+
         public string GetTeamWorkList()
         {
             if (Signature != GetParam("sig").ToString())
