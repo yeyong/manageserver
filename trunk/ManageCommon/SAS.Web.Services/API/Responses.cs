@@ -94,6 +94,14 @@ namespace SAS.Web.Services.API
     #endregion
 
     #region 团队成员信息操作
+
+    [XmlRoot("teaminfo_get", Namespace = "http://www.cnzshy.com/api/", IsNullable = false)]
+    public class TeamGetResponse
+    {
+        [XmlElement("teaminfo")]
+        [JsonProperty("teaminfo")]
+        public TeamInfos Team;
+    }
     [XmlRoot("member_getlist", Namespace = "http://www.cnzshy.com/api/", IsNullable = false)]
     public class MemberGetListResponse
     {

@@ -116,9 +116,17 @@ namespace SAS.Sirius
         /// <summary>
         /// 成果信息获取(cache)
         /// </summary>
-        public override List<TeamWorkInfo> GetTeamWorksWithCache(int tid)
+        public override SAS.Common.Generic.List<TeamWorkInfo> GetTeamWorksWithCache(int tid)
         {
             return Sirius.GetTeamWorksWithCache(tid);
+        }
+
+        /// <summary>
+        /// 获取团队信息缓存
+        /// </summary>
+        public override TeamInfo GetTeamInfoCache(int tid)
+        {
+            return Sirius.GetTeamInfoCache(tid);
         }
     }
 }

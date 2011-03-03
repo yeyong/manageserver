@@ -49,6 +49,11 @@ namespace SAS.Plugin.Sirius
         public abstract TeamInfo GetTeamByTeamID(int teamID);
 
         /// <summary>
+        /// 获取团队信息缓存
+        /// </summary>
+        public abstract TeamInfo GetTeamInfoCache(int tid);
+
+        /// <summary>
         /// 更新团队信息
         /// </summary>
         /// <param name="teaminfo"></param>

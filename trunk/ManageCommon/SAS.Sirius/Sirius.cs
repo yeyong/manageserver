@@ -61,6 +61,21 @@ namespace SAS.Sirius
         }
 
         /// <summary>
+        /// 获取团队信息缓存
+        /// </summary>
+        public static TeamInfo GetTeamInfoCache(int tid)
+        {
+            List<TeamInfo> tlist = GetAllTeamInfoList();
+            if (tlist.Count > 0)
+            {
+                TeamInfo tinfo = new TeamInfo();
+                tinfo = tlist.Find(new Predicate<TeamInfo>(delegate(TeamInfo info) { return info.TeamID == tid; }));
+                return tinfo;
+            }
+            return null;
+        }
+
+        /// <summary>
         /// 根据域名获取团队信息
         /// </summary>
         /// <param name="domain"></param>
