@@ -227,6 +227,7 @@ namespace SAS.Logic
                     StringBuilder textLinkBuilder = new StringBuilder();
                     foreach (DataRow dr in dt.Rows)
                     {
+                        if (TypeConverter.StrToInt(dr["displayorder"].ToString(), 0) >= 10) continue;
                         if (Utils.StrIsNullOrEmpty(dr["note"].ToString()))
                         {
                             if (Utils.StrIsNullOrEmpty(dr["name"].ToString()))
