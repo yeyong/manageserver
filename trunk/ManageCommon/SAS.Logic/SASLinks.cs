@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 
 using SAS.Entity;
 
@@ -63,6 +64,7 @@ namespace SAS.Logic
             if (flinks == null)
             {
                 flinks = Data.DataProvider.SASLinks.GetAllLinks();
+                flinks = flinks.FindAll(new Predicate<FriendLinkInfo>(delegate(FriendLinkInfo finfo) { return finfo.displayorder >= 10; }));
                 SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/LinkList", flinks);
             }
             return flinks;

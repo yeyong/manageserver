@@ -18,12 +18,12 @@
 		<p class="o1tit olw2">
 			<strong>资讯头条</strong>
 			<span>更新：<font class="f_c00">4521</font></span>
-			<em><a title="" class="l_666" href="{newsurl}">更多&gt;&gt;</a></em>
+			<em><a title="" class="l_666" href="{newsurl}" target="_blank">更多&gt;&gt;</a></em>
 		</p>
 		<ul class="olnr">
 		<%loop (NewsContent) newsinfo newslist%>
 		    <%set (string){newsinfotitle}=Utils.GetSubString({newsinfo.NewsTitle},30,"")%>
-			<li>▪&nbsp;<a title="{newsinfo.NewsTitle}" href="{newsinfo.NewsUrl}">{newsinfotitle}</a></li>
+			<li>▪&nbsp;<a title="{newsinfo.NewsTitle}" href="{newsinfo.NewsUrl}" target="_blank">{newsinfotitle}</a></li>
 		<%/loop%>
 		</ul>
 	</div>
@@ -176,6 +176,7 @@
 		<%if {indexad1}.Length>=8%>
 		    <a title="{indexad1[5]}" href="tools/ajax.aspx?t=advredirect&url=<%urlencode({indexad1[4]})%>" target="_blank" rel="nofollow"><img alt="{indexad1[5]}" src="{indexad1[1]}" /></a>
 		<%/if%>
+</script>
 		</p>
 	</div>
 	<p class="inxad mar_top">

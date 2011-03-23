@@ -2,7 +2,7 @@
 <%@ Register TagPrefix="sas" TagName="viewgood" Src="~/usercontrol/viewgoods.ascx"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="styles" Runat="Server">
 <link href="css/channels.css" rel="stylesheet" type="text/css" />
-<link href="css/jquery.cluetip.css" rel="stylesheet" type="text/css">
+<link href="css/jquery.cluetip.css" rel="stylesheet" type="text/css"/>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="scripts" Runat="Server">
 <script src="js/jquery.cluetip.js" type="text/javascript"></script>
@@ -33,6 +33,18 @@
                 }
 			%>
 			</ul>
+		</div>
+		<div class="listlt2 mar_top">
+		    <script type="text/javascript">
+		    <!--
+		        google_ad_client = "ca-pub-9347367743095772";
+		        /* taogou itemshow */
+		        google_ad_slot = "6825378366";
+		        google_ad_width = 200;
+		        google_ad_height = 200;
+            //-->
+            </script>
+            <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 		</div>
 		<sas:viewgood runat="server" ID="viewgoods" />
 	</div>

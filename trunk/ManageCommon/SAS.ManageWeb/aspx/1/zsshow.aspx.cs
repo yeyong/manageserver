@@ -52,7 +52,7 @@ namespace SAS.ManageWeb
             pagetitle = "浙商黄页|" + companyshowinfo.En_name;
             string m_keyword = companyshowinfo.En_main.Trim(',');
             string m_desc = Utils.CutString(Utils.RemoveHtml(companyshowinfo.En_desc), 0, 60);
-            UpdateMetaInfo(m_keyword.Trim().Trim(','), m_desc.Trim().Trim(','), "");
+            UpdateMetaInfo(m_keyword.Trim().Trim(',') + "," + companyshowinfo.En_name, companyshowinfo.En_name + "," + m_desc.Trim().Trim(','), "");
 
             if (ispost)
             {
