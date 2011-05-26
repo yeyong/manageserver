@@ -44,6 +44,7 @@ namespace SAS.Entity
                 case 19: return "淘之购类别频道广告";
                 case 20: return "黄页页内图片广告";
                 case 21: return "浙商企业列表页图片广告";
+                case 22: return "淘之购宅男宅女广告";
                 default: return "";
             }
         }
@@ -377,7 +378,11 @@ namespace SAS.Entity
         /// <summary>
         /// 浙商企业列表页图片广告
         /// </summary>
-        ListPicAd = 21
+        ListPicAd = 21,
+        /// <summary>
+        /// 淘之购宅男女频道广告
+        /// </summary>
+        TaoResidence = 22
     }
     /// <summary>
     /// 淘之购相关频道

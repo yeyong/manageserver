@@ -93,6 +93,25 @@
 		</ul>
 	</div>
 </div>
+<div class="cot" style="margin-top:10px">
+<script type="text/javascript">
+    alimama_pid = "mm_13451138_2368524_9192014";
+    alimama_titlecolor = "37499C";
+    alimama_descolor = "5892CB";
+    alimama_bgcolor = "EDF9F7";
+    alimama_bordercolor = "D6E9FC";
+    alimama_linkcolor = "5768AC";
+    alimama_bottomcolor = "FFFFFF";
+    alimama_anglesize = "10";
+    alimama_bgpic = "5";
+    alimama_icon = "1";
+    alimama_sizecode = "15";
+    alimama_width = 950;
+    alimama_height = 90;
+    alimama_type = 2; 
+</script> 
+<script src="http://a.alimama.cn/inf.js" type="text/javascript"></script>
+</div>
 <div class="cot" id="like">
 	<div class="liketit mar_top">
 		<strong><img alt="潮我喜欢" src="images/index_tit2.gif" /></strong>

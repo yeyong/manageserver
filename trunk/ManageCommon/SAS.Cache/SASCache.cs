@@ -11,7 +11,7 @@ using SAS.Config;
 
 namespace SAS.Cache
 {
-     /// <summary>
+    /// <summary>
     /// SAS!NT缓存类
     /// 对SAS!NT论坛缓存进行全局控制管理
     /// </summary>

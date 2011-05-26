@@ -275,6 +275,7 @@ namespace SAS.Web.Services.API.Actions
                 minfo.Sign = dr["tm_sign"].ToString();
                 minfo.Selfdesc = dr["tm_selfdesc"].ToString();
                 minfo.Selfenjoy = dr["tm_selfenjoy"].ToString();
+                minfo.PSign = dr["pd_sign"].ToString();
                 mlist.Add(minfo);
             }
 
