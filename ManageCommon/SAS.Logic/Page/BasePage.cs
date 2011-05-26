@@ -507,7 +507,7 @@ namespace SAS.Logic
             }
 
             //当为forumlist.aspx或forumindex.aspx,可能出现在线并发问题,这时系统会延时2秒
-            if ((pagename != "forumlist.aspx") && (pagename != "forumindex.aspx"))
+            if ((pagename != "zshy.aspx") && (pagename != "index.aspx"))
                 oluserinfo = OnlineUsers.UpdateInfo(config.Passwordkey, config.Onlinetimeout);
             else
             {

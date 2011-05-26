@@ -206,5 +206,12 @@ namespace SAS.Web.Services.API
         [JsonPropertyAttribute("selfenjoy")]
         [XmlElement("selfenjoy")]
         public string Selfenjoy = string.Empty;
+
+        /// <summary>
+        /// 个性签名
+        /// </summary>
+        [JsonPropertyAttribute("psign")]
+        [XmlElement("psign")]
+        public string PSign = string.Empty;
     }
 }

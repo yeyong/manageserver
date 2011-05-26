@@ -72,58 +72,18 @@
 			<span>3. 调整关键字，如“兰蔻再生青春眼霜”改成“兰蔻 再生青春眼霜”或“兰蔻 眼霜”</span>
 			<span class="mar_top">你是不是想找： </span>
 			<span>
-				<a class="l_f18c08" title="" href="list.shtml">哈伦裤</a>
-				<a class="l_f18c08" title="" href="list.shtml">宽松T</a>
-				<a class="l_f18c08" title="" href="list.shtml">淑女装</a>
-				<a class="l_f18c08" title="" href="list.shtml">手机</a>
-				<a class="l_f18c08" title="" href="list.shtml">男装</a>
-				<a class="l_f18c08" title="" href="list.shtml">女包</a>
-				<a class="l_f18c08" title="" href="list.shtml">雪纺</a>
-				<a class="l_f18c08" title="" href="list.shtml">头饰</a>
-				<a class="l_f18c08" title="" href="list.shtml">化妆品</a>
-				<a class="l_f18c08" title="" href="list.shtml">女鞋</a>
+				<a class="l_f18c08" title="哈伦裤" href="goodssearch-s-哈伦裤.html">哈伦裤</a>
+				<a class="l_f18c08" title="宽松" href="goodssearch-s-宽松T.html">宽松T</a>
+				<a class="l_f18c08" title="淑女装" href="goodssearch-s-淑女装.html">淑女装</a>
+				<a class="l_f18c08" title="手机" href="goodssearch-s-手机.html">手机</a>
+				<a class="l_f18c08" title="男装" href="goodssearch-s-男装.html">男装</a>
+				<a class="l_f18c08" title="女包" href="goodssearch-s-女包.html">女包</a>
+				<a class="l_f18c08" title="雪纺" href="goodssearch-s-雪纺.html">雪纺</a>
+				<a class="l_f18c08" title="头饰" href="goodssearch-s-头饰.html">头饰</a>
+				<a class="l_f18c08" title="化妆品" href="goodssearch-s-化妆品.html">化妆品</a>
+				<a class="l_f18c08" title="女鞋" href="goodssearch-s-女鞋.html">女鞋</a>
 			</span>
 		</p>
-		<div class="shownr mar_top">
-			<strong>为您推荐</strong>
-			<ul class="showcot">
-				<li>
-					<a title="" href="show.shtml">
-					<img alt="" src="images/ad/120x120.gif" />
-					<span>josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-					</a>
-					<b>￥158.00</b>
-				</li>
-				<li>
-					<a title="" href="show.shtml">
-					<img alt="" src="images/ad/120x120.gif" />
-					<span>josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-					</a>
-					<b>￥158.00</b>
-				</li>
-				<li>
-					<a title="" href="show.shtml">
-					<img alt="" src="images/ad/120x120.gif" />
-					<span>josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-					</a>
-					<b>￥158.00</b>
-				</li>
-				<li>
-					<a title="" href="show.shtml">
-					<img alt="" src="images/ad/120x120.gif" />
-					<span>josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-					</a>
-					<b>￥158.00</b>
-				</li>
-				<li>
-					<a title="" href="show.shtml">
-					<img alt="" src="images/ad/120x120.gif" />
-					<span>josiny 杂志款漆皮凉靴 复古 罗马战靴 高跟凉鞋女鞋</span>
-					</a>
-					<b>￥158.00</b>
-				</li>
-			</ul>
-		</div>
 	</div>
 </div>
 </asp:Content>

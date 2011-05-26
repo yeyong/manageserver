@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SAS.Common.Generic
 {
-    // <summary>
+    /// <summary>
     /// SortedList泛型类
     /// </summary>
     /// <typeparam name="T">占位符(下同)</typeparam>
