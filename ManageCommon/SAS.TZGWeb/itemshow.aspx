@@ -35,16 +35,6 @@
 			</ul>
 		</div>
 		<div class="listlt2 mar_top">
-		    <script type="text/javascript">
-		    <!--
-		        google_ad_client = "ca-pub-9347367743095772";
-		        /* taogou itemshow */
-		        google_ad_slot = "6825378366";
-		        google_ad_width = 200;
-		        google_ad_height = 200;
-            //-->
-            </script>
-            <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 		</div>
 		<sas:viewgood runat="server" ID="viewgoods" />
 	</div>
@@ -65,8 +55,8 @@
 			</p>
 			<p>所在地区：<%=shopaddress%></p>
 			<p class="showan">
-				<a title="<%=iteminfo.Title%>" href="<%=tkitem.ClickUrl%>"><img alt="点击查看详情" src="images/show_an1.gif" /></a>
-				<a id="put" title="复制链接给好友" href="tooltip.html" rel="tooltip.html"><img alt="点击复制代码 分享给好友" src="images/show_an2.gif" /></a>
+				<a title="<%=iteminfo.Title%>" href="<%=tkitem.ClickUrl==""?"http://s8.taobao.com/search?cat=0&commend=1,2&s=0&sort=coefp&n=40&q="+HttpUtility.UrlEncode(iteminfo.Title, Encoding.GetEncoding("GB2312"))+"&tab=coefp&pid=mm_13451138_0_0&mode=23":tkitem.ClickUrl%>"><img alt="点击查看详情" src="images/show_an1.gif" /></a>
+				<a href="http://www.jiathis.com/share/" class="jiathis" target="_blank"><img src="http://v2.jiathis.com/code/images/jiathis2.gif" border="0" /></a>
 			</p>
 		</div>
 		<div class="showcon mar_top">
@@ -148,5 +138,6 @@ jQuery(document).ready(function(){
 	jQuery('#put').cluetip({ activation: 'click', sticky: true, width: 350, positionBy: 'bottomTop', closePosition: 'title',closeText: '<img src="images/cross.png" alt="close" />',cursor: 'pointer', dropShadow: false});
 });	
 </script>
+<script type="text/javascript" src="http://v2.jiathis.com/code/jia.js" charset="utf-8"></script>
 </asp:Content>
 

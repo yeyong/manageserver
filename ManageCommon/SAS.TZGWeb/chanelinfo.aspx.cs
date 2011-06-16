@@ -47,6 +47,7 @@ public partial class chanelinfo : TaoBaoPage
     /// 5号广告
     /// </summary>
     protected string adlist5 = "";
+    protected string classstr = "";
 
     protected override void ShowPage()
     {
@@ -61,7 +62,7 @@ public partial class chanelinfo : TaoBaoPage
 
         cbrandlist = TaoBaos.GetGoodsBrandListByClass(chanelid);
         csubclasslist = TaoBaos.GetCategoryListByParentID(chanelid);
-        rproductlist = TaoBaos.GetProductWithRecommend(Convert.ToInt16(TaoChanel.Chanel), chanelid);
+        //rproductlist = TaoBaos.GetProductWithRecommend(Convert.ToInt16(TaoChanel.Chanel), chanelid);
 
         adlist1 = Advertisements.GetTaoRandomAd(chanelid * 10 + 1, AdType.TaoChanelAd);
         adlist2 = Advertisements.GetTaoRandomAd(chanelid * 10 + 2, AdType.TaoChanelAd);
@@ -72,5 +73,20 @@ public partial class chanelinfo : TaoBaoPage
         pagetitle = crootinfo.Name + "频道-" + crootinfo.Name + "类型商品导购";
         seokeyword = string.Format("{0}频道,{0}类别,{0}商品,{0}导购,{0}类目,{0}搜索", crootinfo.Name);
         seodescription = string.Format("{0}频道，淘之购提供专业的{0}淘宝商品导购与商品推荐。", crootinfo.Name);
+    }
+
+    protected string GetSubClassList(List<CategoryInfo> csclasslist)
+    {
+        int countsum = 0;
+        foreach (CategoryInfo subcinfo2 in csubclasslist)
+        {
+            if (countsum > 4) break;
+            if (subcinfo2.Cg_relateclass.Split(',').Length <= 0) continue;
+            if (subcinfo2.Cg_relateclass.Split(',')[0].Split('|').Length <= 0) continue;
+            classstr += subcinfo2.Cg_relateclass.Split(',')[0].Split('|')[0] + ",";
+            countsum++;
+        }
+        
+        return classstr.Trim().Trim(',');
     }
 }

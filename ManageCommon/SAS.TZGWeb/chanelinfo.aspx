@@ -66,25 +66,30 @@
 			<strong><img alt="潮我喜欢" src="images/index_tit2.gif" /></strong>
 			<ul id="chalprdrt">
 			<%
-                foreach (RecommendWithProduct rpinfo in rproductlist)
+                int subcinfo1_num = 0;
+                foreach (CategoryInfo subcinfo1 in csubclasslist)
                 {
+                    if (subcinfo1_num > 4) break;
             %>
-				<li><%=rpinfo.ctitle%></li>
+				<li><%=subcinfo1.Name%></li>
 			<%
+                subcinfo1_num++;
                 }
             %>
 			</ul>
 		</div>
 		<div id="chalprdnr">
 		    <%
-                foreach (RecommendWithProduct rpinfo in rproductlist)
+                string subsclass = GetSubClassList(csubclasslist);
+
+                foreach (string subid in subsclass.Split(','))
                 {
             %>
 			<div class="con">
 				<ul class="trdcot">
 				    <%
                         int tkiteminfo__id = 1;
-                        foreach (SAS.Entity.Domain.TaobaokeItem tkiteminfo in rpinfo.item)
+                        foreach (SAS.Entity.Domain.TaobaokeItem tkiteminfo in SAS.Taobao.TaoBaos.GetChanelItemList(Utils.StrToInt(subid,0)))
                         {
                     %>
 					<li class="trdcot1">

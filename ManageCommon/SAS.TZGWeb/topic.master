@@ -41,5 +41,6 @@
 <script type="text/javascript">
     <%=configinfo.Statcode%>
 </script>
+<div style="display:none"><script src="http://s21.cnzz.com/stat.php?id=3170502&web_id=3170502" language="JavaScript"></script></div>
 <asp:ContentPlaceHolder id="footer" runat="server"></asp:ContentPlaceHolder>
 </html>
