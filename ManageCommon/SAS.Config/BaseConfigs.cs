@@ -73,6 +73,17 @@ namespace SAS.Config
         }
 
         /// <summary>
+        /// 返回发布系统数据库连接串
+        /// </summary>
+        public static string GetPlatformConnectString
+        {
+            get
+            {
+                return GetBaseConfig().PlatformDbConnectstring;
+            }
+        }
+
+        /// <summary>
         /// 返回表前缀
         /// </summary>
         public static string GetTablePrefix

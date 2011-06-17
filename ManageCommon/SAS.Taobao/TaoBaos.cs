@@ -92,6 +92,39 @@ namespace SAS.Taobao
         }
 
         /// <summary>
+        /// 获取各类别首页频道淘宝客商品
+        /// </summary>
+        /// <param name="cid">频道类别</param>
+        /// <returns></returns>
+        public static List<TaobaokeItem> GetChanelItemList(int cid)
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            string cachekey = "TaobaokeItemList_" + cid;
+            List<TaobaokeItem> tklist = cache.RetrieveObject(cachekey) as List<TaobaokeItem>;
+
+            if (tklist == null)
+            {
+                TaobaokeItemsGetRequest tgr = new TaobaokeItemsGetRequest();
+                ItemCat icinfo = GetItemCatInfo(cid);
+                tgr.Fields = "iid,num_iid,title,nick,pic_url,price,click_url,commission,commission_rate,commission_num,commission_volume,shop_click_url,seller_credit_score,item_location,keyword_click_url,volume";
+                tgr.Nick = SAS_USERNICK;
+                tgr.Cid = Int32.Parse(icinfo.ParentCid.ToString());
+                tgr.PageNo = 1;
+                tgr.PageSize = 20;
+                tgr.Sort = "commissionRate_desc";
+                PageList<TaobaokeItem> pageitems = client.TaobaokeItemsGet(tgr);
+                tklist = pageitems.Content;
+                SAS.Cache.ICacheStrategy ica = new TaoBaoCacheStrategy();
+                ica.TimeOut = 60;
+                cache.LoadCacheStrategy(ica);
+                cache.AddObject(cachekey, tklist);
+                cache.LoadDefaultCacheStrategy();
+            }
+
+            return tklist;
+        }
+
+        /// <summary>
         /// 根据条件获取商品分页信息
         /// </summary>
         /// <param name="cid">类别ID</param>

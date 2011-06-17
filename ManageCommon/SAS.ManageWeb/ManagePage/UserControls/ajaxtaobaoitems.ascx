@@ -28,8 +28,8 @@
                   <tr class="mouseoutstyle" onmouseover="this.className='mouseoverstyle'" onmouseout="this.className='mouseoutstyle'" style="cursor:hand;">
                     <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><input type="button" class="ManagerButton" value="选择" onclick="selectItem(this,'<%=tkiteminfo.NumIid%>');"/></td>
                     <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;">
-                        <span id="<%=tkiteminfo.Iid%>" onmouseover="showMenu(this.id,0,0,1,0);" style="font-weight:bold"><%=tkiteminfo.Title%><img src="../images/eye.gif" style="vertical-align:middle" /></span>
-                        <div id="<%=tkiteminfo.Iid%>_menu" style="display:none">
+                        <span id="thepic<%=tkiteminfo.NumIid%>" onmouseover="showMenu(this.id,0,0,1,0);" style="font-weight:bold"><%=tkiteminfo.Title%><img src="../images/eye.gif" style="vertical-align:middle" /></span>
+                        <div id="thepic<%=tkiteminfo.NumIid%>_menu" style="display:none">
 					        <img src="<%=tkiteminfo.PicUrl%>_250x250.jpg" onerror="this.src='../../images/common/none.gif'" />
 						</div>
                     </td>

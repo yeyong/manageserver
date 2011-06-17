@@ -123,6 +123,7 @@
     <Compile Include="Goods\ShopDetailInfo.cs" />
     <Compile Include="Goods\TaoBaoTopicInfo.cs" />
     <Compile Include="HelpInfo.cs" />
+    <Compile Include="InfoPlatform\UserInfo.cs" />
     <Compile Include="IpInfo.cs" />
     <Compile Include="NavInfo.cs" />
     <Compile Include="NETCMS\NewsContent.cs" />

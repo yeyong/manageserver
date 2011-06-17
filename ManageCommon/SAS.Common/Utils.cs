@@ -390,6 +390,25 @@ namespace SAS.Common
 
             return ret;
         }
+        /// <summary>
+        /// MD5函数，企业信息发布平台用密码加密算法
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string MD5ForPlat(string STR, string Encryption)
+        {
+            string password = "";
+            STR = STR + Encryption;
+            //pwd为加密结果
+            System.Security.Cryptography.MD5 ps = System.Security.Cryptography.MD5.Create();
+            byte[] s = ps.ComputeHash(Encoding.UTF8.GetBytes(STR));
+            //这里的UTF8是编码方式，你可以采用你喜欢的方式进行，比如UNcode等等
+            for (int i = 0; i < s.Length; i++)
+            {
+                password = password + s[i].ToString();
+            }
+            return password;
+        }
 
         /// <summary>
         /// SHA256函数

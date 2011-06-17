@@ -12,6 +12,7 @@ namespace SAS.Config
 
         private string m_dbconnectstring = "Data Source=127.0.0.1;User ID=sa;Password=123;Initial Catalog=ntw;Pooling=true";		// 数据库连接串-格式(中文为用户修改的内容)：Data Source=数据库服务器地址;User ID=您的数据库用户名;Password=您的数据库用户密码;Initial Catalog=数据库名称;Pooling=true
         private string m_ntwcmsdbconnectstring = "Data Source=127.0.0.1;User ID=sa;Password=123;Initial Catalog=NETCMS;Pooling=true";   //文章管理数据库
+        private string m_platformdbconnectstring = "Data Source=127.0.0.1;User ID=sa;Password=123;Initial Catalog=websen;Pooling=true"; //发布平台数据库
         private string m_tableprefix = "ntw_";		// 数据库中表的前缀
         private string m_sitepath = "/";			// 站点内的根路径
         private string m_dbtype = "";
@@ -43,7 +44,14 @@ namespace SAS.Config
             get { return m_ntwcmsdbconnectstring; }
             set { m_ntwcmsdbconnectstring = value; }
         }
-
+        /// <summary>
+        /// 发布系统数据库连接字符串
+        /// </summary>
+        public string PlatformDbConnectstring
+        {
+            get { return m_platformdbconnectstring; }
+            set { m_platformdbconnectstring = value; }
+        }
         /// <summary>
         /// 数据库中表的前缀
         /// </summary>
