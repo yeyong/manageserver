@@ -6,12 +6,15 @@ using System.Web.UI.WebControls;
 using SAS.Logic;
 using SAS.Entity;
 using SAS.Common;
+using SAS.Plugin.InfoPlatform;
 
 namespace SAS.ManageWeb.ManagePage
 {
     public partial class company_companyedit : AdminPage
     {
+        private INFOPlatformPluginBase infopb = INFOPlatformPluginProvider.GetInstance();
         protected Companys _companyInfos = new Companys();
+        protected SAS.Entity.InfoPlatform.UserInfo platCompany = new SAS.Entity.InfoPlatform.UserInfo();
 
         protected string defaultarea = "";
         protected string defaultcata = "";
@@ -90,6 +93,8 @@ namespace SAS.ManageWeb.ManagePage
             encredit.Text = _companyInfos.En_credits.ToString();
             defaultcata = _companyInfos.En_cataloglist;
             enconfig.SelectedValue = _companyInfos.Configid.ToString();
+
+            platCompany = infopb.GetUserInfoByLoginName("Company_" + enid);
         }
 
         private void UpdateCompanyInfo_Click(object sender, EventArgs e)
@@ -162,6 +167,61 @@ namespace SAS.ManageWeb.ManagePage
                 {
                     base.RegisterStartupScript("", "<script>alert('修改操作失败，请与管理员联系!');window.location.href='company_companyedit.aspx?enid=" + SASRequest.GetInt("enid", 0) + "';</script>");
                     return;
+                }
+
+                if (_companyInfo.En_level > 0 && platCompany.UserID <= 0)
+                {
+                    Companys _eninfo = Companies.GetCompanyInfo(SASRequest.GetInt("enid", 0));
+
+                    platCompany.LoginName = "Company_" + _eninfo.En_id;
+                    platCompany.Password = Utils.MD5ForPlat("Company_" + _eninfo.En_id, "");
+                    platCompany.Sex = "先生";
+                    platCompany.Question = "";
+                    platCompany.Answer = "";
+                    platCompany.GradeID = 2;
+                    platCompany.Lockuedup = _eninfo.En_visble > 0 ? false : true;
+                    platCompany.LinkName = _eninfo.En_contact;
+                    platCompany.MobilePhone = _eninfo.En_mobile;
+                    platCompany.Email = _eninfo.En_mail;
+                    string[] telphone = _eninfo.En_phone.Split('-');
+
+                    if(telphone.Length > 1){
+                        platCompany.Tel_DistrictNumber = telphone[0];
+                        platCompany.Tel_Telephone = telphone[1];
+                    }
+                    string[] faxphone = _eninfo.En_fax.Split('-');
+
+                    if (faxphone.Length > 1)
+                    {
+                        platCompany.Fax_DistrictNumber = faxphone[0];
+                        platCompany.Fax_Telephone = faxphone[1];
+                    }
+
+                    platCompany.CompanyName = _eninfo.En_name;
+                    platCompany.CompanyNature = "企业单位";
+                    platCompany.BusinessModel = _eninfo.En_type == 1 ? "0" : (_eninfo.En_type == 7 ? "2" : (_eninfo.En_type == 8 ? "3" : "1"));
+                    platCompany.DealinAdd = _eninfo.En_address;
+                    platCompany.Product = _eninfo.En_main.Trim(',');
+                    platCompany.Industry = Utils.CutString(Catalogs.GetCatalogInfo(Utils.StrToInt(_eninfo.En_cataloglist.Split(',')[0], 0)).parentlist + "," + Utils.StrToInt(_eninfo.En_cataloglist.Split(',')[0], 0), 2);
+                    platCompany.Summary = _eninfo.En_desc;
+                    platCompany.Verify = _eninfo.En_status == 2 ? true : false;
+                    platCompany.Country = "中国";
+                    platCompany.Province = _eninfo.ProvinceName;
+                    platCompany.City = _eninfo.CityName;
+                    platCompany.Area = _eninfo.DistrictName;
+                    platCompany.Postalcode = _eninfo.En_post;
+                    platCompany.URL = _eninfo.En_web;
+                    platCompany.Capital = Utils.StrToInt(_eninfo.Reg_capital, 0);
+                    platCompany.Established = DateTime.Parse(_eninfo.En_builddate);
+                    platCompany.RegisterAddress = _eninfo.Reg_address;
+                    platCompany.Corporate = _eninfo.En_corp;
+                    platCompany.RegDate = Convert.ToDateTime(DateTime.Now.Date);
+
+                    if (infopb.InsertUser(platCompany) <= 0)
+                    {
+                        base.RegisterStartupScript("", "<script>alert('企业信息发布平台操作失败，请与管理员联系!');window.location.href='company_companyedit.aspx?enid=" + SASRequest.GetInt("enid", 0) + "';</script>");
+                        return;
+                    }
                 }
 
                 foreach (string str in _companyInfo.En_cataloglist.Split(','))

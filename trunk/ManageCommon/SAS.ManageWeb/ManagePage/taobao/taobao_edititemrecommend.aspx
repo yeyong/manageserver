@@ -171,8 +171,8 @@
                   <tr class="mouseoutstyle" onmouseover="this.className='mouseoverstyle'" onmouseout="this.className='mouseoutstyle'" style="cursor:hand;">
                     <td nowrap="nowrap" style="border-color:#EAE9E1;border-width:1px;border-style:solid;"><input type="button" class="ManagerButton" value="删除" onclick="deleteItem(this,'<%=tbkiteminfo.NumIid%>');"/></td>
                     <td style="border-color:#EAE9E1;border-width:1px;border-style:solid;">
-                        <span id="<%=tbkiteminfo.Iid%>1" onmouseover="showMenu(this.id,0,0,1,0);" style="font-weight:bold"><%=tbkiteminfo.Title%><img src="../images/eye.gif" style="vertical-align:middle" /></span>
-                        <div id="<%=tbkiteminfo.Iid%>1_menu" style="display:none">
+                        <span id="otherpic<%=tbkiteminfo.NumIid%>" onmouseover="showMenu(this.id,0,0,1,0);" style="font-weight:bold"><%=tbkiteminfo.Title%><img src="../images/eye.gif" style="vertical-align:middle" /></span>
+                        <div id="otherpic<%=tbkiteminfo.NumIid%>_menu" style="display:none">
 					        <img src="<%=tbkiteminfo.PicUrl%>_250x250.jpg" onerror="this.src='../../images/common/none.gif'" />
 						</div>
                     </td>

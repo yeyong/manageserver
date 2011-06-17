@@ -902,6 +902,10 @@
       <Project>{F6CFD248-E9E3-480A-B518-526298AAF81E}</Project>
       <Name>SAS.Entity</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SAS.InfoRelease\SAS.InfoRelease.csproj">
+      <Project>{73DDB392-4539-402E-B813-4D964A77D622}</Project>
+      <Name>SAS.InfoRelease</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SAS.Logic\SAS.Logic.csproj">
       <Project>{9145299A-21C2-4558-A956-2DBDCBF477DE}</Project>
       <Name>SAS.Logic</Name>
