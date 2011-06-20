@@ -37,6 +37,9 @@ a:hover{ color:#e00000; text-decoration:underline;}
 .l_734d01:hover{ color:#e00000; text-decoration:underline;}
 .l_e00000:link, .l_e00000:visited{ color:#e00000; text-decoration:none;}
 .l_e00000:hover{ color:#e00000; text-decoration:underline;}
+.l_5baf00:link, .l_5baf00:visited{ color:#5baf00; text-decoration:none;}
+.l_5baf00:hover{ color:#c00; text-decoration:underline;}
+
 /*信誉图*/
 .rankbg{ background:url(../images/rank_bg.gif) repeat-x;}
 .rank1{ height:13px; background-position:0 -1px;}

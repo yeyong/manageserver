@@ -73,7 +73,7 @@ namespace SAS.Logic
                 SAS.Data.DataProvider.Help.UpdateHelp(id, title, message, pid, orderby);
             SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/helplist");
             SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/helpindex");
-            SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoIndexHelp", true);
+            //SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoIndexHelp", true);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace SAS.Logic
             SAS.Data.DataProvider.Help.AddHelp(title, message, pid);
             SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/helplist");
             SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/helpindex");
-            SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoIndexHelp", true);
+            //SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoIndexHelp", true);
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace SAS.Logic
             SAS.Data.DataProvider.Help.DelHelp(idlist);
             SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/helplist");
             SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/helpindex");
-            SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoIndexHelp", true);
+            //SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoIndexHelp", true);
         }
 
         /// <summary>
@@ -146,18 +146,18 @@ namespace SAS.Logic
         /// <summary>
         /// 获取淘之购帮助
         /// </summary>
-        public static System.Collections.Generic.List<HelpInfo> GetTaoIndexHelp()
-        {
-            System.Collections.Generic.List<HelpInfo> helplist = new System.Collections.Generic.List<HelpInfo>();
-            helplist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/TaoIndexHelp") as System.Collections.Generic.List<HelpInfo>;
+        //public static System.Collections.Generic.List<HelpInfo> GetTaoIndexHelp()
+        //{
+        //    System.Collections.Generic.List<HelpInfo> helplist = new System.Collections.Generic.List<HelpInfo>();
+        //    helplist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/TaoIndexHelp") as System.Collections.Generic.List<HelpInfo>;
 
-            if (helplist == null)
-            {
-                helplist = SAS.Data.DataProvider.Help.GetHelpList().FindAll(new Predicate<HelpInfo>(delegate(HelpInfo subhelp) { return subhelp.Pid == 1; }));
-                SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/TaoIndexHelp", helplist);
-            }
-            return helplist;
-        }
+        //    if (helplist == null)
+        //    {
+        //        helplist = SAS.Data.DataProvider.Help.GetHelpList().FindAll(new Predicate<HelpInfo>(delegate(HelpInfo subhelp) { return subhelp.Pid == 1; }));
+        //        SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/TaoIndexHelp", helplist);
+        //    }
+        //    return helplist;
+        //}
 
         /// <summary>
         /// 获取站内关于相关帮助
@@ -225,7 +225,7 @@ namespace SAS.Logic
             }
             SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/helplist");
             SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/helpindex");
-            SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoIndexHelp", true);
+            //SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoIndexHelp", true);
             return true;
         }
     }

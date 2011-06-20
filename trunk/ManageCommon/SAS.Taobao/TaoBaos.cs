@@ -57,7 +57,9 @@ namespace SAS.Taobao
         /// </summary>
         public static List<ItemCat> GetItemCatCache(long cid)
         {
-            List<ItemCat> itemcatlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/Taobao/ItemCats_" + cid) as List<ItemCat>;
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            List<ItemCat> itemcatlist = cache.RetrieveObject("/SAS/Taobao/ItemCats_" + cid) as List<ItemCat>;
+            //List<ItemCat> itemcatlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/Taobao/ItemCats_" + cid) as List<ItemCat>;
             if (itemcatlist == null)
             {
                 ItemcatsGetRequest igr = new ItemcatsGetRequest();
@@ -67,7 +69,8 @@ namespace SAS.Taobao
                 {
                     PageList<ItemCat> pageitems = client.ItemcatsGet(igr);
                     itemcatlist = pageitems.Content;
-                    SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/Taobao/ItemCats_" + cid, itemcatlist);
+                    cache.AddObject("/SAS/Taobao/ItemCats_" + cid, itemcatlist);
+                    //SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/Taobao/ItemCats_" + cid, itemcatlist);
                 }
                 catch (NTWException e)
                 {
@@ -99,7 +102,7 @@ namespace SAS.Taobao
         public static List<TaobaokeItem> GetChanelItemList(int cid)
         {
             SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
-            string cachekey = "TaobaokeItemList_" + cid;
+            string cachekey = "/SAS/Taobao/TaobaokeItemList_" + cid;
             List<TaobaokeItem> tklist = cache.RetrieveObject(cachekey) as List<TaobaokeItem>;
 
             if (tklist == null)
@@ -589,7 +592,9 @@ namespace SAS.Taobao
         public static SAS.Common.Generic.List<ShopDetailInfo> GetTaoBaoShopListByRecommend(int chanel, int classid)
         {
             SAS.Common.Generic.List<ShopDetailInfo> shoplist = new SAS.Common.Generic.List<ShopDetailInfo>();
-            shoplist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/ShopList/Chanel_" + chanel + "/Class_" + classid) as SAS.Common.Generic.List<ShopDetailInfo>;
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            shoplist = cache.RetrieveObject("/SAS/ShopList/Chanel_" + chanel + "/Class_" + classid) as SAS.Common.Generic.List<ShopDetailInfo>;
+            //shoplist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/ShopList/Chanel_" + chanel + "/Class_" + classid) as SAS.Common.Generic.List<ShopDetailInfo>;
             if (shoplist == null)
             {
                 List<RecommendInfo> rlist = GetRecommendList(2, chanel, classid);
@@ -599,7 +604,8 @@ namespace SAS.Taobao
                     shopidlist += rinfo.ccontent + ",";
                 }
                 shoplist = GetTaoBaoShopListByIds(shopidlist.Trim().Trim(','));
-                SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/ShopList/Chanel_" + chanel + "/Class_" + classid, shoplist);
+                cache.AddObject("/SAS/ShopList/Chanel_" + chanel + "/Class_" + classid, shoplist);
+                //SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/ShopList/Chanel_" + chanel + "/Class_" + classid, shoplist);
             }
             return shoplist;
         }
@@ -681,11 +687,14 @@ namespace SAS.Taobao
         public static List<GoodsBrandInfo> GetGoodsBrandListByClass(int classid)
         {
             SAS.Common.Generic.List<GoodsBrandInfo> brandlist = new SAS.Common.Generic.List<GoodsBrandInfo>();
-            brandlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/GoodsBrand/Class_" + classid) as SAS.Common.Generic.List<GoodsBrandInfo>;
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            brandlist = cache.RetrieveObject("/SAS/GoodsBrand/Class_" + classid) as SAS.Common.Generic.List<GoodsBrandInfo>;
+            //brandlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/GoodsBrand/Class_" + classid) as SAS.Common.Generic.List<GoodsBrandInfo>;
             if (brandlist == null)
             {
                 brandlist = DTOProvider.GetGoodsBrandListEntity(Data.DbProvider.GetInstance().GetGoodsBrandListByClass(classid));
-                SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/GoodsBrand/Class_" + classid, brandlist);
+                cache.AddObject("/SAS/GoodsBrand/Class_" + classid, brandlist);
+                //SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/GoodsBrand/Class_" + classid, brandlist);
             }
             return brandlist;
         }
@@ -695,7 +704,9 @@ namespace SAS.Taobao
         public static List<GoodsBrandInfo> GetGoodsBrandList(int chanel, int classid)
         {
             SAS.Common.Generic.List<GoodsBrandInfo> goodsbrandlist = new SAS.Common.Generic.List<GoodsBrandInfo>();
-            goodsbrandlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/BrandList/Chanel_" + chanel + "/Class_" + classid) as SAS.Common.Generic.List<GoodsBrandInfo>;
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            goodsbrandlist = cache.RetrieveObject("/SAS/BrandList/Chanel_" + chanel + "/Class_" + classid) as SAS.Common.Generic.List<GoodsBrandInfo>;
+            //goodsbrandlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/BrandList/Chanel_" + chanel + "/Class_" + classid) as SAS.Common.Generic.List<GoodsBrandInfo>;
             if (goodsbrandlist == null)
             {
                 List<RecommendInfo> rlist = GetRecommendList(4, chanel, classid);
@@ -707,8 +718,8 @@ namespace SAS.Taobao
 
                 if (shopidlist.Trim().Trim(',') == "") return new List<GoodsBrandInfo>();
                 goodsbrandlist = DTOProvider.GetGoodsBrandListEntity(GetGoodsBrandListByIds(shopidlist.Trim().Trim(',')));
-                
-                SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/BrandList/Chanel_" + chanel + "/Class_" + classid, goodsbrandlist);
+                cache.AddObject("/SAS/BrandList/Chanel_" + chanel + "/Class_" + classid, goodsbrandlist);
+                //SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/BrandList/Chanel_" + chanel + "/Class_" + classid, goodsbrandlist);
             }
             return goodsbrandlist;
         }
@@ -732,7 +743,9 @@ namespace SAS.Taobao
         public static List<TaoBaoTopicInfo> GetTaoBaoTopicList()
         {
             List<TaoBaoTopicInfo> tbtlist = new List<TaoBaoTopicInfo>();
-            tbtlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/TopicList") as List<TaoBaoTopicInfo>;
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            tbtlist = cache.RetrieveObject("/SAS/TopBaoTopicList") as List<TaoBaoTopicInfo>;
+            //tbtlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/TopicList") as List<TaoBaoTopicInfo>;
             if (tbtlist == null)
             {
                 tbtlist = new List<TaoBaoTopicInfo>();
@@ -760,7 +773,8 @@ namespace SAS.Taobao
                     tbtlist.Add(ttinfo);
                 }
                 tbtlist.Sort(CompareTopicOrder);
-                SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/TopicList", tbtlist);
+                //SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/TopicList", tbtlist);
+                cache.AddObject("/SAS/TopBaoTopicList", tbtlist);
             }
             return tbtlist;
         }
@@ -777,7 +791,9 @@ namespace SAS.Taobao
         public static List<TaoBaoTopicInfo> GetTaoBaoTopicList(int chanel)
         {
             List<TaoBaoTopicInfo> tbtlist = new List<TaoBaoTopicInfo>();
-            tbtlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/TopicList_" + chanel) as List<TaoBaoTopicInfo>;
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            tbtlist = cache.RetrieveObject("/SAS/TaoBaoTopicList_" + chanel) as List<TaoBaoTopicInfo>;
+            //tbtlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/TopicList_" + chanel) as List<TaoBaoTopicInfo>;
             if (tbtlist == null)
             {
                 tbtlist = new List<TaoBaoTopicInfo>();
@@ -805,7 +821,8 @@ namespace SAS.Taobao
                     tbtlist.Add(ttinfo);
                 }
                 tbtlist.Sort(CompareTopicOrder);
-                SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/TopicList_" + chanel, tbtlist);
+                cache.AddObject("/SAS/TaoBaoTopicList_" + chanel, tbtlist);
+                //SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/TopicList_" + chanel, tbtlist);
             }
             return tbtlist;
         }
@@ -818,7 +835,9 @@ namespace SAS.Taobao
         public static List<TaobaokeItem> GetRecommendProduct(int chanel, int classid)
         {
             List<TaobaokeItem> taobaoitemlist = new List<TaobaokeItem>();
-            taobaoitemlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/RecommendItem/Chanel_" + chanel + "/Class_" + classid) as List<TaobaokeItem>;
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            taobaoitemlist = cache.RetrieveObject("/SAS/RecommendItem/Chanel_" + chanel + "/Class_" + classid) as List<TaobaokeItem>;
+            //taobaoitemlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/RecommendItem/Chanel_" + chanel + "/Class_" + classid) as List<TaobaokeItem>;
 
             if (taobaoitemlist == null)
             {
@@ -837,8 +856,8 @@ namespace SAS.Taobao
 
                 PageList<TaobaokeItem> pageitems = client.TaobaokeItemsConvert(tcr);
                 taobaoitemlist = pageitems.Content;
-
-                SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/RecommendItem/Chanel_" + chanel + "/Class_" + classid, taobaoitemlist);
+                cache.AddObject("/SAS/RecommendItem/Chanel_" + chanel + "/Class_" + classid, taobaoitemlist);
+                //SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/RecommendItem/Chanel_" + chanel + "/Class_" + classid, taobaoitemlist);
             }
             return taobaoitemlist;
         }
@@ -855,7 +874,9 @@ namespace SAS.Taobao
         public static List<RecommendWithProduct> GetProductWithRecommend(int chanel, int classid)
         {
             List<RecommendWithProduct> recommendlist = new List<RecommendWithProduct>();
-            recommendlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/RecommendWithItem/Chanel_" + chanel + "/Class_" + classid) as List<RecommendWithProduct>;
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            recommendlist = cache.RetrieveObject("/SAS/RecommendWithItem/Chanel_" + chanel + "/Class_" + classid) as List<RecommendWithProduct>;
+            //recommendlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/RecommendWithItem/Chanel_" + chanel + "/Class_" + classid) as List<RecommendWithProduct>;
 
             if (recommendlist == null)
             {
@@ -876,8 +897,8 @@ namespace SAS.Taobao
                     rpinfo.item = pageitems.Content;
                     recommendlist.Add(rpinfo);
                 }
-
-                SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/RecommendWithItem/Chanel_" + chanel + "/Class_" + classid, recommendlist);
+                cache.AddObject("/SAS/RecommendWithItem/Chanel_" + chanel + "/Class_" + classid, recommendlist);
+                //SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/RecommendWithItem/Chanel_" + chanel + "/Class_" + classid, recommendlist);
             }
             return recommendlist;
         }

@@ -58,7 +58,7 @@ namespace SAS.ManageWeb.ManagePage
                                         title.Text, targetlist, GetParameters(), GetCode(), starttimestr, endtimestr);
 
                 SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/Advertisements");
-
+                if (Utils.StrToInt(type.SelectedValue, 0) > 10) SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/TaoAdvertisements");
                 base.RegisterStartupScript("PAGE", "window.location.href='global_advsgrid.aspx';");
             }
             #endregion

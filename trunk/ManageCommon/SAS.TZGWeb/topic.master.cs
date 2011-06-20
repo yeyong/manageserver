@@ -30,7 +30,7 @@ public partial class mastertopic : System.Web.UI.MasterPage
     /// 站点根目录
     /// </summary>
     protected string therooturl = Utils.GetRootUrl(BaseConfigs.GetSitePath);
-    protected List<HelpInfo> helplist = Helps.GetTaoIndexHelp();
+    protected List<HelpInfo> helplist = Helps.GetCommonHelp();
 
     protected void Page_Load(object sender, EventArgs e)
     {

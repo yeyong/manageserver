@@ -28,7 +28,9 @@ namespace SAS.Web.UI
         private string GetTaoSiteMap()
         {
             string sitemapstr = "";
-            sitemapstr = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/TaoSiteMap") as string;
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            sitemapstr = cache.RetrieveObject("/SAS/TaoSiteMap") as string;
+            //sitemapstr = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/TaoSiteMap") as string;
             if (sitemapstr == null)
             {
                 StringBuilder sitemapBuilder = new StringBuilder("<?xml version=\"1.0\" encoding=\"utf-8\" ?>\r\n");
@@ -89,8 +91,8 @@ namespace SAS.Web.UI
 
                 sitemapBuilder.Append("</urlset>");
                 sitemapstr = sitemapBuilder.ToString();
-
-                SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/TaoSiteMap", sitemapstr);
+                cache.AddObject("/SAS/TaoSiteMap", sitemapstr);
+                //SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/TaoSiteMap", sitemapstr);
             }
 
             return sitemapstr;

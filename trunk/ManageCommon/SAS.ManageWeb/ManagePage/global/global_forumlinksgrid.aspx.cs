@@ -41,7 +41,6 @@ namespace SAS.ManageWeb.ManagePage
                     SASLinks.CreateSASLink(SASRequest.GetInt("displayorder", 0), SASRequest.GetString("name"), SASRequest.GetString("url"), SASRequest.GetString("note"),
                         SASRequest.GetString("logo"));
                     AdminVistLogs.InsertLog(this.userid, this.username, this.usergroupid, this.grouptitle, this.ip, "添加友情链接", "添加友情链接,名称为: " + SASRequest.GetString("name"));
-                    SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/SASLinkList");
                     BindData();
                 }
                 catch

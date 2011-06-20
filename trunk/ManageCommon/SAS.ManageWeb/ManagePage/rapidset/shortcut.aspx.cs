@@ -164,7 +164,8 @@ namespace SAS.ManageWeb.ManagePage
 
         private void UpdateTaoSiteMap_Click(object sender, EventArgs e)
         {
-            SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoSiteMap", true);
+            SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/TaoSiteMap");
+            //SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoSiteMap", true);
         }
 
         #region Web 窗体设计器生成的代码
