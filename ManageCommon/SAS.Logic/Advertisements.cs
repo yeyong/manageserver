@@ -54,12 +54,15 @@ namespace SAS.Logic
         /// <returns>广告列表</returns>
         private static AdShowInfo[] GetTaoAdsTable(string selectstr)
         {
-            DataTable dt = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/TaoAdvertisements") as DataTable;
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+
+            DataTable dt = cache.RetrieveObject("/SAS/TaoAdvertisements") as DataTable;
 
             if (dt == null)
             {
                 dt = SAS.Data.DataProvider.Advertisenments.GetAdsTable();
-                SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/TaoAdvertisements", dt);
+                //SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/TaoAdvertisements", dt);
+                cache.AddObject("/SAS/TaoAdvertisements", dt);
             }
 
             DataRow[] drs = dt.Select(selectstr);
@@ -568,7 +571,7 @@ namespace SAS.Logic
             SAS.Data.DataProvider.Advertisenments.CreateAd(available, type, displayorder, title, targets, parameters, code, startTime.IndexOf("1900") >= 0 ? "1900-1-1" : startTime, endTime.IndexOf("1900") >= 0 ? "2555-1-1" : endTime);
 
             SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/Advertisements");
-            SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoAdvertisements", true);
+            //SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoAdvertisements", true);
         }
 
         /// <summary>
@@ -610,7 +613,8 @@ namespace SAS.Logic
             {
                 SAS.Data.DataProvider.Advertisenments.DeleteAdvertisementList(advIdList);
                 SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/Advertisements");
-                SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoAdvertisements", true);
+                SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/TaoAdvertisements");
+                //SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoAdvertisements", true);
             }
         }
 
@@ -626,7 +630,8 @@ namespace SAS.Logic
             {
                 int result = SAS.Data.DataProvider.Advertisenments.UpdateAdvertisementAvailable(aidList, available);
                 SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/Advertisements");
-                SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoAdvertisements", true);
+                SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/TaoAdvertisements");
+                //SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoAdvertisements", true);
                 return result;
             }
             else
@@ -656,7 +661,8 @@ namespace SAS.Logic
 
                 Data.DataProvider.Advertisenments.UpdateAdvertisement(adId, available, type, displayorder, title, targets, parameters, code, startTime, endTime);
                 SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/Advertisements");
-                SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoAdvertisements", true);
+                if (Utils.StrToInt(type, 0) > 10) SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/TaoAdvertisements");
+                //SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoAdvertisements", true);
             }
         }
 

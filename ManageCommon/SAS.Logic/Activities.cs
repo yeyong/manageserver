@@ -110,11 +110,14 @@ namespace SAS.Logic
         public static System.Collections.Generic.List<ActivityInfo> GetTaoActivities()
         {
             System.Collections.Generic.List<ActivityInfo> actlist = new System.Collections.Generic.List<ActivityInfo>();
-            actlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/TaoActivities") as System.Collections.Generic.List<ActivityInfo>;
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            actlist = cache.RetrieveObject("/SAS/TaoActivities") as List<ActivityInfo>;
+            //actlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/TaoActivities") as System.Collections.Generic.List<ActivityInfo>;
             if (actlist == null)
             {
                 actlist = SAS.Data.DataProvider.Activities.GetActvitiesByType(6, ActivityType.TaobaoActivity);
-                SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/TaoActivities", actlist);
+                //SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/TaoActivities", actlist);
+                cache.AddObject("/SAS/TaoActivities", actlist);
             }
             return actlist;
         }

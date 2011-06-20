@@ -62,9 +62,12 @@ namespace SAS.ManageWeb.ManagePage
             }
 
             tpb.UpdateRecommendInfo(rid, thercategory, therchanel, thertitle, thecontent, rtype);
-            SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TopicList", true);
-            SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TopicList_" + rinfo.relatechanel, true);
-            SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TopicList_" + therchanel, true);
+            SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/TopBaoTopicList");
+            SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/TaoBaoTopicList_" + rinfo.relatechanel);
+            SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/TaoBaoTopicList_" + therchanel);
+            //SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TopicList", true);
+            //SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TopicList_" + rinfo.relatechanel, true);
+            //SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TopicList_" + therchanel, true);
             base.RegisterStartupScript("PAGE", "window.location.href='taobao_recommendgrid.aspx?ctype=" + rtype + "';");
 
         }

@@ -69,8 +69,10 @@ namespace SAS.ManageWeb.ManagePage
                 }
 
                 tpb.UpdateGoodsBrand(LoadGoodsBrandInfo());
-                SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/GoodsBrand/Class_" + ginfo.relateclass, true);
-                SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/GoodsBrand/Class_" + brandclass.SelectedValue, true);
+                SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/GoodsBrand/Class_" + brandclass.SelectedValue);
+                SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/GoodsBrand/Class_" + ginfo.relateclass);
+                //SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/GoodsBrand/Class_" + ginfo.relateclass, true);
+                //SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/GoodsBrand/Class_" + brandclass.SelectedValue, true);
                 AdminVistLogs.InsertLog(this.userid, this.username, this.usergroupid, this.grouptitle, this.ip, "修改品牌", "编辑品牌,品牌名称:" + brandname.Text);
                 base.RegisterStartupScript("PAGE", "window.location.href='taobao_goodsbrandgrid.aspx';");
             }

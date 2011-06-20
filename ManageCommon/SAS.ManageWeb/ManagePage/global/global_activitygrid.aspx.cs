@@ -92,7 +92,8 @@ namespace SAS.ManageWeb.ManagePage
                     }
                     if (TypeConverter.StrToInt(typeid.SelectedValue, 0) == Convert.ToInt16(ActivityType.TaobaoActivity))
                     {
-                        SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoActivities", true);
+                        SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/TaoActivities");
+                        //SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/TaoActivities", true);
                     }
                     base.RegisterStartupScript("PAGE", "window.location.href='global_activitygrid.aspx';");
                 }
