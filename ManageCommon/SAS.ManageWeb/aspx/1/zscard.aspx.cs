@@ -139,10 +139,10 @@ namespace SAS.ManageWeb
             pagetitle = "浙商名片|浙商企业另类展示" + (pageid > 1 ? "(" + pageid + ")" : "");
             searchkey = keyword;
             keyword = Utils.UrlEncode(keyword).Replace("'", "%27");
-            AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
-            script += "\r\n<script src=\"" + forumpath + "javascript/locations.js\" type=\"text/javascript\"></script>";
-            script += "\r\n<script src=\"" + forumpath + "javascript/jquery.capSlide.js\" type=\"text/javascript\"></script>";
-            script += "\r\n<script src=\"" + forumpath + "javascript/template_catalogadmin.js\" type=\"text/javascript\"></script>";
+            AddLinkCss(rooturl + "templates/" + templatepath + "/css/channels.css");
+            script += "\r\n<script src=\"" + rooturl + "javascript/locations.js\" type=\"text/javascript\"></script>";
+            script += "\r\n<script src=\"" + rooturl + "javascript/jquery.capSlide.js\" type=\"text/javascript\"></script>";
+            script += "\r\n<script src=\"" + rooturl + "javascript/template_catalogadmin.js\" type=\"text/javascript\"></script>";
 
             string loadscript = "\r\n " + "jQuery(document).ready(function() {";
             loadscript += "\r\n " + "jQuery(\"#thelocation\").LoadLocation({provinceid:" + provinceid + ",cityid:" + cityid + ",areaid:" + areaid + ",urlparms:'zscard-" + catalogid + "-{1}-{2}-{3}-" + entypeid + "-" + regyear + "-" + ordertype + "-" + keyword + ".html'});";

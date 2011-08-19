@@ -136,5 +136,36 @@ namespace SAS.InfoRelease.Data
             }
             return info;
         }
+
+        /// <summary>
+        /// 修改企业会员信息
+        /// </summary>
+        public int UpdateUser(UserInfo eui)
+        {
+            SqlParameter[] commandParameters = new SqlParameter[]{                               
+				new SqlParameter("@UserID", eui.UserID),
+                new SqlParameter("@GradeID", eui.GradeID),
+				new SqlParameter("@CompanyName", eui.CompanyName),
+				new SqlParameter("@CompanyNature", eui.CompanyNature),
+				new SqlParameter("@BusinessModel", eui.BusinessModel),
+				new SqlParameter("@DealinAdd", eui.DealinAdd),
+				new SqlParameter("@Product", eui.Product),
+				new SqlParameter("@Industry", eui.Industry),
+				new SqlParameter("@Summary", eui.Summary),
+				new SqlParameter("@Country", eui.Country),
+				new SqlParameter("@Province", eui.Province),
+				new SqlParameter("@City", eui.City),
+				new SqlParameter("@Area", eui.Area),
+				new SqlParameter("@Street", eui.Street),
+				new SqlParameter("@Postalcode", eui.Postalcode),
+				new SqlParameter("@URL", eui.URL),
+				new SqlParameter("@Capital", eui.Capital),
+				new SqlParameter("@Established",eui.Established),
+				new SqlParameter("@RegisterAddress", eui.RegisterAddress),
+				new SqlParameter("@Corporate", eui.Corporate),
+                new SqlParameter("@Logo", eui.Logo)
+             };
+            return SqlHelper.ExecuteNonQuery(CommandType.StoredProcedure, "SP_U_UserInfo_CorpInfo_Update", commandParameters);
+        }
     }
 }

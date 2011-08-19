@@ -217,11 +217,25 @@ namespace SAS.ManageWeb.ManagePage
                     platCompany.Corporate = _eninfo.En_corp;
                     platCompany.RegDate = Convert.ToDateTime(DateTime.Now.Date);
 
-                    if (infopb.InsertUser(platCompany) <= 0)
+                    SAS.Entity.InfoPlatform.UserInfo newCompany = infopb.GetUserInfoByLoginName(platCompany.LoginName);
+
+                    if (newCompany != null)
                     {
-                        base.RegisterStartupScript("", "<script>alert('企业信息发布平台操作失败，请与管理员联系!');window.location.href='company_companyedit.aspx?enid=" + SASRequest.GetInt("enid", 0) + "';</script>");
-                        return;
+                        platCompany.UserID = newCompany.UserID;
+                        if (infopb.UpdateUser(platCompany) <= 0)
+                        {
+                            base.RegisterStartupScript("", "<script>alert('企业信息发布平台操作失败，请与管理员联系!');window.location.href='company_companyedit.aspx?enid=" + SASRequest.GetInt("enid", 0) + "';</script>");
+                            return;
+                        }
                     }
+                    else
+                    {
+                        if (infopb.InsertUser(platCompany) <= 0)
+                        {
+                            base.RegisterStartupScript("", "<script>alert('企业信息发布平台操作失败，请与管理员联系!');window.location.href='company_companyedit.aspx?enid=" + SASRequest.GetInt("enid", 0) + "';</script>");
+                            return;
+                        }
+                    }                   
                 }
 
                 foreach (string str in _companyInfo.En_cataloglist.Split(','))

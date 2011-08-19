@@ -103,13 +103,13 @@ namespace SAS.ManageWeb
                 Utils.WriteCookie("lastcomment", System.DateTime.Now.ToString());
             }
 
-            AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
-            AddLinkCss(forumpath + "templates/" + templatepath + "/css/jquery.cluetip.css");
-            script += "\r\n<script src=\"" + forumpath + "javascript/sascommon.js\" type=\"text/javascript\"></script>";
-            script += "\r\n<script src=\"" + forumpath + "javascript/ajax.js\" type=\"text/javascript\"></script>";
-            script += "\r\n<script src=\"" + forumpath + "javascript/template_showcompany.js\" type=\"text/javascript\"></script>";
-            script += "\r\n<script src=\"" + forumpath + "javascript/jquery.cluetip-min.js\" type=\"text/javascript\"></script>";
-            script += "\r\n<script src=\"" + forumpath + "javascript/jquery.ratingmin.js\" type=\"text/javascript\"></script>";
+            AddLinkCss(rooturl + "templates/" + templatepath + "/css/channels.css");
+            AddLinkCss(rooturl + "templates/" + templatepath + "/css/jquery.cluetip.css");
+            script += "\r\n<script src=\"" + rooturl + "javascript/sascommon.js\" type=\"text/javascript\"></script>";
+            script += "\r\n<script src=\"" + rooturl + "javascript/ajax.js\" type=\"text/javascript\"></script>";
+            script += "\r\n<script src=\"" + rooturl + "javascript/template_showcompany.js\" type=\"text/javascript\"></script>";
+            script += "\r\n<script src=\"" + rooturl + "javascript/jquery.cluetip-min.js\" type=\"text/javascript\"></script>";
+            script += "\r\n<script src=\"" + rooturl + "javascript/jquery.ratingmin.js\" type=\"text/javascript\"></script>";
 
             string loadscript = "\r\n " + "var page_qyid = " + showenid + ";";
             loadscript += "\r\n " + "var comment_page_recordcount = " + commentcount + ";";

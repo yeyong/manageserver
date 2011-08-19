@@ -236,6 +236,10 @@ namespace SAS.Logic
         /// </summary>
         public string newsurl = GeneralConfigs.GetNEWCMSUrl();
         /// <summary>
+        /// 商记链接
+        /// </summary>
+        public string shangjiurl = GeneralConfigs.GetSHANGJIUrl();
+        /// <summary>
         /// 用户头像
         /// </summary>
         public string useravatar = "";

@@ -77,7 +77,7 @@ namespace SAS.ManageWeb
         protected override void ShowPage()
         {
             pagetitle = "企业状态查询";
-            AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
+            AddLinkCss(rooturl + "templates/" + templatepath + "/css/channels.css");
             if (templateid == 2)
             {
                 string loadscript = "\r\n " + "jQuery(document).ready(function() {";

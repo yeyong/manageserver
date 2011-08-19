@@ -125,7 +125,7 @@
 	    </table>
 	    <p style="text-align:right;width:80%;">
             <cc1:Button ID="SavaTemplateInfo" runat="server" Text=" 提 交 "></cc1:Button>&nbsp;&nbsp;
-	        <button class="ManagerButton" type="button" onclick="javascript:window.location.href='global_templatetree.aspx?templateid=<%=Request.Params["templageid"]%>&path=<%=Request.Params["path"].Split('\\')[0]%>&templatename=<%=Request.Params["templatename"]%>';">
+	        <button class="ManagerButton" type="button" onclick="javascript:window.location.href='global_templatetree.aspx?templateid=<%=Request.Params["templateid"]%>&path=<%=Request.Params["path"].Split('\\')[0]%>&templatename=<%=Request.Params["templatename"]%>';">
                 <img src="../images/arrow_undo.gif" /> 返 回 
             </button>
 	    </p>

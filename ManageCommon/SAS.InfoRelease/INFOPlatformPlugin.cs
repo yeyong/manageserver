@@ -26,5 +26,12 @@ namespace SAS.InfoRelease
         {
             return INFOPlatform.GetUserByName(loginname);
         }
+        /// <summary>
+        /// 修改企业会员信息
+        /// </summary>
+        public override int UpdateUser(UserInfo uinfo)
+        {
+            return INFOPlatform.UpdateUser(uinfo);
+        }
     }
 }

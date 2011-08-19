@@ -15,5 +15,9 @@ namespace SAS.InfoRelease.Data
         /// </summary>
         int InsertUser(UserInfo eui);
         UserInfo GetUserByName(string lname);
+        /// <summary>
+        /// 修改企业会员信息
+        /// </summary>
+        int UpdateUser(UserInfo uinfo);
     }
 }

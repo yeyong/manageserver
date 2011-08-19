@@ -68,5 +68,28 @@ namespace SAS.Logic
         {
             return NETCMSPluginProvider.GetInstance().GetClassUrl(classid);
         }
+
+        /// <summary>
+        /// 获取商记频道新闻资讯信息
+        /// </summary>
+        /// <returns></returns>
+        public static List<NewsContent> GetShangJiNews()
+        {
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            string cachekey = "SAS_ShangjiNews";
+            List<NewsContent> newslist = cache.RetrieveObject(cachekey) as List<NewsContent>;
+
+            if (newslist == null)
+            {
+                newslist = NETCMSPluginProvider.GetInstance().GetNewsList("", 10, "id", "desc");
+                SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
+                ica.TimeOut = 60;
+                cache.LoadCacheStrategy(ica);
+                cache.AddObject(cachekey, newslist);
+                cache.LoadDefaultCacheStrategy();
+            }
+
+            return newslist == null ? new List<NewsContent>() : newslist;
+        }
     }
 }

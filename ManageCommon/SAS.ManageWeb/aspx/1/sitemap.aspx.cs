@@ -29,7 +29,7 @@ namespace SAS.ManageWeb
         {
             pagetitle = "站点地图-浙商站点地图";
             UpdateMetaInfo("站点地图", "浙商站点地图，展示浙商主站及分站全貌。", "");
-            AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
+            AddLinkCss(rooturl + "templates/" + templatepath + "/css/channels.css");
             categorylist = tpb.GetCategoryListByParentID(0);
         }
 

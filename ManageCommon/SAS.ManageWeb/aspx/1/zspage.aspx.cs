@@ -75,8 +75,8 @@ namespace SAS.ManageWeb
         {
             pagetitle = "浙商黄页-黄页频道";
             UpdateMetaInfo("浙商,浙商黄页,黄页频道,杭州企业,企业推广", "黄页频道-浙商黄页的企业推荐平台，推荐包括工业、商业服务、公共服务及社会组织等四类标准行业的浙江企业。", "");
-            AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
-            script += "\r\n<script src=\"" + forumpath + "javascript/ScrollText.js\" type=\"text/javascript\"></script>";
+            AddLinkCss(rooturl + "templates/" + templatepath + "/css/channels.css");
+            script += "\r\n<script src=\"" + rooturl + "javascript/ScrollText.js\" type=\"text/javascript\"></script>";
 
             string loadscript = "\r\n " + "jQuery(document).ready(function() {";
             if (templateid == 1)

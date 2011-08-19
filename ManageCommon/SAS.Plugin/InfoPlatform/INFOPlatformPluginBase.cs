@@ -22,5 +22,10 @@ namespace SAS.Plugin.InfoPlatform
         /// 根据登录名获取会员信息
         /// </summary>
         public abstract UserInfo GetUserInfoByLoginName(string loginname);
+
+        /// <summary>
+        /// 修改企业会员信息
+        /// </summary>
+        public abstract int UpdateUser(UserInfo uinfo);
     }
 }
