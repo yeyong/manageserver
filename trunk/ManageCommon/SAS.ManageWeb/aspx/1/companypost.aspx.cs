@@ -14,10 +14,10 @@ namespace SAS.ManageWeb
     {
         protected override void ShowPage()
         {
-            AddLinkCss(forumpath + "images/validatorAuto.css");
-            script += "\r\n<script src=\"" + forumpath + "javascript/companycategories.js\" type=\"text/javascript\"></script>";
-            script += "\r\n<script src=\"" + forumpath + "javascript/locations.js\" type=\"text/javascript\"></script>";
-            script += "\r\n<script src=\"" + forumpath + "javascript/template_catalogadmin.js\" type=\"text/javascript\"></script>";
+            AddLinkCss(rooturl + "images/validatorAuto.css");
+            script += "\r\n<script src=\"" + rooturl + "javascript/companycategories.js\" type=\"text/javascript\"></script>";
+            script += "\r\n<script src=\"" + rooturl + "javascript/locations.js\" type=\"text/javascript\"></script>";
+            script += "\r\n<script src=\"" + rooturl + "javascript/template_catalogadmin.js\" type=\"text/javascript\"></script>";
             string loadscript = "\r\n " + "jQuery(document).ready(function() {";
             loadscript += "\r\n " + "jQuery(\"#moveup\").click(function() { jQuery(this).CatalogMoveUp(\"zyhy\", \"selecthy\"); });";
             loadscript += "\r\n " + "jQuery(\"#movedown\").click(function() { jQuery(this).CatalogMoveDown(\"selecthy\"); });";

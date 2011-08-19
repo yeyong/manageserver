@@ -93,6 +93,20 @@ namespace SAS.Web.Services.API
     }
     #endregion
 
+    #region 浙商咨询信息操作
+    [XmlRoot("news_getlist", Namespace = "http://www.cnzshy.com/api/", IsNullable = false)]
+    public class NewsGetListResponse
+    {
+        [XmlElement("nums")]
+        [JsonProperty("nums")]
+        public int Anums;
+
+        [XmlElement("newslist")]
+        [JsonProperty("newslist")]
+        public NewsInfo[] NewsList;
+    }
+    #endregion
+
     #region 团队成员信息操作
 
     [XmlRoot("teaminfo_get", Namespace = "http://www.cnzshy.com/api/", IsNullable = false)]

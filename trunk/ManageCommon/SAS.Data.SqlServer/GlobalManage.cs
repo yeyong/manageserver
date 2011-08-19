@@ -1442,13 +1442,13 @@ namespace SAS.Data.SqlServer
             string commandText = "";
             if (condition == "")
             {
-                commandText = string.Format("SELECT {0} FROM [{1}advertisements] ORDER BY [advid] ASC",
+                commandText = string.Format("SELECT {0} FROM [{1}advertisements] ORDER BY [adtype],[addisplayorder],[advid] ASC",
                                                     DbFields.ADVERTISEMENTS,
                                                     BaseConfigs.GetTablePrefix);
             }
             else
             {
-                commandText = string.Format("SELECT {0} FROM [{1}advertisements] WHERE {2} ORDER BY [advid] ASC",
+                commandText = string.Format("SELECT {0} FROM [{1}advertisements] WHERE {2} ORDER BY [adtype],[addisplayorder],[advid] ASC",
                                                     DbFields.ADVERTISEMENTS,
                                                     BaseConfigs.GetTablePrefix, condition);
             }

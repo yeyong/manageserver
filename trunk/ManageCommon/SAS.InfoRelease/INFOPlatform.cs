@@ -25,5 +25,12 @@ namespace SAS.InfoRelease
         {
             return Data.DbProvider.GetInstance().GetUserByName(lname);
         }
+        /// <summary>
+        /// 修改企业会员信息
+        /// </summary>
+        public static int UpdateUser(UserInfo uinfo)
+        {
+            return Data.DbProvider.GetInstance().UpdateUser(uinfo);
+        }
     }
 }

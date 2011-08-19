@@ -56,9 +56,9 @@ namespace SAS.ManageWeb
             string m_desc = config.Seodescription + companyshowinfo.ProvinceName + "," + companyshowinfo.CityName + "," + companyshowinfo.DistrictName + "。" + Utils.CutString(Utils.RemoveHtml(companyshowinfo.En_desc), 0, 60);
             UpdateMetaInfo(m_keyword.Trim().Trim(','), m_desc.Trim().Trim(','), "");
 
-            AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
-            script += "\r\n<script src=\"" + forumpath + "javascript/sascommon.js\" type=\"text/javascript\"></script>";
-            script += "\r\n<script src=\"" + forumpath + "javascript/jquery-exchange.js\" type=\"text/javascript\"></script>";
+            AddLinkCss(rooturl + "templates/" + templatepath + "/css/channels.css");
+            script += "\r\n<script src=\"" + rooturl + "javascript/sascommon.js\" type=\"text/javascript\"></script>";
+            script += "\r\n<script src=\"" + rooturl + "javascript/jquery-exchange.js\" type=\"text/javascript\"></script>";
             string loadscript = "\r\n " + "jQuery(document).ready(function() {";
             loadscript += "\r\n " + "promotion_0 = document.getElementById('html_pro1').innerHTML;";
             loadscript += "\r\n " + "promotion_1 = document.getElementById('html_pro1').innerHTML;";

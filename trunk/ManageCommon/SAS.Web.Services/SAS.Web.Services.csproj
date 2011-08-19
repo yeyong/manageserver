@@ -49,12 +49,14 @@
     <Compile Include="API\Actions\Auth.cs" />
     <Compile Include="API\Actions\Companys.cs" />
     <Compile Include="API\Actions\Members.cs" />
+    <Compile Include="API\Actions\News.cs" />
     <Compile Include="API\ActivityInfo.cs" />
     <Compile Include="API\Arg.cs" />
     <Compile Include="API\CompanyInfo.cs" />
     <Compile Include="API\Enums.cs" />
     <Compile Include="API\Error.cs" />
     <Compile Include="API\ErrorDetails.cs" />
+    <Compile Include="API\NewsInfo.cs" />
     <Compile Include="API\Responses.cs" />
     <Compile Include="API\SASException.cs" />
     <Compile Include="API\SASParam.cs" />

@@ -25,8 +25,8 @@
 			<p class="tp"></p>
 			<div class="ce">
 				<p class="ce1"></p>
-				<div class="ce2">
-					<%if(adlist2.Length>0){if(adlist2[0].Parameters.Split('|').Length>=8){%><a target="_blank" title="<%=adlist2[0].Parameters.Split('|')[5]%>" href="<%=adlist2[0].Parameters.Split('|')[4]%>"><img id="dtu" alt="<%=adlist2[0].Parameters.Split('|')[5]%>" src="<%=adlist2[0].Parameters.Split('|')[1]%>" /></a><%}}%>
+				<div class="ce2" id="dtu">
+					<%if(adlist2.Length>0){if(adlist2[0].Parameters.Split('|').Length>=8){%><a target="_blank" title="<%=adlist2[0].Parameters.Split('|')[5]%>" href="<%=adlist2[0].Parameters.Split('|')[4]%>"><img alt="<%=adlist2[0].Parameters.Split('|')[5]%>" src="<%=adlist2[0].Parameters.Split('|')[1]%>" /></a><%}}%>
 				</div>
 				<p class="ce3"></p>
 			</div>
@@ -94,13 +94,15 @@
 <script type="text/javascript"> 
 jQuery(document).ready(function(){
 	jQuery("#branr").Scroll({line:4,speed:300,left:"btn2",right:"btn1"});
-	jQuery("#restu").find("li").click(function(){
-		jQuery("#restu").find("li").removeClass().addClass("nr1");
-		jQuery(this).removeClass().addClass("nr2");
-		var swosrc = jQuery(this).find("img").attr("src");
-		var swoalt = jQuery(this).find("img").attr("alt");
-		jQuery("#dtu").attr("src",swosrc);
-		jQuery("#dtu").attr("alt",swoalt);
+	jQuery("#restu").find("li").click(function() {
+	    jQuery("#restu").find("li").removeClass().addClass("nr1");
+	    jQuery(this).removeClass().addClass("nr2");
+	    var swosrc = jQuery(this).find("img").attr("src");
+	    var swoalt = jQuery(this).find("img").attr("alt");
+	    var swohref = jQuery(this).find("img").attr("rel");
+	    jQuery("#dtu").find("img").attr("src", swosrc);
+	    jQuery("#dtu").find("img").attr("alt", swoalt);
+	    jQuery("#dtu").find("a").attr("href", swohref);
 	});
 });	
 </script>

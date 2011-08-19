@@ -123,8 +123,8 @@ namespace SAS.ManageWeb
         {
             pagetitle = "浙商黄页-商之源";
 
-            AddLinkCss(forumpath + "templates/" + templatepath + "/css/main.css");
-            script += "\r\n<script src=\"" + forumpath + "javascript/ScrollText.js\" type=\"text/javascript\"></script>";
+            AddLinkCss(rooturl + "templates/" + templatepath + "/css/main.css");
+            script += "\r\n<script src=\"" + rooturl + "javascript/ScrollText.js\" type=\"text/javascript\"></script>";
 
             string adtempstr = "";
             if (indexdouble1.Length >= 8)

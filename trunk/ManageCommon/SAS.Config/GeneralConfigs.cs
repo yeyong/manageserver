@@ -69,6 +69,14 @@ namespace SAS.Config
         {
             return GetConfig().NETCMSUrl;
         }
+        /// <summary>
+        /// 获取商记连接
+        /// </summary>
+        /// <returns></returns>
+        public static string GetSHANGJIUrl()
+        {
+            return GetConfig().SHANGJIUrl;
+        }
 
         /// <summary>
         /// 获得设置项信息

@@ -83,7 +83,7 @@ public partial class itemsearch : TaoBaoPage
         catch
         {
             AddErrLine("您的页面正在跳转！");
-            SetMetaRefresh(2, string.Format("http://search8.taobao.com/browse/search_auction.htm?q={0}&pid={1}&search_type=auction&commend=all&at_topsearch=1&unid={2}", searchkey, taobaoconfig.UserID, taobaoconfig.AppKey));
+            SetMetaRefresh(2, string.Format("http://s8.taobao.com/search?cat=0&commend=1,2&s=0&sort=coefp&n=40&q={0}&tab=coefp&pid={1}&mode=23", HttpUtility.UrlEncode(searchkey, Encoding.GetEncoding("GB2312")), taobaoconfig.UserID, taobaoconfig.AppKey));
             return;
         }
         SetConditionAndPage();

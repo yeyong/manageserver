@@ -16,7 +16,7 @@ namespace SAS.ManageWeb
         protected int enid = 0;
         protected override void ShowPage()
         {
-            AddLinkCss(forumpath + "images/validator.css");
+            AddLinkCss(rooturl + "images/validator.css");
             string loadscript = "\r\n " + "jQuery(document).ready(function() {";
             loadscript += "\r\n " + "var theprifix = \"v2_\";";
             loadscript += "\r\n " + "jQuery(\"#form1\").FormValidFunc(theprifix,1,1);";

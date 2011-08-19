@@ -19,7 +19,7 @@ namespace SAS.ManageWeb
 
         protected override void ShowPage()
         {
-            AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
+            AddLinkCss(rooturl + "templates/" + templatepath + "/css/channels.css");
             todaycompanyid = Utils.GetCookie("lastviews").Trim(',').Split(',');
         }
     }

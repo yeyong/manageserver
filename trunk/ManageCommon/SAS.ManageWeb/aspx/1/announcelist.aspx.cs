@@ -54,7 +54,7 @@ namespace SAS.ManageWeb
         {
             pagetitle = "公告列表-浙商公告列表" + (pageid > 1 ? "(" + pageid.ToString() + ")" : "");
             UpdateMetaInfo(config.Seokeywords + "," + "浙商公告", "浙商黄页公告列表。" + config.Seodescription, "");
-            AddLinkCss(forumpath + "templates/" + templatepath + "/css/channels.css");
+            AddLinkCss(rooturl + "templates/" + templatepath + "/css/channels.css");
             SetAnnouncePage();
             curannouncelist = Announcements.GetAnnouncementList(pagesize, pageid);
         }
