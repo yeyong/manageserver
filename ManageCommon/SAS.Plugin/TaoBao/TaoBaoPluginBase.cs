@@ -178,5 +178,10 @@ namespace SAS.Plugin.TaoBao
         /// 更新品牌信息
         /// </summary>
         public abstract void UpdateGoodsBrand(GoodsBrandInfo ginfo);
+
+        /// <summary>
+        /// 获取商记首页用商品
+        /// </summary>
+        public abstract System.Collections.Generic.List<TempGoodsWithCat> GetShangjiGoods();
     }
 }

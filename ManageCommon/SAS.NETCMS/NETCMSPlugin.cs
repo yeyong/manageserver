@@ -23,6 +23,13 @@ namespace SAS.NETCMS
         {
             return NETCMS.GetNewsList(classid, newscount, ordercol, ordertype);
         }
+        /// <summary>
+        /// 获得图片类新闻信息列表
+        /// </summary>
+        public override List<NewsContent> GetPicNewList(string classid, int newscount, string ordercol, string ordertype)
+        {
+            return NETCMS.GetPicNewList(classid, newscount, ordercol, ordertype);
+        }
 
         /// <summary>
         /// 获得新闻栏目

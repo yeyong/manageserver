@@ -46,9 +46,9 @@ namespace SAS.NETCMS.Data
         /// <summary>
         /// 获取新闻集合
         /// </summary>       
-        public IDataReader GetNewsList(string classid, int newscount, string ordercol, string ordertype)
+        public IDataReader GetNewsList(string classid, int newscount, string ordercol, string ordertype, string strWhere)
         {
-            string commandText = String.Format("SELECT TOP {0} [Id],[NewsID],[NewsTitle],[ClassID],[SavePath],[FileName],[FileEXName],[SPicURL] FROM {1}News WHERE [isLock] = 0 AND [isRecyle] = 0 {4} ORDER BY {2} {3}", newscount, newpre, ordercol == "" ? "[id]" : ordercol, ordertype == "desc" ? ordertype : "", classid == "" ? "" : "AND [ClassID] = '" + classid + "'");
+            string commandText = String.Format("SELECT TOP {0} [Id],[NewsID],[NewsTitle],[ClassID],[SavePath],[FileName],[FileEXName],[SPicURL] FROM {1}News WHERE [isLock] = 0 AND [isRecyle] = 0 {4}{5} ORDER BY {2} {3}", newscount, newpre, ordercol == "" ? "[id]" : ordercol, ordertype == "desc" ? ordertype : "", classid == "" ? "" : "AND [ClassID] = '" + classid + "'", strWhere == "" ? "" : " AND " + strWhere);
             return NewsDbHelper.ExecuteReader(CommandType.Text, commandText);
         }
         /// <summary>

@@ -187,6 +187,7 @@ namespace SAS.Entity
                 case 9: return "详细页";
                 case 10: return "频道页";
                 case 11: return "其他";
+                case 12: return "商记频道";
                 default: return "";
             }
         }
@@ -432,6 +433,10 @@ namespace SAS.Entity
         /// <summary>
         /// 其他
         /// </summary>
-        Other = 11
+        Other = 11,
+        /// <summary>
+        /// 商记频道
+        /// </summary>
+        Shangji = 12
     }
 }

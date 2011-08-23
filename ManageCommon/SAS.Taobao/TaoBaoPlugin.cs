@@ -267,5 +267,12 @@ namespace SAS.Taobao
         {
             TaoBaos.UpdateGoodsBrand(ginfo);
         }
+        /// <summary>
+        /// 获取商记首页用商品
+        /// </summary>
+        public override List<TempGoodsWithCat> GetShangjiGoods()
+        {
+            return TaoBaos.GetShangjiGoods();
+        }
     }
 }
