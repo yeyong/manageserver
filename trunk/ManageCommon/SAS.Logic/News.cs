@@ -81,7 +81,15 @@ namespace SAS.Logic
 
             if (newslist == null)
             {
-                newslist = NETCMSPluginProvider.GetInstance().GetNewsList("", 10, "id", "desc");
+                newslist = NETCMSPluginProvider.GetInstance().GetNewsList("", 9, "id", "desc");
+                List<NewsContent> picnewslist = new List<NewsContent>();
+                picnewslist = NETCMSPluginProvider.GetInstance().GetPicNewList("", 1, "id", "desc");
+
+                foreach (NewsContent ninfo in picnewslist)
+                {
+                    newslist.Insert(0, ninfo);
+                }
+
                 SAS.Cache.ICacheStrategy ica = new SASCacheStrategy();
                 ica.TimeOut = 60;
                 cache.LoadCacheStrategy(ica);

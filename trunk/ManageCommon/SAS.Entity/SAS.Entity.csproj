@@ -122,6 +122,7 @@
     <Compile Include="Goods\RecommendWithProduct.cs" />
     <Compile Include="Goods\ShopDetailInfo.cs" />
     <Compile Include="Goods\TaoBaoTopicInfo.cs" />
+    <Compile Include="Goods\TempGoodsWithCat.cs" />
     <Compile Include="HelpInfo.cs" />
     <Compile Include="InfoPlatform\UserInfo.cs" />
     <Compile Include="IpInfo.cs" />

@@ -107,6 +107,23 @@ namespace SAS.Web.Services.API
     }
     #endregion
 
+    #region 淘之购商品信息操作
+    /// <summary>
+    /// 商记商品获取
+    /// </summary>
+    [XmlRoot("shangjigoods_getlist", Namespace = "http://www.cnzshy.com/api/", IsNullable = false)]
+    public class ShangjiGoodsGetListResponse
+    {
+        [XmlElement("nums")]
+        [JsonProperty("nums")]
+        public int Anums;
+
+        [XmlElement("shangjigoodslist")]
+        [JsonProperty("shangjigoodslist")]
+        public TaoBaoGoodInfo[] TBGI;
+    }
+    #endregion
+
     #region 团队成员信息操作
 
     [XmlRoot("teaminfo_get", Namespace = "http://www.cnzshy.com/api/", IsNullable = false)]

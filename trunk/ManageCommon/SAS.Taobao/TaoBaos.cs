@@ -27,7 +27,8 @@ namespace SAS.Taobao
         private static TaoBaoConfigInfo taobaoconfig = TaoBaoConfigs.GetConfig();
         private const string TOP_AUTHORIZE_URL = "http://open.taobao.com/isv/authorize.php";
         private const string TOP_CONTAINER_URL = "http://container.sandbox.taobao.com/container";
-        private const string SAS_USERNICK = "yeyong2086521";
+        private static string SAS_USERNICK = TaoBaoConfigs.GetConfig().UserNick;
+        private static string SAS_USERID = TaoBaoConfigs.GetConfig().UserID;
 
         public static NTWXmlRestClient GetDevelopTopClient()
         {
@@ -111,6 +112,7 @@ namespace SAS.Taobao
                 ItemCat icinfo = GetItemCatInfo(cid);
                 tgr.Fields = "num_iid,title,nick,pic_url,price,click_url,commission,commission_rate,commission_num,commission_volume,shop_click_url,seller_credit_score,item_location,volume";
                 tgr.Nick = SAS_USERNICK;
+                tgr.Pid = SAS_USERID;
                 tgr.Cid = Int32.Parse(icinfo.ParentCid.ToString());
                 tgr.PageNo = 1;
                 tgr.PageSize = 20;
@@ -150,6 +152,7 @@ namespace SAS.Taobao
             TaobaokeItemsGetRequest tgr = new TaobaokeItemsGetRequest();
             tgr.Fields = "num_iid,title,nick,pic_url,price,click_url,commission,commission_rate,commission_num,commission_volume,shop_click_url,seller_credit_score,item_location,volume";
             tgr.Nick = SAS_USERNICK;
+            tgr.Pid = SAS_USERID;
             tgr.Keyword = keyword;
             if (cid >= 0)
             {
@@ -223,7 +226,6 @@ namespace SAS.Taobao
         /// </summary>
         public static TaobaokeItemDetail GetTaoBaoKeItemDetail(long numiid)
         {
-           
             TaobaokeItemsDetailGetRequest ttg = new TaobaokeItemsDetailGetRequest();
             ttg.Fields = "iid,num_iid,title,nick,type,cid,desc,pic_url,num,location,price,score,volume,click_url,shop_click_url,seller_credit_score,valid_thru";
             ttg.NumIids = numiid.ToString();
@@ -233,6 +235,26 @@ namespace SAS.Taobao
                 PageList<TaobaokeItemDetail> pagetd = client.TaobaokeItemsDetailGet(ttg);
                 if (pagetd.Content.Count == 0) return null;
                 return pagetd.Content[0];
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        /// <summary>
+        /// 获取淘宝客商品详细信息组（仅商记使用，且numiids数量不得大于10）
+        /// </summary>
+        public static List<TaobaokeItemDetail> GetTaoBaoKeItemListDetail(string numiids)
+        {
+            TaobaokeItemsDetailGetRequest ttg = new TaobaokeItemsDetailGetRequest();
+            ttg.Fields = "iid,num_iid,title,nick,type,cid,desc,pic_url,num,location,price,score,volume,click_url,shop_click_url,seller_credit_score,valid_thru";
+            ttg.NumIids = numiids;
+            ttg.Nick = SAS_USERNICK;
+            try
+            {
+                PageList<TaobaokeItemDetail> pagetd = client.TaobaokeItemsDetailGet(ttg);
+                if (pagetd.Content.Count == 0) return null;
+                return pagetd.Content;
             }
             catch
             {
@@ -594,7 +616,6 @@ namespace SAS.Taobao
             SAS.Common.Generic.List<ShopDetailInfo> shoplist = new SAS.Common.Generic.List<ShopDetailInfo>();
             SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
             shoplist = cache.RetrieveObject("/SAS/ShopList/Chanel_" + chanel + "/Class_" + classid) as SAS.Common.Generic.List<ShopDetailInfo>;
-            //shoplist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/ShopList/Chanel_" + chanel + "/Class_" + classid) as SAS.Common.Generic.List<ShopDetailInfo>;
             if (shoplist == null)
             {
                 List<RecommendInfo> rlist = GetRecommendList(2, chanel, classid);
@@ -605,7 +626,6 @@ namespace SAS.Taobao
                 }
                 shoplist = GetTaoBaoShopListByIds(shopidlist.Trim().Trim(','));
                 cache.AddObject("/SAS/ShopList/Chanel_" + chanel + "/Class_" + classid, shoplist);
-                //SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/ShopList/Chanel_" + chanel + "/Class_" + classid, shoplist);
             }
             return shoplist;
         }
@@ -822,7 +842,6 @@ namespace SAS.Taobao
                 }
                 tbtlist.Sort(CompareTopicOrder);
                 cache.AddObject("/SAS/TaoBaoTopicList_" + chanel, tbtlist);
-                //SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/TopicList_" + chanel, tbtlist);
             }
             return tbtlist;
         }
@@ -837,7 +856,6 @@ namespace SAS.Taobao
             List<TaobaokeItem> taobaoitemlist = new List<TaobaokeItem>();
             SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
             taobaoitemlist = cache.RetrieveObject("/SAS/RecommendItem/Chanel_" + chanel + "/Class_" + classid) as List<TaobaokeItem>;
-            //taobaoitemlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/RecommendItem/Chanel_" + chanel + "/Class_" + classid) as List<TaobaokeItem>;
 
             if (taobaoitemlist == null)
             {
@@ -857,7 +875,6 @@ namespace SAS.Taobao
                 PageList<TaobaokeItem> pageitems = client.TaobaokeItemsConvert(tcr);
                 taobaoitemlist = pageitems.Content;
                 cache.AddObject("/SAS/RecommendItem/Chanel_" + chanel + "/Class_" + classid, taobaoitemlist);
-                //SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/RecommendItem/Chanel_" + chanel + "/Class_" + classid, taobaoitemlist);
             }
             return taobaoitemlist;
         }
@@ -876,7 +893,6 @@ namespace SAS.Taobao
             List<RecommendWithProduct> recommendlist = new List<RecommendWithProduct>();
             SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
             recommendlist = cache.RetrieveObject("/SAS/RecommendWithItem/Chanel_" + chanel + "/Class_" + classid) as List<RecommendWithProduct>;
-            //recommendlist = SAS.Cache.WebCacheFactory.GetWebCache().Get("/SAS/RecommendWithItem/Chanel_" + chanel + "/Class_" + classid) as List<RecommendWithProduct>;
 
             if (recommendlist == null)
             {
@@ -898,9 +914,71 @@ namespace SAS.Taobao
                     recommendlist.Add(rpinfo);
                 }
                 cache.AddObject("/SAS/RecommendWithItem/Chanel_" + chanel + "/Class_" + classid, recommendlist);
-                //SAS.Cache.WebCacheFactory.GetWebCache().Add("/SAS/RecommendWithItem/Chanel_" + chanel + "/Class_" + classid, recommendlist);
             }
             return recommendlist;
+        }
+        #endregion
+
+        #region 商记用商品推荐
+        /// <summary>
+        /// 获取商记首页用商品
+        /// </summary>
+        public static List<TempGoodsWithCat> GetShangjiGoods()
+        {
+            List<TempGoodsWithCat> tempgoods = new List<TempGoodsWithCat>();
+            string cachekey = "/SAS/ShangjiGoods";
+            SAS.Cache.SASCache cache = SAS.Cache.SASCache.GetCacheService();
+            tempgoods = cache.RetrieveObject(cachekey) as List<TempGoodsWithCat>;
+
+            if (tempgoods == null)
+            {
+                tempgoods = new List<TempGoodsWithCat>();
+                List<TaobaokeItem> tklist = GetRecommendProduct(Convert.ToInt16(TaoChanel.Shangji), 0);
+                int tgwcID = 1;
+                string numiidsarray = "";
+
+                foreach (TaobaokeItem tkinfo in tklist)
+                {
+                    TempGoodsWithCat tgwcInfo = new TempGoodsWithCat();
+                    if (tgwcID > 12) break;
+                    if (tgwcID > 3)
+                    {                        
+                        numiidsarray += tkinfo.NumIid.ToString() + ",";
+                    }
+                    else
+                    {
+                        tgwcInfo.ID = tgwcID;
+                        tgwcInfo.GoodID = tkinfo.NumIid.ToString();
+                        tgwcInfo.GoodName = tkinfo.Title;
+                        tgwcInfo.PicUrl = tkinfo.PicUrl;
+                        tempgoods.Add(tgwcInfo);
+                    }
+                    tgwcID++;
+                }
+
+                List<TaobaokeItemDetail> tkdlist = GetTaoBaoKeItemListDetail(numiidsarray);
+                if (tkdlist != null && tkdlist.Count > 0)
+                {
+                    tgwcID = 4;
+                    foreach (TaobaokeItemDetail tkdinfo in tkdlist)
+                    {
+                        TempGoodsWithCat tgwcInfo = new TempGoodsWithCat();
+                        Item iteminfo = tkdinfo.Item;
+                        CategoryInfo cinfo = new CategoryInfo();
+                        tgwcInfo.ID = tgwcID;
+                        tgwcInfo.GoodID = iteminfo.NumIid.ToString();
+                        tgwcInfo.GoodName = iteminfo.Title;
+                        tgwcInfo.PicUrl = iteminfo.PicUrl;
+                        cinfo = GetCategoryInfoByCache(iteminfo.Cid.ToString());
+                        tgwcInfo.CatID = cinfo.Cid;
+                        tgwcInfo.CatName = cinfo.Name;
+                        tempgoods.Add(tgwcInfo);
+                        tgwcID++;
+                    }
+                }
+            }
+            cache.AddObject(cachekey, tempgoods);
+            return tempgoods;
         }
         #endregion
     }
