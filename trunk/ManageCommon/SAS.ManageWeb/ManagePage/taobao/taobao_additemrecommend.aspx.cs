@@ -57,6 +57,7 @@ namespace SAS.ManageWeb.ManagePage
             {
                 SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/RecommendWithItem/Chanel_" + therchanel + "/Class_" + thercategory);
                 SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/RecommendItem/Chanel_" + therchanel + "/Class_" + thercategory);
+                if (therchanel == Convert.ToInt16(TaoChanel.Shangji)) SAS.Cache.SASCache.GetCacheService().RemoveObject("/SAS/ShangjiGoods");
                 //SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/RecommendWithItem/Chanel_" + therchanel + "/Class_" + thercategory, true);
                 //SAS.Cache.WebCacheFactory.GetWebCache().Remove("/SAS/RecommendItem/Chanel_" + therchanel + "/Class_" + thercategory, true);
                 base.RegisterStartupScript("PAGE", "window.location.href='taobao_recommendGrid.aspx?ctype=" + rtype + "';");

@@ -970,8 +970,11 @@ namespace SAS.Taobao
                         tgwcInfo.GoodName = iteminfo.Title;
                         tgwcInfo.PicUrl = iteminfo.PicUrl;
                         cinfo = GetCategoryInfoByCache(iteminfo.Cid.ToString());
-                        tgwcInfo.CatID = cinfo.Cid;
-                        tgwcInfo.CatName = cinfo.Name;
+                        if (cinfo != null)
+                        {
+                            tgwcInfo.CatID = cinfo.Cid;
+                            tgwcInfo.CatName = cinfo.Name;
+                        }
                         tempgoods.Add(tgwcInfo);
                         tgwcID++;
                     }
