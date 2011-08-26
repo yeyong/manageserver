@@ -9,9 +9,9 @@ namespace SAS.Entity
     public class CategoryInfo
     {
         #region Model
-        private int _cid;
+        private int _cid = 0;
         private string _name = "";
-        private int _parentid;
+        private int _parentid = 0;
         private string _parentlist = "";
         private string _cg_img = "";
         private int _sort;
