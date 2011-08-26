@@ -9,9 +9,13 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="scripts" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="mainbody" Runat="Server">
+<%
+    if (page_err == 0)
+    {
+%>
 <!--内容开始-->
 <div class="cot">
-	<p class="site">您现在的位置：<a title="" href="index.html">淘之购</a> &gt; <a title="" href="chanels_<%=rootcategory.Cid%>.html"><%=rootcategory.Name%></a> &gt; <a title="" href="goodslist-p-<%=parentcategory.Cid%>.html"><%=parentcategory.Name%></a> &gt; <%=currentcategoryname%></p>
+	<p class="site">您现在的位置：<a title="淘之购" href="<%=rooturl%>">淘之购</a> &gt; <a title="<%=rootcategory.Name%>" href="chanels_<%=rootcategory.Cid%>.html"><%=rootcategory.Name%></a> &gt; <a title="<%=parentcategory.Name%>" href="goodslist-p-<%=parentcategory.Cid%>.html"><%=parentcategory.Name%></a> &gt; <%=currentcategoryname%></p>
 	<div class="listlt">
 		<div class="listlt1" id="listmu">
 			<h3><%=rootcategory.Name%></h3>
@@ -151,6 +155,15 @@
 		</p>
 	</div>
 </div>
+<%
+    }
+    else
+    {
+%>
+<!--#include file="msgbox.htm"-->
+<%
+    }
+%>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="footer" Runat="Server">
 <script type="text/javascript">

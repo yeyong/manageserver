@@ -11,6 +11,7 @@ using SAS.Logic;
 using SAS.Taobao;
 using SAS.Entity;
 using SAS.Entity.Domain;
+using System.Text;
 
 public partial class itemsearch : TaoBaoPage
 {

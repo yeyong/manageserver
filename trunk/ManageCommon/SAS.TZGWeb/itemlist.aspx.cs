@@ -19,13 +19,14 @@ public partial class itemlist : TaoBaoPage
     protected List<GoodsBrandInfo> itemlistgoodsbrands = new List<GoodsBrandInfo>();
     protected List<TaobaokeItem> putitemlist = new List<TaobaokeItem>();
     /// <summary>
-    /// 根类别
-    /// </summary>
-    protected CategoryInfo rootcategory = new CategoryInfo();
-    /// <summary>
     /// 父级类别
     /// </summary>
     protected CategoryInfo parentcategory = new CategoryInfo();
+    /// <summary>
+    /// 根类别
+    /// </summary>
+    protected CategoryInfo rootcategory = new CategoryInfo();
+   
     protected int cid = SASRequest.GetInt("cid", 0);
     protected int pid = SASRequest.GetInt("pid", 0);
     public string keyword = SASRequest.GetString("keyword");
@@ -75,6 +76,7 @@ public partial class itemlist : TaoBaoPage
             AddErrLine("您的信息错误！");
             return;
         }
+
         if (cid > 0)
         {
             parentcategory = TaoBaos.GetCategoryInfoByCache(cid.ToString());
@@ -82,6 +84,7 @@ public partial class itemlist : TaoBaoPage
         else if (pid > 0)
         {
             parentcategory = TaoBaos.GetCategoryInfoByCache(pid);
+
             if (parentcategory.Cg_relateclass.Split(',').Length > 0)
             {
                 if (parentcategory.Cg_relateclass.Split(',')[0].Split('|').Length > 0)
@@ -99,14 +102,17 @@ public partial class itemlist : TaoBaoPage
 
         if (parentcategory == null)
         {
-            AddErrLine("您的信息错误！");
+            parentcategory = new CategoryInfo();
+            AddErrLine("类别信息出错！");
+            SetMetaRefresh(2, LogicUtils.GetReUrl());
             return;
         }
 
         rootcategory = TaoBaos.GetCategoryInfoByCache(parentcategory.Parentid);
         if (rootcategory == null)
         {
-            AddErrLine("您的信息错误！");
+            AddErrLine("您的页面正在跳转！");
+            SetMetaRefresh(2, rooturl + "goodssearch-s-" + Utils.UrlEncode(parentcategory.Name) + ".html");
             return;
         }
         string tempstr = "," + parentcategory.Cg_relateclass;
