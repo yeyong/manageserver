@@ -90,7 +90,7 @@
 					        <input type="hidden" id="menuid" name="menuid" value="0" />
 					        <input type="hidden" id="mode" name="mode" value="" />
 					    </td>
-					    <td width="70%"><input id="menutitle"  name="menutitle" type="text" maxlength="8" size="10"class="FormBase" onfocus="this.className='FormFocus';" onblur="this.className='FormBase';" /></td>
+					    <td width="70%"><input id="menutitle"  name="menutitle" type="text" maxlength="8" size="10" class="FormBase" onfocus="this.className='FormFocus';" onblur="this.className='FormBase';" /></td>
 				    </tr>
 				    <tr>
 					    <td>默认展现<br />页面地址:</td>

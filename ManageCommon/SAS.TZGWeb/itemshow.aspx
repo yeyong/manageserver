@@ -48,14 +48,14 @@
 				<span>商品数：<%=iteminfo.Num%></span>
 			</p>
 			<em class="showline"></em>
-			<p>掌柜店铺：<a title="<%=shopname%>" class="l_f18c08" href="<%=shopurl%>"><%=shopname%></a></p>
+			<p>掌柜店铺：<a rel="nofollow" title="<%=shopname%>" class="l_f18c08" href="<%=shopurl%>"><%=shopname%></a></p>
 			<p>
 				<span><i>累计信用：</i><b class="rankbg rank<%=System.Math.Ceiling((double)tkitem.SellerCreditScore / 5)%> rankw<%=tkitem.SellerCreditScore % 5==0?5:tkitem.SellerCreditScore % 5%>"></b></span>
 				<span>好评率：<em class="f_f00"><%=shopscore%>%</em></span>
 			</p>
 			<p>所在地区：<%=shopaddress%></p>
 			<p class="showan">
-				<a title="<%=iteminfo.Title%>" href="<%=tkitem.ClickUrl==""?"http://s8.taobao.com/search?cat=0&commend=1,2&s=0&sort=coefp&n=40&q="+HttpUtility.UrlEncode(iteminfo.Title, Encoding.GetEncoding("GB2312"))+"&tab=coefp&pid=mm_13451138_0_0&mode=23":tkitem.ClickUrl%>"><img alt="点击查看详情" src="images/show_an1.gif" /></a>
+				<a rel="nofollow" title="<%=iteminfo.Title%>" href="<%=tkitem.ClickUrl==""?"http://s8.taobao.com/search?cat=0&commend=1,2&s=0&sort=coefp&n=40&q="+HttpUtility.UrlEncode(iteminfo.Title, Encoding.GetEncoding("GB2312"))+"&tab=coefp&pid=mm_13451138_0_0&mode=23":tkitem.ClickUrl%>"><img alt="点击查看详情" src="images/show_an1.gif" /></a>
 				<a href="http://www.jiathis.com/share/" class="jiathis" target="_blank"><img src="http://v2.jiathis.com/code/images/jiathis2.gif" border="0" /></a>
 			</p>
 		</div>

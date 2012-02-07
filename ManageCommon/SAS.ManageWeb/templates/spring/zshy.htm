@@ -12,7 +12,7 @@
 		<!--按信息展示开始-->
 		<ul class="ltnr5" id="put">
 		<%loop (Companys) zshycompanyinfo companylist%>
-		<%set (string) {zshycompanystatus}="未审核"%>
+		<%set (string) {zshycompanystatus}="审核未通过"%>
 		<%if {zshycompanyinfo.en_status}==1%>
 		<%set {zshycompanystatus}="审核中"%>
 		<%else if {zshycompanyinfo.en_status}==2%>
