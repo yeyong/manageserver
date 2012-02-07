@@ -39,8 +39,16 @@
 </div>
 </body>
 <script type="text/javascript">
-    <%=configinfo.Statcode%>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-4474812-4']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
 </script>
-<div style="display:none"><script src="http://s21.cnzz.com/stat.php?id=3170502&web_id=3170502" language="JavaScript"></script></div>
+<div style="display:none"><script type="text/javascript" src="http://toptrace.taobao.com/assets/getAppKey.js" topappkey="12097501" defer="defer"></script></div>
 <asp:ContentPlaceHolder id="footer" runat="server"></asp:ContentPlaceHolder>
 </html>
